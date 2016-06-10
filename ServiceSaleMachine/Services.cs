@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace ServiceSaleMachine
 {
-    public partial class Form1 : Form
+    public partial class Services : Form
     {
-        public Form1()
+        public Services()
         {
             InitializeComponent();
         }

@@ -98,7 +98,34 @@ namespace ServiceSaleMachine.Drivers
         /// <param name="command"></param>
         public void Request(ZebexCommandEnum command)
         {
+            if (serialPort.IsOpen)
+            {
+                byte[] buf = new byte[1];
 
+                switch (command)
+                {
+                    case ZebexCommandEnum.disable:
+                        buf[0] = (int)ZebexCommandEnum.disable;
+                        serialPort.Write(buf, 0, buf.Length);
+                        break;
+                    case ZebexCommandEnum.enable:
+                        buf[0] = (int)ZebexCommandEnum.enable;
+                        serialPort.Write(buf, 0, buf.Length);
+                        break;
+                    case ZebexCommandEnum.powerUp:
+                        buf[0] = (int)ZebexCommandEnum.powerUp;
+                        serialPort.Write(buf, 0, buf.Length);
+                        break;
+                    case ZebexCommandEnum.sleep:
+                        buf[0] = (int)ZebexCommandEnum.sleep;
+                        serialPort.Write(buf, 0, buf.Length);
+                        break;
+                    case ZebexCommandEnum.wakeUp:
+                        buf[0] = (int)ZebexCommandEnum.wakeUp;
+                        serialPort.Write(buf, 0, buf.Length);
+                        break;
+                }
+            }
         }
     }
 }

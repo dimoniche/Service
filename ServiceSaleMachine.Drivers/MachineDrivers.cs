@@ -15,6 +15,11 @@ namespace ServiceSaleMachine.Drivers
         // Драйвера устройств
         ZebexScaner scaner;
 
+        public delegate void ServiceClientResponseEventHandler(object sender, ServiceClientResponseEventArgs e);
+
+        // событие обновления данных
+        public event ServiceClientResponseEventHandler ReceivedResponse;
+
         public MachineDrivers()
         {
             // настроим драйвер сканера
@@ -37,8 +42,12 @@ namespace ServiceSaleMachine.Drivers
 
             var str = System.Text.Encoding.Default.GetString(responseDriver);
 
+            Message message = new Message();
 
-            
+            message.Recipient = MessageEndPoint.Scaner;
+            message.Content = str;
+
+            ReceivedResponse(this, new ServiceClientResponseEventArgs(message));
         }
 
         private void WorkerScanerDriver_Complete(object sender, ThreadCompleteEventArgs e)
@@ -98,6 +107,16 @@ namespace ServiceSaleMachine.Drivers
                     }
                 }
             }
+        }
+    }
+
+    public class ServiceClientResponseEventArgs : EventArgs
+    {
+        public Message Message { get; private set; }
+
+        public ServiceClientResponseEventArgs(Message message)
+        {
+            Message = message;
         }
     }
 }

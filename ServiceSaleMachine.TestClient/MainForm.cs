@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using static ServiceSaleMachine.Drivers.MachineDrivers;
 
 namespace ServiceSaleMachine.TestClient
 {
@@ -17,12 +18,26 @@ namespace ServiceSaleMachine.TestClient
         public MainForm()
         {
             InitializeComponent();
+
+            drivers = new MachineDrivers();
+            drivers.ReceivedResponse += reciveResponse;
+
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void reciveResponse(object sender, ServiceClientResponseEventArgs e)
         {
-            drivers = new MachineDrivers();
+            if (InvokeRequired)
+            {
+                BeginInvoke(new ServiceClientResponseEventHandler(reciveResponse), sender, e);
+                return;
+            }
 
+            switch (e.Message.Recipient)
+            {
+                case MessageEndPoint.Scaner:
+                    LabelCode.Text = e.Message.Content;
+                    break;
+            }
         }
     }
 }

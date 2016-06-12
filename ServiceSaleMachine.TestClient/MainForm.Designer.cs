@@ -42,7 +42,6 @@
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -62,7 +61,6 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.button3);
             this.tabPage1.Controls.Add(this.tabControl2);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -86,11 +84,11 @@
             // 
             this.tabControl2.Controls.Add(this.tabPage3);
             this.tabControl2.Controls.Add(this.tabPage4);
-            this.tabControl2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tabControl2.Location = new System.Drawing.Point(3, 66);
+            this.tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl2.Location = new System.Drawing.Point(3, 3);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(791, 460);
+            this.tabControl2.Size = new System.Drawing.Size(791, 523);
             this.tabControl2.TabIndex = 0;
             // 
             // tabPage3
@@ -106,7 +104,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(783, 434);
+            this.tabPage3.Size = new System.Drawing.Size(783, 497);
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "Сканер";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -197,16 +195,6 @@
             this.button2.Text = "Записать";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(30, 23);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(177, 23);
-            this.button3.TabIndex = 1;
-            this.button3.Text = "Включить драйвера";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -240,7 +228,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
     }
 }
 

@@ -1,8 +1,8 @@
-// CCNET.cpp : Defines the initialization routines for the DLL.
+// ServiceSaleMachine.CCNET.cpp : Defines the initialization routines for the DLL.
 //
 
 #include "stdafx.h"
-#include "CCNET.h"
+#include "ServiceSaleMachine.CCNET.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -33,29 +33,29 @@
 //		details.
 //
 
-// CCCNETApp
+// CServiceSaleMachineCCNETApp
 
-BEGIN_MESSAGE_MAP(CCCNETApp, CWinApp)
+BEGIN_MESSAGE_MAP(CServiceSaleMachineCCNETApp, CWinApp)
 END_MESSAGE_MAP()
 
 
-// CCCNETApp construction
+// CServiceSaleMachineCCNETApp construction
 
-CCCNETApp::CCCNETApp()
+CServiceSaleMachineCCNETApp::CServiceSaleMachineCCNETApp()
 {
 	// TODO: add construction code here,
 	// Place all significant initialization in InitInstance
 }
 
 
-// The one and only CCCNETApp object
+// The one and only CServiceSaleMachineCCNETApp object
 
-CCCNETApp theApp;
+CServiceSaleMachineCCNETApp theApp;
 
 
-// CCCNETApp initialization
+// CServiceSaleMachineCCNETApp initialization
 
-BOOL CCCNETApp::InitInstance()
+BOOL CServiceSaleMachineCCNETApp::InitInstance()
 {
 	CWinApp::InitInstance();
 

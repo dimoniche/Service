@@ -13,7 +13,7 @@ namespace ServiceSaleMachine.Drivers
         public static AutoResetEvent BillAcceptorEvent = new AutoResetEvent(false);
 
         // Драйвера устройств
-        ZebexScaner scaner;
+        public ZebexScaner scaner;
 
         public delegate void ServiceClientResponseEventHandler(object sender, ServiceClientResponseEventArgs e);
 

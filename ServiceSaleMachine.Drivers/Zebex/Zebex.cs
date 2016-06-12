@@ -96,7 +96,7 @@ namespace ServiceSaleMachine.Drivers
         /// Установка режима работы устройства
         /// </summary>
         /// <param name="command"></param>
-        public void Request(ZebexCommandEnum command)
+        public void Request(int command)
         {
             if (serialPort.IsOpen)
             {
@@ -104,23 +104,23 @@ namespace ServiceSaleMachine.Drivers
 
                 switch (command)
                 {
-                    case ZebexCommandEnum.disable:
+                    case 0:
                         buf[0] = (int)ZebexCommandEnum.disable;
                         serialPort.Write(buf, 0, buf.Length);
                         break;
-                    case ZebexCommandEnum.enable:
+                    case 1:
                         buf[0] = (int)ZebexCommandEnum.enable;
                         serialPort.Write(buf, 0, buf.Length);
                         break;
-                    case ZebexCommandEnum.powerUp:
+                    case 2:
                         buf[0] = (int)ZebexCommandEnum.powerUp;
                         serialPort.Write(buf, 0, buf.Length);
                         break;
-                    case ZebexCommandEnum.sleep:
+                    case 3:
                         buf[0] = (int)ZebexCommandEnum.sleep;
                         serialPort.Write(buf, 0, buf.Length);
                         break;
-                    case ZebexCommandEnum.wakeUp:
+                    case 4:
                         buf[0] = (int)ZebexCommandEnum.wakeUp;
                         serialPort.Write(buf, 0, buf.Length);
                         break;

@@ -93,16 +93,6 @@ namespace ServiceSaleMachine.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap gain {
-            get {
-                object obj = ResourceManager.GetObject("gain", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap gain1 {
             get {
                 object obj = ResourceManager.GetObject("gain1", resourceCulture);

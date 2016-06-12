@@ -31,7 +31,7 @@ namespace ServiceSaleMachine.TestClient
                 string index = Globals.ClientConfiguration.Settings.comPortScanner.Remove(0, 3);
                 int int_index = 0;
                 int.TryParse(index, out int_index);
-                comboBox1.SelectedIndex = int_index;
+                comboBox1.SelectedIndex = int_index-1;
 
                 drivers.scaner.openPort((string)comboBox1.Items[comboBox1.SelectedIndex]);
             }

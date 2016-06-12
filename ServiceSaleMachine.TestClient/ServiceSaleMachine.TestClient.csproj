@@ -75,10 +75,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ServiceSaleMachine.CCNET\ServiceSaleMachine.CCNET.vcxproj">
-      <Project>{cde38216-ad33-4d19-bbcd-b18a9dce8d93}</Project>
-      <Name>ServiceSaleMachine.CCNET</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ServiceSaleMachine.Drivers\ServiceSaleMachine.Drivers.csproj">
       <Project>{d1f52424-7717-459d-a0cc-a69f1edfe105}</Project>
       <Name>ServiceSaleMachine.Drivers</Name>

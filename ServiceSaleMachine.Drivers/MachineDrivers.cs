@@ -15,7 +15,7 @@ namespace ServiceSaleMachine.Drivers
         // Драйвера устройств
         public ZebexScaner scaner;
 
-        public ServiceSaleMachine.CCNET.CCCRSProtocol CCNETDriver;
+        //public ServiceSaleMachine.CCNET.CCCRSProtocol CCNETDriver;
         
         public delegate void ServiceClientResponseEventHandler(object sender, ServiceClientResponseEventArgs e);
 

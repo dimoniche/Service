@@ -49,10 +49,6 @@
     <Compile Include="Zebex\ZebexCommandEnum.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ServiceSaleMachine.CCNET\ServiceSaleMachine.CCNET.vcxproj">
-      <Project>{cde38216-ad33-4d19-bbcd-b18a9dce8d93}</Project>
-      <Name>ServiceSaleMachine.CCNET</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ServiceSaleMachine\ServiceSaleMachine.csproj">
       <Project>{5CDB5513-96E8-4266-8B72-83679284B4E8}</Project>
       <Name>ServiceSaleMachine</Name>

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace ServiceSaleMachine
+namespace ServiceSaleMachine.Client
 {
     public partial class Services : Form
     {

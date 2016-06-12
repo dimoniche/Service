@@ -1,4 +1,4 @@
-﻿namespace ServiceSaleMachine
+﻿namespace ServiceSaleMachine.Client
 {
     partial class Services
     {

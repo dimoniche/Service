@@ -32,6 +32,16 @@ namespace ServiceSaleMachine.TestClient
                 testLog.AllowWriteThread = true;
             }
 
+            if(!Globals.ClientConfiguration.Load())
+            {
+                Globals.ClientConfiguration.Settings.comPortScanner = "NULL";
+                Globals.ClientConfiguration.Settings.comPortBill = "NULL";
+                Globals.ClientConfiguration.Settings.comPortPrinter = "NULL";
+
+                Globals.ClientConfiguration.Save();
+                Globals.ClientConfiguration.Load();
+            }
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());

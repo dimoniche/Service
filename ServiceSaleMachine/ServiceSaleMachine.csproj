@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\DefaultValueObject.cs" />
+    <Compile Include="Configuration\ClientConfiguration.cs" />
+    <Compile Include="Configuration\ClientConfigurationProperties.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="Lock\LockObject.cs" />
     <Compile Include="Lock\LockTicket.cs" />
@@ -57,6 +60,7 @@
     <Compile Include="Thread\ThreadCompleteEventArgs.cs" />
     <Compile Include="Thread\ThreadProgressChangedEventArgs.cs" />
     <Compile Include="Thread\ThreadWorkEventArgs.cs" />
+    <Compile Include="Utils\SerialPortHelper.cs" />
     <Compile Include="Utils\DirectoryHelper.cs" />
     <Compile Include="Utils\FileHelper.cs" />
     <Compile Include="Utils\RegServiceActionEnum.cs" />

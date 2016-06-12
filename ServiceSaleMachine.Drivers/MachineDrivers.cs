@@ -23,7 +23,7 @@ namespace ServiceSaleMachine.Drivers
         public MachineDrivers()
         {
             // настроим драйвер сканера
-            scaner = new ZebexScaner("COM1");
+            scaner = new ZebexScaner();
 
             // запустим задачу ожидания сообщений от сканера
             WorkerScanerDriver = new SaleThread { ThreadName = "WorkerScanerDriver" };
@@ -31,6 +31,13 @@ namespace ServiceSaleMachine.Drivers
             WorkerScanerDriver.Complete += WorkerScanerDriver_Complete;
 
             WorkerScanerDriver.Run();
+        }
+
+        public void SetComPortScaner(string port)
+        {
+            scaner.closePort();
+            scaner.openPort(port);
+
         }
 
         void ScannerProcessResponse()

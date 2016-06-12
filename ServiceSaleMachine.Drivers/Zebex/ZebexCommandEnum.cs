@@ -3,9 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Drivers.Zebex
+namespace ServiceSaleMachine.Drivers
 {
     public enum ZebexCommandEnum
+    {
+        enable,
+        disable,
+        powerUp,
+        sleep,
+        wakeUp
+    }
+
+    public enum ZebexCommandCodeEnum
     {
         enable = 0x0E,
         disable = 0x0F,

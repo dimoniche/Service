@@ -18,6 +18,7 @@ namespace ServiceSaleMachine
         public static Version DatabaseVersion { get; private set; }
         public static Version ProductVersion { get; set; }
         public static CultureInfo CultureRu { get; private set; }
+        public static ClientConfiguration ClientConfiguration { get; set; }
         public static RegistrySettings RegistrySettings { get; private set; }
 
         // Сообщения об ошибках
@@ -37,6 +38,7 @@ namespace ServiceSaleMachine
             ProductVersion = (Version)Assembly.GetExecutingAssembly().GetName().Version.Clone();
             CultureRu = new CultureInfo("ru-RU");
             RegistrySettings = new RegistrySettings();
+            ClientConfiguration = new ClientConfiguration();
         }
 
         public static string GetProcessFileName(bool extension)

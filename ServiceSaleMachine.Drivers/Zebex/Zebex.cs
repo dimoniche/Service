@@ -1,5 +1,4 @@
-﻿using Drivers.Zebex;
-using System;
+﻿using System;
 using System.IO;
 using System.IO.Ports;
 using System.Threading;
@@ -14,24 +13,53 @@ namespace ServiceSaleMachine.Drivers
         public MemoryStream InputStream = new MemoryStream();
         internal readonly ReaderWriterLockSlim Locker = new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion);
 
-        public ZebexScaner(string com_port)
+        public ZebexScaner()
         {
-            // настроим ком порт для прослушки
-            serialPort = new SerialPort();
-            serialPort.PortName = com_port;
-            serialPort.BaudRate = 9600;        // 9600
-            serialPort.Parity = Parity.None;
-            serialPort.StopBits = StopBits.One;
-            serialPort.DataBits = 8;
-            serialPort.Handshake = Handshake.None;
-            serialPort.NewLine = "\r\n"; // Пусть пока будет "\r\n".
-            serialPort.DtrEnable = true;
 
-            serialPort.DataReceived += SerialPortDataRecevied;
-            serialPort.ErrorReceived += SerialPortErrorRecived;
-            serialPort.PinChanged += SerialPortPinChanged;
+        }
 
-            serialPort.Open();
+        public void closePort()
+        {
+            if (serialPort.IsOpen)
+            {
+                try
+                {
+                    serialPort.DataReceived -= SerialPortDataRecevied;
+                    serialPort.ErrorReceived -= SerialPortErrorRecived;
+                    serialPort.PinChanged -= SerialPortPinChanged;
+
+                    serialPort.Close();
+                }
+                catch
+                {
+
+                }
+
+                serialPort = null;
+            }
+        }
+
+        public void openPort(string com_port)
+        {
+            if (serialPort == null)
+            {
+                // настроим ком порт для прослушки
+                serialPort = new SerialPort();
+                serialPort.PortName = com_port;
+                serialPort.BaudRate = 9600;        // 9600
+                serialPort.Parity = Parity.None;
+                serialPort.StopBits = StopBits.One;
+                serialPort.DataBits = 8;
+                serialPort.Handshake = Handshake.None;
+                serialPort.NewLine = "\r\n"; // Пусть пока будет "\r\n".
+                serialPort.DtrEnable = true;
+
+                serialPort.DataReceived += SerialPortDataRecevied;
+                serialPort.ErrorReceived += SerialPortErrorRecived;
+                serialPort.PinChanged += SerialPortPinChanged;
+
+                serialPort.Open();
+            }
         }
 
         private void SerialPortPinChanged(object sender, SerialPinChangedEventArgs e)
@@ -96,32 +124,36 @@ namespace ServiceSaleMachine.Drivers
         /// Установка режима работы устройства
         /// </summary>
         /// <param name="command"></param>
-        public void Request(int command)
+        public void Request(ZebexCommandEnum command)
         {
             if (serialPort.IsOpen)
             {
+                // Сначала действия перед отсылкой данных
+                serialPort.DiscardInBuffer();
+                serialPort.DiscardOutBuffer();
+
                 byte[] buf = new byte[1];
 
                 switch (command)
                 {
-                    case 0:
-                        buf[0] = (int)ZebexCommandEnum.disable;
+                    case ZebexCommandEnum.disable:
+                        buf[0] = (int)ZebexCommandCodeEnum.disable;
                         serialPort.Write(buf, 0, buf.Length);
                         break;
-                    case 1:
-                        buf[0] = (int)ZebexCommandEnum.enable;
+                    case ZebexCommandEnum.enable:
+                        buf[0] = (int)ZebexCommandCodeEnum.enable;
                         serialPort.Write(buf, 0, buf.Length);
                         break;
-                    case 2:
-                        buf[0] = (int)ZebexCommandEnum.powerUp;
+                    case ZebexCommandEnum.powerUp:
+                        buf[0] = (int)ZebexCommandCodeEnum.powerUp;
                         serialPort.Write(buf, 0, buf.Length);
                         break;
-                    case 3:
-                        buf[0] = (int)ZebexCommandEnum.sleep;
+                    case ZebexCommandEnum.sleep:
+                        buf[0] = (int)ZebexCommandCodeEnum.sleep;
                         serialPort.Write(buf, 0, buf.Length);
                         break;
-                    case 4:
-                        buf[0] = (int)ZebexCommandEnum.wakeUp;
+                    case ZebexCommandEnum.wakeUp:
+                        buf[0] = (int)ZebexCommandCodeEnum.wakeUp;
                         serialPort.Write(buf, 0, buf.Length);
                         break;
                 }

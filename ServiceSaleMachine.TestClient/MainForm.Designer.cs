@@ -114,9 +114,9 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(192, 74);
+            this.tabPage4.Size = new System.Drawing.Size(783, 497);
             this.tabPage4.TabIndex = 1;
-            this.tabPage4.Text = "tabPage4";
+            this.tabPage4.Text = "Купюроприемник";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // comboBox1
@@ -126,6 +126,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 0;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -195,6 +196,7 @@
             this.button2.TabIndex = 3;
             this.button2.Text = "Записать";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // MainForm
             // 

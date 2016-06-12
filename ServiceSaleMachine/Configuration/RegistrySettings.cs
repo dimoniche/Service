@@ -30,18 +30,7 @@ namespace ServiceSaleMachine
                         {
                             InstallPath = (string)regUninstall.GetValue("InstallLocation", null);
                             //InstallType = (VspInstallType)Enum.Parse(typeof(VspInstallType), (string)regUninstall.GetValue("InstallType", null));
-                            LogLevel = (LogMessageTypeEnum)Enum.Parse(typeof(LogMessageTypeEnum), (string)regUninstall.GetValue("Settings: LogLevel", LogMessageTypeEnum.Error.ToString()));
-
-                            object val;
-
-                            if ((val = regUninstall.GetValue("Setup: Instance Id", null)) != null)
-                            {
-                                Guid instanceId;
-                                if (Guid.TryParseExact(val.ToString(), Globals.GuidFormat, out instanceId))
-                                {
-                                    InstanceId = instanceId;
-                                }
-                            }
+                            //LogLevel = (LogMessageTypeEnum)Enum.Parse(typeof(LogMessageTypeEnum), (string)regUninstall.GetValue("Settings: LogLevel", LogMessageTypeEnum.Error.ToString()));
 
                             return true;
                         }

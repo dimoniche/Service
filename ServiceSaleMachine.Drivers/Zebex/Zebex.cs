@@ -19,7 +19,7 @@ namespace ServiceSaleMachine.Drivers
             // настроим ком порт для прослушки
             serialPort = new SerialPort();
             serialPort.PortName = com_port;
-            serialPort.BaudRate = 4;        // 9600
+            serialPort.BaudRate = 9600;        // 9600
             serialPort.Parity = Parity.None;
             serialPort.StopBits = StopBits.One;
             serialPort.DataBits = 8;
@@ -30,6 +30,8 @@ namespace ServiceSaleMachine.Drivers
             serialPort.DataReceived += SerialPortDataRecevied;
             serialPort.ErrorReceived += SerialPortErrorRecived;
             serialPort.PinChanged += SerialPortPinChanged;
+
+            serialPort.Open();
         }
 
         private void SerialPortPinChanged(object sender, SerialPinChangedEventArgs e)
@@ -64,6 +66,8 @@ namespace ServiceSaleMachine.Drivers
 
                         using (var ticket = LockTicket.Create(Locker, LockTypeEnum.Write))
                         {
+                            InputStream.SetLength(0);
+
                             // Наполняем поток полученными данными
                             InputStream.Write(byteAnswer, 0, bytes);
 

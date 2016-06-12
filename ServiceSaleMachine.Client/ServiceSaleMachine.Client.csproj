@@ -105,6 +105,16 @@
   <ItemGroup>
     <None Include="Resources\forward.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ServiceSaleMachine.Drivers\ServiceSaleMachine.Drivers.csproj">
+      <Project>{d1f52424-7717-459d-a0cc-a69f1edfe105}</Project>
+      <Name>ServiceSaleMachine.Drivers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceSaleMachine\ServiceSaleMachine.csproj">
+      <Project>{5cdb5513-96e8-4266-8b72-83679284b4e8}</Project>
+      <Name>ServiceSaleMachine</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ServiceSaleMachine.Drivers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,9 +12,17 @@ namespace ServiceSaleMachine.TestClient
 {
     public partial class MainForm : Form
     {
+        MachineDrivers drivers;
+
         public MainForm()
         {
             InitializeComponent();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            drivers = new MachineDrivers();
+
         }
     }
 }

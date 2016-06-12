@@ -7,12 +7,31 @@ namespace ServiceSaleMachine.TestClient
 {
     static class Program
     {
+        internal static Log testLog { get; private set; }
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
+            if (!Globals.RegistrySettings.Load())
+            {
+                MessageBox.Show(Globals.ErrorMessageRegistryDontRead,"test", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Создадим журнал клиента
+            testLog = new Log { MinMessageType = LogMessageTypeEnum.Warning, AllowWriteToConsole = false };
+
+            // В случае отладки будем сохранять максимум информации
+            if (Globals.IsDebug)
+            {
+                testLog.MinMessageType = LogMessageTypeEnum.Debug;
+                testLog.AllowWriteThreadId = true;
+                testLog.AllowWriteThread = true;
+            }
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());

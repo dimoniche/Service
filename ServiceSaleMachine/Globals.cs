@@ -36,8 +36,7 @@ namespace ServiceSaleMachine
             DatabaseVersion = new Version("1.0");
             ProductVersion = (Version)Assembly.GetExecutingAssembly().GetName().Version.Clone();
             CultureRu = new CultureInfo("ru-RU");
-
-
+            RegistrySettings = new RegistrySettings();
         }
 
         public static string GetProcessFileName(bool extension)

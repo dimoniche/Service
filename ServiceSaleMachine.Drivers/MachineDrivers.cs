@@ -3,7 +3,7 @@ using System.Threading;
 
 namespace ServiceSaleMachine.Drivers
 {
-    class MachineDrivers
+    public class MachineDrivers
     {
         private SaleThread WorkerScanerDriver { get; set; }
 
@@ -15,29 +15,17 @@ namespace ServiceSaleMachine.Drivers
         // Драйвера устройств
         ZebexScaner scaner;
 
-        static Log logDrivers { get; set; }
-
         public MachineDrivers()
         {
             // настроим драйвер сканера
             scaner = new ZebexScaner("COM1");
 
-            // Создадим журнал
-            logDrivers = new Log();
-            logDrivers.MinMessageType = Globals.RegistrySettings.LogLevel;
-
-            // В случае отладки будем сохранять максимум информации
-            if (Globals.IsDebug)
-            {
-                logDrivers.MinMessageType = LogMessageTypeEnum.Debug;
-                logDrivers.AllowWriteThreadId = true;
-                logDrivers.AllowWriteThread = true;
-            }
-
             // запустим задачу ожидания сообщений от сканера
             WorkerScanerDriver = new SaleThread { ThreadName = "WorkerScanerDriver" };
             WorkerScanerDriver.Work += WorkerScanerDriver_Work;
             WorkerScanerDriver.Complete += WorkerScanerDriver_Complete;
+
+            WorkerScanerDriver.Run();
         }
 
         void ScannerProcessResponse()
@@ -46,6 +34,11 @@ namespace ServiceSaleMachine.Drivers
             byte[] buffer = scaner.InputStream.GetBuffer();
 
             Array.Copy(buffer, 0, responseDriver, 0, responseDriver.Length);
+
+            var str = System.Text.Encoding.Default.GetString(responseDriver);
+
+
+            
         }
 
         private void WorkerScanerDriver_Complete(object sender, ThreadCompleteEventArgs e)
@@ -61,6 +54,9 @@ namespace ServiceSaleMachine.Drivers
         private void WorkerScanerDriver_Work(object sender, ThreadWorkEventArgs e)
         {
             int stepCount = 0;
+
+            // сначала ждем первого события
+            ScanerEvent.WaitOne();
 
             while (!e.Cancel)
             {
@@ -79,13 +75,13 @@ namespace ServiceSaleMachine.Drivers
                 {
                     if (hasErrors)
                     {
-                        logDrivers.Write(LogMessageType.Information, "ScanerDriver : ERROR");
+                        //logDrivers.Write(LogMessageType.Information, "ScanerDriver : ERROR");
                     }
 
                     if (!e.Cancel)
                     {
                         // Нормальная работа
-                        ScanerEvent.WaitOne(100);
+                        ScanerEvent.WaitOne();
 
                         // Принудительный запуск сборки мусора, если возможно освободить больше установленного минимума
                         stepCount++;

@@ -8,5 +8,6 @@ namespace ServiceSaleMachine.Drivers
 {
     public class Zebex
     {
+
     }
 }

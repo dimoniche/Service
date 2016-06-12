@@ -10,6 +10,7 @@ namespace ServiceSaleMachine
     {
         public const string GuidFormat = "D";
         public const string LogExtention = "log";
+        public const long GcMinMemoryBlock = 1024 * 1024;
 
         // Режим отладки
         public static bool IsDebug { get; private set; }

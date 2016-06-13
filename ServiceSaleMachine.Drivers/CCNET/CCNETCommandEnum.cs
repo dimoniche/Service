@@ -10,6 +10,14 @@ namespace ServiceSaleMachine.Drivers
         Reset = 0,
         Poll,
         Status,
-        Information
+        Information,
+        Hold,
+        SetSecurity,
+        BillType,
+        Pack,
+        Return,
+        SetBarParams,
+        ExtractBarData,
+        GetBillTable,
     }
 }

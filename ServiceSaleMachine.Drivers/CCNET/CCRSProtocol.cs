@@ -463,7 +463,7 @@ namespace ServiceSaleMachine.Drivers
 
           @{
         */
-        public bool Cmd(CCNETCommandEnum command,byte adr)
+        public bool Cmd(CCNETCommandEnum command,byte adr, object param1 = null, object param2 = null)
         {
             switch(command)
             {
@@ -478,6 +478,30 @@ namespace ServiceSaleMachine.Drivers
                     break;
                 case CCNETCommandEnum.Information:
                     return CmdIdentification(adr);
+                    break;
+                case CCNETCommandEnum.Hold:
+                    return CmdHold(adr);
+                    break;
+                case CCNETCommandEnum.SetSecurity:
+                    return CmdSetSecurity((long)param1,adr);
+                    break;
+                case CCNETCommandEnum.BillType:
+                    return CmdBillType((long)param1, (long)param2, adr);
+                    break;
+                case CCNETCommandEnum.Pack:
+                    return CmdPack(adr);
+                    break;
+                case CCNETCommandEnum.Return:
+                    return CmdReturn(adr);
+                    break;
+                case CCNETCommandEnum.SetBarParams:
+                    return CmdSetBarParams((byte)param1, (byte)param2, adr);
+                    break;
+                case CCNETCommandEnum.ExtractBarData:
+                    return CmdExtractBarData((byte[])param1, adr);
+                    break;
+                case CCNETCommandEnum.GetBillTable:
+                    return CmdGetBillTable((_BillRecord[])param1, adr);
                     break;
             }
 

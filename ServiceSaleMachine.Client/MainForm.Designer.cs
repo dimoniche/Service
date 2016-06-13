@@ -28,18 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
             this.SuspendLayout();
@@ -72,6 +71,16 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "CopyRight";
             // 
+            // button4
+            // 
+            this.button4.Image = global::ServiceSaleMachine.Client.Properties.Resources.gain1;
+            this.button4.Location = new System.Drawing.Point(812, 11);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(60, 57);
+            this.button4.TabIndex = 0;
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // panel3
             // 
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
@@ -102,7 +111,7 @@
             // button3
             // 
             this.button3.Enabled = false;
-            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
+            this.button3.Image = global::ServiceSaleMachine.Client.Properties.Resources.firstbutton;
             this.button3.Location = new System.Drawing.Point(205, 152);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(127, 40);
@@ -112,7 +121,7 @@
             // button2
             // 
             this.button2.Enabled = false;
-            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
+            this.button2.Image = global::ServiceSaleMachine.Client.Properties.Resources.firstbutton;
             this.button2.Location = new System.Drawing.Point(205, 95);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(127, 40);
@@ -121,23 +130,13 @@
             // 
             // button1
             // 
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Image = global::ServiceSaleMachine.Client.Properties.Resources.firstbutton;
             this.button1.Location = new System.Drawing.Point(205, 40);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(127, 40);
             this.button1.TabIndex = 0;
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button4
-            // 
-            this.button4.Image = global::ServiceSaleMachine.Properties.Resources.gain1;
-            this.button4.Location = new System.Drawing.Point(812, 11);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(60, 57);
-            this.button4.TabIndex = 0;
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // MainForm
             // 

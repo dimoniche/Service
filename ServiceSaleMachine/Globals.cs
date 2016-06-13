@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace ServiceSaleMachine
 {
-    public class Globals
+    public static class Globals
     {
         public const string GuidFormat = "D";
         public const string LogExtention = "log";
@@ -16,9 +16,9 @@ namespace ServiceSaleMachine
         public static bool IsDebug { get; private set; }
 
         public static Version DatabaseVersion { get; private set; }
-        public static Version ProductVersion { get; set; }
+        public static Version ProductVersion { get; private set; }
         public static CultureInfo CultureRu { get; private set; }
-        public static ClientConfiguration ClientConfiguration { get; set; }
+        public static ClientConfiguration ClientConfiguration { get; private set; }
         public static RegistrySettings RegistrySettings { get; private set; }
 
         // Сообщения об ошибках

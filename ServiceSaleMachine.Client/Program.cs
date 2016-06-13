@@ -7,7 +7,7 @@ namespace ServiceSaleMachine.Client
 {
     static class Program
     {
-        internal static Log clientLog { get; private set; }
+        internal static Log testLog { get; private set; }
 
         /// <summary>
         /// The main entry point for the application.
@@ -22,14 +22,14 @@ namespace ServiceSaleMachine.Client
             }
 
             // Создадим журнал клиента
-            clientLog = new Log { MinMessageType = LogMessageTypeEnum.Warning, AllowWriteToConsole = false };
+            testLog = new Log { MinMessageType = LogMessageTypeEnum.Warning, AllowWriteToConsole = false };
 
             // В случае отладки будем сохранять максимум информации
             if (Globals.IsDebug)
             {
-                clientLog.MinMessageType = LogMessageTypeEnum.Debug;
-                clientLog.AllowWriteThreadId = true;
-                clientLog.AllowWriteThread = true;
+                testLog.MinMessageType = LogMessageTypeEnum.Debug;
+                testLog.AllowWriteThreadId = true;
+                testLog.AllowWriteThread = true;
             }
 
             if (!Globals.ClientConfiguration.Load())

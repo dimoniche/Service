@@ -41,6 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CCNET\CCOMPort.cs" />
+    <Compile Include="CCNET\CCRSProtocol.cs" />
+    <Compile Include="CCNET\_BillRecord.cs" />
+    <Compile Include="CCNET\_Cassete.cs" />
+    <Compile Include="CCNET\_PollResults.cs" />
+    <Compile Include="CCNET\Command.cs" />
+    <Compile Include="CCNET\_BillStatus.cs" />
+    <Compile Include="CCNET\_Identification.cs" />
+    <Compile Include="CCNET\_Time.cs" />
     <Compile Include="MachineDrivers.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="MessageEndPoint.cs" />

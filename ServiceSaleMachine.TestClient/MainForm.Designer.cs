@@ -58,7 +58,7 @@
             this.ResetResult = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.ResultPoll = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.reasultPoll = new System.Windows.Forms.Label();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage9 = new System.Windows.Forms.TabPage();
             this.tabPage10 = new System.Windows.Forms.TabPage();
@@ -395,14 +395,14 @@
             this.ResultPoll.TabIndex = 1;
             this.ResultPoll.Text = "Результат опроса";
             // 
-            // label9
+            // reasultPoll
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(148, 38);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(22, 13);
-            this.label9.TabIndex = 0;
-            this.label9.Text = "ОК";
+            this.reasultPoll.AutoSize = true;
+            this.reasultPoll.Location = new System.Drawing.Point(148, 38);
+            this.reasultPoll.Name = "reasultPoll";
+            this.reasultPoll.Size = new System.Drawing.Size(22, 13);
+            this.reasultPoll.TabIndex = 0;
+            this.reasultPoll.Text = "ОК";
             // 
             // tabControl3
             // 
@@ -420,7 +420,7 @@
             // tabPage9
             // 
             this.tabPage9.Controls.Add(this.ResultPoll);
-            this.tabPage9.Controls.Add(this.label9);
+            this.tabPage9.Controls.Add(this.reasultPoll);
             this.tabPage9.Location = new System.Drawing.Point(4, 22);
             this.tabPage9.Name = "tabPage9";
             this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
@@ -519,7 +519,7 @@
         private System.Windows.Forms.TabControl tabControl3;
         private System.Windows.Forms.TabPage tabPage9;
         private System.Windows.Forms.Label ResultPoll;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label reasultPoll;
         private System.Windows.Forms.TabPage tabPage10;
         private System.Windows.Forms.TabPage tabPage11;
         private System.Windows.Forms.TabPage tabPage12;

@@ -301,12 +301,31 @@ namespace ServiceSaleMachine.Drivers
         {
             ushort wCRC = 0, Len = (ushort)((Buffer[2] > 0) ? Buffer[2] : (((ushort)(Buffer)[4]) << 8) + (Buffer)[5]);
 
+            //wCRC = GetCRC16(Buffer, (ushort)(Len - 2));
+
             for (int i = 0; i < Len - 2; i++)
                 wCRC = crc16_ccitt(Buffer[i], wCRC);
 
             return wCRC;
         }
 
+        ushort GetCRC16(byte[] bufData, ushort sizeData)
+        {
+            ushort CRC, i;
+            byte j;
+            CRC = 0;
+            for (i = 0; i < sizeData; i++)
+            {
+                CRC ^= bufData[i];
+                for (j = 0; j < 8; j++)
+                {
+                    if ((CRC & 0x0001) > 0) { CRC >>= 1; CRC ^= 0x08408; }
+                    else CRC >>= 1;
+                }
+            }
+            return CRC;
+        }
+   
         int SendCommand(byte[] BufOut, byte[] BufIn)
         {
             iRecievingError = RE_TIMEOUT;
@@ -462,6 +481,7 @@ namespace ServiceSaleMachine.Drivers
             Data[2] = 6;
             Data[3] = RESET;
             Data[4] = 0;
+            Data[5] = 0;
 
             CCommand cmd = new CCommand(Data,0, 6);
 

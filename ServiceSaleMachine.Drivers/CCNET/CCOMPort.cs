@@ -1,4 +1,5 @@
-﻿using System.IO.Ports;
+﻿using System;
+using System.IO.Ports;
 using System.Threading;
 
 namespace ServiceSaleMachine.Drivers
@@ -28,17 +29,37 @@ namespace ServiceSaleMachine.Drivers
                 COMPort.StopBits = StopBits.One;
                 COMPort.DataBits = 8;
                 COMPort.Handshake = Handshake.None;
-                COMPort.NewLine = "\r\n"; // Пусть пока будет "\r\n".
+                //COMPort.NewLine = "\r\n"; // Пусть пока будет "\r\n".
+
+                COMPort.RtsEnable = true;
                 COMPort.DtrEnable = true;
 
-                /*COMPort.DataReceived += SerialPortDataRecevied;
+
+                COMPort.ReadTimeout = 10000;
+
+                COMPort.DataReceived += SerialPortDataRecevied;
                 COMPort.ErrorReceived += SerialPortErrorRecived;
-                COMPort.PinChanged += SerialPortPinChanged;*/
+                COMPort.PinChanged += SerialPortPinChanged;
 
                 COMPort.Open();
             }
 
             return true;
+        }
+
+        private void SerialPortPinChanged(object sender, SerialPinChangedEventArgs e)
+        {
+            
+        }
+
+        private void SerialPortErrorRecived(object sender, SerialErrorReceivedEventArgs e)
+        {
+            
+        }
+
+        private void SerialPortDataRecevied(object sender, SerialDataReceivedEventArgs e)
+        {
+            
         }
 
         public void CloseCOM()
@@ -47,9 +68,9 @@ namespace ServiceSaleMachine.Drivers
             {
                 try
                 {
-                    //COMPort.DataReceived -= SerialPortDataRecevied;
-                    //COMPort.ErrorReceived -= SerialPortErrorRecived;
-                    //COMPort.PinChanged -= SerialPortPinChanged;
+                    COMPort.DataReceived -= SerialPortDataRecevied;
+                    COMPort.ErrorReceived -= SerialPortErrorRecived;
+                    COMPort.PinChanged -= SerialPortPinChanged;
 
                     COMPort.Close();
                 }

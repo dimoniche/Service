@@ -156,7 +156,33 @@ namespace ServiceSaleMachine.TestClient
         // послать команду приемнику
         private void button4_Click(object sender, System.EventArgs e)
         {
-            drivers.CCNETDriver.Cmd((CCNETCommandEnum)comboBox4.SelectedIndex, (byte)drivers.CCNETDriver.BillAdr);
+            string result = "ОК";
+
+            if(drivers.CCNETDriver.Cmd((CCNETCommandEnum)comboBox4.SelectedIndex, (byte)drivers.CCNETDriver.BillAdr) == true)
+            {
+
+            }
+            else
+            {
+                result = "СБОЙ";
+            }
+
+            switch ((CCNETCommandEnum)comboBox4.SelectedIndex)
+            {
+                case CCNETCommandEnum.Reset:
+                    ResetResult.Text = result;
+                    break;
+                case CCNETCommandEnum.Poll:
+                    reasultPoll.Text = result;
+                    break;
+                case CCNETCommandEnum.Status:
+                    //reasultPoll.Text = result;
+                    break;
+                case CCNETCommandEnum.Information:
+                    //reasultPoll.Text = result;
+                    break;
+            }
+
         }
     }
 }

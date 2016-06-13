@@ -341,6 +341,7 @@ namespace ServiceSaleMachine.Drivers
                     COMPort.Send(BufOut, ((int)BufOut[4] << 8) + BufOut[5]);
                 else
                     COMPort.Send(BufOut, BufOut[2]);
+
                 if ((BufOut[3] == ACK) || (BufOut[3] == NAK))
                     return iRecievingError = RE_NONE;
 
@@ -364,8 +365,8 @@ namespace ServiceSaleMachine.Drivers
                                 iRecievingError = RE_DATA;
 
                                 //PurgeComm(COMPort.GetHandle(), PURGE_RXABORT | PURGE_RXCLEAR);
-                                COMPort.GetHandle().DiscardInBuffer();
-                                COMPort.GetHandle().DiscardOutBuffer();
+                                //COMPort.GetHandle().DiscardInBuffer();
+                                //COMPort.GetHandle().DiscardOutBuffer();
                             }
                         }
                         else
@@ -407,7 +408,7 @@ namespace ServiceSaleMachine.Drivers
             return cmdIn;
         }
 
-        CCommand Transmit(CCommand CMD, byte Addr)
+        CCommand Transmit(CCommand CMD, byte Addr = 0x03)
         {
             CCommand cmdRes = new CCommand(), cmdACK = new CCommand();
             for (int i = 0; i < 3; i++)
@@ -451,6 +452,17 @@ namespace ServiceSaleMachine.Drivers
             return cmdRes;
         }
 
+        //////////////////////////////////////////////////////////////////////
+        // CCNET Commands implementation
+        /** \defgroup CCNETCommands CCNET protocol commands and requests
+
+            The group contains member functions providing interface to CCNET commands and requests.
+            All functions return a bool result showing whether operation was successfully completed.
+            In the case of error the error code (refer to \link ErrCode Possible error codes \endlink) 
+            is stored in the CCCRSProtocol::iLastError member variable, which can be used in further analysis.
+
+          @{
+        */
         public bool Cmd(CCNETCommandEnum command,byte adr)
         {
             switch(command)
@@ -472,7 +484,12 @@ namespace ServiceSaleMachine.Drivers
             return false;
         }
 
+        /**	\brief	The CCCRSProtocol::CmdReset function sends a RESET command to the device
 
+            \param	Addr	a parameter of type BYTE containing device address. Refer to \link Addr Device address list \endlink for the valid values
+
+            \return	bool - true if command was acknowledged    
+        */
         bool CmdReset(byte Addr)
         {
             byte[] Data = new byte[256];
@@ -508,6 +525,14 @@ namespace ServiceSaleMachine.Drivers
             }
         }
 
+        /**	\brief	The CCCRSProtocol::CmdPoll function sends POLL command to the device
+
+          The function sends POLL command and fills bytes Z1 and Z2 of the response into the CCCRSProtocol::PollResults structure.
+
+            \param	Addr	a parameter of type BYTE containing device address. Refer to \link Addr Device address list \endlink for the valid values
+
+            \return	bool - true if exchange was successfully completed    
+        */
         bool CmdPoll(byte Addr)
         {
             byte[] Data = new byte[256];
@@ -537,6 +562,14 @@ namespace ServiceSaleMachine.Drivers
             }
         }
 
+        /**	\brief	The CCCRSProtocol::CmdStatus function sends STATUS REQUEST to the device
+
+          The response status data is stored in the CCCRSProtocol::BillStatus member structure.
+
+            \param	Addr	a parameter of type BYTE containing device address. Refer to \link Addr Device address list \endlink for the valid values
+
+            \return	bool - true if exchange was successfully completed    
+        */
         bool CmdStatus(byte Addr)
         {
             byte[] Data = new byte[256];
@@ -573,6 +606,15 @@ namespace ServiceSaleMachine.Drivers
             }
         }
 
+        /**	\brief	The CCCRSProtocol::CmdIdentification function sends IDENTIFICATION request
+
+          The function sends IDENTIFICATION request and stores device identification in the member CCCRSProtocol::Ident structure.
+          The function supports both new and old identification formats of Bill-To-Bill units.
+
+            \param	Addr	a parameter of type BYTE containing device address. Refer to \link Addr Device address list \endlink for the valid values
+
+            \return	bool - true if the exchange was successfully completed and data received    
+        */
         bool CmdIdentification(byte Addr)
         {
             byte[] Data = new byte[256];
@@ -609,18 +651,20 @@ namespace ServiceSaleMachine.Drivers
                 Ident.PartNumber = Encoding.ASCII.GetBytes("N/A");
 
                 byte[] sTemp = new byte[64];
-
                 int iPos = 3, iLen = 15;
-                /*strncpy(sTemp, Response.GetData() + iPos, iLen);\
 
+                Array.Copy(Response.GetData(), iPos, sTemp, 0, iLen);
                 sTemp[iLen] = 0; iPos += iLen;
-                strcpy(Ident.PartNumber, sTemp);
+                Array.Copy(sTemp, 0, Ident.PartNumber, 0, sTemp.Length);
+
                 iLen = 12;
-                strncpy(sTemp, (char*)Response.GetData() + iPos, iLen);
+                Array.Copy(Response.GetData(), iPos, sTemp, 0, iLen);
                 sTemp[iLen] = 0; iPos += iLen;
-                strcpy(Ident.SN, sTemp);
-                char* strTemp = (char*)Response.GetData() + iPos;
+                Array.Copy(sTemp, 0, Ident.SN, 0, sTemp.Length);
 
+                byte[] strTemp = new byte[256];
+
+                Array.Copy(Response.GetData(), iPos, strTemp, 0, iLen);
 
                 Ident.DS1 = 0; iPos += 8;
                 for (int i = 0; i < 7; i++)
@@ -628,64 +672,429 @@ namespace ServiceSaleMachine.Drivers
                     Ident.DS1 <<= 8;
                     Ident.DS1 += strTemp[i];
                 }
+
                 if (Response.GetData()[2] < 109) return true;
 
                 iLen = 6;
-                strncpy(sTemp, (char*)Response.GetData() + iPos, iLen);
+                Array.Copy(Response.GetData(), iPos, sTemp, 0, iLen);
                 sTemp[iLen] = 0; iPos += iLen;
-                strcpy(Ident.BVBootVersion, sTemp);
+                Array.Copy(sTemp, 0, Ident.BVBootVersion, 0, sTemp.Length);
 
                 iLen = 20;
-                strncpy(sTemp, (char*)Response.GetData() + iPos, iLen);
+                Array.Copy(Response.GetData(), iPos, sTemp, 0, iLen);
                 sTemp[iLen] = 0; iPos += iLen;
-                strcpy(Ident.BVVersion, sTemp);
+                Array.Copy(sTemp, 0, Ident.BVVersion, 0, sTemp.Length);
 
                 iLen = 6;
-                strncpy(sTemp, (char*)Response.GetData() + iPos, iLen);
+                Array.Copy(Response.GetData(), iPos, sTemp, 0, iLen);
                 sTemp[iLen] = 0; iPos += iLen;
-                strcpy(Ident.BCCPUBoot, sTemp);
+                Array.Copy(sTemp, 0, Ident.BCCPUBoot, 0, sTemp.Length);
 
                 iLen = 6;
-                strncpy(sTemp, (char*)Response.GetData() + iPos, iLen);
+                Array.Copy(Response.GetData(), iPos, sTemp, 0, iLen);
                 sTemp[iLen] = 0; iPos += iLen;
-                strcpy(Ident.BCCPUVersion, sTemp);
+                Array.Copy(sTemp, 0, Ident.BCCPUVersion, 0, sTemp.Length);
 
                 iLen = 6;
-                strncpy(sTemp, (char*)Response.GetData() + iPos, iLen);
+                Array.Copy(Response.GetData(), iPos, sTemp, 0, iLen);
                 sTemp[iLen] = 0; iPos += iLen;
-                strcpy(Ident.BCDispenserBoot, sTemp);
+                Array.Copy(sTemp, 0, Ident.BCDispenserBoot, 0, sTemp.Length);
 
                 iLen = 6;
-                strncpy(sTemp, (char*)Response.GetData() + iPos, iLen);
+                Array.Copy(Response.GetData(), iPos, sTemp, 0, iLen);
                 sTemp[iLen] = 0; iPos += iLen;
-                strcpy(Ident.BCDispenserVersion, sTemp);
+                Array.Copy(sTemp, 0, Ident.BCDispenserVersion, 0, sTemp.Length);
 
                 iLen = 6;
-                strncpy(sTemp, (char*)Response.GetData() + iPos, iLen);
+                Array.Copy(Response.GetData(), iPos, sTemp, 0, iLen);
                 sTemp[iLen] = 0; iPos += iLen;
-                strcpy(Ident.BCCS1Boot, sTemp);
+                Array.Copy(sTemp, 0, Ident.BCCS1Boot, 0, sTemp.Length);
 
                 iLen = 6;
-                strncpy(sTemp, (char*)Response.GetData() + iPos, iLen);
+                Array.Copy(Response.GetData(), iPos, sTemp, 0, iLen);
                 sTemp[iLen] = 0; iPos += iLen;
-                strcpy(Ident.BCCS2Boot, sTemp);
+                Array.Copy(sTemp, 0, Ident.BCCS2Boot, 0, sTemp.Length);
 
                 iLen = 6;
-                strncpy(sTemp, (char*)Response.GetData() + iPos, iLen);
+                Array.Copy(Response.GetData(), iPos, sTemp, 0, iLen);
                 sTemp[iLen] = 0; iPos += iLen;
-                strcpy(Ident.BCCS3Boot, sTemp);
+                Array.Copy(sTemp, 0, Ident.BCCS3Boot, 0, sTemp.Length);
 
                 iLen = 6;
-                strncpy(sTemp, (char*)Response.GetData() + iPos, iLen);
+                Array.Copy(Response.GetData(), iPos, sTemp, 0, iLen);
                 sTemp[iLen] = 0; iPos += iLen;
-                strcpy(Ident.BCCSVersion, sTemp);*/
+                Array.Copy(sTemp, 0, Ident.BCCSVersion, 0, sTemp.Length);
+
                 return true;
             }
             else
             {
                 return false;
             }
+        }
 
+        /**	\brief	The CCCRSProtocol::CmdHold function sends HOLD command to the device
+
+            \param	Addr	a parameter of type BYTE containing device address. Refer to \link Addr Device address list \endlink for the valid values
+
+            \return	bool - true if exchange successfully completed    
+        */
+        bool CmdHold(byte Addr)
+        {
+            byte[] Data = new byte[256];
+            Data[0] = SYNC;
+            Data[1] = 0;
+            Data[2] = 6;
+            Data[3] = HOLD;
+            Data[4] = 0;
+            Data[5] = 0;
+
+            CCommand cmd = new CCommand(Data,0);
+            CCommand Response = Transmit(cmd, Addr);
+            byte ack;
+
+            iLastError = Response.GetCode();
+
+            if (iLastError == 0)
+            {
+                if ((ack = Response.GetData()[3]) != ACK)
+                {
+                    iLastError = (ack != ST_INV_CMD) ? ER_NAK : ER_INVALID_CMD;
+                    return false;
+                }
+                else return true;
+
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /**	\brief	The CCCRSProtocol::CmdSetSecurity function sends SET SECURITY LEVELS command
+
+	        \param	wS	a parameter of type DWORD - a bitmap containing security levels to set
+	        \param	Addr	a parameter of type BYTE containing device address. Refer to \link Addr Device address list \endlink for the valid values
+
+	        \return	bool - true if exchange successfully completed
+        */
+        bool CmdSetSecurity(long wS, byte Addr)
+        {
+            byte[] Data = new byte[256];
+            Data[0] = SYNC;
+            Data[1] = 0;
+            Data[2] = 9;
+            Data[3] = SET_SECURITY;
+            Data[4] = (byte)(wS >> 16);
+            Data[5] = (byte)(wS >> 8);
+            Data[6] = (byte)wS;
+            Data[7] = 0;
+            Data[8] = 0;
+
+            CCommand cmd = new CCommand(Data,0);
+            CCommand Response = Transmit(cmd, Addr);
+            byte ack;
+
+            iLastError = Response.GetCode();
+
+            if (iLastError == 0)
+            {
+                if ((ack = Response.GetData()[3]) != ACK)
+                {
+                    iLastError = (ack != ST_INV_CMD) ? ER_NAK : ER_INVALID_CMD;
+                    return false;
+                }
+                else return true;
+
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /**	\brief	The CCCRSProtocol::CmdBillType function sends ENABLE BILL TYPE command
+
+	        \param	enBill	a parameter of type DWORD - a bitmap containing 1 in the positions corresponding to the enabled bill types
+	        \param	escBill	a parameter of type DWORD - a bitmap containing 1 in the positions corresponding to bill type processed with escrow
+	        \param	Addr	a parameter of type BYTE containing device address. Refer to \link Addr Device address list \endlink for the valid values
+
+	        \return	bool- true if the command was acknowledged
+        */
+        bool CmdBillType(long enBill, long escBill, byte Addr)
+        {
+            byte[] Data = new byte[256];
+            Data[0] = SYNC;
+            Data[1] = 0;
+            Data[2] = 12;
+            Data[3] = BILL_TYPE;
+            Data[4] = (byte)(enBill >> 16);
+            Data[5] = (byte)(enBill >> 8);
+            Data[6] = (byte)enBill;
+            Data[7] = (byte)(escBill >> 16);
+            Data[8] = (byte)(escBill >> 8);
+            Data[9] = (byte)escBill;
+
+            Data[10] = 0;
+            Data[11] = 0;
+
+            CCommand cmd = new CCommand(Data,0);
+            CCommand Response = Transmit(cmd, Addr);
+            byte ack;
+
+            iLastError = Response.GetCode();
+
+            if (iLastError == 0)
+            {
+                if ((ack = Response.GetData()[3]) != ACK)
+                {
+                    iLastError = (ack != ST_INV_CMD) ? ER_NAK : ER_INVALID_CMD;
+                    return false;
+                }
+                else return true;
+
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /**	\brief	The CCCRSProtocol::CmdPack function sends PACK command
+
+	    \param	Addr	a parameter of type BYTE containing device address. Refer to \link Addr Device address list \endlink for the valid values
+
+	    \return	bool - true if the command was acknowledged
+        */
+        bool CmdPack(byte Addr)
+        {
+            byte[] Data = new byte[256];
+            Data[0] = SYNC;
+            Data[1] = 0;
+            Data[2] = 6;
+            Data[3] = PACK;
+
+            Data[4] = 0;
+            Data[5] = 0;
+
+            CCommand cmd = new CCommand(Data,0);
+            CCommand Response = Transmit(cmd, Addr);
+            byte ack;
+            iLastError = Response.GetCode();
+
+            if (iLastError == 0)
+            {
+                if ((ack = Response.GetData()[3]) != ACK)
+                {
+                    iLastError = (ack != ST_INV_CMD) ? ER_NAK : ER_INVALID_CMD;
+                    return false;
+                }
+                else return true;
+
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /**	\brief	The CCCRSProtocol::CmdReturn function sends RETURN command
+
+            \param	Addr	a parameter of type BYTE containing device address. Refer to \link Addr Device address list \endlink for the valid values
+
+            \return	bool - true if the command was acknowledged  
+        */
+        bool CmdReturn(byte Addr)
+        {
+            byte[] Data = new byte[256];
+            Data[0] = SYNC;
+            Data[1] = 0;
+            Data[2] = 6;
+            Data[3] = RETURN;
+
+            Data[4] = 0;
+            Data[5] = 0;
+
+            CCommand cmd = new CCommand(Data,0);
+            CCommand Response = Transmit(cmd, Addr);
+            byte ack;
+            iLastError = Response.GetCode();
+
+            if (iLastError == 0)
+            {
+                if ((ack = Response.GetData()[3]) != ACK)
+                {
+                    iLastError = (ack != ST_INV_CMD) ? ER_NAK : ER_INVALID_CMD;
+                    return false;
+                }
+                else return true;
+
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /**	\brief	The CCCRSProtocol::CmdSetBarParams function sends SET BARCODE PARAMETERS command
+
+            \param	Format	a parameter of type BYTE specifiying barcode format
+            \param	Length	a parameter of type BYTE specifiying barcode length
+            \param	Addr	a parameter of type BYTE containing device address. Refer to \link Addr Device address list \endlink for the valid values
+
+            \return	bool - true if the command was acknowledged    
+        */
+        bool CmdSetBarParams(byte Format, byte Length, byte Addr = ADDR_BB)
+        {
+            byte[] Data = new byte[256];
+            Data[0] = SYNC;
+            Data[1] = 0;
+            Data[2] = 8;
+            Data[3] = SET_BAR_PARAMS;
+            Data[4] = Format;
+            Data[5] = Length;
+
+            Data[6] = 0;
+            Data[7] = 0;
+
+            CCommand cmd = new CCommand(Data,0);
+            CCommand Response = Transmit(cmd, Addr);
+            byte ack;
+
+            iLastError = Response.GetCode();
+
+            if (iLastError == 0)
+            {
+                if ((ack = Response.GetData()[3]) != ACK)
+                {
+                    iLastError = (ack != ST_INV_CMD) ? ER_NAK : ER_INVALID_CMD;
+                    return false;
+                }
+                else return true;
+
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /**	\brief	The CCCRSProtocol::CmdExtractBarData function sends EXTRACT BARCODE DATA command
+
+	        \param	sBar	a parameter of type LPSTR containing pointer to a zero-terminated string receiving the barcode value.
+	        \param	Addr	a parameter of type BYTE containing device address. Refer to \link Addr Device address list \endlink for the valid values
+
+	        \return	bool - true if the response was successfully received
+        */
+        bool CmdExtractBarData(byte[] sBar, byte Addr = ADDR_BB)
+        {
+            byte[] Data = new byte[256];
+            Data[0] = SYNC;
+            Data[1] = 0;
+            Data[2] = 6;
+            Data[3] = EXTRACT_BAR_DATA;
+            Data[4] = 0;
+            Data[5] = 0;
+
+
+            CCommand cmd = new CCommand(Data,0);
+            CCommand Response = Transmit(cmd, Addr);
+
+            iLastError = Response.GetCode();
+
+            if (iLastError == 0)
+            {
+                if ((Response.GetData()[3] == ST_INV_CMD) && (Response.GetData()[2] == 6))
+                {
+                    iLastError = ER_INVALID_CMD;
+                    return false;
+                }
+
+                //strcpy(sBar, "");
+                for (int i = 3; i < Response.GetData()[2] - 2; i++)
+                    sBar[i - 3] = Response.GetData()[i];
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /**	\brief	The CCCRSProtocol::CmdGetBillTable function sends BILL TABLE request
+
+            \param	BillTable	a parameter of type _BillRecord * containing pointer to the _BillRecord array receiving the bill table.
+                    Position in the array corresponds to the bill type and the structure at the position describes that bill type.
+            \param	Addr	a parameter of type BYTE containing device address. Refer to \link Addr Device address list \endlink for the valid values
+
+            \return	bool - true if the response was successfully received
+
+            
+*/
+        bool CmdGetBillTable(_BillRecord[] BillTable, byte Addr)
+        {
+            byte[] Data = new byte[256];
+            Data[0] = SYNC;
+            Data[1] = 0;
+            Data[2] = 6;
+            Data[3] = GET_BILL_TABLE;
+            Data[4] = 0;
+            Data[5] = 0;
+
+            CCommand cmd = new CCommand(Data,0);
+            CCommand Response = Transmit(cmd, Addr);
+
+            iLastError = Response.GetCode();
+
+            if (iLastError == 0)
+            {
+                int i = 0;
+
+                if ((Response.GetData()[3] == ST_INV_CMD) && (Response.GetData()[2] == 6))
+                {
+                    iLastError = ER_INVALID_CMD;
+                    for (i = 0; i < 24; i++)
+                    {
+                        BillTable[i].Denomination = 0;
+                        BillTable[i].sCountryCode = Encoding.ASCII.GetBytes("");
+                    }
+                    return false;
+                }
+
+                for (i = 0; i < (Response.GetData()[2]) - 5; i += 5)
+                {
+                    BillTable[i / 5].Denomination = Response.GetData()[i + 3];
+
+                    byte[] sTmp = new byte[5];
+                    Array.Copy(Response.GetData(), i + 4, sTmp, 0, 3);
+                    sTmp[3] = 0;
+                    Array.Copy(sTmp, 0, BillTable[i / 5].sCountryCode, 0, sTmp.Length);
+
+                    if ((((Response.GetData())[i + 7]) & 0x80) > 0)
+                    {
+                        for (int j = 0; j < ((Response.GetData()[i + 7]) & 0x7F); j++)
+                            BillTable[i / 5].Denomination /= 10;
+                    }
+                    else
+                    {
+                        for (int j = 0; j < ((Response.GetData()[i + 7]) & 0x7F); j++)
+                            BillTable[i / 5].Denomination *= 10;
+                    }
+                }
+
+                for (int j = i; i < 24 * 5; i += 5)
+                {
+                    BillTable[i / 5].Denomination = 0;
+                    BillTable[i / 5].sCountryCode = Encoding.ASCII.GetBytes("");
+                }
+                return true;
+
+            }
+	        else 
+	        {
+		        return false;
+	        }
         }
 
     }

@@ -29,13 +29,13 @@ namespace ServiceSaleMachine.Drivers
                 COMPort.StopBits = StopBits.One;
                 COMPort.DataBits = 8;
                 COMPort.Handshake = Handshake.None;
-                //COMPort.NewLine = "\r\n"; // Пусть пока будет "\r\n".
+                COMPort.NewLine = "\r\n"; // Пусть пока будет "\r\n".
 
-                COMPort.RtsEnable = true;
-                COMPort.DtrEnable = true;
+                COMPort.RtsEnable = false;
+                COMPort.DtrEnable = false;
 
 
-                COMPort.ReadTimeout = 10000;
+                COMPort.ReadTimeout = 5000;
 
                 COMPort.DataReceived += SerialPortDataRecevied;
                 COMPort.ErrorReceived += SerialPortErrorRecived;

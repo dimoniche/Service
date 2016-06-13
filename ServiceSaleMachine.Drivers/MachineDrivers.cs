@@ -14,8 +14,7 @@ namespace ServiceSaleMachine.Drivers
 
         // Драйвера устройств
         public ZebexScaner scaner;
-
-        //public ServiceSaleMachine.CCNET.CCCRSProtocol CCNETDriver;
+        public CCRSProtocol CCNETDriver;
         
         public delegate void ServiceClientResponseEventHandler(object sender, ServiceClientResponseEventArgs e);
 
@@ -33,6 +32,10 @@ namespace ServiceSaleMachine.Drivers
             WorkerScanerDriver.Complete += WorkerScanerDriver_Complete;
 
             WorkerScanerDriver.Run();
+
+            // настроим купюроприемник
+            CCNETDriver = new CCRSProtocol();
+
         }
 
         public void SetComPortScaner(string port)

@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO.Ports;
-using System.Linq;
-using System.Text;
+﻿using System.IO.Ports;
 using System.Threading;
 
 namespace ServiceSaleMachine.Drivers
 {
     public class CCOMPort
     {
-        int iCOM;                               //!< COM port number 
+        string COM;                             //!< COM port number 
         SerialPort COMPort;                     //!< File handle associated with the COM port
         long[] EnablePorts = new long[16];		//!< An array containing port enumeration results (error codes) for firs 16 COM ports
 
@@ -18,17 +14,15 @@ namespace ServiceSaleMachine.Drivers
             return EnablePorts[iPort];
         }
 
-        public bool OpenCOM(int COMi)
+        public bool OpenCOM(string strCOM)
         {
             if (COMPort == null)
             {
-                iCOM = COMi;
-
-                string com_port = "COM" + COMi;
+                COM = strCOM;
 
                 // настроим ком порт для прослушки
                 COMPort = new SerialPort();
-                COMPort.PortName = com_port;
+                COMPort.PortName = strCOM;
                 COMPort.BaudRate = 9600;        // 9600
                 COMPort.Parity = Parity.None;
                 COMPort.StopBits = StopBits.One;

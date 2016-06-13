@@ -74,6 +74,7 @@ namespace ServiceSaleMachine.Drivers
         const byte ST_IDLING = 0x14;//!< IDLING state
         const byte ST_ACCEPTING = 0x15;//!< ACCEPTING state
         const byte ST_PACKING = 0x17;//!< STACKING/PACKING state
+
         const byte ST_RETURNING = 0x18;//!< RETURNING state
         const byte ST_DISABLED = 0x19;//!< UNIT DISABLED state
         const byte ST_HOLDING = 0x1A;//!< HOLDING state
@@ -211,20 +212,20 @@ namespace ServiceSaleMachine.Drivers
         /**	\struct _BillStatus
             \brief	The _BillStatus struct describing response to the STATUS REQUEST command
         */
-        _BillStatus BillStatus = new _BillStatus();  //!< Variable containing the most recent response to the STATUS REQUEST
+        public _BillStatus BillStatus = new _BillStatus();  //!< Variable containing the most recent response to the STATUS REQUEST
 
         /**	\struct _Identification
 			\brief	The _Identification struct contains identification of the device
 		*/
-        _Identification Ident = new _Identification();//!< A variable containing current device identification
+        public _Identification Ident = new _Identification();//!< A variable containing current device identification
 
         /**	\struct _PollResults
 			\brief	The _PollResults struct containing 2 first bytes of the response to the POLL command
 		*/
-        _PollResults PollResults = new _PollResults(); //!< A variable keeping last POLL result
+        public _PollResults PollResults = new _PollResults(); //!< A variable keeping last POLL result
 
-        List<_Cassete> Cassetes = new List<_Cassete>();       //!< List of the cassettes 
-        _Cassete EscrCassete = new _Cassete();                //!< Escrow cassette
+        public List<_Cassete> Cassetes = new List<_Cassete>();       //!< List of the cassettes 
+        public _Cassete EscrCassete = new _Cassete();                //!< Escrow cassette
 
         public CCRSProtocol()
         {
@@ -243,17 +244,36 @@ namespace ServiceSaleMachine.Drivers
             Ident.PartNumber = Encoding.ASCII.GetBytes("N/A");
         }
 
-        CCOMPort GetCOMPort()
+        public void openPort(string com_port)
+        {
+            if (COMPort == null)
+            {
+                COMPort = new CCOMPort();
+
+                COMPort.OpenCOM(com_port);
+            }
+        }
+
+        public void closePort()
+        {
+            if (COMPort != null)
+            {
+                COMPort.CloseCOM();
+                COMPort = null;
+            }
+        }
+
+        public CCOMPort GetCOMPort()
         {
             return COMPort;
         }
 
-        long PortState(int iPort)
+        public long PortState(int iPort)
         {
             return COMPort.IsEnable(iPort);
         }
 
-        bool InitCOM(int COMi, int iTo)
+        public bool InitCOM(string COMi)
         {
             return COMPort.OpenCOM(COMi);
         }
@@ -410,6 +430,28 @@ namespace ServiceSaleMachine.Drivers
 
             return cmdRes;
         }
+
+        public bool Cmd(CCNETCommandEnum command,byte adr)
+        {
+            switch(command)
+            {
+                case CCNETCommandEnum.Reset:
+                    return CmdReset(adr);
+                    break;
+                case CCNETCommandEnum.Poll:
+                    return CmdPoll(adr);
+                    break;
+                case CCNETCommandEnum.Status:
+                    return CmdStatus(adr);
+                    break;
+                case CCNETCommandEnum.Information:
+                    return CmdIdentification(adr);
+                    break;
+            }
+
+            return false;
+        }
+
 
         bool CmdReset(byte Addr)
         {

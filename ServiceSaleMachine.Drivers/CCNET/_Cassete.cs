@@ -26,6 +26,8 @@ namespace ServiceSaleMachine.Drivers
 		*/
         public _Cassete()
         {
+            UnloadTime = new _Time();
+
             Status = 0xfe; dValue = UnloadTime.hours =
                BillNumber = UnloadLevel = 0;
             UnloadTime.mins = UnloadTime.secs = 0xff;

@@ -17,7 +17,12 @@ namespace ServiceSaleMachine.TestClient
             currentPort = SerialPortHelper.GetSerialPorts();
 
             comboBox1.Items.Clear();
+            comboBox1.Items.Add("NULL");
             comboBox1.Items.AddRange(currentPort);
+
+            comboBox3.Items.Clear();
+            comboBox3.Items.Add("NULL");
+            comboBox3.Items.AddRange(currentPort);
 
             drivers = new MachineDrivers();
             drivers.ReceivedResponse += reciveResponse;
@@ -31,9 +36,23 @@ namespace ServiceSaleMachine.TestClient
                 string index = Globals.ClientConfiguration.Settings.comPortScanner.Remove(0, 3);
                 int int_index = 0;
                 int.TryParse(index, out int_index);
-                comboBox1.SelectedIndex = int_index-1;
+                comboBox1.SelectedIndex = int_index;
 
                 drivers.scaner.openPort((string)comboBox1.Items[comboBox1.SelectedIndex]);
+            }
+
+            if (Globals.ClientConfiguration.Settings.comPortBill.Contains("NULL"))
+            {
+                comboBox3.SelectedIndex = -1;
+            }
+            else if (Globals.ClientConfiguration.Settings.comPortBill.Contains("COM"))
+            {
+                string index = Globals.ClientConfiguration.Settings.comPortBill.Remove(0, 3);
+                int int_index = 0;
+                int.TryParse(index, out int_index);
+                comboBox3.SelectedIndex = int_index;
+
+                drivers.CCNETDriver.openPort((string)comboBox3.Items[comboBox3.SelectedIndex]);
             }
         }
 
@@ -65,9 +84,31 @@ namespace ServiceSaleMachine.TestClient
 
         private void button2_Click(object sender, System.EventArgs e)
         {
-            drivers.scaner.openPort((string)comboBox1.Items[comboBox1.SelectedIndex]);
+            if (!((string)comboBox1.Items[comboBox1.SelectedIndex]).Contains("NULL"))
+            {
+                drivers.scaner.openPort((string)comboBox1.Items[comboBox1.SelectedIndex]);
+            }
+            else
+            {
+                drivers.scaner.closePort();
+            }
 
             Globals.ClientConfiguration.Settings.comPortScanner = (string)comboBox1.Items[comboBox1.SelectedIndex];
+            Globals.ClientConfiguration.Save();
+        }
+
+        private void button3_Click(object sender, System.EventArgs e)
+        {
+            if (!((string)comboBox3.Items[comboBox3.SelectedIndex]).Contains("NULL"))
+            {
+                drivers.CCNETDriver.openPort((string)comboBox3.Items[comboBox3.SelectedIndex]);
+            }
+            else
+            {
+                drivers.CCNETDriver.closePort();
+            }
+
+            Globals.ClientConfiguration.Settings.comPortBill = (string)comboBox3.Items[comboBox3.SelectedIndex];
             Globals.ClientConfiguration.Save();
         }
     }

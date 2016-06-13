@@ -6,6 +6,7 @@ namespace ServiceSaleMachine
 	{
         public string comPortScanner;
         public string comPortBill;
+        public string adressBill;
         public string comPortPrinter;
 
         internal ClientConfigurationProperties()

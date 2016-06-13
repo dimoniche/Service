@@ -54,6 +54,20 @@ namespace ServiceSaleMachine.TestClient
 
                 drivers.CCNETDriver.openPort((string)comboBox3.Items[comboBox3.SelectedIndex]);
             }
+
+            if (Globals.ClientConfiguration.Settings.adressBill == null || Globals.ClientConfiguration.Settings.adressBill.Contains("NULL"))
+            {
+                drivers.CCNETDriver.BillAdr = 1;
+            }
+            else
+            {
+                string index = Globals.ClientConfiguration.Settings.adressBill;
+                int int_index = 0;
+                int.TryParse(index, out int_index);
+                textBox1.Text = Globals.ClientConfiguration.Settings.adressBill;
+
+                drivers.CCNETDriver.BillAdr = int_index;
+            }
         }
 
         private void reciveResponse(object sender, ServiceClientResponseEventArgs e)
@@ -108,8 +122,41 @@ namespace ServiceSaleMachine.TestClient
                 drivers.CCNETDriver.closePort();
             }
 
+            if (textBox1.Text.Contains("NULL"))
+            {
+                drivers.CCNETDriver.BillAdr = 1;
+            }
+            else
+            {
+                string index = textBox1.Text;
+                int int_index = 0;
+
+                if (int.TryParse(index, out int_index))
+                {
+                    Globals.ClientConfiguration.Settings.adressBill = textBox1.Text;
+                    drivers.CCNETDriver.BillAdr = int_index;
+                }
+                else
+                {
+                    Globals.ClientConfiguration.Settings.adressBill = "1";
+                    drivers.CCNETDriver.BillAdr = 1;
+                }
+            }
+
             Globals.ClientConfiguration.Settings.comPortBill = (string)comboBox3.Items[comboBox3.SelectedIndex];
+            Globals.ClientConfiguration.Settings.adressBill = drivers.CCNETDriver.BillAdr.ToString();
             Globals.ClientConfiguration.Save();
+        }
+
+        private void comboBox4_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            BillCommandData.SelectedIndex = comboBox4.SelectedIndex;
+        }
+
+        // послать команду приемнику
+        private void button4_Click(object sender, System.EventArgs e)
+        {
+            drivers.CCNETDriver.Cmd((CCNETCommandEnum)comboBox4.SelectedIndex, (byte)drivers.CCNETDriver.BillAdr);
         }
     }
 }

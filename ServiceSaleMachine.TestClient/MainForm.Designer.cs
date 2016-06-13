@@ -48,11 +48,32 @@
             this.comboBox4 = new System.Windows.Forms.ComboBox();
             this.button4 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
+            this.BillCommandData = new System.Windows.Forms.TabControl();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.ResetResult = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.ResultPoll = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.tabControl3 = new System.Windows.Forms.TabControl();
+            this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.tabPage10 = new System.Windows.Forms.TabPage();
+            this.tabPage11 = new System.Windows.Forms.TabPage();
+            this.tabPage12 = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            this.BillCommandData.SuspendLayout();
+            this.tabPage5.SuspendLayout();
+            this.tabPage6.SuspendLayout();
+            this.tabControl3.SuspendLayout();
+            this.tabPage9.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -187,10 +208,13 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.textBox1);
+            this.tabPage4.Controls.Add(this.BillCommandData);
             this.tabPage4.Controls.Add(this.comboBox4);
             this.tabPage4.Controls.Add(this.button4);
             this.tabPage4.Controls.Add(this.label5);
             this.tabPage4.Controls.Add(this.button3);
+            this.tabPage4.Controls.Add(this.label6);
             this.tabPage4.Controls.Add(this.label4);
             this.tabPage4.Controls.Add(this.comboBox3);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
@@ -213,7 +237,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(219, 24);
+            this.button3.Location = new System.Drawing.Point(406, 24);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 6;
@@ -250,6 +274,7 @@
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(121, 21);
             this.comboBox4.TabIndex = 9;
+            this.comboBox4.SelectedIndexChanged += new System.EventHandler(this.comboBox4_SelectedIndexChanged);
             // 
             // button4
             // 
@@ -259,6 +284,7 @@
             this.button4.TabIndex = 8;
             this.button4.Text = "Записать";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // label5
             // 
@@ -268,6 +294,170 @@
             this.label5.Size = new System.Drawing.Size(52, 13);
             this.label5.TabIndex = 7;
             this.label5.Text = "Команда";
+            // 
+            // BillCommandData
+            // 
+            this.BillCommandData.Controls.Add(this.tabPage5);
+            this.BillCommandData.Controls.Add(this.tabPage6);
+            this.BillCommandData.Controls.Add(this.tabPage7);
+            this.BillCommandData.Controls.Add(this.tabPage8);
+            this.BillCommandData.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.BillCommandData.Location = new System.Drawing.Point(3, 170);
+            this.BillCommandData.Name = "BillCommandData";
+            this.BillCommandData.SelectedIndex = 0;
+            this.BillCommandData.Size = new System.Drawing.Size(777, 324);
+            this.BillCommandData.TabIndex = 10;
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.label7);
+            this.tabPage5.Controls.Add(this.ResetResult);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(769, 298);
+            this.tabPage5.TabIndex = 0;
+            this.tabPage5.Text = "Сброс";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // tabPage6
+            // 
+            this.tabPage6.Controls.Add(this.tabControl3);
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(769, 298);
+            this.tabPage6.TabIndex = 1;
+            this.tabPage6.Text = "Опрос";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // tabPage7
+            // 
+            this.tabPage7.Location = new System.Drawing.Point(4, 22);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage7.Size = new System.Drawing.Size(769, 298);
+            this.tabPage7.TabIndex = 2;
+            this.tabPage7.Text = "Статус";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // tabPage8
+            // 
+            this.tabPage8.Location = new System.Drawing.Point(4, 22);
+            this.tabPage8.Name = "tabPage8";
+            this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage8.Size = new System.Drawing.Size(769, 298);
+            this.tabPage8.TabIndex = 3;
+            this.tabPage8.Text = "Информация";
+            this.tabPage8.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(260, 24);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 11;
+            this.textBox1.Text = "1";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(216, 27);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(38, 13);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "Адрес";
+            // 
+            // ResetResult
+            // 
+            this.ResetResult.AutoSize = true;
+            this.ResetResult.Location = new System.Drawing.Point(148, 38);
+            this.ResetResult.Name = "ResetResult";
+            this.ResetResult.Size = new System.Drawing.Size(22, 13);
+            this.ResetResult.TabIndex = 0;
+            this.ResetResult.Text = "ОК";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(14, 38);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(98, 13);
+            this.label7.TabIndex = 1;
+            this.label7.Text = "Результат сброса";
+            // 
+            // ResultPoll
+            // 
+            this.ResultPoll.AutoSize = true;
+            this.ResultPoll.Location = new System.Drawing.Point(14, 38);
+            this.ResultPoll.Name = "ResultPoll";
+            this.ResultPoll.Size = new System.Drawing.Size(98, 13);
+            this.ResultPoll.TabIndex = 1;
+            this.ResultPoll.Text = "Результат опроса";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(148, 38);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(22, 13);
+            this.label9.TabIndex = 0;
+            this.label9.Text = "ОК";
+            // 
+            // tabControl3
+            // 
+            this.tabControl3.Controls.Add(this.tabPage9);
+            this.tabControl3.Controls.Add(this.tabPage10);
+            this.tabControl3.Controls.Add(this.tabPage11);
+            this.tabControl3.Controls.Add(this.tabPage12);
+            this.tabControl3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tabControl3.Location = new System.Drawing.Point(3, -29);
+            this.tabControl3.Name = "tabControl3";
+            this.tabControl3.SelectedIndex = 0;
+            this.tabControl3.Size = new System.Drawing.Size(763, 324);
+            this.tabControl3.TabIndex = 11;
+            // 
+            // tabPage9
+            // 
+            this.tabPage9.Controls.Add(this.ResultPoll);
+            this.tabPage9.Controls.Add(this.label9);
+            this.tabPage9.Location = new System.Drawing.Point(4, 22);
+            this.tabPage9.Name = "tabPage9";
+            this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage9.Size = new System.Drawing.Size(755, 298);
+            this.tabPage9.TabIndex = 0;
+            this.tabPage9.Text = "Сброс";
+            this.tabPage9.UseVisualStyleBackColor = true;
+            // 
+            // tabPage10
+            // 
+            this.tabPage10.Location = new System.Drawing.Point(4, 22);
+            this.tabPage10.Name = "tabPage10";
+            this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage10.Size = new System.Drawing.Size(769, 298);
+            this.tabPage10.TabIndex = 1;
+            this.tabPage10.Text = "Опрос";
+            this.tabPage10.UseVisualStyleBackColor = true;
+            // 
+            // tabPage11
+            // 
+            this.tabPage11.Location = new System.Drawing.Point(4, 22);
+            this.tabPage11.Name = "tabPage11";
+            this.tabPage11.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage11.Size = new System.Drawing.Size(769, 298);
+            this.tabPage11.TabIndex = 2;
+            this.tabPage11.Text = "Статус";
+            this.tabPage11.UseVisualStyleBackColor = true;
+            // 
+            // tabPage12
+            // 
+            this.tabPage12.Location = new System.Drawing.Point(4, 22);
+            this.tabPage12.Name = "tabPage12";
+            this.tabPage12.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage12.Size = new System.Drawing.Size(769, 298);
+            this.tabPage12.TabIndex = 3;
+            this.tabPage12.Text = "Информация";
+            this.tabPage12.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -284,6 +474,13 @@
             this.tabPage3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            this.BillCommandData.ResumeLayout(false);
+            this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
+            this.tabPage6.ResumeLayout(false);
+            this.tabControl3.ResumeLayout(false);
+            this.tabPage9.ResumeLayout(false);
+            this.tabPage9.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -310,6 +507,22 @@
         private System.Windows.Forms.ComboBox comboBox4;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TabControl BillCommandData;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.TabPage tabPage8;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label ResetResult;
+        private System.Windows.Forms.TabControl tabControl3;
+        private System.Windows.Forms.TabPage tabPage9;
+        private System.Windows.Forms.Label ResultPoll;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TabPage tabPage10;
+        private System.Windows.Forms.TabPage tabPage11;
+        private System.Windows.Forms.TabPage tabPage12;
     }
 }
 

@@ -36,6 +36,7 @@ namespace ServiceSaleMachine.TestClient
             {
                 Globals.ClientConfiguration.Settings.comPortScanner = "NULL";
                 Globals.ClientConfiguration.Settings.comPortBill = "NULL";
+                Globals.ClientConfiguration.Settings.adressBill = "NULL";
                 Globals.ClientConfiguration.Settings.comPortPrinter = "NULL";
 
                 Globals.ClientConfiguration.Save();

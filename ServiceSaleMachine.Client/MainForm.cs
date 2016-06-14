@@ -9,8 +9,8 @@ namespace ServiceSaleMachine.Client
     {
         MachineDrivers drivers;
 
-        FormSettings setting = new FormSettings();
-        Services services = new Services();
+        FormSettings setting;
+        Services services;
 
         public MainForm()
         {
@@ -42,12 +42,22 @@ namespace ServiceSaleMachine.Client
 
         private void button4_Click(object sender, EventArgs e)
         {
+            setting = new FormSettings();
             setting.Show();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            services = new Services();
             services.Show();
+        }
+
+        private void MainForm_ResizeEnd(object sender, EventArgs e)
+        {
+            int heght = this.Size.Height;
+            int width = this.Size.Width;
+
+
         }
     }
 }

@@ -230,7 +230,7 @@ namespace ServiceSaleMachine.Drivers
 
         public CCRSProtocol()
         {
-            iCmdDelay = 20;
+            iCmdDelay = 50;
 
             Ident.BCCPUBoot = Encoding.ASCII.GetBytes("N/A");
             Ident.BCCPUVersion = Encoding.ASCII.GetBytes("N/A");
@@ -345,6 +345,8 @@ namespace ServiceSaleMachine.Drivers
                 if ((BufOut[3] == ACK) || (BufOut[3] == NAK))
                     return iRecievingError = RE_NONE;
 
+                Thread.Sleep(250);
+
                 if (COMPort.Recieve(BufIn, ibytesToRecieve))
                 {
                     if (BufIn[0] != SYNC)
@@ -365,8 +367,8 @@ namespace ServiceSaleMachine.Drivers
                                 iRecievingError = RE_DATA;
 
                                 //PurgeComm(COMPort.GetHandle(), PURGE_RXABORT | PURGE_RXCLEAR);
-                                //COMPort.GetHandle().DiscardInBuffer();
-                                //COMPort.GetHandle().DiscardOutBuffer();
+                                COMPort.GetHandle().DiscardInBuffer();
+                                COMPort.GetHandle().DiscardOutBuffer();
                             }
                         }
                         else
@@ -395,8 +397,10 @@ namespace ServiceSaleMachine.Drivers
             int iErrCode = SendCommand(Cmd.GetData(), tmpBuffer);
             if ((iErrCode == 0) && (Cmd.GetData()[3] > 0) && (0xFF != Cmd.GetData()[3]))
             {
-                wCRC = (ushort)(tmpBuffer[(tmpBuffer[2] > 0) ? tmpBuffer[2] : (((ushort)(tmpBuffer[4])) << 8) + tmpBuffer[5] - 2] +
-                    (tmpBuffer[(tmpBuffer[2] > 0) ? tmpBuffer[2] : (((ushort)(tmpBuffer[4])) << 8) + tmpBuffer[5] - 1] << 8));
+                byte first = (byte)(((tmpBuffer[2] > 0) ? tmpBuffer[2] : (((ushort)(tmpBuffer[4])) << 8) + tmpBuffer[5]) - 2);
+                byte second = (byte)(((tmpBuffer[2] > 0) ? tmpBuffer[2] : (((ushort)(tmpBuffer[4])) << 8) + tmpBuffer[5]) - 1);
+
+                wCRC = (ushort)(tmpBuffer[first] + (tmpBuffer[second] << 8));
 
                 if (CalculateCRC(tmpBuffer) != wCRC)
                     iErrCode = RE_CRC;
@@ -450,6 +454,135 @@ namespace ServiceSaleMachine.Drivers
             }
 
             return cmdRes;
+        }
+
+        internal string pollStatus()
+        {
+            string str = "";
+
+            switch(PollResults.Z1)
+            {
+                case 0x10:
+                    str = "Power Up";
+                    break;
+                case 0x11:
+                    str = "Power Up with Bill in Validator";
+                    break;
+                case 0x12:
+                    str = "Power Up with Bill in Stacker";
+                    break;
+                case 0x13:
+                    str = "Initialize";
+                    break;
+                case 0x14:
+                    str = "Idling";
+                    break;
+                case 0x15:
+                    str = "Accepting ";
+                    break;
+                case 0x17:
+                    str = "Stacking";
+                    break;
+                case 0x18:
+                    str = "Returning";
+                    break;
+                case 0x19:
+                    str = "Unit Disabled";
+                    break;
+                case 0x1A:
+                    str = "Holding";
+                    break;
+                case 0x1B:
+                    str = "Device Busy " + ((int)PollResults.Z2*100).ToString() + " ms";
+                    break;
+                case 0x1C:
+                    switch(PollResults.Z2)
+                    {
+                        case 0x60:
+                            str = "Rejecting due to Insertion";
+                            break;
+                        case 0x61:
+                            str = "Rejecting due to Magnetic";
+                            break;
+                        case 0x62:
+                            str = "Rejecting due to Remained bill in head";
+                            break;
+                        case 0x63:
+                            str = "Rejecting due to Multiplying";
+                            break;
+                        case 0x64:
+                            str = "Rejecting due to Conveying";
+                            break;
+                        case 0x65:
+                            str = "RRejecting due to Identification1";
+                            break;
+                        case 0x66:
+                            str = "Rejecting due to Verification";
+                            break;
+                        case 0x67:
+                            str = "Rejecting due to Optic ";
+                            break;
+                        case 0x68:
+                            str = "Rejecting due to Inhibit ";
+                            break;
+                        case 0x69:
+                            str = "Rejecting due to Capacity";
+                            break;
+                        case 0x6A:
+                            str = "Rejecting due to Operation";
+                            break;
+                        case 0x6C:
+                            str = "Rejecting due to Length";
+                            break;
+                        case 0x92:
+                            str = "Rejecting due to unrecognised barcode";
+                            break;
+                        case 0x6D:
+                            str = "Rejecting due to UV";
+                            break;
+                        case 0x93:
+                            str = "Rejecting due to incorrect number of characters in barcode";
+                            break;
+                        case 0x94:
+                            str = "Rejecting due to unknown barcode start sequence ";
+                            break;
+                        case 0x95:
+                            str = "Rejecting due to unknown barcode stop sequence ";
+                            break;
+                    }
+                    break;
+                case 0x41:
+                    str = "Drop Cassette Full";
+                    break;
+                case 0x42:
+                    str = "Drop Cassette out of position";
+                    break;
+                case 0x43:
+                    str = "Validator Jammed";
+                    break;
+                case 0x44:
+                    str = "Drop Cassette Jammed";
+                    break;
+                case 0x45:
+                    str = "Cheated";
+                    break;
+                case 0x46:
+                    str = "Pause";
+                    break;
+                case 0x47:
+                    str = "Pause";
+                    break;
+                case 0x80:
+                    str = "Escrow position " + PollResults.Z2.ToString();
+                    break;
+                case 0x81:
+                    str = "Bill stacked " + PollResults.Z2.ToString();
+                    break;
+                case 0x82:
+                    str = "Bill returned " + PollResults.Z2.ToString();
+                    break;
+            }
+            return str;
         }
 
         //////////////////////////////////////////////////////////////////////
@@ -674,17 +807,14 @@ namespace ServiceSaleMachine.Drivers
                 Ident.BVVersion = Encoding.ASCII.GetBytes("N/A");
                 Ident.PartNumber = Encoding.ASCII.GetBytes("N/A");
 
-                byte[] sTemp = new byte[64];
                 int iPos = 3, iLen = 15;
 
-                Array.Copy(Response.GetData(), iPos, sTemp, 0, iLen);
-                sTemp[iLen] = 0; iPos += iLen;
-                Array.Copy(sTemp, 0, Ident.PartNumber, 0, sTemp.Length);
+                Ident.PartNumber = Encoding.ASCII.GetBytes(Encoding.UTF8.GetString(Response.GetData()).ToCharArray(), iPos, iLen);
+                iPos += iLen;
 
                 iLen = 12;
-                Array.Copy(Response.GetData(), iPos, sTemp, 0, iLen);
-                sTemp[iLen] = 0; iPos += iLen;
-                Array.Copy(sTemp, 0, Ident.SN, 0, sTemp.Length);
+                Ident.SN = Encoding.ASCII.GetBytes(Encoding.UTF8.GetString(Response.GetData()).ToCharArray(), iPos, iLen);
+                iPos += iLen;
 
                 byte[] strTemp = new byte[256];
 
@@ -700,54 +830,44 @@ namespace ServiceSaleMachine.Drivers
                 if (Response.GetData()[2] < 109) return true;
 
                 iLen = 6;
-                Array.Copy(Response.GetData(), iPos, sTemp, 0, iLen);
-                sTemp[iLen] = 0; iPos += iLen;
-                Array.Copy(sTemp, 0, Ident.BVBootVersion, 0, sTemp.Length);
+                Ident.BVBootVersion = Encoding.ASCII.GetBytes(Encoding.UTF8.GetString(Response.GetData()).ToCharArray(), iPos, iLen);
+                iPos += iLen;
 
                 iLen = 20;
-                Array.Copy(Response.GetData(), iPos, sTemp, 0, iLen);
-                sTemp[iLen] = 0; iPos += iLen;
-                Array.Copy(sTemp, 0, Ident.BVVersion, 0, sTemp.Length);
+                Ident.BVVersion = Encoding.ASCII.GetBytes(Encoding.UTF8.GetString(Response.GetData()).ToCharArray(), iPos, iLen);
+                iPos += iLen;
 
                 iLen = 6;
-                Array.Copy(Response.GetData(), iPos, sTemp, 0, iLen);
-                sTemp[iLen] = 0; iPos += iLen;
-                Array.Copy(sTemp, 0, Ident.BCCPUBoot, 0, sTemp.Length);
+                Ident.BCCPUBoot = Encoding.ASCII.GetBytes(Encoding.UTF8.GetString(Response.GetData()).ToCharArray(), iPos, iLen);
+                iPos += iLen;
 
                 iLen = 6;
-                Array.Copy(Response.GetData(), iPos, sTemp, 0, iLen);
-                sTemp[iLen] = 0; iPos += iLen;
-                Array.Copy(sTemp, 0, Ident.BCCPUVersion, 0, sTemp.Length);
+                Ident.BCCPUVersion = Encoding.ASCII.GetBytes(Encoding.UTF8.GetString(Response.GetData()).ToCharArray(), iPos, iLen);
+                iPos += iLen;
 
                 iLen = 6;
-                Array.Copy(Response.GetData(), iPos, sTemp, 0, iLen);
-                sTemp[iLen] = 0; iPos += iLen;
-                Array.Copy(sTemp, 0, Ident.BCDispenserBoot, 0, sTemp.Length);
+                Ident.BCDispenserBoot = Encoding.ASCII.GetBytes(Encoding.UTF8.GetString(Response.GetData()).ToCharArray(), iPos, iLen);
+                iPos += iLen;
 
                 iLen = 6;
-                Array.Copy(Response.GetData(), iPos, sTemp, 0, iLen);
-                sTemp[iLen] = 0; iPos += iLen;
-                Array.Copy(sTemp, 0, Ident.BCDispenserVersion, 0, sTemp.Length);
+                Ident.BCDispenserVersion = Encoding.ASCII.GetBytes(Encoding.UTF8.GetString(Response.GetData()).ToCharArray(), iPos, iLen);
+                iPos += iLen;
 
                 iLen = 6;
-                Array.Copy(Response.GetData(), iPos, sTemp, 0, iLen);
-                sTemp[iLen] = 0; iPos += iLen;
-                Array.Copy(sTemp, 0, Ident.BCCS1Boot, 0, sTemp.Length);
+                Ident.BCCS1Boot = Encoding.ASCII.GetBytes(Encoding.UTF8.GetString(Response.GetData()).ToCharArray(), iPos, iLen);
+                iPos += iLen;
 
                 iLen = 6;
-                Array.Copy(Response.GetData(), iPos, sTemp, 0, iLen);
-                sTemp[iLen] = 0; iPos += iLen;
-                Array.Copy(sTemp, 0, Ident.BCCS2Boot, 0, sTemp.Length);
+                Ident.BCCS2Boot = Encoding.ASCII.GetBytes(Encoding.UTF8.GetString(Response.GetData()).ToCharArray(), iPos, iLen);
+                iPos += iLen;
 
                 iLen = 6;
-                Array.Copy(Response.GetData(), iPos, sTemp, 0, iLen);
-                sTemp[iLen] = 0; iPos += iLen;
-                Array.Copy(sTemp, 0, Ident.BCCS3Boot, 0, sTemp.Length);
+                Ident.BCCS3Boot = Encoding.ASCII.GetBytes(Encoding.UTF8.GetString(Response.GetData()).ToCharArray(), iPos, iLen);
+                iPos += iLen;
 
                 iLen = 6;
-                Array.Copy(Response.GetData(), iPos, sTemp, 0, iLen);
-                sTemp[iLen] = 0; iPos += iLen;
-                Array.Copy(sTemp, 0, Ident.BCCSVersion, 0, sTemp.Length);
+                iPos += iLen;
+                Ident.BCCSVersion = Encoding.ASCII.GetBytes(Encoding.UTF8.GetString(Response.GetData()).ToCharArray(), iPos, iLen);
 
                 return true;
             }
@@ -806,7 +926,7 @@ namespace ServiceSaleMachine.Drivers
         {
             byte[] Data = new byte[256];
             Data[0] = SYNC;
-            Data[1] = 0;
+            Data[1] = Addr;
             Data[2] = 9;
             Data[3] = SET_SECURITY;
             Data[4] = (byte)(wS >> 16);
@@ -849,7 +969,7 @@ namespace ServiceSaleMachine.Drivers
         {
             byte[] Data = new byte[256];
             Data[0] = SYNC;
-            Data[1] = 0;
+            Data[1] = Addr;
             Data[2] = 12;
             Data[3] = BILL_TYPE;
             Data[4] = (byte)(enBill >> 16);
@@ -894,7 +1014,7 @@ namespace ServiceSaleMachine.Drivers
         {
             byte[] Data = new byte[256];
             Data[0] = SYNC;
-            Data[1] = 0;
+            Data[1] = Addr;
             Data[2] = 6;
             Data[3] = PACK;
 
@@ -932,7 +1052,7 @@ namespace ServiceSaleMachine.Drivers
         {
             byte[] Data = new byte[256];
             Data[0] = SYNC;
-            Data[1] = 0;
+            Data[1] = Addr;
             Data[2] = 6;
             Data[3] = RETURN;
 
@@ -972,7 +1092,7 @@ namespace ServiceSaleMachine.Drivers
         {
             byte[] Data = new byte[256];
             Data[0] = SYNC;
-            Data[1] = 0;
+            Data[1] = Addr;
             Data[2] = 8;
             Data[3] = SET_BAR_PARAMS;
             Data[4] = Format;
@@ -1014,7 +1134,7 @@ namespace ServiceSaleMachine.Drivers
         {
             byte[] Data = new byte[256];
             Data[0] = SYNC;
-            Data[1] = 0;
+            Data[1] = Addr;
             Data[2] = 6;
             Data[3] = EXTRACT_BAR_DATA;
             Data[4] = 0;
@@ -1060,7 +1180,7 @@ namespace ServiceSaleMachine.Drivers
         {
             byte[] Data = new byte[256];
             Data[0] = SYNC;
-            Data[1] = 0;
+            Data[1] = Addr;
             Data[2] = 6;
             Data[3] = GET_BILL_TABLE;
             Data[4] = 0;
@@ -1090,10 +1210,7 @@ namespace ServiceSaleMachine.Drivers
                 {
                     BillTable[i / 5].Denomination = Response.GetData()[i + 3];
 
-                    byte[] sTmp = new byte[5];
-                    Array.Copy(Response.GetData(), i + 4, sTmp, 0, 3);
-                    sTmp[3] = 0;
-                    Array.Copy(sTmp, 0, BillTable[i / 5].sCountryCode, 0, sTmp.Length);
+                    BillTable[i / 5].sCountryCode = Encoding.ASCII.GetBytes(Encoding.UTF8.GetString(Response.GetData()).ToCharArray(), i + 4, 3);
 
                     if ((((Response.GetData())[i + 7]) & 0x80) > 0)
                     {

@@ -1,4 +1,5 @@
 ﻿using ServiceSaleMachine.Drivers;
+using System.Text;
 using System.Windows.Forms;
 using static ServiceSaleMachine.Drivers.MachineDrivers;
 
@@ -50,7 +51,18 @@ namespace ServiceSaleMachine.TestClient
                 string index = Globals.ClientConfiguration.Settings.comPortBill.Remove(0, 3);
                 int int_index = 0;
                 int.TryParse(index, out int_index);
-                comboBox3.SelectedIndex = int_index;
+
+                int counter = 0;
+                foreach(object item in comboBox3.Items)
+                {
+                    if((string)item == Globals.ClientConfiguration.Settings.comPortBill)
+                    {
+                        break;
+                    }
+                    counter++;
+                }
+
+                comboBox3.SelectedIndex = counter;
 
                 drivers.CCNETDriver.openPort((string)comboBox3.Items[comboBox3.SelectedIndex]);
             }
@@ -81,7 +93,13 @@ namespace ServiceSaleMachine.TestClient
             switch (e.Message.Recipient)
             {
                 case MessageEndPoint.Scaner:
-                    LabelCode.Text = e.Message.Content;
+                    LabelCode.Text = (string)e.Message.Content;
+                    break;
+                case MessageEndPoint.BillAcceptor:
+                    richTextBox1.Text = (string)e.Message.Content + "\n" + richTextBox1.Text;
+                    break;
+                case MessageEndPoint.BillAcceptorCredit:
+                    label5.Text = (string)e.Message.Content + " руб";
                     break;
             }
         }
@@ -148,17 +166,47 @@ namespace ServiceSaleMachine.TestClient
             Globals.ClientConfiguration.Save();
         }
 
-        private void comboBox4_SelectedIndexChanged(object sender, System.EventArgs e)
-        {
-            BillCommandData.SelectedIndex = comboBox4.SelectedIndex;
-        }
-
-        // послать команду приемнику
-        private void button4_Click(object sender, System.EventArgs e)
+        private void button3_Click_1(object sender, System.EventArgs e)
         {
             string result = "ОК";
 
-            if(drivers.CCNETDriver.Cmd((CCNETCommandEnum)comboBox4.SelectedIndex, (byte)drivers.CCNETDriver.BillAdr) == true)
+            if (drivers.CCNETDriver.Cmd(CCNETCommandEnum.GetBillTable, (byte)drivers.CCNETDriver.BillAdr, drivers.bill_record) == true)
+            {
+                label9.Text = "";
+
+                foreach (_BillRecord rec in drivers.bill_record)
+                {
+                    if (rec.Denomination != 0)
+                    {
+                        label9.Text += Encoding.UTF8.GetString(rec.sCountryCode) + rec.Denomination.ToString() + " ";
+                    }
+                }
+            }
+            else
+            {
+                result = "СБОЙ";
+            }
+        }
+
+        private void button4_Click_1(object sender, System.EventArgs e)
+        {
+            string result = "ОК";
+
+            if (drivers.CCNETDriver.Cmd(CCNETCommandEnum.Poll, (byte)drivers.CCNETDriver.BillAdr) == true)
+            {
+
+            }
+            else
+            {
+                result = "СБОЙ";
+            }
+        }
+
+        private void button5_Click(object sender, System.EventArgs e)
+        {
+            string result = "ОК";
+
+            if (drivers.CCNETDriver.Cmd(CCNETCommandEnum.BillType, (byte)drivers.CCNETDriver.BillAdr, (long)0x00ffffff, (long)0x00) == true)
             {
 
             }
@@ -167,22 +215,105 @@ namespace ServiceSaleMachine.TestClient
                 result = "СБОЙ";
             }
 
-            switch ((CCNETCommandEnum)comboBox4.SelectedIndex)
+            if (drivers.CCNETDriver.Cmd(CCNETCommandEnum.BillType, (byte)drivers.CCNETDriver.BillAdr, (long)0x00, (long)0x00) == true)
             {
-                case CCNETCommandEnum.Reset:
-                    ResetResult.Text = result;
-                    break;
-                case CCNETCommandEnum.Poll:
-                    reasultPoll.Text = result;
-                    break;
-                case CCNETCommandEnum.Status:
-                    //reasultPoll.Text = result;
-                    break;
-                case CCNETCommandEnum.Information:
-                    //reasultPoll.Text = result;
-                    break;
+
+            }
+            else
+            {
+                result = "СБОЙ";
+            }
+        }
+
+        private void button6_Click(object sender, System.EventArgs e)
+        {
+            drivers.startPollBill();
+        }
+
+        private void button7_Click(object sender, System.EventArgs e)
+        {
+            drivers.stopPollBill();
+        }
+
+        private void button8_Click(object sender, System.EventArgs e)
+        {
+            string result = "ОК";
+
+            if (drivers.CCNETDriver.Cmd(CCNETCommandEnum.Reset, (byte)drivers.CCNETDriver.BillAdr, (long)0x00ffffff, (long)0x00) == true)
+            {
+
+            }
+            else
+            {
+                result = "СБОЙ";
             }
 
+        }
+
+        private void button9_Click(object sender, System.EventArgs e)
+        {
+            string result = "ОК";
+
+            if (drivers.CCNETDriver.Cmd(CCNETCommandEnum.Information, (byte)drivers.CCNETDriver.BillAdr) == true)
+            {
+                result = Encoding.UTF8.GetString(drivers.CCNETDriver.Ident.PartNumber) + " " + Encoding.UTF8.GetString(drivers.CCNETDriver.Ident.SN);
+            }
+            else
+            {
+                result = "СБОЙ";
+            }
+
+            label15.Text = result;
+        }
+
+        private void button10_Click(object sender, System.EventArgs e)
+        {
+            string result = "ОК";
+
+            if (drivers.CCNETDriver.Cmd(CCNETCommandEnum.BillType, (byte)drivers.CCNETDriver.BillAdr, (long)0x00ffffff, (long)0x00) == true)
+            {
+
+            }
+            else
+            {
+                result = "СБОЙ";
+            }
+
+        }
+
+        private void button11_Click(object sender, System.EventArgs e)
+        {
+            string result = "ОК";
+
+            if (drivers.CCNETDriver.Cmd(CCNETCommandEnum.Pack, (byte)drivers.CCNETDriver.BillAdr))
+            {
+
+            }
+            else
+            {
+                result = "СБОЙ";
+            }
+
+        }
+
+        private void button12_Click(object sender, System.EventArgs e)
+        {
+            string result = "ОК";
+
+            if (drivers.CCNETDriver.Cmd(CCNETCommandEnum.Return, (byte)drivers.CCNETDriver.BillAdr))
+            {
+
+            }
+            else
+            {
+                result = "СБОЙ";
+            }
+        }
+
+        private void button13_Click(object sender, System.EventArgs e)
+        {
+            drivers.CCNETDriver.Cmd(CCNETCommandEnum.Hold, (byte)drivers.CCNETDriver.BillAdr);
+            drivers.hold_bill = true;
         }
     }
 }

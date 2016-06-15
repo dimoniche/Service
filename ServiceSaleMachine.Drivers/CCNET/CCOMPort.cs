@@ -37,9 +37,9 @@ namespace ServiceSaleMachine.Drivers
 
                 COMPort.ReadTimeout = 5000;
 
-                COMPort.DataReceived += SerialPortDataRecevied;
+                /*COMPort.DataReceived += SerialPortDataRecevied;
                 COMPort.ErrorReceived += SerialPortErrorRecived;
-                COMPort.PinChanged += SerialPortPinChanged;
+                COMPort.PinChanged += SerialPortPinChanged;*/
 
                 COMPort.Open();
             }
@@ -68,9 +68,9 @@ namespace ServiceSaleMachine.Drivers
             {
                 try
                 {
-                    COMPort.DataReceived -= SerialPortDataRecevied;
+                    /*COMPort.DataReceived -= SerialPortDataRecevied;
                     COMPort.ErrorReceived -= SerialPortErrorRecived;
-                    COMPort.PinChanged -= SerialPortPinChanged;
+                    COMPort.PinChanged -= SerialPortPinChanged;*/
 
                     COMPort.Close();
                 }

@@ -349,6 +349,7 @@ CCommand CCCRSProtocol::Transmit(CCommand CMD, BYTE Addr)
 	
 	return cmdRes;
 }
+
 //////////////////////////////////////////////////////////////////////
 // CCNET Commands implementation
 /** \defgroup CCNETCommands CCNET protocol commands and requests

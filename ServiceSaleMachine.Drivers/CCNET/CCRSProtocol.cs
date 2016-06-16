@@ -195,7 +195,7 @@ namespace ServiceSaleMachine.Drivers
 
         #endregion
 
-        public int BillAdr = 1;
+        public int BillAdr = 3;
 
         static int ibytesToRecieve;         //!< A variable containing number of bytes to receive from the device at once
         static int iRecievingError = 0;     //!< A variable containing a communication error code produced by last serial communication

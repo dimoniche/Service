@@ -69,7 +69,7 @@ namespace ServiceSaleMachine.TestClient
 
             if (Globals.ClientConfiguration.Settings.adressBill == null || Globals.ClientConfiguration.Settings.adressBill.Contains("NULL"))
             {
-                drivers.CCNETDriver.BillAdr = 1;
+                drivers.CCNETDriver.BillAdr = 3;
             }
             else
             {
@@ -142,7 +142,7 @@ namespace ServiceSaleMachine.TestClient
 
             if (textBox1.Text.Contains("NULL"))
             {
-                drivers.CCNETDriver.BillAdr = 1;
+                drivers.CCNETDriver.BillAdr = 3;
             }
             else
             {
@@ -156,8 +156,8 @@ namespace ServiceSaleMachine.TestClient
                 }
                 else
                 {
-                    Globals.ClientConfiguration.Settings.adressBill = "1";
-                    drivers.CCNETDriver.BillAdr = 1;
+                    Globals.ClientConfiguration.Settings.adressBill = "3";
+                    drivers.CCNETDriver.BillAdr = 3;
                 }
             }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Threading;
 
 namespace ServiceSaleMachine.Drivers
@@ -26,6 +27,7 @@ namespace ServiceSaleMachine.Drivers
         public _BillRecord[] bill_record = new _BillRecord[24];
 
         public bool hold_bill = false;  // удерживать купюру
+        bool send_bill_command = false; // отправляем в данный момент команду в приемник купюр
 
         public MachineDrivers()
         {
@@ -66,10 +68,13 @@ namespace ServiceSaleMachine.Drivers
             {
                 WorkerBillPollDriver.Abort();
 
+                send_bill_command = true;
+
                 if (CCNETDriver.Cmd(CCNETCommandEnum.BillType, (byte)CCNETDriver.BillAdr, (long)0x00, (long)0x00) == true)
                 {
 
                 }
+                send_bill_command = false;
             }
         }
 
@@ -78,9 +83,277 @@ namespace ServiceSaleMachine.Drivers
             
         }
 
+        /// <summary>
+        /// Запрос поддерживаемых купюр
+        /// </summary>
+        /// <returns></returns>
+        public string GetBillTable()
+        {
+            string result = "";
+            int count = 0;
+
+            // если занято - ждем - но не более 1сек
+            while (send_bill_command == true) { if (count++ == 1000) { break; } Thread.Sleep(1); }
+
+            send_bill_command = true;
+
+            try
+            {
+                if (CCNETDriver.Cmd(CCNETCommandEnum.GetBillTable, (byte)CCNETDriver.BillAdr, bill_record) == true)
+                {
+                    foreach (_BillRecord rec in bill_record)
+                    {
+                        if (rec.Denomination != 0)
+                        {
+                            result += Encoding.UTF8.GetString(rec.sCountryCode) + rec.Denomination.ToString() + " ";
+                        }
+                    }
+                }
+                else
+                {
+                    result = "СБОЙ";
+                }
+
+                send_bill_command = false;
+            }
+            catch
+            {
+                send_bill_command = false;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Ожидание ввода купюры
+        /// </summary>
+        /// <returns></returns>
+        public string WaitBill()
+        {
+            string result = "";
+            int count = 0;
+
+            // если занято - ждем - но не более 1сек
+            while (send_bill_command == true) { if (count++ == 1000) { break; } Thread.Sleep(1); }
+
+            send_bill_command = true;
+
+            try
+            {
+                if (CCNETDriver.Cmd(CCNETCommandEnum.BillType, (byte)CCNETDriver.BillAdr, (long)0x00ffffff, (long)0x00) == true)
+                {
+                    result = "ОК";
+                }
+                else
+                {
+                    result = "СБОЙ";
+                }
+
+                send_bill_command = false;
+            }
+            catch
+            {
+                send_bill_command = false;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Окончание ожидания ввода купюры
+        /// </summary>
+        /// <returns></returns>
+        public string StopWaitBill()
+        {
+            string result = "";
+            int count = 0;
+
+            // если занято - ждем - но не более 1сек
+            while (send_bill_command == true) { if (count++ == 1000) { break; } Thread.Sleep(1); }
+
+            send_bill_command = true;
+
+            try
+            {
+                if (CCNETDriver.Cmd(CCNETCommandEnum.BillType, (byte)CCNETDriver.BillAdr, (long)0x00ffffff, (long)0x00) == true)
+                {
+                    result = "ОК";
+                }
+                else
+                {
+                    result = "СБОЙ";
+                }
+
+                if (CCNETDriver.Cmd(CCNETCommandEnum.BillType, (byte)CCNETDriver.BillAdr, (long)0x00, (long)0x00) == true)
+                {
+
+                }
+                else
+                {
+                    result = "СБОЙ";
+                }
+
+                send_bill_command = false;
+            }
+            catch
+            {
+                send_bill_command = false;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Перезагрузка приемника
+        /// </summary>
+        /// <returns></returns>
+        public string restartBill()
+        {
+            string result = "";
+            int count = 0;
+
+            // если занято - ждем - но не более 1сек
+            while (send_bill_command == true) { if (count++ == 1000) { break; } Thread.Sleep(1); }
+
+            send_bill_command = true;
+
+            try
+            {
+                if (CCNETDriver.Cmd(CCNETCommandEnum.Reset, (byte)CCNETDriver.BillAdr) == true)
+                {
+                    result = "ОК";
+                }
+                else
+                {
+                    result = "СБОЙ";
+                }
+
+                send_bill_command = false;
+            }
+            catch
+            {
+                send_bill_command = false;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Возврат купюры
+        /// </summary>
+        /// <returns></returns>
+        public string returnBill()
+        {
+            string result = "";
+            int count = 0;
+
+            // если занято - ждем - но не более 1сек
+            while (send_bill_command == true) { if (count++ == 1000) { break; } Thread.Sleep(1); }
+
+            send_bill_command = true;
+
+            try
+            {
+                if (CCNETDriver.Cmd(CCNETCommandEnum.Pack, (byte)CCNETDriver.BillAdr))
+                {
+                    result = "ОК";
+                }
+                else
+                {
+                    result = "СБОЙ";
+                }
+
+                send_bill_command = false;
+            }
+            catch
+            {
+                send_bill_command = false;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Забрать купюру
+        /// </summary>
+        /// <returns></returns>
+        public string StackBill()
+        {
+            string result = "";
+            int count = 0;
+
+            // если занято - ждем - но не более 1сек
+            while (send_bill_command == true) { if (count++ == 1000) { break; } Thread.Sleep(1); }
+
+            send_bill_command = true;
+
+            try
+            {
+                if (CCNETDriver.Cmd(CCNETCommandEnum.Pack, (byte)CCNETDriver.BillAdr))
+                {
+                    result = "ОК";
+                }
+                else
+                {
+                    result = "СБОЙ";
+                }
+
+                send_bill_command = false;
+            }
+            catch
+            {
+                send_bill_command = false;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Забрать купюру
+        /// </summary>
+        /// <returns></returns>
+        public string getInfoBill()
+        {
+            string result = "";
+            int count = 0;
+
+            // если занято - ждем - но не более 1сек
+            while (send_bill_command == true) { if (count++ == 1000) { break; } Thread.Sleep(1); }
+
+            send_bill_command = true;
+
+            try
+            {
+                if (CCNETDriver.Cmd(CCNETCommandEnum.Information, (byte)CCNETDriver.BillAdr) == true)
+                {
+                    result = Encoding.UTF8.GetString(CCNETDriver.Ident.PartNumber) + " " + Encoding.UTF8.GetString(CCNETDriver.Ident.SN);
+                }
+                else
+                {
+                    result = "СБОЙ";
+                }
+
+                send_bill_command = false;
+            }
+            catch
+            {
+                send_bill_command = false;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Обработчик опроса состояния приемника
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void WorkerBillPollDriver_Work(object sender, ThreadWorkEventArgs e)
         {
             int stepCount = 0;
+
+            // сначала загрузим массив принимаемых купюр
+            GetBillTable();
 
             CCNETDriver.Cmd(CCNETCommandEnum.Information, (byte)CCNETDriver.BillAdr);
 
@@ -90,36 +363,88 @@ namespace ServiceSaleMachine.Drivers
 
                 try
                 {
-                    if (hold_bill && (stepCount%10) == 0)
+                    if (!send_bill_command)
                     {
-                        CCNETDriver.Cmd(CCNETCommandEnum.Hold, (byte)CCNETDriver.BillAdr);
-                    }
+                        send_bill_command = true;
+                        if (hold_bill && (stepCount % 10) == 0)
+                        {
+                            CCNETDriver.Cmd(CCNETCommandEnum.Hold, (byte)CCNETDriver.BillAdr);
+                        }
 
-                    CCNETDriver.Cmd(CCNETCommandEnum.Poll, (byte)CCNETDriver.BillAdr);
+                        CCNETDriver.Cmd(CCNETCommandEnum.Poll, (byte)CCNETDriver.BillAdr);
+                        send_bill_command = false;
 
-                    if(CCNETDriver.PollResults.Z1 != 0 && CCNETDriver.PollResults.Z2 != 0)
-                    {
-                        Message message = new Message();
+                        // все события купюроприемника
+                        if (CCNETDriver.PollResults.Z1 != 0 && CCNETDriver.PollResults.Z2 != 0)
+                        {
+                            Message message = new Message();
 
-                        message.Recipient = MessageEndPoint.BillAcceptor;
-                        message.Content = CCNETDriver.pollStatus();
+                            message.Event = DeviceEvent.BillAcceptor;
+                            message.Content = CCNETDriver.pollStatus();
 
-                        ReceivedResponse(this, new ServiceClientResponseEventArgs(message));
-                    }
+                            ReceivedResponse(this, new ServiceClientResponseEventArgs(message));
+                        }
 
-                    if (CCNETDriver.PollResults.Z1 == 0x81)
-                    {
-                        Message message = new Message();
+                        // выемка денег
+                        if (CCNETDriver.PollResults.Z1 == 0x42)
+                        {
+                            Message message = new Message();
 
-                        message.Recipient = MessageEndPoint.BillAcceptorCredit;
-                        message.Content = bill_record[CCNETDriver.PollResults.Z2].Denomination.ToString();
+                            message.Event = DeviceEvent.DropCassetteBillAcceptor;
+                            message.Content = null;
 
-                        ReceivedResponse(this, new ServiceClientResponseEventArgs(message));
+                            ReceivedResponse(this, new ServiceClientResponseEventArgs(message));
+                        }
+
+                        // да фига денег - больше не надо
+                        if (CCNETDriver.PollResults.Z1 == 0x41)
+                        {
+                            Message message = new Message();
+
+                            message.Event = DeviceEvent.DropCassetteFullBillAcceptor;
+                            message.Content = null;
+
+                            ReceivedResponse(this, new ServiceClientResponseEventArgs(message));
+                        }
+
+                        // ошибки приемника
+                        if (CCNETDriver.PollResults.Z1 == 0x47)
+                        {
+                            Message message = new Message();
+
+                            message.Event = DeviceEvent.BillAcceptorError;
+                            message.Content = CCNETDriver.PollResults.Z2;
+
+                            ReceivedResponse(this, new ServiceClientResponseEventArgs(message));
+                        }
+
+                        // получили купюру
+                        if (CCNETDriver.PollResults.Z1 == 0x81)
+                        {
+                            Message message = new Message();
+
+                            message.Event = DeviceEvent.BillAcceptorCredit;
+                            message.Content = bill_record[CCNETDriver.PollResults.Z2].Denomination.ToString();
+
+                            ReceivedResponse(this, new ServiceClientResponseEventArgs(message));
+                        }
+
+                        // вернем купюру
+                        if (CCNETDriver.PollResults.Z1 == 0x82)
+                        {
+                            Message message = new Message();
+
+                            message.Event = DeviceEvent.returnBillAcceptor;
+                            message.Content = null;
+
+                            ReceivedResponse(this, new ServiceClientResponseEventArgs(message));
+                        }
                     }
                 }
                 catch
                 {
                     hasErrors = true;
+                    send_bill_command = false;
                 }
                 finally
                 {
@@ -131,7 +456,7 @@ namespace ServiceSaleMachine.Drivers
                     if (!e.Cancel)
                     {
                         // Нормальная работа
-                        ScanerEvent.WaitOne(200);
+                        BillAcceptorEvent.WaitOne(100);
 
                         // Принудительный запуск сборки мусора, если возможно освободить больше установленного минимума
                         stepCount++;
@@ -168,7 +493,7 @@ namespace ServiceSaleMachine.Drivers
 
             Message message = new Message();
 
-            message.Recipient = MessageEndPoint.Scaner;
+            message.Event = DeviceEvent.Scaner;
             message.Content = str;
 
             ReceivedResponse(this, new ServiceClientResponseEventArgs(message));

@@ -345,19 +345,47 @@ namespace ServiceSaleMachine.Drivers
                 if ((BufOut[3] == ACK) || (BufOut[3] == NAK))
                     return iRecievingError = RE_NONE;
 
-                Thread.Sleep(250);
+                int counter = 0;
+                bool recieveResult = true;
+                while (counter < ibytesToRecieve)
+                {
+                    int val = 0;
+                    if(COMPort.Recieve(BufIn,counter,ibytesToRecieve - counter, out val) == false)
+                    {
+                        recieveResult = false;
+                        break;
+                    }
+                    else
+                    {
+                        counter += val;
+                    }
+                }
 
-                if (COMPort.Recieve(BufIn, ibytesToRecieve))
+                if (recieveResult == true)
                 {
                     if (BufIn[0] != SYNC)
                         iRecievingError = RE_SYNC;
                     else
                     {
-                        int iLen = ((BufIn[2] > 0) ? BufIn[2] : (BufIn[5] + ((int)BufIn[4] << 8))) - ibytesToRecieve;
+                        int iLen = ((BufIn[2] > 0) ? BufIn[2] : (BufIn[5] + ((int)BufIn[4] << 8)));
                         if (iLen > 0)
                         {
 
-                            if (COMPort.Recieve(BufIn,ibytesToRecieve, iLen))
+                            while (counter < iLen)
+                            {
+                                int val = 0;
+                                if (COMPort.Recieve(BufIn, counter, iLen - counter, out val) == false)
+                                {
+                                    recieveResult = false;
+                                    break;
+                                }
+                                else
+                                {
+                                    counter += val;
+                                }
+                            }
+
+                            if (recieveResult)
                             {
                                 iRecievingError = RE_NONE;
                                 break;

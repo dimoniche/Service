@@ -90,15 +90,15 @@ namespace ServiceSaleMachine.TestClient
                 return;
             }
 
-            switch (e.Message.Recipient)
+            switch (e.Message.Event)
             {
-                case MessageEndPoint.Scaner:
+                case DeviceEvent.Scaner:
                     LabelCode.Text = (string)e.Message.Content;
                     break;
-                case MessageEndPoint.BillAcceptor:
+                case DeviceEvent.BillAcceptor:
                     richTextBox1.Text = (string)e.Message.Content + "\n" + richTextBox1.Text;
                     break;
-                case MessageEndPoint.BillAcceptorCredit:
+                case DeviceEvent.BillAcceptorCredit:
                     label5.Text = (string)e.Message.Content + " руб";
                     break;
             }
@@ -168,24 +168,7 @@ namespace ServiceSaleMachine.TestClient
 
         private void button3_Click_1(object sender, System.EventArgs e)
         {
-            string result = "ОК";
-
-            if (drivers.CCNETDriver.Cmd(CCNETCommandEnum.GetBillTable, (byte)drivers.CCNETDriver.BillAdr, drivers.bill_record) == true)
-            {
-                label9.Text = "";
-
-                foreach (_BillRecord rec in drivers.bill_record)
-                {
-                    if (rec.Denomination != 0)
-                    {
-                        label9.Text += Encoding.UTF8.GetString(rec.sCountryCode) + rec.Denomination.ToString() + " ";
-                    }
-                }
-            }
-            else
-            {
-                result = "СБОЙ";
-            }
+            label9.Text = drivers.GetBillTable();
         }
 
         private void button4_Click_1(object sender, System.EventArgs e)
@@ -204,25 +187,7 @@ namespace ServiceSaleMachine.TestClient
 
         private void button5_Click(object sender, System.EventArgs e)
         {
-            string result = "ОК";
-
-            if (drivers.CCNETDriver.Cmd(CCNETCommandEnum.BillType, (byte)drivers.CCNETDriver.BillAdr, (long)0x00ffffff, (long)0x00) == true)
-            {
-
-            }
-            else
-            {
-                result = "СБОЙ";
-            }
-
-            if (drivers.CCNETDriver.Cmd(CCNETCommandEnum.BillType, (byte)drivers.CCNETDriver.BillAdr, (long)0x00, (long)0x00) == true)
-            {
-
-            }
-            else
-            {
-                result = "СБОЙ";
-            }
+            drivers.StopWaitBill();
         }
 
         private void button6_Click(object sender, System.EventArgs e)
@@ -252,62 +217,24 @@ namespace ServiceSaleMachine.TestClient
 
         private void button9_Click(object sender, System.EventArgs e)
         {
-            string result = "ОК";
-
-            if (drivers.CCNETDriver.Cmd(CCNETCommandEnum.Information, (byte)drivers.CCNETDriver.BillAdr) == true)
-            {
-                result = Encoding.UTF8.GetString(drivers.CCNETDriver.Ident.PartNumber) + " " + Encoding.UTF8.GetString(drivers.CCNETDriver.Ident.SN);
-            }
-            else
-            {
-                result = "СБОЙ";
-            }
+            string result = drivers.getInfoBill();
 
             label15.Text = result;
         }
 
         private void button10_Click(object sender, System.EventArgs e)
         {
-            string result = "ОК";
-
-            if (drivers.CCNETDriver.Cmd(CCNETCommandEnum.BillType, (byte)drivers.CCNETDriver.BillAdr, (long)0x00ffffff, (long)0x00) == true)
-            {
-
-            }
-            else
-            {
-                result = "СБОЙ";
-            }
-
+            drivers.WaitBill();
         }
 
         private void button11_Click(object sender, System.EventArgs e)
         {
-            string result = "ОК";
-
-            if (drivers.CCNETDriver.Cmd(CCNETCommandEnum.Pack, (byte)drivers.CCNETDriver.BillAdr))
-            {
-
-            }
-            else
-            {
-                result = "СБОЙ";
-            }
-
+            drivers.StackBill();
         }
 
         private void button12_Click(object sender, System.EventArgs e)
         {
-            string result = "ОК";
-
-            if (drivers.CCNETDriver.Cmd(CCNETCommandEnum.Return, (byte)drivers.CCNETDriver.BillAdr))
-            {
-
-            }
-            else
-            {
-                result = "СБОЙ";
-            }
+            drivers.returnBill();
         }
 
         private void button13_Click(object sender, System.EventArgs e)

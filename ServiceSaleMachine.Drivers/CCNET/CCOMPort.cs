@@ -96,28 +96,30 @@ namespace ServiceSaleMachine.Drivers
             }
         }
 
-        public bool Recieve(byte[] Buffer, int Length)
+        public bool Recieve(byte[] Buffer, int Length, out int count)
         {
             try
             {
-                COMPort.Read(Buffer, 0, Length);
+                count = COMPort.Read(Buffer, 0, Length);
                 return true;
             }
             catch
             {
+                count = 0;
                 return false;
             }
         }
 
-        public bool Recieve(byte[] Buffer, int offset, int Length)
+        public bool Recieve(byte[] Buffer, int offset, int Length, out int count)
         {
             try
             {
-                COMPort.Read(Buffer, offset, Length);
+                count = COMPort.Read(Buffer, offset, Length);
                 return true;
             }
             catch
             {
+                count = 0;
                 return false;
             }
         }

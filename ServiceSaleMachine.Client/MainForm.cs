@@ -29,12 +29,12 @@ namespace ServiceSaleMachine.Client
                 return;
             }
 
-            switch (e.Message.Recipient)
+            switch (e.Message.Event)
             {
-                case MessageEndPoint.Scaner:
+                case DeviceEvent.Scaner:
                     
                     break;
-                case MessageEndPoint.BillAcceptor:
+                case DeviceEvent.BillAcceptor:
 
                     break;
             }

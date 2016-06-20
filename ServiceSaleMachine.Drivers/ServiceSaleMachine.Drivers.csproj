@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -55,6 +56,8 @@
     <Compile Include="MachineDrivers.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="MessageEndPoint.cs" />
+    <Compile Include="Printer\ESC_POS.cs" />
+    <Compile Include="Printer\RawPrinterHelper.cs" />
     <Compile Include="Zebex\Zebex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Zebex\ZebexCommandEnum.cs" />

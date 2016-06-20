@@ -242,5 +242,20 @@ namespace ServiceSaleMachine.TestClient
             drivers.CCNETDriver.Cmd(CCNETCommandEnum.Hold, (byte)drivers.CCNETDriver.BillAdr);
             drivers.hold_bill = true;
         }
+
+        private void button14_Click(object sender, System.EventArgs e)
+        {
+            drivers.printer.StartPrint();
+        }
+
+        private void button15_Click(object sender, System.EventArgs e)
+        {
+            drivers.printer.EndPrint();
+        }
+
+        private void button16_Click(object sender, System.EventArgs e)
+        {
+            drivers.printer.PrintBarCode(textBox2.Text);
+        }
     }
 }

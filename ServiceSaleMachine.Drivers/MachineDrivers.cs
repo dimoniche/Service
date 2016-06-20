@@ -17,7 +17,8 @@ namespace ServiceSaleMachine.Drivers
         // Драйвера устройств
         public ZebexScaner scaner;
         public CCRSProtocol CCNETDriver;
-        
+        public PrinterESC printer;
+
         public delegate void ServiceClientResponseEventHandler(object sender, ServiceClientResponseEventArgs e);
 
         // событие обновления данных
@@ -52,6 +53,10 @@ namespace ServiceSaleMachine.Drivers
             {
                 bill_record[i] = new _BillRecord();
             }
+
+            printer = new PrinterESC();
+
+
         }
 
         public void startPollBill()

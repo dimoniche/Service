@@ -189,7 +189,9 @@
             this.Controls.Add(this.BottomPanel);
             this.Controls.Add(this.UpPanel);
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ExMachine";
+            this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.ResizeEnd += new System.EventHandler(this.MainForm_ResizeEnd);
             this.BottomPanel.ResumeLayout(false);
             this.BottomPanel.PerformLayout();

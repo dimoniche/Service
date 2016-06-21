@@ -25,8 +25,11 @@ namespace ServiceSaleMachine.TestClient
             comboBox3.Items.Add("NULL");
             comboBox3.Items.AddRange(currentPort);
 
-            drivers = new MachineDrivers();
+            drivers = new MachineDrivers(Program.testLog);
             drivers.ReceivedResponse += reciveResponse;
+
+            // инициализируем устройства
+            drivers.InitAllDevice();
 
             if (Globals.ClientConfiguration.Settings.comPortScanner.Contains("NULL"))
             {

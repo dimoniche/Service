@@ -41,7 +41,14 @@ namespace ServiceSaleMachine.Drivers
                 COMPort.ErrorReceived += SerialPortErrorRecived;
                 COMPort.PinChanged += SerialPortPinChanged;*/
 
-                COMPort.Open();
+                try
+                {
+                    COMPort.Open();
+                }
+                catch
+                {
+                    return false;
+                }
             }
 
             return true;

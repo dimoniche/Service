@@ -38,6 +38,8 @@ namespace ServiceSaleMachine.TestClient
                 Globals.ClientConfiguration.Settings.comPortBill = "NULL";
                 Globals.ClientConfiguration.Settings.adressBill = "NULL";
                 Globals.ClientConfiguration.Settings.comPortPrinter = "NULL";
+                Globals.ClientConfiguration.Settings.NamePrinter = "NULL";
+                Globals.ClientConfiguration.Settings.comPortControl = "NULL";
 
                 Globals.ClientConfiguration.Save();
                 Globals.ClientConfiguration.Load();

@@ -245,14 +245,33 @@ namespace ServiceSaleMachine.Drivers
             Ident.PartNumber = Encoding.ASCII.GetBytes("N/A");
         }
 
-        public void openPort(string com_port)
+        public string getNumberComPort()
+        {
+            return Globals.ClientConfiguration.Settings.comPortBill;
+        }
+
+        public void setNumberComPort(string str)
+        {
+            Globals.ClientConfiguration.Settings.comPortBill = str;
+            Globals.ClientConfiguration.Save();
+        }
+
+        public void setAdress(string adr)
+        {
+            Globals.ClientConfiguration.Settings.adressBill = adr;
+            Globals.ClientConfiguration.Save();
+        }
+
+        public bool openPort(string com_port)
         {
             if (COMPort == null)
             {
                 COMPort = new CCOMPort();
 
-                COMPort.OpenCOM(com_port);
+                return COMPort.OpenCOM(com_port);
             }
+
+            return true;
         }
 
         public void closePort()

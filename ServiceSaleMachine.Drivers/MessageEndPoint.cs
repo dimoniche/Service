@@ -12,5 +12,8 @@
         BillAcceptorError = 7,                  // у приемника проблемы
         returnBillAcceptor = 8,                 // возврат купюры
 
+        NoCOMPort = 9,                          // нет ком портов
+        NeedSettingProgram = 10,                // Необходима настройка приложения
+        BadSetting = 11,                        // плохие настройки
     }
 }

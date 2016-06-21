@@ -18,6 +18,7 @@ namespace ServiceSaleMachine.Drivers
         public ZebexScaner scaner;
         public CCRSProtocol CCNETDriver;
         public PrinterESC printer;
+        public ControlDevice control;
 
         public delegate void ServiceClientResponseEventHandler(object sender, ServiceClientResponseEventArgs e);
 
@@ -30,33 +31,165 @@ namespace ServiceSaleMachine.Drivers
         public bool hold_bill = false;  // удерживать купюру
         bool send_bill_command = false; // отправляем в данный момент команду в приемник купюр
 
-        public MachineDrivers()
-        {
-            // настроим драйвер сканера
-            scaner = new ZebexScaner();
+        // логгер
+        Log log;
 
-            // запустим задачу ожидания сообщений от сканера
+        // количество драйверов
+        static int COUNT_DEVICE = 3;
+
+        /// <summary>
+        /// Инициализация драйверов устройств
+        /// </summary>
+        /// <param name="log"></param>
+        public MachineDrivers(Log log)
+        {
+            this.log = log;
+
+            this.log.Write(LogMessageType.Information, "Старт драйверов. Версия " + Globals.ProductVersion);
+        }
+
+        public bool InitAllDevice()
+        {
+            bool res = true;
+
+            if (!CheckSerialPort() && getCountSerialPort() < COUNT_DEVICE)
+            {
+                this.log.Write(LogMessageType.Error, "COM портов нет. Работа не возможна.");
+
+                sendMessage(DeviceEvent.NoCOMPort);
+                return false;
+            }
+
+            scaner = new ZebexScaner();
             WorkerScanerDriver = new SaleThread { ThreadName = "WorkerScanerDriver" };
             WorkerScanerDriver.Work += WorkerScanerDriver_Work;
             WorkerScanerDriver.Complete += WorkerScanerDriver_Complete;
 
-            WorkerScanerDriver.Run();
-
-            // настроим купюроприемник
             CCNETDriver = new CCRSProtocol();
-
             WorkerBillPollDriver = new SaleThread { ThreadName = "WorkerBillPollDriver" };
             WorkerBillPollDriver.Work += WorkerBillPollDriver_Work;
             WorkerBillPollDriver.Complete += WorkerBillPollDriver_Complete;
 
-            for (int i = 0; i < 24; i++)
+            printer = new PrinterESC();
+            control = new ControlDevice();
+
+            if (scaner.getNumberComPort().Contains("NULL") || CCNETDriver.getNumberComPort().Contains("NULL") || printer.getNamePrinter().Contains("NULL"))
             {
-                bill_record[i] = new _BillRecord();
+                // необходима настройка приложения
+                this.log.Write(LogMessageType.Error, "Необходима настройка приложения");
+
+                sendMessage(DeviceEvent.NeedSettingProgram);
+                return false;
             }
 
-            printer = new PrinterESC();
+            this.log.Write(LogMessageType.Information, "Настройка сканера.");
 
+            // настроим драйвер сканера
 
+            if (scaner.openPort(scaner.getNumberComPort()))
+            {
+                // запустим задачу ожидания сообщений от сканера
+                WorkerScanerDriver.Run();
+            }
+            else
+            {
+                // неудача
+                this.log.Write(LogMessageType.Error, "Сканер не верно настроен. Порт не доступен.");
+                sendMessage(DeviceEvent.NeedSettingProgram);
+
+                return false;
+            }
+
+            this.log.Write(LogMessageType.Information, "Настройка купюроприемникa.");
+
+            // настроим купюроприемник
+            if (CCNETDriver.openPort(CCNETDriver.getNumberComPort()))
+            {
+                if(restartBill().Contains("СБОЙ"))
+                {
+                    // неудача
+                    this.log.Write(LogMessageType.Error, "Купюроприемник не работает или не подключен.");
+                    sendMessage(DeviceEvent.NeedSettingProgram);
+
+                    return false;
+                }
+
+                // запустим задачу опроса купюроприемника
+                WorkerBillPollDriver.Run();
+
+                for (int i = 0; i < 24; i++)
+                {
+                    bill_record[i] = new _BillRecord();
+                }
+            }
+            else
+            {
+                // неудача
+                this.log.Write(LogMessageType.Error, "Купюроприемник не верно настроен. Порт не доступен.");
+                sendMessage(DeviceEvent.NeedSettingProgram);
+
+                return false;
+            }
+
+            this.log.Write(LogMessageType.Information, "Настройка принтера.");
+
+            // настроим принтер
+            if(printer.OpenPrint("Citizen PPU-700"))
+            {
+                
+            }
+            else
+            {
+                // неудача
+                this.log.Write(LogMessageType.Error, "Принтер не верно настроен. Порт не доступен.");
+                sendMessage(DeviceEvent.NeedSettingProgram);
+
+                return false;
+            }
+
+            // настроим управляющее устройство
+            this.log.Write(LogMessageType.Information, "Настройка управлящего устройства.");
+
+            if (control.openPort(control.getNumberComPort()))
+            {
+                
+                
+            }
+            else
+            {
+                // неудача
+                this.log.Write(LogMessageType.Error, "Управляющее устройство не верно настроен. Порт не доступен.");
+                sendMessage(DeviceEvent.NeedSettingProgram);
+
+                return false;
+            }
+
+            return res;
+        }
+
+        void sendMessage(DeviceEvent devEvent)
+        {
+            Message message = new Message();
+
+            message.Event = devEvent;
+            message.Content = "";
+
+            ReceivedResponse(this, new ServiceClientResponseEventArgs(message));
+        }
+
+        bool CheckSerialPort()
+        {
+            if(SerialPortHelper.GetSerialPorts().Length == 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        int getCountSerialPort()
+        {
+            return SerialPortHelper.GetSerialPorts().Length;
         }
 
         public void startPollBill()
@@ -81,6 +214,32 @@ namespace ServiceSaleMachine.Drivers
                 }
                 send_bill_command = false;
             }
+        }
+
+        public bool ScanerIsWork()
+        {
+            return WorkerScanerDriver.IsWork;
+        }
+
+        public void startScanerPoll()
+        {
+            if (!WorkerScanerDriver.IsWork)
+            {
+                WorkerScanerDriver.Run();
+            }
+        }
+
+        public void stopScanerPoll()
+        {
+            if (WorkerScanerDriver.IsWork)
+            {
+                WorkerScanerDriver.Abort();
+            }
+        }
+
+        public bool BillPollIsWork()
+        {
+            return WorkerBillPollDriver.IsWork;
         }
 
         private void WorkerBillPollDriver_Complete(object sender, ThreadCompleteEventArgs e)
@@ -484,7 +643,6 @@ namespace ServiceSaleMachine.Drivers
         {
             scaner.closePort();
             scaner.openPort(port);
-
         }
 
         void ScannerProcessResponse()

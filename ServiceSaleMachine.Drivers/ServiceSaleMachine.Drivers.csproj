@@ -53,6 +53,7 @@
     <Compile Include="CCNET\_BillStatus.cs" />
     <Compile Include="CCNET\_Identification.cs" />
     <Compile Include="CCNET\_Time.cs" />
+    <Compile Include="ControlDevice\ControlDevice.cs" />
     <Compile Include="MachineDrivers.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="MessageEndPoint.cs" />

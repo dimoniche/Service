@@ -7,7 +7,7 @@ namespace ServiceSaleMachine.Client
 {
     static class Program
     {
-        internal static Log testLog { get; private set; }
+        internal static Log Log { get; private set; }
 
         /// <summary>
         /// The main entry point for the application.
@@ -22,14 +22,14 @@ namespace ServiceSaleMachine.Client
             }
 
             // Создадим журнал клиента
-            testLog = new Log { MinMessageType = LogMessageTypeEnum.Warning, AllowWriteToConsole = false };
+            Log = new Log { MinMessageType = LogMessageTypeEnum.Warning, AllowWriteToConsole = false };
 
             // В случае отладки будем сохранять максимум информации
             if (Globals.IsDebug)
             {
-                testLog.MinMessageType = LogMessageTypeEnum.Debug;
-                testLog.AllowWriteThreadId = true;
-                testLog.AllowWriteThread = true;
+                Log.MinMessageType = LogMessageTypeEnum.Debug;
+                Log.AllowWriteThreadId = true;
+                Log.AllowWriteThread = true;
             }
 
             if (!Globals.ClientConfiguration.Load())
@@ -38,6 +38,8 @@ namespace ServiceSaleMachine.Client
                 Globals.ClientConfiguration.Settings.comPortBill = "NULL";
                 Globals.ClientConfiguration.Settings.adressBill = "NULL";
                 Globals.ClientConfiguration.Settings.comPortPrinter = "NULL";
+                Globals.ClientConfiguration.Settings.NamePrinter = "NULL";
+                Globals.ClientConfiguration.Settings.comPortControl = "NULL";
 
                 Globals.ClientConfiguration.Save();
                 Globals.ClientConfiguration.Load();

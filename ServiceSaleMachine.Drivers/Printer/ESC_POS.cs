@@ -39,9 +39,32 @@ namespace ServiceSaleMachine.Drivers
 
         }
 
-        public void StartPrint()
+        public void StartPrint(string str)
         {
+            PrinterName = str;
             prn.OpenPrint(PrinterName);
+        }
+
+        public bool OpenPrint(string str)
+        {
+            PrinterName = str;
+            return prn.OpenPrint(PrinterName);
+        }
+
+        public void ClosePrint()
+        {
+            prn.ClosePrint();
+        }
+
+        public string getNamePrinter()
+        {
+            return Globals.ClientConfiguration.Settings.NamePrinter;
+        }
+
+        public void setNamePrinter(string str)
+        {
+            Globals.ClientConfiguration.Settings.NamePrinter = str;
+            Globals.ClientConfiguration.Save();
         }
 
         public void PrintHeader()

@@ -39,6 +39,8 @@ namespace ServiceSaleMachine
                         if ((xElement = xSettings.Element("adressBill")) != null) Settings.adressBill = xElement.Value;
                         if ((xElement = xSettings.Element("comPortBill")) != null) Settings.comPortBill = xElement.Value;
                         if ((xElement = xSettings.Element("comPortPrinter")) != null) Settings.comPortPrinter = xElement.Value;
+                        if ((xElement = xSettings.Element("NamePrinter")) != null) Settings.NamePrinter = xElement.Value;
+                        if ((xElement = xSettings.Element("comPortControl")) != null) Settings.comPortControl = xElement.Value;
                     }
 
 					return true;
@@ -63,6 +65,8 @@ namespace ServiceSaleMachine
                 xSettings.Add(new XElement("comPortBill", Settings.comPortBill));
                 xSettings.Add(new XElement("adressBill", Settings.adressBill));
                 xSettings.Add(new XElement("comPortPrinter", Settings.comPortPrinter));
+                xSettings.Add(new XElement("NamePrinter", Settings.NamePrinter));
+                xSettings.Add(new XElement("comPortControl", Settings.comPortControl));
 
                 if (xSettings.HasElements)
 				{

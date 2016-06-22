@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Services>
+  <Service>
+    <image>serv1.bmp</image>
+    <caption>Услуга1</caption>
+    <timework>10</timework>
+  </Service>
+  <Service>
+    <image>serv2.bmp</image>
+    <caption>Услуга2</caption>
+    <timework>10</timework>
+  </Service>
+  <Service>
+    <image>s3.bmp</image>
+    <caption>Услуга2</caption>
+  </Service>
+  <Service>
+    <image>s4.bmp</image>
+    <caption>Услуга2</caption>
+  </Service>
+  <Service>
+    <image>s5.bmp</image>
+    <caption>Услуга2</caption>
+  </Service>
+  <Service>
+    <image>s6.bmp</image>
+    <caption>Услуга2</caption>
+  </Service>
+  <Service>
+    <image>s7.bmp</image>
+    <caption>Услуга2</caption>
+  </Service>
+  <Service>
+    <image>s7.bmp</image>
+    <caption>Услуга2</caption>
+  </Service>
+  <Service>
+    <image>s7.bmp</image>
+    <caption>Услуга2</caption>
+  </Service>
+</Services>

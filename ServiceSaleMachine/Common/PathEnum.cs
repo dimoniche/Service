@@ -7,6 +7,7 @@
 		Root,
         Logs,
         Image,
-        Bin
+        Bin,
+        Video,
     }
 }

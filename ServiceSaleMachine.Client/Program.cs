@@ -32,6 +32,8 @@ namespace ServiceSaleMachine.Client
                 Log.AllowWriteThread = true;
             }
 
+            string fileName = Globals.GetPath(PathEnum.Image) + "\\";
+
             if (!Globals.ClientConfiguration.Load())
             {
                 Globals.ClientConfiguration.Settings.comPortScanner = "NULL";
@@ -40,6 +42,12 @@ namespace ServiceSaleMachine.Client
                 Globals.ClientConfiguration.Settings.comPortPrinter = "NULL";
                 Globals.ClientConfiguration.Settings.NamePrinter = "NULL";
                 Globals.ClientConfiguration.Settings.comPortControl = "NULL";
+
+                // пока 3 сервиса
+                Globals.ClientConfiguration.Settings.services = new List<Service>();
+                Globals.ClientConfiguration.Settings.services.Add(new Service("Сервис 1", fileName + "sol.png", 10));
+                Globals.ClientConfiguration.Settings.services.Add(new Service("Сервис 2", fileName + "sol.png", 10));
+                Globals.ClientConfiguration.Settings.services.Add(new Service("Сервис 3", fileName + "sol.png", 10));
 
                 Globals.ClientConfiguration.Save();
                 Globals.ClientConfiguration.Load();

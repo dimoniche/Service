@@ -18,7 +18,18 @@ namespace ServiceSaleMachine
 			Settings = new ClientConfigurationProperties();
 		}
 
-		public bool Load()
+        public int ServCount
+        {
+            get { return Settings.services.Count; }
+            set { }
+        }
+
+        public Service ServiceByIndex(int aIndex)
+        {
+            return Settings.services[aIndex];
+        }
+
+        public bool Load()
 		{
 			try
 			{
@@ -30,7 +41,7 @@ namespace ServiceSaleMachine
 
 					XElement xElement;
 
-					// Настройки
+					// Настройки драйверов
 					XElement xSettings = root.Element("Settings");
 
 					if (xSettings != null)
@@ -41,6 +52,15 @@ namespace ServiceSaleMachine
                         if ((xElement = xSettings.Element("comPortPrinter")) != null) Settings.comPortPrinter = xElement.Value;
                         if ((xElement = xSettings.Element("NamePrinter")) != null) Settings.NamePrinter = xElement.Value;
                         if ((xElement = xSettings.Element("comPortControl")) != null) Settings.comPortControl = xElement.Value;
+
+                        // настройки сервисов
+                        if ((xElement = xSettings.Element("services")) != null)
+                        {
+                            foreach (XElement xItem in xElement.Elements("services"))
+                            {
+                                Settings.services.Add(Service.FromXml(xItem));
+                            }
+                        }
                     }
 
 					return true;
@@ -67,6 +87,17 @@ namespace ServiceSaleMachine
                 xSettings.Add(new XElement("comPortPrinter", Settings.comPortPrinter));
                 xSettings.Add(new XElement("NamePrinter", Settings.NamePrinter));
                 xSettings.Add(new XElement("comPortControl", Settings.comPortControl));
+
+                if (Settings.services.Count > 0)
+                {
+                    XElement services = new XElement("services");
+                    foreach (Service service in Settings.services)
+                    {
+                        XElement newservice = service.ToXml();
+                        services.Add(newservice);
+                    }
+                    xSettings.Add(services);
+                }
 
                 if (xSettings.HasElements)
 				{

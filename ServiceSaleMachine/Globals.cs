@@ -64,17 +64,17 @@ namespace ServiceSaleMachine
         /// <summary>
         /// Возвращает полный путь
         /// </summary>
-        public static string GetPath(PathEnum vspPath)
+        public static string GetPath(PathEnum Path)
         {
-            return GetPath(vspPath, RegistrySettings.InstallPath);
+            return GetPath(Path, RegistrySettings.InstallPath);
         }
 
         /// <summary>
         /// Возвращает полный путь, относительно указанного корневого
         /// </summary>
-        public static string GetPath(PathEnum vspPath, string rootPath)
+        public static string GetPath(PathEnum Path, string rootPath)
         {
-            return (vspPath != PathEnum.Root) ? Utils.GetNormalisedFullPath(rootPath, true) + GetRelativePath(vspPath) : Utils.GetNormalisedFullPath(rootPath, false);
+            return (Path != PathEnum.Root) ? Utils.GetNormalisedFullPath(rootPath, true) + GetRelativePath(Path) : Utils.GetNormalisedFullPath(rootPath, false);
         }
 
         /// <summary>
@@ -89,6 +89,12 @@ namespace ServiceSaleMachine
 
                 case PathEnum.Logs:
                     return "Logs";
+
+                case PathEnum.Image:
+                    return "Image";
+
+                case PathEnum.Video:
+                    return "Video";
 
                 default:
                     throw new InvalidOperationException();

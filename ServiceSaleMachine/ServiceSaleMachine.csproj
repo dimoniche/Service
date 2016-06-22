@@ -45,6 +45,7 @@
     <Compile Include="Common\DefaultValueObject.cs" />
     <Compile Include="Configuration\ClientConfiguration.cs" />
     <Compile Include="Configuration\ClientConfigurationProperties.cs" />
+    <Compile Include="Configuration\Service.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="Lock\LockObject.cs" />
     <Compile Include="Lock\LockTicket.cs" />

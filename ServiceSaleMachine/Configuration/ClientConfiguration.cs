@@ -56,7 +56,8 @@ namespace ServiceSaleMachine
                         // настройки сервисов
                         if ((xElement = xSettings.Element("services")) != null)
                         {
-                            foreach (XElement xItem in xElement.Elements("services"))
+                            Settings.services = new List<Service>();
+                            foreach (XElement xItem in xElement.Elements("Service"))
                             {
                                 Settings.services.Add(Service.FromXml(xItem));
                             }

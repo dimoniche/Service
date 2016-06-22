@@ -41,13 +41,12 @@ namespace ServiceSaleMachine
             if (xObject.Name != "Service") throw new ArgumentException(xObject.Name.LocalName);
 
             XElement xElement;
-            XAttribute xAttribute;
 
             Service result = new Service();
 
             if ((xElement = xObject.Element("caption")) != null) result.caption = xElement.Value;
             if ((xElement = xObject.Element("filename")) != null) result.filename = xElement.Value;
-            if ((xAttribute = xObject.Attribute("timework")) != null) result.timework = int.Parse(xAttribute.Value);
+            if ((xElement = xObject.Element("timework")) != null) result.timework = int.Parse(xElement.Value);
 
             return result;
         }

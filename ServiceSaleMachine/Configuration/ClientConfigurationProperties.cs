@@ -8,6 +8,8 @@ namespace ServiceSaleMachine
         public string comPortBill;
         public string adressBill;
         public string comPortPrinter;
+        public string NamePrinter;
+        public string comPortControl;
 
         internal ClientConfigurationProperties()
 		{

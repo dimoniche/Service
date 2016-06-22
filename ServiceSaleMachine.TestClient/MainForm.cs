@@ -1,4 +1,5 @@
 ﻿using ServiceSaleMachine.Drivers;
+using System.Text;
 using System.Windows.Forms;
 using static ServiceSaleMachine.Drivers.MachineDrivers;
 
@@ -24,8 +25,11 @@ namespace ServiceSaleMachine.TestClient
             comboBox3.Items.Add("NULL");
             comboBox3.Items.AddRange(currentPort);
 
-            drivers = new MachineDrivers();
+            drivers = new MachineDrivers(Program.testLog);
             drivers.ReceivedResponse += reciveResponse;
+
+            // инициализируем устройства
+            drivers.InitAllDevice();
 
             if (Globals.ClientConfiguration.Settings.comPortScanner.Contains("NULL"))
             {
@@ -50,14 +54,25 @@ namespace ServiceSaleMachine.TestClient
                 string index = Globals.ClientConfiguration.Settings.comPortBill.Remove(0, 3);
                 int int_index = 0;
                 int.TryParse(index, out int_index);
-                comboBox3.SelectedIndex = int_index;
+
+                int counter = 0;
+                foreach(object item in comboBox3.Items)
+                {
+                    if((string)item == Globals.ClientConfiguration.Settings.comPortBill)
+                    {
+                        break;
+                    }
+                    counter++;
+                }
+
+                comboBox3.SelectedIndex = counter;
 
                 drivers.CCNETDriver.openPort((string)comboBox3.Items[comboBox3.SelectedIndex]);
             }
 
             if (Globals.ClientConfiguration.Settings.adressBill == null || Globals.ClientConfiguration.Settings.adressBill.Contains("NULL"))
             {
-                drivers.CCNETDriver.BillAdr = 1;
+                drivers.CCNETDriver.BillAdr = 3;
             }
             else
             {
@@ -78,10 +93,16 @@ namespace ServiceSaleMachine.TestClient
                 return;
             }
 
-            switch (e.Message.Recipient)
+            switch (e.Message.Event)
             {
-                case MessageEndPoint.Scaner:
-                    LabelCode.Text = e.Message.Content;
+                case DeviceEvent.Scaner:
+                    LabelCode.Text = (string)e.Message.Content;
+                    break;
+                case DeviceEvent.BillAcceptor:
+                    richTextBox1.Text = (string)e.Message.Content + "\n" + richTextBox1.Text;
+                    break;
+                case DeviceEvent.BillAcceptorCredit:
+                    label5.Text = (string)e.Message.Content + " руб";
                     break;
             }
         }
@@ -124,7 +145,7 @@ namespace ServiceSaleMachine.TestClient
 
             if (textBox1.Text.Contains("NULL"))
             {
-                drivers.CCNETDriver.BillAdr = 1;
+                drivers.CCNETDriver.BillAdr = 3;
             }
             else
             {
@@ -138,8 +159,8 @@ namespace ServiceSaleMachine.TestClient
                 }
                 else
                 {
-                    Globals.ClientConfiguration.Settings.adressBill = "1";
-                    drivers.CCNETDriver.BillAdr = 1;
+                    Globals.ClientConfiguration.Settings.adressBill = "3";
+                    drivers.CCNETDriver.BillAdr = 3;
                 }
             }
 
@@ -148,17 +169,45 @@ namespace ServiceSaleMachine.TestClient
             Globals.ClientConfiguration.Save();
         }
 
-        private void comboBox4_SelectedIndexChanged(object sender, System.EventArgs e)
+        private void button3_Click_1(object sender, System.EventArgs e)
         {
-            BillCommandData.SelectedIndex = comboBox4.SelectedIndex;
+            label9.Text = drivers.GetBillTable();
         }
 
-        // послать команду приемнику
-        private void button4_Click(object sender, System.EventArgs e)
+        private void button4_Click_1(object sender, System.EventArgs e)
         {
             string result = "ОК";
 
-            if(drivers.CCNETDriver.Cmd((CCNETCommandEnum)comboBox4.SelectedIndex, (byte)drivers.CCNETDriver.BillAdr) == true)
+            if (drivers.CCNETDriver.Cmd(CCNETCommandEnum.Poll, (byte)drivers.CCNETDriver.BillAdr) == true)
+            {
+
+            }
+            else
+            {
+                result = "СБОЙ";
+            }
+        }
+
+        private void button5_Click(object sender, System.EventArgs e)
+        {
+            drivers.StopWaitBill();
+        }
+
+        private void button6_Click(object sender, System.EventArgs e)
+        {
+            drivers.startPollBill();
+        }
+
+        private void button7_Click(object sender, System.EventArgs e)
+        {
+            drivers.stopPollBill();
+        }
+
+        private void button8_Click(object sender, System.EventArgs e)
+        {
+            string result = "ОК";
+
+            if (drivers.CCNETDriver.Cmd(CCNETCommandEnum.Reset, (byte)drivers.CCNETDriver.BillAdr, (long)0x00ffffff, (long)0x00) == true)
             {
 
             }
@@ -167,22 +216,49 @@ namespace ServiceSaleMachine.TestClient
                 result = "СБОЙ";
             }
 
-            switch ((CCNETCommandEnum)comboBox4.SelectedIndex)
-            {
-                case CCNETCommandEnum.Reset:
-                    ResetResult.Text = result;
-                    break;
-                case CCNETCommandEnum.Poll:
-                    reasultPoll.Text = result;
-                    break;
-                case CCNETCommandEnum.Status:
-                    //reasultPoll.Text = result;
-                    break;
-                case CCNETCommandEnum.Information:
-                    //reasultPoll.Text = result;
-                    break;
-            }
+        }
 
+        private void button9_Click(object sender, System.EventArgs e)
+        {
+            string result = drivers.getInfoBill();
+
+            label15.Text = result;
+        }
+
+        private void button10_Click(object sender, System.EventArgs e)
+        {
+            drivers.WaitBill();
+        }
+
+        private void button11_Click(object sender, System.EventArgs e)
+        {
+            drivers.StackBill();
+        }
+
+        private void button12_Click(object sender, System.EventArgs e)
+        {
+            drivers.returnBill();
+        }
+
+        private void button13_Click(object sender, System.EventArgs e)
+        {
+            drivers.CCNETDriver.Cmd(CCNETCommandEnum.Hold, (byte)drivers.CCNETDriver.BillAdr);
+            drivers.hold_bill = true;
+        }
+
+        private void button14_Click(object sender, System.EventArgs e)
+        {
+            drivers.printer.StartPrint();
+        }
+
+        private void button15_Click(object sender, System.EventArgs e)
+        {
+            drivers.printer.EndPrint();
+        }
+
+        private void button16_Click(object sender, System.EventArgs e)
+        {
+            drivers.printer.PrintBarCode(textBox2.Text);
         }
     }
 }

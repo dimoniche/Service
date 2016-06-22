@@ -37,11 +37,18 @@ namespace ServiceSaleMachine.Drivers
 
                 COMPort.ReadTimeout = 5000;
 
-                COMPort.DataReceived += SerialPortDataRecevied;
+                /*COMPort.DataReceived += SerialPortDataRecevied;
                 COMPort.ErrorReceived += SerialPortErrorRecived;
-                COMPort.PinChanged += SerialPortPinChanged;
+                COMPort.PinChanged += SerialPortPinChanged;*/
 
-                COMPort.Open();
+                try
+                {
+                    COMPort.Open();
+                }
+                catch
+                {
+                    return false;
+                }
             }
 
             return true;
@@ -68,9 +75,9 @@ namespace ServiceSaleMachine.Drivers
             {
                 try
                 {
-                    COMPort.DataReceived -= SerialPortDataRecevied;
+                    /*COMPort.DataReceived -= SerialPortDataRecevied;
                     COMPort.ErrorReceived -= SerialPortErrorRecived;
-                    COMPort.PinChanged -= SerialPortPinChanged;
+                    COMPort.PinChanged -= SerialPortPinChanged;*/
 
                     COMPort.Close();
                 }
@@ -96,28 +103,30 @@ namespace ServiceSaleMachine.Drivers
             }
         }
 
-        public bool Recieve(byte[] Buffer, int Length)
+        public bool Recieve(byte[] Buffer, int Length, out int count)
         {
             try
             {
-                COMPort.Read(Buffer, 0, Length);
+                count = COMPort.Read(Buffer, 0, Length);
                 return true;
             }
             catch
             {
+                count = 0;
                 return false;
             }
         }
 
-        public bool Recieve(byte[] Buffer, int offset, int Length)
+        public bool Recieve(byte[] Buffer, int offset, int Length, out int count)
         {
             try
             {
-                COMPort.Read(Buffer, offset, Length);
+                count = COMPort.Read(Buffer, offset, Length);
                 return true;
             }
             catch
             {
+                count = 0;
                 return false;
             }
         }

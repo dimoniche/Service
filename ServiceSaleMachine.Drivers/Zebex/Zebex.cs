@@ -39,7 +39,18 @@ namespace ServiceSaleMachine.Drivers
             }
         }
 
-        public void openPort(string com_port)
+        public string getNumberComPort()
+        {
+            return Globals.ClientConfiguration.Settings.comPortScanner;
+        }
+
+        public void setNumberComPort(string str)
+        {
+            Globals.ClientConfiguration.Settings.comPortScanner = str;
+            Globals.ClientConfiguration.Save();
+        }
+
+        public bool openPort(string com_port)
         {
             if (serialPort == null)
             {
@@ -58,8 +69,17 @@ namespace ServiceSaleMachine.Drivers
                 serialPort.ErrorReceived += SerialPortErrorRecived;
                 serialPort.PinChanged += SerialPortPinChanged;
 
-                serialPort.Open();
+                try
+                {
+                    serialPort.Open();
+                }
+                catch
+                {
+                    return false;
+                }
             }
+
+            return true;
         }
 
         private void SerialPortPinChanged(object sender, SerialPinChangedEventArgs e)

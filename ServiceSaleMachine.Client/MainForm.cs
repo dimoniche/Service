@@ -12,16 +12,35 @@ namespace ServiceSaleMachine.Client
         FormSettings setting;
         Services services;
 
+        FormWait wait;
+        private SaleThread WorkerWait { get; set; }
+
+        // задача очистки логов
+        ClearFilesControlServiceTask ClearFilesTask { get; set; }
+
+        // запуск приложения
         public MainForm()
         {
             InitializeComponent();
 
-            drivers = new MachineDrivers();
+            // запустим задачу очистки от логов директории
+            ClearFilesTask = new ClearFilesControlServiceTask(Program.Log);
+
+            drivers = new MachineDrivers(Program.Log);
             drivers.ReceivedResponse += reciveResponse;
 
+            // задача отображения долгих операций
+            WorkerWait = new SaleThread { ThreadName = "WorkerWait" };
+            WorkerWait.Work += WorkerWait_Work;
+            WorkerWait.Complete += WorkerWait_Complete;
         }
 
-        private void reciveResponse(object sender, ServiceClientResponseEventArgs e)
+        /// <summary>
+        /// Обработчик событий от устройств
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void reciveResponse(object sender, ServiceClientResponseEventArgs e)
         {
             if (InvokeRequired)
             {
@@ -29,20 +48,29 @@ namespace ServiceSaleMachine.Client
                 return;
             }
 
-            switch (e.Message.Recipient)
+            switch (e.Message.Event)
             {
-                case MessageEndPoint.Scaner:
+                case DeviceEvent.Scaner:
                     
                     break;
-                case MessageEndPoint.BillAcceptor:
+                case DeviceEvent.BillAcceptor:
 
+                    break;
+                case DeviceEvent.NoCOMPort:
+                    MessageBox.Show("Нет доступных COM портов. Дальнейшая работа бесмысленна.");
+                    Close();
+                    break;
+                case DeviceEvent.NeedSettingProgram:
+                    this.Hide();
+                    setting = new FormSettings(drivers,this);
+                    setting.Show();
                     break;
             }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            setting = new FormSettings();
+            setting = new FormSettings(drivers,this);
             setting.Show();
         }
 
@@ -58,6 +86,42 @@ namespace ServiceSaleMachine.Client
             int width = this.Size.Width;
 
 
+        }
+
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            WorkerWait.Run();
+
+            // инициализируем устройства
+            drivers.InitAllDevice();
+
+            WorkerWait.Abort();
+        }
+
+        private void WorkerWait_Complete(object sender, ThreadCompleteEventArgs e)
+        {
+            wait.Hide();
+        }
+
+        private void WorkerWait_Work(object sender, ThreadWorkEventArgs e)
+        {
+            wait = new FormWait();
+            wait.Show();
+
+            while (!e.Cancel)
+            {
+                try
+                {
+                    wait.Refresh();
+                }
+                catch
+                {
+                }
+                finally
+                {
+                    SaleThread.Sleep(100);
+                }
+            }
         }
     }
 }

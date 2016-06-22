@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClearFile\ClearFilesControlServiceTask.cs" />
     <Compile Include="Common\DefaultValueObject.cs" />
     <Compile Include="Configuration\ClientConfiguration.cs" />
     <Compile Include="Configuration\ClientConfigurationProperties.cs" />

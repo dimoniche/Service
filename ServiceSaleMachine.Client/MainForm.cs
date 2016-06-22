@@ -127,6 +127,7 @@ namespace ServiceSaleMachine.Client
 
                     break;
                 case DeviceEvent.NoCOMPort:
+                    WorkerWait.Abort();
                     MessageBox.Show("Нет доступных COM портов. Дальнейшая работа бесмысленна.");
                     Close();
                     break;
@@ -163,7 +164,7 @@ namespace ServiceSaleMachine.Client
             WorkerWait.Run();
 
             // инициализируем устройства
-            //drivers.InitAllDevice();
+            drivers.InitAllDevice();
 
             WorkerWait.Abort();
         }

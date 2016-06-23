@@ -119,12 +119,9 @@ namespace ServiceSaleMachine.Client
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            int current = CurrentPage * 4;
-            FormProgress fprgs = new FormProgress();
-            Service serv = Globals.ClientConfiguration.ServiceByIndex(current);
-            fprgs.timework = serv.timework;
-            fprgs.ServName = serv.caption;
-            fprgs.Start();
+            ((MainForm)form).numberService = CurrentPage * 4;
+
+            this.Close();
         }
 
         private void pictureBox5_Click(object sender, EventArgs e)
@@ -191,6 +188,14 @@ namespace ServiceSaleMachine.Client
         {
             // покажем основную форму
             form.Show();
+        }
+
+        private void FormChooseService_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Alt & e.KeyCode == Keys.F4)
+            {
+                ((MainForm)form).Stage = WorkerStateStage.ExitProgram;
+            }
         }
     }
 }

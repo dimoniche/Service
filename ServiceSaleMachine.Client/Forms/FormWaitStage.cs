@@ -1,4 +1,5 @@
 ﻿using ServiceSaleMachine.Drivers;
+using ServiceSaleMachine.MainWorker;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,6 +22,9 @@ namespace ServiceSaleMachine.Client
 
             this.drivers = drivers;
             this.form = form;
+
+            MediaPlayer.Visible = false;
+            //MediaPlayer.URL = 
         }
 
         public FormWaitStage()
@@ -37,6 +41,19 @@ namespace ServiceSaleMachine.Client
         {
             // покажем основную форму
             form.Show();
+        }
+
+        private void MediaPlayer_ClickEvent(object sender, AxWMPLib._WMPOCXEvents_ClickEvent e)
+        {
+            this.Close();
+        }
+
+        private void FormWaitStage_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Alt & e.KeyCode == Keys.F4)
+            {
+                ((MainForm)form).Stage = WorkerStateStage.ExitProgram;
+            }
         }
     }
 }

@@ -13,15 +13,25 @@ namespace ServiceSaleMachine.Client
         // стадии работы
         public WorkerStateStage Stage { get; set; }
 
-
+        // драйвера
         MachineDrivers drivers;
 
+        // услуги
+        public int numberService;
+
+        // формы
         FormSettings setting;
         FormWaitStage WaitStageForm;
         FormRuleService RuleStageForm;
         FormChooseService ChooseServiceForm;
+        FormChoosePay ChoosePayForm;
+        FormWaitPayCheck WaitPayCheck;
+        FormWaitPayBill WaitPayBill;
+        FormProgress fprgs;
 
         FormWait wait;
+
+        // потоки
         private SaleThread WorkerWait { get; set; }
         private SaleThread MainWorkerTask { get; set; }
 
@@ -126,8 +136,19 @@ namespace ServiceSaleMachine.Client
                         break;
                     case WorkerStateStage.Setting:
                         break;
-
                      case WorkerStateStage.ChooseService:
+                        BeginInvoke(new StartNextForm(StartNextForm_Func));
+                        break;
+                    case WorkerStateStage.ChoosePay:
+                        BeginInvoke(new StartNextForm(StartNextForm_Func));
+                        break;
+                    case WorkerStateStage.PayBillService:
+                        BeginInvoke(new StartNextForm(StartNextForm_Func));
+                        break;
+                    case WorkerStateStage.PayCheckService:
+                        BeginInvoke(new StartNextForm(StartNextForm_Func));
+                        break;
+                    case WorkerStateStage.StartService:
                         BeginInvoke(new StartNextForm(StartNextForm_Func));
                         break;
                 }
@@ -166,6 +187,30 @@ namespace ServiceSaleMachine.Client
                     ChooseServiceForm = new FormChooseService(drivers, this);
                     ChooseServiceForm.Show();
                     break;
+                case WorkerStateStage.ChoosePay:
+                    this.Hide();
+                    ChoosePayForm = new FormChoosePay(drivers, this);
+                    ChoosePayForm.Show();
+                    break;
+                case WorkerStateStage.PayCheckService:
+                    this.Hide();
+                    WaitPayCheck = new FormWaitPayCheck(drivers, this);
+                    WaitPayCheck.Show();
+                    break;
+                case WorkerStateStage.PayBillService:
+                    this.Hide();
+                    WaitPayBill = new FormWaitPayBill(drivers, this);
+                    WaitPayBill.Show();
+                    break;
+                case WorkerStateStage.StartService:
+                    this.Hide();
+                    fprgs = new FormProgress(drivers, this);
+
+                    Service serv = Globals.ClientConfiguration.ServiceByIndex(numberService);
+                    fprgs.timework = serv.timework;
+                    fprgs.ServName = serv.caption;
+                    fprgs.Start();
+                    break;
             }
         }
 
@@ -187,10 +232,34 @@ namespace ServiceSaleMachine.Client
                     Stage = WorkerStateStage.ChooseService;
                     MainWorkerTask.Run();
                     break;
-                case WorkerStateStage.FailRules:
+                case WorkerStateStage.Fail:
                     // вышли из режима ознокомления с правилами c отказом - опять ждем клиента
                     Stage = WorkerStateStage.Wait;
                     MainWorkerTask.Run();
+                    break;
+                case WorkerStateStage.ChooseService:
+                    // выбрали сервис - выберем способ оплаты
+                    Stage = WorkerStateStage.ChoosePay;
+                    MainWorkerTask.Run();
+                    break;
+                case WorkerStateStage.PayBillService:
+                    // выбрали сервис - выберем способ оплаты
+                    Stage = WorkerStateStage.PayBillService;
+                    MainWorkerTask.Run();
+                    break;
+                case WorkerStateStage.PayCheckService:
+                    // выбрали сервис - выберем способ оплаты
+                    Stage = WorkerStateStage.PayCheckService;
+                    MainWorkerTask.Run();
+                    break;
+                case WorkerStateStage.StartService:
+                    // выбрали сервис - выберем способ оплаты
+                    Stage = WorkerStateStage.StartService;
+                    MainWorkerTask.Run();
+                    break;
+                case WorkerStateStage.ExitProgram:
+                    // выход
+                    Close();
                     break;
             }
         }

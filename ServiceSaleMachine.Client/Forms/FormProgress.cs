@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ServiceSaleMachine.Drivers;
+using ServiceSaleMachine.MainWorker;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,6 +13,9 @@ namespace ServiceSaleMachine.Client
 {
     public partial class FormProgress : Form
     {
+        MachineDrivers drivers;
+        Form form;
+
         public int CurrentWork;
         public int FTimeWork;
         public string ServName;
@@ -18,6 +23,14 @@ namespace ServiceSaleMachine.Client
         public FormProgress()
         {
             InitializeComponent();
+        }
+
+        public FormProgress(MachineDrivers drivers, Form form)
+        {
+            InitializeComponent();
+
+            this.drivers = drivers;
+            this.form = form;
         }
 
         public int timework
@@ -54,7 +67,24 @@ namespace ServiceSaleMachine.Client
             if (CurrentWork >= FTimeWork)
             {
                 timer1.Enabled = false;
+
+                ((MainForm)form).Stage = WorkerStateStage.EndService;
+
                 this.Close();
+            }
+        }
+
+        private void FormProgress_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            // покажем основную форму
+            form.Show();
+        }
+
+        private void FormProgress_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Alt & e.KeyCode == Keys.F4)
+            {
+                ((MainForm)form).Stage = WorkerStateStage.ExitProgram;
             }
         }
     }

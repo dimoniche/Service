@@ -236,7 +236,7 @@
             this.MainWorkerTask.Priority = System.Threading.ThreadPriority.Normal;
             this.MainWorkerTask.ThreadName = null;
             // 
-            // MainForm
+            // FormChooseService
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -250,6 +250,7 @@
             this.Name = "FormChooseService";
             this.Text = "ExMachine";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormChooseService_KeyDown);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);

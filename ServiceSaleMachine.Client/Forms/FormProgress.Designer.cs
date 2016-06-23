@@ -120,6 +120,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormProgress";
             this.Text = "FormProgress";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormProgress_FormClosed);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormProgress_KeyDown);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);

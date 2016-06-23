@@ -44,6 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\FormChoosePay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormChoosePay.Designer.cs">
+      <DependentUpon>FormChoosePay.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormProgress.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,6 +74,18 @@
     <Compile Include="Forms\FormWait.Designer.cs">
       <DependentUpon>FormWait.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormWaitPayCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormWaitPayCheck.Designer.cs">
+      <DependentUpon>FormWaitPayCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormWaitPayBill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormWaitPayBill.Designer.cs">
+      <DependentUpon>FormWaitPayBill.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormWaitStage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +106,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\FormChoosePay.resx">
+      <DependentUpon>FormChoosePay.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormProgress.resx">
       <DependentUpon>FormProgress.cs</DependentUpon>
     </EmbeddedResource>
@@ -99,6 +120,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormWait.resx">
       <DependentUpon>FormWait.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormWaitPayBill.resx">
+      <DependentUpon>FormWaitPayBill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormWaitPayCheck.resx">
+      <DependentUpon>FormWaitPayCheck.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormWaitStage.resx">
       <DependentUpon>FormWaitStage.cs</DependentUpon>
@@ -156,8 +183,32 @@
     <None Include="Resources\gain1.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Yes.jpg" />
+    <None Include="Resources\check.jpg" />
+    <None Include="Resources\fail.png" />
+    <Content Include="Resources\money.jpg" />
+    <None Include="Resources\money1.jpg" />
     <Content Include="Resources\serv1.png" />
     <Content Include="Resources\sol.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AxWMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="WMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

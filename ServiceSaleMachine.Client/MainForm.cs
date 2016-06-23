@@ -1,6 +1,8 @@
 ﻿using ServiceSaleMachine.Drivers;
+using ServiceSaleMachine.MainWorker;
 using System;
 using System.Drawing;
+using System.Threading;
 using System.Windows.Forms;
 using static ServiceSaleMachine.Drivers.MachineDrivers;
 
@@ -8,21 +10,26 @@ namespace ServiceSaleMachine.Client
 {
     public partial class MainForm : Form
     {
-        int FCurrentPage;
-        int FServCount;
-        int FPageCount;
-        string EmptyServ;
+        // стадии работы
+        public WorkerStateStage Stage { get; set; }
+
 
         MachineDrivers drivers;
 
         FormSettings setting;
-        Services services;
+        FormWaitStage WaitStageForm;
+        FormRuleService RuleStageForm;
+        FormChooseService ChooseServiceForm;
 
         FormWait wait;
         private SaleThread WorkerWait { get; set; }
+        private SaleThread MainWorkerTask { get; set; }
+
 
         // задача очистки логов
         ClearFilesControlServiceTask ClearFilesTask { get; set; }
+
+        delegate void StartNextForm();
 
         // запуск приложения
         public MainForm()
@@ -35,73 +42,156 @@ namespace ServiceSaleMachine.Client
             drivers = new MachineDrivers(Program.Log);
             drivers.ReceivedResponse += reciveResponse;
 
+            // основная управляющая задача
+            MainWorkerTask = new SaleThread { ThreadName = "MainWorkerTask" };
+            MainWorkerTask.Work += MainWorkerTask_Work;
+            MainWorkerTask.Complete += MainWorkerTask_Complete;
+            MainWorkerTask.ProgressChanged += MainWorkerTask_ProgressChanged;
+
             // задача отображения долгих операций
             WorkerWait = new SaleThread { ThreadName = "WorkerWait" };
             WorkerWait.Work += WorkerWait_Work;
             WorkerWait.Complete += WorkerWait_Complete;
 
-            ServCount = Globals.ClientConfiguration.ServCount;
-
-            EmptyServ = Globals.GetPath(PathEnum.Image) + "\\serv0.bmp";
-
-            CurrentPage = 0;
-            pbxNext.BackColor = Color.Transparent;
-
-            this.WindowState = FormWindowState.Maximized;
+            Stage = WorkerStateStage.None;
         }
 
-        public int ServCount
+        private void MainWorkerTask_ProgressChanged(object sender, ThreadProgressChangedEventArgs e)
         {
-            get { return FServCount; }
-            set
+
+        }
+
+        private void MainWorkerTask_Complete(object sender, ThreadCompleteEventArgs e)
+        {
+            try
             {
-                FServCount = value;
-                FPageCount = value / 4 + 1;
+                switch (Stage)
+                {
+                    case WorkerStateStage.Init:
+
+                        break;
+                    case WorkerStateStage.Wait:
+
+                        break;
+                    case WorkerStateStage.Rules:
+
+                        break;
+                        /*case WorkerStateStage.:
+
+                            break;
+                        case WorkerStateStage.:
+
+                            break;
+                        case WorkerStateStage.:
+
+                            break;*/
+                }
+            }
+            catch (Exception err)
+            {
             }
         }
 
-        public int CurrentPage
+        // основной рабочий обработчик
+        private void MainWorkerTask_Work(object sender, ThreadWorkEventArgs e)
         {
-            get { return FCurrentPage; }
-            set
+            try
             {
-                if (value > FServCount / 4)
-                    FCurrentPage = FServCount / 4;
-                else
-                    FCurrentPage = value;
+                switch (Stage)
+                {
+                    case WorkerStateStage.Init:
+                        WorkerWait.Run();
 
-                pbxPrev.Visible = FCurrentPage != 0;
-                pbxNext.Visible = FCurrentPage != (FServCount / 4);
+                        BeginInvoke(new StartNextForm(hideMainForm));
 
-                pictureBox1.Enabled = ((FPageCount == FCurrentPage + 1) && (FServCount % 4 >= 1)) ||
-                    (FCurrentPage < FPageCount);
-                pictureBox2.Enabled = ((FPageCount == FCurrentPage + 1) && (FServCount % 4 >= 2)) ||
-                    (FCurrentPage < FPageCount - 1);
-                pictureBox3.Enabled = ((FPageCount == FCurrentPage + 1) && (FServCount % 4 >= 3)) ||
-                    (FCurrentPage < FPageCount - 1);
-                pictureBox4.Enabled = ((FPageCount == FCurrentPage + 1) && ((FServCount % 4 == 2) && (FServCount != 0))) ||
-                    (FCurrentPage < FPageCount - 1);
+                        // инициализируем устройства
+                        //if (drivers.InitAllDevice())
+                        {
+                            Stage = WorkerStateStage.Wait;          // переходим в ожидания
+                            BeginInvoke(new StartNextForm(StartNextForm_Func));
+                        }
+                        /*else
+                        {
+                            Stage = WorkerStateStage.Setting;       // переходим в режим настройки
+                            BeginInvoke(new StartNextForm(StartNextForm_Func));
+                        }*/
 
-                if (pictureBox1.Enabled)
-                    pictureBox1.Load(Globals.ClientConfiguration.ServiceByIndex(FCurrentPage * 4).filename);
-                else
-                    pictureBox1.Load(EmptyServ);
+                        WorkerWait.Abort();
+                        break;
+                    case WorkerStateStage.Wait:
+                        BeginInvoke(new StartNextForm(StartNextForm_Func));
+                        break;
+                    case WorkerStateStage.Rules:
+                        BeginInvoke(new StartNextForm(StartNextForm_Func));
+                        break;
+                    case WorkerStateStage.Setting:
+                        break;
 
-                if (pictureBox2.Enabled)
-                    pictureBox2.Load(Globals.ClientConfiguration.ServiceByIndex(FCurrentPage * 4 + 1).filename);
-                else
-                    pictureBox2.Load(EmptyServ);
+                     case WorkerStateStage.ChooseService:
+                        BeginInvoke(new StartNextForm(StartNextForm_Func));
+                        break;
+                }
+            }
+            catch (Exception err)
+            {
+            }
+        }
 
-                if (pictureBox3.Enabled)
-                    pictureBox3.Load(Globals.ClientConfiguration.ServiceByIndex(FCurrentPage * 4 + 2).filename);
-                else
-                    pictureBox3.Load(EmptyServ);
+        private void hideMainForm()
+        {
+            this.Hide();
+        }
 
-                if (pictureBox4.Enabled)
-                    pictureBox4.Load(Globals.ClientConfiguration.ServiceByIndex(FCurrentPage * 4 + 3).filename);
-                else
-                    pictureBox4.Load(EmptyServ);
+        private void StartNextForm_Func()
+        {
+            switch (Stage)
+            {
+                case WorkerStateStage.Setting:
+                    this.Hide();
+                    setting = new FormSettings(drivers, this);
+                    setting.Show();
+                    break;
+                case WorkerStateStage.Wait:
+                    this.Hide();
+                    WaitStageForm = new FormWaitStage(drivers, this);
+                    WaitStageForm.Show();
+                    break;
+                case WorkerStateStage.Rules:
+                    this.Hide();
+                    RuleStageForm = new FormRuleService(drivers, this);
+                    RuleStageForm.Show();
+                    break;
+                case WorkerStateStage.ChooseService:
+                    this.Hide();
+                    ChooseServiceForm = new FormChooseService(drivers, this);
+                    ChooseServiceForm.Show();
+                    break;
+            }
+        }
 
+        private void MainForm_Activated(object sender, EventArgs e)
+        {
+            switch (Stage)
+            {
+                case WorkerStateStage.Setting:
+                    Stage = WorkerStateStage.Init;
+                    MainWorkerTask.Run();
+                    break;
+                case WorkerStateStage.Wait:
+                    // вышли из режима ожидания - ознокомление с правилами
+                    Stage = WorkerStateStage.Rules;
+                    MainWorkerTask.Run();
+                    break;
+                case WorkerStateStage.Rules:
+                    // вышли из режима ознокомления с правилами - теперь выберем услугу
+                    Stage = WorkerStateStage.ChooseService;
+                    MainWorkerTask.Run();
+                    break;
+                case WorkerStateStage.FailRules:
+                    // вышли из режима ознокомления с правилами c отказом - опять ждем клиента
+                    Stage = WorkerStateStage.Wait;
+                    MainWorkerTask.Run();
+                    break;
             }
         }
 
@@ -121,7 +211,7 @@ namespace ServiceSaleMachine.Client
             switch (e.Message.Event)
             {
                 case DeviceEvent.Scaner:
-                    
+
                     break;
                 case DeviceEvent.BillAcceptor:
 
@@ -131,42 +221,24 @@ namespace ServiceSaleMachine.Client
                     MessageBox.Show("Нет доступных COM портов. Дальнейшая работа бесмысленна.");
                     Close();
                     break;
+                case DeviceEvent.InitializationOK:
+                    break;
                 case DeviceEvent.NeedSettingProgram:
-                    this.Hide();
-                    setting = new FormSettings(drivers,this);
-                    setting.Show();
                     break;
             }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            setting = new FormSettings(drivers,this);
+            setting = new FormSettings(drivers, this);
             setting.Show();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            services = new Services();
-            services.Show();
-        }
-
-        private void MainForm_ResizeEnd(object sender, EventArgs e)
-        {
-            int heght = this.Size.Height;
-            int width = this.Size.Width;
-
-
         }
 
         private void MainForm_Shown(object sender, EventArgs e)
         {
-            WorkerWait.Run();
-
-            // инициализируем устройства
-            drivers.InitAllDevice();
-
-            WorkerWait.Abort();
+            // запустим основной обработчик - инициализация
+            Stage = WorkerStateStage.Init;
+            MainWorkerTask.Run();
         }
 
         private void WorkerWait_Complete(object sender, ThreadCompleteEventArgs e)
@@ -190,91 +262,12 @@ namespace ServiceSaleMachine.Client
                 }
                 finally
                 {
-                    SaleThread.Sleep(100);
+                    if (!e.Cancel)
+                    {
+                        Thread.Sleep(100);
+                    }
                 }
             }
-        }
-
-        private void pbxNext_Click(object sender, EventArgs e)
-        {
-            if (FCurrentPage + 1 < FPageCount)
-                CurrentPage += 1;
-        }
-
-        private void pbxPrev_Click(object sender, EventArgs e)
-        {
-            if (FCurrentPage + 1 > 0)
-                CurrentPage -= 1;
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            int current = CurrentPage * 4;
-            FormProgress fprgs = new FormProgress();
-            Service serv = Globals.ClientConfiguration.ServiceByIndex(current);
-            fprgs.timework = serv.timework;
-            fprgs.ServName = serv.caption;
-            fprgs.Start();
-        }
-
-        private void pictureBox5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel4_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel5_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void pictureBox4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

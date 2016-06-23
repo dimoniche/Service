@@ -44,23 +44,41 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FormProgress.cs">
+    <Compile Include="Forms\FormProgress.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormProgress.Designer.cs">
+    <Compile Include="Forms\FormProgress.Designer.cs">
       <DependentUpon>FormProgress.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormSettings.cs">
+    <Compile Include="Forms\FormRuleService.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormSettings.Designer.cs">
+    <Compile Include="Forms\FormRuleService.Designer.cs">
+      <DependentUpon>FormRuleService.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormSettings.Designer.cs">
       <DependentUpon>FormSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormWait.cs">
+    <Compile Include="Forms\FormWait.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormWait.Designer.cs">
+    <Compile Include="Forms\FormWait.Designer.cs">
       <DependentUpon>FormWait.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormWaitStage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormWaitStage.Designer.cs">
+      <DependentUpon>FormWaitStage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormChooseService.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormChooseService.Designer.cs">
+      <DependentUpon>FormChooseService.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -70,20 +88,23 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Services.Designer.cs">
-      <DependentUpon>Services.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="FormProgress.resx">
+    <EmbeddedResource Include="Forms\FormProgress.resx">
       <DependentUpon>FormProgress.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormSettings.resx">
+    <EmbeddedResource Include="Forms\FormRuleService.resx">
+      <DependentUpon>FormRuleService.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSettings.resx">
       <DependentUpon>FormSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormWait.resx">
+    <EmbeddedResource Include="Forms\FormWait.resx">
       <DependentUpon>FormWait.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormWaitStage.resx">
+      <DependentUpon>FormWaitStage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormChooseService.resx">
+      <DependentUpon>FormChooseService.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -98,9 +119,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Services.resx">
-      <DependentUpon>Services.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -115,6 +133,10 @@
     <ProjectReference Include="..\ServiceSaleMachine.Drivers\ServiceSaleMachine.Drivers.csproj">
       <Project>{d1f52424-7717-459d-a0cc-a69f1edfe105}</Project>
       <Name>ServiceSaleMachine.Drivers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceSaleMachine.MainWorker\ServiceSaleMachine.MainWorker.csproj">
+      <Project>{c3da8d9e-43a4-4e44-bd6f-d12376c5368f}</Project>
+      <Name>ServiceSaleMachine.MainWorker</Name>
     </ProjectReference>
     <ProjectReference Include="..\ServiceSaleMachine\ServiceSaleMachine.csproj">
       <Project>{5cdb5513-96e8-4266-8b72-83679284b4e8}</Project>

@@ -248,7 +248,7 @@ namespace ServiceSaleMachine.TestClient
 
         private void button14_Click(object sender, System.EventArgs e)
         {
-            drivers.printer.StartPrint();
+            drivers.printer.StartPrint("");
         }
 
         private void button15_Click(object sender, System.EventArgs e)

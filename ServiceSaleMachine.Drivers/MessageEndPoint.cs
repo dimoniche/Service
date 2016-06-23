@@ -15,5 +15,6 @@
         NoCOMPort = 9,                          // нет ком портов
         NeedSettingProgram = 10,                // Необходима настройка приложения
         BadSetting = 11,                        // плохие настройки
+        InitializationOK = 12,                  // инициализация прошла успешно
     }
 }

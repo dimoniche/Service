@@ -1,6 +1,6 @@
 ﻿namespace ServiceSaleMachine.Client
 {
-    partial class MainForm
+    partial class FormWaitStage
     {
         /// <summary>
         /// Required designer variable.
@@ -28,23 +28,38 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // MainForm
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(59, 35);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(141, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Форма ожидания клиента";
+            // 
+            // FormWaitStage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(742, 559);
+            this.ClientSize = new System.Drawing.Size(749, 466);
+            this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "MainForm";
-            this.Text = "ExMachine";
-            this.Activated += new System.EventHandler(this.MainForm_Activated);
-            this.Shown += new System.EventHandler(this.MainForm_Shown);
+            this.Name = "FormWaitStage";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "FormWaitStage";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormWaitStage_FormClosed);
+            this.Click += new System.EventHandler(this.FormWaitStage_Click);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Label label1;
     }
 }
-

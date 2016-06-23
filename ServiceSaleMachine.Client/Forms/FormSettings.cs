@@ -185,6 +185,10 @@ namespace ServiceSaleMachine.Client
 
         private void FormSettings_FormClosed(object sender, FormClosedEventArgs e)
         {
+            drivers.scaner.closePort();
+            drivers.CCNETDriver.closePort();
+            drivers.printer.ClosePrint();
+
             // покажем основную форму
             form.Show();
             // вернем обработчик обратно

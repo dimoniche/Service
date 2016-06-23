@@ -23,8 +23,9 @@ namespace ServiceSaleMachine.Client
             this.drivers = drivers;
             this.form = form;
 
-            MediaPlayer.Visible = false;
-            //MediaPlayer.URL = 
+            MediaPlayer.Visible = true;
+
+            MediaPlayer.URL = Globals.GetPath(PathEnum.Video) + "\\advert.mpg";
         }
 
         public FormWaitStage()

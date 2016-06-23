@@ -49,7 +49,6 @@
             this.MediaPlayer.Size = new System.Drawing.Size(749, 466);
             this.MediaPlayer.TabIndex = 1;
             this.MediaPlayer.ClickEvent += new AxWMPLib._WMPOCXEvents_ClickEventHandler(this.MediaPlayer_ClickEvent);
-            this.MediaPlayer.MouseCaptureChanged += new System.EventHandler(this.FormWaitStage_Click);
             // 
             // panel1
             // 

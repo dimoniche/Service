@@ -19,6 +19,8 @@ namespace WindowsFormsApplication1
         int FPageCount;
         string PathToImg = Environment.CurrentDirectory + "\\..\\";
         string EmptyServ;
+        db mydb;
+
 
         public int ServCount
         {
@@ -168,6 +170,25 @@ namespace WindowsFormsApplication1
         private void pictureBox2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnCheckDB_Click(object sender, EventArgs e)
+        {
+            mydb = new db();
+            if (mydb.Connect())
+            { label1.Text = "ok"; }
+            else
+            { label1.Text = "error";
+                return;
+            }
+            dataGridView1.DataSource = mydb.GetDevices();
+            mydb.CreateTables();
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            mydb.WriteWorkTime(1, 5);
         }
     }
 }

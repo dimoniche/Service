@@ -45,7 +45,7 @@ namespace WindowsFormsApplication1
         public int LoadXml()
         {
             XmlDocument doc = new XmlDocument();
-            string xmlname = "..\\services.xml";
+            string xmlname = "d:\\work\\TermServices\\Service\\MyTests\\bin\\services.xml";
 
             if (System.IO.File.Exists(xmlname))
             {
@@ -63,7 +63,7 @@ namespace WindowsFormsApplication1
             foreach (XmlNode node in xRoot)
             {
                 Debug.Print(node.Name.ToString());
-                string filename = Environment.CurrentDirectory+ "\\..\\";
+                string filename = "d:\\work\\TermServices\\Service\\MyTests\\bin\\";//Environment.CurrentDirectory+ "\\..\\";
                 string caption = "";
                 int timework = 0;
                 foreach (XmlNode servnode in node.ChildNodes)

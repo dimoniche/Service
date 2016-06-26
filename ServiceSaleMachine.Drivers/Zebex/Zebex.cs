@@ -20,7 +20,7 @@ namespace ServiceSaleMachine.Drivers
 
         public void closePort()
         {
-            if (serialPort.IsOpen)
+            if (serialPort != null && serialPort.IsOpen)
             {
                 try
                 {

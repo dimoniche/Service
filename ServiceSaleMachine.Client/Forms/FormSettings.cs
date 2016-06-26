@@ -137,28 +137,17 @@ namespace ServiceSaleMachine.Client
                 drivers.CCNETDriver.BillAdr = int_index;
             }
 
+            cbxComPortPrinter.Items.Clear();
+            cbxComPortPrinter.Items.AddRange(drivers.printer.findAllPrinter());
+
             if (drivers.printer.getNamePrinter().Contains("NULL"))
             {
                 cbxComPortPrinter.SelectedIndex = -1;
             }
             else
             {
-                int counter = -1;
-
-                foreach (object item in cbxComPortPrinter.Items)
-                {
-                    counter++;
-                    if ((string)item == drivers.printer.getNamePrinter())
-                    {
-                        break;
-                    }
-                }
-
-                cbxComPortPrinter.SelectedIndex = counter;
-
-                drivers.printer.OpenPrint((string)cbxComPortPrinter.Items[cbxComPortPrinter.SelectedIndex]);
+                cbxComPortPrinter.SelectedIndex = drivers.printer.findPrinterIndex(drivers.printer.getNamePrinter());
             }
-
         }
 
         private void reciveResponse(object sender, ServiceClientResponseEventArgs e)
@@ -299,11 +288,6 @@ namespace ServiceSaleMachine.Client
             drivers.printer.setNamePrinter((string)cbxComPortPrinter.Items[cbxComPortPrinter.SelectedIndex]);
         }
 
-        private void button3_Click_1(object sender, EventArgs e)
-        {
-            drivers.printer.PrintBarCode(textBox2.Text);
-        }
-
         private void button4_Click(object sender, EventArgs e)
         {
             if (!((string)comboBox2.Items[comboBox2.SelectedIndex]).Contains("NULL"))
@@ -316,6 +300,37 @@ namespace ServiceSaleMachine.Client
             }
 
             drivers.control.setNumberComPort((string)comboBox2.Items[comboBox2.SelectedIndex]);
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            drivers.printer.StartPrint((string)cbxComPortPrinter.Items[cbxComPortPrinter.SelectedIndex]);
+
+            if (drivers.printer.prn.PrinterIsOpen)
+            {
+                drivers.printer.PrintHeader();
+                drivers.printer.PrintBarCode(textBox2.Text);
+                drivers.printer.PrintFooter();
+                drivers.printer.EndPrint();
+            }
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            drivers.printer.StartPrint((string)cbxComPortPrinter.Items[cbxComPortPrinter.SelectedIndex]);
+
+            if (drivers.printer.prn.PrinterIsOpen)
+            {
+                drivers.printer.PrintHeader();
+                drivers.printer.PrintBody();
+                drivers.printer.PrintFooter();
+                drivers.printer.EndPrint();
+            }
+        }
+
+        private void button1_Click_2(object sender, EventArgs e)
+        {
+            drivers.printer.setNamePrinter((string)cbxComPortPrinter.Items[cbxComPortPrinter.SelectedIndex]);
         }
     }
 }

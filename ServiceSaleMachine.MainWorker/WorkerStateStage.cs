@@ -70,6 +70,11 @@ namespace ServiceSaleMachine.MainWorker
         EndService,                       //
 
         /// <summary>
+        /// Ожидание клиента
+        /// </summary>
+        AgainWait,                       //
+
+        /// <summary>
         /// выход из программы
         /// </summary>
         ExitProgram,                       //

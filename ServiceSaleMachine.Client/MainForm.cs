@@ -131,6 +131,10 @@ namespace ServiceSaleMachine.Client
                     case WorkerStateStage.Wait:
                         BeginInvoke(new StartNextForm(StartNextForm_Func));
                         break;
+                    case WorkerStateStage.AgainWait:
+                        Stage = WorkerStateStage.Wait;                      // переходим в ожидание
+                        BeginInvoke(new StartNextForm(StartNextForm_Func));
+                        break;
                     case WorkerStateStage.Rules:
                         BeginInvoke(new StartNextForm(StartNextForm_Func));
                         break;
@@ -255,6 +259,11 @@ namespace ServiceSaleMachine.Client
                 case WorkerStateStage.StartService:
                     // выбрали сервис - выберем способ оплаты
                     Stage = WorkerStateStage.StartService;
+                    MainWorkerTask.Run();
+                    break;
+                case WorkerStateStage.EndService:
+                    // все сделали переходим в режим ожидания
+                    Stage = WorkerStateStage.AgainWait;
                     MainWorkerTask.Run();
                     break;
                 case WorkerStateStage.ExitProgram:

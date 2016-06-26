@@ -32,17 +32,14 @@
             this.DeviceSettings = new System.Windows.Forms.TabPage();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.cbxComPortPrinter = new System.Windows.Forms.ComboBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.buttonStopScanerPoll = new System.Windows.Forms.Button();
+            this.buttonStartScanerPoll = new System.Windows.Forms.Button();
+            this.LabelCode = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.LabelCode = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.buttonStartScanerPoll = new System.Windows.Forms.Button();
-            this.buttonStopScanerPoll = new System.Windows.Forms.Button();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.label5 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.label16 = new System.Windows.Forms.Label();
@@ -56,14 +53,18 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cbxComPortPrinter = new System.Windows.Forms.ComboBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.button4 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button17 = new System.Windows.Forms.Button();
+            this.button16 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -122,67 +123,47 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(706, 438);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Купюроприемник";
+            this.tabPage1.Text = "Сканер";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tabPage3
+            // buttonStopScanerPoll
             // 
-            this.tabPage3.Controls.Add(this.label5);
-            this.tabPage3.Controls.Add(this.richTextBox1);
-            this.tabPage3.Controls.Add(this.label16);
-            this.tabPage3.Controls.Add(this.button10);
-            this.tabPage3.Controls.Add(this.label14);
-            this.tabPage3.Controls.Add(this.button8);
-            this.tabPage3.Controls.Add(this.button7);
-            this.tabPage3.Controls.Add(this.button6);
-            this.tabPage3.Controls.Add(this.textBox1);
-            this.tabPage3.Controls.Add(this.button30);
-            this.tabPage3.Controls.Add(this.label6);
-            this.tabPage3.Controls.Add(this.label4);
-            this.tabPage3.Controls.Add(this.comboBox3);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(706, 438);
-            this.tabPage3.TabIndex = 1;
-            this.tabPage3.Text = "Сканер";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.buttonStopScanerPoll.Location = new System.Drawing.Point(340, 50);
+            this.buttonStopScanerPoll.Name = "buttonStopScanerPoll";
+            this.buttonStopScanerPoll.Size = new System.Drawing.Size(75, 23);
+            this.buttonStopScanerPoll.TabIndex = 10;
+            this.buttonStopScanerPoll.Text = "Стоп";
+            this.buttonStopScanerPoll.UseVisualStyleBackColor = true;
+            this.buttonStopScanerPoll.Click += new System.EventHandler(this.button3_Click);
             // 
-            // tabPage4
+            // buttonStartScanerPoll
             // 
-            this.tabPage4.Controls.Add(this.textBox2);
-            this.tabPage4.Controls.Add(this.button3);
-            this.tabPage4.Controls.Add(this.button1);
-            this.tabPage4.Controls.Add(this.label3);
-            this.tabPage4.Controls.Add(this.cbxComPortPrinter);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(706, 438);
-            this.tabPage4.TabIndex = 2;
-            this.tabPage4.Text = "Принтер";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.buttonStartScanerPoll.Location = new System.Drawing.Point(259, 50);
+            this.buttonStartScanerPoll.Name = "buttonStartScanerPoll";
+            this.buttonStartScanerPoll.Size = new System.Drawing.Size(75, 23);
+            this.buttonStartScanerPoll.TabIndex = 9;
+            this.buttonStartScanerPoll.Text = "Пуск опроса";
+            this.buttonStartScanerPoll.UseVisualStyleBackColor = true;
+            this.buttonStartScanerPoll.Click += new System.EventHandler(this.button1_Click);
             // 
-            // cbxComPortPrinter
+            // LabelCode
             // 
-            this.cbxComPortPrinter.FormattingEnabled = true;
-            this.cbxComPortPrinter.Items.AddRange(new object[] {
-            "Citizen PPU-700",
-            "Custom VKP80II"});
-            this.cbxComPortPrinter.Location = new System.Drawing.Point(103, 31);
-            this.cbxComPortPrinter.Name = "cbxComPortPrinter";
-            this.cbxComPortPrinter.Size = new System.Drawing.Size(121, 21);
-            this.cbxComPortPrinter.TabIndex = 1;
+            this.LabelCode.AutoSize = true;
+            this.LabelCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.LabelCode.Location = new System.Drawing.Point(77, 52);
+            this.LabelCode.Name = "LabelCode";
+            this.LabelCode.Size = new System.Drawing.Size(120, 25);
+            this.LabelCode.TabIndex = 7;
+            this.LabelCode.Text = "123456789";
             // 
-            // tabPage2
+            // label2
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(720, 470);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(17, 61);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(26, 13);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "Код";
             // 
             // button2
             // 
@@ -211,44 +192,28 @@
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 4;
             // 
-            // LabelCode
+            // tabPage3
             // 
-            this.LabelCode.AutoSize = true;
-            this.LabelCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.LabelCode.Location = new System.Drawing.Point(77, 52);
-            this.LabelCode.Name = "LabelCode";
-            this.LabelCode.Size = new System.Drawing.Size(120, 25);
-            this.LabelCode.TabIndex = 7;
-            this.LabelCode.Text = "123456789";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(17, 61);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(26, 13);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Код";
-            // 
-            // buttonStartScanerPoll
-            // 
-            this.buttonStartScanerPoll.Location = new System.Drawing.Point(259, 50);
-            this.buttonStartScanerPoll.Name = "buttonStartScanerPoll";
-            this.buttonStartScanerPoll.Size = new System.Drawing.Size(75, 23);
-            this.buttonStartScanerPoll.TabIndex = 9;
-            this.buttonStartScanerPoll.Text = "Пуск опроса";
-            this.buttonStartScanerPoll.UseVisualStyleBackColor = true;
-            this.buttonStartScanerPoll.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // buttonStopScanerPoll
-            // 
-            this.buttonStopScanerPoll.Location = new System.Drawing.Point(340, 50);
-            this.buttonStopScanerPoll.Name = "buttonStopScanerPoll";
-            this.buttonStopScanerPoll.Size = new System.Drawing.Size(75, 23);
-            this.buttonStopScanerPoll.TabIndex = 10;
-            this.buttonStopScanerPoll.Text = "Стоп";
-            this.buttonStopScanerPoll.UseVisualStyleBackColor = true;
-            this.buttonStopScanerPoll.Click += new System.EventHandler(this.button3_Click);
+            this.tabPage3.Controls.Add(this.label5);
+            this.tabPage3.Controls.Add(this.richTextBox1);
+            this.tabPage3.Controls.Add(this.label16);
+            this.tabPage3.Controls.Add(this.button10);
+            this.tabPage3.Controls.Add(this.label14);
+            this.tabPage3.Controls.Add(this.button8);
+            this.tabPage3.Controls.Add(this.button7);
+            this.tabPage3.Controls.Add(this.button6);
+            this.tabPage3.Controls.Add(this.textBox1);
+            this.tabPage3.Controls.Add(this.button30);
+            this.tabPage3.Controls.Add(this.label6);
+            this.tabPage3.Controls.Add(this.label4);
+            this.tabPage3.Controls.Add(this.comboBox3);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(706, 438);
+            this.tabPage3.TabIndex = 1;
+            this.tabPage3.Text = "Купюроприемник";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // label5
             // 
@@ -371,6 +336,30 @@
             this.comboBox3.Size = new System.Drawing.Size(121, 21);
             this.comboBox3.TabIndex = 33;
             // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.button1);
+            this.tabPage4.Controls.Add(this.button17);
+            this.tabPage4.Controls.Add(this.button16);
+            this.tabPage4.Controls.Add(this.textBox2);
+            this.tabPage4.Controls.Add(this.label3);
+            this.tabPage4.Controls.Add(this.cbxComPortPrinter);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(706, 438);
+            this.tabPage4.TabIndex = 2;
+            this.tabPage4.Text = "Принтер";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(103, 89);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(121, 20);
+            this.textBox2.TabIndex = 39;
+            this.textBox2.Text = "123456789012";
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -380,33 +369,16 @@
             this.label3.TabIndex = 36;
             this.label3.Text = "Принтер";
             // 
-            // button1
+            // cbxComPortPrinter
             // 
-            this.button1.Location = new System.Drawing.Point(261, 29);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 37;
-            this.button1.Text = "Записать";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(261, 72);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 38;
-            this.button3.Text = "Печать";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click_1);
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(103, 75);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(121, 20);
-            this.textBox2.TabIndex = 39;
-            this.textBox2.Text = "123456789012";
+            this.cbxComPortPrinter.FormattingEnabled = true;
+            this.cbxComPortPrinter.Items.AddRange(new object[] {
+            "Citizen PPU-700",
+            "Custom VKP80II"});
+            this.cbxComPortPrinter.Location = new System.Drawing.Point(103, 31);
+            this.cbxComPortPrinter.Name = "cbxComPortPrinter";
+            this.cbxComPortPrinter.Size = new System.Drawing.Size(121, 21);
+            this.cbxComPortPrinter.TabIndex = 1;
             // 
             // tabPage5
             // 
@@ -447,6 +419,46 @@
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(121, 21);
             this.comboBox2.TabIndex = 7;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(720, 470);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // button17
+            // 
+            this.button17.Location = new System.Drawing.Point(250, 131);
+            this.button17.Name = "button17";
+            this.button17.Size = new System.Drawing.Size(138, 23);
+            this.button17.TabIndex = 40;
+            this.button17.Text = "Распечатать чек";
+            this.button17.UseVisualStyleBackColor = true;
+            this.button17.Click += new System.EventHandler(this.button17_Click);
+            // 
+            // button16
+            // 
+            this.button16.Location = new System.Drawing.Point(250, 89);
+            this.button16.Name = "button16";
+            this.button16.Size = new System.Drawing.Size(138, 23);
+            this.button16.TabIndex = 41;
+            this.button16.Text = "Распечатать баркод";
+            this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.button16_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(250, 31);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(138, 23);
+            this.button1.TabIndex = 42;
+            this.button1.Text = "Сохранить";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_2);
             // 
             // FormSettings
             // 
@@ -504,12 +516,13 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Button button17;
+        private System.Windows.Forms.Button button16;
+        private System.Windows.Forms.Button button1;
     }
 }

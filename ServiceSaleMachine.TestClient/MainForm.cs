@@ -83,6 +83,9 @@ namespace ServiceSaleMachine.TestClient
 
                 drivers.CCNETDriver.BillAdr = int_index;
             }
+
+            comboBox4.Items.Clear();
+            comboBox4.Items.AddRange(drivers.printer.findAllPrinter());
         }
 
         private void reciveResponse(object sender, ServiceClientResponseEventArgs e)
@@ -248,7 +251,7 @@ namespace ServiceSaleMachine.TestClient
 
         private void button14_Click(object sender, System.EventArgs e)
         {
-            drivers.printer.StartPrint("");
+            drivers.printer.StartPrint("CITIZEN PPU-700");
         }
 
         private void button15_Click(object sender, System.EventArgs e)
@@ -258,7 +261,28 @@ namespace ServiceSaleMachine.TestClient
 
         private void button16_Click(object sender, System.EventArgs e)
         {
-            drivers.printer.PrintBarCode(textBox2.Text);
+            drivers.printer.StartPrint("CITIZEN PPU-700");
+
+            if (drivers.printer.prn.PrinterIsOpen)
+            {
+                drivers.printer.PrintHeader();
+                drivers.printer.PrintBarCode(textBox2.Text);
+                drivers.printer.PrintFooter();
+                drivers.printer.EndPrint();
+            }
+        }
+
+        private void button17_Click(object sender, System.EventArgs e)
+        {
+            drivers.printer.StartPrint("CITIZEN PPU-700");
+
+            if (drivers.printer.prn.PrinterIsOpen)
+            {
+                drivers.printer.PrintHeader();
+                drivers.printer.PrintBody();
+                drivers.printer.PrintFooter();
+                drivers.printer.EndPrint();
+            }
         }
     }
 }

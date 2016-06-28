@@ -167,6 +167,22 @@ namespace ServiceSaleMachine.Drivers
             return res;
         }
 
+        public void ManualInitDevice()
+        {
+            scaner = new ZebexScaner();
+            WorkerScanerDriver = new SaleThread { ThreadName = "WorkerScanerDriver" };
+            WorkerScanerDriver.Work += WorkerScanerDriver_Work;
+            WorkerScanerDriver.Complete += WorkerScanerDriver_Complete;
+
+            CCNETDriver = new CCRSProtocol();
+            WorkerBillPollDriver = new SaleThread { ThreadName = "WorkerBillPollDriver" };
+            WorkerBillPollDriver.Work += WorkerBillPollDriver_Work;
+            WorkerBillPollDriver.Complete += WorkerBillPollDriver_Complete;
+
+            printer = new PrinterESC();
+            control = new ControlDevice();
+        }
+
         void sendMessage(DeviceEvent devEvent)
         {
             Message message = new Message();

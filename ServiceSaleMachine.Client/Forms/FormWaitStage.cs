@@ -22,8 +22,7 @@ namespace ServiceSaleMachine.Client
             this.drivers = drivers;
             this.form = form;
 
-            MediaPlayer.Visible = true;
-
+            //MediaPlayer.Visible = true;
             //MediaPlayer.URL = Globals.GetPath(PathEnum.Video) + "\\advert.mpg";
         }
 
@@ -43,10 +42,10 @@ namespace ServiceSaleMachine.Client
             form.Show();
         }
 
-        private void MediaPlayer_ClickEvent(object sender, AxWMPLib._WMPOCXEvents_ClickEvent e)
-        {
-            this.Close();
-        }
+        //private void MediaPlayer_ClickEvent(object sender, AxWMPLib._WMPOCXEvents_ClickEvent e)
+        //{
+        //    this.Close();
+        //}
 
         private void FormWaitStage_KeyDown(object sender, KeyEventArgs e)
         {
@@ -58,7 +57,8 @@ namespace ServiceSaleMachine.Client
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            ((MainForm)form).Stage = WorkerStateStage.ManualSetting;
+            this.Close();
         }
     }
 }

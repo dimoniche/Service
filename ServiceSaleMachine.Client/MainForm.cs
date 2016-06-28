@@ -72,33 +72,6 @@ namespace ServiceSaleMachine.Client
 
         private void MainWorkerTask_Complete(object sender, ThreadCompleteEventArgs e)
         {
-            try
-            {
-                switch (Stage)
-                {
-                    case WorkerStateStage.Init:
-
-                        break;
-                    case WorkerStateStage.Wait:
-
-                        break;
-                    case WorkerStateStage.Rules:
-
-                        break;
-                        /*case WorkerStateStage.:
-
-                            break;
-                        case WorkerStateStage.:
-
-                            break;
-                        case WorkerStateStage.:
-
-                            break;*/
-                }
-            }
-            catch (Exception err)
-            {
-            }
         }
 
         // основной рабочий обработчик
@@ -111,13 +84,12 @@ namespace ServiceSaleMachine.Client
                     case WorkerStateStage.Init:
                         WorkerWait.Run();
 
-                        BeginInvoke(new StartNextForm(hideMainForm));
+                        hideMainForm();
 
                         // инициализируем устройства
                         //if (drivers.InitAllDevice())
                         {
                             Stage = WorkerStateStage.Wait;          // переходим в ожидания
-                            BeginInvoke(new StartNextForm(StartNextForm_Func));
                         }
                         /*else
                         {
@@ -128,46 +100,42 @@ namespace ServiceSaleMachine.Client
                         WorkerWait.Abort();
                         break;
                     case WorkerStateStage.Wait:
-                        BeginInvoke(new StartNextForm(StartNextForm_Func));
                         break;
                     case WorkerStateStage.AgainWait:
                         Stage = WorkerStateStage.Wait;                      // переходим в ожидание
-                        BeginInvoke(new StartNextForm(StartNextForm_Func));
                         break;
                     case WorkerStateStage.Rules:
-                        BeginInvoke(new StartNextForm(StartNextForm_Func));
                         break;
                     case WorkerStateStage.Setting:
                         break;
                      case WorkerStateStage.ChooseService:
-                        BeginInvoke(new StartNextForm(StartNextForm_Func));
                         break;
                     case WorkerStateStage.ChoosePay:
-                        BeginInvoke(new StartNextForm(StartNextForm_Func));
                         break;
                     case WorkerStateStage.PayBillService:
-                        BeginInvoke(new StartNextForm(StartNextForm_Func));
                         break;
                     case WorkerStateStage.PayCheckService:
-                        BeginInvoke(new StartNextForm(StartNextForm_Func));
                         break;
                     case WorkerStateStage.StartService:
-                        BeginInvoke(new StartNextForm(StartNextForm_Func));
                         break;
                 }
+
+                // переход на нужную форму
+                StartNextForm_Func();
             }
             catch (Exception err)
             {
             }
         }
 
-        private void hideMainForm()
-        {
-            this.Hide();
-        }
-
         private void StartNextForm_Func()
         {
+            if (InvokeRequired)
+            {
+                BeginInvoke(new StartNextForm(StartNextForm_Func));
+                return;
+            }
+
             switch (Stage)
             {
                 case WorkerStateStage.Setting:
@@ -221,55 +189,57 @@ namespace ServiceSaleMachine.Client
         {
             switch (Stage)
             {
+                case WorkerStateStage.None:
+                    return;
                 case WorkerStateStage.Setting:
                     Stage = WorkerStateStage.Init;
-                    MainWorkerTask.Run();
                     break;
                 case WorkerStateStage.Wait:
                     // вышли из режима ожидания - ознокомление с правилами
                     Stage = WorkerStateStage.Rules;
-                    MainWorkerTask.Run();
                     break;
                 case WorkerStateStage.Rules:
                     // вышли из режима ознокомления с правилами - теперь выберем услугу
                     Stage = WorkerStateStage.ChooseService;
-                    MainWorkerTask.Run();
                     break;
                 case WorkerStateStage.Fail:
                     // вышли из режима ознокомления с правилами c отказом - опять ждем клиента
                     Stage = WorkerStateStage.Wait;
-                    MainWorkerTask.Run();
                     break;
                 case WorkerStateStage.ChooseService:
                     // выбрали сервис - выберем способ оплаты
                     Stage = WorkerStateStage.ChoosePay;
-                    MainWorkerTask.Run();
                     break;
                 case WorkerStateStage.PayBillService:
                     // выбрали сервис - выберем способ оплаты
                     Stage = WorkerStateStage.PayBillService;
-                    MainWorkerTask.Run();
                     break;
                 case WorkerStateStage.PayCheckService:
                     // выбрали сервис - выберем способ оплаты
                     Stage = WorkerStateStage.PayCheckService;
-                    MainWorkerTask.Run();
                     break;
                 case WorkerStateStage.StartService:
                     // выбрали сервис - выберем способ оплаты
                     Stage = WorkerStateStage.StartService;
-                    MainWorkerTask.Run();
                     break;
                 case WorkerStateStage.EndService:
                     // все сделали переходим в режим ожидания
                     Stage = WorkerStateStage.AgainWait;
-                    MainWorkerTask.Run();
                     break;
                 case WorkerStateStage.ExitProgram:
                     // выход
                     Close();
+                    return;
+                case WorkerStateStage.ManualSetting:
+                    // вход в настройки
+                    drivers.ManualInitDevice();
+
+                    Stage = WorkerStateStage.Setting;
                     break;
             }
+
+            // запустим обработчикдействия пользователя
+            MainWorkerTask.Run();
         }
 
         /// <summary>
@@ -303,6 +273,17 @@ namespace ServiceSaleMachine.Client
                 case DeviceEvent.NeedSettingProgram:
                     break;
             }
+        }
+
+        private void hideMainForm()
+        {
+            if (InvokeRequired)
+            {
+                BeginInvoke(new StartNextForm(hideMainForm));
+                return;
+            }
+
+            this.Hide();
         }
 
         private void button4_Click(object sender, EventArgs e)

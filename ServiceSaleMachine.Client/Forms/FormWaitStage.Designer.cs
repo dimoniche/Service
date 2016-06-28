@@ -28,29 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormWaitStage));
-            this.MediaPlayer = new AxWMPLib.AxWindowsMediaPlayer();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.MediaPlayer)).BeginInit();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // MediaPlayer
-            // 
-            this.MediaPlayer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MediaPlayer.Enabled = true;
-            this.MediaPlayer.Location = new System.Drawing.Point(0, 0);
-            this.MediaPlayer.Name = "MediaPlayer";
-            this.MediaPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("MediaPlayer.OcxState")));
-            this.MediaPlayer.Size = new System.Drawing.Size(749, 466);
-            this.MediaPlayer.TabIndex = 1;
-            this.MediaPlayer.ClickEvent += new AxWMPLib._WMPOCXEvents_ClickEventHandler(this.MediaPlayer_ClickEvent);
             // 
             // panel1
             // 
@@ -73,12 +58,21 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.button1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel2.Location = new System.Drawing.Point(641, 60);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(108, 406);
             this.panel2.TabIndex = 3;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(149, 114);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(225, 62);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "Запуск настройки";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // panel3
             // 
@@ -96,26 +90,16 @@
             this.panel4.Size = new System.Drawing.Size(533, 60);
             this.panel4.TabIndex = 5;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(21, 332);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 62);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // FormWaitStage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(749, 466);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.MediaPlayer);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormWaitStage";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -124,16 +108,13 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormWaitStage_FormClosed);
             this.Click += new System.EventHandler(this.FormWaitStage_Click);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormWaitStage_KeyDown);
-            ((System.ComponentModel.ISupportInitialize)(this.MediaPlayer)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private AxWMPLib.AxWindowsMediaPlayer MediaPlayer;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;

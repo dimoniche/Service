@@ -79,5 +79,9 @@ namespace ServiceSaleMachine
         /// </summary>
         ExitProgram,                       //
 
+        /// <summary>
+        /// Ручной вход в настройки
+        /// </summary>
+        ManualSetting,
     }
 }

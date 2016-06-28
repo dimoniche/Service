@@ -25,7 +25,7 @@ namespace ServiceSaleMachine.Client
 
             MediaPlayer.Visible = true;
 
-            MediaPlayer.URL = Globals.GetPath(PathEnum.Video) + "\\advert.mpg";
+            //MediaPlayer.URL = Globals.GetPath(PathEnum.Video) + "\\advert.mpg";
         }
 
         public FormWaitStage()
@@ -55,6 +55,11 @@ namespace ServiceSaleMachine.Client
             {
                 ((MainForm)form).Stage = WorkerStateStage.ExitProgram;
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

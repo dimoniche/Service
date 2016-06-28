@@ -1,5 +1,4 @@
 ﻿using ServiceSaleMachine.Drivers;
-using ServiceSaleMachine.MainWorker;
 using System;
 using System.Drawing;
 using System.Threading;

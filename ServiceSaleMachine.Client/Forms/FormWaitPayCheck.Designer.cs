@@ -32,18 +32,18 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pbxForward = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pbxFail = new System.Windows.Forms.PictureBox();
             this.panel3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxForward)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxFail)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
@@ -85,24 +85,23 @@
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.pictureBox2);
+            this.panel4.Controls.Add(this.pbxForward);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(252, 207);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(244, 199);
             this.panel4.TabIndex = 3;
             // 
-            // pictureBox2
+            // pbxForward
             // 
-            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox2.Image = global::ServiceSaleMachine.Client.Properties.Resources.forward;
-            this.pictureBox2.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(244, 199);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 1;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
+            this.pbxForward.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbxForward.Location = new System.Drawing.Point(0, 0);
+            this.pbxForward.Name = "pbxForward";
+            this.pbxForward.Size = new System.Drawing.Size(244, 199);
+            this.pbxForward.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbxForward.TabIndex = 1;
+            this.pbxForward.TabStop = false;
+            this.pbxForward.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // panel2
             // 
@@ -125,24 +124,23 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Controls.Add(this.pbxFail);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 207);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(243, 199);
             this.panel1.TabIndex = 0;
             // 
-            // pictureBox1
+            // pbxFail
             // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Image = global::ServiceSaleMachine.Client.Properties.Resources.fail;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(243, 199);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.pbxFail.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbxFail.Location = new System.Drawing.Point(0, 0);
+            this.pbxFail.Name = "pbxFail";
+            this.pbxFail.Size = new System.Drawing.Size(243, 199);
+            this.pbxFail.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbxFail.TabIndex = 1;
+            this.pbxFail.TabStop = false;
+            this.pbxFail.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // FormWaitPayCheck
             // 
@@ -161,11 +159,11 @@
             this.panel3.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxForward)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxFail)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -175,10 +173,10 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pbxForward;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pbxFail;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
     }

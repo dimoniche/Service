@@ -18,6 +18,9 @@ namespace ServiceSaleMachine.Client
         public FormWaitPayBill()
         {
             InitializeComponent();
+
+            pbxFail.Load(Globals.GetPath(PathEnum.Image) + "\\fail.png");
+            pbxForward.Load(Globals.GetPath(PathEnum.Image) + "\\Forward.png");
         }
 
         public FormWaitPayBill(MachineDrivers drivers, Form form)
@@ -26,6 +29,9 @@ namespace ServiceSaleMachine.Client
 
             this.drivers = drivers;
             this.form = form;
+
+            pbxFail.Load(Globals.GetPath(PathEnum.Image) + "\\fail.png");
+            pbxForward.Load(Globals.GetPath(PathEnum.Image) + "\\Forward.png");
         }
 
         private void FormWaitPayBill_FormClosed(object sender, FormClosedEventArgs e)

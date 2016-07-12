@@ -34,11 +34,18 @@ namespace ServiceSaleMachine.Client
         private SaleThread WorkerWait { get; set; }
         private SaleThread MainWorkerTask { get; set; }
 
-
         // задача очистки логов
         ClearFilesControlServiceTask ClearFilesTask { get; set; }
 
         delegate void StartNextForm();
+
+        // количество банкнот
+        int CountBankNote;
+
+        // текущий пользователь
+        int CurrentUserId;
+
+
 
         // запуск приложения
         public MainForm()
@@ -63,6 +70,20 @@ namespace ServiceSaleMachine.Client
             WorkerWait.Complete += WorkerWait_Complete;
 
             Stage = WorkerStateStage.None;
+
+            // база данных
+            if (GlobalDb.GlobalBase.Connect())
+            {
+
+            }
+            else
+            {
+             
+            }
+
+            GlobalDb.GlobalBase.CreateTables();
+
+            CountBankNote = GlobalDb.GlobalBase.GetCountBankNote();
         }
 
         private void MainWorkerTask_ProgressChanged(object sender, ThreadProgressChangedEventArgs e)
@@ -178,9 +199,23 @@ namespace ServiceSaleMachine.Client
                     fprgs = new FormProgress(drivers, this);
 
                     Service serv = Globals.ClientConfiguration.ServiceByIndex(numberService);
-                    fprgs.timework = serv.timework;
-                    fprgs.ServName = serv.caption;
-                    fprgs.Start();
+
+                    Device dev = serv.GetActualDevice();
+
+                    if(dev != null)
+                    {
+                        fprgs.timework = dev.timework;
+                        fprgs.ServName = serv.caption;
+                        fprgs.Start();
+
+                        // пишем в базу строку с временем работы
+                        GlobalDb.GlobalBase.WriteWorkTime(serv.id, dev.id, dev.timework);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Услуга " + serv.caption + " не может быть предоставлена");
+                    }
+
                     break;
             }
         }
@@ -271,6 +306,25 @@ namespace ServiceSaleMachine.Client
                 case DeviceEvent.InitializationOK:
                     break;
                 case DeviceEvent.NeedSettingProgram:
+                    break;
+                case DeviceEvent.DropCassetteBillAcceptor:
+                    // выемка денег
+                    DateTime dt = GlobalDb.GlobalBase.GetLastEncashment();
+
+                    int countmoney = 0;
+                    if (dt != null)
+                    {
+                        countmoney = GlobalDb.GlobalBase.GetCountMoney(dt);
+                    }
+                    else
+                    {
+                        countmoney = GlobalDb.GlobalBase.GetCountMoney(new DateTime(2000,1,1));
+                    }
+
+                    GlobalDb.GlobalBase.Encashment(CurrentUserId, countmoney);
+                    break;
+                case DeviceEvent.DropCassetteFullBillAcceptor:
+                    // я полный
                     break;
             }
         }

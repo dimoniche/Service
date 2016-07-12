@@ -57,9 +57,16 @@ namespace ServiceSaleMachine
                         if ((xElement = xSettings.Element("services")) != null)
                         {
                             Settings.services = new List<Service>();
+                            int i = 1;
                             foreach (XElement xItem in xElement.Elements("Service"))
                             {
-                                Settings.services.Add(Service.FromXml(xItem));
+                                Service tmp = Service.FromXml(xItem);
+                                if(tmp.id == 0)
+                                {
+                                    tmp.id = i;
+                                }
+                                Settings.services.Add(tmp);
+                                i++;
                             }
                         }
                     }

@@ -45,9 +45,10 @@ namespace ServiceSaleMachine.Client
 
                 // пока 3 сервиса
                 Globals.ClientConfiguration.Settings.services = new List<Service>();
-                Globals.ClientConfiguration.Settings.services.Add(new Service("Сервис 1", fileName + "sol.png", 10));
-                Globals.ClientConfiguration.Settings.services.Add(new Service("Сервис 2", fileName + "sol.png", 10));
-                Globals.ClientConfiguration.Settings.services.Add(new Service("Сервис 3", fileName + "sol.png", 10));
+                
+                Globals.ClientConfiguration.Settings.services.Add(new Service(1,"Сервис 1", fileName + "sol.png"));
+                Globals.ClientConfiguration.Settings.services.Add(new Service(2,"Сервис 2", fileName + "sol.png"));
+                Globals.ClientConfiguration.Settings.services.Add(new Service(3,"Сервис 3", fileName + "sol.png"));
 
                 Globals.ClientConfiguration.Save();
                 Globals.ClientConfiguration.Load();

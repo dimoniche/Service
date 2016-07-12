@@ -30,18 +30,18 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pbxNo = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pbxYes = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxNo)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxYes)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -64,24 +64,23 @@
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.pictureBox2);
+            this.panel4.Controls.Add(this.pbxNo);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(313, 217);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(305, 209);
             this.panel4.TabIndex = 3;
             // 
-            // pictureBox2
+            // pbxNo
             // 
-            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox2.Image = global::ServiceSaleMachine.Client.Properties.Resources.fail;
-            this.pictureBox2.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(305, 209);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 1;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Click += new System.EventHandler(this.button2_Click);
+            this.pbxNo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbxNo.Location = new System.Drawing.Point(0, 0);
+            this.pbxNo.Name = "pbxNo";
+            this.pbxNo.Size = new System.Drawing.Size(305, 209);
+            this.pbxNo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbxNo.TabIndex = 1;
+            this.pbxNo.TabStop = false;
+            this.pbxNo.Click += new System.EventHandler(this.button2_Click);
             // 
             // panel3
             // 
@@ -112,24 +111,23 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Controls.Add(this.pbxYes);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 217);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(304, 209);
             this.panel1.TabIndex = 0;
             // 
-            // pictureBox1
+            // pbxYes
             // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Image = global::ServiceSaleMachine.Client.Properties.Resources.Yes;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(304, 209);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.button1_Click);
+            this.pbxYes.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbxYes.Location = new System.Drawing.Point(0, 0);
+            this.pbxYes.Name = "pbxYes";
+            this.pbxYes.Size = new System.Drawing.Size(304, 209);
+            this.pbxYes.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbxYes.TabIndex = 1;
+            this.pbxYes.TabStop = false;
+            this.pbxYes.Click += new System.EventHandler(this.button1_Click);
             // 
             // FormRuleService
             // 
@@ -145,11 +143,11 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormRuleService_KeyDown);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxNo)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxYes)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -160,8 +158,8 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pbxNo;
+        private System.Windows.Forms.PictureBox pbxYes;
         private System.Windows.Forms.Label label1;
     }
 }

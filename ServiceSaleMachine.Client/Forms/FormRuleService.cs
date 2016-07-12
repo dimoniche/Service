@@ -21,6 +21,9 @@ namespace ServiceSaleMachine.Client
 
             this.drivers = drivers;
             this.form = form;
+
+            pbxYes.Load(Globals.GetPath(PathEnum.Image) + "\\Yes.jpg");
+            pbxNo.Load(Globals.GetPath(PathEnum.Image) + "\\fail.png");
         }
 
         public FormRuleService()

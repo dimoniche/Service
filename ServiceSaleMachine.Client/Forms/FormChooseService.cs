@@ -170,17 +170,23 @@ namespace ServiceSaleMachine.Client
 
         private void pictureBox4_Click(object sender, EventArgs e)
         {
+            ((MainForm)form).numberService = CurrentPage * 4 + 3;
 
+            this.Close();
         }
 
         private void pictureBox3_Click(object sender, EventArgs e)
         {
+            ((MainForm)form).numberService = CurrentPage * 4 + 2;
 
+            this.Close();
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
+            ((MainForm)form).numberService = CurrentPage * 4 + 1;
 
+            this.Close();
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)

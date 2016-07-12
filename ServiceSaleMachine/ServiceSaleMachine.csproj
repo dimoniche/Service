@@ -30,6 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
@@ -45,7 +46,10 @@
     <Compile Include="Common\DefaultValueObject.cs" />
     <Compile Include="Configuration\ClientConfiguration.cs" />
     <Compile Include="Configuration\ClientConfigurationProperties.cs" />
+    <Compile Include="Configuration\Device.cs" />
     <Compile Include="Configuration\Service.cs" />
+    <Compile Include="DataBase\GlobalBase.cs" />
+    <Compile Include="DataBase\db.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="Lock\LockObject.cs" />
     <Compile Include="Lock\LockTicket.cs" />
@@ -63,15 +67,14 @@
     <Compile Include="Thread\ThreadCompleteEventArgs.cs" />
     <Compile Include="Thread\ThreadProgressChangedEventArgs.cs" />
     <Compile Include="Thread\ThreadWorkEventArgs.cs" />
+    <Compile Include="Users\UserRole.cs" />
     <Compile Include="Utils\SerialPortHelper.cs" />
     <Compile Include="Utils\DirectoryHelper.cs" />
     <Compile Include="Utils\FileHelper.cs" />
     <Compile Include="Utils\RegServiceActionEnum.cs" />
     <Compile Include="Utils\Utils.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DataBase\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

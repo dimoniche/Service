@@ -18,6 +18,9 @@ namespace ServiceSaleMachine.Client
         MachineDrivers drivers;
         Form form;
 
+        // база данных
+        public db mydb;
+
         public FormSettings(MachineDrivers drivers, Form form)
         {
             InitializeComponent();
@@ -148,6 +151,20 @@ namespace ServiceSaleMachine.Client
             {
                 cbxComPortPrinter.SelectedIndex = drivers.printer.findPrinterIndex(drivers.printer.getNamePrinter());
             }
+
+            // база данных
+            mydb = new db();
+
+            if (mydb.Connect())
+            {
+
+            }
+            else
+            {
+
+            }
+
+            mydb.CreateTables();
         }
 
         private void reciveResponse(object sender, ServiceClientResponseEventArgs e)
@@ -331,6 +348,20 @@ namespace ServiceSaleMachine.Client
         private void button1_Click_2(object sender, EventArgs e)
         {
             drivers.printer.setNamePrinter((string)cbxComPortPrinter.Items[cbxComPortPrinter.SelectedIndex]);
+        }
+
+        private void btnShowDB_Click(object sender, EventArgs e)
+        {
+            dataGridView1.DataSource = mydb.GetLogWork();
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            int count = mydb.GetWorkTime(1, 1, new DateTime(2016, 07, 12));
+            MessageBox.Show(count.ToString());
+
+            DateTime dt = mydb.GetLastRefreshTime(1, 1);
+            MessageBox.Show(dt.ToString());
         }
     }
 }

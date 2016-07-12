@@ -30,6 +30,8 @@ namespace ServiceSaleMachine.Client
             this.form = form;
             pbxOk.Load(Globals.GetPath(PathEnum.Image) + "\\yes.jpg");
             pbxCancel.Load(Globals.GetPath(PathEnum.Image) + "\\fail.png");
+            pbxEnterName.Load(Globals.GetPath(PathEnum.Image) + "\\EnterUserName.png");
+            pbxEnterPsw.Load(Globals.GetPath(PathEnum.Image) + "\\EnterUserPsw.png");
         }
 
         private void UserRequest_FormClosed(object sender, FormClosedEventArgs e)
@@ -53,6 +55,8 @@ namespace ServiceSaleMachine.Client
         private void pbxCancel_Click(object sender, EventArgs e)
         {
             retLogin = "";
+            Close();
         }
+
     }
 }

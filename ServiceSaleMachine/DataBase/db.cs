@@ -229,6 +229,40 @@ namespace ServiceSaleMachine
             return 0;
         }
 
+        public UserInfo GetUserByName(string User, string Password)
+        {
+            string queryString = "select id, login, password, role from users where (login = '" + User + "') and (password='"+Password+"')";
+
+            MySqlCommand com = new MySqlCommand(queryString, con);
+
+            UserInfo ui = null;
+
+            try
+            {
+                using (MySqlDataReader dr = com.ExecuteReader())
+                {
+                    if (dr.HasRows)
+                    {
+                        dr.Read();
+                        ui = new UserInfo();
+                        ui.Id = (int)dr[0];
+                        ui.Login = (string)dr[1];
+                        ui.Role = (UserRole)dr[3];
+                        dr.Close();
+
+                        return ui;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.Message);
+
+            }
+            return ui;
+        }
+
         public DataTable GetDevices()
         {
             DataTable dt = new DataTable();

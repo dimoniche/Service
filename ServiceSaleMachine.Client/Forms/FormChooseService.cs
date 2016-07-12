@@ -26,6 +26,7 @@ namespace ServiceSaleMachine.Client
 
             EmptyServ = Globals.GetPath(PathEnum.Image) + "\\serv0.bmp";
 
+
             CurrentPage = 0;
             pbxNext.BackColor = Color.Transparent;
 
@@ -42,6 +43,7 @@ namespace ServiceSaleMachine.Client
             ServCount = Globals.ClientConfiguration.ServCount;
 
             EmptyServ = Globals.GetPath(PathEnum.Image) + "\\serv0.bmp";
+            pbxUser.Load(Globals.GetPath(PathEnum.Image) + "\\user.png");
 
             CurrentPage = 0;
             pbxNext.BackColor = Color.Transparent;
@@ -201,6 +203,12 @@ namespace ServiceSaleMachine.Client
             {
                 ((MainForm)form).Stage = WorkerStateStage.ExitProgram;
             }
+        }
+
+        private void pictureBox5_Click_1(object sender, EventArgs e)
+        {
+            ((MainForm)form).Stage = WorkerStateStage.UserRequestService;
+            this.Close();
         }
     }
 }

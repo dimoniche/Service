@@ -27,6 +27,7 @@ namespace ServiceSaleMachine.Client
         FormWaitPayCheck WaitPayCheck;
         FormWaitPayBill WaitPayBill;
         FormProgress fprgs;
+        UserRequest userRequest;
 
         FormWait wait;
 
@@ -139,6 +140,8 @@ namespace ServiceSaleMachine.Client
                         break;
                     case WorkerStateStage.StartService:
                         break;
+                    case WorkerStateStage.UserRequestService:
+                        break;
                 }
 
                 // переход на нужную форму
@@ -217,6 +220,19 @@ namespace ServiceSaleMachine.Client
                     }
 
                     break;
+                case WorkerStateStage.UserRequestService:
+                    this.Hide();
+                    userRequest = new UserRequest(drivers, this);
+                    userRequest.ShowDialog();
+                    if (userRequest.retLogin != "")
+                    {
+                        UserInfo ui = GlobalDb.GlobalBase.GetUserByName(userRequest.retLogin, userRequest.retPassword);
+                        if (ui != null)
+                        {
+                            MessageBox.Show(ui.Role.ToString());
+                        }
+                    }
+                    break;
             }
         }
 
@@ -270,6 +286,9 @@ namespace ServiceSaleMachine.Client
                     drivers.ManualInitDevice();
 
                     Stage = WorkerStateStage.Setting;
+                    break;
+                case WorkerStateStage.UserRequestService:
+                    // идентификация пользователя  из формы сервиса
                     break;
             }
 

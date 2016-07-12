@@ -83,5 +83,10 @@ namespace ServiceSaleMachine
         /// Ручной вход в настройки
         /// </summary>
         ManualSetting,
+
+        /// <summary>
+        /// авторизация  из выбора сервиса
+        /// </summary>
+        UserRequestService,
     }
 }

@@ -50,6 +50,7 @@
     <Compile Include="Configuration\Service.cs" />
     <Compile Include="DataBase\GlobalBase.cs" />
     <Compile Include="DataBase\db.cs" />
+    <Compile Include="DataBase\UserInfo.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="Lock\LockObject.cs" />
     <Compile Include="Lock\LockTicket.cs" />

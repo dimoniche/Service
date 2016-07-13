@@ -74,22 +74,22 @@ namespace ServiceSaleMachine.Client
                     (FCurrentPage < FPageCount - 1);
 
                 if (pictureBox1.Enabled)
-                    pictureBox1.Load(Globals.ClientConfiguration.ServiceByIndex(FCurrentPage * 4).filename);
+                    pictureBox1.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.ServiceByIndex(FCurrentPage * 4).filename);
                 else
                     pictureBox1.Load(EmptyServ);
 
                 if (pictureBox2.Enabled)
-                    pictureBox2.Load(Globals.ClientConfiguration.ServiceByIndex(FCurrentPage * 4 + 1).filename);
+                    pictureBox2.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.ServiceByIndex(FCurrentPage * 4 + 1).filename);
                 else
                     pictureBox2.Load(EmptyServ);
 
                 if (pictureBox3.Enabled)
-                    pictureBox3.Load(Globals.ClientConfiguration.ServiceByIndex(FCurrentPage * 4 + 2).filename);
+                    pictureBox3.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.ServiceByIndex(FCurrentPage * 4 + 2).filename);
                 else
                     pictureBox3.Load(EmptyServ);
 
                 if (pictureBox4.Enabled)
-                    pictureBox4.Load(Globals.ClientConfiguration.ServiceByIndex(FCurrentPage * 4 + 3).filename);
+                    pictureBox4.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.ServiceByIndex(FCurrentPage * 4 + 3).filename);
                 else
                     pictureBox4.Load(EmptyServ);
 

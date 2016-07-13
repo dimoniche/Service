@@ -40,7 +40,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ExMachine";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Activated += new System.EventHandler(this.MainForm_Activated);
             this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.ResumeLayout(false);
 

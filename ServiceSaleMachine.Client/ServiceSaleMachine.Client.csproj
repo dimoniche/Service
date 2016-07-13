@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormResultData.cs" />
     <Compile Include="Forms\FormChoosePay.cs">
       <SubType>Form</SubType>
     </Compile>

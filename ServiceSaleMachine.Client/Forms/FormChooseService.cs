@@ -1,41 +1,23 @@
-﻿using ServiceSaleMachine.Drivers;
-using System;
+﻿using System;
 using System.Drawing;
-using System.Threading;
+using System.Linq;
 using System.Windows.Forms;
-using static ServiceSaleMachine.Drivers.MachineDrivers;
 
 namespace ServiceSaleMachine.Client
 {
     public partial class FormChooseService : MyForm
     {
+        FormResultData data;
+
         int FCurrentPage;
         int FServCount;
         int FPageCount;
         string EmptyServ;
 
-        MachineDrivers drivers;
-        Form form;
-
         // запуск приложения
         public FormChooseService()
         {
             InitializeComponent();
-
-            constructor(null, null);
-        }
-
-        public FormChooseService(MachineDrivers drivers, Form form)
-        {
-            InitializeComponent();
-
-            constructor(drivers,form);
-        }
-
-        void constructor(MachineDrivers drivers, Form form)
-        {
-            this.drivers = drivers;
-            this.form = form;
 
             ServCount = Globals.ClientConfiguration.ServCount;
 
@@ -46,6 +28,17 @@ namespace ServiceSaleMachine.Client
             pbxNext.BackColor = Color.Transparent;
 
             this.WindowState = FormWindowState.Maximized;
+        }
+
+        public override void LoadData()
+        {
+            foreach (object obj in Params.Objects.Where(obj => obj != null))
+            {
+                if (obj.GetType() == typeof(FormResultData))
+                {
+                    data = (FormResultData)obj;
+                }
+            }
         }
 
         public int ServCount
@@ -117,8 +110,8 @@ namespace ServiceSaleMachine.Client
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            ((MainForm)form).numberService = CurrentPage * 4;
-
+            data.numberService = CurrentPage * 4;
+            data.stage = WorkerStateStage.ChoosePay;
             this.Close();
         }
 
@@ -169,42 +162,41 @@ namespace ServiceSaleMachine.Client
 
         private void pictureBox4_Click(object sender, EventArgs e)
         {
-            ((MainForm)form).numberService = CurrentPage * 4 + 3;
-
+            data.numberService = CurrentPage * 4 + 3;
+            data.stage = WorkerStateStage.ChoosePay;
             this.Close();
         }
 
         private void pictureBox3_Click(object sender, EventArgs e)
         {
-            ((MainForm)form).numberService = CurrentPage * 4 + 2;
-
+            data.numberService = CurrentPage * 4 + 2;
+            data.stage = WorkerStateStage.ChoosePay;
             this.Close();
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-            ((MainForm)form).numberService = CurrentPage * 4 + 1;
-
+            data.numberService = CurrentPage * 4 + 1;
+            data.stage = WorkerStateStage.ChoosePay;
             this.Close();
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            // покажем основную форму
-            form.Show();
+            Params.Result = data;
         }
 
         private void FormChooseService_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Alt & e.KeyCode == Keys.F4)
             {
-                ((MainForm)form).Stage = WorkerStateStage.ExitProgram;
+                data.stage = WorkerStateStage.ExitProgram;
             }
         }
 
         private void pictureBox5_Click_1(object sender, EventArgs e)
         {
-            ((MainForm)form).Stage = WorkerStateStage.UserRequestService;
+            data.stage = WorkerStateStage.UserRequestService;
             this.Close();
         }
     }

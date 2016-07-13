@@ -15,25 +15,10 @@ namespace ServiceSaleMachine.Client
         // драйвера
         MachineDrivers drivers;
 
-        // услуги
-        public int numberService;
-
-        // формы
-        FormSettings setting;
-        FormWaitStage WaitStageForm;
-        FormRuleService RuleStageForm;
-        FormChooseService ChooseServiceForm;
-        FormChoosePay ChoosePayForm;
-        FormWaitPayCheck WaitPayCheck;
-        FormWaitPayBill WaitPayBill;
-        FormProgress fprgs;
-        UserRequest userRequest;
-
         FormWait wait;
 
         // потоки
         private SaleThread WorkerWait { get; set; }
-        private SaleThread MainWorkerTask { get; set; }
 
         // задача очистки логов
         ClearFilesControlServiceTask ClearFilesTask { get; set; }
@@ -57,12 +42,6 @@ namespace ServiceSaleMachine.Client
             drivers = new MachineDrivers(Program.Log);
             drivers.ReceivedResponse += reciveResponse;
 
-            // основная управляющая задача
-            MainWorkerTask = new SaleThread { ThreadName = "MainWorkerTask" };
-            MainWorkerTask.Work += MainWorkerTask_Work;
-            MainWorkerTask.Complete += MainWorkerTask_Complete;
-            MainWorkerTask.ProgressChanged += MainWorkerTask_ProgressChanged;
-
             // задача отображения долгих операций
             WorkerWait = new SaleThread { ThreadName = "WorkerWait" };
             WorkerWait.Work += WorkerWait_Work;
@@ -83,235 +62,160 @@ namespace ServiceSaleMachine.Client
             GlobalDb.GlobalBase.CreateTables();
 
             CountBankNote = GlobalDb.GlobalBase.GetCountBankNote();
-
-            //FormManager.OpenForm<FormWaitStage>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify);
         }
 
-        private void MainWorkerTask_ProgressChanged(object sender, ThreadProgressChangedEventArgs e)
+        /// <summary>
+        /// Основной обработчик
+        /// </summary>
+        private void MainWorker()
         {
+            FormResultData result = new FormResultData();
+            result.drivers = drivers;
 
-        }
-
-        private void MainWorkerTask_Complete(object sender, ThreadCompleteEventArgs e)
-        {
-        }
-
-        // основной рабочий обработчик
-        private void MainWorkerTask_Work(object sender, ThreadWorkEventArgs e)
-        {
-            //while (!e.Cancel)
-            //{
-            //    try
-            //    {
-                    
-            //    }
-            //    catch
-            //    {
-            //    }
-            //    finally
-            //    {
-            //        if (!e.Cancel)
-            //        {
-            //            Thread.Sleep(100);
-            //        }
-            //    }
-            //}
-
-            try
             {
-                switch (Stage)
+                // инициализация оборудования
+                //drivers.InitAllDevice();
+            }
+
+            while (true)
+            {
+                // ожидание клиента
+                result = (FormResultData)FormManager.OpenForm<FormWaitStage>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                if (result.stage == WorkerStateStage.ExitProgram)
                 {
-                    case WorkerStateStage.Init:
-                        WorkerWait.Run();
+                    // выход
+                    Close();
+                    return;
+                }
+                else if (result.stage == WorkerStateStage.Rules)
+                {
 
-                        hideMainForm();
+                }
+                else if (result.stage == WorkerStateStage.ManualSetting)
+                {
+                    result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
-                        // инициализируем устройства
-                        //if (drivers.InitAllDevice())
-                        {
-                            Stage = WorkerStateStage.Wait;          // переходим в ожидания
-                        }
-                        /*else
-                        {
-                            Stage = WorkerStateStage.Setting;       // переходим в режим настройки
-                            BeginInvoke(new StartNextForm(StartNextForm_Func));
-                        }*/
+                    drivers.ReceivedResponse += reciveResponse;
 
-                        WorkerWait.Abort();
-                        break;
-                    case WorkerStateStage.Wait:
-                        break;
-                    case WorkerStateStage.AgainWait:
-                        Stage = WorkerStateStage.Wait;                      // переходим в ожидание
-                        break;
-                    case WorkerStateStage.Rules:
-                        break;
-                    case WorkerStateStage.Setting:
-                        break;
-                     case WorkerStateStage.ChooseService:
-                        break;
-                    case WorkerStateStage.ChoosePay:
-                        break;
-                    case WorkerStateStage.PayBillService:
-                        break;
-                    case WorkerStateStage.PayCheckService:
-                        break;
-                    case WorkerStateStage.StartService:
-                        break;
-                    case WorkerStateStage.UserRequestService:
-                        break;
+                    continue;
                 }
 
-                // переход на нужную форму
-                StartNextForm_Func();
-            }
-            catch (Exception err)
-            {
-            }
-        }
+                // ознакомление с правилами
+                result = (FormResultData)FormManager.OpenForm<FormRuleService>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
-        private void StartNextForm_Func()
-        {
-            if (InvokeRequired)
-            {
-                BeginInvoke(new StartNextForm(StartNextForm_Func));
-                return;
-            }
+                if (result.stage == WorkerStateStage.ExitProgram)
+                {
+                    // выход
+                    Close();
+                    return;
+                }
+                else if (result.stage == WorkerStateStage.ChooseService)
+                {
 
-            switch (Stage)
-            {
-                case WorkerStateStage.Setting:
-                    this.Hide();
-                    setting = new FormSettings(drivers, this);
-                    setting.Show();
-                    break;
-                case WorkerStateStage.Wait:
-                    this.Hide();
-                    WaitStageForm = new FormWaitStage(drivers, this);
-                    WaitStageForm.Show();
-                    break;
-                case WorkerStateStage.Rules:
-                    this.Hide();
-                    RuleStageForm = new FormRuleService(drivers, this);
-                    RuleStageForm.Show();
-                    break;
-                case WorkerStateStage.ChooseService:
-                    this.Hide();
-                    ChooseServiceForm = new FormChooseService(drivers, this);
-                    ChooseServiceForm.Show();
-                    break;
-                case WorkerStateStage.ChoosePay:
-                    this.Hide();
-                    ChoosePayForm = new FormChoosePay(drivers, this);
-                    ChoosePayForm.Show();
-                    break;
-                case WorkerStateStage.PayCheckService:
-                    this.Hide();
-                    WaitPayCheck = new FormWaitPayCheck(drivers, this);
-                    WaitPayCheck.Show();
-                    break;
-                case WorkerStateStage.PayBillService:
-                    this.Hide();
-                    WaitPayBill = new FormWaitPayBill(drivers, this);
-                    WaitPayBill.Show();
-                    break;
-                case WorkerStateStage.StartService:
-                    this.Hide();
-                    fprgs = new FormProgress(drivers, this);
+                }
+                else if (result.stage == WorkerStateStage.Fail)
+                {
+                    continue;
+                }
 
-                    Service serv = Globals.ClientConfiguration.ServiceByIndex(numberService);
 
-                    Device dev = serv.GetActualDevice();
+                ChooseService:
 
-                    if(dev != null)
+                // выбор услуг
+                result = (FormResultData)FormManager.OpenForm<FormChooseService>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                if (result.stage == WorkerStateStage.ExitProgram)
+                {
+                    // выход
+                    Close();
+                    return;
+                }
+                else if (result.stage == WorkerStateStage.UserRequestService)
+                {
+                    // авторизация пользователя
+                    result = (FormResultData)FormManager.OpenForm<UserRequest>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                    // проверим результат
+                    if (result.retLogin == "admin")
                     {
-                        fprgs.timework = dev.timework;
-                        fprgs.ServName = serv.caption;
-                        fprgs.Start();
+                        // вход админа
+                        result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
-                        // пишем в базу строку с временем работы
-                        GlobalDb.GlobalBase.WriteWorkTime(serv.id, dev.id, dev.timework);
+                        drivers.ReceivedResponse += reciveResponse;
+
+                        continue;
                     }
-                    else
+                    else if (result.retLogin != "")
                     {
-                        MessageBox.Show("Услуга " + serv.caption + " не может быть предоставлена");
-                    }
-
-                    break;
-                case WorkerStateStage.UserRequestService:
-                    this.Hide();
-                    userRequest = new UserRequest(drivers, this);
-                    userRequest.ShowDialog();
-                    if (userRequest.retLogin != "")
-                    {
-                        UserInfo ui = GlobalDb.GlobalBase.GetUserByName(userRequest.retLogin, userRequest.retPassword);
+                        UserInfo ui = GlobalDb.GlobalBase.GetUserByName(result.retLogin, result.retPassword);
                         if (ui != null)
                         {
                             MessageBox.Show(ui.Role.ToString());
                         }
                     }
-                    break;
-            }
-        }
 
-        private void MainForm_Activated(object sender, EventArgs e)
-        {
-            switch (Stage)
-            {
-                case WorkerStateStage.None:
-                    return;
-                case WorkerStateStage.Setting:
-                    Stage = WorkerStateStage.Init;
-                    break;
-                case WorkerStateStage.Wait:
-                    // вышли из режима ожидания - ознокомление с правилами
-                    Stage = WorkerStateStage.Rules;
-                    break;
-                case WorkerStateStage.Rules:
-                    // вышли из режима ознокомления с правилами - теперь выберем услугу
-                    Stage = WorkerStateStage.ChooseService;
-                    break;
-                case WorkerStateStage.Fail:
-                    // вышли из режима ознокомления с правилами c отказом - опять ждем клиента
-                    Stage = WorkerStateStage.Wait;
-                    break;
-                case WorkerStateStage.ChooseService:
-                    // выбрали сервис - выберем способ оплаты
-                    Stage = WorkerStateStage.ChoosePay;
-                    break;
-                case WorkerStateStage.PayBillService:
-                    // выбрали сервис - выберем способ оплаты
-                    Stage = WorkerStateStage.PayBillService;
-                    break;
-                case WorkerStateStage.PayCheckService:
-                    // выбрали сервис - выберем способ оплаты
-                    Stage = WorkerStateStage.PayCheckService;
-                    break;
-                case WorkerStateStage.StartService:
-                    // выбрали сервис - выберем способ оплаты
-                    Stage = WorkerStateStage.StartService;
-                    break;
-                case WorkerStateStage.EndService:
-                    // все сделали переходим в режим ожидания
-                    Stage = WorkerStateStage.AgainWait;
-                    break;
-                case WorkerStateStage.ExitProgram:
+                    // вернемся в выбор услуги (уж не думал что goto буду использовать)
+                    goto ChooseService;
+                }
+
+                // выбор формы оплаты
+                result = (FormResultData)FormManager.OpenForm<FormChoosePay>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                if(result.stage == WorkerStateStage.PayBillService)
+                {
+                    // ожидание внесение денег
+                    result = (FormResultData)FormManager.OpenForm<FormWaitPayBill>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                    // проверим результат
+
+                }
+                else if(result.stage == WorkerStateStage.PayCheckService)
+                {
+                    // ожидание считывания чека
+                    result = (FormResultData)FormManager.OpenForm<FormWaitPayCheck>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                    // проверим результат
+
+                }
+                else if (result.stage == WorkerStateStage.Fail)
+                {
+                    // в начало
+                    continue;
+                }
+                else if (result.stage == WorkerStateStage.ExitProgram)
+                {
                     // выход
                     Close();
                     return;
-                case WorkerStateStage.ManualSetting:
-                    // вход в настройки
-                    drivers.ManualInitDevice();
+                }
 
-                    Stage = WorkerStateStage.Setting;
-                    break;
-                case WorkerStateStage.UserRequestService:
-                    // идентификация пользователя  из формы сервиса
-                    break;
+                // оказание услуги
+                Service serv = Globals.ClientConfiguration.ServiceByIndex(result.numberService);
+                Device dev = serv.GetActualDevice();
+
+                if (dev != null)
+                {
+                    result.timework = dev.timework;
+                    result.ServName = serv.caption;
+
+                    result = (FormResultData)FormManager.OpenForm<FormProgress>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                    if (result.stage == WorkerStateStage.ExitProgram)
+                    {
+                        // выход
+                        Close();
+                        return;
+                    }
+
+                    // пишем в базу строку с временем работы
+                    GlobalDb.GlobalBase.WriteWorkTime(serv.id, dev.id, dev.timework);
+                }
+                else
+                {
+                    MessageBox.Show("Услуга " + serv.caption + " не может быть предоставлена");
+                }
             }
-
-            // запустим обработчик действия пользователя
-            MainWorkerTask.Run();
         }
 
         /// <summary>
@@ -366,28 +270,9 @@ namespace ServiceSaleMachine.Client
             }
         }
 
-        private void hideMainForm()
-        {
-            if (InvokeRequired)
-            {
-                BeginInvoke(new StartNextForm(hideMainForm));
-                return;
-            }
-
-            this.Hide();
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            setting = new FormSettings(drivers, this);
-            setting.Show();
-        }
-
         private void MainForm_Shown(object sender, EventArgs e)
         {
-            // запустим основной обработчик - инициализация
-            Stage = WorkerStateStage.Init;
-            MainWorkerTask.Run();
+            MainWorker();
         }
 
         private void WorkerWait_Complete(object sender, ThreadCompleteEventArgs e)

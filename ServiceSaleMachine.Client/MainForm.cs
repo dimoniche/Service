@@ -50,6 +50,15 @@ namespace ServiceSaleMachine.Client
             Stage = WorkerStateStage.None;
 
             // база данных
+            if (GlobalDb.GlobalBase.CreateDB())
+            {
+
+            }
+            else
+            {
+
+            }
+
             if (GlobalDb.GlobalBase.Connect())
             {
 

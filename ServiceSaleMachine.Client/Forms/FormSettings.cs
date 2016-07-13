@@ -11,7 +11,7 @@ using static ServiceSaleMachine.Drivers.MachineDrivers;
 
 namespace ServiceSaleMachine.Client
 {
-    public partial class FormSettings : Form
+    public partial class FormSettings : MyForm
     {
         string[] currentPort;
 

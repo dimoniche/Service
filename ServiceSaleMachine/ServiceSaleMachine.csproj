@@ -34,7 +34,9 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,6 +53,16 @@
     <Compile Include="DataBase\GlobalBase.cs" />
     <Compile Include="DataBase\db.cs" />
     <Compile Include="DataBase\UserInfo.cs" />
+    <Compile Include="Form\Defines.cs" />
+    <Compile Include="Form\FormManager.cs" />
+    <Compile Include="Form\MyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\MyForm.Designer.cs">
+      <DependentUpon>MyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\ValidateDataMessage.cs" />
+    <Compile Include="Form\ValidateDataResult.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="Lock\LockObject.cs" />
     <Compile Include="Lock\LockTicket.cs" />

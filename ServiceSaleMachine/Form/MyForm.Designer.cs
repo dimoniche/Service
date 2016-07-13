@@ -1,6 +1,6 @@
-﻿namespace ServiceSaleMachine.Client
+﻿namespace ServiceSaleMachine
 {
-    partial class MainForm
+    partial class MyForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,25 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            // 
-            // MainForm
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(742, 559);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "MainForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ExMachine";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Activated += new System.EventHandler(this.MainForm_Activated);
-            this.Shown += new System.EventHandler(this.MainForm_Shown);
-            this.ResumeLayout(false);
-
+            this.Text = "MyForm";
         }
 
         #endregion
     }
 }
-

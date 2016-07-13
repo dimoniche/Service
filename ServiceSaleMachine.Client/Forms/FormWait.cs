@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace ServiceSaleMachine.Client
 {
-    public partial class FormWait : Form
+    public partial class FormWait : MyForm
     {
         public FormWait()
         {

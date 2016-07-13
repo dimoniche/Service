@@ -7,7 +7,7 @@ using static ServiceSaleMachine.Drivers.MachineDrivers;
 
 namespace ServiceSaleMachine.Client
 {
-    public partial class MainForm : Form
+    public partial class MainForm : MyForm
     {
         // стадии работы
         public WorkerStateStage Stage { get; set; }
@@ -46,8 +46,6 @@ namespace ServiceSaleMachine.Client
         // текущий пользователь
         int CurrentUserId;
 
-
-
         // запуск приложения
         public MainForm()
         {
@@ -85,6 +83,8 @@ namespace ServiceSaleMachine.Client
             GlobalDb.GlobalBase.CreateTables();
 
             CountBankNote = GlobalDb.GlobalBase.GetCountBankNote();
+
+            FormManager.OpenForm<FormWaitStage>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify);
         }
 
         private void MainWorkerTask_ProgressChanged(object sender, ThreadProgressChangedEventArgs e)
@@ -369,7 +369,7 @@ namespace ServiceSaleMachine.Client
         {
             // запустим основной обработчик - инициализация
             Stage = WorkerStateStage.Init;
-            MainWorkerTask.Run();
+            //MainWorkerTask.Run();
         }
 
         private void WorkerWait_Complete(object sender, ThreadCompleteEventArgs e)

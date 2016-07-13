@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace ServiceSaleMachine.Client
 {
-    public partial class FormRuleService : Form
+    public partial class FormRuleService : MyForm
     {
         MachineDrivers drivers;
         Form form;

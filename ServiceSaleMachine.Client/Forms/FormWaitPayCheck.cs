@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace ServiceSaleMachine.Client
 {
-    public partial class FormWaitPayCheck : Form
+    public partial class FormWaitPayCheck : MyForm
     {
         MachineDrivers drivers;
         Form form;

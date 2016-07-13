@@ -7,7 +7,7 @@ using static ServiceSaleMachine.Drivers.MachineDrivers;
 
 namespace ServiceSaleMachine.Client
 {
-    public partial class FormChooseService : Form
+    public partial class FormChooseService : MyForm
     {
         int FCurrentPage;
         int FServCount;

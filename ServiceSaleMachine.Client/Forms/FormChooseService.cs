@@ -22,28 +22,25 @@ namespace ServiceSaleMachine.Client
         {
             InitializeComponent();
 
-            ServCount = Globals.ClientConfiguration.ServCount;
-
-            EmptyServ = Globals.GetPath(PathEnum.Image) + "\\serv0.bmp";
-
-
-            CurrentPage = 0;
-            pbxNext.BackColor = Color.Transparent;
-
-            this.WindowState = FormWindowState.Maximized;
+            constructor(null, null);
         }
 
         public FormChooseService(MachineDrivers drivers, Form form)
         {
             InitializeComponent();
 
+            constructor(drivers,form);
+        }
+
+        void constructor(MachineDrivers drivers, Form form)
+        {
             this.drivers = drivers;
             this.form = form;
 
             ServCount = Globals.ClientConfiguration.ServCount;
 
-            EmptyServ = Globals.GetPath(PathEnum.Image) + "\\serv0.bmp";
-            pbxUser.Load(Globals.GetPath(PathEnum.Image) + "\\user.png");
+            EmptyServ = Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonServiceEmpty;
+            pbxUser.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonUser);
 
             CurrentPage = 0;
             pbxNext.BackColor = Color.Transparent;

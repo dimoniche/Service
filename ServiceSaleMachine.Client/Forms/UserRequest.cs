@@ -20,18 +20,26 @@ namespace ServiceSaleMachine.Client
         public UserRequest()
         {
             InitializeComponent();
+
+            constructor(null, null);
         }
 
         public UserRequest(MachineDrivers drivers, Form form)
         {
             InitializeComponent();
 
+            constructor(drivers, form);
+        }
+
+        void constructor(MachineDrivers drivers, Form form)
+        {
             this.drivers = drivers;
             this.form = form;
-            pbxOk.Load(Globals.GetPath(PathEnum.Image) + "\\yes.jpg");
-            pbxCancel.Load(Globals.GetPath(PathEnum.Image) + "\\fail.png");
-            pbxEnterName.Load(Globals.GetPath(PathEnum.Image) + "\\EnterUserName.png");
-            pbxEnterPsw.Load(Globals.GetPath(PathEnum.Image) + "\\EnterUserPsw.png");
+
+            pbxOk.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonYes);
+            pbxCancel.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonFail);
+            pbxEnterName.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonEnterUserName);
+            pbxEnterPsw.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonEnterUserPasw);
         }
 
         private void UserRequest_FormClosed(object sender, FormClosedEventArgs e)

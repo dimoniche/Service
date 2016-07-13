@@ -53,6 +53,18 @@ namespace ServiceSaleMachine
                         if ((xElement = xSettings.Element("NamePrinter")) != null) Settings.NamePrinter = xElement.Value;
                         if ((xElement = xSettings.Element("comPortControl")) != null) Settings.comPortControl = xElement.Value;
 
+                        if ((xElement = xSettings.Element("ButtonFail")) != null) Settings.ButtonFail = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonYes")) != null) Settings.ButtonYes = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonUser")) != null) Settings.ButtonUser = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonCheck")) != null) Settings.ButtonCheck = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonMoney")) != null) Settings.ButtonMoney = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonService")) != null) Settings.ButtonService = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonServiceEmpty")) != null) Settings.ButtonServiceEmpty = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonBack")) != null) Settings.ButtonBack = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonForward")) != null) Settings.ButtonForward = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonEnterUserName")) != null) Settings.ButtonEnterUserName = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonEnterUserPasw")) != null) Settings.ButtonEnterUserPasw = xElement.Value;
+
                         // настройки сервисов
                         if ((xElement = xSettings.Element("services")) != null)
                         {
@@ -95,6 +107,18 @@ namespace ServiceSaleMachine
                 xSettings.Add(new XElement("comPortPrinter", Settings.comPortPrinter));
                 xSettings.Add(new XElement("NamePrinter", Settings.NamePrinter));
                 xSettings.Add(new XElement("comPortControl", Settings.comPortControl));
+
+                xSettings.Add(new XElement("ButtonFail", Settings.ButtonFail));
+                xSettings.Add(new XElement("ButtonYes", Settings.ButtonYes));
+                xSettings.Add(new XElement("ButtonUser", Settings.ButtonUser));
+                xSettings.Add(new XElement("ButtonCheck", Settings.ButtonCheck));
+                xSettings.Add(new XElement("ButtonMoney", Settings.ButtonMoney));
+                xSettings.Add(new XElement("ButtonService", Settings.ButtonService));
+                xSettings.Add(new XElement("ButtonServiceEmpty", Settings.ButtonServiceEmpty));
+                xSettings.Add(new XElement("ButtonBack", Settings.ButtonBack));
+                xSettings.Add(new XElement("ButtonForward", Settings.ButtonForward));
+                xSettings.Add(new XElement("ButtonEnterUserName", Settings.ButtonEnterUserName));
+                xSettings.Add(new XElement("ButtonEnterUserPasw", Settings.ButtonEnterUserPasw));
 
                 if (Settings.services.Count > 0)
                 {

@@ -27,8 +27,8 @@ namespace ServiceSaleMachine.Client
             this.drivers = drivers;
             this.form = form;
 
-            pbxCheck.Load(Globals.GetPath(PathEnum.Image) + "\\check.jpg");
-            pbxMoney.Load(Globals.GetPath(PathEnum.Image) + "\\money.jpg");
+            pbxCheck.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonCheck);
+            pbxMoney.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonMoney);
         }
 
         private void FormChoosePay_FormClosed(object sender, FormClosedEventArgs e)

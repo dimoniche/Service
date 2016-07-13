@@ -18,17 +18,22 @@ namespace ServiceSaleMachine.Client
         public FormRuleService(MachineDrivers drivers, Form form)
         {
             InitializeComponent();
-
-            this.drivers = drivers;
-            this.form = form;
-
-            pbxYes.Load(Globals.GetPath(PathEnum.Image) + "\\Yes.jpg");
-            pbxNo.Load(Globals.GetPath(PathEnum.Image) + "\\fail.png");
+            constructor(drivers, form);
         }
 
         public FormRuleService()
         {
             InitializeComponent();
+            constructor(null,null);
+        }
+
+        void constructor(MachineDrivers drivers, Form form)
+        {
+            this.drivers = drivers;
+            this.form = form;
+
+            pbxYes.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonYes);
+            pbxNo.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonFail);
         }
 
         private void button1_Click(object sender, EventArgs e)

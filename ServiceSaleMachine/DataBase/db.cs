@@ -16,7 +16,6 @@ namespace ServiceSaleMachine
 
         public db()
         {
-
             mysqlCSB = new MySqlConnectionStringBuilder();
             mysqlCSB.Server = "localhost";
             mysqlCSB.Database = "servterminal";

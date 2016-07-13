@@ -292,7 +292,7 @@ namespace ServiceSaleMachine.Client
                     break;
             }
 
-            // запустим обработчикдействия пользователя
+            // запустим обработчик действия пользователя
             MainWorkerTask.Run();
         }
 

@@ -1,5 +1,6 @@
 ﻿using ServiceSaleMachine.Drivers;
 using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace ServiceSaleMachine.Client
@@ -11,7 +12,13 @@ namespace ServiceSaleMachine.Client
 
         public override void LoadData()
         {
-
+            foreach (object obj in Params.Objects.Where(obj => obj != null))
+            {
+                //if (obj.GetType() == typeof(FindEquipData))
+                //{
+                //    findEquipData = (FindEquipData)obj;
+                //}
+            }
         }
 
         public FormWaitStage(MachineDrivers drivers, Form form)

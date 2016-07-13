@@ -77,14 +77,14 @@ namespace ServiceSaleMachine.Client
             }
             else
             {
-             
+                
             }
 
             GlobalDb.GlobalBase.CreateTables();
 
             CountBankNote = GlobalDb.GlobalBase.GetCountBankNote();
 
-            FormManager.OpenForm<FormWaitStage>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify);
+            //FormManager.OpenForm<FormWaitStage>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify);
         }
 
         private void MainWorkerTask_ProgressChanged(object sender, ThreadProgressChangedEventArgs e)
@@ -99,6 +99,24 @@ namespace ServiceSaleMachine.Client
         // основной рабочий обработчик
         private void MainWorkerTask_Work(object sender, ThreadWorkEventArgs e)
         {
+            //while (!e.Cancel)
+            //{
+            //    try
+            //    {
+                    
+            //    }
+            //    catch
+            //    {
+            //    }
+            //    finally
+            //    {
+            //        if (!e.Cancel)
+            //        {
+            //            Thread.Sleep(100);
+            //        }
+            //    }
+            //}
+
             try
             {
                 switch (Stage)
@@ -369,7 +387,7 @@ namespace ServiceSaleMachine.Client
         {
             // запустим основной обработчик - инициализация
             Stage = WorkerStateStage.Init;
-            //MainWorkerTask.Run();
+            MainWorkerTask.Run();
         }
 
         private void WorkerWait_Complete(object sender, ThreadCompleteEventArgs e)

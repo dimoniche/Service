@@ -7,29 +7,17 @@ namespace ServiceSaleMachine.Client
 {
     public partial class FormWaitStage : MyForm
     {
-        MachineDrivers drivers;
-        Form form;
+        FormResultData data;
 
         public override void LoadData()
         {
             foreach (object obj in Params.Objects.Where(obj => obj != null))
             {
-                //if (obj.GetType() == typeof(FindEquipData))
-                //{
-                //    findEquipData = (FindEquipData)obj;
-                //}
+                if (obj.GetType() == typeof(FormResultData))
+                {
+                    data = (FormResultData)obj;
+                }
             }
-        }
-
-        public FormWaitStage(MachineDrivers drivers, Form form)
-        {
-            InitializeComponent();
-
-            this.drivers = drivers;
-            this.form = form;
-
-            //MediaPlayer.Visible = true;
-            //MediaPlayer.URL = Globals.GetPath(PathEnum.Video) + "\\advert.mpg";
         }
 
         public FormWaitStage()
@@ -39,13 +27,13 @@ namespace ServiceSaleMachine.Client
 
         private void FormWaitStage_Click(object sender, EventArgs e)
         {
+            data.stage = WorkerStateStage.Rules;
             this.Close();
         }
 
         private void FormWaitStage_FormClosed(object sender, FormClosedEventArgs e)
         {
-            // покажем основную форму
-            form.Show();
+            Params.Result = data;
         }
 
         //private void MediaPlayer_ClickEvent(object sender, AxWMPLib._WMPOCXEvents_ClickEvent e)
@@ -55,15 +43,15 @@ namespace ServiceSaleMachine.Client
 
         private void FormWaitStage_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.Alt & e.KeyCode == Keys.F4)
+            if (e.Alt & e.KeyCode == Keys.F4)
             {
-                ((MainForm)form).Stage = WorkerStateStage.ExitProgram;
+                data.stage = WorkerStateStage.ExitProgram;
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ((MainForm)form).Stage = WorkerStateStage.ManualSetting;
+            data.stage = WorkerStateStage.ManualSetting;
             this.Close();
         }
     }

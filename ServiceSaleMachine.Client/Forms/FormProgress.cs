@@ -12,8 +12,7 @@ namespace ServiceSaleMachine.Client
 {
     public partial class FormProgress : MyForm
     {
-        MachineDrivers drivers;
-        Form form;
+        FormResultData data;
 
         public int CurrentWork;
         public int FTimeWork;
@@ -24,33 +23,24 @@ namespace ServiceSaleMachine.Client
             InitializeComponent();
         }
 
-        public FormProgress(MachineDrivers drivers, Form form)
+        public override void LoadData()
         {
-            InitializeComponent();
-
-            this.drivers = drivers;
-            this.form = form;
-        }
-
-        public int timework
-        {
-            get { return 0; }
-            set
+            foreach (object obj in Params.Objects.Where(obj => obj != null))
             {
-                FTimeWork = value;
-                progressBar.Maximum = value;
-                progressBar.Minimum = 0;
-                progressBar.Value = 0;
-                timer1.Enabled = true;
-                CurrentWork = 0;
+                if (obj.GetType() == typeof(FormResultData))
+                {
+                    data = (FormResultData)obj;
+                }
             }
-        }
 
-        public void Start()
-        {
+            FTimeWork = data.timework;
+            progressBar.Maximum = data.timework;
+            progressBar.Minimum = 0;
+            progressBar.Value = 0;
+            CurrentWork = 0;
+
             timer1.Enabled = true;
             this.WindowState = FormWindowState.Maximized;
-            this.ShowDialog();
         }
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
@@ -67,7 +57,7 @@ namespace ServiceSaleMachine.Client
             {
                 timer1.Enabled = false;
 
-                ((MainForm)form).Stage = WorkerStateStage.EndService;
+                data.stage = WorkerStateStage.EndService;
 
                 this.Close();
             }
@@ -75,15 +65,14 @@ namespace ServiceSaleMachine.Client
 
         private void FormProgress_FormClosed(object sender, FormClosedEventArgs e)
         {
-            // покажем основную форму
-            form.Show();
+            Params.Result = data;
         }
 
         private void FormProgress_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Alt & e.KeyCode == Keys.F4)
             {
-                ((MainForm)form).Stage = WorkerStateStage.ExitProgram;
+                data.stage = WorkerStateStage.ExitProgram;
             }
         }
     }

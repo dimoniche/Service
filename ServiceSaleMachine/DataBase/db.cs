@@ -23,6 +23,25 @@ namespace ServiceSaleMachine
             mysqlCSB.Password = "vzljot";
         }
 
+        public bool CreateDB()
+        {
+            con = new MySqlConnection();
+            con.ConnectionString = mysqlCSB.ConnectionString;
+            try
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("CREATE DATABASE IF NOT EXISTS `servterminal`;", con);
+                cmd.ExecuteNonQuery();
+                con.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.Message);
+                return false;
+            }
+        }
+
         public bool Connect()
         {
             con = new MySqlConnection();

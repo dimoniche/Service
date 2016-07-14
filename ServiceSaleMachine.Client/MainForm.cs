@@ -71,6 +71,25 @@ namespace ServiceSaleMachine.Client
             GlobalDb.GlobalBase.CreateTables();
 
             CountBankNote = GlobalDb.GlobalBase.GetCountBankNote();
+
+            // КЛАВИАТУРА
+            string[,] str = new string[keyboard1.CountRow, keyboard1.CountCol];
+
+            for(int i = 0; i < keyboard1.CountRow; i++)
+            {
+                for (int j = 0; j < keyboard1.CountCol; j++)
+                {
+                    str[i, j] = Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonFail;
+                }
+            }
+
+            keyboard1.LoadPicture(str);
+        }
+
+        // Обработчик событий от клавиатуры
+        private void keyboard1_KeyboardEvent(object sender, KeyBoardEventArgs e)
+        {
+
         }
 
         /// <summary>

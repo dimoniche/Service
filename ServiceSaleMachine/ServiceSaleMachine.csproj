@@ -53,6 +53,12 @@
     <Compile Include="DataBase\GlobalBase.cs" />
     <Compile Include="DataBase\db.cs" />
     <Compile Include="DataBase\UserInfo.cs" />
+    <Compile Include="Form\Common\Keyboard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Form\Common\Keyboard.Designer.cs">
+      <DependentUpon>Keyboard.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form\Defines.cs" />
     <Compile Include="Form\FormManager.cs" />
     <Compile Include="Form\MyForm.cs">
@@ -87,7 +93,11 @@
     <Compile Include="Utils\RegServiceActionEnum.cs" />
     <Compile Include="Utils\Utils.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Form\Common\Keyboard.resx">
+      <DependentUpon>Keyboard.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

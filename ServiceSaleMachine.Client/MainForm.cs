@@ -73,7 +73,7 @@ namespace ServiceSaleMachine.Client
             CountBankNote = GlobalDb.GlobalBase.GetCountBankNote();
 
             // КЛАВИАТУРА
-            string[,] str = new string[keyboard1.CountRow, keyboard1.CountCol];
+          /*  string[,] str = new string[keyboard1.CountRow, keyboard1.CountCol];
 
             for(int i = 0; i < keyboard1.CountRow; i++)
             {
@@ -83,7 +83,7 @@ namespace ServiceSaleMachine.Client
                 }
             }
 
-            keyboard1.LoadPicture(str);
+            keyboard1.LoadPicture(str);*/
         }
 
         // Обработчик событий от клавиатуры

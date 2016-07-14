@@ -50,19 +50,20 @@ namespace ServiceSaleMachine
                     // добавим картинки в ячейки
                     PictureBox pbx = new PictureBox();
                     pbx.Dock = DockStyle.Fill;
+                    pbx.SizeMode = PictureBoxSizeMode.StretchImage;
                     pbx.Load(str[i, j]);
 
-                    table.Controls.Add(pbx, i, j);
+                    table.Controls.Add(pbx, j, i);
                 }
             }
 
             table.ResumeLayout();
         }
 
-        Point? GetRowColIndex(TableLayoutPanel tlp, Point point)
+        Point GetRowColIndex(TableLayoutPanel tlp, Point point)
         {
-            if (point.X > tlp.Width || point.Y > tlp.Height)
-                return null;
+            /*if (point.X > tlp.Width || point.Y > tlp.Height)
+                return null;*/
 
             int w = tlp.Width;
             int h = tlp.Height;
@@ -84,7 +85,7 @@ namespace ServiceSaleMachine
 
         private void table_Click(object sender, EventArgs e)
         {
-            Point? cellPos = GetRowColIndex(table,table.PointToClient(Cursor.Position));
+            Point cellPos = GetRowColIndex(table,table.PointToClient(Cursor.Position));
 
             KeyboardEvent(this, new KeyBoardEventArgs(cellPos));
         }
@@ -92,9 +93,9 @@ namespace ServiceSaleMachine
 
     public class KeyBoardEventArgs : EventArgs
     {
-        public Point? Message { get; private set; }
+        public Point Message { get; private set; }
 
-        public KeyBoardEventArgs(Point? message)
+        public KeyBoardEventArgs(Point message)
         {
             Message = message;
         }

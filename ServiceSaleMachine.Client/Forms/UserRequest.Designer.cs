@@ -30,6 +30,7 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.NumberBoard = new ServiceSaleMachine.Keyboard();
             this.panel4 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -40,6 +41,7 @@
             this.pbxCancel = new System.Windows.Forms.PictureBox();
             this.pbxEnterName = new System.Windows.Forms.PictureBox();
             this.pbxEnterPsw = new System.Windows.Forms.PictureBox();
+            this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -60,11 +62,23 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.NumberBoard);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel2.Location = new System.Drawing.Point(526, 0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(219, 479);
             this.panel2.TabIndex = 1;
+            // 
+            // NumberBoard
+            // 
+            this.NumberBoard.CountCol = 2;
+            this.NumberBoard.CountRow = 6;
+            this.NumberBoard.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.NumberBoard.Location = new System.Drawing.Point(0, 0);
+            this.NumberBoard.Name = "NumberBoard";
+            this.NumberBoard.Size = new System.Drawing.Size(219, 479);
+            this.NumberBoard.TabIndex = 1;
+            this.NumberBoard.KeyboardEvent += new ServiceSaleMachine.Keyboard.KeyboardEventHandler(this.NumberBoard_KeyboardEvent);
             // 
             // panel4
             // 
@@ -204,6 +218,7 @@
             this.Text = "UserRequest";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.UserRequest_FormClosed);
+            this.panel2.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -233,5 +248,6 @@
         private System.Windows.Forms.PictureBox pbxCancel;
         private System.Windows.Forms.PictureBox pbxEnterName;
         private System.Windows.Forms.PictureBox pbxEnterPsw;
+        private Keyboard NumberBoard;
     }
 }

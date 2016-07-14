@@ -68,7 +68,7 @@ namespace ServiceSaleMachine.Client
 
         private void NumberBoard_KeyboardEvent(object sender, KeyBoardEventArgs e)
         {
-            int numb = e.Message.X * 5 + e.Message.Y;
+            int numb = e.Message.X + e.Message.Y * 2;
             tbxLogin.Text += numb;
         }
     }

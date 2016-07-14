@@ -53,6 +53,9 @@ namespace ServiceSaleMachine
                     pbx.SizeMode = PictureBoxSizeMode.StretchImage;
                     pbx.Load(str[i, j]);
 
+                    pbx.Click += table_Click;
+                    pbx.Tag = new Point(j,i);
+
                     table.Controls.Add(pbx, j, i);
                 }
             }
@@ -60,32 +63,9 @@ namespace ServiceSaleMachine
             table.ResumeLayout();
         }
 
-        Point GetRowColIndex(TableLayoutPanel tlp, Point point)
-        {
-            /*if (point.X > tlp.Width || point.Y > tlp.Height)
-                return null;*/
-
-            int w = tlp.Width;
-            int h = tlp.Height;
-            int[] widths = tlp.GetColumnWidths();
-
-            int i;
-            for (i = widths.Length - 1; i >= 0 && point.X < w; i--)
-                w -= widths[i];
-            int col = i + 1;
-
-            int[] heights = tlp.GetRowHeights();
-            for (i = heights.Length - 1; i >= 0 && point.Y < h; i--)
-                h -= heights[i];
-
-            int row = i + 1;
-
-            return new Point(col, row);
-        }
-
         private void table_Click(object sender, EventArgs e)
         {
-            Point cellPos = GetRowColIndex(table,table.PointToClient(Cursor.Position));
+            Point cellPos = (Point)((PictureBox)sender).Tag;
 
             KeyboardEvent(this, new KeyBoardEventArgs(cellPos));
         }

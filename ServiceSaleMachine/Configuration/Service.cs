@@ -37,6 +37,17 @@ namespace ServiceSaleMachine
             xOut.Add(new XElement("caption", caption));
             xOut.Add(new XElement("filename", filename));
 
+            if (devs.Count > 0)
+            {
+                XElement devices = new XElement("Devices");
+                foreach (Device dev in devs)
+                {
+                    XElement newservice = dev.ToXml();
+                    devices.Add(newservice);
+                }
+                xOut.Add(devices);
+            }
+
             return xOut;
         }
 

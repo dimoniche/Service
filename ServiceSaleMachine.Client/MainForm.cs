@@ -94,7 +94,11 @@ namespace ServiceSaleMachine.Client
                 else
                 {
                     result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-                    drivers.InitAllDevice();
+
+                    if (Globals.ClientConfiguration.Settings.offHardware == 0)
+                    {
+                        drivers.InitAllDevice();
+                    }
                 }
             }
             else
@@ -124,7 +128,10 @@ namespace ServiceSaleMachine.Client
                         result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
                         // проинициализируем железо после настроек
-                        drivers.InitAllDevice();
+                        if (Globals.ClientConfiguration.Settings.offHardware == 0)
+                        {
+                            drivers.InitAllDevice();
+                        }
 
                         continue;
                     }
@@ -140,7 +147,7 @@ namespace ServiceSaleMachine.Client
                     }
                     else if (result.stage == WorkerStateStage.NeedService)
                     {
-                        // выемка денег
+                        // необходимо обслуживание
                         result = (FormResultData)FormManager.OpenForm<FormNeedService>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
                         if (result.stage == WorkerStateStage.EndNeedService)
@@ -191,7 +198,10 @@ namespace ServiceSaleMachine.Client
                             result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
                             // проинициализируем железо после настроек
-                            drivers.InitAllDevice();
+                            if (Globals.ClientConfiguration.Settings.offHardware == 0)
+                            {
+                                drivers.InitAllDevice();
+                            }
 
                             continue;
                         }
@@ -300,7 +310,7 @@ namespace ServiceSaleMachine.Client
                         MessageBox.Show("Услуга " + serv.caption + " не может быть предоставлена");
                     }
                 }
-                catch
+                catch (Exception exp)
                 {
                     // вернемся к исходной позиции - какая то ошибка
                 }
@@ -404,6 +414,8 @@ namespace ServiceSaleMachine.Client
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
+            WorkerWait.Abort();
+
             try
             {
                 drivers.StopAllDevice();

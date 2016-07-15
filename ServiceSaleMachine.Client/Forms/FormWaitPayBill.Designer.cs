@@ -37,6 +37,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pbxFail = new System.Windows.Forms.PictureBox();
+            this.AmountServiceText = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.price = new System.Windows.Forms.Label();
             this.panel3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -48,6 +51,7 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.AmountServiceText);
             this.panel3.Controls.Add(this.label2);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(267, 3);
@@ -105,6 +109,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.price);
+            this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
@@ -141,6 +147,36 @@
             this.pbxFail.TabIndex = 1;
             this.pbxFail.TabStop = false;
             this.pbxFail.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // AmountServiceText
+            // 
+            this.AmountServiceText.AutoSize = true;
+            this.AmountServiceText.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.AmountServiceText.Location = new System.Drawing.Point(32, 69);
+            this.AmountServiceText.Name = "AmountServiceText";
+            this.AmountServiceText.Size = new System.Drawing.Size(92, 37);
+            this.AmountServiceText.TabIndex = 1;
+            this.AmountServiceText.Text = "0 руб";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.Location = new System.Drawing.Point(38, 81);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(178, 24);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Стоимость услуги:";
+            // 
+            // price
+            // 
+            this.price.AutoSize = true;
+            this.price.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.price.Location = new System.Drawing.Point(38, 105);
+            this.price.Name = "price";
+            this.price.Size = new System.Drawing.Size(56, 24);
+            this.price.TabIndex = 0;
+            this.price.Text = "0 руб";
             // 
             // FormWaitPayBill
             // 
@@ -179,5 +215,8 @@
         private System.Windows.Forms.PictureBox pbxFail;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label AmountServiceText;
+        private System.Windows.Forms.Label price;
+        private System.Windows.Forms.Label label4;
     }
 }

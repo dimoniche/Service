@@ -2,6 +2,8 @@
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using ServiceSaleMachine.Drivers;
+using static ServiceSaleMachine.Drivers.MachineDrivers;
 
 namespace ServiceSaleMachine.Client
 {
@@ -9,12 +11,20 @@ namespace ServiceSaleMachine.Client
     {
         FormResultData data;
 
+        // количество внесенных денег
+        int amount;
+        // остаток денег - на чек
+        int balance;
+
         public FormWaitPayBill()
         {
             InitializeComponent();
 
             pbxFail.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonFail);
-            pbxForward.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonForward);
+            pbxForward.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonNoForward);
+
+            // пока не внесли нужную сумму - не жамкаем кнопку
+            pbxForward.Enabled = false;
         }
 
         public override void LoadData()
@@ -25,6 +35,54 @@ namespace ServiceSaleMachine.Client
                 {
                     data = (FormResultData)obj;
                 }
+            }
+
+            // стоимость
+            price.Text = data.serv.price + " руб";
+            AmountServiceText.Text = "0 руб";
+
+            // заменим обработчик событий
+            data.drivers.ReceivedResponse += reciveResponse;
+        }
+
+        /// <summary>
+        /// События от приемника денег
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void reciveResponse(object sender, ServiceClientResponseEventArgs e)
+        {
+            if (InvokeRequired)
+            {
+                BeginInvoke(new ServiceClientResponseEventHandler(reciveResponse), sender, e);
+                return;
+            }
+
+            switch (e.Message.Event)
+            {
+                case DeviceEvent.BillAcceptor:
+                    
+                    break;
+                case DeviceEvent.BillAcceptorCredit:
+                    {
+                        // внесли деньги
+                        int count = 0;
+                        int.TryParse((string)e.Message.Content, out count);
+                        amount += count;
+
+                        AmountServiceText.Text = amount + " руб";
+
+                        if (amount >= data.serv.price)
+                        {
+                            // внесли нужную сумму - можно идти вперед
+                            pbxForward.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonForward);
+                            pbxForward.Enabled = true;
+                        }
+                    }
+                    break;
+                default:
+                    // Остальные события нас не интересуют
+                    break;
             }
         }
 

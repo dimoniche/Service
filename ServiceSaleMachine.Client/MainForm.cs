@@ -71,25 +71,6 @@ namespace ServiceSaleMachine.Client
             GlobalDb.GlobalBase.CreateTables();
 
             CountBankNote = GlobalDb.GlobalBase.GetCountBankNote();
-
-            // КЛАВИАТУРА
-          /*  string[,] str = new string[keyboard1.CountRow, keyboard1.CountCol];
-
-            for(int i = 0; i < keyboard1.CountRow; i++)
-            {
-                for (int j = 0; j < keyboard1.CountCol; j++)
-                {
-                    str[i, j] = Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonFail;
-                }
-            }
-
-            keyboard1.LoadPicture(str);*/
-        }
-
-        // Обработчик событий от клавиатуры
-        private void keyboard1_KeyboardEvent(object sender, KeyBoardEventArgs e)
-        {
-
         }
 
         /// <summary>
@@ -107,127 +88,10 @@ namespace ServiceSaleMachine.Client
 
             while (true)
             {
-                // ожидание клиента
-                result = (FormResultData)FormManager.OpenForm<FormWaitStage>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-
-                if (result.stage == WorkerStateStage.ExitProgram)
+                try
                 {
-                    // выход
-                    Close();
-                    return;
-                }
-                else if (result.stage == WorkerStateStage.Rules)
-                {
-
-                }
-                else if (result.stage == WorkerStateStage.ManualSetting)
-                {
-                    result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-
-                    drivers.ReceivedResponse += reciveResponse;
-
-                    continue;
-                }
-
-                // ознакомление с правилами
-                result = (FormResultData)FormManager.OpenForm<FormRuleService>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-
-                if (result.stage == WorkerStateStage.ExitProgram)
-                {
-                    // выход
-                    Close();
-                    return;
-                }
-                else if (result.stage == WorkerStateStage.ChooseService)
-                {
-
-                }
-                else if (result.stage == WorkerStateStage.Fail)
-                {
-                    continue;
-                }
-
-
-                ChooseService:
-
-                // выбор услуг
-                result = (FormResultData)FormManager.OpenForm<FormChooseService>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-
-                if (result.stage == WorkerStateStage.ExitProgram)
-                {
-                    // выход
-                    Close();
-                    return;
-                }
-                else if (result.stage == WorkerStateStage.UserRequestService)
-                {
-                    // авторизация пользователя
-                    result = (FormResultData)FormManager.OpenForm<UserRequest>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-
-                    // проверим результат
-                    if (result.retLogin == "admin")
-                    {
-                        // вход админа
-                        result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-
-                        drivers.ReceivedResponse += reciveResponse;
-
-                        continue;
-                    }
-                    else if (result.retLogin != "")
-                    {
-                        UserInfo ui = GlobalDb.GlobalBase.GetUserByName(result.retLogin, result.retPassword);
-                        if (ui != null)
-                        {
-                            MessageBox.Show(ui.Role.ToString());
-                        }
-                    }
-
-                    // вернемся в выбор услуги (уж не думал что goto буду использовать)
-                    goto ChooseService;
-                }
-
-                // выбор формы оплаты
-                result = (FormResultData)FormManager.OpenForm<FormChoosePay>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-
-                if(result.stage == WorkerStateStage.PayBillService)
-                {
-                    // ожидание внесение денег
-                    result = (FormResultData)FormManager.OpenForm<FormWaitPayBill>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-
-                    // проверим результат
-
-                }
-                else if(result.stage == WorkerStateStage.PayCheckService)
-                {
-                    // ожидание считывания чека
-                    result = (FormResultData)FormManager.OpenForm<FormWaitPayCheck>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-
-                    // проверим результат
-
-                }
-                else if (result.stage == WorkerStateStage.Fail)
-                {
-                    // в начало
-                    continue;
-                }
-                else if (result.stage == WorkerStateStage.ExitProgram)
-                {
-                    // выход
-                    Close();
-                    return;
-                }
-
-                // оказание услуги
-                Service serv = Globals.ClientConfiguration.ServiceByIndex(result.numberService);
-                Device dev = serv.GetActualDevice();
-
-                if (dev != null)
-                {
-                    result.timework = dev.timework;
-                    result.ServName = serv.caption;
-
-                    result = (FormResultData)FormManager.OpenForm<FormProgress>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+                    // ожидание клиента
+                    result = (FormResultData)FormManager.OpenForm<FormWaitStage>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
                     if (result.stage == WorkerStateStage.ExitProgram)
                     {
@@ -235,13 +99,164 @@ namespace ServiceSaleMachine.Client
                         Close();
                         return;
                     }
+                    else if (result.stage == WorkerStateStage.Rules)
+                    {
 
-                    // пишем в базу строку с временем работы
-                    GlobalDb.GlobalBase.WriteWorkTime(serv.id, dev.id, dev.timework);
+                    }
+                    else if (result.stage == WorkerStateStage.ManualSetting)
+                    {
+                        result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                        drivers.ReceivedResponse += reciveResponse;
+
+                        continue;
+                    }
+
+                    // ознакомление с правилами
+                    result = (FormResultData)FormManager.OpenForm<FormRuleService>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                    if (result.stage == WorkerStateStage.ExitProgram)
+                    {
+                        // выход
+                        Close();
+                        return;
+                    }
+                    else if (result.stage == WorkerStateStage.ChooseService)
+                    {
+
+                    }
+                    else if (result.stage == WorkerStateStage.Fail)
+                    {
+                        continue;
+                    }
+
+
+                    ChooseService:
+
+                    // выбор услуг
+                    result = (FormResultData)FormManager.OpenForm<FormChooseService>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                    if (result.stage == WorkerStateStage.ExitProgram)
+                    {
+                        // выход
+                        Close();
+                        return;
+                    }
+                    else if (result.stage == WorkerStateStage.UserRequestService)
+                    {
+                        // авторизация пользователя
+                        result = (FormResultData)FormManager.OpenForm<UserRequest>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                        // проверим результат
+                        if (result.retLogin == "admin")
+                        {
+                            // вход админа
+                            result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                            drivers.ReceivedResponse += reciveResponse;
+
+                            continue;
+                        }
+                        else if (result.retLogin != "")
+                        {
+                            UserInfo ui = GlobalDb.GlobalBase.GetUserByName(result.retLogin, result.retPassword);
+                            if (ui != null)
+                            {
+                                MessageBox.Show(ui.Role.ToString());
+                            }
+                        }
+
+                        // вернемся в выбор услуги (уж не думал что goto буду использовать)
+                        goto ChooseService;
+                    }
+
+                    // выбор формы оплаты
+                    result = (FormResultData)FormManager.OpenForm<FormChoosePay>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                    // загрузим выбранную услугу
+                    Service serv = Globals.ClientConfiguration.ServiceByIndex(result.numberService);
+                    result.serv = serv;
+
+                    if (result.stage == WorkerStateStage.PayBillService)
+                    {
+                        // ожидание внесение денег
+                        result = (FormResultData)FormManager.OpenForm<FormWaitPayBill>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                        // проверим результат
+                        drivers.ReceivedResponse += reciveResponse;
+
+                        if (result.stage == WorkerStateStage.Fail)
+                        {
+                            // отказ - выход в начало
+                            continue;
+                        }
+                        else if (result.stage == WorkerStateStage.ExitProgram)
+                        {
+                            // выход
+                            Close();
+                            return;
+                        }
+                    }
+                    else if (result.stage == WorkerStateStage.PayCheckService)
+                    {
+                        // ожидание считывания чека
+                        result = (FormResultData)FormManager.OpenForm<FormWaitPayCheck>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                        // проверим результат
+                        drivers.ReceivedResponse += reciveResponse;
+
+                        if (result.stage == WorkerStateStage.Fail)
+                        {
+                            // отказ - выход в начало
+                            continue;
+                        }
+                        else if (result.stage == WorkerStateStage.ExitProgram)
+                        {
+                            // выход
+                            Close();
+                            return;
+                        }
+                    }
+                    else if (result.stage == WorkerStateStage.Fail)
+                    {
+                        // в начало
+                        continue;
+                    }
+                    else if (result.stage == WorkerStateStage.ExitProgram)
+                    {
+                        // выход
+                        Close();
+                        return;
+                    }
+
+                    // оказание услуги
+                    Device dev = serv.GetActualDevice();
+
+                    if (dev != null)
+                    {
+                        result.timework = dev.timework;
+                        result.ServName = serv.caption;
+
+                        result = (FormResultData)FormManager.OpenForm<FormProgress>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                        if (result.stage == WorkerStateStage.ExitProgram)
+                        {
+                            // выход
+                            Close();
+                            return;
+                        }
+
+                        // пишем в базу строку с временем работы
+                        GlobalDb.GlobalBase.WriteWorkTime(serv.id, dev.id, dev.timework);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Услуга " + serv.caption + " не может быть предоставлена");
+                    }
                 }
-                else
+                catch
                 {
-                    MessageBox.Show("Услуга " + serv.caption + " не может быть предоставлена");
+                    // вернемся к исходной позиции - какая то ошибка
                 }
             }
         }

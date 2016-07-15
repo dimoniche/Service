@@ -62,6 +62,7 @@ namespace ServiceSaleMachine
                         if ((xElement = xSettings.Element("ButtonServiceEmpty")) != null) Settings.ButtonServiceEmpty = xElement.Value;
                         if ((xElement = xSettings.Element("ButtonBack")) != null) Settings.ButtonBack = xElement.Value;
                         if ((xElement = xSettings.Element("ButtonForward")) != null) Settings.ButtonForward = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonNoForward")) != null) Settings.ButtonNoForward = xElement.Value;
                         if ((xElement = xSettings.Element("ButtonEnterUserName")) != null) Settings.ButtonEnterUserName = xElement.Value;
                         if ((xElement = xSettings.Element("ButtonEnterUserPasw")) != null) Settings.ButtonEnterUserPasw = xElement.Value;
 
@@ -117,6 +118,7 @@ namespace ServiceSaleMachine
                 xSettings.Add(new XElement("ButtonServiceEmpty", Settings.ButtonServiceEmpty));
                 xSettings.Add(new XElement("ButtonBack", Settings.ButtonBack));
                 xSettings.Add(new XElement("ButtonForward", Settings.ButtonForward));
+                xSettings.Add(new XElement("ButtonNoForward", Settings.ButtonNoForward));
                 xSettings.Add(new XElement("ButtonEnterUserName", Settings.ButtonEnterUserName));
                 xSettings.Add(new XElement("ButtonEnterUserPasw", Settings.ButtonEnterUserPasw));
 

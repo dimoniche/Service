@@ -8,6 +8,7 @@ namespace ServiceSaleMachine.Client
         public object result = null;
 
         public int numberService;
+        public Service serv;
 
         public string retLogin;
         public string retPassword;

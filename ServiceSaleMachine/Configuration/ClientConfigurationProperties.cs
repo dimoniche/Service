@@ -26,6 +26,7 @@ namespace ServiceSaleMachine
         public string ButtonServiceEmpty;
         public string ButtonBack;
         public string ButtonForward;
+        public string ButtonNoForward;
         public string ButtonEnterUserName;
         public string ButtonEnterUserPasw;
 

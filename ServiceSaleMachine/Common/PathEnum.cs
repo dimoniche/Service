@@ -9,5 +9,6 @@
         Image,
         Bin,
         Video,
+        Text,
     }
 }

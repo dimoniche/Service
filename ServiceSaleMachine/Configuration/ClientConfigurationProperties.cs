@@ -13,6 +13,13 @@ namespace ServiceSaleMachine
         public string NamePrinter;
         public string comPortControl;
 
+        // Отключение железа
+        public int offHardware;
+        // отключение оплату чеком
+        public int offCheck;
+        // отключение БД
+        public int offDataBase;
+
         // настройки сервисов
         public List<Service> services;
 

@@ -96,6 +96,9 @@ namespace ServiceSaleMachine
                 case PathEnum.Video:
                     return "Video";
 
+                case PathEnum.Text:
+                    return "Text";
+
                 default:
                     throw new InvalidOperationException();
             }

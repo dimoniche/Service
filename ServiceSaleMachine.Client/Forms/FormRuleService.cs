@@ -25,6 +25,9 @@ namespace ServiceSaleMachine.Client
                     data = (FormResultData)obj;
                 }
             }
+
+            string file = Globals.GetPath(PathEnum.Text) + "\\Rule.txt";
+
         }
 
         private void button1_Click(object sender, EventArgs e)

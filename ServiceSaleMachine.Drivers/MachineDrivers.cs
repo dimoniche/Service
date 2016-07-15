@@ -60,44 +60,69 @@ namespace ServiceSaleMachine.Drivers
                 return false;
             }
 
-            scaner = new ZebexScaner();
-            WorkerScanerDriver = new SaleThread { ThreadName = "WorkerScanerDriver" };
-            WorkerScanerDriver.Work += WorkerScanerDriver_Work;
-            WorkerScanerDriver.Complete += WorkerScanerDriver_Complete;
+            if (Globals.ClientConfiguration.Settings.offCheck != 1)
+            {
+                // не платим чеком - не нужен сканер
+                scaner = new ZebexScaner();
+                WorkerScanerDriver = new SaleThread { ThreadName = "WorkerScanerDriver" };
+                WorkerScanerDriver.Work += WorkerScanerDriver_Work;
+                WorkerScanerDriver.Complete += WorkerScanerDriver_Complete;
+            }
 
-            CCNETDriver = new CCRSProtocol();
-            WorkerBillPollDriver = new SaleThread { ThreadName = "WorkerBillPollDriver" };
-            WorkerBillPollDriver.Work += WorkerBillPollDriver_Work;
-            WorkerBillPollDriver.Complete += WorkerBillPollDriver_Complete;
+            if (CCNETDriver == null)
+            {
+                CCNETDriver = new CCRSProtocol();
+                WorkerBillPollDriver = new SaleThread { ThreadName = "WorkerBillPollDriver" };
+                WorkerBillPollDriver.Work += WorkerBillPollDriver_Work;
+                WorkerBillPollDriver.Complete += WorkerBillPollDriver_Complete;
+            }
 
-            printer = new PrinterESC();
-            control = new ControlDevice();
+            if (printer == null)
+            {
+                printer = new PrinterESC();
+            }
 
-            if (scaner.getNumberComPort().Contains("NULL") || CCNETDriver.getNumberComPort().Contains("NULL") || printer.getNamePrinter().Contains("NULL"))
+            if (control == null)
+            {
+                control = new ControlDevice();
+            }
+
+            if ((Globals.ClientConfiguration.Settings.offCheck != 1 && scaner.getNumberComPort().Contains("NULL")) 
+            || CCNETDriver.getNumberComPort().Contains("NULL") || printer.getNamePrinter().Contains("NULL"))
             {
                 // необходима настройка приложения
                 this.log.Write(LogMessageType.Error, "Необходима настройка приложения");
 
                 sendMessage(DeviceEvent.NeedSettingProgram);
-                return false;
+                res = false;
             }
 
-            this.log.Write(LogMessageType.Information, "Настройка сканера.");
-
             // настроим драйвер сканера
-
-            if (scaner.openPort(scaner.getNumberComPort()))
+            if (Globals.ClientConfiguration.Settings.offCheck != 1)
             {
-                // запустим задачу ожидания сообщений от сканера
-                WorkerScanerDriver.Run();
+                this.log.Write(LogMessageType.Information, "Настройка сканера.");
+                
+                // не платим чеком - не нужен сканер
+                if (scaner.openPort(scaner.getNumberComPort()))
+                {
+                    // запустим задачу ожидания сообщений от сканера
+                    if (!WorkerScanerDriver.IsWork)
+                    {
+                        WorkerScanerDriver.Run();
+                    }
+                }
+                else
+                {
+                    // неудача
+                    this.log.Write(LogMessageType.Error, "Сканер не верно настроен. Порт не доступен.");
+                    sendMessage(DeviceEvent.NeedSettingProgram);
+
+                    res = false;
+                }
             }
             else
             {
-                // неудача
-                this.log.Write(LogMessageType.Error, "Сканер не верно настроен. Порт не доступен.");
-                sendMessage(DeviceEvent.NeedSettingProgram);
-
-                return false;
+                this.log.Write(LogMessageType.Information, "Сканер оотключен.");
             }
 
             this.log.Write(LogMessageType.Information, "Настройка купюроприемникa.");
@@ -115,7 +140,8 @@ namespace ServiceSaleMachine.Drivers
                 }
 
                 // запустим задачу опроса купюроприемника
-                WorkerBillPollDriver.Run();
+                if (!WorkerBillPollDriver.IsWork)
+                    WorkerBillPollDriver.Run();
 
                 for (int i = 0; i < 24; i++)
                 {
@@ -128,7 +154,7 @@ namespace ServiceSaleMachine.Drivers
                 this.log.Write(LogMessageType.Error, "Купюроприемник не верно настроен. Порт не доступен.");
                 sendMessage(DeviceEvent.NeedSettingProgram);
 
-                return false;
+                res = false;
             }
 
             this.log.Write(LogMessageType.Information, "Настройка принтера.");
@@ -144,7 +170,7 @@ namespace ServiceSaleMachine.Drivers
                 this.log.Write(LogMessageType.Error, "Принтер не верно настроен. Порт не доступен.");
                 sendMessage(DeviceEvent.NeedSettingProgram);
 
-                return false;
+                res = false;
             }
 
             // настроим управляющее устройство
@@ -158,10 +184,10 @@ namespace ServiceSaleMachine.Drivers
             else
             {
                 // неудача
-                this.log.Write(LogMessageType.Error, "Управляющее устройство не верно настроен. Порт не доступен.");
+                this.log.Write(LogMessageType.Error, "Управляющее устройство не верно настроено. Порт не доступен.");
                 sendMessage(DeviceEvent.NeedSettingProgram);
 
-                return false;
+                res = false;
             }
 
             return res;
@@ -169,10 +195,15 @@ namespace ServiceSaleMachine.Drivers
 
         public void ManualInitDevice()
         {
-            scaner = new ZebexScaner();
-            WorkerScanerDriver = new SaleThread { ThreadName = "WorkerScanerDriver" };
-            WorkerScanerDriver.Work += WorkerScanerDriver_Work;
-            WorkerScanerDriver.Complete += WorkerScanerDriver_Complete;
+
+            if (Globals.ClientConfiguration.Settings.offCheck != 1)
+            {
+                // не платим чеком - не нужен сканер
+                scaner = new ZebexScaner();
+                WorkerScanerDriver = new SaleThread { ThreadName = "WorkerScanerDriver" };
+                WorkerScanerDriver.Work += WorkerScanerDriver_Work;
+                WorkerScanerDriver.Complete += WorkerScanerDriver_Complete;
+            }
 
             CCNETDriver = new CCRSProtocol();
             WorkerBillPollDriver = new SaleThread { ThreadName = "WorkerBillPollDriver" };

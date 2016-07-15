@@ -68,14 +68,19 @@
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button3 = new System.Windows.Forms.Button();
             this.btnShowDB = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label8 = new System.Windows.Forms.Label();
             this.dtDBFrom = new System.Windows.Forms.DateTimePicker();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button3 = new System.Windows.Forms.Button();
+            this.cbxOffHardware = new System.Windows.Forms.CheckBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.cbxCheckOff = new System.Windows.Forms.CheckBox();
+            this.cbxOffDataBase = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -86,8 +91,9 @@
             this.tabPage6.SuspendLayout();
             this.tabControl3.SuspendLayout();
             this.tabPage8.SuspendLayout();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.panel1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -214,6 +220,7 @@
             this.tabPage3.Controls.Add(this.label5);
             this.tabPage3.Controls.Add(this.richTextBox1);
             this.tabPage3.Controls.Add(this.label16);
+            this.tabPage3.Controls.Add(this.button5);
             this.tabPage3.Controls.Add(this.button10);
             this.tabPage3.Controls.Add(this.label14);
             this.tabPage3.Controls.Add(this.button8);
@@ -511,6 +518,15 @@
             this.tabPage8.Text = "Просмотр";
             this.tabPage8.UseVisualStyleBackColor = true;
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(3, 59);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(686, 344);
+            this.dataGridView1.TabIndex = 1;
+            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.button3);
@@ -523,6 +539,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(686, 56);
             this.panel1.TabIndex = 0;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(391, 17);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 4;
+            this.button3.Text = "Вывести";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click_1);
             // 
             // btnShowDB
             // 
@@ -561,32 +587,70 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.checkBox1);
+            this.tabPage2.Controls.Add(this.cbxOffDataBase);
+            this.tabPage2.Controls.Add(this.cbxCheckOff);
+            this.tabPage2.Controls.Add(this.cbxOffHardware);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(720, 470);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.Text = "Настройки";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // cbxOffHardware
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 59);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(686, 344);
-            this.dataGridView1.TabIndex = 1;
+            this.cbxOffHardware.AutoSize = true;
+            this.cbxOffHardware.Location = new System.Drawing.Point(24, 25);
+            this.cbxOffHardware.Name = "cbxOffHardware";
+            this.cbxOffHardware.Size = new System.Drawing.Size(155, 17);
+            this.cbxOffHardware.TabIndex = 1;
+            this.cbxOffHardware.Text = "Отключить оборудование";
+            this.cbxOffHardware.UseVisualStyleBackColor = true;
+            this.cbxOffHardware.CheckStateChanged += new System.EventHandler(this.cbxOffHardware_CheckStateChanged);
             // 
-            // button3
+            // button5
             // 
-            this.button3.Location = new System.Drawing.Point(391, 17);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "Вывести";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click_1);
+            this.button5.Location = new System.Drawing.Point(356, 237);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(164, 23);
+            this.button5.TabIndex = 44;
+            this.button5.Text = "Отмена режима ожидания купюры";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // cbxCheckOff
+            // 
+            this.cbxCheckOff.AutoSize = true;
+            this.cbxCheckOff.Location = new System.Drawing.Point(24, 48);
+            this.cbxCheckOff.Name = "cbxCheckOff";
+            this.cbxCheckOff.Size = new System.Drawing.Size(152, 17);
+            this.cbxCheckOff.TabIndex = 2;
+            this.cbxCheckOff.Text = "Отключить оплату чеком";
+            this.cbxCheckOff.UseVisualStyleBackColor = true;
+            this.cbxCheckOff.CheckedChanged += new System.EventHandler(this.cbxCheckOff_CheckedChanged);
+            // 
+            // cbxOffDataBase
+            // 
+            this.cbxOffDataBase.AutoSize = true;
+            this.cbxOffDataBase.Location = new System.Drawing.Point(24, 71);
+            this.cbxOffDataBase.Name = "cbxOffDataBase";
+            this.cbxOffDataBase.Size = new System.Drawing.Size(147, 17);
+            this.cbxOffDataBase.TabIndex = 3;
+            this.cbxOffDataBase.Text = "Отключить базу данных";
+            this.cbxOffDataBase.UseVisualStyleBackColor = true;
+            this.cbxOffDataBase.CheckedChanged += new System.EventHandler(this.cbxOffDataBase_CheckedChanged);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(24, 94);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(230, 17);
+            this.checkBox1.TabIndex = 4;
+            this.checkBox1.Text = "Отключить регистрацию пользователей";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // FormSettings
             // 
@@ -612,9 +676,11 @@
             this.tabPage6.ResumeLayout(false);
             this.tabControl3.ResumeLayout(false);
             this.tabPage8.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -669,5 +735,10 @@
         private System.Windows.Forms.DateTimePicker dtDBFrom;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.CheckBox cbxOffHardware;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.CheckBox cbxCheckOff;
+        private System.Windows.Forms.CheckBox cbxOffDataBase;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

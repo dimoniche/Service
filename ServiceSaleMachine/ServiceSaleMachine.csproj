@@ -50,6 +50,15 @@
     <Compile Include="Configuration\ClientConfigurationProperties.cs" />
     <Compile Include="Configuration\Device.cs" />
     <Compile Include="Configuration\Service.cs" />
+    <Compile Include="Control\RichTextBoxEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Control\RichTextBoxEx.Designer.cs">
+      <DependentUpon>RichTextBoxEx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ScalableLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="DataBase\GlobalBase.cs" />
     <Compile Include="DataBase\db.cs" />
     <Compile Include="DataBase\UserInfo.cs" />
@@ -94,6 +103,9 @@
     <Compile Include="Utils\Utils.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Control\RichTextBoxEx.resx">
+      <DependentUpon>RichTextBoxEx.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\Common\Keyboard.resx">
       <DependentUpon>Keyboard.cs</DependentUpon>
     </EmbeddedResource>

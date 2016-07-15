@@ -65,6 +65,9 @@ namespace ServiceSaleMachine
                         if ((xElement = xSettings.Element("ButtonNoForward")) != null) Settings.ButtonNoForward = xElement.Value;
                         if ((xElement = xSettings.Element("ButtonEnterUserName")) != null) Settings.ButtonEnterUserName = xElement.Value;
                         if ((xElement = xSettings.Element("ButtonEnterUserPasw")) != null) Settings.ButtonEnterUserPasw = xElement.Value;
+                        if ((xElement = xSettings.Element("offHardware")) != null) Settings.offHardware = int.Parse(xElement.Value);
+                        if ((xElement = xSettings.Element("offCheck")) != null) Settings.offCheck = int.Parse(xElement.Value);
+                        if ((xElement = xSettings.Element("offDataBase")) != null) Settings.offDataBase = int.Parse(xElement.Value);
 
                         // настройки сервисов
                         if ((xElement = xSettings.Element("services")) != null)
@@ -121,6 +124,9 @@ namespace ServiceSaleMachine
                 xSettings.Add(new XElement("ButtonNoForward", Settings.ButtonNoForward));
                 xSettings.Add(new XElement("ButtonEnterUserName", Settings.ButtonEnterUserName));
                 xSettings.Add(new XElement("ButtonEnterUserPasw", Settings.ButtonEnterUserPasw));
+                xSettings.Add(new XElement("offHardware", Settings.offHardware.ToString()));
+                xSettings.Add(new XElement("offCheck", Settings.offCheck.ToString()));
+                xSettings.Add(new XElement("offDataBase", Settings.offDataBase.ToString()));
 
                 if (Settings.services.Count > 0)
                 {

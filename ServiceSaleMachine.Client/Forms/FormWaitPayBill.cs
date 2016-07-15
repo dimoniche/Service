@@ -21,10 +21,17 @@ namespace ServiceSaleMachine.Client
             InitializeComponent();
 
             pbxFail.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonFail);
-            pbxForward.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonNoForward);
 
-            // пока не внесли нужную сумму - не жамкаем кнопку
-            pbxForward.Enabled = false;
+            if (Globals.ClientConfiguration.Settings.offHardware == 0)
+            {
+                pbxForward.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonNoForward);
+                // пока не внесли нужную сумму - не жамкаем кнопку
+                pbxForward.Enabled = false;
+            }
+            else
+            {
+                pbxForward.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonForward);
+            }
         }
 
         public override void LoadData()
@@ -43,6 +50,9 @@ namespace ServiceSaleMachine.Client
 
             // заменим обработчик событий
             data.drivers.ReceivedResponse += reciveResponse;
+
+            // перейдем в режим ожидания купюр
+            data.drivers.WaitBill();
         }
 
         /// <summary>
@@ -77,6 +87,8 @@ namespace ServiceSaleMachine.Client
                             // внесли нужную сумму - можно идти вперед
                             pbxForward.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonForward);
                             pbxForward.Enabled = true;
+
+                            data.drivers.StopWaitBill();
                         }
                     }
                     break;
@@ -88,6 +100,7 @@ namespace ServiceSaleMachine.Client
 
         private void FormWaitPayBill_FormClosed(object sender, FormClosedEventArgs e)
         {
+            data.drivers.StopWaitBill();
             Params.Result = data;
         }
 
@@ -102,6 +115,10 @@ namespace ServiceSaleMachine.Client
         {
             // запуск услуги
             data.stage = WorkerStateStage.StartService;
+
+            // Распечатать чек за услугу
+
+
             this.Close();
         }
 

@@ -81,9 +81,22 @@ namespace ServiceSaleMachine.Client
             FormResultData result = new FormResultData();
             result.drivers = drivers;
 
+            if(Globals.ClientConfiguration.Settings.offHardware == 0)   // если не отключено
             {
                 // инициализация оборудования
-                //drivers.InitAllDevice();
+                if(drivers.InitAllDevice())
+                {
+
+                }
+                else
+                {
+                    result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+                    drivers.InitAllDevice();
+                }
+            }
+            else
+            {
+
             }
 
             while (true)
@@ -107,7 +120,8 @@ namespace ServiceSaleMachine.Client
                     {
                         result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
-                        drivers.ReceivedResponse += reciveResponse;
+                        // проинициализируем железо после настроек
+                        drivers.InitAllDevice();
 
                         continue;
                     }
@@ -153,7 +167,8 @@ namespace ServiceSaleMachine.Client
                             // вход админа
                             result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
-                            drivers.ReceivedResponse += reciveResponse;
+                            // проинициализируем железо после настроек
+                            drivers.InitAllDevice();
 
                             continue;
                         }
@@ -170,8 +185,16 @@ namespace ServiceSaleMachine.Client
                         goto ChooseService;
                     }
 
-                    // выбор формы оплаты
-                    result = (FormResultData)FormManager.OpenForm<FormChoosePay>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+                    if (Globals.ClientConfiguration.Settings.offCheck != 1)
+                    {
+                        // выбор формы оплаты - если есть оплата чеком
+                        result = (FormResultData)FormManager.OpenForm<FormChoosePay>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+                    }
+                    else
+                    {
+                        // платим только деньгами
+                        result.stage = WorkerStateStage.PayBillService;
+                    }
 
                     // загрузим выбранную услугу
                     Service serv = Globals.ClientConfiguration.ServiceByIndex(result.numberService);
@@ -290,6 +313,8 @@ namespace ServiceSaleMachine.Client
                 case DeviceEvent.InitializationOK:
                     break;
                 case DeviceEvent.NeedSettingProgram:
+                    // необходимо запустить настройку приложения
+
                     break;
                 case DeviceEvent.DropCassetteBillAcceptor:
                     // выемка денег

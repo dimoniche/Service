@@ -88,5 +88,25 @@ namespace ServiceSaleMachine
         /// авторизация  из выбора сервиса
         /// </summary>
         UserRequestService,
+
+        /// <summary>
+        /// выемка денег
+        /// </summary>
+        DropCassettteBill,
+
+        /// <summary>
+        /// конец выемки денег
+        /// </summary>
+        EndDropCassette,
+
+        /// <summary>
+        /// Необходимость обслуживания
+        /// </summary>
+        NeedService,
+
+        /// <summary>
+        /// Обслуживание проведено
+        /// </summary>
+        EndNeedService,
     }
 }

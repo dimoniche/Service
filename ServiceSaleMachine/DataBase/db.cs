@@ -392,7 +392,7 @@ namespace ServiceSaleMachine
 
         public bool InsertMoney(int userid, int sum)
         {
-            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return 0;
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
 
             string query = "INSERT INTO payments (userid, amount, datetime) VALUES (" + userid.ToString() + "," + sum.ToString() + ","
                   + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
@@ -444,7 +444,7 @@ namespace ServiceSaleMachine
 
         public DateTime GetLastEncashment() //
         {
-            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return 0;
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return new DateTime(2016, 07, 01);
 
             string queryString = "select max(datetime) as dt from encashment";
 

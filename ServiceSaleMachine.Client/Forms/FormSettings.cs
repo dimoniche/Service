@@ -248,11 +248,11 @@ namespace ServiceSaleMachine.Client
                 if (Globals.ClientConfiguration.Settings.offCheck != 1)
                 {
                     // не платим чеком - не нужен сканер
-                    data.drivers.scaner.closePort();
+                    //data.drivers.scaner.closePort();
                 }
 
-                data.drivers.CCNETDriver.closePort();
-                data.drivers.printer.ClosePrint();
+                //data.drivers.CCNETDriver.closePort();
+                //data.drivers.printer.ClosePrint();
             }
             catch
             {

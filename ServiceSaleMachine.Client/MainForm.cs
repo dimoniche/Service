@@ -31,6 +31,9 @@ namespace ServiceSaleMachine.Client
         // текущий пользователь
         int CurrentUserId;
 
+        // выемка денег
+        bool MoneyRecess;
+
         // запуск приложения
         public MainForm()
         {
@@ -124,6 +127,26 @@ namespace ServiceSaleMachine.Client
                         drivers.InitAllDevice();
 
                         continue;
+                    }
+                    else if (result.stage == WorkerStateStage.DropCassettteBill)
+                    {
+                        // выемка денег
+                        result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                        if (result.stage == WorkerStateStage.EndDropCassette)
+                        {
+                            continue;
+                        }
+                    }
+                    else if (result.stage == WorkerStateStage.NeedService)
+                    {
+                        // выемка денег
+                        result = (FormResultData)FormManager.OpenForm<FormNeedService>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                        if (result.stage == WorkerStateStage.EndNeedService)
+                        {
+                            continue;
+                        }
                     }
 
                     // ознакомление с правилами
@@ -318,19 +341,26 @@ namespace ServiceSaleMachine.Client
                     break;
                 case DeviceEvent.DropCassetteBillAcceptor:
                     // выемка денег
-                    DateTime dt = GlobalDb.GlobalBase.GetLastEncashment();
-
-                    int countmoney = 0;
-                    if (dt != null)
                     {
-                        countmoney = GlobalDb.GlobalBase.GetCountMoney(dt);
-                    }
-                    else
-                    {
-                        countmoney = GlobalDb.GlobalBase.GetCountMoney(new DateTime(2000,1,1));
-                    }
+                        if (MoneyRecess == false)
+                        {
+                            DateTime dt = GlobalDb.GlobalBase.GetLastEncashment();
 
-                    GlobalDb.GlobalBase.Encashment(CurrentUserId, countmoney);
+                            int countmoney = 0;
+                            if (dt != null)
+                            {
+                                countmoney = GlobalDb.GlobalBase.GetCountMoney(dt);
+                            }
+                            else
+                            {
+                                countmoney = GlobalDb.GlobalBase.GetCountMoney(new DateTime(2000, 1, 1));
+                            }
+
+                            GlobalDb.GlobalBase.Encashment(CurrentUserId, countmoney);
+
+                            MoneyRecess = true;
+                        }
+                    } 
                     break;
                 case DeviceEvent.DropCassetteFullBillAcceptor:
                     // я полный
@@ -369,6 +399,18 @@ namespace ServiceSaleMachine.Client
                         Thread.Sleep(100);
                     }
                 }
+            }
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            try
+            {
+                drivers.StopAllDevice();
+            }
+            catch
+            {
+
             }
         }
     }

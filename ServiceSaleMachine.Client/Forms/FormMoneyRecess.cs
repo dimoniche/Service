@@ -1,14 +1,19 @@
-﻿using ServiceSaleMachine.Drivers;
-using System;
+﻿using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using ServiceSaleMachine.Drivers;
 using static ServiceSaleMachine.Drivers.MachineDrivers;
 
 namespace ServiceSaleMachine.Client
 {
-    public partial class FormWaitStage : MyForm
+    public partial class FormMoneyRecess : MyForm
     {
         FormResultData data;
+
+        public FormMoneyRecess()
+        {
+            InitializeComponent();
+        }
 
         public override void LoadData()
         {
@@ -34,10 +39,7 @@ namespace ServiceSaleMachine.Client
             switch (e.Message.Event)
             {
                 case DeviceEvent.DropCassetteBillAcceptor:
-                    {
-                        data.stage = WorkerStateStage.DropCassettteBill;
-                        this.Close();
-                    }
+
                     break;
                 case DeviceEvent.DropCassetteFullBillAcceptor:
 
@@ -45,42 +47,21 @@ namespace ServiceSaleMachine.Client
                 case DeviceEvent.BillAcceptorError:
 
                     break;
+                default:
+                    // другие события
+                    if(!((string)e.Message.Content).Contains("Drop Cassette out of position"))
+                    {
+                        // не выемка
+                        data.stage = WorkerStateStage.EndDropCassette;
+                        this.Close();
+                    }
+                    break;
             }
         }
 
-        public FormWaitStage()
-        {
-            InitializeComponent();
-        }
-
-        private void FormWaitStage_Click(object sender, EventArgs e)
-        {
-            data.stage = WorkerStateStage.Rules;
-            this.Close();
-        }
-
-        private void FormWaitStage_FormClosed(object sender, FormClosedEventArgs e)
+        private void FormMoneyRecess_FormClosed(object sender, FormClosedEventArgs e)
         {
             Params.Result = data;
-        }
-
-        //private void MediaPlayer_ClickEvent(object sender, AxWMPLib._WMPOCXEvents_ClickEvent e)
-        //{
-        //    this.Close();
-        //}
-
-        private void FormWaitStage_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Alt & e.KeyCode == Keys.F4)
-            {
-                data.stage = WorkerStateStage.ExitProgram;
-            }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            data.stage = WorkerStateStage.ManualSetting;
-            this.Close();
         }
     }
 }

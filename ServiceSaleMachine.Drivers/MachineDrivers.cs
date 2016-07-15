@@ -48,6 +48,22 @@ namespace ServiceSaleMachine.Drivers
             this.log.Write(LogMessageType.Information, "Старт драйверов. Версия " + Globals.ProductVersion);
         }
 
+        public bool StopAllDevice()
+        {
+            WorkerBillPollDriver.Abort();
+            CCNETDriver.closePort();
+
+            if (Globals.ClientConfiguration.Settings.offCheck != 1)
+            {
+                WorkerScanerDriver.Abort();
+                scaner.closePort();
+            }
+
+            control.closePort();
+
+            return true;
+        }
+
         public bool InitAllDevice()
         {
             bool res = true;
@@ -127,34 +143,41 @@ namespace ServiceSaleMachine.Drivers
 
             this.log.Write(LogMessageType.Information, "Настройка купюроприемникa.");
 
-            // настроим купюроприемник
-            if (CCNETDriver.openPort(CCNETDriver.getNumberComPort()))
+            try
             {
-                if(restartBill().Contains("СБОЙ"))
+                // настроим купюроприемник
+                if (CCNETDriver.openPort(CCNETDriver.getNumberComPort()))
+                {
+                    if (restartBill().Contains("СБОЙ"))
+                    {
+                        // неудача
+                        this.log.Write(LogMessageType.Error, "Купюроприемник не работает или не подключен.");
+                        sendMessage(DeviceEvent.NeedSettingProgram);
+
+                        return false;
+                    }
+
+                    // запустим задачу опроса купюроприемника
+                    if (!WorkerBillPollDriver.IsWork)
+                        WorkerBillPollDriver.Run();
+
+                    for (int i = 0; i < 24; i++)
+                    {
+                        bill_record[i] = new _BillRecord();
+                    }
+                }
+                else
                 {
                     // неудача
-                    this.log.Write(LogMessageType.Error, "Купюроприемник не работает или не подключен.");
+                    this.log.Write(LogMessageType.Error, "Купюроприемник не верно настроен. Порт не доступен.");
                     sendMessage(DeviceEvent.NeedSettingProgram);
 
-                    return false;
-                }
-
-                // запустим задачу опроса купюроприемника
-                if (!WorkerBillPollDriver.IsWork)
-                    WorkerBillPollDriver.Run();
-
-                for (int i = 0; i < 24; i++)
-                {
-                    bill_record[i] = new _BillRecord();
+                    res = false;
                 }
             }
-            else
+            catch(Exception exp)
             {
-                // неудача
-                this.log.Write(LogMessageType.Error, "Купюроприемник не верно настроен. Порт не доступен.");
-                sendMessage(DeviceEvent.NeedSettingProgram);
 
-                res = false;
             }
 
             this.log.Write(LogMessageType.Information, "Настройка принтера.");
@@ -652,7 +675,7 @@ namespace ServiceSaleMachine.Drivers
                         }
                     }
                 }
-                catch
+                catch(Exception exp)
                 {
                     hasErrors = true;
                     send_bill_command = false;

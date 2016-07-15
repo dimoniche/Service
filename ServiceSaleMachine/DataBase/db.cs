@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
 using MySql.Data.MySqlClient;
 using System.Diagnostics;
@@ -44,6 +40,8 @@ namespace ServiceSaleMachine
 
         public bool Connect()
         {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
+
             con = new MySqlConnection();
             con.ConnectionString = mysqlCSB.ConnectionString;
 
@@ -61,6 +59,8 @@ namespace ServiceSaleMachine
         }
         public bool CreateTables()
         {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
+
             string query = "CREATE TABLE IF NOT EXISTS `devices` ( `id` int(11) NOT NULL,  `name` varchar(255) NOT NULL," +
                   "PRIMARY KEY(`id`)) ENGINE = InnoDB DEFAULT CHARSET = cp866;  SET FOREIGN_KEY_CHECKS = 1";
             MySqlCommand cmd = new MySqlCommand(query, con);
@@ -220,6 +220,8 @@ namespace ServiceSaleMachine
 
         public int GetCountBankNote()
         {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return 0;
+
             string queryString = "select count(id) from banknotes";
 
             MySqlCommand com = new MySqlCommand(queryString, con);
@@ -347,6 +349,8 @@ namespace ServiceSaleMachine
 
         public bool Encashment(int iduser, int Amount)
         {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
+
             string query = "INSERT INTO encashment (iduser, amount, datetime) VALUES (" + iduser.ToString() + "," + Amount.ToString() + "," +
                   DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
 
@@ -367,7 +371,8 @@ namespace ServiceSaleMachine
 
         public bool WriteWorkTime(int serv, int idDevice, int timeWork)
         {
-            
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
+
             string query = "INSERT INTO logwork (idserv, iddev, timework, datetime) VALUES (" + serv.ToString() + "," + idDevice.ToString() + ","+
                  timeWork.ToString () + ", '"+DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") +"')";
             Debug.Print(query);
@@ -387,6 +392,8 @@ namespace ServiceSaleMachine
 
         public bool InsertMoney(int userid, int sum)
         {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return 0;
+
             string query = "INSERT INTO payments (userid, amount, datetime) VALUES (" + userid.ToString() + "," + sum.ToString() + ","
                   + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
 
@@ -407,8 +414,10 @@ namespace ServiceSaleMachine
 
         public int GetCountMoney(DateTime dt) 
         {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return 0;
+
             string queryString = "select sum(amount) as dt from payments where " +
-                 "(datetime >= '" + dt.ToString("yyyy-MM-dd HH:mm:ss") + "')";
+                "(datetime >= '" + dt.ToString("yyyy-MM-dd HH:mm:ss") + "')";
 
             MySqlCommand com = new MySqlCommand(queryString, con);
 
@@ -435,6 +444,8 @@ namespace ServiceSaleMachine
 
         public DateTime GetLastEncashment() //
         {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return 0;
+
             string queryString = "select max(datetime) as dt from encashment";
 
             DateTime dt;
@@ -466,6 +477,8 @@ namespace ServiceSaleMachine
 
         public int GetWorkTime(int Serv, int Dev, DateTime dt) //сколько времени (секунд) девайс отработал с даты Х
         {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return 0;
+
             string queryString = "select sum(timework) as dt from logwork where "+
                  "(idserv = " + Serv.ToString() + ") and (iddev = " + Dev.ToString() + ") and (datetime >= '" + 
                     dt.ToString("yyyy-MM-dd HH:mm:ss") + "')";
@@ -495,6 +508,8 @@ namespace ServiceSaleMachine
 
         public DateTime GetLastRefreshTime(int Serv, int Dev) //
         {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return new DateTime(2016, 07, 01);
+
             string queryString = "select max(datetime) as dt from refreshdevices where " +
                  "(idserv = " + Serv.ToString() + ") and (iddev = " + Dev.ToString() + ")";
 

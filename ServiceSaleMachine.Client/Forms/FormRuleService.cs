@@ -28,6 +28,8 @@ namespace ServiceSaleMachine.Client
 
             string file = Globals.GetPath(PathEnum.Text) + "\\Rule.txt";
 
+            TimeOutTimer.Enabled = true;
+            Timeout = 0;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -46,6 +48,7 @@ namespace ServiceSaleMachine.Client
 
         private void FormRuleService_FormClosed(object sender, FormClosedEventArgs e)
         {
+            TimeOutTimer.Enabled = false;
             Params.Result = data;
         }
 
@@ -54,6 +57,19 @@ namespace ServiceSaleMachine.Client
             if (e.Alt & e.KeyCode == Keys.F4)
             {
                 data.stage = WorkerStateStage.ExitProgram;
+            }
+        }
+
+        int Timeout = 0;
+
+        private void TimeOutTimer_Tick(object sender, EventArgs e)
+        {
+            Timeout++;
+
+            if (Timeout > 30)
+            {
+                data.stage = WorkerStateStage.TimeOut;
+                this.Close();
             }
         }
     }

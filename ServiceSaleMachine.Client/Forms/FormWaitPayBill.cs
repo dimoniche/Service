@@ -32,6 +32,9 @@ namespace ServiceSaleMachine.Client
             {
                 pbxForward.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonForward);
             }
+
+            TimeOutTimer.Enabled = true;
+            Timeout = 0;
         }
 
         public override void LoadData()
@@ -100,6 +103,7 @@ namespace ServiceSaleMachine.Client
 
         private void FormWaitPayBill_FormClosed(object sender, FormClosedEventArgs e)
         {
+            TimeOutTimer.Enabled = false;
             data.drivers.StopWaitBill();
             Params.Result = data;
         }
@@ -127,6 +131,19 @@ namespace ServiceSaleMachine.Client
             if (e.Alt & e.KeyCode == Keys.F4)
             {
                 data.stage = WorkerStateStage.ExitProgram;
+            }
+        }
+
+        int Timeout = 0;
+
+        private void TimeOutTimer_Tick(object sender, EventArgs e)
+        {
+            Timeout++;
+
+            if (Timeout > 30)
+            {
+                data.stage = WorkerStateStage.TimeOut;
+                this.Close();
             }
         }
     }

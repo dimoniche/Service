@@ -47,6 +47,7 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.MainWorkerTask = new ServiceSaleMachine.SaleThread(this.components);
+            this.TimeOutTimer = new System.Windows.Forms.Timer(this.components);
             this.panel2.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxUser)).BeginInit();
@@ -269,6 +270,11 @@
             this.MainWorkerTask.Priority = System.Threading.ThreadPriority.Normal;
             this.MainWorkerTask.ThreadName = null;
             // 
+            // TimeOutTimer
+            // 
+            this.TimeOutTimer.Interval = 1000;
+            this.TimeOutTimer.Tick += new System.EventHandler(this.TimeOutTimer_Tick);
+            // 
             // FormChooseService
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -325,6 +331,7 @@
         private SaleThread MainWorkerTask;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.PictureBox pbxUser;
+        private System.Windows.Forms.Timer TimeOutTimer;
     }
 }
 

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel3 = new System.Windows.Forms.Panel();
             this.AmountServiceText = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -37,11 +38,12 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.price = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pbxFail = new System.Windows.Forms.PictureBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.TimeOutTimer = new System.Windows.Forms.Timer(this.components);
             this.panel3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -152,6 +154,26 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "Стоимость услуги:";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label5.Location = new System.Drawing.Point(7, 63);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(149, 24);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "50 и 100 рублей";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.Location = new System.Drawing.Point(9, 39);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(209, 24);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "купюрами номиналом ";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -182,25 +204,10 @@
             this.pbxFail.TabStop = false;
             this.pbxFail.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
-            // label3
+            // TimeOutTimer
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(9, 39);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(209, 24);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "купюрами номиналом ";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(7, 63);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(149, 24);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "50 и 100 рублей";
+            this.TimeOutTimer.Interval = 1000;
+            this.TimeOutTimer.Tick += new System.EventHandler(this.TimeOutTimer_Tick);
             // 
             // FormWaitPayBill
             // 
@@ -244,5 +251,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Timer TimeOutTimer;
     }
 }

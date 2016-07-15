@@ -217,6 +217,10 @@ namespace ServiceSaleMachine.Client
                         // вернемся в выбор услуги (уж не думал что goto буду использовать)
                         goto ChooseService;
                     }
+                    else if (result.stage == WorkerStateStage.TimeOut)
+                    {
+                        continue;
+                    }
 
                     if (Globals.ClientConfiguration.Settings.offCheck != 1)
                     {
@@ -252,6 +256,10 @@ namespace ServiceSaleMachine.Client
                             Close();
                             return;
                         }
+                        else if (result.stage == WorkerStateStage.TimeOut)
+                        {
+                            continue;
+                        }
                     }
                     else if (result.stage == WorkerStateStage.PayCheckService)
                     {
@@ -272,6 +280,10 @@ namespace ServiceSaleMachine.Client
                             Close();
                             return;
                         }
+                        else if (result.stage == WorkerStateStage.TimeOut)
+                        {
+                            continue;
+                        }
                     }
                     else if (result.stage == WorkerStateStage.Fail)
                     {
@@ -283,6 +295,10 @@ namespace ServiceSaleMachine.Client
                         // выход
                         Close();
                         return;
+                    }
+                    else if (result.stage == WorkerStateStage.TimeOut)
+                    {
+                        continue;
                     }
 
                     // оказание услуги

@@ -28,6 +28,9 @@ namespace ServiceSaleMachine.Client
             pbxNext.BackColor = Color.Transparent;
 
             this.WindowState = FormWindowState.Maximized;
+
+            TimeOutTimer.Enabled = true;
+            Timeout = 0;
         }
 
         public override void LoadData()
@@ -183,6 +186,7 @@ namespace ServiceSaleMachine.Client
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
+            TimeOutTimer.Enabled = false;
             Params.Result = data;
         }
 
@@ -198,6 +202,19 @@ namespace ServiceSaleMachine.Client
         {
             data.stage = WorkerStateStage.UserRequestService;
             this.Close();
+        }
+
+        int Timeout = 0;
+
+        private void TimeOutTimer_Tick(object sender, EventArgs e)
+        {
+            Timeout++;
+
+            if (Timeout > 30)
+            {
+                data.stage = WorkerStateStage.TimeOut;
+                this.Close();
+            }
         }
     }
 }

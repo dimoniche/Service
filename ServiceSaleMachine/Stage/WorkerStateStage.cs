@@ -108,5 +108,10 @@ namespace ServiceSaleMachine
         /// Обслуживание проведено
         /// </summary>
         EndNeedService,
+
+        /// <summary>
+        /// выход из формы в начало по таймауту
+        /// </summary>
+        TimeOut,
     }
 }

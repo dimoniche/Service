@@ -54,8 +54,11 @@ namespace ServiceSaleMachine.Client
             // заменим обработчик событий
             data.drivers.ReceivedResponse += reciveResponse;
 
-            // перейдем в режим ожидания купюр
-            data.drivers.WaitBill();
+            if (Globals.ClientConfiguration.Settings.offHardware == 0)
+            {
+                // перейдем в режим ожидания купюр
+                data.drivers.WaitBill();
+            }
         }
 
         /// <summary>
@@ -91,7 +94,10 @@ namespace ServiceSaleMachine.Client
                             pbxForward.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonForward);
                             pbxForward.Enabled = true;
 
-                            data.drivers.StopWaitBill();
+                            if (Globals.ClientConfiguration.Settings.offHardware == 0)
+                            {
+                                data.drivers.StopWaitBill();
+                            }
                         }
                     }
                     break;
@@ -104,7 +110,10 @@ namespace ServiceSaleMachine.Client
         private void FormWaitPayBill_FormClosed(object sender, FormClosedEventArgs e)
         {
             TimeOutTimer.Enabled = false;
-            data.drivers.StopWaitBill();
+            if (Globals.ClientConfiguration.Settings.offHardware == 0)
+            {
+                data.drivers.StopWaitBill();
+            }
             Params.Result = data;
         }
 

@@ -64,16 +64,17 @@ namespace ServiceSaleMachine.Drivers
             return true;
         }
 
-        public bool InitAllDevice()
+        public WorkerStateStage InitAllDevice()
         {
-            bool res = true;
+            WorkerStateStage res = WorkerStateStage.None;
 
             if (!CheckSerialPort() && getCountSerialPort() < COUNT_DEVICE)
             {
                 this.log.Write(LogMessageType.Error, "COM портов нет. Работа не возможна.");
 
                 sendMessage(DeviceEvent.NoCOMPort);
-                return false;
+
+                return WorkerStateStage.NoCOMPort;
             }
 
             if (Globals.ClientConfiguration.Settings.offCheck != 1)
@@ -110,7 +111,7 @@ namespace ServiceSaleMachine.Drivers
                 this.log.Write(LogMessageType.Error, "Необходима настройка приложения");
 
                 sendMessage(DeviceEvent.NeedSettingProgram);
-                res = false;
+                res = WorkerStateStage.NeedSettingProgram;
             }
 
             // настроим драйвер сканера
@@ -132,8 +133,7 @@ namespace ServiceSaleMachine.Drivers
                     // неудача
                     this.log.Write(LogMessageType.Error, "Сканер не верно настроен. Порт не доступен.");
                     sendMessage(DeviceEvent.NeedSettingProgram);
-
-                    res = false;
+                    res = WorkerStateStage.NeedSettingProgram;
                 }
             }
             else
@@ -153,8 +153,7 @@ namespace ServiceSaleMachine.Drivers
                         // неудача
                         this.log.Write(LogMessageType.Error, "Купюроприемник не работает или не подключен.");
                         sendMessage(DeviceEvent.NeedSettingProgram);
-
-                        return false;
+                        res = WorkerStateStage.NeedSettingProgram;
                     }
 
                     // запустим задачу опроса купюроприемника
@@ -171,8 +170,7 @@ namespace ServiceSaleMachine.Drivers
                     // неудача
                     this.log.Write(LogMessageType.Error, "Купюроприемник не верно настроен. Порт не доступен.");
                     sendMessage(DeviceEvent.NeedSettingProgram);
-
-                    res = false;
+                    res = WorkerStateStage.NeedSettingProgram;
                 }
             }
             catch(Exception exp)
@@ -192,8 +190,7 @@ namespace ServiceSaleMachine.Drivers
                 // неудача
                 this.log.Write(LogMessageType.Error, "Принтер не верно настроен. Порт не доступен.");
                 sendMessage(DeviceEvent.NeedSettingProgram);
-
-                res = false;
+                res = WorkerStateStage.NeedSettingProgram;
             }
 
             // настроим управляющее устройство
@@ -209,8 +206,7 @@ namespace ServiceSaleMachine.Drivers
                 // неудача
                 this.log.Write(LogMessageType.Error, "Управляющее устройство не верно настроено. Порт не доступен.");
                 sendMessage(DeviceEvent.NeedSettingProgram);
-
-                res = false;
+                res = WorkerStateStage.NeedSettingProgram;
             }
 
             return res;

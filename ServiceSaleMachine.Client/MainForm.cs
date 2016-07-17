@@ -84,26 +84,31 @@ namespace ServiceSaleMachine.Client
             FormResultData result = new FormResultData();
             result.drivers = drivers;
 
+            initDevice:
             if(Globals.ClientConfiguration.Settings.offHardware == 0)   // если не отключено
             {
                 // инициализация оборудования
-                if(drivers.InitAllDevice())
+                switch (drivers.InitAllDevice())
                 {
-
-                }
-                else
-                {
-                    result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-
-                    if (Globals.ClientConfiguration.Settings.offHardware == 0)
-                    {
-                        drivers.InitAllDevice();
-                    }
+                    case WorkerStateStage.None:
+                        break;
+                    case WorkerStateStage.NoCOMPort:
+                        result = (FormResultData)FormManager.OpenForm<FormWelcomeUser>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+                        break;
+                    case WorkerStateStage.NeedSettingProgram:
+                        {
+                            result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+                            if (Globals.ClientConfiguration.Settings.offHardware == 0)
+                            {
+                                drivers.InitAllDevice();
+                            }
+                        }
+                        break;
                 }
             }
             else
             {
-
+                
             }
 
             while (true)
@@ -355,15 +360,11 @@ namespace ServiceSaleMachine.Client
 
                     break;
                 case DeviceEvent.NoCOMPort:
-                    WorkerWait.Abort();
-                    MessageBox.Show("Нет доступных COM портов. Дальнейшая работа бесмысленна.");
-                    Close();
                     break;
                 case DeviceEvent.InitializationOK:
                     break;
                 case DeviceEvent.NeedSettingProgram:
                     // необходимо запустить настройку приложения
-
                     break;
                 case DeviceEvent.DropCassetteBillAcceptor:
                     // выемка денег

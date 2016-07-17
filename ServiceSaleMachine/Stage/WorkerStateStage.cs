@@ -113,5 +113,15 @@ namespace ServiceSaleMachine
         /// выход из формы в начало по таймауту
         /// </summary>
         TimeOut,
+
+        /// <summary>
+        /// Нужно настроить программу
+        /// </summary>
+        NeedSettingProgram,
+
+        /// <summary>
+        /// Нет ком портов
+        /// </summary>
+        NoCOMPort,
     }
 }

@@ -30,137 +30,173 @@ namespace ServiceSaleMachine.Client
                 }
             }
 
+            ReLoad();
+        }
+
+        void ReLoad()
+        {
             try
             {
                 data.drivers.ReceivedResponse += reciveResponse;
 
                 currentPort = SerialPortHelper.GetSerialPorts();
 
-                comboBox1.Items.Clear();
-                comboBox1.Items.Add("NULL");
-                comboBox1.Items.AddRange(currentPort);
+                cBxComPortScaner.Items.Clear();
+                cBxComPortScaner.Items.Add("нет");
+                cBxComPortScaner.Items.AddRange(currentPort);
 
-                comboBox3.Items.Clear();
-                comboBox3.Items.Add("NULL");
-                comboBox3.Items.AddRange(currentPort);
+                cBxComPortBill.Items.Clear();
+                cBxComPortBill.Items.Add("нет");
+                cBxComPortBill.Items.AddRange(currentPort);
 
                 comboBox2.Items.Clear();
-                comboBox2.Items.Add("NULL");
+                comboBox2.Items.Add("нет");
                 comboBox2.Items.AddRange(currentPort);
 
-                if (Globals.ClientConfiguration.Settings.offCheck != 1)
-                { 
-                    buttonStartScanerPoll.Enabled = !data.drivers.ScanerIsWork();
-                    buttonStopScanerPoll.Enabled = data.drivers.ScanerIsWork();
-                }
-
-                button6.Enabled = !data.drivers.BillPollIsWork();
-                button7.Enabled = data.drivers.BillPollIsWork();
-
-                if (Globals.ClientConfiguration.Settings.offCheck != 1)
+                if (Globals.ClientConfiguration.Settings.offHardware != 1)
                 {
-                    // не платим чеком - не нужен сканер
-                    if (data.drivers.scaner.getNumberComPort().Contains("NULL"))
+                    changeStateHardWare(true);
+
+                    if (Globals.ClientConfiguration.Settings.offCheck != 1)
                     {
-                        comboBox1.SelectedIndex = -1;
+                        buttonStartScanerPoll.Enabled = !data.drivers.ScanerIsWork();
+                        buttonStopScanerPoll.Enabled = data.drivers.ScanerIsWork();
                     }
-                    else if (data.drivers.scaner.getNumberComPort().Contains("COM"))
+
+                    butStartPoll.Enabled = !data.drivers.BillPollIsWork();
+                    butStopPoll.Enabled = data.drivers.BillPollIsWork();
+
+                    if (Globals.ClientConfiguration.Settings.offCheck != 1)
                     {
-                        string index = data.drivers.scaner.getNumberComPort().Remove(0, 3);
+                        // не платим чеком - не нужен сканер
+                        if (data.drivers.scaner.getNumberComPort().Contains("нет"))
+                        {
+                            cBxComPortScaner.SelectedIndex = 0;
+
+                            buttonStartScanerPoll.Enabled = false;
+                            buttonStopScanerPoll.Enabled = false;
+                        }
+                        else if (data.drivers.scaner.getNumberComPort().Contains("COM"))
+                        {
+                            string index = data.drivers.scaner.getNumberComPort().Remove(0, 3);
+                            int int_index = 0;
+                            int.TryParse(index, out int_index);
+
+                            int counter = 0;
+                            foreach (object item in cBxComPortScaner.Items)
+                            {
+                                if ((string)item == data.drivers.scaner.getNumberComPort())
+                                {
+                                    break;
+                                }
+                                counter++;
+                            }
+
+                            cBxComPortScaner.SelectedIndex = counter;
+
+                            data.drivers.scaner.openPort((string)cBxComPortScaner.Items[cBxComPortScaner.SelectedIndex]);
+                        }
+
+                        buttonStartScanerPoll.Enabled = true;
+                        buttonStopScanerPoll.Enabled = true;
+                        cBxComPortScaner.Enabled = true;
+                        butWriteComPortScaner.Enabled = true;
+                    }
+                    else
+                    {
+                        buttonStartScanerPoll.Enabled = false;
+                        buttonStopScanerPoll.Enabled = false;
+                        cBxComPortScaner.Enabled = false;
+                        butWriteComPortScaner.Enabled = false;
+                    }
+
+                    if (data.drivers.control.getNumberComPort().Contains("нет"))
+                    {
+                        comboBox2.SelectedIndex = 0;
+                    }
+                    else if (data.drivers.control.getNumberComPort().Contains("COM"))
+                    {
+                        string index = data.drivers.control.getNumberComPort().Remove(0, 3);
                         int int_index = 0;
                         int.TryParse(index, out int_index);
 
                         int counter = 0;
-                        foreach (object item in comboBox1.Items)
+                        foreach (object item in comboBox2.Items)
                         {
-                            if ((string)item == data.drivers.scaner.getNumberComPort())
+                            if ((string)item == data.drivers.control.getNumberComPort())
                             {
                                 break;
                             }
                             counter++;
                         }
 
-                        comboBox1.SelectedIndex = counter;
+                        comboBox2.SelectedIndex = counter;
 
-                        data.drivers.scaner.openPort((string)comboBox1.Items[comboBox1.SelectedIndex]);
+                        data.drivers.control.openPort((string)comboBox2.Items[cBxComPortScaner.SelectedIndex]);
                     }
-                }
 
-                if (data.drivers.control.getNumberComPort().Contains("NULL"))
-                {
-                    comboBox2.SelectedIndex = -1;
-                }
-                else if (data.drivers.control.getNumberComPort().Contains("COM"))
-                {
-                    string index = data.drivers.control.getNumberComPort().Remove(0, 3);
-                    int int_index = 0;
-                    int.TryParse(index, out int_index);
-
-                    int counter = 0;
-                    foreach (object item in comboBox2.Items)
+                    if (data.drivers.CCNETDriver.getNumberComPort().Contains("нет"))
                     {
-                        if ((string)item == data.drivers.control.getNumberComPort())
-                        {
-                            break;
-                        }
-                        counter++;
+                        cBxComPortBill.SelectedIndex = 0;
+
+                        butStartPoll.Enabled = false;
+                        butStopPoll.Enabled = false;
+                        butResetBill.Enabled = false;
+                        butWaitNoteOn.Enabled = false;
+                        butWaitNoteOff.Enabled = false;
                     }
-
-                    comboBox2.SelectedIndex = counter;
-
-                    data.drivers.control.openPort((string)comboBox2.Items[comboBox1.SelectedIndex]);
-                }
-
-                if (data.drivers.CCNETDriver.getNumberComPort().Contains("NULL"))
-                {
-                    comboBox3.SelectedIndex = -1;
-                }
-                else if (data.drivers.CCNETDriver.getNumberComPort().Contains("COM"))
-                {
-                    string index = data.drivers.CCNETDriver.getNumberComPort().Remove(0, 3);
-                    int int_index = 0;
-                    int.TryParse(index, out int_index);
-
-                    int counter = 0;
-                    foreach (object item in comboBox3.Items)
+                    else if (data.drivers.CCNETDriver.getNumberComPort().Contains("COM"))
                     {
-                        if ((string)item == data.drivers.CCNETDriver.getNumberComPort())
+                        string index = data.drivers.CCNETDriver.getNumberComPort().Remove(0, 3);
+                        int int_index = 0;
+                        int.TryParse(index, out int_index);
+
+                        int counter = 0;
+                        foreach (object item in cBxComPortBill.Items)
                         {
-                            break;
+                            if ((string)item == data.drivers.CCNETDriver.getNumberComPort())
+                            {
+                                break;
+                            }
+                            counter++;
                         }
-                        counter++;
+
+                        cBxComPortBill.SelectedIndex = counter;
+
+                        data.drivers.CCNETDriver.openPort((string)cBxComPortBill.Items[cBxComPortBill.SelectedIndex]);
                     }
 
-                    comboBox3.SelectedIndex = counter;
+                    if (Globals.ClientConfiguration.Settings.adressBill == null || Globals.ClientConfiguration.Settings.adressBill.Contains("NULL"))
+                    {
+                        data.drivers.CCNETDriver.BillAdr = 3;
+                        tBxAdress.Text = data.drivers.CCNETDriver.BillAdr.ToString();
+                    }
+                    else
+                    {
+                        string index = Globals.ClientConfiguration.Settings.adressBill;
+                        int int_index = 0;
+                        int.TryParse(index, out int_index);
+                        tBxAdress.Text = Globals.ClientConfiguration.Settings.adressBill;
 
-                    data.drivers.CCNETDriver.openPort((string)comboBox3.Items[comboBox3.SelectedIndex]);
-                }
+                        data.drivers.CCNETDriver.BillAdr = int_index;
+                    }
 
-                if (Globals.ClientConfiguration.Settings.adressBill == null || Globals.ClientConfiguration.Settings.adressBill.Contains("NULL"))
-                {
-                    data.drivers.CCNETDriver.BillAdr = 3;
-                    textBox1.Text = data.drivers.CCNETDriver.BillAdr.ToString();
+                    cbxComPortPrinter.Items.Clear();
+                    cbxComPortPrinter.Items.AddRange(data.drivers.printer.findAllPrinter());
+
+                    if (data.drivers.printer.getNamePrinter().Contains("нет"))
+                    {
+                        cbxComPortPrinter.SelectedIndex = -1;
+                    }
+                    else
+                    {
+                        cbxComPortPrinter.SelectedIndex = data.drivers.printer.findPrinterIndex(data.drivers.printer.getNamePrinter());
+                    }
                 }
                 else
                 {
-                    string index = Globals.ClientConfiguration.Settings.adressBill;
-                    int int_index = 0;
-                    int.TryParse(index, out int_index);
-                    textBox1.Text = Globals.ClientConfiguration.Settings.adressBill;
-
-                    data.drivers.CCNETDriver.BillAdr = int_index;
-                }
-
-                cbxComPortPrinter.Items.Clear();
-                cbxComPortPrinter.Items.AddRange(data.drivers.printer.findAllPrinter());
-
-                if (data.drivers.printer.getNamePrinter().Contains("NULL"))
-                {
-                    cbxComPortPrinter.SelectedIndex = -1;
-                }
-                else
-                {
-                    cbxComPortPrinter.SelectedIndex = data.drivers.printer.findPrinterIndex(data.drivers.printer.getNamePrinter());
+                    // все отключено
+                    changeStateHardWare(false);
                 }
             }
             catch
@@ -168,21 +204,32 @@ namespace ServiceSaleMachine.Client
 
             }
 
-            // база данных
-            mydb = new db();
 
-            if (mydb.Connect())
+            if (Globals.ClientConfiguration.Settings.offDataBase != 1)
             {
+                // база данных
+                mydb = new db();
 
+                if (mydb.Connect())
+                {
+
+                }
+                else
+                {
+
+                }
+
+                mydb.CreateTables();
+
+                tabDataBaseSetting.Enabled = true;
             }
             else
             {
-
+                tabDataBaseSetting.Enabled = false;
             }
 
-            mydb.CreateTables();
 
-            if(Globals.ClientConfiguration.Settings.offDataBase == 1)
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1)
             {
                 cbxOffDataBase.Checked = true;
             }
@@ -208,7 +255,6 @@ namespace ServiceSaleMachine.Client
             {
                 cbxOffHardware.Checked = false;
             }
-
         }
 
         public FormSettings()
@@ -262,26 +308,27 @@ namespace ServiceSaleMachine.Client
 
         private void button2_Click(object sender, EventArgs e)
         {
-
             if (Globals.ClientConfiguration.Settings.offCheck != 1)
             {
                 // не платим чеком - не нужен сканер
-                if (!((string)comboBox1.Items[comboBox1.SelectedIndex]).Contains("NULL"))
+                if (!((string)cBxComPortScaner.Items[cBxComPortScaner.SelectedIndex]).Contains("нет"))
                 {
-                    data.drivers.scaner.openPort((string)comboBox1.Items[comboBox1.SelectedIndex]);
+                    data.drivers.scaner.openPort((string)cBxComPortScaner.Items[cBxComPortScaner.SelectedIndex]);
                 }
                 else
                 {
                     data.drivers.scaner.closePort();
                 }
 
-                data.drivers.scaner.setNumberComPort((string)comboBox1.Items[comboBox1.SelectedIndex]);
+                data.drivers.scaner.setNumberComPort((string)cBxComPortScaner.Items[cBxComPortScaner.SelectedIndex]);
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-           data.drivers.startScanerPoll();
+            if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
+
+            data.drivers.startScanerPoll();
 
             buttonStartScanerPoll.Enabled = !data.drivers.ScanerIsWork();
             buttonStopScanerPoll.Enabled =data.drivers.ScanerIsWork();
@@ -289,7 +336,9 @@ namespace ServiceSaleMachine.Client
 
         private void button3_Click(object sender, EventArgs e)
         {
-           data.drivers.stopScanerPoll();
+            if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
+
+            data.drivers.stopScanerPoll();
 
             buttonStartScanerPoll.Enabled = !data.drivers.ScanerIsWork();
             buttonStopScanerPoll.Enabled =data.drivers.ScanerIsWork();
@@ -297,22 +346,22 @@ namespace ServiceSaleMachine.Client
 
         private void button30_Click(object sender, EventArgs e)
         {
-            if (!((string)comboBox3.Items[comboBox3.SelectedIndex]).Contains("NULL"))
+            if (!((string)cBxComPortBill.Items[cBxComPortBill.SelectedIndex]).Contains("нет"))
             {
-               data.drivers.CCNETDriver.openPort((string)comboBox3.Items[comboBox3.SelectedIndex]);
+               data.drivers.CCNETDriver.openPort((string)cBxComPortBill.Items[cBxComPortBill.SelectedIndex]);
             }
             else
             {
                data.drivers.CCNETDriver.closePort();
             }
 
-            if (textBox1.Text.Contains("NULL"))
+            if (tBxAdress.Text.Contains("нет"))
             {
                data.drivers.CCNETDriver.BillAdr = 3;
             }
             else
             {
-                string index = textBox1.Text;
+                string index = tBxAdress.Text;
                 int int_index = 0;
 
                 if (int.TryParse(index, out int_index))
@@ -325,39 +374,45 @@ namespace ServiceSaleMachine.Client
                 }
             }
 
-           data.drivers.CCNETDriver.setNumberComPort((string)comboBox3.Items[comboBox3.SelectedIndex]);
+           data.drivers.CCNETDriver.setNumberComPort((string)cBxComPortBill.Items[cBxComPortBill.SelectedIndex]);
            data.drivers.CCNETDriver.setAdress(data.drivers.CCNETDriver.BillAdr.ToString());
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-           data.drivers.startPollBill();
+            if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
 
-            button6.Enabled = !data.drivers.BillPollIsWork();
-            button7.Enabled = data.drivers.BillPollIsWork();
+            data.drivers.startPollBill();
+
+            butStartPoll.Enabled = !data.drivers.BillPollIsWork();
+            butStopPoll.Enabled = data.drivers.BillPollIsWork();
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-           data.drivers.stopPollBill();
+            if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
 
-            button6.Enabled = !data.drivers.BillPollIsWork();
-            button7.Enabled = data.drivers.BillPollIsWork();
+            data.drivers.stopPollBill();
+
+            butStartPoll.Enabled = !data.drivers.BillPollIsWork();
+            butStopPoll.Enabled = data.drivers.BillPollIsWork();
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
+            if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
             label14.Text = data.drivers.restartBill();
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
+            if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
             label16.Text = data.drivers.WaitBill();
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            if (!((string)cbxComPortPrinter.Items[cbxComPortPrinter.SelectedIndex]).Contains("NULL"))
+            if (!((string)cbxComPortPrinter.Items[cbxComPortPrinter.SelectedIndex]).Contains("нет"))
             {
                data.drivers.printer.OpenPrint((string)cbxComPortPrinter.Items[cbxComPortPrinter.SelectedIndex]);
             }
@@ -371,7 +426,7 @@ namespace ServiceSaleMachine.Client
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if (!((string)comboBox2.Items[comboBox2.SelectedIndex]).Contains("NULL"))
+            if (!((string)comboBox2.Items[comboBox2.SelectedIndex]).Contains("нет"))
             {
                data.drivers.control.openPort((string)comboBox2.Items[comboBox2.SelectedIndex]);
             }
@@ -385,7 +440,9 @@ namespace ServiceSaleMachine.Client
 
         private void button16_Click(object sender, EventArgs e)
         {
-           data.drivers.printer.StartPrint((string)cbxComPortPrinter.Items[cbxComPortPrinter.SelectedIndex]);
+            if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
+
+            data.drivers.printer.StartPrint((string)cbxComPortPrinter.Items[cbxComPortPrinter.SelectedIndex]);
 
             if (data.drivers.printer.prn.PrinterIsOpen)
             {
@@ -398,7 +455,9 @@ namespace ServiceSaleMachine.Client
 
         private void button17_Click(object sender, EventArgs e)
         {
-           data.drivers.printer.StartPrint((string)cbxComPortPrinter.Items[cbxComPortPrinter.SelectedIndex]);
+            if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
+
+            data.drivers.printer.StartPrint((string)cbxComPortPrinter.Items[cbxComPortPrinter.SelectedIndex]);
 
             if (data.drivers.printer.prn.PrinterIsOpen)
             {
@@ -428,33 +487,117 @@ namespace ServiceSaleMachine.Client
             MessageBox.Show(dt.ToString());
         }
 
+        void changeStateHardWare(bool state)
+        {
+            buttonStartScanerPoll.Enabled = state;
+            buttonStopScanerPoll.Enabled = state;
+            cBxComPortScaner.Enabled = state;
+            butWriteComPortScaner.Enabled = state;
+
+            cBxComPortBill.Enabled = state;
+            tBxAdress.Enabled = state;
+            butWriteComPortBill.Enabled = state;
+            butStartPoll.Enabled = state;
+            butStopPoll.Enabled = state;
+            butResetBill.Enabled = state;
+            butWaitNoteOn.Enabled = state;
+            butWaitNoteOff.Enabled = state;
+
+            cbxComPortPrinter.Enabled = state;
+            butWriteComPortPrinter.Enabled = state;
+            butWriteBarCode.Enabled = state;
+            butPrintCheck.Enabled = state;
+
+            cbxCheckOff.Enabled = state;
+        }
+
         private void cbxOffHardware_CheckStateChanged(object sender, EventArgs e)
         {
-            if(cbxOffHardware.Checked) Globals.ClientConfiguration.Settings.offHardware = 1;
-            else Globals.ClientConfiguration.Settings.offHardware = 0;
+            if (cbxOffHardware.Checked)
+            {
+                Globals.ClientConfiguration.Settings.offHardware = 1;
+                changeStateHardWare(false);
+            }
+            else
+            {
+                Globals.ClientConfiguration.Settings.offHardware = 0;
+                changeStateHardWare(true);
+            }
 
             Globals.ClientConfiguration.Save();
+
+            data.drivers.InitAllDevice();
+            ReLoad();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
+            if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
             data.drivers.StopWaitBill();
         }
 
         private void cbxCheckOff_CheckedChanged(object sender, EventArgs e)
         {
-            if (cbxCheckOff.Checked) Globals.ClientConfiguration.Settings.offCheck = 1;
-            else Globals.ClientConfiguration.Settings.offCheck = 0;
+            if (Globals.ClientConfiguration.Settings.offHardware != 1)
+            {
+                if (cbxCheckOff.Checked)
+                {
+                    Globals.ClientConfiguration.Settings.offCheck = 1;
 
-            Globals.ClientConfiguration.Save();
+                    buttonStartScanerPoll.Enabled = false;
+                    buttonStopScanerPoll.Enabled = false;
+                    cBxComPortScaner.Enabled = false;
+                    butWriteComPortScaner.Enabled = false;
+                }
+                else
+                {
+                    Globals.ClientConfiguration.Settings.offCheck = 0;
+
+                    buttonStartScanerPoll.Enabled = true;
+                    buttonStopScanerPoll.Enabled = true;
+                    cBxComPortScaner.Enabled = true;
+                    butWriteComPortScaner.Enabled = true;
+                }
+
+                Globals.ClientConfiguration.Save();
+            }
         }
 
         private void cbxOffDataBase_CheckedChanged(object sender, EventArgs e)
         {
-            if (cbxOffDataBase.Checked) Globals.ClientConfiguration.Settings.offDataBase = 1;
-            else Globals.ClientConfiguration.Settings.offDataBase = 0;
+            if (cbxOffDataBase.Checked)
+            {
+                Globals.ClientConfiguration.Settings.offDataBase = 1;
+                tabDataBaseSetting.Enabled = false;
+            }
+            else
+            {
+                Globals.ClientConfiguration.Settings.offDataBase = 0;
+                tabDataBaseSetting.Enabled = true;
+            }
 
             Globals.ClientConfiguration.Save();
+        }
+
+        private void cBxComPortBill_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(((string)cBxComPortBill.Items[cBxComPortBill.SelectedIndex]).Contains("нет"))
+            {
+                butStartPoll.Enabled = false;
+                butStopPoll.Enabled = false;
+                butResetBill.Enabled = false;
+                butWaitNoteOn.Enabled = false;
+                butWaitNoteOff.Enabled = false;
+            }
+            else
+            {
+                butStartPoll.Enabled = true;
+                butStopPoll.Enabled = true;
+                butResetBill.Enabled = true;
+                butWaitNoteOn.Enabled = true;
+                butWaitNoteOff.Enabled = true;
+            }
+
         }
     }
 }

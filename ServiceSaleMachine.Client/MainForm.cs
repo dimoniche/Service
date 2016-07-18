@@ -85,6 +85,8 @@ namespace ServiceSaleMachine.Client
             result.drivers = drivers;
 
             initDevice:
+            WorkerWait.Run();
+
             if(Globals.ClientConfiguration.Settings.offHardware == 0)   // если не отключено
             {
                 // инициализация оборудования
@@ -93,14 +95,17 @@ namespace ServiceSaleMachine.Client
                     case WorkerStateStage.None:
                         break;
                     case WorkerStateStage.NoCOMPort:
+                        if (WorkerWait.IsWork) WorkerWait.Abort();
                         result = (FormResultData)FormManager.OpenForm<FormWelcomeUser>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
                         break;
                     case WorkerStateStage.NeedSettingProgram:
                         {
+                            if (WorkerWait.IsWork) WorkerWait.Abort();
+
                             result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
                             if (Globals.ClientConfiguration.Settings.offHardware == 0)
                             {
-                                drivers.InitAllDevice();
+                                goto initDevice;
                             }
                         }
                         break;
@@ -110,6 +115,8 @@ namespace ServiceSaleMachine.Client
             {
                 
             }
+
+            if(WorkerWait.IsWork) WorkerWait.Abort();
 
             while (true)
             {
@@ -135,7 +142,7 @@ namespace ServiceSaleMachine.Client
                         // проинициализируем железо после настроек
                         if (Globals.ClientConfiguration.Settings.offHardware == 0)
                         {
-                            drivers.InitAllDevice();
+                            goto initDevice;
                         }
 
                         continue;

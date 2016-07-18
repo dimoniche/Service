@@ -80,10 +80,13 @@ namespace ServiceSaleMachine.Drivers
             if (Globals.ClientConfiguration.Settings.offCheck != 1)
             {
                 // не платим чеком - не нужен сканер
-                scaner = new ZebexScaner();
-                WorkerScanerDriver = new SaleThread { ThreadName = "WorkerScanerDriver" };
-                WorkerScanerDriver.Work += WorkerScanerDriver_Work;
-                WorkerScanerDriver.Complete += WorkerScanerDriver_Complete;
+                if (scaner == null)
+                {
+                    scaner = new ZebexScaner();
+                    WorkerScanerDriver = new SaleThread { ThreadName = "WorkerScanerDriver" };
+                    WorkerScanerDriver.Work += WorkerScanerDriver_Work;
+                    WorkerScanerDriver.Complete += WorkerScanerDriver_Complete;
+                }
             }
 
             if (CCNETDriver == null)
@@ -104,8 +107,8 @@ namespace ServiceSaleMachine.Drivers
                 control = new ControlDevice();
             }
 
-            if ((Globals.ClientConfiguration.Settings.offCheck != 1 && scaner.getNumberComPort().Contains("NULL")) 
-            || CCNETDriver.getNumberComPort().Contains("NULL") || printer.getNamePrinter().Contains("NULL"))
+            if ((Globals.ClientConfiguration.Settings.offCheck != 1 && scaner.getNumberComPort().Contains("нет")) 
+            || CCNETDriver.getNumberComPort().Contains("нет") || printer.getNamePrinter().Contains("нет"))
             {
                 // необходима настройка приложения
                 this.log.Write(LogMessageType.Error, "Необходима настройка приложения");
@@ -115,7 +118,7 @@ namespace ServiceSaleMachine.Drivers
             }
 
             // настроим драйвер сканера
-            if (Globals.ClientConfiguration.Settings.offCheck != 1)
+            if (Globals.ClientConfiguration.Settings.offCheck != 1 && !scaner.getNumberComPort().Contains("нет"))
             {
                 this.log.Write(LogMessageType.Information, "Настройка сканера.");
                 
@@ -138,75 +141,96 @@ namespace ServiceSaleMachine.Drivers
             }
             else
             {
-                this.log.Write(LogMessageType.Information, "Сканер оотключен.");
+                this.log.Write(LogMessageType.Information, "Сканер отключен.");
             }
 
             this.log.Write(LogMessageType.Information, "Настройка купюроприемникa.");
 
-            try
+            if (!CCNETDriver.getNumberComPort().Contains("нет"))
             {
-                // настроим купюроприемник
-                if (CCNETDriver.openPort(CCNETDriver.getNumberComPort()))
+                try
                 {
-                    if (restartBill().Contains("СБОЙ"))
+                    // настроим купюроприемник
+                    if (CCNETDriver.openPort(CCNETDriver.getNumberComPort()))
+                    {
+                        if (restartBill().Contains("СБОЙ"))
+                        {
+                            // неудача
+                            this.log.Write(LogMessageType.Error, "Купюроприемник не работает или не подключен.");
+                            sendMessage(DeviceEvent.NeedSettingProgram);
+                            res = WorkerStateStage.NeedSettingProgram;
+                        }
+
+                        // запустим задачу опроса купюроприемника
+                        if (!WorkerBillPollDriver.IsWork)
+                            WorkerBillPollDriver.Run();
+
+                        for (int i = 0; i < 24; i++)
+                        {
+                            bill_record[i] = new _BillRecord();
+                        }
+                    }
+                    else
                     {
                         // неудача
-                        this.log.Write(LogMessageType.Error, "Купюроприемник не работает или не подключен.");
+                        this.log.Write(LogMessageType.Error, "Купюроприемник не верно настроен. Порт не доступен.");
                         sendMessage(DeviceEvent.NeedSettingProgram);
                         res = WorkerStateStage.NeedSettingProgram;
                     }
-
-                    // запустим задачу опроса купюроприемника
-                    if (!WorkerBillPollDriver.IsWork)
-                        WorkerBillPollDriver.Run();
-
-                    for (int i = 0; i < 24; i++)
-                    {
-                        bill_record[i] = new _BillRecord();
-                    }
                 }
-                else
+                catch (Exception exp)
                 {
-                    // неудача
-                    this.log.Write(LogMessageType.Error, "Купюроприемник не верно настроен. Порт не доступен.");
-                    sendMessage(DeviceEvent.NeedSettingProgram);
-                    res = WorkerStateStage.NeedSettingProgram;
+
                 }
             }
-            catch(Exception exp)
+            else
             {
-
+                this.log.Write(LogMessageType.Error, "Купюроприемник не настроен.");
             }
 
             this.log.Write(LogMessageType.Information, "Настройка принтера.");
 
-            // настроим принтер
-            if(printer.OpenPrint("Citizen PPU-700"))
+            if (!printer.getNamePrinter().Contains("нет"))
             {
-                
+                // настроим принтер
+                if (printer.OpenPrint("Citizen PPU-700"))
+                {
+
+                }
+                else
+                {
+                    // неудача
+                    this.log.Write(LogMessageType.Error, "Принтер не верно настроен. Порт не доступен.");
+                    sendMessage(DeviceEvent.NeedSettingProgram);
+                    res = WorkerStateStage.NeedSettingProgram;
+                }
             }
             else
             {
-                // неудача
-                this.log.Write(LogMessageType.Error, "Принтер не верно настроен. Порт не доступен.");
-                sendMessage(DeviceEvent.NeedSettingProgram);
-                res = WorkerStateStage.NeedSettingProgram;
+                this.log.Write(LogMessageType.Error, "Принтер не настроен.");
             }
 
             // настроим управляющее устройство
             this.log.Write(LogMessageType.Information, "Настройка управлящего устройства.");
 
-            if (control.openPort(control.getNumberComPort()))
+            if (!control.getNumberComPort().Contains("нет"))
             {
-                
-                
+                if (control.openPort(control.getNumberComPort()))
+                {
+
+
+                }
+                else
+                {
+                    // неудача
+                    this.log.Write(LogMessageType.Error, "Управляющее устройство не верно настроено. Порт не доступен.");
+                    sendMessage(DeviceEvent.NeedSettingProgram);
+                    res = WorkerStateStage.NeedSettingProgram;
+                }
             }
             else
             {
-                // неудача
-                this.log.Write(LogMessageType.Error, "Управляющее устройство не верно настроено. Порт не доступен.");
-                sendMessage(DeviceEvent.NeedSettingProgram);
-                res = WorkerStateStage.NeedSettingProgram;
+                this.log.Write(LogMessageType.Error, "Управляющее устройство не настроенo.");
             }
 
             return res;

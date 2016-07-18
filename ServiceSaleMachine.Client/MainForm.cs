@@ -23,8 +23,6 @@ namespace ServiceSaleMachine.Client
         // задача очистки логов
         ClearFilesControlServiceTask ClearFilesTask { get; set; }
 
-        delegate void StartNextForm();
-
         // количество банкнот
         int CountBankNote;
 
@@ -442,7 +440,7 @@ namespace ServiceSaleMachine.Client
 
             try
             {
-                drivers.StopAllDevice();
+                //drivers.StopAllDevice();
             }
             catch
             {

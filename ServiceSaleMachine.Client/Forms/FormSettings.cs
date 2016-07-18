@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using static ServiceSaleMachine.Drivers.MachineDrivers;
 
@@ -21,6 +22,9 @@ namespace ServiceSaleMachine.Client
         public db mydb;
 
         bool init = false;
+
+        FormWait wait;
+        private SaleThread WorkerWait { get; set; }
 
         public override void LoadData()
         {
@@ -139,7 +143,7 @@ namespace ServiceSaleMachine.Client
                         data.drivers.control.openPort((string)comboBox2.Items[cBxComPortScaner.SelectedIndex]);
                     }
 
-                    if (data.drivers.CCNETDriver.getNumberComPort().Contains("нет"))
+                    if (Globals.ClientConfiguration.Settings.offBill == 1 || data.drivers.CCNETDriver.getNumberComPort().Contains("нет"))
                     {
                         cBxComPortBill.SelectedIndex = 0;
 
@@ -260,12 +264,26 @@ namespace ServiceSaleMachine.Client
                 cbxOffHardware.Checked = false;
             }
 
+            if (Globals.ClientConfiguration.Settings.offBill == 1)
+            {
+                cBxBillOff.Checked = true;
+            }
+            else
+            {
+                cBxBillOff.Checked = false;
+            }
+
             init = false;
         }
 
         public FormSettings()
         {
             InitializeComponent();
+
+            // задача отображения долгих операций
+            WorkerWait = new SaleThread { ThreadName = "WorkerWaitSetting" };
+            WorkerWait.Work += WorkerWait_Work;
+            WorkerWait.Complete += WorkerWait_Complete;
         }
 
         private void reciveResponse(object sender, ServiceClientResponseEventArgs e)
@@ -542,8 +560,10 @@ namespace ServiceSaleMachine.Client
 
             if (!init)
             {
+                WorkerWait.Run();
                 data.drivers.InitAllDevice();
                 ReLoad();
+                WorkerWait.Abort();
             }
         }
 
@@ -580,8 +600,10 @@ namespace ServiceSaleMachine.Client
 
                 if (!init)
                 {
+                    WorkerWait.Run();
                     data.drivers.InitAllDevice();
                     ReLoad();
+                    WorkerWait.Abort();
                 }
             }
         }
@@ -622,6 +644,62 @@ namespace ServiceSaleMachine.Client
                 butWaitNoteOn.Enabled = true;
                 butWaitNoteOff.Enabled = true;
             }
+        }
+
+        private void WorkerWait_Complete(object sender, ThreadCompleteEventArgs e)
+        {
+            wait.Hide();
+        }
+
+        private void WorkerWait_Work(object sender, ThreadWorkEventArgs e)
+        {
+            wait = new FormWait();
+            wait.Show();
+
+            while (!e.Cancel)
+            {
+                try
+                {
+                    wait.Refresh();
+                }
+                catch
+                {
+                }
+                finally
+                {
+                    if (!e.Cancel)
+                    {
+                        Thread.Sleep(100);
+                    }
+                }
+            }
+        }
+
+        private void cBxBillOff_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cBxBillOff.Checked)
+            {
+                Globals.ClientConfiguration.Settings.offBill = 1;
+
+                butStartPoll.Enabled = false;
+                butStopPoll.Enabled = false;
+                butResetBill.Enabled = false;
+                butWaitNoteOn.Enabled = false;
+                butWaitNoteOff.Enabled = false;
+            }
+            else
+            {
+                Globals.ClientConfiguration.Settings.offBill = 0;
+
+                butStartPoll.Enabled = true;
+                butStopPoll.Enabled = true;
+                butResetBill.Enabled = true;
+                butWaitNoteOn.Enabled = true;
+                butWaitNoteOff.Enabled = true;
+            }
+
+            Globals.ClientConfiguration.Save();
+
         }
     }
 }

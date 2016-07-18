@@ -81,6 +81,7 @@
             this.cbxOffDataBase = new System.Windows.Forms.CheckBox();
             this.cbxCheckOff = new System.Windows.Forms.CheckBox();
             this.cbxOffHardware = new System.Windows.Forms.CheckBox();
+            this.cBxBillOff = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -598,6 +599,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.cBxBillOff);
             this.tabPage2.Controls.Add(this.checkBox1);
             this.tabPage2.Controls.Add(this.cbxOffDataBase);
             this.tabPage2.Controls.Add(this.cbxCheckOff);
@@ -652,6 +654,17 @@
             this.cbxOffHardware.Text = "Отключить оборудование";
             this.cbxOffHardware.UseVisualStyleBackColor = true;
             this.cbxOffHardware.CheckStateChanged += new System.EventHandler(this.cbxOffHardware_CheckStateChanged);
+            // 
+            // cBxBillOff
+            // 
+            this.cBxBillOff.AutoSize = true;
+            this.cBxBillOff.Location = new System.Drawing.Point(24, 117);
+            this.cBxBillOff.Name = "cBxBillOff";
+            this.cBxBillOff.Size = new System.Drawing.Size(171, 17);
+            this.cBxBillOff.TabIndex = 4;
+            this.cBxBillOff.Text = "Отключить купюроприемник";
+            this.cBxBillOff.UseVisualStyleBackColor = true;
+            this.cBxBillOff.CheckedChanged += new System.EventHandler(this.cBxBillOff_CheckedChanged);
             // 
             // FormSettings
             // 
@@ -741,5 +754,6 @@
         private System.Windows.Forms.CheckBox cbxCheckOff;
         private System.Windows.Forms.CheckBox cbxOffDataBase;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox cBxBillOff;
     }
 }

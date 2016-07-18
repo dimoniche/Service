@@ -108,7 +108,8 @@ namespace ServiceSaleMachine.Drivers
             }
 
             if ((Globals.ClientConfiguration.Settings.offCheck != 1 && scaner.getNumberComPort().Contains("нет")) 
-            || CCNETDriver.getNumberComPort().Contains("нет") || printer.getNamePrinter().Contains("нет"))
+            ||  (Globals.ClientConfiguration.Settings.offBill != 1 && CCNETDriver.getNumberComPort().Contains("нет"))
+            || printer.getNamePrinter().Contains("нет"))
             {
                 // необходима настройка приложения
                 this.log.Write(LogMessageType.Error, "Необходима настройка приложения");
@@ -146,7 +147,7 @@ namespace ServiceSaleMachine.Drivers
 
             this.log.Write(LogMessageType.Information, "Настройка купюроприемникa.");
 
-            if (!CCNETDriver.getNumberComPort().Contains("нет"))
+            if (Globals.ClientConfiguration.Settings.offBill != 1 && !CCNETDriver.getNumberComPort().Contains("нет"))
             {
                 try
                 {
@@ -248,10 +249,13 @@ namespace ServiceSaleMachine.Drivers
                 WorkerScanerDriver.Complete += WorkerScanerDriver_Complete;
             }
 
-            CCNETDriver = new CCRSProtocol();
-            WorkerBillPollDriver = new SaleThread { ThreadName = "WorkerBillPollDriver" };
-            WorkerBillPollDriver.Work += WorkerBillPollDriver_Work;
-            WorkerBillPollDriver.Complete += WorkerBillPollDriver_Complete;
+            if (Globals.ClientConfiguration.Settings.offBill != 1)
+            {
+                CCNETDriver = new CCRSProtocol();
+                WorkerBillPollDriver = new SaleThread { ThreadName = "WorkerBillPollDriver" };
+                WorkerBillPollDriver.Work += WorkerBillPollDriver_Work;
+                WorkerBillPollDriver.Complete += WorkerBillPollDriver_Complete;
+            }
 
             printer = new PrinterESC();
             control = new ControlDevice();

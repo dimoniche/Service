@@ -68,6 +68,7 @@ namespace ServiceSaleMachine
                         if ((xElement = xSettings.Element("offHardware")) != null) Settings.offHardware = int.Parse(xElement.Value);
                         if ((xElement = xSettings.Element("offCheck")) != null) Settings.offCheck = int.Parse(xElement.Value);
                         if ((xElement = xSettings.Element("offDataBase")) != null) Settings.offDataBase = int.Parse(xElement.Value);
+                        if ((xElement = xSettings.Element("offBill")) != null) Settings.offBill = int.Parse(xElement.Value);
 
                         // настройки сервисов
                         if ((xElement = xSettings.Element("services")) != null)
@@ -127,6 +128,7 @@ namespace ServiceSaleMachine
                 xSettings.Add(new XElement("offHardware", Settings.offHardware.ToString()));
                 xSettings.Add(new XElement("offCheck", Settings.offCheck.ToString()));
                 xSettings.Add(new XElement("offDataBase", Settings.offDataBase.ToString()));
+                xSettings.Add(new XElement("offBill", Settings.offBill.ToString()));
 
                 if (Settings.services.Count > 0)
                 {

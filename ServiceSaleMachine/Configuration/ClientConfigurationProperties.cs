@@ -19,6 +19,8 @@ namespace ServiceSaleMachine
         public int offCheck;
         // отключение БД
         public int offDataBase;
+        // отключение купюроприемник
+        public int offBill;
 
         // настройки сервисов
         public List<Service> services;

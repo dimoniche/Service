@@ -22,7 +22,7 @@ namespace ServiceSaleMachine.Client
 
             pbxFail.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonFail);
 
-            if (Globals.ClientConfiguration.Settings.offHardware == 0)
+            if (Globals.ClientConfiguration.Settings.offHardware == 0 && Globals.ClientConfiguration.Settings.offBill == 0)
             {
                 pbxForward.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonNoForward);
                 // пока не внесли нужную сумму - не жамкаем кнопку
@@ -129,15 +129,18 @@ namespace ServiceSaleMachine.Client
             // запуск услуги
             data.stage = WorkerStateStage.StartService;
 
-            // Распечатать чек за услугу
-            data.drivers.printer.StartPrint(data.drivers.printer.getNamePrinter());
-
-            if (data.drivers.printer.prn.PrinterIsOpen)
+            if (Globals.ClientConfiguration.Settings.offHardware != 1)
             {
-                data.drivers.printer.PrintHeader();
-                data.drivers.printer.PrintBody();
-                data.drivers.printer.PrintFooter();
-                data.drivers.printer.EndPrint();
+                // Распечатать чек за услугу
+                data.drivers.printer.StartPrint(data.drivers.printer.getNamePrinter());
+
+                if (data.drivers.printer.prn.PrinterIsOpen)
+                {
+                    data.drivers.printer.PrintHeader();
+                    data.drivers.printer.PrintBody();
+                    data.drivers.printer.PrintFooter();
+                    data.drivers.printer.EndPrint();
+                }
             }
 
             this.Close();

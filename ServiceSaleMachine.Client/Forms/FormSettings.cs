@@ -560,6 +560,9 @@ namespace ServiceSaleMachine.Client
                 }
 
                 Globals.ClientConfiguration.Save();
+
+                data.drivers.InitAllDevice();
+                ReLoad();
             }
         }
 

@@ -136,7 +136,7 @@ namespace ServiceSaleMachine.Drivers
 
         public void PrintHeader()
         {
-            Print(eInit + "" + eSelectRusCodePage + "" + eCentre + "" + TransformCode("АБВГДЕЁЖЗИКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"));
+            Print(eInit + "" + eSelectRusCodePage + "" + eCentre + "" + TransformCode("FIRMA NAME"));
             Print("Tel:0123 456 7890");
             Print("Web: www.????.com");
             Print("sales@????.com");
@@ -146,15 +146,16 @@ namespace ServiceSaleMachine.Drivers
 
         public void PrintBody()
         {
-            Print(eSmlText + "" + TransformCode("Услуга 1"));
+            Print(eSmlText + "" + TransformCode("Service 1"));
             PrintDashes();
             Print(eSmlText + "-------");
+            Print("Price: 100 rubles");
             Print("--------");
         }
 
         public void PrintFooter()
         {
-            Print(eCentre + "" + TransformCode("СПАСИБО") + eLeft);
+            Print(eCentre + "" + TransformCode("Thanx") + eLeft);
             Print(vbLf + vbLf + vbLf + vbLf + vbLf + eCut + eDrawer);
         }
 

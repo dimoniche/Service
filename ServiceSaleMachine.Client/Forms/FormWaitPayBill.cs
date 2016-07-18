@@ -130,7 +130,15 @@ namespace ServiceSaleMachine.Client
             data.stage = WorkerStateStage.StartService;
 
             // Распечатать чек за услугу
+            data.drivers.printer.StartPrint(data.drivers.printer.getNamePrinter());
 
+            if (data.drivers.printer.prn.PrinterIsOpen)
+            {
+                data.drivers.printer.PrintHeader();
+                data.drivers.printer.PrintBody();
+                data.drivers.printer.PrintFooter();
+                data.drivers.printer.EndPrint();
+            }
 
             this.Close();
         }

@@ -20,6 +20,8 @@ namespace ServiceSaleMachine.Client
         // база данных
         public db mydb;
 
+        bool init = false;
+
         public override void LoadData()
         {
             foreach (object obj in Params.Objects.Where(obj => obj != null))
@@ -35,6 +37,8 @@ namespace ServiceSaleMachine.Client
 
         void ReLoad()
         {
+            init = true;
+
             try
             {
                 data.drivers.ReceivedResponse += reciveResponse;
@@ -255,6 +259,8 @@ namespace ServiceSaleMachine.Client
             {
                 cbxOffHardware.Checked = false;
             }
+
+            init = false;
         }
 
         public FormSettings()
@@ -412,6 +418,9 @@ namespace ServiceSaleMachine.Client
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+            if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
+            if (cbxComPortPrinter.SelectedIndex == -1) return;
+
             if (!((string)cbxComPortPrinter.Items[cbxComPortPrinter.SelectedIndex]).Contains("нет"))
             {
                data.drivers.printer.OpenPrint((string)cbxComPortPrinter.Items[cbxComPortPrinter.SelectedIndex]);
@@ -426,6 +435,9 @@ namespace ServiceSaleMachine.Client
 
         private void button4_Click(object sender, EventArgs e)
         {
+            if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
+            if (comboBox2.SelectedIndex == -1) return;
+
             if (!((string)comboBox2.Items[comboBox2.SelectedIndex]).Contains("нет"))
             {
                data.drivers.control.openPort((string)comboBox2.Items[comboBox2.SelectedIndex]);
@@ -441,6 +453,7 @@ namespace ServiceSaleMachine.Client
         private void button16_Click(object sender, EventArgs e)
         {
             if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
+            if (cbxComPortPrinter.SelectedIndex == -1) return;
 
             data.drivers.printer.StartPrint((string)cbxComPortPrinter.Items[cbxComPortPrinter.SelectedIndex]);
 
@@ -456,6 +469,7 @@ namespace ServiceSaleMachine.Client
         private void button17_Click(object sender, EventArgs e)
         {
             if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
+            if (cbxComPortPrinter.SelectedIndex == -1) return;
 
             data.drivers.printer.StartPrint((string)cbxComPortPrinter.Items[cbxComPortPrinter.SelectedIndex]);
 
@@ -526,8 +540,11 @@ namespace ServiceSaleMachine.Client
 
             Globals.ClientConfiguration.Save();
 
-            data.drivers.InitAllDevice();
-            ReLoad();
+            if (!init)
+            {
+                data.drivers.InitAllDevice();
+                ReLoad();
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -561,8 +578,11 @@ namespace ServiceSaleMachine.Client
 
                 Globals.ClientConfiguration.Save();
 
-                data.drivers.InitAllDevice();
-                ReLoad();
+                if (!init)
+                {
+                    data.drivers.InitAllDevice();
+                    ReLoad();
+                }
             }
         }
 
@@ -584,7 +604,9 @@ namespace ServiceSaleMachine.Client
 
         private void cBxComPortBill_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(((string)cBxComPortBill.Items[cBxComPortBill.SelectedIndex]).Contains("нет"))
+            if (cbxComPortPrinter.SelectedIndex == -1) return;
+
+            if (((string)cBxComPortBill.Items[cBxComPortBill.SelectedIndex]).Contains("нет"))
             {
                 butStartPoll.Enabled = false;
                 butStopPoll.Enabled = false;
@@ -600,7 +622,6 @@ namespace ServiceSaleMachine.Client
                 butWaitNoteOn.Enabled = true;
                 butWaitNoteOff.Enabled = true;
             }
-
         }
     }
 }

@@ -27,7 +27,9 @@ namespace ServiceSaleMachine
 			Worker.ThreadName = "ClearOldFilesControl";
 			Worker.Priority = ThreadPriority.BelowNormal;
 			Worker.Work += Worker_Work;
-		}
+
+            Start();
+        }
 
 		internal void Start()
 		{

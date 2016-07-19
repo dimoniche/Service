@@ -110,6 +110,7 @@
             this.pbxUser.Size = new System.Drawing.Size(179, 83);
             this.pbxUser.TabIndex = 0;
             this.pbxUser.TabStop = false;
+            this.pbxUser.Visible = false;
             this.pbxUser.Click += new System.EventHandler(this.pictureBox5_Click_1);
             // 
             // pbxRetToMain

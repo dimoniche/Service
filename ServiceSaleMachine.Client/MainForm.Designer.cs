@@ -37,6 +37,8 @@
             this.ClientSize = new System.Drawing.Size(742, 559);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MainForm";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ExMachine";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

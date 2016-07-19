@@ -12,6 +12,7 @@ namespace ServiceSaleMachine
         public const string LogExtention = "log";
         public const long GcMinMemoryBlock = 1024 * 1024;
         public static bool admin = false;
+        public static string HelpFileName;
 
         // Режим отладки
         public static bool IsDebug { get; private set; }

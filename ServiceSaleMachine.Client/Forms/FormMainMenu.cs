@@ -83,6 +83,7 @@ namespace ServiceSaleMachine.Client
 
         private void pbxHelp_Click(object sender, EventArgs e)
         {
+            Globals.HelpFileName = "HelpMain.txt";
             data.stage = WorkerStateStage.Rules;
             this.Close();
         }

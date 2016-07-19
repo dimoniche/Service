@@ -46,6 +46,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FormResultData.cs" />
+    <Compile Include="Forms\FormRules.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormRules.Designer.cs">
+      <DependentUpon>FormRules.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormMainMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,11 +82,11 @@
     <Compile Include="Forms\FormProgress.Designer.cs">
       <DependentUpon>FormProgress.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormRuleService.cs">
+    <Compile Include="Forms\FormRuleService_old.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormRuleService.Designer.cs">
-      <DependentUpon>FormRuleService.cs</DependentUpon>
+    <Compile Include="Forms\FormRuleService_old.Designer.cs">
+      <DependentUpon>FormRuleService_old.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormSettings.cs">
       <SubType>Form</SubType>
@@ -138,6 +144,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\FormRules.resx">
+      <DependentUpon>FormRules.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormMainMenu.resx">
       <DependentUpon>FormMainMenu.cs</DependentUpon>
     </EmbeddedResource>
@@ -153,8 +162,8 @@
     <EmbeddedResource Include="Forms\FormProgress.resx">
       <DependentUpon>FormProgress.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormRuleService.resx">
-      <DependentUpon>FormRuleService.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormRuleService_old.resx">
+      <DependentUpon>FormRuleService_old.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSettings.resx">
       <DependentUpon>FormSettings.cs</DependentUpon>

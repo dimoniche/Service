@@ -142,7 +142,7 @@ namespace ServiceSaleMachine.Client
                     else if (result.stage == WorkerStateStage.Rules)
                     {
                         // ознакомление с правилами
-                        result = (FormResultData)FormManager.OpenForm<FormRuleService>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+                        result = (FormResultData)FormManager.OpenForm<FormRules>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
                         // ознакомились - возвращаемся обратно
                         continue;
                     }

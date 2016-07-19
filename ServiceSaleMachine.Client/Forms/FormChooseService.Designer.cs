@@ -34,6 +34,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.pbxUser = new System.Windows.Forms.PictureBox();
+            this.pbxRetToMain = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.pbxPrev = new System.Windows.Forms.PictureBox();
@@ -51,6 +52,7 @@
             this.panel2.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxUser)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxRetToMain)).BeginInit();
             this.panel3.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxPrev)).BeginInit();
@@ -87,11 +89,12 @@
             // tableLayoutPanel4
             // 
             this.tableLayoutPanel4.ColumnCount = 4;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel4.Controls.Add(this.pbxUser, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.pbxUser, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.pbxRetToMain, 0, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
@@ -102,13 +105,23 @@
             // 
             // pbxUser
             // 
-            this.pbxUser.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbxUser.Location = new System.Drawing.Point(3, 3);
+            this.pbxUser.Location = new System.Drawing.Point(114, 3);
             this.pbxUser.Name = "pbxUser";
             this.pbxUser.Size = new System.Drawing.Size(179, 83);
             this.pbxUser.TabIndex = 0;
             this.pbxUser.TabStop = false;
             this.pbxUser.Click += new System.EventHandler(this.pictureBox5_Click_1);
+            // 
+            // pbxRetToMain
+            // 
+            this.pbxRetToMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbxRetToMain.Location = new System.Drawing.Point(3, 3);
+            this.pbxRetToMain.Name = "pbxRetToMain";
+            this.pbxRetToMain.Size = new System.Drawing.Size(105, 83);
+            this.pbxRetToMain.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbxRetToMain.TabIndex = 1;
+            this.pbxRetToMain.TabStop = false;
+            this.pbxRetToMain.Click += new System.EventHandler(this.pbxRetToMain_Click);
             // 
             // panel3
             // 
@@ -294,6 +307,7 @@
             this.panel2.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbxUser)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxRetToMain)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
@@ -332,6 +346,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.PictureBox pbxUser;
         private System.Windows.Forms.Timer TimeOutTimer;
+        private System.Windows.Forms.PictureBox pbxRetToMain;
     }
 }
 

@@ -34,6 +34,7 @@ namespace ServiceSaleMachine
         public string ButtonLogo = defpicture;
         public string ButtonHelp = defpicture;
         public string ButtonFail = defpicture;
+        public string ButtonRetToMain = defpicture;
         public string ButtonYes = defpicture;
         public string ButtonUser = defpicture;
         public string ButtonCheck = defpicture;

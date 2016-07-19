@@ -53,6 +53,7 @@ namespace ServiceSaleMachine
                         if ((xElement = xSettings.Element("NamePrinter")) != null) Settings.NamePrinter = xElement.Value;
                         if ((xElement = xSettings.Element("comPortControl")) != null) Settings.comPortControl = xElement.Value;
 
+                        if ((xElement = xSettings.Element("ButtonRetToMain")) != null) Settings.ButtonRetToMain = xElement.Value;
                         if ((xElement = xSettings.Element("ButtonLogo")) != null) Settings.ButtonLogo = xElement.Value;
                         if ((xElement = xSettings.Element("ButtonHelp")) != null) Settings.ButtonHelp = xElement.Value;
                         if ((xElement = xSettings.Element("ButtonStartServices")) != null) Settings.ButtonStartServices = xElement.Value;
@@ -117,6 +118,7 @@ namespace ServiceSaleMachine
                 xSettings.Add(new XElement("NamePrinter", Settings.NamePrinter));
                 xSettings.Add(new XElement("comPortControl", Settings.comPortControl));
 
+                xSettings.Add(new XElement("RetToMain", Settings.ButtonRetToMain));
                 xSettings.Add(new XElement("ButtonFail", Settings.ButtonFail));
                 xSettings.Add(new XElement("ButtonYes", Settings.ButtonYes));
                 xSettings.Add(new XElement("ButtonUser", Settings.ButtonUser));

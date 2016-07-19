@@ -23,6 +23,8 @@ namespace ServiceSaleMachine.Client
 
             EmptyServ = Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonServiceEmpty;
             pbxUser.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonUser);
+            Globals.ClientConfiguration.Settings.LoadPictureBox(pbxRetToMain, Globals.ClientConfiguration.Settings.ButtonRetToMain);
+
 
             CurrentPage = 0;
             pbxNext.BackColor = Color.Transparent;
@@ -215,6 +217,12 @@ namespace ServiceSaleMachine.Client
                 data.stage = WorkerStateStage.TimeOut;
                 this.Close();
             }
+        }
+
+        private void pbxRetToMain_Click(object sender, EventArgs e)
+        {
+            data.stage = WorkerStateStage.TimeOut;
+            this.Close();
         }
     }
 }

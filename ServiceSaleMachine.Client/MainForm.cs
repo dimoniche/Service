@@ -82,12 +82,10 @@ namespace ServiceSaleMachine.Client
         {
             FormResultData result = new FormResultData();
             result.drivers = drivers;
-            result = (FormResultData)FormManager.OpenForm<FormMainMenu>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-
 
             if (Globals.admin)
             {
-              result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+                result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
             }
 
             initDevice:
@@ -129,7 +127,7 @@ namespace ServiceSaleMachine.Client
                 try
                 {
                     // ожидание клиента
-                    result = (FormResultData)FormManager.OpenForm<FormWaitStage>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+                    result = (FormResultData)FormManager.OpenForm<FormMainMenu>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
                     if (result.stage == WorkerStateStage.ExitProgram)
                     {
@@ -172,6 +170,10 @@ namespace ServiceSaleMachine.Client
                         {
                             continue;
                         }
+                    }
+                    else if (result.stage == WorkerStateStage.TimeOut)
+                    {
+                        result = (FormResultData)FormManager.OpenForm<FormWaitStage>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
                     }
 
                     // ознакомление с правилами

@@ -41,7 +41,8 @@ namespace ServiceSaleMachine.Client
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            lblTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            lblTime.Text = DateTime.Now.ToString("HH:mm:ss");
+            LblDate.Text = DateTime.Now.ToString("yyyy-MM-dd dddd");
         }
 
         private void FormMainMenu_FormClosed(object sender, FormClosedEventArgs e)

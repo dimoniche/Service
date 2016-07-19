@@ -40,6 +40,7 @@
             this.pbxHelp = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.TimeOutTimer = new System.Windows.Forms.Timer(this.components);
+            this.LblDate = new System.Windows.Forms.Label();
             this.panel3.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -64,8 +65,9 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel3.Controls.Add(this.lblTime, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.label1, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.LblDate, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.lblTime, 2, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -78,7 +80,7 @@
             // 
             this.lblTime.AutoSize = true;
             this.lblTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblTime.Location = new System.Drawing.Point(3, 0);
+            this.lblTime.Location = new System.Drawing.Point(455, 0);
             this.lblTime.Name = "lblTime";
             this.lblTime.Size = new System.Drawing.Size(24, 20);
             this.lblTime.TabIndex = 1;
@@ -172,6 +174,16 @@
             this.TimeOutTimer.Interval = 1000;
             this.TimeOutTimer.Tick += new System.EventHandler(this.TimeOutTimer_Tick);
             // 
+            // LblDate
+            // 
+            this.LblDate.AutoSize = true;
+            this.LblDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.LblDate.Location = new System.Drawing.Point(3, 0);
+            this.LblDate.Name = "LblDate";
+            this.LblDate.Size = new System.Drawing.Size(24, 20);
+            this.LblDate.TabIndex = 3;
+            this.LblDate.Text = "...";
+            // 
             // FormMainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -209,5 +221,6 @@
         private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Timer TimeOutTimer;
+        private System.Windows.Forms.Label LblDate;
     }
 }

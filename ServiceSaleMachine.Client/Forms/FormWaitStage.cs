@@ -55,7 +55,7 @@ namespace ServiceSaleMachine.Client
 
         private void FormWaitStage_Click(object sender, EventArgs e)
         {
-            data.stage = WorkerStateStage.Rules;
+            data.stage = WorkerStateStage.MainScreen;
             this.Close();
         }
 
@@ -75,12 +75,6 @@ namespace ServiceSaleMachine.Client
             {
                 data.stage = WorkerStateStage.ExitProgram;
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            data.stage = WorkerStateStage.ManualSetting;
-            this.Close();
         }
     }
 }

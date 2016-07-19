@@ -123,5 +123,10 @@ namespace ServiceSaleMachine
         /// Нет ком портов
         /// </summary>
         NoCOMPort,
+
+        /// <summary>
+        /// Главный экран
+        /// </summary>
+        MainScreen,
     }
 }

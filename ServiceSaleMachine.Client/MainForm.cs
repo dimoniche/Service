@@ -168,6 +168,7 @@ namespace ServiceSaleMachine.Client
                     }
                     else if (result.stage == WorkerStateStage.TimeOut)
                     {
+                        // по тайм ауту вышли в рекламу
                         result = (FormResultData)FormManager.OpenForm<FormWaitStage>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
                         if (result.stage == WorkerStateStage.DropCassettteBill)

@@ -21,9 +21,18 @@ namespace ServiceSaleMachine.Client
                 return;
             }
 
-            if (args.Length > 0)
+            foreach(string arg in args)
             {
-                Globals.admin = (args[0] == "/admin");
+                switch (arg)
+                {
+                    case "/admin":
+                        {
+
+                            Globals.admin = true;
+                            break;
+                        }
+                }
+
             }
 
             // Создадим журнал клиента

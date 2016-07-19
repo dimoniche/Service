@@ -13,12 +13,17 @@ namespace ServiceSaleMachine.Client
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
             if (!Globals.RegistrySettings.Load())
             {
                 MessageBox.Show(Globals.ErrorMessageRegistryDontRead, "test", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
+            }
+
+            if (args.Length > 0)
+            {
+                Globals.admin = (args[0] == "/admin");
             }
 
             // Создадим журнал клиента
@@ -56,7 +61,7 @@ namespace ServiceSaleMachine.Client
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            Application.Run(new MainForm(WorkerStateStage.None));
         }
     }
 }

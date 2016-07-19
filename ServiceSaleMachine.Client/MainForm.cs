@@ -33,7 +33,7 @@ namespace ServiceSaleMachine.Client
         bool MoneyRecess;
 
         // запуск приложения
-        public MainForm()
+        public MainForm(WorkerStateStage StateStage)
         {
             InitializeComponent();
 
@@ -48,7 +48,8 @@ namespace ServiceSaleMachine.Client
             WorkerWait.Work += WorkerWait_Work;
             WorkerWait.Complete += WorkerWait_Complete;
 
-            Stage = WorkerStateStage.None;
+
+            Stage = StateStage;// WorkerStateStage.None;
 
             // база данных
             if (GlobalDb.GlobalBase.CreateDB())
@@ -72,6 +73,10 @@ namespace ServiceSaleMachine.Client
             GlobalDb.GlobalBase.CreateTables();
 
             CountBankNote = GlobalDb.GlobalBase.GetCountBankNote();
+            if (Stage == WorkerStateStage.NeedSettingProgram)
+            {
+                //sendMessage(DeviceEvent.NeedSettingProgram);
+            }
         }
 
         /// <summary>
@@ -81,6 +86,11 @@ namespace ServiceSaleMachine.Client
         {
             FormResultData result = new FormResultData();
             result.drivers = drivers;
+
+            if (Globals.admin)
+            {
+              result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+            }
 
             initDevice:
             WorkerWait.Run();

@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
+using System.IO;
 
 namespace ServiceSaleMachine
 {
+
 	public class ClientConfigurationProperties
 	{
         // настройки драйверов
@@ -26,22 +29,44 @@ namespace ServiceSaleMachine
         public List<Service> services;
 
         // настройки отображения - изображения
-        public string ButtonFail;
-        public string ButtonYes;
-        public string ButtonUser;
-        public string ButtonCheck;
-        public string ButtonMoney;
-        public string ButtonService;
-        public string ButtonServiceEmpty;
-        public string ButtonBack;
-        public string ButtonForward;
-        public string ButtonNoForward;
-        public string ButtonEnterUserName;
-        public string ButtonEnterUserPasw;
+        const string defpicture = "default.png";
+        public string ButtonStartServices = defpicture;
+        public string ButtonLogo = defpicture;
+        public string ButtonHelp = defpicture;
+        public string ButtonFail = defpicture;
+        public string ButtonYes = defpicture;
+        public string ButtonUser = defpicture;
+        public string ButtonCheck = defpicture;
+        public string ButtonMoney = defpicture;
+        public string ButtonService = defpicture;
+        public string ButtonServiceEmpty = defpicture;
+        public string ButtonBack = defpicture;
+        public string ButtonForward = defpicture;
+        public string ButtonNoForward = defpicture;
+        public string ButtonEnterUserName = defpicture;
+        public string ButtonEnterUserPasw = defpicture;
 
         internal ClientConfigurationProperties()
 		{
 			
 		}
-	}
+
+        public void LoadPictureBox(PictureBox pbx, string path)
+        {
+            string fname = Globals.GetPath(PathEnum.Image) + "\\" + path;
+
+            if (!File.Exists(fname))
+            {
+                fname = Globals.GetPath(PathEnum.Image) + "\\" + defpicture;
+            }
+            try
+            {
+                pbx.Load(fname);
+            }
+            catch(Exception e)
+            {
+            }
+        }
+
+    }
 }

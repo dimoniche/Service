@@ -73,10 +73,6 @@ namespace ServiceSaleMachine.Client
             GlobalDb.GlobalBase.CreateTables();
 
             CountBankNote = GlobalDb.GlobalBase.GetCountBankNote();
-            if (Stage == WorkerStateStage.NeedSettingProgram)
-            {
-                //sendMessage(DeviceEvent.NeedSettingProgram);
-            }
         }
 
         /// <summary>
@@ -86,6 +82,8 @@ namespace ServiceSaleMachine.Client
         {
             FormResultData result = new FormResultData();
             result.drivers = drivers;
+            result = (FormResultData)FormManager.OpenForm<FormMainMenu>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
 
             if (Globals.admin)
             {

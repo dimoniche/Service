@@ -683,6 +683,9 @@ namespace ServiceSaleMachine.Drivers
                 case CCNETCommandEnum.GetBillTable:
                     return CmdGetBillTable((_BillRecord[])param1, adr);
                     break;
+                case CCNETCommandEnum.GetCassetteStatus:
+                    return CmdCsStatus();
+                    break;
             }
 
             return false;
@@ -1283,6 +1286,84 @@ namespace ServiceSaleMachine.Drivers
 	        {
 		        return false;
 	        }
+        }
+
+        /**	\brief	The CCCRSProtocol::CmdCsStatus function sends GET CASSETTE STATUS request
+
+          The function is applicable for Bill-To-Bill units only. It sends RECYCLING CASSETTE STATUS request 
+          and translates the response data into the CCRSProtocol::Cassettes array so it contains the image of 
+          the unit's cassettes.
+
+
+	        \return	bool - true if the request succeeded	
+        */
+        bool CmdCsStatus()
+        {
+            byte[] Data = new byte[256];
+            Data[0] = SYNC;
+            Data[1] = 0;
+            Data[2] = 6;
+            Data[3] = C_STATUS;
+            Data[4] = 0;
+            Data[5] = 0;
+
+            CCommand cmd = new CCommand(Data, 0);
+            CCommand Response = Transmit(cmd);
+
+            iLastError = Response.GetCode();
+
+            if (iLastError == 0)
+            {
+                if ((Response.GetData()[2] == 6) && (Response.GetData()[3] == ST_INV_CMD))
+                {
+                    iLastError = ER_INVALID_CMD;
+                    for (int j = 0; j < 32; j += 2)
+                    {
+                        Cassetes[j / 2].BillNumber = 0;
+                        Cassetes[j / 2].bEscrow = false;
+                        Cassetes[j / 2].BillType = 0;
+                        Cassetes[j / 2].Status = CS_NU;
+                    }
+                    return false;
+                }
+
+                int i = 0;
+
+                for (; i < (Response.GetData()[2]) - 5; i += 2)
+                {
+                    Cassetes[i / 2].BillNumber = Response.GetData()[i + 4];
+
+                    Cassetes[i / 2].BillType = (byte)((Response.GetData()[i + 3]) & 0x1F);
+                    Cassetes[i / 2].bEscrow = ((Cassetes[i / 2].BillType == BT_ESCROW));
+                    if (((Response.GetData()[i + 3]) & 0x80) > 0)
+                    {
+                        Cassetes[i / 2].Status = CS_NU;
+                    }
+                    else
+                    {
+                        if ((Cassetes[i / 2].BillType == (BT_NO_TYPE & 0x1F)))
+                        {
+                            Cassetes[i / 2].Status = CS_NA;
+                        }
+                        else
+                        {
+                            Cassetes[i / 2].Status = CS_OK;
+                        }
+                    }
+                }
+                for (int j = i; j < 32; j += 2)
+                {
+                    Cassetes[j / 2].BillNumber = 0;
+                    Cassetes[j / 2].bEscrow = false;
+                    Cassetes[j / 2].BillType = 0;
+                    Cassetes[j / 2].Status = CS_NU;
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
     }

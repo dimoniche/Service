@@ -19,5 +19,6 @@ namespace ServiceSaleMachine.Drivers
         SetBarParams,
         ExtractBarData,
         GetBillTable,
+        GetCassetteStatus,
     }
 }

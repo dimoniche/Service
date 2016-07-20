@@ -301,6 +301,9 @@ namespace ServiceSaleMachine.Client
                 case DeviceEvent.BillAcceptorCredit:
                     label5.Text = (string)e.Message.Content + " руб";
                     break;
+                case DeviceEvent.BillAcceptorEscrow:
+                    label5.Text = (string)e.Message.Content + " руб";
+                    break;
             }
         }
 
@@ -696,6 +699,12 @@ namespace ServiceSaleMachine.Client
 
             Globals.ClientConfiguration.Save();
 
+        }
+
+        private void button1_Click_3(object sender, EventArgs e)
+        {
+            if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
+            label16.Text = data.drivers.WaitBill();
         }
     }
 }

@@ -16,5 +16,6 @@
         NeedSettingProgram = 10,                // Необходима настройка приложения
         BadSetting = 11,                        // плохие настройки
         InitializationOK = 12,                  // инициализация прошла успешно
+        BillAcceptorEscrow = 13,                // событие задержки денег
     }
 }

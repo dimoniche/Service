@@ -383,7 +383,7 @@ namespace ServiceSaleMachine.Drivers
         }
 
         /// <summary>
-        /// Ожидание ввода купюры
+        /// Ожидание ввода купюры, забор купюр сразу
         /// </summary>
         /// <returns></returns>
         public string WaitBill()
@@ -413,6 +413,45 @@ namespace ServiceSaleMachine.Drivers
             {
                 send_bill_command = false;
             }
+
+            hold_bill = false;
+
+            return result;
+        }
+
+        /// <summary>
+        /// Ожидание ввода купюры, держим купюру
+        /// </summary>
+        /// <returns></returns>
+        public string WaitBillEscrow()
+        {
+            string result = "";
+            int count = 0;
+
+            // если занято - ждем - но не более 1сек
+            while (send_bill_command == true) { if (count++ == 1000) { break; } Thread.Sleep(1); }
+
+            send_bill_command = true;
+
+            try
+            {
+                if (CCNETDriver.Cmd(CCNETCommandEnum.BillType, (byte)CCNETDriver.BillAdr, (long)0x00ffffff, (long)0x00ffffff) == true)
+                {
+                    result = "ОК";
+                }
+                else
+                {
+                    result = "СБОЙ";
+                }
+
+                send_bill_command = false;
+            }
+            catch
+            {
+                send_bill_command = false;
+            }
+
+            hold_bill = true;
 
             return result;
         }
@@ -457,6 +496,8 @@ namespace ServiceSaleMachine.Drivers
             {
                 send_bill_command = false;
             }
+
+            hold_bill = false;
 
             return result;
         }
@@ -672,6 +713,17 @@ namespace ServiceSaleMachine.Drivers
 
                             message.Event = DeviceEvent.BillAcceptorError;
                             message.Content = CCNETDriver.PollResults.Z2;
+
+                            ReceivedResponse(this, new ServiceClientResponseEventArgs(message));
+                        }
+
+                        // задержали купюру
+                        if (CCNETDriver.PollResults.Z1 == 0x80)
+                        {
+                            Message message = new Message();
+
+                            message.Event = DeviceEvent.BillAcceptorEscrow;
+                            message.Content = bill_record[CCNETDriver.PollResults.Z2].Denomination.ToString();
 
                             ReceivedResponse(this, new ServiceClientResponseEventArgs(message));
                         }

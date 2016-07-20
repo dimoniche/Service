@@ -62,6 +62,32 @@ namespace ServiceSaleMachine.Client
         }
 
         /// <summary>
+        /// Внесли деньги
+        /// </summary>
+        /// <param name="e"></param>
+        void CreditMoney(ServiceClientResponseEventArgs e)
+        {
+            // внесли деньги
+            int count = 0;
+            int.TryParse((string)e.Message.Content, out count);
+            amount += count;
+
+            AmountServiceText.Text = amount + " руб";
+
+            if (amount >= data.serv.price)
+            {
+                // внесли нужную сумму - можно идти вперед
+                pbxForward.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonForward);
+                pbxForward.Enabled = true;
+
+                if (Globals.ClientConfiguration.Settings.offHardware == 0)
+                {
+                    data.drivers.StopWaitBill();
+                }
+            }
+        }
+
+        /// <summary>
         /// События от приемника денег
         /// </summary>
         /// <param name="sender"></param>
@@ -79,27 +105,11 @@ namespace ServiceSaleMachine.Client
                 case DeviceEvent.BillAcceptor:
                     
                     break;
+                case DeviceEvent.BillAcceptorEscrow:
+                    CreditMoney(e);
+                    break;
                 case DeviceEvent.BillAcceptorCredit:
-                    {
-                        // внесли деньги
-                        int count = 0;
-                        int.TryParse((string)e.Message.Content, out count);
-                        amount += count;
-
-                        AmountServiceText.Text = amount + " руб";
-
-                        if (amount >= data.serv.price)
-                        {
-                            // внесли нужную сумму - можно идти вперед
-                            pbxForward.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonForward);
-                            pbxForward.Enabled = true;
-
-                            if (Globals.ClientConfiguration.Settings.offHardware == 0)
-                            {
-                                data.drivers.StopWaitBill();
-                            }
-                        }
-                    }
+                    CreditMoney(e);
                     break;
                 default:
                     // Остальные события нас не интересуют

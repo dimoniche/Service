@@ -77,11 +77,14 @@
             this.label8 = new System.Windows.Forms.Label();
             this.dtDBFrom = new System.Windows.Forms.DateTimePicker();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.cBxBillOff = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.cbxOffDataBase = new System.Windows.Forms.CheckBox();
             this.cbxCheckOff = new System.Windows.Forms.CheckBox();
             this.cbxOffHardware = new System.Windows.Forms.CheckBox();
-            this.cBxBillOff = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -221,8 +224,11 @@
             this.tabPage3.Controls.Add(this.label5);
             this.tabPage3.Controls.Add(this.richTextBox1);
             this.tabPage3.Controls.Add(this.label16);
+            this.tabPage3.Controls.Add(this.button2);
             this.tabPage3.Controls.Add(this.butWaitNoteOff);
+            this.tabPage3.Controls.Add(this.button1);
             this.tabPage3.Controls.Add(this.butWaitNoteOn);
+            this.tabPage3.Controls.Add(this.label9);
             this.tabPage3.Controls.Add(this.label14);
             this.tabPage3.Controls.Add(this.butResetBill);
             this.tabPage3.Controls.Add(this.butStopPoll);
@@ -264,9 +270,9 @@
             this.label16.AutoSize = true;
             this.label16.Location = new System.Drawing.Point(534, 213);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(137, 13);
+            this.label16.Size = new System.Drawing.Size(112, 13);
             this.label16.TabIndex = 45;
-            this.label16.Text = "Режим ожидания купюры";
+            this.label16.Text = "Забор купюры сразу";
             // 
             // butWaitNoteOff
             // 
@@ -612,6 +618,17 @@
             this.tabPage2.Text = "Настройки";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // cBxBillOff
+            // 
+            this.cBxBillOff.AutoSize = true;
+            this.cBxBillOff.Location = new System.Drawing.Point(24, 117);
+            this.cBxBillOff.Name = "cBxBillOff";
+            this.cBxBillOff.Size = new System.Drawing.Size(171, 17);
+            this.cBxBillOff.TabIndex = 4;
+            this.cBxBillOff.Text = "Отключить купюроприемник";
+            this.cBxBillOff.UseVisualStyleBackColor = true;
+            this.cBxBillOff.CheckedChanged += new System.EventHandler(this.cBxBillOff_CheckedChanged);
+            // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
@@ -655,16 +672,34 @@
             this.cbxOffHardware.UseVisualStyleBackColor = true;
             this.cbxOffHardware.CheckStateChanged += new System.EventHandler(this.cbxOffHardware_CheckStateChanged);
             // 
-            // cBxBillOff
+            // button1
             // 
-            this.cBxBillOff.AutoSize = true;
-            this.cBxBillOff.Location = new System.Drawing.Point(24, 117);
-            this.cBxBillOff.Name = "cBxBillOff";
-            this.cBxBillOff.Size = new System.Drawing.Size(171, 17);
-            this.cBxBillOff.TabIndex = 4;
-            this.cBxBillOff.Text = "Отключить купюроприемник";
-            this.cBxBillOff.UseVisualStyleBackColor = true;
-            this.cBxBillOff.CheckedChanged += new System.EventHandler(this.cBxBillOff_CheckedChanged);
+            this.button1.Location = new System.Drawing.Point(356, 266);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(164, 23);
+            this.button1.TabIndex = 44;
+            this.button1.Text = "Ожидания купюры";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_3);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(356, 295);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(164, 23);
+            this.button2.TabIndex = 44;
+            this.button2.Text = "Отмена режима ожидания купюры";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(534, 271);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(115, 13);
+            this.label9.TabIndex = 43;
+            this.label9.Text = "С задержкой купюры";
             // 
             // FormSettings
             // 
@@ -755,5 +790,8 @@
         private System.Windows.Forms.CheckBox cbxOffDataBase;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox cBxBillOff;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label9;
     }
 }

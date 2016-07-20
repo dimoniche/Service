@@ -21,8 +21,8 @@ namespace ServiceSaleMachine.Client
 
             ServCount = Globals.ClientConfiguration.ServCount;
 
-            EmptyServ = Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonServiceEmpty;
-            pbxUser.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonUser);
+            EmptyServ = Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonServiceEmpty;
+            pbxUser.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonUser);
             Globals.ClientConfiguration.Settings.LoadPictureBox(pbxRetToMain, Globals.ClientConfiguration.Settings.ButtonRetToMain);
 
 

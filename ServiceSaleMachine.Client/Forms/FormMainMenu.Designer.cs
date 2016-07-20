@@ -31,8 +31,9 @@
             this.components = new System.ComponentModel.Container();
             this.panel3 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.lblTime = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.LblDate = new System.Windows.Forms.Label();
+            this.lblTime = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.pbxLogo = new System.Windows.Forms.PictureBox();
@@ -40,7 +41,6 @@
             this.pbxHelp = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.TimeOutTimer = new System.Windows.Forms.Timer(this.components);
-            this.LblDate = new System.Windows.Forms.Label();
             this.panel3.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -76,16 +76,6 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(678, 51);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
-            // lblTime
-            // 
-            this.lblTime.AutoSize = true;
-            this.lblTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblTime.Location = new System.Drawing.Point(455, 0);
-            this.lblTime.Name = "lblTime";
-            this.lblTime.Size = new System.Drawing.Size(24, 20);
-            this.lblTime.TabIndex = 1;
-            this.lblTime.Text = "...";
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -97,6 +87,29 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "ООО Фирма (812) 111-22-33";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // LblDate
+            // 
+            this.LblDate.AutoSize = true;
+            this.LblDate.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LblDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.LblDate.Location = new System.Drawing.Point(3, 0);
+            this.LblDate.Name = "LblDate";
+            this.LblDate.Size = new System.Drawing.Size(220, 51);
+            this.LblDate.TabIndex = 3;
+            this.LblDate.Text = "...";
+            // 
+            // lblTime
+            // 
+            this.lblTime.AutoSize = true;
+            this.lblTime.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblTime.Location = new System.Drawing.Point(455, 0);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(220, 51);
+            this.lblTime.TabIndex = 1;
+            this.lblTime.Text = "...";
+            this.lblTime.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // tableLayoutPanel1
             // 
@@ -173,16 +186,6 @@
             // 
             this.TimeOutTimer.Interval = 1000;
             this.TimeOutTimer.Tick += new System.EventHandler(this.TimeOutTimer_Tick);
-            // 
-            // LblDate
-            // 
-            this.LblDate.AutoSize = true;
-            this.LblDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.LblDate.Location = new System.Drawing.Point(3, 0);
-            this.LblDate.Name = "LblDate";
-            this.LblDate.Size = new System.Drawing.Size(24, 20);
-            this.LblDate.TabIndex = 3;
-            this.LblDate.Text = "...";
             // 
             // FormMainMenu
             // 

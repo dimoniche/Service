@@ -136,32 +136,43 @@ namespace ServiceSaleMachine.Drivers
 
         public void PrintHeader()
         {
-            Print(eInit + "" + eSelectRusCodePage + "" + eCentre + "" + TransformCode("FIRMA NAME"));
-            Print("Tel:0123 456 7890");
-            Print("Web: www.????.com");
-            Print("sales@????.com");
-            Print("VAT Reg No:123 4567 89" + eLeft);
+            Print(eInit + "" + eSelectRusCodePage + "" + eCentre + "" + TransformCode(Globals.CheckConfiguration.Settings.firmsname));
+            Print(TransformCode(Globals.CheckConfiguration.Settings.secondfirmsname));
+            Print(eLeft + DateTime.Now.ToString("yyyy-MM-dd") + "                          " + DateTime.Now.ToString("HH:mm"));
+            Print(eLeft);
             PrintDashes();
         }
 
-        public void PrintBody()
+        public void PrintBody(Service serv)
         {
-            Print(eSmlText + "" + TransformCode("Service 1"));
+            Print("" + TransformCode(serv.caption) + " ".PadRight(42 - serv.caption.Length - serv.price.ToString().Length, ' ') + serv.price.ToString());
             PrintDashes();
-            Print(eSmlText + "-------");
-            Print("Price: 100 rubles");
-            Print("--------");
+            Print(eLeft + TransformCode("ИТОГ") + " ".PadRight(42 - 4 - serv.price.ToString().Length, ' ') + serv.price.ToString());
+            Print(eLeft + TransformCode("Налич") + " ".PadRight(42 - 5 - serv.price.ToString().Length, ' ') + serv.price.ToString());
+            Print(eLeft + TransformCode("Сдача") + " ".PadRight(42 - 5 - 1, ' ') + "0");
         }
 
         public void PrintFooter()
         {
-            Print(eCentre + "" + TransformCode("Thanx") + eLeft);
-            Print(vbLf + vbLf + vbLf + vbLf + vbLf + eCut + eDrawer);
+            Print(eCentre + "" + TransformCode("СПАСИБО") + eLeft);
+            Print("");
+            Print(Globals.CheckConfiguration.Settings.advert1);
+            Print(Globals.CheckConfiguration.Settings.advert2);
+            Print(Globals.CheckConfiguration.Settings.advert3);
+            Print(Globals.CheckConfiguration.Settings.advert4);
+            Print(vbLf + vbLf + vbLf + vbLf + vbLf + eCut);
         }
 
-        public void Print(String Line)
+        public void Print(String Line, bool end = true)
         {
-            prn.SendStringToPrinter(PrinterName, Line + vbCrLf);
+            if (end)
+            {
+                prn.SendStringToPrinter(PrinterName, Line + vbCrLf);
+            }
+            else
+            {
+                prn.SendStringToPrinter(PrinterName, Line);
+            }
         }
 
         public void PrintDashes()

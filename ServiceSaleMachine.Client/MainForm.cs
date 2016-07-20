@@ -85,6 +85,7 @@ namespace ServiceSaleMachine.Client
 
             if (Globals.admin)
             {
+                drivers.InitAllDevice();
                 result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
             }
 
@@ -426,7 +427,14 @@ namespace ServiceSaleMachine.Client
         private void WorkerWait_Work(object sender, ThreadWorkEventArgs e)
         {
             wait = new FormWait();
-            wait.Show();
+            try
+            {
+                wait.Show();
+            }
+            catch
+            {
+                return;
+            }
 
             while (!e.Cancel)
             {

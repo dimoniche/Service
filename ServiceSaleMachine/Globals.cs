@@ -22,6 +22,8 @@ namespace ServiceSaleMachine
         public static CultureInfo CultureRu { get; private set; }
         public static ClientConfiguration ClientConfiguration { get; private set; }
         public static DesignConfiguration DesignConfiguration { get; private set; }
+        public static CheckConfiguration CheckConfiguration { get; private set; }
+        
         public static RegistrySettings RegistrySettings { get; private set; }
 
         // Сообщения об ошибках
@@ -43,6 +45,7 @@ namespace ServiceSaleMachine
             RegistrySettings = new RegistrySettings();
             ClientConfiguration = new ClientConfiguration();
             DesignConfiguration = new DesignConfiguration();
+            CheckConfiguration = new CheckConfiguration();
         }
 
         public static string GetProcessFileName(bool extension)

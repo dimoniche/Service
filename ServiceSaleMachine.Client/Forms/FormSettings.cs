@@ -494,7 +494,7 @@ namespace ServiceSaleMachine.Client
             if (data.drivers.printer.prn.PrinterIsOpen)
             {
                data.drivers.printer.PrintHeader();
-               data.drivers.printer.PrintBody();
+               data.drivers.printer.PrintBody(Globals.ClientConfiguration.ServiceByIndex(0));
                data.drivers.printer.PrintFooter();
                data.drivers.printer.EndPrint();
             }

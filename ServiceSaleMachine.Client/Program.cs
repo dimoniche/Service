@@ -51,6 +51,12 @@ namespace ServiceSaleMachine.Client
             if (!Globals.DesignConfiguration.Load())
             { }
 
+            if (!Globals.CheckConfiguration.Load())
+            {
+                Globals.CheckConfiguration.Save();
+                Globals.CheckConfiguration.Load();
+            }
+
             if (!Globals.ClientConfiguration.Load())
             {
                 Globals.ClientConfiguration.Settings.comPortScanner = "NULL";

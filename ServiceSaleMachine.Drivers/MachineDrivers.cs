@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ServiceSaleMachine.Drivers;
+using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 
@@ -451,8 +453,6 @@ namespace ServiceSaleMachine.Drivers
                 send_bill_command = false;
             }
 
-            hold_bill = true;
-
             return result;
         }
 
@@ -569,6 +569,8 @@ namespace ServiceSaleMachine.Drivers
                 send_bill_command = false;
             }
 
+            hold_bill = false;
+
             return result;
         }
 
@@ -603,6 +605,8 @@ namespace ServiceSaleMachine.Drivers
             {
                 send_bill_command = false;
             }
+
+            hold_bill = false;
 
             return result;
         }
@@ -720,6 +724,9 @@ namespace ServiceSaleMachine.Drivers
                         // задержали купюру
                         if (CCNETDriver.PollResults.Z1 == 0x80)
                         {
+                            // удерживаем купюру
+                            hold_bill = true;
+
                             Message message = new Message();
 
                             message.Event = DeviceEvent.BillAcceptorEscrow;
@@ -866,6 +873,42 @@ namespace ServiceSaleMachine.Drivers
                 }
             }
         }
+
+        /// <summary>
+        /// получение статуса
+        /// </summary>
+        /// <returns></returns>
+        public List<_Cassete> GetStatus()
+        {
+            int count = 0;
+
+            // если занято - ждем - но не более 1сек
+            while (send_bill_command == true) { if (count++ == 1000) { break; } Thread.Sleep(1); }
+
+            send_bill_command = true;
+
+            try
+            {
+                if (CCNETDriver.Cmd(CCNETCommandEnum.GetCassetteStatus, (byte)CCNETDriver.BillAdr))
+                {
+                    
+                }
+                else
+                {
+                    
+                }
+
+                send_bill_command = false;
+            }
+            catch
+            {
+                send_bill_command = false;
+            }
+
+            
+            return CCNETDriver.Cassetes;
+        }
+
     }
 
     public class ServiceClientResponseEventArgs : EventArgs

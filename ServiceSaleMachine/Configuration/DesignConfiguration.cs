@@ -5,25 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 
-namespace ServiceSaleMachine.Configuration
+namespace ServiceSaleMachine
 {
-    class DesignConfiguration
+    public class DesignConfiguration
     {
         private const string RootName = "DesignConfiguration";
         private const string FileName = "DesignConfiguration.cfg";
 
-        public ClientConfigurationProperties Settings { get; private set; }
-        public DesignConfigurationProperties Design { get; private set; }
+        public DesignConfigurationProperties Settings { get; private set; }
 
         public DesignConfiguration()
         {
-            Settings = new ClientConfigurationProperties();
-        }
-
-        public int ServCount
-        {
-            get { return Settings.services.Count; }
-            set { }
+            Settings = new DesignConfigurationProperties();
         }
 
         public bool Load()
@@ -43,23 +36,23 @@ namespace ServiceSaleMachine.Configuration
 
                     if (xSettings != null)
                     {
-                        if ((xElement = xSettings.Element("ButtonRetToMain")) != null) Design.ButtonRetToMain = xElement.Value;
-                        if ((xElement = xSettings.Element("ButtonLogo")) != null) Design.ButtonLogo = xElement.Value;
-                        if ((xElement = xSettings.Element("ButtonHelp")) != null) Design.ButtonHelp = xElement.Value;
-                        if ((xElement = xSettings.Element("ButtonStartServices")) != null) Design.ButtonStartServices = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonRetToMain")) != null) Settings.ButtonRetToMain = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonLogo")) != null) Settings.ButtonLogo = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonHelp")) != null) Settings.ButtonHelp = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonStartServices")) != null) Settings.ButtonStartServices = xElement.Value;
 
-                        if ((xElement = xSettings.Element("ButtonFail")) != null) Design.ButtonFail = xElement.Value;
-                        if ((xElement = xSettings.Element("ButtonYes")) != null) Design.ButtonYes = xElement.Value;
-                        if ((xElement = xSettings.Element("ButtonUser")) != null) Design.ButtonUser = xElement.Value;
-                        if ((xElement = xSettings.Element("ButtonCheck")) != null) Design.ButtonCheck = xElement.Value;
-                        if ((xElement = xSettings.Element("ButtonMoney")) != null) Design.ButtonMoney = xElement.Value;
-                        if ((xElement = xSettings.Element("ButtonService")) != null) Design.ButtonService = xElement.Value;
-                        if ((xElement = xSettings.Element("ButtonServiceEmpty")) != null) Design.ButtonServiceEmpty = xElement.Value;
-                        if ((xElement = xSettings.Element("ButtonBack")) != null) Design.ButtonBack = xElement.Value;
-                        if ((xElement = xSettings.Element("ButtonForward")) != null) Design.ButtonForward = xElement.Value;
-                        if ((xElement = xSettings.Element("ButtonNoForward")) != null) Design.ButtonNoForward = xElement.Value;
-                        if ((xElement = xSettings.Element("ButtonEnterUserName")) != null) Design.ButtonEnterUserName = xElement.Value;
-                        if ((xElement = xSettings.Element("ButtonEnterUserPasw")) != null) Design.ButtonEnterUserPasw = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonFail")) != null) Settings.ButtonFail = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonYes")) != null) Settings.ButtonYes = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonUser")) != null) Settings.ButtonUser = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonCheck")) != null) Settings.ButtonCheck = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonMoney")) != null) Settings.ButtonMoney = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonService")) != null) Settings.ButtonService = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonServiceEmpty")) != null) Settings.ButtonServiceEmpty = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonBack")) != null) Settings.ButtonBack = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonForward")) != null) Settings.ButtonForward = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonNoForward")) != null) Settings.ButtonNoForward = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonEnterUserName")) != null) Settings.ButtonEnterUserName = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonEnterUserPasw")) != null) Settings.ButtonEnterUserPasw = xElement.Value;
                     }
 
                     return true;

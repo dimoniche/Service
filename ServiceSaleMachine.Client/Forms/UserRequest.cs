@@ -13,10 +13,10 @@ namespace ServiceSaleMachine.Client
         {
             InitializeComponent();
 
-            pbxOk.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonYes);
-            pbxCancel.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonFail);
-            pbxEnterName.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonEnterUserName);
-            pbxEnterPsw.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonEnterUserPasw);
+            pbxOk.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonYes);
+            pbxCancel.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonFail);
+            pbxEnterName.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonEnterUserName);
+            pbxEnterPsw.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonEnterUserPasw);
 
             string[,] str = new string[NumberBoard.CountRow, NumberBoard.CountCol ];
 

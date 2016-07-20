@@ -32,7 +32,11 @@ namespace ServiceSaleMachine.TestClient
                 testLog.AllowWriteThread = true;
             }
 
-            if(!Globals.ClientConfiguration.Load())
+            if (!Globals.DesignConfiguration.Load())
+            { }
+
+
+                if (!Globals.ClientConfiguration.Load())
             {
                 Globals.ClientConfiguration.Settings.comPortScanner = "NULL";
                 Globals.ClientConfiguration.Settings.comPortBill = "NULL";

@@ -12,8 +12,8 @@ namespace ServiceSaleMachine.Client
         {
             InitializeComponent();
 
-            pbxYes.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonYes);
-            pbxNo.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonFail);
+            pbxYes.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonYes);
+            pbxNo.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonFail);
         }
 
         public override void LoadData()

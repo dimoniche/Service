@@ -13,8 +13,8 @@ namespace ServiceSaleMachine.Client
         {
             InitializeComponent();
 
-            pbxCheck.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonCheck);
-            pbxMoney.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonMoney);
+            pbxCheck.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonCheck);
+            pbxMoney.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonMoney);
         }
 
         public override void LoadData()

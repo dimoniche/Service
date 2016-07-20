@@ -48,6 +48,9 @@ namespace ServiceSaleMachine.Client
 
             string fileName = Globals.GetPath(PathEnum.Image) + "\\";
 
+            if (!Globals.DesignConfiguration.Load())
+            { }
+
             if (!Globals.ClientConfiguration.Load())
             {
                 Globals.ClientConfiguration.Settings.comPortScanner = "NULL";

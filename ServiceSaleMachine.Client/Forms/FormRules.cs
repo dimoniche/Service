@@ -17,7 +17,7 @@ namespace ServiceSaleMachine.Client
         {
 
             InitializeComponent();
-            Globals.ClientConfiguration.Settings.LoadPictureBox(pbxRetToMain, Globals.ClientConfiguration.Settings.ButtonRetToMain);
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pbxRetToMain, Globals.DesignConfiguration.Settings.ButtonRetToMain);
             try
             {
                 richTextBoxEx1.LoadFile(Globals.GetPath(PathEnum.Text) + "\\" +  Globals.HelpFileName, RichTextBoxStreamType.PlainText);

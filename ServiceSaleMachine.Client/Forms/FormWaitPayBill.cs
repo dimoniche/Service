@@ -20,17 +20,17 @@ namespace ServiceSaleMachine.Client
         {
             InitializeComponent();
 
-            pbxFail.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonFail);
+            pbxFail.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonFail);
 
             if (Globals.ClientConfiguration.Settings.offHardware == 0 && Globals.ClientConfiguration.Settings.offBill == 0)
             {
-                pbxForward.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonNoForward);
+                pbxForward.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonNoForward);
                 // пока не внесли нужную сумму - не жамкаем кнопку
                 pbxForward.Enabled = false;
             }
             else
             {
-                pbxForward.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonForward);
+                pbxForward.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonForward);
             }
 
             TimeOutTimer.Enabled = true;
@@ -91,7 +91,7 @@ namespace ServiceSaleMachine.Client
                         if (amount >= data.serv.price)
                         {
                             // внесли нужную сумму - можно идти вперед
-                            pbxForward.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.Settings.ButtonForward);
+                            pbxForward.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonForward);
                             pbxForward.Enabled = true;
 
                             if (Globals.ClientConfiguration.Settings.offHardware == 0)

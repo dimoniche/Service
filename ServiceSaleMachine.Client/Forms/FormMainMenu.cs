@@ -15,9 +15,9 @@ namespace ServiceSaleMachine.Client
         {
             InitializeComponent();
 
-            Globals.ClientConfiguration.Settings.LoadPictureBox(pbxHelp, Globals.ClientConfiguration.Settings.ButtonHelp);
-            Globals.ClientConfiguration.Settings.LoadPictureBox(pbxLogo, Globals.ClientConfiguration.Settings.ButtonLogo);
-            Globals.ClientConfiguration.Settings.LoadPictureBox(pbxStart, Globals.ClientConfiguration.Settings.ButtonStartServices);
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pbxHelp, Globals.DesignConfiguration.Settings.ButtonHelp);
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pbxLogo, Globals.DesignConfiguration.Settings.ButtonLogo);
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pbxStart, Globals.DesignConfiguration.Settings.ButtonStartServices);
 
             TimeOutTimer.Enabled = true;
             Timeout = 0;

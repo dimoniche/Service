@@ -42,6 +42,7 @@ namespace ServiceSaleMachine
             CultureRu = new CultureInfo("ru-RU");
             RegistrySettings = new RegistrySettings();
             ClientConfiguration = new ClientConfiguration();
+            DesignConfiguration = new DesignConfiguration();
         }
 
         public static string GetProcessFileName(bool extension)

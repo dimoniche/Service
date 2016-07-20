@@ -23,7 +23,7 @@ namespace ServiceSaleMachine.Client
 
             EmptyServ = Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonServiceEmpty;
             pbxUser.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonUser);
-            Globals.ClientConfiguration.Settings.LoadPictureBox(pbxRetToMain, Globals.ClientConfiguration.Settings.ButtonRetToMain);
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pbxRetToMain, Globals.DesignConfiguration.Settings.ButtonRetToMain);
 
 
             CurrentPage = 0;

@@ -147,7 +147,7 @@ namespace ServiceSaleMachine.Client
                 if (data.drivers.printer.prn.PrinterIsOpen)
                 {
                     data.drivers.printer.PrintHeader();
-                    data.drivers.printer.PrintBody();
+                    data.drivers.printer.PrintBody(data.serv);
                     data.drivers.printer.PrintFooter();
                     data.drivers.printer.EndPrint();
                 }

@@ -149,12 +149,12 @@ namespace ServiceSaleMachine.Drivers
         * 
         * @{
 */
-        const byte CS_OK = 0;   //!< Cassette is present and operational
-        const byte CS_FULL = 1; //!< Cassette is full
-        const byte CS_NU = 0xFE;//!< Cassette is not present
-        const byte CS_MALFUNCTION = 0xFF;//!< Cassette is malfunctioning
-        const byte CS_NA = 0xFD;//!< Cassette is not assigned to any denomination
-        const byte CS_ESCROW = 0xFC;//!< Cassette is assigned to multi-escrow 
+        public const byte CS_OK = 0;                //!< Cassette is present and operational
+        public const byte CS_FULL = 1;              //!< Cassette is full
+        public const byte CS_NU = 0xFE;             //!< Cassette is not present
+        public const byte CS_MALFUNCTION = 0xFF;    //!< Cassette is malfunctioning
+        public const byte CS_NA = 0xFD;             //!< Cassette is not assigned to any denomination
+        public const byte CS_ESCROW = 0xFC;         //!< Cassette is assigned to multi-escrow 
                                     /**@} */
         /**	\defgroup BTs Predefined bill type values
         * 
@@ -1297,7 +1297,7 @@ namespace ServiceSaleMachine.Drivers
 
 	        \return	bool - true if the request succeeded	
         */
-        bool CmdCsStatus()
+        public bool CmdCsStatus()
         {
             byte[] Data = new byte[256];
             Data[0] = SYNC;

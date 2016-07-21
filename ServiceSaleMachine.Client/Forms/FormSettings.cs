@@ -1,5 +1,6 @@
 ﻿using ServiceSaleMachine.Drivers;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading;
@@ -493,7 +494,7 @@ namespace ServiceSaleMachine.Client
             if (data.drivers.printer.prn.PrinterIsOpen)
             {
                data.drivers.printer.PrintHeader();
-               data.drivers.printer.PrintBody();
+               data.drivers.printer.PrintBody(Globals.ClientConfiguration.ServiceByIndex(0));
                data.drivers.printer.PrintFooter();
                data.drivers.printer.EndPrint();
             }
@@ -705,6 +706,25 @@ namespace ServiceSaleMachine.Client
         {
             if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
             label16.Text = data.drivers.WaitBill();
+        }
+
+        private void button5_Click_1(object sender, EventArgs e)
+        {
+            List<_Cassete> cassets = data.drivers.GetStatus();
+            int position = 0;
+            int countmoney = 0;
+
+            foreach(_Cassete casset in cassets)
+            {
+                if (casset.Status == CCRSProtocol.CS_OK)
+                {
+                    countmoney = casset.BillNumber;
+                    break;
+                }
+                position++;
+            }
+
+            CountBill.Text = countmoney.ToString();
         }
     }
 }

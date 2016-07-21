@@ -279,7 +279,7 @@ namespace ServiceSaleMachine.TestClient
             if (drivers.printer.prn.PrinterIsOpen)
             {
                 drivers.printer.PrintHeader();
-                drivers.printer.PrintBody();
+                drivers.printer.PrintBody(Globals.ClientConfiguration.ServiceByIndex(0));
                 drivers.printer.PrintFooter();
                 drivers.printer.EndPrint();
             }

@@ -20,17 +20,21 @@ namespace ServiceSaleMachine.Client
         {
             InitializeComponent();
 
-            pbxFail.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonFail);
+
+            //pbxFail.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonFail);
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pbxFail, Globals.DesignConfiguration.Settings.ButtonRetToMain);
 
             if (Globals.ClientConfiguration.Settings.offHardware == 0 && Globals.ClientConfiguration.Settings.offBill == 0)
             {
-                pbxForward.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonNoForward);
+                Globals.DesignConfiguration.Settings.LoadPictureBox(pbxForward, Globals.DesignConfiguration.Settings.ButtonNoForward);
+//                pbxForward.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonNoForward);
                 // пока не внесли нужную сумму - не жамкаем кнопку
                 pbxForward.Enabled = false;
             }
             else
             {
-                pbxForward.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonForward);
+             //   pbxForward.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonForward);
+                Globals.DesignConfiguration.Settings.LoadPictureBox(pbxForward, Globals.DesignConfiguration.Settings.ButtonForward);
             }
 
             TimeOutTimer.Enabled = true;
@@ -50,6 +54,7 @@ namespace ServiceSaleMachine.Client
             // стоимость
             price.Text = data.serv.price + " руб";
             AmountServiceText.Text = "0 руб";
+            AmountServiceText.ForeColor = System.Drawing.Color.Red;
 
             // заменим обработчик событий
             data.drivers.ReceivedResponse += reciveResponse;
@@ -76,8 +81,10 @@ namespace ServiceSaleMachine.Client
 
             if (amount >= data.serv.price)
             {
+                AmountServiceText.ForeColor = System.Drawing.Color.Green;
                 // внесли нужную сумму - можно идти вперед
-                pbxForward.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonForward);
+//                pbxForward.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonForward);
+                Globals.DesignConfiguration.Settings.LoadPictureBox(pbxForward, Globals.DesignConfiguration.Settings.ButtonForward);
                 pbxForward.Enabled = true;
 
                 if (Globals.ClientConfiguration.Settings.offHardware == 0)

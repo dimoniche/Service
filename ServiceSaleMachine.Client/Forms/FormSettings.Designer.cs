@@ -43,10 +43,12 @@
             this.label5 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.label16 = new System.Windows.Forms.Label();
+            this.button5 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.butWaitNoteOff = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.butWaitNoteOn = new System.Windows.Forms.Button();
+            this.CountBill = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.butResetBill = new System.Windows.Forms.Button();
@@ -85,8 +87,11 @@
             this.cbxOffDataBase = new System.Windows.Forms.CheckBox();
             this.cbxCheckOff = new System.Windows.Forms.CheckBox();
             this.cbxOffHardware = new System.Windows.Forms.CheckBox();
-            this.button5 = new System.Windows.Forms.Button();
-            this.CountBill = new System.Windows.Forms.Label();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.Info = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -223,16 +228,21 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.label10);
             this.tabPage3.Controls.Add(this.label5);
             this.tabPage3.Controls.Add(this.richTextBox1);
             this.tabPage3.Controls.Add(this.label16);
+            this.tabPage3.Controls.Add(this.button8);
             this.tabPage3.Controls.Add(this.button5);
+            this.tabPage3.Controls.Add(this.button6);
+            this.tabPage3.Controls.Add(this.button7);
             this.tabPage3.Controls.Add(this.button2);
             this.tabPage3.Controls.Add(this.butWaitNoteOff);
             this.tabPage3.Controls.Add(this.button1);
             this.tabPage3.Controls.Add(this.butWaitNoteOn);
             this.tabPage3.Controls.Add(this.CountBill);
             this.tabPage3.Controls.Add(this.label9);
+            this.tabPage3.Controls.Add(this.Info);
             this.tabPage3.Controls.Add(this.label14);
             this.tabPage3.Controls.Add(this.butResetBill);
             this.tabPage3.Controls.Add(this.butStopPoll);
@@ -278,15 +288,25 @@
             this.label16.TabIndex = 45;
             this.label16.Text = "Забор купюры сразу";
             // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(356, 382);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(164, 23);
+            this.button5.TabIndex = 44;
+            this.button5.Text = "Количество купюр";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click_1);
+            // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(356, 295);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(164, 23);
             this.button2.TabIndex = 44;
-            this.button2.Text = "Отмена режима ожидания купюры";
+            this.button2.Text = "Вернуть купюру";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button5_Click);
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // butWaitNoteOff
             // 
@@ -304,7 +324,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(164, 23);
             this.button1.TabIndex = 44;
-            this.button1.Text = "Ожидания купюры";
+            this.button1.Text = "Ожидание купюры";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_3);
             // 
@@ -317,6 +337,15 @@
             this.butWaitNoteOn.Text = "Режим ожидания купюры";
             this.butWaitNoteOn.UseVisualStyleBackColor = true;
             this.butWaitNoteOn.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // CountBill
+            // 
+            this.CountBill.AutoSize = true;
+            this.CountBill.Location = new System.Drawing.Point(534, 387);
+            this.CountBill.Name = "CountBill";
+            this.CountBill.Size = new System.Drawing.Size(13, 13);
+            this.CountBill.TabIndex = 43;
+            this.CountBill.Text = "0";
             // 
             // label9
             // 
@@ -705,24 +734,54 @@
             this.cbxOffHardware.UseVisualStyleBackColor = true;
             this.cbxOffHardware.CheckStateChanged += new System.EventHandler(this.cbxOffHardware_CheckStateChanged);
             // 
-            // button5
+            // button6
             // 
-            this.button5.Location = new System.Drawing.Point(356, 324);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(164, 23);
-            this.button5.TabIndex = 44;
-            this.button5.Text = "Количество купюр";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click_1);
+            this.button6.Location = new System.Drawing.Point(356, 353);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(164, 23);
+            this.button6.TabIndex = 44;
+            this.button6.Text = "Отмена режима ожидания купюры";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button5_Click);
             // 
-            // CountBill
+            // button7
             // 
-            this.CountBill.AutoSize = true;
-            this.CountBill.Location = new System.Drawing.Point(534, 329);
-            this.CountBill.Name = "CountBill";
-            this.CountBill.Size = new System.Drawing.Size(13, 13);
-            this.CountBill.TabIndex = 43;
-            this.CountBill.Text = "0";
+            this.button7.Location = new System.Drawing.Point(356, 324);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(164, 23);
+            this.button7.TabIndex = 44;
+            this.button7.Text = "Забрать купюру";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click_1);
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(34, 80);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(164, 23);
+            this.button8.TabIndex = 44;
+            this.button8.Text = "Идетификатор";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click_1);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label10.Location = new System.Drawing.Point(-292, 81);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(61, 24);
+            this.label10.TabIndex = 47;
+            this.label10.Text = "0 руб";
+            // 
+            // Info
+            // 
+            this.Info.AutoSize = true;
+            this.Info.Location = new System.Drawing.Point(213, 85);
+            this.Info.Name = "Info";
+            this.Info.Size = new System.Drawing.Size(87, 13);
+            this.Info.TabIndex = 43;
+            this.Info.Text = "Идентификатор";
             // 
             // FormSettings
             // 
@@ -818,5 +877,10 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Label CountBill;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Label Info;
     }
 }

@@ -20,20 +20,16 @@ namespace ServiceSaleMachine.Client
         {
             InitializeComponent();
 
-
-            //pbxFail.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonFail);
             Globals.DesignConfiguration.Settings.LoadPictureBox(pbxFail, Globals.DesignConfiguration.Settings.ButtonRetToMain);
 
             if (Globals.ClientConfiguration.Settings.offHardware == 0 && Globals.ClientConfiguration.Settings.offBill == 0)
             {
                 Globals.DesignConfiguration.Settings.LoadPictureBox(pbxForward, Globals.DesignConfiguration.Settings.ButtonNoForward);
-//                pbxForward.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonNoForward);
                 // пока не внесли нужную сумму - не жамкаем кнопку
                 pbxForward.Enabled = false;
             }
             else
             {
-             //   pbxForward.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonForward);
                 Globals.DesignConfiguration.Settings.LoadPictureBox(pbxForward, Globals.DesignConfiguration.Settings.ButtonForward);
             }
 
@@ -79,11 +75,13 @@ namespace ServiceSaleMachine.Client
 
             AmountServiceText.Text = amount + " руб";
 
+            // деньги внесли - нет пути назад
+            TimeOutTimer.Enabled = false;
+
             if (amount >= data.serv.price)
             {
                 AmountServiceText.ForeColor = System.Drawing.Color.Green;
                 // внесли нужную сумму - можно идти вперед
-//                pbxForward.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonForward);
                 Globals.DesignConfiguration.Settings.LoadPictureBox(pbxForward, Globals.DesignConfiguration.Settings.ButtonForward);
                 pbxForward.Enabled = true;
 
@@ -127,6 +125,10 @@ namespace ServiceSaleMachine.Client
         private void FormWaitPayBill_FormClosed(object sender, FormClosedEventArgs e)
         {
             TimeOutTimer.Enabled = false;
+
+            // вернем деньгу
+            data.drivers.ReturnBill();
+
             if (Globals.ClientConfiguration.Settings.offHardware == 0)
             {
                 data.drivers.StopWaitBill();

@@ -269,7 +269,7 @@ namespace ServiceSaleMachine.Client
                         // проверим результат
                         drivers.ReceivedResponse += reciveResponse;
 
-                        if (result.stage == WorkerStateStage.Fail)
+                        if (result.stage == WorkerStateStage.Fail || result.stage == WorkerStateStage.EndDropCassette)
                         {
                             // отказ - выход в начало
                             continue;
@@ -293,7 +293,7 @@ namespace ServiceSaleMachine.Client
                         // проверим результат
                         drivers.ReceivedResponse += reciveResponse;
 
-                        if (result.stage == WorkerStateStage.Fail)
+                        if (result.stage == WorkerStateStage.Fail || result.stage == WorkerStateStage.EndDropCassette)
                         {
                             // отказ - выход в начало
                             continue;

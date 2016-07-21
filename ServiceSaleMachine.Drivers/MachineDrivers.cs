@@ -612,7 +612,7 @@ namespace ServiceSaleMachine.Drivers
         }
 
         /// <summary>
-        /// Забрать купюру
+        /// Идентификатор
         /// </summary>
         /// <returns></returns>
         public string getInfoBill()
@@ -909,6 +909,75 @@ namespace ServiceSaleMachine.Drivers
             return CCNETDriver.Cassetes;
         }
 
+        /// <summary>
+        /// Забрать купюру
+        /// </summary>
+        /// <returns></returns>
+        public List<_Cassete> PackBill()
+        {
+            int count = 0;
+
+            // если занято - ждем - но не более 1сек
+            while (send_bill_command == true) { if (count++ == 1000) { break; } Thread.Sleep(1); }
+
+            send_bill_command = true;
+
+            try
+            {
+                if (CCNETDriver.Cmd(CCNETCommandEnum.Pack, (byte)CCNETDriver.BillAdr))
+                {
+
+                }
+                else
+                {
+
+                }
+
+                send_bill_command = false;
+            }
+            catch
+            {
+                send_bill_command = false;
+            }
+
+
+            return CCNETDriver.Cassetes;
+        }
+
+        /// <summary>
+        /// Вернуть купюру
+        /// </summary>
+        /// <returns></returns>
+        public List<_Cassete> ReturnBill()
+        {
+            int count = 0;
+
+            // если занято - ждем - но не более 1сек
+            while (send_bill_command == true) { if (count++ == 1000) { break; } Thread.Sleep(1); }
+
+            send_bill_command = true;
+
+            try
+            {
+                if (CCNETDriver.Cmd(CCNETCommandEnum.Return, (byte)CCNETDriver.BillAdr))
+                {
+
+                }
+                else
+                {
+
+                }
+
+                send_bill_command = false;
+            }
+            catch
+            {
+                send_bill_command = false;
+            }
+
+
+            return CCNETDriver.Cassetes;
+        }
     }
 
     public class ServiceClientResponseEventArgs : EventArgs

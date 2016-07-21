@@ -705,7 +705,7 @@ namespace ServiceSaleMachine.Client
         private void button1_Click_3(object sender, EventArgs e)
         {
             if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
-            label16.Text = data.drivers.WaitBill();
+            label16.Text = data.drivers.WaitBillEscrow();
         }
 
         private void button5_Click_1(object sender, EventArgs e)
@@ -725,6 +725,24 @@ namespace ServiceSaleMachine.Client
             }
 
             CountBill.Text = countmoney.ToString();
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
+            data.drivers.ReturnBill();
+        }
+
+        private void button7_Click_1(object sender, EventArgs e)
+        {
+            if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
+            data.drivers.PackBill();
+        }
+
+        private void button8_Click_1(object sender, EventArgs e)
+        {
+            if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
+            Info.Text = data.drivers.getInfoBill();
         }
     }
 }

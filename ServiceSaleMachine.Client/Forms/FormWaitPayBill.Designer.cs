@@ -33,17 +33,17 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.TimeOutTimer = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.AmountServiceText = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.AmountServiceText = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.pbxForward = new System.Windows.Forms.PictureBox();
-            this.pbxFail = new System.Windows.Forms.PictureBox();
-            this.price = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.price = new System.Windows.Forms.Label();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.pbxFail = new System.Windows.Forms.PictureBox();
+            this.pbxForward = new System.Windows.Forms.PictureBox();
+            this.TimeOutTimer = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -51,8 +51,8 @@
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxForward)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxFail)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxForward)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -101,11 +101,6 @@
             this.panel1.Size = new System.Drawing.Size(653, 158);
             this.panel1.TabIndex = 0;
             // 
-            // TimeOutTimer
-            // 
-            this.TimeOutTimer.Interval = 1000;
-            this.TimeOutTimer.Tick += new System.EventHandler(this.TimeOutTimer_Tick);
-            // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 2;
@@ -118,7 +113,7 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 158F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(653, 158);
             this.tableLayoutPanel2.TabIndex = 2;
             // 
@@ -132,17 +127,6 @@
             this.panel3.Size = new System.Drawing.Size(321, 152);
             this.panel3.TabIndex = 0;
             // 
-            // AmountServiceText
-            // 
-            this.AmountServiceText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.AmountServiceText.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.AmountServiceText.Location = new System.Drawing.Point(0, 0);
-            this.AmountServiceText.Name = "AmountServiceText";
-            this.AmountServiceText.Size = new System.Drawing.Size(321, 152);
-            this.AmountServiceText.TabIndex = 2;
-            this.AmountServiceText.Text = "0 руб";
-            this.AmountServiceText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // label2
             // 
             this.label2.Dock = System.Windows.Forms.DockStyle.Top;
@@ -154,6 +138,17 @@
             this.label2.Text = "Внесённая сумма:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // AmountServiceText
+            // 
+            this.AmountServiceText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.AmountServiceText.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.AmountServiceText.Location = new System.Drawing.Point(0, 0);
+            this.AmountServiceText.Name = "AmountServiceText";
+            this.AmountServiceText.Size = new System.Drawing.Size(321, 152);
+            this.AmountServiceText.TabIndex = 2;
+            this.AmountServiceText.Text = "0 руб";
+            this.AmountServiceText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // panel4
             // 
             this.panel4.Controls.Add(this.label4);
@@ -163,6 +158,29 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(320, 152);
             this.panel4.TabIndex = 1;
+            // 
+            // label4
+            // 
+            this.label4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.Location = new System.Drawing.Point(0, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(320, 45);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Стоимость услуги:";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // price
+            // 
+            this.price.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.price.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.price.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.price.Location = new System.Drawing.Point(0, 0);
+            this.price.Name = "price";
+            this.price.Size = new System.Drawing.Size(320, 152);
+            this.price.TabIndex = 2;
+            this.price.Text = "0 руб";
+            this.price.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel3
             // 
@@ -180,16 +198,6 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(653, 159);
             this.tableLayoutPanel3.TabIndex = 2;
             // 
-            // pbxForward
-            // 
-            this.pbxForward.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbxForward.Location = new System.Drawing.Point(329, 3);
-            this.pbxForward.Name = "pbxForward";
-            this.pbxForward.Size = new System.Drawing.Size(321, 153);
-            this.pbxForward.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbxForward.TabIndex = 2;
-            this.pbxForward.TabStop = false;
-            // 
             // pbxFail
             // 
             this.pbxFail.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -199,29 +207,23 @@
             this.pbxFail.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxFail.TabIndex = 3;
             this.pbxFail.TabStop = false;
+            this.pbxFail.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
-            // price
+            // pbxForward
             // 
-            this.price.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.price.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.price.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.price.Location = new System.Drawing.Point(0, 0);
-            this.price.Name = "price";
-            this.price.Size = new System.Drawing.Size(320, 152);
-            this.price.TabIndex = 2;
-            this.price.Text = "0 руб";
-            this.price.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.pbxForward.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbxForward.Location = new System.Drawing.Point(329, 3);
+            this.pbxForward.Name = "pbxForward";
+            this.pbxForward.Size = new System.Drawing.Size(321, 153);
+            this.pbxForward.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbxForward.TabIndex = 2;
+            this.pbxForward.TabStop = false;
+            this.pbxForward.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
-            // label4
+            // TimeOutTimer
             // 
-            this.label4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(0, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(320, 45);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Стоимость услуги:";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.TimeOutTimer.Interval = 1000;
+            this.TimeOutTimer.Tick += new System.EventHandler(this.TimeOutTimer_Tick);
             // 
             // FormWaitPayBill
             // 
@@ -243,8 +245,8 @@
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbxForward)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxFail)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxForward)).EndInit();
             this.ResumeLayout(false);
 
         }

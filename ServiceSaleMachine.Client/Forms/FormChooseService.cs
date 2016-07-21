@@ -52,7 +52,7 @@ namespace ServiceSaleMachine.Client
             set
             {
                 FServCount = value;
-                FPageCount = value / 4 + 1;
+                FPageCount = (value - 1) / 4 + 1;
             }
         }
 
@@ -61,25 +61,23 @@ namespace ServiceSaleMachine.Client
             get { return FCurrentPage; }
             set
             {
-                if (value > FServCount / 4)
-                    FCurrentPage = FServCount / 4;
+                if (value >= FPageCount)
+                    FCurrentPage = FPageCount - 1;
                 else
                     FCurrentPage = value;
 
                 pbxPrev.Visible = FCurrentPage != 0;
-                pbxNext.Visible = FCurrentPage != (FServCount / 4);
+                pbxNext.Visible = FCurrentPage < FPageCount - 1;
 
-                pictureBox1.Enabled = ((FPageCount == FCurrentPage + 1) && (FServCount % 4 >= 1)) ||
-                    (FCurrentPage < FPageCount);
-                pictureBox2.Enabled = ((FPageCount == FCurrentPage + 1) && (FServCount % 4 >= 2)) ||
-                    (FCurrentPage < FPageCount - 1);
-                pictureBox3.Enabled = ((FPageCount == FCurrentPage + 1) && (FServCount % 4 >= 3)) ||
-                    (FCurrentPage < FPageCount - 1);
-                pictureBox4.Enabled = ((FPageCount == FCurrentPage + 1) && ((FServCount % 4 == 2) && (FServCount != 0))) ||
+                pictureBox1.Enabled = ((FPageCount == FCurrentPage + 1) && ((FServCount - 1) % 4 >= 0)) || (FCurrentPage < FPageCount);
+                pictureBox2.Enabled = ((FPageCount == FCurrentPage + 1) && ((FServCount - 1) % 4 >= 1)) || (FCurrentPage < FPageCount - 1);
+                pictureBox3.Enabled = ((FPageCount == FCurrentPage + 1) && ((FServCount - 1) % 4 >= 2)) || (FCurrentPage < FPageCount - 1);
+                pictureBox4.Enabled = ((FPageCount == FCurrentPage + 1) && (((FServCount - 1) % 4 == 3) && (FServCount != 0))) ||
                     (FCurrentPage < FPageCount - 1);
 
+                string fs = Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.ServiceByIndex(FCurrentPage * 4).filename;
                 if (pictureBox1.Enabled)
-                    pictureBox1.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.ServiceByIndex(FCurrentPage * 4).filename);
+                    pictureBox1.Load(fs);
                 else
                     pictureBox1.Load(EmptyServ);
 

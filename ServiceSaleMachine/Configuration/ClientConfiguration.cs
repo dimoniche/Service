@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
+using System.Diagnostics;
 
 namespace ServiceSaleMachine
 {
@@ -79,9 +80,10 @@ namespace ServiceSaleMachine
 					return true;
 				}
 			}
-			catch
+			catch(Exception e)
 			{
-			}
+                Debug.Print(e.Message);
+            }
 			return false;
 		}
 

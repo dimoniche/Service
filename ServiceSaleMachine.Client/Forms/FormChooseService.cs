@@ -101,12 +101,18 @@ namespace ServiceSaleMachine.Client
 
         private void pbxNext_Click(object sender, EventArgs e)
         {
+            // сбросим таймаут
+            Timeout = 0;
+        
             if (FCurrentPage + 1 < FPageCount)
                 CurrentPage += 1;
         }
 
         private void pbxPrev_Click(object sender, EventArgs e)
         {
+            // сбросим таймаут
+            Timeout = 0;
+
             if (FCurrentPage + 1 > 0)
                 CurrentPage -= 1;
         }
@@ -209,6 +215,12 @@ namespace ServiceSaleMachine.Client
         private void TimeOutTimer_Tick(object sender, EventArgs e)
         {
             Timeout++;
+
+            if (Globals.ClientConfiguration.Settings.timeout == 0)
+            {
+                Timeout = 0;
+                return;
+            }
 
             if (Timeout > Globals.ClientConfiguration.Settings.timeout * 60)
             {

@@ -12,6 +12,7 @@ namespace ServiceSaleMachine.Client
     public partial class FormRules : MyForm
     {
         FormResultData data;
+        private int Timeout;
 
         public FormRules()
         {
@@ -27,6 +28,7 @@ namespace ServiceSaleMachine.Client
                 richTextBoxEx1.Text = "Ошибка загрузки файла с инструкцией";
             }
 
+            Timeout = 0;
         }
 
         public override void LoadData()
@@ -51,6 +53,23 @@ namespace ServiceSaleMachine.Client
         private void pbxRetToMain_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void timerTimeOut_Tick(object sender, EventArgs e)
+        {
+            Timeout++;
+
+            if (Globals.ClientConfiguration.Settings.timeout == 0)
+            {
+                Timeout = 0;
+                return;
+            }
+
+            if (Timeout > Globals.ClientConfiguration.Settings.timeout * 60)
+            {
+                data.stage = WorkerStateStage.TimeOut;
+                this.Close();
+            }
         }
     }
 }

@@ -34,6 +34,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.richTextBoxEx1 = new ServiceSaleMachine.RichTextBoxEx();
+            this.timerTimeOut = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxRetToMain)).BeginInit();
             this.panel1.SuspendLayout();
@@ -88,6 +89,11 @@
             this.richTextBoxEx1.Text = "Это инструкция\nВ общем, нажимаете на кнопку, получаете результат.\nИ денежки не за" +
     "будьте!\n";
             // 
+            // timerTimeOut
+            // 
+            this.timerTimeOut.Interval = 1000;
+            this.timerTimeOut.Tick += new System.EventHandler(this.timerTimeOut_Tick);
+            // 
             // FormRules
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -113,5 +119,6 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Panel panel1;
         private RichTextBoxEx richTextBoxEx1;
+        private System.Windows.Forms.Timer timerTimeOut;
     }
 }

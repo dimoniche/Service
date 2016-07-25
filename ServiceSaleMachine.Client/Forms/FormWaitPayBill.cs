@@ -77,6 +77,9 @@ namespace ServiceSaleMachine.Client
         /// <param name="e"></param>
         void CreditMoney(ServiceClientResponseEventArgs e)
         {
+            // сбросим таймаут
+            Timeout = 0;
+
             int numberNominal = ((BillNominal)e.Message.Content).nominalNumber;
 
             if (Globals.ClientConfiguration.Settings.nominals[numberNominal] > 0)
@@ -258,6 +261,12 @@ namespace ServiceSaleMachine.Client
         private void TimeOutTimer_Tick(object sender, EventArgs e)
         {
             Timeout++;
+
+            if(Globals.ClientConfiguration.Settings.timeout == 0)
+            {
+                Timeout = 0;
+                return;
+            }
 
             if (Timeout > Globals.ClientConfiguration.Settings.timeout * 60)
             {

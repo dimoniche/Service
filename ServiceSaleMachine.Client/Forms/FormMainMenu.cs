@@ -102,6 +102,12 @@ namespace ServiceSaleMachine.Client
         {
             Timeout++;
 
+            if (Globals.ClientConfiguration.Settings.timeout == 0)
+            {
+                Timeout = 0;
+                return;
+            }
+
             if (Timeout > Globals.ClientConfiguration.Settings.timeout * 60)
             {
                 data.stage = WorkerStateStage.TimeOut;

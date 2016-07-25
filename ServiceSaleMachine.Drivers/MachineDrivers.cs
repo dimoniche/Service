@@ -814,6 +814,8 @@ namespace ServiceSaleMachine.Drivers
 
                             Message message = new Message();
 
+                            message.Event = DeviceEvent.BillAcceptorCredit;
+
                             BillNominal nominal = new BillNominal();
 
                             nominal.record = bill_record[CCNETDriver.PollResults.Z2];

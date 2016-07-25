@@ -398,9 +398,24 @@ namespace ServiceSaleMachine.Drivers
 
             send_bill_command = true;
 
+            long mask = 0x00;
+            int i = 0;
+
+            foreach(int nominal in Globals.ClientConfiguration.Settings.nominals)
+            {
+                if (nominal > 0)
+                {
+                    mask |= (((long)1) << i);
+                }
+                else
+                {
+                    mask &= ~(((long)1) << i);
+                }
+            }
+
             try
             {
-                if (CCNETDriver.Cmd(CCNETCommandEnum.BillType, (byte)CCNETDriver.BillAdr, (long)0x00ffffff, (long)0x00) == true)
+                if (CCNETDriver.Cmd(CCNETCommandEnum.BillType, (byte)CCNETDriver.BillAdr, mask, (long)0x00) == true)
                 {
                     result = "ОК";
                 }
@@ -435,9 +450,24 @@ namespace ServiceSaleMachine.Drivers
 
             send_bill_command = true;
 
+            long mask = 0x00;
+            int i = 0;
+
+            foreach (int nominal in Globals.ClientConfiguration.Settings.nominals)
+            {
+                if (nominal > 0)
+                {
+                    mask |= (((long)1) << i);
+                }
+                else
+                {
+                    mask &= ~(((long)1) << i);
+                }
+            }
+
             try
             {
-                if (CCNETDriver.Cmd(CCNETCommandEnum.BillType, (byte)CCNETDriver.BillAdr, (long)0x00ffffff, (long)0x00ffffff) == true)
+                if (CCNETDriver.Cmd(CCNETCommandEnum.BillType, (byte)CCNETDriver.BillAdr, mask, mask) == true)
                 {
                     result = "ОК";
                 }
@@ -730,7 +760,14 @@ namespace ServiceSaleMachine.Drivers
                             Message message = new Message();
 
                             message.Event = DeviceEvent.BillAcceptorEscrow;
-                            message.Content = bill_record[CCNETDriver.PollResults.Z2].Denomination.ToString();
+
+                            BillNominal nominal = new BillNominal();
+
+                            nominal.record = bill_record[CCNETDriver.PollResults.Z2];
+                            nominal.nominalNumber = CCNETDriver.PollResults.Z2;
+                            nominal.Denomination = bill_record[CCNETDriver.PollResults.Z2].Denomination.ToString();
+
+                            message.Content = nominal;
 
                             ReceivedResponse(this, new ServiceClientResponseEventArgs(message));
                         }
@@ -740,8 +777,13 @@ namespace ServiceSaleMachine.Drivers
                         {
                             Message message = new Message();
 
-                            message.Event = DeviceEvent.BillAcceptorCredit;
-                            message.Content = bill_record[CCNETDriver.PollResults.Z2].Denomination.ToString();
+                            BillNominal nominal = new BillNominal();
+
+                            nominal.record = bill_record[CCNETDriver.PollResults.Z2];
+                            nominal.nominalNumber = CCNETDriver.PollResults.Z2;
+                            nominal.Denomination = bill_record[CCNETDriver.PollResults.Z2].Denomination.ToString();
+
+                            message.Content = nominal;
 
                             ReceivedResponse(this, new ServiceClientResponseEventArgs(message));
                         }

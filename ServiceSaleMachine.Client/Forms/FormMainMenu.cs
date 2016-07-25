@@ -102,7 +102,7 @@ namespace ServiceSaleMachine.Client
         {
             Timeout++;
 
-            if (Timeout > 60)
+            if (Timeout > Globals.ClientConfiguration.Settings.timeout * 60)
             {
                 data.stage = WorkerStateStage.TimeOut;
                 this.Close();

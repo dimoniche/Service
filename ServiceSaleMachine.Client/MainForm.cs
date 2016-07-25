@@ -90,7 +90,7 @@ namespace ServiceSaleMachine.Client
             }
 
             initDevice:
-            WorkerWait.Run();
+            //WorkerWait.Run();
 
             if(Globals.ClientConfiguration.Settings.offHardware == 0)   // если не отключено
             {
@@ -271,8 +271,8 @@ namespace ServiceSaleMachine.Client
 
                         if (result.stage == WorkerStateStage.Fail || result.stage == WorkerStateStage.EndDropCassette)
                         {
-                            // отказ - выход в начало
-                            continue;
+                            // отказ - выход в выбор услуг
+                            goto ChooseService;
                         }
                         else if (result.stage == WorkerStateStage.ExitProgram)
                         {

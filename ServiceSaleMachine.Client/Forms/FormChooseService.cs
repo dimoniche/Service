@@ -210,7 +210,7 @@ namespace ServiceSaleMachine.Client
         {
             Timeout++;
 
-            if (Timeout > 30)
+            if (Timeout > Globals.ClientConfiguration.Settings.timeout * 60)
             {
                 data.stage = WorkerStateStage.TimeOut;
                 this.Close();

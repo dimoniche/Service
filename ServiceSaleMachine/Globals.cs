@@ -23,7 +23,7 @@ namespace ServiceSaleMachine
         public static ClientConfiguration ClientConfiguration { get; private set; }
         public static DesignConfiguration DesignConfiguration { get; private set; }
         public static CheckConfiguration CheckConfiguration { get; private set; }
-        
+
         public static RegistrySettings RegistrySettings { get; private set; }
 
         // Сообщения об ошибках

@@ -46,6 +46,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FormResultData.cs" />
+    <Compile Include="Forms\FormBigBill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormBigBill.Designer.cs">
+      <DependentUpon>FormBigBill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormInsertBill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormInsertBill.Designer.cs">
+      <DependentUpon>FormInsertBill.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormRules.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,6 +156,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\FormBigBill.resx">
+      <DependentUpon>FormBigBill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormInsertBill.resx">
+      <DependentUpon>FormInsertBill.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormRules.resx">
       <DependentUpon>FormRules.cs</DependentUpon>
     </EmbeddedResource>

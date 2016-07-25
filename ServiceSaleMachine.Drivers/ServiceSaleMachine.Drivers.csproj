@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CCNET\BillNominal.cs" />
     <Compile Include="CCNET\CCNETCommandEnum.cs" />
     <Compile Include="CCNET\CCNETSequence.cs" />
     <Compile Include="CCNET\CCOMPort.cs" />

@@ -25,14 +25,22 @@ namespace ServiceSaleMachine
         // отключение купюроприемник
         public int offBill;
 
+        // массив обрабатываемых номиналов купюр
+        public int[] nominals = new int[24];
+
+        // режим работы купюроприемника
+        public int changeOn;
+
+        // таймаут перехода в реклами или начальный экран
+        public int timeout;
+
         // настройки сервисов
         public List<Service> services;
+
 
         internal ClientConfigurationProperties()
 		{
 			
 		}
-
-
     }
 }

@@ -58,7 +58,16 @@ namespace ServiceSaleMachine.Client
             if (Globals.ClientConfiguration.Settings.offHardware == 0)
             {
                 // перейдем в режим ожидания купюр
-                data.drivers.WaitBill();
+                if (Globals.ClientConfiguration.Settings.changeOn > 0)
+                {
+                    // со сдачей - жрем деньги сразу
+                    data.drivers.WaitBill();
+                }
+                else
+                {
+                    // без сдачи
+                    data.drivers.WaitBillEscrow();
+                }
             }
         }
 
@@ -68,11 +77,78 @@ namespace ServiceSaleMachine.Client
         /// <param name="e"></param>
         void CreditMoney(ServiceClientResponseEventArgs e)
         {
+            int numberNominal = ((BillNominal)e.Message.Content).nominalNumber;
+
+            if (Globals.ClientConfiguration.Settings.nominals[numberNominal] > 0)
+            {
+                // такую купюру мы обрабатываем
+
+            }
+            else
+            {
+                // такая купюра не пойдет - вернем ее
+                data.drivers.ReturnBill();
+                return;
+            }
+
+            //  прошли проверку
+
             // внесли деньги
             int count = 0;
-            int.TryParse((string)e.Message.Content, out count);
+            int.TryParse(((BillNominal)e.Message.Content).Denomination, out count);
+
             amount += count;
 
+            // сдача
+            int diff = 0;
+
+            if (Globals.ClientConfiguration.Settings.changeOn > 0)
+            {
+                // сдача на чек
+                if (amount > data.serv.price)
+                {
+                    // посчитаем размер сдачи
+                    diff = amount - data.serv.price;
+
+                    // тут надо решить как выдать сдачу
+                }
+            }
+            else
+            {
+                // без сдачи
+                if(count > data.serv.price)
+                {
+                    // купюра великовата - вернем ее
+                    data.drivers.ReturnBill();
+
+                    // сообщим о том что купюра великовата
+                    FormManager.OpenForm<FormBigBill>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify);
+                    return;
+                }
+
+                if (amount < data.serv.price)
+                {
+                    // еще не все внесли - напишем номинал купюры с предложением съесть ее
+                    bool res = (bool)FormManager.OpenForm<FormInsertBill>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, ((BillNominal)e.Message.Content).Denomination);
+
+                    if(res)
+                    {
+                        // оставляем купюру
+                    }
+                    else
+                    {
+                        // возвращаем ее обратно
+                        amount -= count;
+
+                        data.drivers.ReturnBill();
+                        return;
+                    }
+                }
+
+                // внесли достаточную для услуги сумму
+            }
+
+            // напишем на экране
             AmountServiceText.Text = amount + " руб";
 
             // деньги внесли - нет пути назад
@@ -126,11 +202,10 @@ namespace ServiceSaleMachine.Client
         {
             TimeOutTimer.Enabled = false;
 
-            // вернем деньгу
-            data.drivers.ReturnBill();
-
             if (Globals.ClientConfiguration.Settings.offHardware == 0)
             {
+                // вернем деньгу
+                data.drivers.ReturnBill();
                 data.drivers.StopWaitBill();
             }
             Params.Result = data;
@@ -179,7 +254,7 @@ namespace ServiceSaleMachine.Client
         {
             Timeout++;
 
-            if (Timeout > 30)
+            if (Timeout > Globals.ClientConfiguration.Settings.timeout * 60)
             {
                 data.stage = WorkerStateStage.TimeOut;
                 this.Close();

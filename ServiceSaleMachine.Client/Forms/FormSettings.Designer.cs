@@ -40,16 +40,21 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cBxComPortScaner = new System.Windows.Forms.ComboBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label10 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.label16 = new System.Windows.Forms.Label();
+            this.button8 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.butWaitNoteOff = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.butWaitNoteOn = new System.Windows.Forms.Button();
             this.CountBill = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.Info = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.butResetBill = new System.Windows.Forms.Button();
             this.butStopPoll = new System.Windows.Forms.Button();
@@ -82,16 +87,28 @@
             this.label8 = new System.Windows.Forms.Label();
             this.dtDBFrom = new System.Windows.Forms.DateTimePicker();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabControl3 = new System.Windows.Forms.TabControl();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.label12 = new System.Windows.Forms.Label();
+            this.textBoxTimeOut = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.cBxBillOff = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.cbxOffDataBase = new System.Windows.Forms.CheckBox();
             this.cbxCheckOff = new System.Windows.Forms.CheckBox();
             this.cbxOffHardware = new System.Windows.Forms.CheckBox();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
-            this.Info = new System.Windows.Forms.Label();
+            this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button9 = new System.Windows.Forms.Button();
+            this.checkchangeOn = new System.Windows.Forms.CheckBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.butWriteNominal = new System.Windows.Forms.Button();
+            this.checkBox5000 = new System.Windows.Forms.CheckBox();
+            this.checkBox1000 = new System.Windows.Forms.CheckBox();
+            this.checkBox500 = new System.Windows.Forms.CheckBox();
+            this.checkBox100 = new System.Windows.Forms.CheckBox();
+            this.checkBox50 = new System.Windows.Forms.CheckBox();
+            this.checkBox10 = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -105,6 +122,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabControl3.SuspendLayout();
+            this.tabPage6.SuspendLayout();
+            this.tabPage9.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -260,6 +282,16 @@
             this.tabPage3.Text = "Купюроприемник";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label10.Location = new System.Drawing.Point(-292, 81);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(61, 24);
+            this.label10.TabIndex = 47;
+            this.label10.Text = "0 руб";
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -288,6 +320,16 @@
             this.label16.TabIndex = 45;
             this.label16.Text = "Забор купюры сразу";
             // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(34, 80);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(164, 23);
+            this.button8.TabIndex = 44;
+            this.button8.Text = "Идетификатор";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click_1);
+            // 
             // button5
             // 
             this.button5.Location = new System.Drawing.Point(356, 382);
@@ -297,6 +339,26 @@
             this.button5.Text = "Количество купюр";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click_1);
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(356, 353);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(164, 23);
+            this.button6.TabIndex = 44;
+            this.button6.Text = "Отмена режима ожидания купюры";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(356, 324);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(164, 23);
+            this.button7.TabIndex = 44;
+            this.button7.Text = "Забрать купюру";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click_1);
             // 
             // button2
             // 
@@ -355,6 +417,15 @@
             this.label9.Size = new System.Drawing.Size(115, 13);
             this.label9.TabIndex = 43;
             this.label9.Text = "С задержкой купюры";
+            // 
+            // Info
+            // 
+            this.Info.AutoSize = true;
+            this.Info.Location = new System.Drawing.Point(213, 85);
+            this.Info.Name = "Info";
+            this.Info.Size = new System.Drawing.Size(87, 13);
+            this.Info.TabIndex = 43;
+            this.Info.Text = "Идентификатор";
             // 
             // label14
             // 
@@ -667,11 +738,7 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.cBxBillOff);
-            this.tabPage2.Controls.Add(this.checkBox1);
-            this.tabPage2.Controls.Add(this.cbxOffDataBase);
-            this.tabPage2.Controls.Add(this.cbxCheckOff);
-            this.tabPage2.Controls.Add(this.cbxOffHardware);
+            this.tabPage2.Controls.Add(this.tabControl3);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -680,13 +747,70 @@
             this.tabPage2.Text = "Настройки";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // tabControl3
+            // 
+            this.tabControl3.Controls.Add(this.tabPage6);
+            this.tabControl3.Controls.Add(this.tabPage9);
+            this.tabControl3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl3.Location = new System.Drawing.Point(3, 3);
+            this.tabControl3.Name = "tabControl3";
+            this.tabControl3.SelectedIndex = 0;
+            this.tabControl3.Size = new System.Drawing.Size(714, 464);
+            this.tabControl3.TabIndex = 0;
+            // 
+            // tabPage6
+            // 
+            this.tabPage6.Controls.Add(this.label12);
+            this.tabPage6.Controls.Add(this.textBoxTimeOut);
+            this.tabPage6.Controls.Add(this.label11);
+            this.tabPage6.Controls.Add(this.cBxBillOff);
+            this.tabPage6.Controls.Add(this.checkBox1);
+            this.tabPage6.Controls.Add(this.cbxOffDataBase);
+            this.tabPage6.Controls.Add(this.cbxCheckOff);
+            this.tabPage6.Controls.Add(this.cbxOffHardware);
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(706, 438);
+            this.tabPage6.TabIndex = 0;
+            this.tabPage6.Text = "Основные";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(241, 143);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(27, 13);
+            this.label12.TabIndex = 12;
+            this.label12.Text = "мин";
+            // 
+            // textBoxTimeOut
+            // 
+            this.textBoxTimeOut.Location = new System.Drawing.Point(126, 140);
+            this.textBoxTimeOut.Name = "textBoxTimeOut";
+            this.textBoxTimeOut.Size = new System.Drawing.Size(100, 20);
+            this.textBoxTimeOut.TabIndex = 11;
+            this.textBoxTimeOut.Text = "0";
+            this.textBoxTimeOut.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxTimeOut.Leave += new System.EventHandler(this.textBoxTimeOut_Leave);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(12, 147);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(108, 13);
+            this.label11.TabIndex = 10;
+            this.label11.Text = "Время бездействия";
+            // 
             // cBxBillOff
             // 
             this.cBxBillOff.AutoSize = true;
-            this.cBxBillOff.Location = new System.Drawing.Point(24, 117);
+            this.cBxBillOff.Location = new System.Drawing.Point(15, 111);
             this.cBxBillOff.Name = "cBxBillOff";
             this.cBxBillOff.Size = new System.Drawing.Size(171, 17);
-            this.cBxBillOff.TabIndex = 4;
+            this.cBxBillOff.TabIndex = 8;
             this.cBxBillOff.Text = "Отключить купюроприемник";
             this.cBxBillOff.UseVisualStyleBackColor = true;
             this.cBxBillOff.CheckedChanged += new System.EventHandler(this.cBxBillOff_CheckedChanged);
@@ -694,20 +818,21 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(24, 94);
+            this.checkBox1.Location = new System.Drawing.Point(15, 88);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(230, 17);
-            this.checkBox1.TabIndex = 4;
+            this.checkBox1.TabIndex = 9;
             this.checkBox1.Text = "Отключить регистрацию пользователей";
             this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // cbxOffDataBase
             // 
             this.cbxOffDataBase.AutoSize = true;
-            this.cbxOffDataBase.Location = new System.Drawing.Point(24, 71);
+            this.cbxOffDataBase.Location = new System.Drawing.Point(15, 65);
             this.cbxOffDataBase.Name = "cbxOffDataBase";
             this.cbxOffDataBase.Size = new System.Drawing.Size(147, 17);
-            this.cbxOffDataBase.TabIndex = 3;
+            this.cbxOffDataBase.TabIndex = 7;
             this.cbxOffDataBase.Text = "Отключить базу данных";
             this.cbxOffDataBase.UseVisualStyleBackColor = true;
             this.cbxOffDataBase.CheckedChanged += new System.EventHandler(this.cbxOffDataBase_CheckedChanged);
@@ -715,10 +840,10 @@
             // cbxCheckOff
             // 
             this.cbxCheckOff.AutoSize = true;
-            this.cbxCheckOff.Location = new System.Drawing.Point(24, 48);
+            this.cbxCheckOff.Location = new System.Drawing.Point(15, 42);
             this.cbxCheckOff.Name = "cbxCheckOff";
             this.cbxCheckOff.Size = new System.Drawing.Size(152, 17);
-            this.cbxCheckOff.TabIndex = 2;
+            this.cbxCheckOff.TabIndex = 6;
             this.cbxCheckOff.Text = "Отключить оплату чеком";
             this.cbxCheckOff.UseVisualStyleBackColor = true;
             this.cbxCheckOff.CheckedChanged += new System.EventHandler(this.cbxCheckOff_CheckedChanged);
@@ -726,62 +851,142 @@
             // cbxOffHardware
             // 
             this.cbxOffHardware.AutoSize = true;
-            this.cbxOffHardware.Location = new System.Drawing.Point(24, 25);
+            this.cbxOffHardware.Location = new System.Drawing.Point(15, 19);
             this.cbxOffHardware.Name = "cbxOffHardware";
             this.cbxOffHardware.Size = new System.Drawing.Size(155, 17);
-            this.cbxOffHardware.TabIndex = 1;
+            this.cbxOffHardware.TabIndex = 5;
             this.cbxOffHardware.Text = "Отключить оборудование";
             this.cbxOffHardware.UseVisualStyleBackColor = true;
-            this.cbxOffHardware.CheckStateChanged += new System.EventHandler(this.cbxOffHardware_CheckStateChanged);
+            this.cbxOffHardware.CheckedChanged += new System.EventHandler(this.cbxOffHardware_CheckStateChanged);
             // 
-            // button6
+            // tabPage9
             // 
-            this.button6.Location = new System.Drawing.Point(356, 353);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(164, 23);
-            this.button6.TabIndex = 44;
-            this.button6.Text = "Отмена режима ожидания купюры";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button5_Click);
+            this.tabPage9.Controls.Add(this.groupBox2);
+            this.tabPage9.Controls.Add(this.groupBox1);
+            this.tabPage9.Location = new System.Drawing.Point(4, 22);
+            this.tabPage9.Name = "tabPage9";
+            this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage9.Size = new System.Drawing.Size(706, 438);
+            this.tabPage9.TabIndex = 1;
+            this.tabPage9.Text = "Прием купюр";
+            this.tabPage9.UseVisualStyleBackColor = true;
             // 
-            // button7
+            // groupBox2
             // 
-            this.button7.Location = new System.Drawing.Point(356, 324);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(164, 23);
-            this.button7.TabIndex = 44;
-            this.button7.Text = "Забрать купюру";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click_1);
+            this.groupBox2.Controls.Add(this.button9);
+            this.groupBox2.Controls.Add(this.checkchangeOn);
+            this.groupBox2.Location = new System.Drawing.Point(241, 20);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(248, 161);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Режим работы";
             // 
-            // button8
+            // button9
             // 
-            this.button8.Location = new System.Drawing.Point(34, 80);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(164, 23);
-            this.button8.TabIndex = 44;
-            this.button8.Text = "Идетификатор";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click_1);
+            this.button9.Location = new System.Drawing.Point(155, 25);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(75, 23);
+            this.button9.TabIndex = 1;
+            this.button9.Text = "Записать";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
-            // label10
+            // checkchangeOn
             // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label10.Location = new System.Drawing.Point(-292, 81);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(61, 24);
-            this.label10.TabIndex = 47;
-            this.label10.Text = "0 руб";
+            this.checkchangeOn.AutoSize = true;
+            this.checkchangeOn.Location = new System.Drawing.Point(16, 25);
+            this.checkchangeOn.Name = "checkchangeOn";
+            this.checkchangeOn.Size = new System.Drawing.Size(77, 17);
+            this.checkchangeOn.TabIndex = 1;
+            this.checkchangeOn.Text = "Со сдачей";
+            this.checkchangeOn.UseVisualStyleBackColor = true;
             // 
-            // Info
+            // groupBox1
             // 
-            this.Info.AutoSize = true;
-            this.Info.Location = new System.Drawing.Point(213, 85);
-            this.Info.Name = "Info";
-            this.Info.Size = new System.Drawing.Size(87, 13);
-            this.Info.TabIndex = 43;
-            this.Info.Text = "Идентификатор";
+            this.groupBox1.Controls.Add(this.butWriteNominal);
+            this.groupBox1.Controls.Add(this.checkBox5000);
+            this.groupBox1.Controls.Add(this.checkBox1000);
+            this.groupBox1.Controls.Add(this.checkBox500);
+            this.groupBox1.Controls.Add(this.checkBox100);
+            this.groupBox1.Controls.Add(this.checkBox50);
+            this.groupBox1.Controls.Add(this.checkBox10);
+            this.groupBox1.Location = new System.Drawing.Point(17, 20);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(218, 161);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Номиналы купюр";
+            // 
+            // butWriteNominal
+            // 
+            this.butWriteNominal.Location = new System.Drawing.Point(125, 25);
+            this.butWriteNominal.Name = "butWriteNominal";
+            this.butWriteNominal.Size = new System.Drawing.Size(75, 23);
+            this.butWriteNominal.TabIndex = 1;
+            this.butWriteNominal.Text = "Записать";
+            this.butWriteNominal.UseVisualStyleBackColor = true;
+            this.butWriteNominal.Click += new System.EventHandler(this.butWriteNominal_Click);
+            // 
+            // checkBox5000
+            // 
+            this.checkBox5000.AutoSize = true;
+            this.checkBox5000.Location = new System.Drawing.Point(6, 134);
+            this.checkBox5000.Name = "checkBox5000";
+            this.checkBox5000.Size = new System.Drawing.Size(70, 17);
+            this.checkBox5000.TabIndex = 1;
+            this.checkBox5000.Text = "5000 руб";
+            this.checkBox5000.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1000
+            // 
+            this.checkBox1000.AutoSize = true;
+            this.checkBox1000.Location = new System.Drawing.Point(6, 111);
+            this.checkBox1000.Name = "checkBox1000";
+            this.checkBox1000.Size = new System.Drawing.Size(70, 17);
+            this.checkBox1000.TabIndex = 1;
+            this.checkBox1000.Text = "1000 руб";
+            this.checkBox1000.UseVisualStyleBackColor = true;
+            // 
+            // checkBox500
+            // 
+            this.checkBox500.AutoSize = true;
+            this.checkBox500.Location = new System.Drawing.Point(6, 88);
+            this.checkBox500.Name = "checkBox500";
+            this.checkBox500.Size = new System.Drawing.Size(64, 17);
+            this.checkBox500.TabIndex = 1;
+            this.checkBox500.Text = "500 руб";
+            this.checkBox500.UseVisualStyleBackColor = true;
+            // 
+            // checkBox100
+            // 
+            this.checkBox100.AutoSize = true;
+            this.checkBox100.Location = new System.Drawing.Point(6, 65);
+            this.checkBox100.Name = "checkBox100";
+            this.checkBox100.Size = new System.Drawing.Size(64, 17);
+            this.checkBox100.TabIndex = 1;
+            this.checkBox100.Text = "100 руб";
+            this.checkBox100.UseVisualStyleBackColor = true;
+            // 
+            // checkBox50
+            // 
+            this.checkBox50.AutoSize = true;
+            this.checkBox50.Location = new System.Drawing.Point(6, 42);
+            this.checkBox50.Name = "checkBox50";
+            this.checkBox50.Size = new System.Drawing.Size(58, 17);
+            this.checkBox50.TabIndex = 1;
+            this.checkBox50.Text = "50 руб";
+            this.checkBox50.UseVisualStyleBackColor = true;
+            // 
+            // checkBox10
+            // 
+            this.checkBox10.AutoSize = true;
+            this.checkBox10.Location = new System.Drawing.Point(6, 19);
+            this.checkBox10.Name = "checkBox10";
+            this.checkBox10.Size = new System.Drawing.Size(58, 17);
+            this.checkBox10.TabIndex = 1;
+            this.checkBox10.Text = "10 руб";
+            this.checkBox10.UseVisualStyleBackColor = true;
             // 
             // FormSettings
             // 
@@ -811,7 +1016,14 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
+            this.tabControl3.ResumeLayout(false);
+            this.tabPage6.ResumeLayout(false);
+            this.tabPage6.PerformLayout();
+            this.tabPage9.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -866,12 +1078,7 @@
         private System.Windows.Forms.DateTimePicker dtDBFrom;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.CheckBox cbxOffHardware;
         private System.Windows.Forms.Button butWaitNoteOff;
-        private System.Windows.Forms.CheckBox cbxCheckOff;
-        private System.Windows.Forms.CheckBox cbxOffDataBase;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox cBxBillOff;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label9;
@@ -882,5 +1089,27 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Label Info;
+        private System.Windows.Forms.TabControl tabControl3;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.CheckBox cBxBillOff;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox cbxOffDataBase;
+        private System.Windows.Forms.CheckBox cbxCheckOff;
+        private System.Windows.Forms.CheckBox cbxOffHardware;
+        private System.Windows.Forms.TabPage tabPage9;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.CheckBox checkchangeOn;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button butWriteNominal;
+        private System.Windows.Forms.CheckBox checkBox5000;
+        private System.Windows.Forms.CheckBox checkBox1000;
+        private System.Windows.Forms.CheckBox checkBox500;
+        private System.Windows.Forms.CheckBox checkBox100;
+        private System.Windows.Forms.CheckBox checkBox50;
+        private System.Windows.Forms.CheckBox checkBox10;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.TextBox textBoxTimeOut;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
     }
 }

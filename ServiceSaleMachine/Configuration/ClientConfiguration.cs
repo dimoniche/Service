@@ -59,6 +59,20 @@ namespace ServiceSaleMachine
                         if ((xElement = xSettings.Element("offDataBase")) != null) Settings.offDataBase = int.Parse(xElement.Value);
                         if ((xElement = xSettings.Element("offBill")) != null) Settings.offBill = int.Parse(xElement.Value);
 
+                        if ((xElement = xSettings.Element("changeOn")) != null) Settings.changeOn = int.Parse(xElement.Value);
+                        if ((xElement = xSettings.Element("timeout")) != null) Settings.timeout = int.Parse(xElement.Value);
+
+                        if ((xElement = xSettings.Element("nominals")) != null)
+                        {
+                            Settings.nominals = new int[24];
+                            int i = 0;
+                            foreach (XElement xItem in xElement.Elements("nominal"))
+                            {
+                                int tmp = int.Parse(xItem.Value);
+                                Settings.nominals[i++] = tmp;
+                            }
+                        }
+                                            
                         // настройки сервисов
                         if ((xElement = xSettings.Element("services")) != null)
                         {
@@ -107,6 +121,16 @@ namespace ServiceSaleMachine
                 xSettings.Add(new XElement("offCheck", Settings.offCheck.ToString()));
                 xSettings.Add(new XElement("offDataBase", Settings.offDataBase.ToString()));
                 xSettings.Add(new XElement("offBill", Settings.offBill.ToString()));
+                xSettings.Add(new XElement("changeOn", Settings.changeOn.ToString()));
+                xSettings.Add(new XElement("timeout", Settings.timeout.ToString()));
+
+                XElement element = new XElement("nominals");
+                foreach (int nominal in Settings.nominals)
+                {
+                    XElement newservice = new XElement("nominal", nominal.ToString());
+                    element.Add(newservice);
+                }
+                xSettings.Add(element);
 
                 if (Settings.services.Count > 0)
                 {

@@ -271,6 +271,18 @@ namespace ServiceSaleMachine.Client
             }
 
             init = false;
+
+            // номиналы купюр
+            checkBox10.Checked = Globals.ClientConfiguration.Settings.nominals[2] > 0 ? true : false;
+            checkBox50.Checked = Globals.ClientConfiguration.Settings.nominals[3] > 0 ? true : false;
+            checkBox100.Checked = Globals.ClientConfiguration.Settings.nominals[4] > 0 ? true : false;
+            checkBox500.Checked = Globals.ClientConfiguration.Settings.nominals[5] > 0 ? true : false;
+            checkBox1000.Checked = Globals.ClientConfiguration.Settings.nominals[6] > 0 ? true : false;
+            checkBox5000.Checked = Globals.ClientConfiguration.Settings.nominals[7] > 0 ? true : false;
+
+            checkchangeOn.Checked = Globals.ClientConfiguration.Settings.changeOn > 0 ? true : false;
+
+            textBoxTimeOut.Text = Globals.ClientConfiguration.Settings.timeout.ToString();
         }
 
         public FormSettings()
@@ -300,10 +312,10 @@ namespace ServiceSaleMachine.Client
                     richTextBox1.Text = (string)e.Message.Content + "\n" + richTextBox1.Text;
                     break;
                 case DeviceEvent.BillAcceptorCredit:
-                    label5.Text = (string)e.Message.Content + " руб";
+                    label5.Text = ((BillNominal)e.Message.Content).Denomination + " руб";
                     break;
                 case DeviceEvent.BillAcceptorEscrow:
-                    label5.Text = (string)e.Message.Content + " руб";
+                    label5.Text = ((BillNominal)e.Message.Content).Denomination + " руб";
                     break;
             }
         }
@@ -560,10 +572,10 @@ namespace ServiceSaleMachine.Client
 
             if (!init)
             {
-                WorkerWait.Run();
+                //WorkerWait.Run();
                 data.drivers.InitAllDevice();
                 ReLoad();
-                WorkerWait.Abort();
+                if (WorkerWait.IsWork) WorkerWait.Abort();
             }
         }
 
@@ -600,10 +612,10 @@ namespace ServiceSaleMachine.Client
 
                 if (!init)
                 {
-                    WorkerWait.Run();
+                    //WorkerWait.Run();
                     data.drivers.InitAllDevice();
                     ReLoad();
-                    WorkerWait.Abort();
+                    if (WorkerWait.IsWork) WorkerWait.Abort();
                 }
             }
         }
@@ -743,6 +755,39 @@ namespace ServiceSaleMachine.Client
         {
             if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
             Info.Text = data.drivers.getInfoBill();
+        }
+
+        private void butWriteNominal_Click(object sender, EventArgs e)
+        {
+            Globals.ClientConfiguration.Settings.nominals[2] = checkBox10.Checked ? 1 : 0;
+            Globals.ClientConfiguration.Settings.nominals[3] = checkBox50.Checked ? 1 : 0;
+            Globals.ClientConfiguration.Settings.nominals[4] = checkBox100.Checked ? 1 : 0;
+            Globals.ClientConfiguration.Settings.nominals[5] = checkBox500.Checked ? 1 : 0;
+            Globals.ClientConfiguration.Settings.nominals[6] = checkBox1000.Checked ? 1 : 0;
+            Globals.ClientConfiguration.Settings.nominals[7] = checkBox5000.Checked ? 1 : 0;
+
+            Globals.ClientConfiguration.Save();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            Globals.ClientConfiguration.Settings.changeOn = checkchangeOn.Checked ? 1 : 0;
+            Globals.ClientConfiguration.Save();
+        }
+
+        private void textBoxTimeOut_Leave(object sender, EventArgs e)
+        {
+            int time = 0;
+
+            int.TryParse(textBoxTimeOut.Text, out time);
+
+            Globals.ClientConfiguration.Settings.timeout = time;
+            Globals.ClientConfiguration.Save();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -33,6 +33,9 @@ namespace ServiceSaleMachine.Drivers
         public bool hold_bill = false;  // удерживать купюру
         bool send_bill_command = false; // отправляем в данный момент команду в приемник купюр
 
+        public bool gettingBill = false;        // грузим купюру
+        public bool gettingEscrowBill = false;  // задержали купюру
+
         // логгер
         Log log;
 
@@ -239,6 +242,22 @@ namespace ServiceSaleMachine.Drivers
             return res;
         }
 
+        public bool bill_recordIsEmpty()
+        {
+            bool empty = true;
+
+            foreach(_BillRecord record in bill_record)
+            {
+                if(record.Denomination > 0)
+                {
+                    empty = false;
+                    break;
+                }
+            }
+
+            return empty;
+        }
+
         public void ManualInitDevice()
         {
 
@@ -411,6 +430,8 @@ namespace ServiceSaleMachine.Drivers
                 {
                     mask &= ~(((long)1) << i);
                 }
+
+                i++;
             }
 
             try
@@ -463,6 +484,8 @@ namespace ServiceSaleMachine.Drivers
                 {
                     mask &= ~(((long)1) << i);
                 }
+
+                i++;
             }
 
             try
@@ -686,7 +709,10 @@ namespace ServiceSaleMachine.Drivers
             int stepCount = 0;
 
             // сначала загрузим массив принимаемых купюр
-            GetBillTable();
+            while (bill_recordIsEmpty())
+            {
+                GetBillTable();
+            }
 
             CCNETDriver.Cmd(CCNETCommandEnum.Information, (byte)CCNETDriver.BillAdr);
 
@@ -754,6 +780,9 @@ namespace ServiceSaleMachine.Drivers
                         // задержали купюру
                         if (CCNETDriver.PollResults.Z1 == 0x80)
                         {
+                            if (gettingEscrowBill) continue;    // уже удерживаем купюру - событий больше не надо
+                            gettingEscrowBill = true;
+
                             // удерживаем купюру
                             hold_bill = true;
 
@@ -771,10 +800,18 @@ namespace ServiceSaleMachine.Drivers
 
                             ReceivedResponse(this, new ServiceClientResponseEventArgs(message));
                         }
+                        else
+                        {
+                            gettingEscrowBill = false;
+                        }
 
                         // получили купюру
                         if (CCNETDriver.PollResults.Z1 == 0x81)
                         {
+                            if (gettingBill) continue;
+                            // получаем купюру
+                            gettingBill = true;
+
                             Message message = new Message();
 
                             BillNominal nominal = new BillNominal();
@@ -786,6 +823,11 @@ namespace ServiceSaleMachine.Drivers
                             message.Content = nominal;
 
                             ReceivedResponse(this, new ServiceClientResponseEventArgs(message));
+                        }
+                        else
+                        {
+                            // другие события - купюру загрузили
+                            gettingBill = false;
                         }
 
                         // вернем купюру

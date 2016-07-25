@@ -15,6 +15,8 @@ namespace ServiceSaleMachine.Client
 
         public override void LoadData()
         {
+            Nominal = "00";
+
             foreach (object obj in Params.Objects.Where(obj => obj != null))
             {
                 if (obj.GetType() == typeof(string))

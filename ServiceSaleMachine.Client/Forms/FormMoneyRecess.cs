@@ -61,6 +61,7 @@ namespace ServiceSaleMachine.Client
 
         private void FormMoneyRecess_FormClosed(object sender, FormClosedEventArgs e)
         {
+            data.drivers.ReceivedResponse -= reciveResponse;
             Params.Result = data;
         }
     }

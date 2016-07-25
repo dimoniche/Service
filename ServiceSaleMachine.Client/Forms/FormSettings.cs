@@ -322,6 +322,8 @@ namespace ServiceSaleMachine.Client
 
         private void FormSettings_FormClosed(object sender, FormClosedEventArgs e)
         {
+            data.drivers.ReceivedResponse -= reciveResponse;
+
             Params.Result = data;
 
             try

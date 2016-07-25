@@ -62,6 +62,7 @@ namespace ServiceSaleMachine.Client
         private void FormNeedService_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
         {
             Params.Result = data;
+            data.drivers.ReceivedResponse -= reciveResponse;
         }
     }
 }

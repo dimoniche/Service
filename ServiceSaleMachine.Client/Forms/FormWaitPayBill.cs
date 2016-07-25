@@ -16,6 +16,9 @@ namespace ServiceSaleMachine.Client
         // остаток денег - на чек
         int balance;
 
+        // зафиксировали купюру
+        bool moneyFixed = false;
+
         public FormWaitPayBill()
         {
             InitializeComponent();
@@ -77,96 +80,123 @@ namespace ServiceSaleMachine.Client
         /// <param name="e"></param>
         void CreditMoney(ServiceClientResponseEventArgs e)
         {
-            // сбросим таймаут
-            Timeout = 0;
-
-            int numberNominal = ((BillNominal)e.Message.Content).nominalNumber;
-
-            if (Globals.ClientConfiguration.Settings.nominals[numberNominal] > 0)
+            lock (Params)
             {
-                // такую купюру мы обрабатываем
-
-            }
-            else
-            {
-                // такая купюра не пойдет - вернем ее
-                data.drivers.ReturnBill();
-                return;
-            }
-
-            //  прошли проверку
-
-            // внесли деньги
-            int count = 0;
-            int.TryParse(((BillNominal)e.Message.Content).Denomination, out count);
-
-            amount += count;
-
-            // сдача
-            int diff = 0;
-
-            if (Globals.ClientConfiguration.Settings.changeOn > 0)
-            {
-                // сдача на чек
-                if (amount > data.serv.price)
+                try
                 {
-                    // посчитаем размер сдачи
-                    diff = amount - data.serv.price;
+                    if (moneyFixed) return;
+                    moneyFixed = true;
 
-                    // тут надо решить как выдать сдачу
-                }
-            }
-            else
-            {
-                // без сдачи
-                if(count > data.serv.price)
-                {
-                    // купюра великовата - вернем ее
-                    data.drivers.ReturnBill();
+                    // сбросим таймаут
+                    Timeout = 0;
 
-                    // сообщим о том что купюра великовата
-                    FormManager.OpenForm<FormBigBill>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify);
-                    return;
-                }
+                    int numberNominal = ((BillNominal)e.Message.Content).nominalNumber;
 
-                if (amount < data.serv.price)
-                {
-                    // еще не все внесли - напишем номинал купюры с предложением съесть ее
-                    bool res = (bool)FormManager.OpenForm<FormInsertBill>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, ((BillNominal)e.Message.Content).Denomination);
-
-                    if(res)
+                    if (Globals.ClientConfiguration.Settings.nominals[numberNominal] > 0)
                     {
-                        // оставляем купюру
+                        // такую купюру мы обрабатываем
+
                     }
                     else
                     {
-                        // возвращаем ее обратно
-                        amount -= count;
-
+                        // такая купюра не пойдет - вернем ее
+                        moneyFixed = false;
                         data.drivers.ReturnBill();
                         return;
                     }
+
+                    //  прошли проверку
+
+                    // внесли деньги
+                    int count = 0;
+                    int.TryParse(((BillNominal)e.Message.Content).Denomination, out count);
+
+                    amount += count;
+
+                    // сдача
+                    int diff = 0;
+
+                    if (Globals.ClientConfiguration.Settings.changeOn > 0)
+                    {
+                        // сдача на чек
+                        if (amount > data.serv.price)
+                        {
+                            // посчитаем размер сдачи
+                            diff = amount - data.serv.price;
+
+                            // тут надо решить как выдать сдачу
+                        }
+                    }
+                    else
+                    {
+                        // без сдачи
+                        if (count > data.serv.price)
+                        {
+                            // купюра великовата - вернем ее
+                            moneyFixed = false;
+                            data.drivers.ReturnBill();
+
+                            // сообщим о том что купюра великовата
+                            FormManager.OpenForm<FormBigBill>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify);
+                            return;
+                        }
+
+                        if (amount <= data.serv.price)
+                        {
+                            // еще не все внесли - напишем номинал купюры с предложением съесть ее
+                            bool res = (bool)FormManager.OpenForm<FormInsertBill>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, ((BillNominal)e.Message.Content).Denomination);
+
+                            if (res)
+                            {
+                                // забираем купюру
+                                moneyFixed = false;
+                                data.drivers.StackBill();
+                            }
+                            else
+                            {
+                                // возвращаем ее обратно
+                                amount -= count;
+
+                                moneyFixed = false;
+                                data.drivers.ReturnBill();
+                                return;
+                            }
+                        }
+
+                        // внесли достаточную для услуги сумму
+                    }
+
+                    // напишем на экране
+                    AmountServiceText.Text = amount + " руб";
+
+                    // деньги внесли - нет пути назад
+                    TimeOutTimer.Enabled = false;
+
+                    if (amount >= data.serv.price)
+                    {
+                        AmountServiceText.ForeColor = System.Drawing.Color.Green;
+                        // внесли нужную сумму - можно идти вперед
+                        Globals.DesignConfiguration.Settings.LoadPictureBox(pbxForward, Globals.DesignConfiguration.Settings.ButtonForward);
+                        pbxForward.Enabled = true;
+
+                        if (Globals.ClientConfiguration.Settings.offHardware == 0)
+                        {
+                            if (Globals.ClientConfiguration.Settings.changeOn > 0)
+                            {
+                                data.drivers.StopWaitBill();
+                                moneyFixed = false;
+                            }
+                            else
+                            {
+                                data.drivers.StopWaitBill();
+                                moneyFixed = false;
+                            }
+                        }
+                    }
                 }
-
-                // внесли достаточную для услуги сумму
-            }
-
-            // напишем на экране
-            AmountServiceText.Text = amount + " руб";
-
-            // деньги внесли - нет пути назад
-            TimeOutTimer.Enabled = false;
-
-            if (amount >= data.serv.price)
-            {
-                AmountServiceText.ForeColor = System.Drawing.Color.Green;
-                // внесли нужную сумму - можно идти вперед
-                Globals.DesignConfiguration.Settings.LoadPictureBox(pbxForward, Globals.DesignConfiguration.Settings.ButtonForward);
-                pbxForward.Enabled = true;
-
-                if (Globals.ClientConfiguration.Settings.offHardware == 0)
+                catch(Exception exp)
                 {
-                    data.drivers.StopWaitBill();
+                    moneyFixed = false;
                 }
             }
         }
@@ -205,6 +235,8 @@ namespace ServiceSaleMachine.Client
         {
             TimeOutTimer.Enabled = false;
 
+            data.drivers.ReceivedResponse -= reciveResponse;
+
             if (amount > 0)
             {
                 // что то уже внесли в аппарат - надо эти деньги записать на счет
@@ -213,6 +245,8 @@ namespace ServiceSaleMachine.Client
             if (Globals.ClientConfiguration.Settings.offHardware == 0)
             {
                 // вернем деньгу
+                moneyFixed = false;
+
                 data.drivers.ReturnBill();
                 data.drivers.StopWaitBill();
             }

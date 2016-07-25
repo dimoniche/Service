@@ -62,6 +62,7 @@ namespace ServiceSaleMachine.Client
         private void FormWaitStage_FormClosed(object sender, FormClosedEventArgs e)
         {
             Params.Result = data;
+            data.drivers.ReceivedResponse -= reciveResponse;
         }
 
         //private void MediaPlayer_ClickEvent(object sender, AxWMPLib._WMPOCXEvents_ClickEvent e)

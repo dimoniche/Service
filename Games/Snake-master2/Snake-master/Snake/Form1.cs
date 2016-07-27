@@ -104,7 +104,7 @@ namespace Snake
             do
             {
                 i++;
-                if (i>1)
+                if (i > 1)
                 {
                     i++;
                     i -= 1;
@@ -179,7 +179,7 @@ namespace Snake
             {
                 ouT = true;
             }
-            
+
 
             if ((!Crash(head, false)) && (!ouT))
             {
@@ -300,5 +300,71 @@ namespace Snake
             canva.Refresh();
         }
 
+        private void canva_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void canva_MouseClick(object sender, MouseEventArgs e)
+        {
+            int mx = e.X / valueX;
+            int my = e.Y / valueY;
+            label4.Text = "XY " + mx.ToString() + "  " + my.ToString();
+            if ((course.X == 0) && (course.Y == 0)) //движения нет
+            {
+                if (Math.Abs(mx - head.X) > Math.Abs(my - head.Y))
+                {
+                    if (mx > head.X)
+                    {
+                        course.X = 1;
+                    }else
+                    {
+                        course.X = -1;
+                    }
+                }else
+                {
+                    if (my > head.Y)
+                    {
+                        course.Y = 1;
+                    }
+                    else
+                    {
+                        course.Y = -1;
+                    }
+                }
+                timer1.Start();
+            }else
+
+            if (course.Y == 0) //движение горизонтальное
+            {
+                if (my > head.Y)
+                {
+                    course.Y = 1;
+                    course.X = 0;
+                }
+                else
+                if (my < head.Y)
+                {
+                    course.Y = -1;
+                    course.X = 0;
+                }
+            }
+            else
+            if (course.X == 0) //движение вертикальное  
+            {
+                if (mx > head.X)
+                {
+                    course.X = 1;
+                    course.Y = 0;
+                }
+                else
+                if (mx < head.X)
+                {
+                    course.X = -1;
+                    course.Y = 0;
+
+                }
+            }
+        }
     }
 }

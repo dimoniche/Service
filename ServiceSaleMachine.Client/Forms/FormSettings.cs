@@ -54,9 +54,9 @@ namespace ServiceSaleMachine.Client
                 cBxComPortBill.Items.Add("нет");
                 cBxComPortBill.Items.AddRange(currentPort);
 
-                comboBox2.Items.Clear();
-                comboBox2.Items.Add("нет");
-                comboBox2.Items.AddRange(currentPort);
+                cBxControlPort.Items.Clear();
+                cBxControlPort.Items.Add("нет");
+                cBxControlPort.Items.AddRange(currentPort);
 
                 if (Globals.ClientConfiguration.Settings.offHardware != 1)
                 {
@@ -115,9 +115,18 @@ namespace ServiceSaleMachine.Client
                         butWriteComPortScaner.Enabled = false;
                     }
 
-                    if (data.drivers.control.getNumberComPort().Contains("нет"))
+                    if (Globals.ClientConfiguration.Settings.offControl == 1 && data.drivers.control.getNumberComPort().Contains("нет"))
                     {
-                        comboBox2.SelectedIndex = 0;
+                        cBxControlPort.SelectedIndex = 0;
+
+                        cBxControlPort.Enabled = false;
+                        buttonwriteControlPort.Enabled = false;
+                        Open1.Enabled = false;
+                        Open1.Enabled = false;
+                        Open1.Enabled = false;
+                        Close1.Enabled = false;
+                        Close2.Enabled = false;
+                        Close3.Enabled = false;
                     }
                     else if (data.drivers.control.getNumberComPort().Contains("COM"))
                     {
@@ -126,7 +135,7 @@ namespace ServiceSaleMachine.Client
                         int.TryParse(index, out int_index);
 
                         int counter = 0;
-                        foreach (object item in comboBox2.Items)
+                        foreach (object item in cBxControlPort.Items)
                         {
                             if ((string)item == data.drivers.control.getNumberComPort())
                             {
@@ -135,9 +144,9 @@ namespace ServiceSaleMachine.Client
                             counter++;
                         }
 
-                        comboBox2.SelectedIndex = counter;
+                        cBxControlPort.SelectedIndex = counter;
 
-                        data.drivers.control.openPort((string)comboBox2.Items[cBxComPortScaner.SelectedIndex]);
+                        data.drivers.control.openPort((string)cBxControlPort.Items[cBxControlPort.SelectedIndex]);
                     }
 
                     if (Globals.ClientConfiguration.Settings.offBill == 1 || data.drivers.CCNETDriver.getNumberComPort().Contains("нет"))
@@ -149,6 +158,13 @@ namespace ServiceSaleMachine.Client
                         butResetBill.Enabled = false;
                         butWaitNoteOn.Enabled = false;
                         butWaitNoteOff.Enabled = false;
+
+                        button1.Enabled = false;
+                        button2.Enabled = false;
+                        button7.Enabled = false;
+                        button8.Enabled = false;
+                        button6.Enabled = false;
+                        button5.Enabled = false;
                     }
                     else if (data.drivers.CCNETDriver.getNumberComPort().Contains("COM"))
                     {
@@ -270,6 +286,15 @@ namespace ServiceSaleMachine.Client
                 cBxBillOff.Checked = false;
             }
 
+            if (Globals.ClientConfiguration.Settings.offControl == 1)
+            {
+                offControl.Checked = true;
+            }
+            else
+            {
+                offControl.Checked = false;
+            }
+
             init = false;
 
             // номиналы купюр
@@ -281,6 +306,9 @@ namespace ServiceSaleMachine.Client
             checkBox5000.Checked = Globals.ClientConfiguration.Settings.nominals[7] > 0 ? true : false;
 
             checkchangeOn.Checked = Globals.ClientConfiguration.Settings.changeOn > 0 ? true : false;
+
+            checkBox3.Checked = Globals.ClientConfiguration.Settings.changeToAccount > 0 ? true : false;
+            checkBox4.Checked = Globals.ClientConfiguration.Settings.changeToCheck > 0 ? true : false;
 
             textBoxTimeOut.Text = Globals.ClientConfiguration.Settings.timeout.ToString();
         }
@@ -468,18 +496,18 @@ namespace ServiceSaleMachine.Client
         private void button4_Click(object sender, EventArgs e)
         {
             if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
-            if (comboBox2.SelectedIndex == -1) return;
+            if (cBxControlPort.SelectedIndex == -1) return;
 
-            if (!((string)comboBox2.Items[comboBox2.SelectedIndex]).Contains("нет"))
+            if (!((string)cBxControlPort.Items[cBxControlPort.SelectedIndex]).Contains("нет"))
             {
-               data.drivers.control.openPort((string)comboBox2.Items[comboBox2.SelectedIndex]);
+               data.drivers.control.openPort((string)cBxControlPort.Items[cBxControlPort.SelectedIndex]);
             }
             else
             {
                data.drivers.control.closePort();
             }
 
-           data.drivers.control.setNumberComPort((string)comboBox2.Items[comboBox2.SelectedIndex]);
+           data.drivers.control.setNumberComPort((string)cBxControlPort.Items[cBxControlPort.SelectedIndex]);
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -553,6 +581,22 @@ namespace ServiceSaleMachine.Client
             butWriteComPortPrinter.Enabled = state;
             butWriteBarCode.Enabled = state;
             butPrintCheck.Enabled = state;
+
+            button1.Enabled = state;
+            button2.Enabled = state;
+            button6.Enabled = state;
+            button8.Enabled = state;
+            button7.Enabled = state;
+            button5.Enabled = state;
+
+            cBxControlPort.Enabled = state;
+            buttonwriteControlPort.Enabled = state;
+            Open1.Enabled = state;
+            Open2.Enabled = state;
+            Open3.Enabled = state;
+            Close1.Enabled = state;
+            Close2.Enabled = state;
+            Close3.Enabled = state;
 
             cbxCheckOff.Enabled = state;
         }
@@ -640,7 +684,7 @@ namespace ServiceSaleMachine.Client
 
         private void cBxComPortBill_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbxComPortPrinter.SelectedIndex == -1) return;
+            if (cBxComPortBill.SelectedIndex == -1) return;
 
             if (((string)cBxComPortBill.Items[cBxComPortBill.SelectedIndex]).Contains("нет"))
             {
@@ -649,14 +693,36 @@ namespace ServiceSaleMachine.Client
                 butResetBill.Enabled = false;
                 butWaitNoteOn.Enabled = false;
                 butWaitNoteOff.Enabled = false;
+
+                button1.Enabled = false;
+                button2.Enabled = false;
+                button6.Enabled = false;
+                button8.Enabled = false;
+                button7.Enabled = false;
+                button5.Enabled = false;
+
+                data.drivers.CCNETDriver.closePort();
             }
             else
             {
+                if(!data.drivers.CCNETDriver.openPort((string)cBxComPortBill.Items[cBxComPortBill.SelectedIndex]))
+                {
+                    cBxComPortBill.SelectedIndex = 0;
+                    return;
+                }
+
                 butStartPoll.Enabled = true;
                 butStopPoll.Enabled = true;
                 butResetBill.Enabled = true;
                 butWaitNoteOn.Enabled = true;
                 butWaitNoteOff.Enabled = true;
+
+                button1.Enabled = true;
+                button2.Enabled = true;
+                button6.Enabled = true;
+                button8.Enabled = true;
+                button7.Enabled = true;
+                button5.Enabled = true;
             }
         }
 
@@ -700,6 +766,13 @@ namespace ServiceSaleMachine.Client
                 butResetBill.Enabled = false;
                 butWaitNoteOn.Enabled = false;
                 butWaitNoteOff.Enabled = false;
+
+                button1.Enabled = false;
+                button2.Enabled = false;
+                button6.Enabled = false;
+                button8.Enabled = false;
+                button7.Enabled = false;
+                button5.Enabled = false;
             }
             else
             {
@@ -710,10 +783,16 @@ namespace ServiceSaleMachine.Client
                 butResetBill.Enabled = true;
                 butWaitNoteOn.Enabled = true;
                 butWaitNoteOff.Enabled = true;
+
+                button1.Enabled = true;
+                button2.Enabled = true;
+                button6.Enabled = true;
+                button8.Enabled = true;
+                button7.Enabled = true;
+                button5.Enabled = true;
             }
 
             Globals.ClientConfiguration.Save();
-
         }
 
         private void button1_Click_3(object sender, EventArgs e)
@@ -790,6 +869,138 @@ namespace ServiceSaleMachine.Client
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void ChangeWrite_Click(object sender, EventArgs e)
+        {
+            Globals.ClientConfiguration.Settings.changeToAccount = checkBox3.Checked ? 1 : 0;
+            Globals.ClientConfiguration.Settings.changeToCheck = checkBox4.Checked ? 1 : 0;
+
+            Globals.ClientConfiguration.Save();
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cBxBillOff.Checked)
+            {
+                Globals.ClientConfiguration.Settings.offControl = 1;
+
+                cBxControlPort.Enabled = false;
+                buttonwriteControlPort.Enabled = false;
+                Open1.Enabled = false;
+                Open2.Enabled = false;
+                Open3.Enabled = false;
+                Close1.Enabled = false;
+                Close2.Enabled = false;
+                Close3.Enabled = false;
+            }
+            else
+            {
+                Globals.ClientConfiguration.Settings.offControl = 0;
+
+                cBxControlPort.Enabled = true;
+                buttonwriteControlPort.Enabled = true;
+                Open1.Enabled = true;
+                Open1.Enabled = true;
+                Open1.Enabled = true;
+                Close1.Enabled = true;
+                Close2.Enabled = true;
+                Close3.Enabled = true;
+            }
+
+            Globals.ClientConfiguration.Save();
+        }
+
+        private void cBxComPortScaner_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cBxComPortScaner.SelectedIndex == -1) return;
+
+            if (((string)cBxComPortScaner.Items[cBxComPortScaner.SelectedIndex]).Contains("нет"))
+            {
+                buttonStartScanerPoll.Enabled = false;
+                buttonStopScanerPoll.Enabled = false;
+                cBxComPortScaner.Enabled = false;
+                butWriteComPortScaner.Enabled = false;
+
+                data.drivers.scaner.closePort();
+            }
+            else
+            {
+                if (!data.drivers.scaner.openPort((string)cBxComPortScaner.Items[cBxComPortScaner.SelectedIndex]))
+                {
+                    cBxComPortScaner.SelectedIndex = 0;
+                    return;
+                }
+
+                buttonStartScanerPoll.Enabled = true;
+                buttonStopScanerPoll.Enabled = true;
+                cBxComPortScaner.Enabled = true;
+                butWriteComPortScaner.Enabled = true;
+            }
+        }
+
+        private void cBxControlPort_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cBxControlPort.SelectedIndex == -1) return;
+
+            if (((string)cBxControlPort.Items[cBxControlPort.SelectedIndex]).Contains("нет"))
+            {
+                buttonwriteControlPort.Enabled = false;
+                Open1.Enabled = false;
+                Open2.Enabled = false;
+                Open3.Enabled = false;
+                Close1.Enabled = false;
+                Close2.Enabled = false;
+                Close3.Enabled = false;
+
+                data.drivers.control.closePort();
+            }
+            else
+            {
+                if (!data.drivers.control.openPort((string)cBxControlPort.Items[cBxControlPort.SelectedIndex]))
+                {
+                    cBxControlPort.SelectedIndex = 0;
+                    return;
+                }
+
+                buttonwriteControlPort.Enabled = true;
+                Open1.Enabled = true;
+                Open2.Enabled = true;
+                Open3.Enabled = true;
+                Close1.Enabled = true;
+                Close2.Enabled = true;
+                Close3.Enabled = true;
+            }
+        }
+
+        private void Open1_Click(object sender, EventArgs e)
+        {
+            data.drivers.SendOpenControl(1);
+        }
+
+        private void Open2_Click(object sender, EventArgs e)
+        {
+            data.drivers.SendOpenControl(2);
+        }
+
+        private void Open3_Click(object sender, EventArgs e)
+        {
+            data.drivers.SendOpenControl(3);
+        }
+
+        private void Close1_Click(object sender, EventArgs e)
+        {
+            data.drivers.SendCloseControl(1);
+        }
+
+        private void Close2_Click(object sender, EventArgs e)
+        {
+            data.drivers.SendCloseControl(2);
+        }
+
+        private void Close3_Click(object sender, EventArgs e)
+        {
+            data.drivers.SendCloseControl(3);
         }
     }
 }

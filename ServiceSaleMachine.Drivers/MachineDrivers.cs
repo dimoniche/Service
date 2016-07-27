@@ -64,7 +64,10 @@ namespace ServiceSaleMachine.Drivers
                 scaner.closePort();
             }
 
-            control.closePort();
+            if (Globals.ClientConfiguration.Settings.offControl != 1)
+            {
+                control.closePort();
+            }
 
             return true;
         }
@@ -112,8 +115,8 @@ namespace ServiceSaleMachine.Drivers
                 control = new ControlDevice();
             }
 
-            if ((Globals.ClientConfiguration.Settings.offCheck != 1 && scaner.getNumberComPort().Contains("нет")) 
-            ||  (Globals.ClientConfiguration.Settings.offBill != 1 && CCNETDriver.getNumberComPort().Contains("нет"))
+            if ((Globals.ClientConfiguration.Settings.offCheck != 1 && scaner.getNumberComPort().Contains("нет"))
+            || (Globals.ClientConfiguration.Settings.offBill != 1 && CCNETDriver.getNumberComPort().Contains("нет"))
             || printer.getNamePrinter().Contains("нет"))
             {
                 // необходима настройка приложения
@@ -127,7 +130,7 @@ namespace ServiceSaleMachine.Drivers
             if (Globals.ClientConfiguration.Settings.offCheck != 1 && !scaner.getNumberComPort().Contains("нет"))
             {
                 this.log.Write(LogMessageType.Information, "Настройка сканера.");
-                
+
                 // не платим чеком - не нужен сканер
                 if (scaner.openPort(scaner.getNumberComPort()))
                 {
@@ -219,7 +222,7 @@ namespace ServiceSaleMachine.Drivers
             // настроим управляющее устройство
             this.log.Write(LogMessageType.Information, "Настройка управлящего устройства.");
 
-            if (!control.getNumberComPort().Contains("нет"))
+            if (Globals.ClientConfiguration.Settings.offControl != 1 && !control.getNumberComPort().Contains("нет"))
             {
                 if (control.openPort(control.getNumberComPort()))
                 {
@@ -246,9 +249,9 @@ namespace ServiceSaleMachine.Drivers
         {
             bool empty = true;
 
-            foreach(_BillRecord record in bill_record)
+            foreach (_BillRecord record in bill_record)
             {
-                if(record.Denomination > 0)
+                if (record.Denomination > 0)
                 {
                     empty = false;
                     break;
@@ -279,7 +282,11 @@ namespace ServiceSaleMachine.Drivers
             }
 
             printer = new PrinterESC();
-            control = new ControlDevice();
+
+            if (Globals.ClientConfiguration.Settings.offControl != 1)
+            {
+                control = new ControlDevice();
+            }
         }
 
         void sendMessage(DeviceEvent devEvent)
@@ -294,7 +301,7 @@ namespace ServiceSaleMachine.Drivers
 
         bool CheckSerialPort()
         {
-            if(SerialPortHelper.GetSerialPorts().Length == 0)
+            if (SerialPortHelper.GetSerialPorts().Length == 0)
             {
                 return false;
             }
@@ -359,7 +366,7 @@ namespace ServiceSaleMachine.Drivers
 
         private void WorkerBillPollDriver_Complete(object sender, ThreadCompleteEventArgs e)
         {
-            
+
         }
 
         /// <summary>
@@ -420,7 +427,7 @@ namespace ServiceSaleMachine.Drivers
             long mask = 0x00;
             int i = 0;
 
-            foreach(int nominal in Globals.ClientConfiguration.Settings.nominals)
+            foreach (int nominal in Globals.ClientConfiguration.Settings.nominals)
             {
                 if (nominal > 0)
                 {
@@ -844,7 +851,7 @@ namespace ServiceSaleMachine.Drivers
                         }
                     }
                 }
-                catch(Exception exp)
+                catch (Exception exp)
                 {
                     hasErrors = true;
                     send_bill_command = false;
@@ -853,7 +860,7 @@ namespace ServiceSaleMachine.Drivers
                 {
                     if (hasErrors)
                     {
-                        
+
                     }
 
                     if (!e.Cancel)
@@ -903,7 +910,7 @@ namespace ServiceSaleMachine.Drivers
 
         private void WorkerScanerDriver_Complete(object sender, ThreadCompleteEventArgs e)
         {
-            
+
         }
 
         /// <summary>
@@ -977,11 +984,11 @@ namespace ServiceSaleMachine.Drivers
             {
                 if (CCNETDriver.Cmd(CCNETCommandEnum.GetCassetteStatus, (byte)CCNETDriver.BillAdr))
                 {
-                    
+
                 }
                 else
                 {
-                    
+
                 }
 
                 send_bill_command = false;
@@ -991,7 +998,7 @@ namespace ServiceSaleMachine.Drivers
                 send_bill_command = false;
             }
 
-            
+
             return CCNETDriver.Cassetes;
         }
 
@@ -1063,6 +1070,62 @@ namespace ServiceSaleMachine.Drivers
 
 
             return CCNETDriver.Cassetes;
+        }
+
+        /// <summary>
+        /// Команда открыть
+        /// </summary>
+        /// <returns></returns>
+        public void SendOpenControl(int controlNumber)
+        {
+            byte[] buf = new byte[2];
+
+            switch(controlNumber)
+            {
+                case 1:
+                    buf[0] = (byte)Globals.ClientConfiguration.Settings.CommandControl1Open;
+                    buf[1] = (byte)(0xFF - buf[0]);
+                    control.Send(buf, 2);
+                    break;
+                case 2:
+                    buf[0] = (byte)Globals.ClientConfiguration.Settings.CommandControl2Open;
+                    buf[1] = (byte)(0xFF - buf[0]);
+                    control.Send(buf, 2);
+                    break;
+                case 3:
+                    buf[0] = (byte)Globals.ClientConfiguration.Settings.CommandControl3Open;
+                    buf[1] = (byte)(0xFF - buf[0]);
+                    control.Send(buf, 2);
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Команда закрыть
+        /// </summary>
+        /// <returns></returns>
+        public void SendCloseControl(int controlNumber)
+        {
+            byte[] buf = new byte[2];
+
+            switch (controlNumber)
+            {
+                case 1:
+                    buf[0] = (byte)Globals.ClientConfiguration.Settings.CommandControl1Close;
+                    buf[1] = (byte)(0xFF - buf[0]);
+                    control.Send(buf, 2);
+                    break;
+                case 2:
+                    buf[0] = (byte)Globals.ClientConfiguration.Settings.CommandControl2Close;
+                    buf[1] = (byte)(0xFF - buf[0]);
+                    control.Send(buf, 2);
+                    break;
+                case 3:
+                    buf[0] = (byte)Globals.ClientConfiguration.Settings.CommandControl3Close;
+                    buf[1] = (byte)(0xFF - buf[0]);
+                    control.Send(buf, 2);
+                    break;
+            }
         }
     }
 

@@ -42,16 +42,13 @@ namespace ServiceSaleMachine.Drivers
                 serialPort.NewLine = "\r\n"; // Пусть пока будет "\r\n".
                 serialPort.DtrEnable = true;
 
-                /*serialPort.DataReceived += SerialPortDataRecevied;
-                serialPort.ErrorReceived += SerialPortErrorRecived;
-                serialPort.PinChanged += SerialPortPinChanged;*/
-
                 try
                 {
                     serialPort.Open();
                 }
                 catch
                 {
+                    serialPort = null;
                     return false;
                 }
             }
@@ -65,10 +62,6 @@ namespace ServiceSaleMachine.Drivers
             {
                 try
                 {
-                    /*serialPort.DataReceived -= SerialPortDataRecevied;
-                    serialPort.ErrorReceived -= SerialPortErrorRecived;
-                    serialPort.PinChanged -= SerialPortPinChanged;*/
-
                     serialPort.Close();
                 }
                 catch

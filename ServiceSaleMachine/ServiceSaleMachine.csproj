@@ -54,6 +54,7 @@
     <Compile Include="Configuration\DesignConfigurationProperties.cs" />
     <Compile Include="Configuration\Device.cs" />
     <Compile Include="Configuration\Service.cs" />
+    <Compile Include="Configuration\UserConfiguratin.cs" />
     <Compile Include="Control\RichTextBoxEx.cs">
       <SubType>Component</SubType>
     </Compile>

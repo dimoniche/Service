@@ -8,6 +8,7 @@ namespace ServiceSaleMachine.Client
     public partial class UserRequest : MyForm
     {
         FormResultData data;
+        TextBox tbx;
 
         public UserRequest()
         {
@@ -17,8 +18,10 @@ namespace ServiceSaleMachine.Client
             pbxCancel.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonFail);
             pbxEnterName.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonEnterUserName);
             pbxEnterPsw.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonEnterUserPasw);
+            LoadFullKeyBoard();
+            tbx = tbxLogin;
 
-            string[,] str = new string[NumberBoard.CountRow, NumberBoard.CountCol ];
+       /*     string[,] str = new string[NumberBoard.CountRow, NumberBoard.CountCol ];
 
             str[0, 0] = Globals.GetPath(PathEnum.Image) + "\\0.png";
             str[0, 1] = Globals.GetPath(PathEnum.Image) + "\\1.png";
@@ -33,9 +36,55 @@ namespace ServiceSaleMachine.Client
             str[5, 0] = Globals.GetPath(PathEnum.Image) + "\\fail.png";
             str[5, 1] = Globals.GetPath(PathEnum.Image) + "\\Yes.jpg";
 
-            NumberBoard.LoadPicture(str);
+            NumberBoard.LoadPicture(str);*/
 
         }
+
+        public void LoadNumberKeyBoard()
+        {
+          
+        }
+
+        public void LoadFullKeyBoard()
+        {
+           // NumberBoard.CountRow = 3;
+           // NumberBoard.CountCol = 10;
+            string[,] str = new string[NumberBoard.CountRow, NumberBoard.CountCol];
+
+            str[0, 0] = Globals.GetPath(PathEnum.Image) + "\\q.png";
+            str[0, 1] = Globals.GetPath(PathEnum.Image) + "\\w.png";
+            str[0, 2] = Globals.GetPath(PathEnum.Image) + "\\e.png";
+            str[0, 3] = Globals.GetPath(PathEnum.Image) + "\\r.png";
+            str[0, 4] = Globals.GetPath(PathEnum.Image) + "\\t.png";
+            str[0, 5] = Globals.GetPath(PathEnum.Image) + "\\y.png";
+            str[0, 6] = Globals.GetPath(PathEnum.Image) + "\\u.png";
+            str[0, 7] = Globals.GetPath(PathEnum.Image) + "\\i.png";
+            str[0, 8] = Globals.GetPath(PathEnum.Image) + "\\o.png";
+            str[0, 9] = Globals.GetPath(PathEnum.Image) + "\\p.png";
+            str[1, 0] = Globals.GetPath(PathEnum.Image) + "\\a.png";
+            str[1, 1] = Globals.GetPath(PathEnum.Image) + "\\s.png";
+            str[1, 2] = Globals.GetPath(PathEnum.Image) + "\\d.png";
+            str[1, 3] = Globals.GetPath(PathEnum.Image) + "\\f.png";
+            str[1, 4] = Globals.GetPath(PathEnum.Image) + "\\g.png";
+            str[1, 5] = Globals.GetPath(PathEnum.Image) + "\\h.png";
+            str[1, 6] = Globals.GetPath(PathEnum.Image) + "\\j.png";
+            str[1, 7] = Globals.GetPath(PathEnum.Image) + "\\k.png";
+            str[1, 8] = Globals.GetPath(PathEnum.Image) + "\\l.png";
+            str[1, 9] = Globals.GetPath(PathEnum.Image) + "\\delete.png";
+            str[2, 1] = Globals.GetPath(PathEnum.Image) + "\\z.png";
+            str[2, 2] = Globals.GetPath(PathEnum.Image) + "\\x.png";
+            str[2, 3] = Globals.GetPath(PathEnum.Image) + "\\c.png";
+            str[2, 4] = Globals.GetPath(PathEnum.Image) + "\\v.png";
+            str[2, 5] = Globals.GetPath(PathEnum.Image) + "\\b.png";
+            str[2, 6] = Globals.GetPath(PathEnum.Image) + "\\n.png";
+            str[2, 7] = Globals.GetPath(PathEnum.Image) + "\\m.png";
+
+            str[2, 0] = Globals.GetPath(PathEnum.Image) + "\\fail.png";
+            str[2, 8] = Globals.GetPath(PathEnum.Image) + "\\Yes.jpg";
+
+            NumberBoard.LoadPicture(str);
+        }
+
 
         public override void LoadData()
         {
@@ -68,8 +117,59 @@ namespace ServiceSaleMachine.Client
 
         private void NumberBoard_KeyboardEvent(object sender, KeyBoardEventArgs e)
         {
-            int numb = e.Message.X + e.Message.Y * 2;
-            tbxLogin.Text += numb;
+            string row1 = "QWERTYUIOP";
+            string row2 = "ASDFGHJKL";
+            string row3 = "ZXCVBNM";
+             
+            if (e.Message.Y == 0)//первая строка
+            { tbx.Text += row1[e.Message.X]; }
+            else
+            if (e.Message.Y == 1)
+            {
+                if (e.Message.X < 9)
+                { tbx.Text += row2[e.Message.X]; }
+                else
+                { //стереть символ последний
+                    string ss = tbxLogin.Text;
+                    if (ss.Length > 0)
+                    { tbx.Text = ss.Remove(ss.Length - 1); }
+                }
+            }
+            else
+            if (e.Message.Y == 2)
+            {
+                if ((e.Message.X < 8) && (e.Message.X > 0))
+                {
+                    tbx.Text += row3[e.Message.X-1];
+                }else
+                if (e.Message.X == 0)
+                { this.Close(); }
+                else
+                if (e.Message.X == 8) //типа Enter
+                {
+                    if (tbx == tbxLogin)
+                    {
+                        tbx = tbxPassword;
+                        tbxLogin.BackColor = System.Drawing.Color.Gray;
+                        tbxPassword.BackColor = System.Drawing.Color.Lime;
+                        return;
+                    }
+                    Globals.UserConfiguration.UserLogin = tbxLogin.Text;
+                    Globals.UserConfiguration.UserPassword = tbxPassword.Text;
+                    this.Close();
+                }
+            }
+
+        }
+
+        private void pbxOk_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pbxCancel_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

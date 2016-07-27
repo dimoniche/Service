@@ -18,9 +18,11 @@ namespace ServiceSaleMachine.Client
             Globals.DesignConfiguration.Settings.LoadPictureBox(pbxHelp, Globals.DesignConfiguration.Settings.ButtonHelp);
             Globals.DesignConfiguration.Settings.LoadPictureBox(pbxLogo, Globals.DesignConfiguration.Settings.ButtonLogo);
             Globals.DesignConfiguration.Settings.LoadPictureBox(pbxStart, Globals.DesignConfiguration.Settings.ButtonStartServices);
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pbxLogin, Globals.DesignConfiguration.Settings.ButtonUser);
 
             TimeOutTimer.Enabled = true;
             Timeout = 0;
+
         }
 
         public override void LoadData()
@@ -41,6 +43,7 @@ namespace ServiceSaleMachine.Client
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            label2.Text = Globals.UserConfiguration.UserLogin;
             lblTime.Text = DateTime.Now.ToString("HH:mm:ss");
             LblDate.Text = DateTime.Now.ToString("yyyy-MM-dd dddd");
         }
@@ -113,6 +116,19 @@ namespace ServiceSaleMachine.Client
                 data.stage = WorkerStateStage.TimeOut;
                 this.Close();
             }
+        }
+
+        private void pbxLogin_Click(object sender, EventArgs e)
+        {
+            FormManager.OpenForm<UserRequest>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify);
+           // UserRequest ureq = new UserRequest();
+           // ureq.LoadFullKeyBoard();
+           // ureq.ShowDialog();
+        }
+
+        private void pbxLogo_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

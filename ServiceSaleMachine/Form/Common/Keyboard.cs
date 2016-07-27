@@ -51,7 +51,10 @@ namespace ServiceSaleMachine
                     PictureBox pbx = new PictureBox();
                     pbx.Dock = DockStyle.Fill;
                     pbx.SizeMode = PictureBoxSizeMode.StretchImage;
-                    pbx.Load(str[i, j]);
+                    if (str[i, j] != null)
+                    {
+                        pbx.Load(str[i, j]);
+                    }
 
                     pbx.Click += table_Click;
                     pbx.Tag = new Point(j,i);

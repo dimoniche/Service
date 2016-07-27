@@ -124,8 +124,9 @@ namespace ServiceSaleMachine
                 if (MainForm != null) MainForm.Cursor = Cursors.Default;
                 return resFromForm;
             }
-            catch
+            catch(Exception e)
             {
+                
                 if (MainForm != null) MainForm.Cursor = Cursors.Default;
 
                 return null;

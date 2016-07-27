@@ -72,9 +72,18 @@
             this.label3 = new System.Windows.Forms.Label();
             this.cbxComPortPrinter = new System.Windows.Forms.ComboBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.button4 = new System.Windows.Forms.Button();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.Close1 = new System.Windows.Forms.Button();
+            this.Close3 = new System.Windows.Forms.Button();
+            this.Close2 = new System.Windows.Forms.Button();
+            this.Open3 = new System.Windows.Forms.Button();
+            this.Open2 = new System.Windows.Forms.Button();
+            this.Open1 = new System.Windows.Forms.Button();
+            this.buttonwriteControlPort = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.cBxControlPort = new System.Windows.Forms.ComboBox();
             this.tabViewDataBase = new System.Windows.Forms.TabPage();
             this.tabDataBaseSetting = new System.Windows.Forms.TabControl();
             this.tabPage7 = new System.Windows.Forms.TabPage();
@@ -92,12 +101,17 @@
             this.label12 = new System.Windows.Forms.Label();
             this.textBoxTimeOut = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
+            this.offControl = new System.Windows.Forms.CheckBox();
             this.cBxBillOff = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.cbxOffDataBase = new System.Windows.Forms.CheckBox();
             this.cbxCheckOff = new System.Windows.Forms.CheckBox();
             this.cbxOffHardware = new System.Windows.Forms.CheckBox();
             this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.ChangeWrite = new System.Windows.Forms.Button();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button9 = new System.Windows.Forms.Button();
             this.checkchangeOn = new System.Windows.Forms.CheckBox();
@@ -125,6 +139,7 @@
             this.tabControl3.SuspendLayout();
             this.tabPage6.SuspendLayout();
             this.tabPage9.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -247,6 +262,7 @@
             this.cBxComPortScaner.Name = "cBxComPortScaner";
             this.cBxComPortScaner.Size = new System.Drawing.Size(121, 21);
             this.cBxComPortScaner.TabIndex = 4;
+            this.cBxComPortScaner.SelectedIndexChanged += new System.EventHandler(this.cBxComPortScaner_SelectedIndexChanged);
             // 
             // tabPage3
             // 
@@ -587,9 +603,18 @@
             // 
             // tabPage5
             // 
-            this.tabPage5.Controls.Add(this.button4);
+            this.tabPage5.Controls.Add(this.label17);
+            this.tabPage5.Controls.Add(this.label15);
+            this.tabPage5.Controls.Add(this.label13);
+            this.tabPage5.Controls.Add(this.Close1);
+            this.tabPage5.Controls.Add(this.Close3);
+            this.tabPage5.Controls.Add(this.Close2);
+            this.tabPage5.Controls.Add(this.Open3);
+            this.tabPage5.Controls.Add(this.Open2);
+            this.tabPage5.Controls.Add(this.Open1);
+            this.tabPage5.Controls.Add(this.buttonwriteControlPort);
             this.tabPage5.Controls.Add(this.label7);
-            this.tabPage5.Controls.Add(this.comboBox2);
+            this.tabPage5.Controls.Add(this.cBxControlPort);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
@@ -598,15 +623,102 @@
             this.tabPage5.Text = "Управляющее устройство";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // label17
             // 
-            this.button4.Location = new System.Drawing.Point(264, 16);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 9;
-            this.button4.Text = "Записать";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(298, 138);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(76, 13);
+            this.label17.TabIndex = 11;
+            this.label17.Text = "Устройство 3";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(298, 109);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(76, 13);
+            this.label15.TabIndex = 11;
+            this.label15.Text = "Устройство 2";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(298, 80);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(76, 13);
+            this.label13.TabIndex = 11;
+            this.label13.Text = "Устройство 1";
+            // 
+            // Close1
+            // 
+            this.Close1.Location = new System.Drawing.Point(159, 75);
+            this.Close1.Name = "Close1";
+            this.Close1.Size = new System.Drawing.Size(105, 23);
+            this.Close1.TabIndex = 10;
+            this.Close1.Text = "Закрыть";
+            this.Close1.UseVisualStyleBackColor = true;
+            this.Close1.Click += new System.EventHandler(this.Close1_Click);
+            // 
+            // Close3
+            // 
+            this.Close3.Location = new System.Drawing.Point(159, 133);
+            this.Close3.Name = "Close3";
+            this.Close3.Size = new System.Drawing.Size(105, 23);
+            this.Close3.TabIndex = 10;
+            this.Close3.Text = "Закрыть";
+            this.Close3.UseVisualStyleBackColor = true;
+            this.Close3.Click += new System.EventHandler(this.Close3_Click);
+            // 
+            // Close2
+            // 
+            this.Close2.Location = new System.Drawing.Point(159, 104);
+            this.Close2.Name = "Close2";
+            this.Close2.Size = new System.Drawing.Size(105, 23);
+            this.Close2.TabIndex = 10;
+            this.Close2.Text = "Закрыть";
+            this.Close2.UseVisualStyleBackColor = true;
+            this.Close2.Click += new System.EventHandler(this.Close2_Click);
+            // 
+            // Open3
+            // 
+            this.Open3.Location = new System.Drawing.Point(25, 133);
+            this.Open3.Name = "Open3";
+            this.Open3.Size = new System.Drawing.Size(105, 23);
+            this.Open3.TabIndex = 10;
+            this.Open3.Text = "Открыть";
+            this.Open3.UseVisualStyleBackColor = true;
+            this.Open3.Click += new System.EventHandler(this.Open3_Click);
+            // 
+            // Open2
+            // 
+            this.Open2.Location = new System.Drawing.Point(25, 104);
+            this.Open2.Name = "Open2";
+            this.Open2.Size = new System.Drawing.Size(105, 23);
+            this.Open2.TabIndex = 10;
+            this.Open2.Text = "Открыть";
+            this.Open2.UseVisualStyleBackColor = true;
+            this.Open2.Click += new System.EventHandler(this.Open2_Click);
+            // 
+            // Open1
+            // 
+            this.Open1.Location = new System.Drawing.Point(25, 75);
+            this.Open1.Name = "Open1";
+            this.Open1.Size = new System.Drawing.Size(105, 23);
+            this.Open1.TabIndex = 10;
+            this.Open1.Text = "Открыть";
+            this.Open1.UseVisualStyleBackColor = true;
+            this.Open1.Click += new System.EventHandler(this.Open1_Click);
+            // 
+            // buttonwriteControlPort
+            // 
+            this.buttonwriteControlPort.Location = new System.Drawing.Point(264, 16);
+            this.buttonwriteControlPort.Name = "buttonwriteControlPort";
+            this.buttonwriteControlPort.Size = new System.Drawing.Size(75, 23);
+            this.buttonwriteControlPort.TabIndex = 9;
+            this.buttonwriteControlPort.Text = "Записать";
+            this.buttonwriteControlPort.UseVisualStyleBackColor = true;
+            this.buttonwriteControlPort.Click += new System.EventHandler(this.button4_Click);
             // 
             // label7
             // 
@@ -617,13 +729,14 @@
             this.label7.TabIndex = 8;
             this.label7.Text = "Порт";
             // 
-            // comboBox2
+            // cBxControlPort
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(81, 16);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 7;
+            this.cBxControlPort.FormattingEnabled = true;
+            this.cBxControlPort.Location = new System.Drawing.Point(81, 16);
+            this.cBxControlPort.Name = "cBxControlPort";
+            this.cBxControlPort.Size = new System.Drawing.Size(121, 21);
+            this.cBxControlPort.TabIndex = 7;
+            this.cBxControlPort.SelectedIndexChanged += new System.EventHandler(this.cBxControlPort_SelectedIndexChanged);
             // 
             // tabViewDataBase
             // 
@@ -763,6 +876,7 @@
             this.tabPage6.Controls.Add(this.label12);
             this.tabPage6.Controls.Add(this.textBoxTimeOut);
             this.tabPage6.Controls.Add(this.label11);
+            this.tabPage6.Controls.Add(this.offControl);
             this.tabPage6.Controls.Add(this.cBxBillOff);
             this.tabPage6.Controls.Add(this.checkBox1);
             this.tabPage6.Controls.Add(this.cbxOffDataBase);
@@ -779,7 +893,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(241, 143);
+            this.label12.Location = new System.Drawing.Point(241, 218);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(27, 13);
             this.label12.TabIndex = 12;
@@ -787,7 +901,7 @@
             // 
             // textBoxTimeOut
             // 
-            this.textBoxTimeOut.Location = new System.Drawing.Point(126, 140);
+            this.textBoxTimeOut.Location = new System.Drawing.Point(126, 215);
             this.textBoxTimeOut.Name = "textBoxTimeOut";
             this.textBoxTimeOut.Size = new System.Drawing.Size(100, 20);
             this.textBoxTimeOut.TabIndex = 11;
@@ -798,11 +912,22 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(12, 147);
+            this.label11.Location = new System.Drawing.Point(12, 222);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(108, 13);
             this.label11.TabIndex = 10;
             this.label11.Text = "Время бездействия";
+            // 
+            // offControl
+            // 
+            this.offControl.AutoSize = true;
+            this.offControl.Location = new System.Drawing.Point(15, 134);
+            this.offControl.Name = "offControl";
+            this.offControl.Size = new System.Drawing.Size(214, 17);
+            this.offControl.TabIndex = 8;
+            this.offControl.Text = "Отключить управляющее устройство";
+            this.offControl.UseVisualStyleBackColor = true;
+            this.offControl.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
             // cBxBillOff
             // 
@@ -861,6 +986,7 @@
             // 
             // tabPage9
             // 
+            this.tabPage9.Controls.Add(this.groupBox3);
             this.tabPage9.Controls.Add(this.groupBox2);
             this.tabPage9.Controls.Add(this.groupBox1);
             this.tabPage9.Location = new System.Drawing.Point(4, 22);
@@ -870,6 +996,48 @@
             this.tabPage9.TabIndex = 1;
             this.tabPage9.Text = "Прием купюр";
             this.tabPage9.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.ChangeWrite);
+            this.groupBox3.Controls.Add(this.checkBox4);
+            this.groupBox3.Controls.Add(this.checkBox3);
+            this.groupBox3.Location = new System.Drawing.Point(17, 197);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(276, 76);
+            this.groupBox3.TabIndex = 2;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Сдача";
+            // 
+            // ChangeWrite
+            // 
+            this.ChangeWrite.Location = new System.Drawing.Point(184, 19);
+            this.ChangeWrite.Name = "ChangeWrite";
+            this.ChangeWrite.Size = new System.Drawing.Size(75, 23);
+            this.ChangeWrite.TabIndex = 1;
+            this.ChangeWrite.Text = "Записать";
+            this.ChangeWrite.UseVisualStyleBackColor = true;
+            this.ChangeWrite.Click += new System.EventHandler(this.ChangeWrite_Click);
+            // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Location = new System.Drawing.Point(6, 42);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(130, 17);
+            this.checkBox4.TabIndex = 1;
+            this.checkBox4.Text = "Выдача сдачи чеком";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(6, 19);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(153, 17);
+            this.checkBox3.TabIndex = 1;
+            this.checkBox3.Text = "Запись сдачи на аккаунт";
+            this.checkBox3.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
@@ -1020,6 +1188,8 @@
             this.tabPage6.ResumeLayout(false);
             this.tabPage6.PerformLayout();
             this.tabPage9.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -1061,9 +1231,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TabPage tabPage5;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button buttonwriteControlPort;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox cBxControlPort;
         private System.Windows.Forms.Button butPrintCheck;
         private System.Windows.Forms.Button butWriteBarCode;
         private System.Windows.Forms.Button butWriteComPortPrinter;
@@ -1111,5 +1281,19 @@
         private System.Windows.Forms.TextBox textBoxTimeOut;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Button Close2;
+        private System.Windows.Forms.Button Open1;
+        private System.Windows.Forms.Button Close1;
+        private System.Windows.Forms.Button Close3;
+        private System.Windows.Forms.Button Open3;
+        private System.Windows.Forms.Button Open2;
+        private System.Windows.Forms.CheckBox offControl;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.Button ChangeWrite;
     }
 }

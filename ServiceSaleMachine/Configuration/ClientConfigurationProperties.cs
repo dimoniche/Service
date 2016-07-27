@@ -17,26 +17,43 @@ namespace ServiceSaleMachine
         public string comPortControl;
 
         // Отключение железа
-        public int offHardware;
+        public int offHardware = 1;
         // отключение оплату чеком
-        public int offCheck;
+        public int offCheck = 1;
         // отключение БД
-        public int offDataBase;
+        public int offDataBase = 1;
         // отключение купюроприемник
-        public int offBill;
+        public int offBill = 1;
+        // отключение управляющее устройство
+        public int offControl = 1;
 
         // массив обрабатываемых номиналов купюр
         public int[] nominals = new int[24];
 
         // режим работы купюроприемника
-        public int changeOn;
+        public int changeOn = 0;
 
         // таймаут перехода в реклами или начальный экран
-        public int timeout;
+        public int timeout = 0;
 
         // настройки сервисов
         public List<Service> services;
 
+        // команды первой услуги (открыть/закрыть)
+        public int CommandControl1Open = 1;
+        public int CommandControl1Close = 2;
+
+        // команды второй услуги (открыть/закрыть)
+        public int CommandControl2Open = 3;
+        public int CommandControl2Close = 4;
+
+        // команды третьей услуги (открыть/закрыть)
+        public int CommandControl3Open = 5;
+        public int CommandControl3Close = 6;
+
+        // поведение со сдачей
+        public int changeToAccount = 0;
+        public int changeToCheck = 0;
 
         internal ClientConfigurationProperties()
 		{

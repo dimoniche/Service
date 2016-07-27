@@ -101,7 +101,10 @@ namespace ServiceSaleMachine.Client
                     {
                         // такая купюра не пойдет - вернем ее
                         moneyFixed = false;
-                        data.drivers.ReturnBill();
+                        if (Globals.ClientConfiguration.Settings.offHardware == 0)
+                        {
+                            data.drivers.ReturnBill();
+                        }
                         return;
                     }
 
@@ -133,8 +136,14 @@ namespace ServiceSaleMachine.Client
                         if (count > data.serv.price)
                         {
                             // купюра великовата - вернем ее
+                            amount -= count;
+
                             moneyFixed = false;
-                            data.drivers.ReturnBill();
+
+                            if (Globals.ClientConfiguration.Settings.offHardware == 0)
+                            {
+                                data.drivers.ReturnBill();
+                            }
 
                             // сообщим о том что купюра великовата
                             FormManager.OpenForm<FormBigBill>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify);
@@ -150,7 +159,11 @@ namespace ServiceSaleMachine.Client
                             {
                                 // забираем купюру
                                 moneyFixed = false;
-                                data.drivers.StackBill();
+
+                                if (Globals.ClientConfiguration.Settings.offHardware == 0)
+                                {
+                                    data.drivers.StackBill();
+                                }
                             }
                             else
                             {
@@ -158,7 +171,11 @@ namespace ServiceSaleMachine.Client
                                 amount -= count;
 
                                 moneyFixed = false;
-                                data.drivers.ReturnBill();
+
+                                if (Globals.ClientConfiguration.Settings.offHardware == 0)
+                                {
+                                    data.drivers.ReturnBill();
+                                }
                                 return;
                             }
                         }
@@ -181,16 +198,8 @@ namespace ServiceSaleMachine.Client
 
                         if (Globals.ClientConfiguration.Settings.offHardware == 0)
                         {
-                            if (Globals.ClientConfiguration.Settings.changeOn > 0)
-                            {
-                                data.drivers.StopWaitBill();
-                                moneyFixed = false;
-                            }
-                            else
-                            {
-                                data.drivers.StopWaitBill();
-                                moneyFixed = false;
-                            }
+                            data.drivers.StopWaitBill();
+                            moneyFixed = false;
                         }
                     }
                 }

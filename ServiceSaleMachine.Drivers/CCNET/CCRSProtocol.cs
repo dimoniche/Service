@@ -268,7 +268,14 @@ namespace ServiceSaleMachine.Drivers
             {
                 COMPort = new CCOMPort();
 
-                return COMPort.OpenCOM(com_port);
+                bool res = COMPort.OpenCOM(com_port);
+
+                if (!res)
+                {
+                    COMPort = null;
+                }
+
+                return res;
             }
 
             return true;

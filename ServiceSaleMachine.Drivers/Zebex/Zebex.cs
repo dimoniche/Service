@@ -75,6 +75,7 @@ namespace ServiceSaleMachine.Drivers
                 }
                 catch
                 {
+                    serialPort = null;
                     return false;
                 }
             }

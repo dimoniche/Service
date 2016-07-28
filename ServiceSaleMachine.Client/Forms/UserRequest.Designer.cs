@@ -43,6 +43,7 @@
             this.tbxPassword = new System.Windows.Forms.TextBox();
             this.pbxEnterName = new System.Windows.Forms.PictureBox();
             this.pbxEnterPsw = new System.Windows.Forms.PictureBox();
+            this.chbNew = new System.Windows.Forms.CheckBox();
             this.panel3.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -127,6 +128,7 @@
             this.pbxCancel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxCancel.TabIndex = 6;
             this.pbxCancel.TabStop = false;
+            this.pbxCancel.Visible = false;
             this.pbxCancel.Click += new System.EventHandler(this.pbxCancel_Click_1);
             // 
             // pbxOk
@@ -137,6 +139,7 @@
             this.pbxOk.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxOk.TabIndex = 5;
             this.pbxOk.TabStop = false;
+            this.pbxOk.Visible = false;
             this.pbxOk.Click += new System.EventHandler(this.pbxOk_Click);
             // 
             // panel4
@@ -158,6 +161,7 @@
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.pbxEnterName, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.pbxEnterPsw, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.chbNew, 1, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -242,6 +246,17 @@
             this.pbxEnterPsw.TabIndex = 8;
             this.pbxEnterPsw.TabStop = false;
             // 
+            // chbNew
+            // 
+            this.chbNew.AutoSize = true;
+            this.chbNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.chbNew.Location = new System.Drawing.Point(295, 203);
+            this.chbNew.Name = "chbNew";
+            this.chbNew.Size = new System.Drawing.Size(286, 37);
+            this.chbNew.TabIndex = 9;
+            this.chbNew.Text = "Новый пользователь";
+            this.chbNew.UseVisualStyleBackColor = true;
+            // 
             // UserRequest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -265,6 +280,7 @@
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
@@ -292,5 +308,6 @@
         private System.Windows.Forms.TextBox tbxPassword;
         private System.Windows.Forms.PictureBox pbxEnterName;
         private System.Windows.Forms.PictureBox pbxEnterPsw;
+        private System.Windows.Forms.CheckBox chbNew;
     }
 }

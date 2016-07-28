@@ -115,6 +115,13 @@ namespace ServiceSaleMachine.Client
             Close();
         }
 
+        private bool AddInDB()
+        {
+            if (GlobalDb.GlobalBase.InsertUser(tbxLogin.Text, tbxPassword.Text))
+            { return true; }
+            return false;
+        }
+
         private void NumberBoard_KeyboardEvent(object sender, KeyBoardEventArgs e)
         {
             string row1 = "QWERTYUIOP";
@@ -156,6 +163,22 @@ namespace ServiceSaleMachine.Client
                     }
                     Globals.UserConfiguration.UserLogin = tbxLogin.Text;
                     Globals.UserConfiguration.UserPassword = tbxPassword.Text;
+                    if (chbNew.Checked)
+                    {
+                        if (AddInDB())
+                        {
+                            //успешно занеслось в БД
+                        }else
+                        {
+                            Globals.UserConfiguration.UserLogin = "";
+                            Globals.UserConfiguration.UserPassword = "";
+                        }
+
+                    }
+                    else
+                    {
+                        //проверить - есть такой в БД?
+                    }
                     this.Close();
                 }
             }

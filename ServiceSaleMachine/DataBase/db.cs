@@ -347,6 +347,38 @@ namespace ServiceSaleMachine
 
         }
 
+        public DataTable GetUsers()
+        {
+            DataTable dt = new DataTable();
+            string queryString = @"select * from users";
+
+            //using (MySqlConnection con = new MySqlConnection())
+            {
+                MySqlCommand com = new MySqlCommand(queryString, con);
+
+                try
+                {
+                    using (MySqlDataReader dr = com.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            dt.Load(dr);
+                        }
+
+                        dr.Close();
+                    }
+                }
+
+                catch (Exception ex)
+                {
+                    Debug.Print(ex.Message);
+
+                }
+            }
+            return dt;
+
+        }
+
         public bool Encashment(int iduser, int Amount)
         {
             if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
@@ -410,6 +442,53 @@ namespace ServiceSaleMachine
                 Debug.Print(ex.Message);
                 return false;
             }
+        }
+
+        public bool InsertUser(string Login, string Psw)
+        {
+            string query = "insert into users (login, password, role, datetime) values ('"+Login+"', '"+Psw+"', 2, '" +
+              DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
+
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.Message);
+                return false;
+            }
+
+        }
+
+        public bool ExistsUser(string User, string Password)
+        {//хотя подойдет функция GetUserByName
+            string queryString = "select id from users where (login = '" + User + "') and (password='" + Password + "')";
+
+            MySqlCommand com = new MySqlCommand(queryString, con);
+
+            UserInfo ui = null;
+
+            try
+            {
+                using (MySqlDataReader dr = com.ExecuteReader())
+                {
+                    if (dr.HasRows)
+                    {
+                        return true;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.Message);
+
+            }
+            return false;
         }
 
         public int GetCountMoney(DateTime dt) 

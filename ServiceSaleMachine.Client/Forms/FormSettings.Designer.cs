@@ -123,6 +123,7 @@
             this.checkBox100 = new System.Windows.Forms.CheckBox();
             this.checkBox50 = new System.Windows.Forms.CheckBox();
             this.checkBox10 = new System.Windows.Forms.CheckBox();
+            this.button4 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -793,6 +794,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.button4);
             this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.btnShowDB);
             this.panel1.Controls.Add(this.dateTimePicker1);
@@ -806,7 +808,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(391, 17);
+            this.button3.Location = new System.Drawing.Point(364, 17);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 4;
@@ -818,9 +820,9 @@
             // 
             this.btnShowDB.Location = new System.Drawing.Point(310, 17);
             this.btnShowDB.Name = "btnShowDB";
-            this.btnShowDB.Size = new System.Drawing.Size(75, 23);
+            this.btnShowDB.Size = new System.Drawing.Size(48, 23);
             this.btnShowDB.TabIndex = 3;
-            this.btnShowDB.Text = "Вывести";
+            this.btnShowDB.Text = "Логи";
             this.btnShowDB.UseVisualStyleBackColor = true;
             this.btnShowDB.Click += new System.EventHandler(this.btnShowDB_Click);
             // 
@@ -1156,6 +1158,16 @@
             this.checkBox10.Text = "10 руб";
             this.checkBox10.UseVisualStyleBackColor = true;
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(445, 17);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(60, 23);
+            this.button4.TabIndex = 5;
+            this.button4.Text = "Логины";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click_1);
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1295,5 +1307,6 @@
         private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.Button ChangeWrite;
+        private System.Windows.Forms.Button button4;
     }
 }

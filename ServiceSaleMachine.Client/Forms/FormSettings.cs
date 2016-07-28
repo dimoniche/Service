@@ -1002,5 +1002,10 @@ namespace ServiceSaleMachine.Client
         {
             data.drivers.SendCloseControl(3);
         }
+
+        private void button4_Click_1(object sender, EventArgs e)
+        {
+            dataGridView1.DataSource = mydb.GetUsers();
+        }
     }
 }

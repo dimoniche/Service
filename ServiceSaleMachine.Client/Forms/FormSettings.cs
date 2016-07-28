@@ -119,7 +119,6 @@ namespace ServiceSaleMachine.Client
                     {
                         cBxControlPort.SelectedIndex = 0;
 
-                        cBxControlPort.Enabled = false;
                         buttonwriteControlPort.Enabled = false;
                         Open1.Enabled = false;
                         Open1.Enabled = false;
@@ -881,7 +880,7 @@ namespace ServiceSaleMachine.Client
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
-            if (cBxBillOff.Checked)
+            if (offControl.Checked)
             {
                 Globals.ClientConfiguration.Settings.offControl = 1;
 
@@ -945,7 +944,6 @@ namespace ServiceSaleMachine.Client
 
             if (((string)cBxControlPort.Items[cBxControlPort.SelectedIndex]).Contains("нет"))
             {
-                buttonwriteControlPort.Enabled = false;
                 Open1.Enabled = false;
                 Open2.Enabled = false;
                 Open3.Enabled = false;
@@ -963,7 +961,6 @@ namespace ServiceSaleMachine.Client
                     return;
                 }
 
-                buttonwriteControlPort.Enabled = true;
                 Open1.Enabled = true;
                 Open2.Enabled = true;
                 Open3.Enabled = true;

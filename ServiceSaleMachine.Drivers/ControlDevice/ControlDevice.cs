@@ -58,18 +58,21 @@ namespace ServiceSaleMachine.Drivers
 
         public void closePort()
         {
-            if (serialPort.IsOpen)
+            if (serialPort != null)
             {
-                try
+                if (serialPort.IsOpen)
                 {
-                    serialPort.Close();
-                }
-                catch
-                {
+                    try
+                    {
+                        serialPort.Close();
+                    }
+                    catch
+                    {
 
-                }
+                    }
 
-                serialPort = null;
+                    serialPort = null;
+                }
             }
         }
 

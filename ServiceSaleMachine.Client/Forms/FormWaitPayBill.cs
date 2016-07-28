@@ -61,16 +61,7 @@ namespace ServiceSaleMachine.Client
             if (Globals.ClientConfiguration.Settings.offHardware == 0)
             {
                 // перейдем в режим ожидания купюр
-                if (Globals.ClientConfiguration.Settings.changeOn > 0)
-                {
-                    // со сдачей - жрем деньги сразу
-                    data.drivers.WaitBill();
-                }
-                else
-                {
-                    // без сдачи
-                    data.drivers.WaitBillEscrow();
-                }
+                data.drivers.WaitBillEscrow();
             }
         }
 
@@ -119,18 +110,7 @@ namespace ServiceSaleMachine.Client
                     // сдача
                     int diff = 0;
 
-                    if (Globals.ClientConfiguration.Settings.changeOn > 0)
-                    {
-                        // сдача на чек
-                        if (amount > data.serv.price)
-                        {
-                            // посчитаем размер сдачи
-                            diff = amount - data.serv.price;
-
-                            // тут надо решить как выдать сдачу
-                        }
-                    }
-                    else
+                    if (Globals.ClientConfiguration.Settings.changeOn == 0)
                     {
                         // без сдачи
                         if (count > data.serv.price)
@@ -149,38 +129,56 @@ namespace ServiceSaleMachine.Client
                             FormManager.OpenForm<FormBigBill>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify);
                             return;
                         }
+                    }
 
-                        if (amount <= data.serv.price)
+                    // еще не все внесли - напишем номинал купюры с предложением съесть ее
+                    bool res = (bool)FormManager.OpenForm<FormInsertBill>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, ((BillNominal)e.Message.Content).Denomination);
+
+                    if (res)
+                    {
+                        // забираем купюру
+                        if (Globals.ClientConfiguration.Settings.offHardware == 0)
                         {
-                            // еще не все внесли - напишем номинал купюры с предложением съесть ее
-                            bool res = (bool)FormManager.OpenForm<FormInsertBill>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, ((BillNominal)e.Message.Content).Denomination);
+                            moneyFixed = false;
+                            data.drivers.StackBill();
+                        }
+                    }
+                    else
+                    {
+                        // возвращаем ее обратно
+                        amount -= count;
 
-                            if (res)
+                        moneyFixed = false;
+
+                        if (Globals.ClientConfiguration.Settings.offHardware == 0)
+                        {
+                            data.drivers.ReturnBill();
+                        }
+                        return;
+                    }
+
+                    // внесли достаточную для услуги сумму
+
+                    if (Globals.ClientConfiguration.Settings.changeOn > 0)
+                    {
+                        // сдача на чек
+                        if (amount > data.serv.price)
+                        {
+                            // посчитаем размер сдачи
+                            diff = amount - data.serv.price;
+
+                            // тут надо решить как выдать сдачу - спросим пользователя
+                            ChooseChangeEnum ch = (ChooseChangeEnum)FormManager.OpenForm<FormChooseChange>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify);
+
+                            if(ch == ChooseChangeEnum.ChangeToAccount)
                             {
-                                // забираем купюру
-                                moneyFixed = false;
-
-                                if (Globals.ClientConfiguration.Settings.offHardware == 0)
-                                {
-                                    data.drivers.StackBill();
-                                }
+                                // заносим в аккаунт
                             }
                             else
                             {
-                                // возвращаем ее обратно
-                                amount -= count;
-
-                                moneyFixed = false;
-
-                                if (Globals.ClientConfiguration.Settings.offHardware == 0)
-                                {
-                                    data.drivers.ReturnBill();
-                                }
-                                return;
+                                // выдаем чек
                             }
                         }
-
-                        // внесли достаточную для услуги сумму
                     }
 
                     // напишем на экране
@@ -232,7 +230,7 @@ namespace ServiceSaleMachine.Client
                     CreditMoney(e);
                     break;
                 case DeviceEvent.BillAcceptorCredit:
-                    CreditMoney(e);
+                    //CreditMoney(e);
                     break;
                 default:
                     // Остальные события нас не интересуют

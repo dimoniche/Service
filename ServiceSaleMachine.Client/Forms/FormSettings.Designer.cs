@@ -90,6 +90,7 @@
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.btnShowDB = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
@@ -109,21 +110,17 @@
             this.cbxOffHardware = new System.Windows.Forms.CheckBox();
             this.tabPage9 = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.ChangeWrite = new System.Windows.Forms.Button();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button9 = new System.Windows.Forms.Button();
             this.checkchangeOn = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.butWriteNominal = new System.Windows.Forms.Button();
             this.checkBox5000 = new System.Windows.Forms.CheckBox();
             this.checkBox1000 = new System.Windows.Forms.CheckBox();
             this.checkBox500 = new System.Windows.Forms.CheckBox();
             this.checkBox100 = new System.Windows.Forms.CheckBox();
             this.checkBox50 = new System.Windows.Forms.CheckBox();
             this.checkBox10 = new System.Windows.Forms.CheckBox();
-            this.button4 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -343,7 +340,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(164, 23);
             this.button8.TabIndex = 44;
-            this.button8.Text = "Идетификатор";
+            this.button8.Text = "Идентификатор";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click_1);
             // 
@@ -806,6 +803,16 @@
             this.panel1.Size = new System.Drawing.Size(686, 56);
             this.panel1.TabIndex = 0;
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(445, 17);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(60, 23);
+            this.button4.TabIndex = 5;
+            this.button4.Text = "Логины";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click_1);
+            // 
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(364, 17);
@@ -1001,25 +1008,14 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.ChangeWrite);
             this.groupBox3.Controls.Add(this.checkBox4);
             this.groupBox3.Controls.Add(this.checkBox3);
             this.groupBox3.Location = new System.Drawing.Point(17, 197);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(276, 76);
+            this.groupBox3.Size = new System.Drawing.Size(259, 76);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Сдача";
-            // 
-            // ChangeWrite
-            // 
-            this.ChangeWrite.Location = new System.Drawing.Point(184, 19);
-            this.ChangeWrite.Name = "ChangeWrite";
-            this.ChangeWrite.Size = new System.Drawing.Size(75, 23);
-            this.ChangeWrite.TabIndex = 1;
-            this.ChangeWrite.Text = "Записать";
-            this.ChangeWrite.UseVisualStyleBackColor = true;
-            this.ChangeWrite.Click += new System.EventHandler(this.ChangeWrite_Click);
             // 
             // checkBox4
             // 
@@ -1030,6 +1026,7 @@
             this.checkBox4.TabIndex = 1;
             this.checkBox4.Text = "Выдача сдачи чеком";
             this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBox4.CheckedChanged += new System.EventHandler(this.ChangeWrite_Click);
             // 
             // checkBox3
             // 
@@ -1040,27 +1037,17 @@
             this.checkBox3.TabIndex = 1;
             this.checkBox3.Text = "Запись сдачи на аккаунт";
             this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.CheckedChanged += new System.EventHandler(this.ChangeWrite_Click);
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button9);
             this.groupBox2.Controls.Add(this.checkchangeOn);
-            this.groupBox2.Location = new System.Drawing.Point(241, 20);
+            this.groupBox2.Location = new System.Drawing.Point(155, 20);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(248, 161);
+            this.groupBox2.Size = new System.Drawing.Size(121, 161);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Режим работы";
-            // 
-            // button9
-            // 
-            this.button9.Location = new System.Drawing.Point(155, 25);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(75, 23);
-            this.button9.TabIndex = 1;
-            this.button9.Text = "Записать";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // checkchangeOn
             // 
@@ -1071,10 +1058,10 @@
             this.checkchangeOn.TabIndex = 1;
             this.checkchangeOn.Text = "Со сдачей";
             this.checkchangeOn.UseVisualStyleBackColor = true;
+            this.checkchangeOn.CheckedChanged += new System.EventHandler(this.button9_Click);
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.butWriteNominal);
             this.groupBox1.Controls.Add(this.checkBox5000);
             this.groupBox1.Controls.Add(this.checkBox1000);
             this.groupBox1.Controls.Add(this.checkBox500);
@@ -1083,20 +1070,10 @@
             this.groupBox1.Controls.Add(this.checkBox10);
             this.groupBox1.Location = new System.Drawing.Point(17, 20);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(218, 161);
+            this.groupBox1.Size = new System.Drawing.Size(128, 161);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Номиналы купюр";
-            // 
-            // butWriteNominal
-            // 
-            this.butWriteNominal.Location = new System.Drawing.Point(125, 25);
-            this.butWriteNominal.Name = "butWriteNominal";
-            this.butWriteNominal.Size = new System.Drawing.Size(75, 23);
-            this.butWriteNominal.TabIndex = 1;
-            this.butWriteNominal.Text = "Записать";
-            this.butWriteNominal.UseVisualStyleBackColor = true;
-            this.butWriteNominal.Click += new System.EventHandler(this.butWriteNominal_Click);
             // 
             // checkBox5000
             // 
@@ -1107,6 +1084,7 @@
             this.checkBox5000.TabIndex = 1;
             this.checkBox5000.Text = "5000 руб";
             this.checkBox5000.UseVisualStyleBackColor = true;
+            this.checkBox5000.CheckedChanged += new System.EventHandler(this.butWriteNominal_Click);
             // 
             // checkBox1000
             // 
@@ -1117,6 +1095,7 @@
             this.checkBox1000.TabIndex = 1;
             this.checkBox1000.Text = "1000 руб";
             this.checkBox1000.UseVisualStyleBackColor = true;
+            this.checkBox1000.CheckedChanged += new System.EventHandler(this.butWriteNominal_Click);
             // 
             // checkBox500
             // 
@@ -1127,6 +1106,7 @@
             this.checkBox500.TabIndex = 1;
             this.checkBox500.Text = "500 руб";
             this.checkBox500.UseVisualStyleBackColor = true;
+            this.checkBox500.CheckedChanged += new System.EventHandler(this.butWriteNominal_Click);
             // 
             // checkBox100
             // 
@@ -1137,6 +1117,7 @@
             this.checkBox100.TabIndex = 1;
             this.checkBox100.Text = "100 руб";
             this.checkBox100.UseVisualStyleBackColor = true;
+            this.checkBox100.CheckedChanged += new System.EventHandler(this.butWriteNominal_Click);
             // 
             // checkBox50
             // 
@@ -1147,6 +1128,7 @@
             this.checkBox50.TabIndex = 1;
             this.checkBox50.Text = "50 руб";
             this.checkBox50.UseVisualStyleBackColor = true;
+            this.checkBox50.CheckedChanged += new System.EventHandler(this.butWriteNominal_Click);
             // 
             // checkBox10
             // 
@@ -1157,16 +1139,7 @@
             this.checkBox10.TabIndex = 1;
             this.checkBox10.Text = "10 руб";
             this.checkBox10.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(445, 17);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(60, 23);
-            this.button4.TabIndex = 5;
-            this.button4.Text = "Логины";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click_1);
+            this.checkBox10.CheckedChanged += new System.EventHandler(this.butWriteNominal_Click);
             // 
             // FormSettings
             // 
@@ -1282,14 +1255,12 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.CheckBox checkchangeOn;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button butWriteNominal;
         private System.Windows.Forms.CheckBox checkBox5000;
         private System.Windows.Forms.CheckBox checkBox1000;
         private System.Windows.Forms.CheckBox checkBox500;
         private System.Windows.Forms.CheckBox checkBox100;
         private System.Windows.Forms.CheckBox checkBox50;
         private System.Windows.Forms.CheckBox checkBox10;
-        private System.Windows.Forms.Button button9;
         private System.Windows.Forms.TextBox textBoxTimeOut;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
@@ -1306,7 +1277,6 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.Button ChangeWrite;
         private System.Windows.Forms.Button button4;
     }
 }

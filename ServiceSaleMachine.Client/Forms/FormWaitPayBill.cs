@@ -168,7 +168,7 @@ namespace ServiceSaleMachine.Client
                             diff = amount - data.serv.price;
 
                             // тут надо решить как выдать сдачу - спросим пользователя
-                            ChooseChangeEnum ch = (ChooseChangeEnum)FormManager.OpenForm<FormChooseChange>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify);
+                            ChooseChangeEnum ch = (ChooseChangeEnum)FormManager.OpenForm<FormChooseChange>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, diff.ToString());
 
                             if(ch == ChooseChangeEnum.ChangeToAccount)
                             {

@@ -7,6 +7,7 @@ namespace ServiceSaleMachine.Client
     public partial class FormChooseChange : MyForm
     {
         ChooseChangeEnum ch = ChooseChangeEnum.None;
+        string Nominal = "";
 
         public FormChooseChange()
         {
@@ -32,6 +33,16 @@ namespace ServiceSaleMachine.Client
             {
                 pictureBox1.Enabled = false;
             }
+
+            foreach (object obj in Params.Objects.Where(obj => obj != null))
+            {
+                if (obj.GetType() == typeof(string))
+                {
+                    Nominal = (string)obj;
+                }
+            }
+
+            label1.Text = "Остается сдача в размере " + Nominal + " руб";
         }
 
         private void FormChooseChange_FormClosed(object sender, FormClosedEventArgs e)

@@ -17,6 +17,9 @@ namespace ServiceSaleMachine.Client
         {
             Nominal = "00";
 
+            pictureBox1.Load(Globals.GetPath(PathEnum.Image) + "\\TakeAwayMoney.png");
+            pictureBox2.Load(Globals.GetPath(PathEnum.Image) + "\\returnMoney.png");
+
             foreach (object obj in Params.Objects.Where(obj => obj != null))
             {
                 if (obj.GetType() == typeof(string))

@@ -46,7 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FormResultData.cs" />
-    <Compile Include="Forms\ChooseChangeEnum.cs" />
+    <Compile Include="Forms\Enum\ChooseChangeEnum.cs" />
     <Compile Include="Forms\FormBigBill.cs">
       <SubType>Form</SubType>
     </Compile>

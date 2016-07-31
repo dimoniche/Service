@@ -58,6 +58,11 @@ namespace ServiceSaleMachine.Client
                 cBxControlPort.Items.Add("нет");
                 cBxControlPort.Items.AddRange(currentPort);
 
+                cBxModemComPort.Items.Clear();
+                cBxModemComPort.Items.Add("нет");
+                cBxModemComPort.Items.AddRange(currentPort);
+
+
                 if (Globals.ClientConfiguration.Settings.offHardware != 1)
                 {
                     changeStateHardWare(true);
@@ -1003,6 +1008,37 @@ namespace ServiceSaleMachine.Client
         private void button4_Click_1(object sender, EventArgs e)
         {
             dataGridView1.DataSource = mydb.GetUsers();
+        }
+
+        private void button9_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cBxoffModem_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cBxoffModem.Checked)
+            {
+                Globals.ClientConfiguration.Settings.offControl = 1;
+
+                cBxModemComPort.Enabled = false;
+                butWriteModemComPort.Enabled = false;
+                groupBxSettingModem.Enabled = false;
+                butinitmodem.Enabled = false;
+                butsendsms.Enabled = false;
+            }
+            else
+            {
+                Globals.ClientConfiguration.Settings.offControl = 0;
+
+                cBxModemComPort.Enabled = true;
+                butWriteModemComPort.Enabled = true;
+                groupBxSettingModem.Enabled = true;
+                butinitmodem.Enabled = true;
+                butsendsms.Enabled = true;
+            }
+
+            Globals.ClientConfiguration.Save();
         }
     }
 }

@@ -26,6 +26,8 @@ namespace ServiceSaleMachine
         public int offBill = 1;
         // отключение управляющее устройство
         public int offControl = 1;
+        // отключение модема
+        public int offModem = 1;
 
         // массив обрабатываемых номиналов купюр
         public int[] nominals = new int[24];

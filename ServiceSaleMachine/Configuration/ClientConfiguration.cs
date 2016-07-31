@@ -59,6 +59,7 @@ namespace ServiceSaleMachine
                         if ((xElement = xSettings.Element("offDataBase")) != null) Settings.offDataBase = int.Parse(xElement.Value);
                         if ((xElement = xSettings.Element("offBill")) != null) Settings.offBill = int.Parse(xElement.Value);
                         if ((xElement = xSettings.Element("offControl")) != null) Settings.offControl = int.Parse(xElement.Value);
+                        if ((xElement = xSettings.Element("offModem")) != null) Settings.offModem = int.Parse(xElement.Value);
 
                         if ((xElement = xSettings.Element("changeOn")) != null) Settings.changeOn = int.Parse(xElement.Value);
                         if ((xElement = xSettings.Element("timeout")) != null) Settings.timeout = int.Parse(xElement.Value);
@@ -133,6 +134,7 @@ namespace ServiceSaleMachine
                 xSettings.Add(new XElement("offDataBase", Settings.offDataBase.ToString()));
                 xSettings.Add(new XElement("offBill", Settings.offBill.ToString()));
                 xSettings.Add(new XElement("offControl", Settings.offControl.ToString()));
+                xSettings.Add(new XElement("offModem", Settings.offModem.ToString()));
 
                 xSettings.Add(new XElement("changeOn", Settings.changeOn.ToString()));
                 xSettings.Add(new XElement("timeout", Settings.timeout.ToString()));

@@ -33,14 +33,16 @@ namespace ServiceSaleMachine.Client
                 }
             }
 
-            FTimeWork = data.timework;
-            progressBar.Maximum = data.timework;
+            FTimeWork = data.timeRecognize;
+            progressBar.Maximum = data.timeRecognize;
             progressBar.Minimum = 0;
             progressBar.Value = 0;
             CurrentWork = 0;
 
             timer1.Enabled = true;
             this.WindowState = FormWindowState.Maximized;
+
+            pBxInstruction.Load(Globals.GetPath(PathEnum.Image) + "\\instruction.png");
         }
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)

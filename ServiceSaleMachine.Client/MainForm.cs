@@ -331,8 +331,10 @@ namespace ServiceSaleMachine.Client
                     if (dev != null)
                     {
                         result.timework = dev.timework;
+                        result.timeRecognize = serv.timeRecognize;
                         result.ServName = serv.caption;
 
+                        // сначала включим подсветку и разрешим забрать аксессуары
                         result = (FormResultData)FormManager.OpenForm<FormProgress>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
                         if (result.stage == WorkerStateStage.ExitProgram)
@@ -340,6 +342,34 @@ namespace ServiceSaleMachine.Client
                             // выход
                             Close();
                             return;
+                        }
+
+                        // теперь собственно окажем услугу - сначала спросим надо ли 
+                        result = (FormResultData)FormManager.OpenForm<FormProvideServiceStart>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                        if (result.stage == WorkerStateStage.ExitProgram)
+                        {
+                            // выход
+                            Close();
+                            return;
+                        }
+                        else if (result.stage == WorkerStateStage.Fail)
+                        {
+                            // услуга не нужна
+                            continue;
+                        }
+                        else if (result.stage == WorkerStateStage.TimeOut)
+                        {
+                            continue;
+                        }
+
+                        // Будем оказывать услугу
+                        result = (FormResultData)FormManager.OpenForm<FormProvideService>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                        if (result.stage == WorkerStateStage.Fail)
+                        {
+                            // отказались от услуги
+                            
                         }
 
                         // пишем в базу строку с временем работы

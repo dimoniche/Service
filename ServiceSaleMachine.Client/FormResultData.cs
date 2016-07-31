@@ -13,7 +13,10 @@ namespace ServiceSaleMachine.Client
         public string retLogin;
         public string retPassword;
 
-        public int timework;
+        // максимальное время оказания услуги
+        public int timework = 3;
+        // время ознакомления с услугой и забор аксессуаров
+        public int timeRecognize = 60;
         public string ServName;
 
         public MachineDrivers drivers;

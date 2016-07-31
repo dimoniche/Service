@@ -15,6 +15,9 @@ namespace ServiceSaleMachine
 
         public List<Device> devs;
 
+        // время ознакомления с услугой и забор аксессуаров (минуты)
+        public int timeRecognize = 3;
+
         public Service()
         {
 
@@ -36,6 +39,7 @@ namespace ServiceSaleMachine
             xOut.Add(new XElement("price", price.ToString()));
             xOut.Add(new XElement("caption", caption));
             xOut.Add(new XElement("filename", filename));
+            xOut.Add(new XElement("timeRecognize", timeRecognize));
 
             if (devs.Count > 0)
             {
@@ -63,6 +67,7 @@ namespace ServiceSaleMachine
             if ((xElement = xObject.Element("caption")) != null) result.caption = xElement.Value;
             if ((xElement = xObject.Element("filename")) != null) result.filename = xElement.Value;
             if ((xElement = xObject.Element("price")) != null) result.price = int.Parse(xElement.Value);
+            if ((xElement = xObject.Element("timeRecognize")) != null) result.timeRecognize = int.Parse(xElement.Value);
 
             // настройки сервисов
             if ((xElement = xObject.Element("Devices")) != null)

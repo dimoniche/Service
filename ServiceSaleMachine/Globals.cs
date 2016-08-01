@@ -20,7 +20,7 @@ namespace ServiceSaleMachine
         public static Version DatabaseVersion { get; private set; }
         public static Version ProductVersion { get; private set; }
         public static CultureInfo CultureRu { get; private set; }
-        public static ClientConfiguration ClientConfiguration { get; private set; }
+        public static ClientConfiguration ClientConfiguration { get; set; }
         public static UserConfiguration UserConfiguration { get; private set; }
         public static DesignConfiguration DesignConfiguration { get; private set; }
         public static CheckConfiguration CheckConfiguration { get; private set; }

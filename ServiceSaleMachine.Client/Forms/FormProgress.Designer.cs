@@ -34,16 +34,16 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.pBxInstruction = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pBxInstruction = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBxInstruction)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -100,6 +100,35 @@
             this.progressBar.Step = 1;
             this.progressBar.TabIndex = 2;
             // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.pBxInstruction);
+            this.panel4.Controls.Add(this.pictureBox1);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel4.Location = new System.Drawing.Point(3, 183);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(661, 266);
+            this.panel4.TabIndex = 9;
+            // 
+            // pBxInstruction
+            // 
+            this.pBxInstruction.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pBxInstruction.Location = new System.Drawing.Point(0, 0);
+            this.pBxInstruction.Name = "pBxInstruction";
+            this.pBxInstruction.Size = new System.Drawing.Size(661, 266);
+            this.pBxInstruction.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pBxInstruction.TabIndex = 1;
+            this.pBxInstruction.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(661, 266);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
             // panel2
             // 
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
@@ -115,34 +144,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(50, 452);
             this.panel1.TabIndex = 6;
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.pBxInstruction);
-            this.panel4.Controls.Add(this.pictureBox1);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(3, 183);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(661, 266);
-            this.panel4.TabIndex = 9;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(661, 266);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pBxInstruction
-            // 
-            this.pBxInstruction.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pBxInstruction.Location = new System.Drawing.Point(0, 0);
-            this.pBxInstruction.Name = "pBxInstruction";
-            this.pBxInstruction.Size = new System.Drawing.Size(661, 266);
-            this.pBxInstruction.TabIndex = 1;
-            this.pBxInstruction.TabStop = false;
             // 
             // FormProgress
             // 
@@ -160,8 +161,8 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBxInstruction)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }

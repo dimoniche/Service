@@ -33,7 +33,112 @@ namespace ServiceSaleMachine.Client
                 }
             }
 
+            tabSettingService.TabPages.Clear();
+
+            foreach (Service serv in Globals.ClientConfiguration.Settings.services)
+            {
+                tabSettingService.TabPages.Add(new TabPage(serv.caption));
+
+                ServiceTabControl stc = new ServiceTabControl();
+                stc.Dock = DockStyle.Fill;
+                stc.AddDevice += AddDevice;
+                stc.DeleteDevice += DeleteDivice;
+                stc.RecognizeLeave += RecognizeLeave;
+                stc.TextBoxRecognize.Text = serv.timeRecognize.ToString();
+
+                tabSettingService.TabPages[tabSettingService.TabPages.Count - 1].Controls.Add(stc);
+
+                stc.DeviceTab.TabPages.Clear();
+
+                foreach (Device dev in serv.devs)
+                {
+                    stc.DeviceTab.TabPages.Add(dev.caption);
+
+                    DeviceTabControl devTab = new DeviceTabControl();
+                    devTab.Dock = DockStyle.Fill;
+                    devTab.LimitTimeLeave += LimitTimeLeave;
+                    devTab.TimeWorkLeave += TimeWorkLeave;
+
+                    devTab.LimitTime.Text = dev.limitTime.ToString();
+                    devTab.TimeWork.Text = dev.timework.ToString();
+
+                    stc.DeviceTab.TabPages[stc.DeviceTab.TabPages.Count - 1].Controls.Add(devTab);
+                }
+            }
+
+
             ReLoad();
+        }
+
+        private void TimeWorkLeave(object sender)
+        {
+            Service stc = Globals.ClientConfiguration.Settings.services[tabSettingService.SelectedIndex];
+            ServiceTabControl currServiceTab = ((ServiceTabControl)tabSettingService.TabPages[tabSettingService.SelectedIndex].Controls[0]);
+            DeviceTabControl currDeviceTab = (DeviceTabControl)currServiceTab.DeviceTab.TabPages[currServiceTab.DeviceTab.SelectedIndex].Controls[0];
+
+            int.TryParse(currDeviceTab.TimeWork.Text, out stc.devs[currServiceTab.DeviceTab.SelectedIndex].timework);
+        }
+
+        private void LimitTimeLeave(object sender)
+        {
+            Service stc = Globals.ClientConfiguration.Settings.services[tabSettingService.SelectedIndex];
+            ServiceTabControl currServiceTab = ((ServiceTabControl)tabSettingService.TabPages[tabSettingService.SelectedIndex].Controls[0]);
+            DeviceTabControl currDeviceTab = (DeviceTabControl)currServiceTab.DeviceTab.TabPages[currServiceTab.DeviceTab.SelectedIndex].Controls[0];
+
+            int.TryParse(currDeviceTab.LimitTime.Text, out stc.devs[currServiceTab.DeviceTab.SelectedIndex].limitTime);
+
+            Globals.ClientConfiguration.Save();
+        }
+
+        private void RecognizeLeave(object sender)
+        {
+            Service stc = Globals.ClientConfiguration.Settings.services[tabSettingService.SelectedIndex];
+            ServiceTabControl currServiceTab = ((ServiceTabControl)tabSettingService.TabPages[tabSettingService.SelectedIndex].Controls[0]);
+
+            int.TryParse(currServiceTab.TextBoxRecognize.Text, out stc.timeRecognize);
+
+            Globals.ClientConfiguration.Save();
+        }
+
+        private void DeleteDivice(object sender)
+        {
+            Service stc = Globals.ClientConfiguration.Settings.services[tabSettingService.SelectedIndex];
+
+            ServiceTabControl currServiceTab = ((ServiceTabControl)tabSettingService.TabPages[tabSettingService.SelectedIndex].Controls[0]);
+            DeviceTabControl currDeviceTab = (DeviceTabControl)currServiceTab.DeviceTab.TabPages[currServiceTab.DeviceTab.SelectedIndex].Controls[0];
+
+            currServiceTab.DeviceTab.TabPages.Remove(currServiceTab.DeviceTab.TabPages[currServiceTab.DeviceTab.SelectedIndex]);
+
+            stc.devs.RemoveAt(currServiceTab.DeviceTab.SelectedIndex);
+
+            Globals.ClientConfiguration.Save();
+        }
+
+        private void AddDevice(object sender)
+        {
+            Service stc = Globals.ClientConfiguration.Settings.services[tabSettingService.SelectedIndex];
+
+            ServiceTabControl currServiceTab = ((ServiceTabControl)tabSettingService.TabPages[tabSettingService.SelectedIndex].Controls[0]);
+            DeviceTabControl currDeviceTab = (DeviceTabControl)currServiceTab.DeviceTab.TabPages[currServiceTab.DeviceTab.SelectedIndex].Controls[0];
+
+            Device dev = new Device();
+            dev.caption = "Устройство " + (currServiceTab.DeviceTab.TabPages.Count + 1);
+            stc.devs.Add(dev);
+
+            currDeviceTab = new DeviceTabControl();
+
+            currServiceTab.DeviceTab.TabPages.Add(dev.caption);
+
+            currDeviceTab.Dock = DockStyle.Fill;
+            currDeviceTab.LimitTimeLeave += LimitTimeLeave;
+            currDeviceTab.TimeWorkLeave += TimeWorkLeave;
+
+            currDeviceTab.LimitTime.Text = dev.limitTime.ToString();
+            currDeviceTab.TimeWork.Text = dev.timework.ToString();
+
+            currServiceTab.DeviceTab.TabPages[currServiceTab.DeviceTab.TabPages.Count - 1].Controls.Add(currDeviceTab);
+
+            Globals.ClientConfiguration.Save();
         }
 
         void ReLoad()
@@ -313,6 +418,8 @@ namespace ServiceSaleMachine.Client
 
             checkBox3.Checked = Globals.ClientConfiguration.Settings.changeToAccount > 0 ? true : false;
             checkBox4.Checked = Globals.ClientConfiguration.Settings.changeToCheck > 0 ? true : false;
+
+            cBxoffModem.Checked = Globals.ClientConfiguration.Settings.offModem > 0 ? true : false;
 
             textBoxTimeOut.Text = Globals.ClientConfiguration.Settings.timeout.ToString();
         }
@@ -862,7 +969,7 @@ namespace ServiceSaleMachine.Client
 
         private void textBoxTimeOut_Leave(object sender, EventArgs e)
         {
-            int time = 0;
+           int time = 0;
 
             int.TryParse(textBoxTimeOut.Text, out time);
 

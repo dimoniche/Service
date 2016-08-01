@@ -37,6 +37,7 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.pBxServiceStop = new System.Windows.Forms.PictureBox();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.panel12 = new System.Windows.Forms.Panel();
             this.pBxServiceStart = new System.Windows.Forms.PictureBox();
             this.panel7 = new System.Windows.Forms.Panel();
             this.pBxInstruction = new System.Windows.Forms.PictureBox();
@@ -55,7 +56,7 @@
             this.tableLayoutPanel2.SuspendLayout();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBxServiceStop)).BeginInit();
-            this.panel6.SuspendLayout();
+            this.panel12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBxServiceStart)).BeginInit();
             this.panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBxInstruction)).BeginInit();
@@ -122,17 +123,18 @@
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.ColumnCount = 3;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.Controls.Add(this.panel5, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.panel6, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.panel12, 2, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 84F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(567, 84);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
@@ -142,7 +144,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(3, 3);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(277, 78);
+            this.panel5.Size = new System.Drawing.Size(183, 78);
             this.panel5.TabIndex = 0;
             // 
             // pBxServiceStop
@@ -150,27 +152,37 @@
             this.pBxServiceStop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pBxServiceStop.Location = new System.Drawing.Point(0, 0);
             this.pBxServiceStop.Name = "pBxServiceStop";
-            this.pBxServiceStop.Size = new System.Drawing.Size(277, 78);
+            this.pBxServiceStop.Size = new System.Drawing.Size(183, 78);
+            this.pBxServiceStop.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pBxServiceStop.TabIndex = 0;
             this.pBxServiceStop.TabStop = false;
             this.pBxServiceStop.Click += new System.EventHandler(this.pBxServiceStop_Click);
             // 
             // panel6
             // 
-            this.panel6.Controls.Add(this.pBxServiceStart);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel6.Location = new System.Drawing.Point(286, 3);
+            this.panel6.Location = new System.Drawing.Point(192, 3);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(278, 78);
+            this.panel6.Size = new System.Drawing.Size(183, 78);
             this.panel6.TabIndex = 1;
+            // 
+            // panel12
+            // 
+            this.panel12.Controls.Add(this.pBxServiceStart);
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel12.Location = new System.Drawing.Point(381, 3);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(183, 78);
+            this.panel12.TabIndex = 2;
             // 
             // pBxServiceStart
             // 
             this.pBxServiceStart.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pBxServiceStart.Location = new System.Drawing.Point(0, 0);
             this.pBxServiceStart.Name = "pBxServiceStart";
-            this.pBxServiceStart.Size = new System.Drawing.Size(278, 78);
-            this.pBxServiceStart.TabIndex = 0;
+            this.pBxServiceStart.Size = new System.Drawing.Size(183, 78);
+            this.pBxServiceStart.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pBxServiceStart.TabIndex = 1;
             this.pBxServiceStart.TabStop = false;
             this.pBxServiceStart.Click += new System.EventHandler(this.pBxServiceStart_Click);
             // 
@@ -189,6 +201,7 @@
             this.pBxInstruction.Location = new System.Drawing.Point(0, 0);
             this.pBxInstruction.Name = "pBxInstruction";
             this.pBxInstruction.Size = new System.Drawing.Size(567, 261);
+            this.pBxInstruction.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pBxInstruction.TabIndex = 0;
             this.pBxInstruction.TabStop = false;
             // 
@@ -264,6 +277,7 @@
             this.pBxMinus.Location = new System.Drawing.Point(0, 0);
             this.pBxMinus.Name = "pBxMinus";
             this.pBxMinus.Size = new System.Drawing.Size(183, 77);
+            this.pBxMinus.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pBxMinus.TabIndex = 1;
             this.pBxMinus.TabStop = false;
             this.pBxMinus.Click += new System.EventHandler(this.pBxMinus_Click);
@@ -283,11 +297,12 @@
             this.pBxPlus.Location = new System.Drawing.Point(0, 0);
             this.pBxPlus.Name = "pBxPlus";
             this.pBxPlus.Size = new System.Drawing.Size(183, 77);
+            this.pBxPlus.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pBxPlus.TabIndex = 0;
             this.pBxPlus.TabStop = false;
             this.pBxPlus.Click += new System.EventHandler(this.pBxPlus_Click);
             // 
-            // FormProvideService
+            // FormProvideServiceStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -297,7 +312,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "FormProvideService";
+            this.Name = "FormProvideServiceStart";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormProvideService";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -308,7 +323,7 @@
             this.tableLayoutPanel2.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pBxServiceStop)).EndInit();
-            this.panel6.ResumeLayout(false);
+            this.panel12.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pBxServiceStart)).EndInit();
             this.panel7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pBxInstruction)).EndInit();
@@ -335,7 +350,6 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.PictureBox pBxServiceStop;
         private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.PictureBox pBxServiceStart;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.PictureBox pBxInstruction;
@@ -347,5 +361,7 @@
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.PictureBox pBxPlus;
         private ScalableLabel intervalLabel;
+        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.PictureBox pBxServiceStart;
     }
 }

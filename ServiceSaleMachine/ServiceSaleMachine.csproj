@@ -55,6 +55,12 @@
     <Compile Include="Configuration\Device.cs" />
     <Compile Include="Configuration\Service.cs" />
     <Compile Include="Configuration\UserConfiguratin.cs" />
+    <Compile Include="Control\DeviceTabControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\DeviceTabControl.Designer.cs">
+      <DependentUpon>DeviceTabControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Control\RichTextBoxEx.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -63,6 +69,12 @@
     </Compile>
     <Compile Include="Control\ScalableLabel.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Control\ServiceTabControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ServiceTabControl.Designer.cs">
+      <DependentUpon>ServiceTabControl.cs</DependentUpon>
     </Compile>
     <Compile Include="DataBase\GlobalBase.cs" />
     <Compile Include="DataBase\db.cs" />
@@ -108,8 +120,14 @@
     <Compile Include="Utils\Utils.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Control\DeviceTabControl.resx">
+      <DependentUpon>DeviceTabControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Control\RichTextBoxEx.resx">
       <DependentUpon>RichTextBoxEx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ServiceTabControl.resx">
+      <DependentUpon>ServiceTabControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Common\Keyboard.resx">
       <DependentUpon>Keyboard.cs</DependentUpon>

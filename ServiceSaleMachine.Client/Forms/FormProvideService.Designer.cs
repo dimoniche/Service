@@ -122,6 +122,7 @@
             this.pBxStopService.Location = new System.Drawing.Point(0, 0);
             this.pBxStopService.Name = "pBxStopService";
             this.pBxStopService.Size = new System.Drawing.Size(167, 77);
+            this.pBxStopService.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pBxStopService.TabIndex = 0;
             this.pBxStopService.TabStop = false;
             this.pBxStopService.Click += new System.EventHandler(this.pBxStopService_Click);
@@ -156,9 +157,7 @@
             // 
             // label1
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(189, 107);
             this.label1.Name = "label1";

@@ -33,30 +33,32 @@ namespace ServiceSaleMachine.Client
             pBxServiceStop.Load(Globals.GetPath(PathEnum.Image) + "\\fail.png");
 
             pBxInstruction.Load(Globals.GetPath(PathEnum.Image) + "\\instruction.png");
+
+            intervalLabel.Text = interval.ToString() + " мин";
         }
 
         private void pBxPlus_Click(object sender, EventArgs e)
         {
-            interval++;
-            intervalLabel.Text = interval.ToString();
+            if(interval < data.timework) interval++;
+            intervalLabel.Text = interval.ToString() + " мин";
         }
 
         private void pBxMinus_Click(object sender, EventArgs e)
         {
-            interval--;
-            intervalLabel.Text = interval.ToString();
+            if (interval > 1) interval--;
+            intervalLabel.Text = interval.ToString() + " мин";
         }
 
         private void pBxServiceStart_Click(object sender, EventArgs e)
         {
-            data.stage = WorkerStateStage.Fail;
+            data.stage = WorkerStateStage.StartService;
             data.timework = interval;
             Close();
         }
 
         private void pBxServiceStop_Click(object sender, EventArgs e)
         {
-            data.stage = WorkerStateStage.StartService;
+            data.stage = WorkerStateStage.Fail;
             data.timework = interval;
             Close();
         }

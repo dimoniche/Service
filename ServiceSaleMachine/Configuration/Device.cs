@@ -6,9 +6,9 @@ namespace ServiceSaleMachine
     public class Device
     {
         public int id;
-        public int limitTime;
-        public string caption;
-        public int timework;
+        public int limitTime = 100;
+        public string caption = "";
+        public int timework = 10;
 
         public Device(int id, string caption, int limitTime,int timework)
         {

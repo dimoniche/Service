@@ -34,9 +34,9 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.scalableLabel1 = new ServiceSaleMachine.ScalableLabel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.scalableLabel2 = new ServiceSaleMachine.ScalableLabel();
             this.panel5.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -93,39 +93,34 @@
             this.panel7.Size = new System.Drawing.Size(477, 296);
             this.panel7.TabIndex = 1;
             // 
+            // scalableLabel1
+            // 
+            this.scalableLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scalableLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.scalableLabel1.Location = new System.Drawing.Point(0, 0);
+            this.scalableLabel1.Name = "scalableLabel1";
+            this.scalableLabel1.Size = new System.Drawing.Size(477, 296);
+            this.scalableLabel1.TabIndex = 0;
+            this.scalableLabel1.Text = "Сумма денег в кассете: 0 руб";
+            // 
             // panel6
             // 
-            this.panel6.Controls.Add(this.label1);
+            this.panel6.Controls.Add(this.scalableLabel2);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(0, 0);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(477, 100);
             this.panel6.TabIndex = 0;
             // 
-            // label1
+            // scalableLabel2
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(162, 38);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(153, 25);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Выемка денег";
-            // 
-            // scalableLabel1
-            // 
-            this.scalableLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.scalableLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.scalableLabel1.Location = new System.Drawing.Point(0, 46);
-            this.scalableLabel1.Name = "scalableLabel1";
-            this.scalableLabel1.Size = new System.Drawing.Size(477, 23);
-            this.scalableLabel1.TabIndex = 0;
-            this.scalableLabel1.Text = "Сумма денег в кассете: 0 руб";
+            this.scalableLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scalableLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.scalableLabel2.Location = new System.Drawing.Point(0, 0);
+            this.scalableLabel2.Name = "scalableLabel2";
+            this.scalableLabel2.Size = new System.Drawing.Size(477, 100);
+            this.scalableLabel2.TabIndex = 0;
+            this.scalableLabel2.Text = "Выемка денег";
             // 
             // FormMoneyRecess
             // 
@@ -146,7 +141,6 @@
             this.panel5.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -160,7 +154,7 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Label label1;
         private ScalableLabel scalableLabel1;
+        private ScalableLabel scalableLabel2;
     }
 }

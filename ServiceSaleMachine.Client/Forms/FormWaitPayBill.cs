@@ -109,6 +109,7 @@ namespace ServiceSaleMachine.Client
 
                     // сдача
                     int diff = 0;
+                    bool res = true;    // купюру забираем всегда - предлагаем вернуть - только если перебор
 
                     if (Globals.ClientConfiguration.Settings.changeOn == 0)
                     {
@@ -130,9 +131,16 @@ namespace ServiceSaleMachine.Client
                             return;
                         }
                     }
+                    else
+                    {
+                        // со сдачей
+                        if (amount > data.serv.price)
+                        {
+                            // купюра великовата - спросим может вернуть ее
+                            res = (bool)FormManager.OpenForm<FormInsertBill>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, ((BillNominal)e.Message.Content).Denomination);
+                        }
+                    }
 
-                    // еще не все внесли - напишем номинал купюры с предложением съесть ее
-                    bool res = (bool)FormManager.OpenForm<FormInsertBill>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, ((BillNominal)e.Message.Content).Denomination);
 
                     if (res)
                     {

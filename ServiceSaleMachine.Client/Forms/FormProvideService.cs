@@ -21,13 +21,15 @@ namespace ServiceSaleMachine.Client
                 {
                     data = (FormResultData)obj;
 
-                    Interval = data.timework;
+                    Interval = data.timework * 60;
                 }
             }
 
             pBxStopService.Load(Globals.GetPath(PathEnum.Image) + "\\fail.png");
 
             timerService.Enabled = true;
+
+            ServiceText.Text = "Идет оказание услуги. Осталось еще " + (Interval / 60).ToString() + " минуты и " + (Interval % 60).ToString() + " секунд";
         }
 
         private void pBxStopService_Click(object sender, System.EventArgs e)

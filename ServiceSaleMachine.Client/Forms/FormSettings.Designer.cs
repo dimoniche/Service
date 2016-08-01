@@ -96,17 +96,31 @@
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label8 = new System.Windows.Forms.Label();
             this.dtDBFrom = new System.Windows.Forms.DateTimePicker();
+            this.tabPage10 = new System.Windows.Forms.TabPage();
+            this.groupBxSettingModem = new System.Windows.Forms.GroupBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.butsendsms = new System.Windows.Forms.Button();
+            this.butinitmodem = new System.Windows.Forms.Button();
+            this.butWriteModemComPort = new System.Windows.Forms.Button();
+            this.label18 = new System.Windows.Forms.Label();
+            this.cBxModemComPort = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.tabSettingService = new System.Windows.Forms.TabControl();
+            this.tabDev1 = new System.Windows.Forms.TabPage();
             this.label12 = new System.Windows.Forms.Label();
             this.textBoxTimeOut = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.offControl = new System.Windows.Forms.CheckBox();
             this.cBxBillOff = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.cbxOffDataBase = new System.Windows.Forms.CheckBox();
             this.cbxCheckOff = new System.Windows.Forms.CheckBox();
+            this.cBxoffModem = new System.Windows.Forms.CheckBox();
             this.cbxOffHardware = new System.Windows.Forms.CheckBox();
             this.tabPage9 = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -121,16 +135,8 @@
             this.checkBox100 = new System.Windows.Forms.CheckBox();
             this.checkBox50 = new System.Windows.Forms.CheckBox();
             this.checkBox10 = new System.Windows.Forms.CheckBox();
-            this.tabPage10 = new System.Windows.Forms.TabPage();
-            this.butWriteModemComPort = new System.Windows.Forms.Button();
-            this.label18 = new System.Windows.Forms.Label();
-            this.cBxModemComPort = new System.Windows.Forms.ComboBox();
-            this.butinitmodem = new System.Windows.Forms.Button();
-            this.butsendsms = new System.Windows.Forms.Button();
-            this.groupBxSettingModem = new System.Windows.Forms.GroupBox();
-            this.cBxoffModem = new System.Windows.Forms.CheckBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
+            this.butDelServ = new System.Windows.Forms.Button();
+            this.butaddServ = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -143,15 +149,18 @@
             this.tabPage8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
+            this.tabPage10.SuspendLayout();
+            this.groupBxSettingModem.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabControl3.SuspendLayout();
             this.tabPage6.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.tabSettingService.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.tabPage9.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.tabPage10.SuspendLayout();
-            this.groupBxSettingModem.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -162,7 +171,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(728, 496);
+            this.tabControl1.Size = new System.Drawing.Size(728, 587);
             this.tabControl1.TabIndex = 0;
             // 
             // DeviceSettings
@@ -171,7 +180,7 @@
             this.DeviceSettings.Location = new System.Drawing.Point(4, 22);
             this.DeviceSettings.Name = "DeviceSettings";
             this.DeviceSettings.Padding = new System.Windows.Forms.Padding(3);
-            this.DeviceSettings.Size = new System.Drawing.Size(720, 470);
+            this.DeviceSettings.Size = new System.Drawing.Size(720, 561);
             this.DeviceSettings.TabIndex = 0;
             this.DeviceSettings.Text = "Оборудование";
             this.DeviceSettings.UseVisualStyleBackColor = true;
@@ -188,7 +197,7 @@
             this.tabControl2.Location = new System.Drawing.Point(3, 3);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(714, 464);
+            this.tabControl2.Size = new System.Drawing.Size(714, 555);
             this.tabControl2.TabIndex = 0;
             // 
             // tabPage1
@@ -203,7 +212,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(706, 438);
+            this.tabPage1.Size = new System.Drawing.Size(706, 529);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Сканер";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -871,13 +880,101 @@
             this.dtDBFrom.Size = new System.Drawing.Size(128, 20);
             this.dtDBFrom.TabIndex = 0;
             // 
+            // tabPage10
+            // 
+            this.tabPage10.Controls.Add(this.groupBxSettingModem);
+            this.tabPage10.Controls.Add(this.butsendsms);
+            this.tabPage10.Controls.Add(this.butinitmodem);
+            this.tabPage10.Controls.Add(this.butWriteModemComPort);
+            this.tabPage10.Controls.Add(this.label18);
+            this.tabPage10.Controls.Add(this.cBxModemComPort);
+            this.tabPage10.Location = new System.Drawing.Point(4, 22);
+            this.tabPage10.Name = "tabPage10";
+            this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage10.Size = new System.Drawing.Size(706, 438);
+            this.tabPage10.TabIndex = 5;
+            this.tabPage10.Text = "Модем";
+            this.tabPage10.UseVisualStyleBackColor = true;
+            // 
+            // groupBxSettingModem
+            // 
+            this.groupBxSettingModem.Controls.Add(this.label19);
+            this.groupBxSettingModem.Controls.Add(this.textBox1);
+            this.groupBxSettingModem.Location = new System.Drawing.Point(18, 55);
+            this.groupBxSettingModem.Name = "groupBxSettingModem";
+            this.groupBxSettingModem.Size = new System.Drawing.Size(341, 148);
+            this.groupBxSettingModem.TabIndex = 14;
+            this.groupBxSettingModem.TabStop = false;
+            this.groupBxSettingModem.Text = "Настройки модема";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(18, 32);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(93, 13);
+            this.label19.TabIndex = 1;
+            this.label19.Text = "Номер телефона";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(133, 25);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(181, 20);
+            this.textBox1.TabIndex = 0;
+            // 
+            // butsendsms
+            // 
+            this.butsendsms.Location = new System.Drawing.Point(18, 251);
+            this.butsendsms.Name = "butsendsms";
+            this.butsendsms.Size = new System.Drawing.Size(150, 24);
+            this.butsendsms.TabIndex = 13;
+            this.butsendsms.Text = "Послать СМС";
+            this.butsendsms.UseVisualStyleBackColor = true;
+            // 
+            // butinitmodem
+            // 
+            this.butinitmodem.Location = new System.Drawing.Point(18, 221);
+            this.butinitmodem.Name = "butinitmodem";
+            this.butinitmodem.Size = new System.Drawing.Size(150, 24);
+            this.butinitmodem.TabIndex = 13;
+            this.butinitmodem.Text = "Инициализировать";
+            this.butinitmodem.UseVisualStyleBackColor = true;
+            // 
+            // butWriteModemComPort
+            // 
+            this.butWriteModemComPort.Location = new System.Drawing.Point(257, 19);
+            this.butWriteModemComPort.Name = "butWriteModemComPort";
+            this.butWriteModemComPort.Size = new System.Drawing.Size(75, 23);
+            this.butWriteModemComPort.TabIndex = 12;
+            this.butWriteModemComPort.Text = "Записать";
+            this.butWriteModemComPort.UseVisualStyleBackColor = true;
+            this.butWriteModemComPort.Click += new System.EventHandler(this.button9_Click_1);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(15, 22);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(32, 13);
+            this.label18.TabIndex = 11;
+            this.label18.Text = "Порт";
+            // 
+            // cBxModemComPort
+            // 
+            this.cBxModemComPort.FormattingEnabled = true;
+            this.cBxModemComPort.Location = new System.Drawing.Point(74, 19);
+            this.cBxModemComPort.Name = "cBxModemComPort";
+            this.cBxModemComPort.Size = new System.Drawing.Size(121, 21);
+            this.cBxModemComPort.TabIndex = 10;
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.tabControl3);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(720, 470);
+            this.tabPage2.Size = new System.Drawing.Size(720, 561);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Настройки";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -890,44 +987,71 @@
             this.tabControl3.Location = new System.Drawing.Point(3, 3);
             this.tabControl3.Name = "tabControl3";
             this.tabControl3.SelectedIndex = 0;
-            this.tabControl3.Size = new System.Drawing.Size(714, 464);
+            this.tabControl3.Size = new System.Drawing.Size(714, 555);
             this.tabControl3.TabIndex = 0;
             // 
             // tabPage6
             // 
-            this.tabPage6.Controls.Add(this.label12);
-            this.tabPage6.Controls.Add(this.textBoxTimeOut);
-            this.tabPage6.Controls.Add(this.label11);
-            this.tabPage6.Controls.Add(this.offControl);
-            this.tabPage6.Controls.Add(this.cBxBillOff);
-            this.tabPage6.Controls.Add(this.checkBox1);
-            this.tabPage6.Controls.Add(this.cbxOffDataBase);
-            this.tabPage6.Controls.Add(this.cbxCheckOff);
-            this.tabPage6.Controls.Add(this.cBxoffModem);
-            this.tabPage6.Controls.Add(this.cbxOffHardware);
+            this.tabPage6.Controls.Add(this.groupBox5);
+            this.tabPage6.Controls.Add(this.groupBox4);
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(706, 438);
+            this.tabPage6.Size = new System.Drawing.Size(706, 529);
             this.tabPage6.TabIndex = 0;
             this.tabPage6.Text = "Основные";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.butDelServ);
+            this.groupBox5.Controls.Add(this.butaddServ);
+            this.groupBox5.Controls.Add(this.tabSettingService);
+            this.groupBox5.Controls.Add(this.label12);
+            this.groupBox5.Controls.Add(this.textBoxTimeOut);
+            this.groupBox5.Controls.Add(this.label11);
+            this.groupBox5.Location = new System.Drawing.Point(313, 6);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(387, 426);
+            this.groupBox5.TabIndex = 14;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Времена";
+            // 
+            // tabSettingService
+            // 
+            this.tabSettingService.Controls.Add(this.tabDev1);
+            this.tabSettingService.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tabSettingService.Location = new System.Drawing.Point(3, 134);
+            this.tabSettingService.Name = "tabSettingService";
+            this.tabSettingService.SelectedIndex = 0;
+            this.tabSettingService.Size = new System.Drawing.Size(381, 289);
+            this.tabSettingService.TabIndex = 16;
+            // 
+            // tabDev1
+            // 
+            this.tabDev1.Location = new System.Drawing.Point(4, 22);
+            this.tabDev1.Name = "tabDev1";
+            this.tabDev1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabDev1.Size = new System.Drawing.Size(373, 263);
+            this.tabDev1.TabIndex = 0;
+            this.tabDev1.Text = "Устройство 1";
+            this.tabDev1.UseVisualStyleBackColor = true;
+            // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(241, 218);
+            this.label12.Location = new System.Drawing.Point(238, 16);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(27, 13);
-            this.label12.TabIndex = 12;
+            this.label12.TabIndex = 15;
             this.label12.Text = "мин";
             // 
             // textBoxTimeOut
             // 
-            this.textBoxTimeOut.Location = new System.Drawing.Point(126, 215);
+            this.textBoxTimeOut.Location = new System.Drawing.Point(123, 13);
             this.textBoxTimeOut.Name = "textBoxTimeOut";
             this.textBoxTimeOut.Size = new System.Drawing.Size(100, 20);
-            this.textBoxTimeOut.TabIndex = 11;
+            this.textBoxTimeOut.TabIndex = 14;
             this.textBoxTimeOut.Text = "0";
             this.textBoxTimeOut.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBoxTimeOut.Leave += new System.EventHandler(this.textBoxTimeOut_Leave);
@@ -935,19 +1059,35 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(12, 222);
+            this.label11.Location = new System.Drawing.Point(9, 20);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(108, 13);
-            this.label11.TabIndex = 10;
+            this.label11.TabIndex = 13;
             this.label11.Text = "Время бездействия";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.offControl);
+            this.groupBox4.Controls.Add(this.cBxBillOff);
+            this.groupBox4.Controls.Add(this.checkBox1);
+            this.groupBox4.Controls.Add(this.cbxOffDataBase);
+            this.groupBox4.Controls.Add(this.cbxCheckOff);
+            this.groupBox4.Controls.Add(this.cBxoffModem);
+            this.groupBox4.Controls.Add(this.cbxOffHardware);
+            this.groupBox4.Location = new System.Drawing.Point(15, 6);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(292, 426);
+            this.groupBox4.TabIndex = 13;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Отключение оборудования";
             // 
             // offControl
             // 
             this.offControl.AutoSize = true;
-            this.offControl.Location = new System.Drawing.Point(15, 134);
+            this.offControl.Location = new System.Drawing.Point(16, 134);
             this.offControl.Name = "offControl";
             this.offControl.Size = new System.Drawing.Size(214, 17);
-            this.offControl.TabIndex = 8;
+            this.offControl.TabIndex = 14;
             this.offControl.Text = "Отключить управляющее устройство";
             this.offControl.UseVisualStyleBackColor = true;
             this.offControl.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
@@ -955,10 +1095,10 @@
             // cBxBillOff
             // 
             this.cBxBillOff.AutoSize = true;
-            this.cBxBillOff.Location = new System.Drawing.Point(15, 111);
+            this.cBxBillOff.Location = new System.Drawing.Point(16, 111);
             this.cBxBillOff.Name = "cBxBillOff";
             this.cBxBillOff.Size = new System.Drawing.Size(171, 17);
-            this.cBxBillOff.TabIndex = 8;
+            this.cBxBillOff.TabIndex = 15;
             this.cBxBillOff.Text = "Отключить купюроприемник";
             this.cBxBillOff.UseVisualStyleBackColor = true;
             this.cBxBillOff.CheckedChanged += new System.EventHandler(this.cBxBillOff_CheckedChanged);
@@ -966,21 +1106,20 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(15, 88);
+            this.checkBox1.Location = new System.Drawing.Point(16, 88);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(230, 17);
-            this.checkBox1.TabIndex = 9;
+            this.checkBox1.TabIndex = 16;
             this.checkBox1.Text = "Отключить регистрацию пользователей";
             this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // cbxOffDataBase
             // 
             this.cbxOffDataBase.AutoSize = true;
-            this.cbxOffDataBase.Location = new System.Drawing.Point(15, 65);
+            this.cbxOffDataBase.Location = new System.Drawing.Point(16, 65);
             this.cbxOffDataBase.Name = "cbxOffDataBase";
             this.cbxOffDataBase.Size = new System.Drawing.Size(147, 17);
-            this.cbxOffDataBase.TabIndex = 7;
+            this.cbxOffDataBase.TabIndex = 13;
             this.cbxOffDataBase.Text = "Отключить базу данных";
             this.cbxOffDataBase.UseVisualStyleBackColor = true;
             this.cbxOffDataBase.CheckedChanged += new System.EventHandler(this.cbxOffDataBase_CheckedChanged);
@@ -988,21 +1127,32 @@
             // cbxCheckOff
             // 
             this.cbxCheckOff.AutoSize = true;
-            this.cbxCheckOff.Location = new System.Drawing.Point(15, 42);
+            this.cbxCheckOff.Location = new System.Drawing.Point(16, 42);
             this.cbxCheckOff.Name = "cbxCheckOff";
             this.cbxCheckOff.Size = new System.Drawing.Size(152, 17);
-            this.cbxCheckOff.TabIndex = 6;
+            this.cbxCheckOff.TabIndex = 12;
             this.cbxCheckOff.Text = "Отключить оплату чеком";
             this.cbxCheckOff.UseVisualStyleBackColor = true;
             this.cbxCheckOff.CheckedChanged += new System.EventHandler(this.cbxCheckOff_CheckedChanged);
             // 
+            // cBxoffModem
+            // 
+            this.cBxoffModem.AutoSize = true;
+            this.cBxoffModem.Location = new System.Drawing.Point(16, 157);
+            this.cBxoffModem.Name = "cBxoffModem";
+            this.cBxoffModem.Size = new System.Drawing.Size(118, 17);
+            this.cBxoffModem.TabIndex = 10;
+            this.cBxoffModem.Text = "Отключить модем";
+            this.cBxoffModem.UseVisualStyleBackColor = true;
+            this.cBxoffModem.CheckedChanged += new System.EventHandler(this.cBxoffModem_CheckedChanged);
+            // 
             // cbxOffHardware
             // 
             this.cbxOffHardware.AutoSize = true;
-            this.cbxOffHardware.Location = new System.Drawing.Point(15, 19);
+            this.cbxOffHardware.Location = new System.Drawing.Point(16, 19);
             this.cbxOffHardware.Name = "cbxOffHardware";
             this.cbxOffHardware.Size = new System.Drawing.Size(155, 17);
-            this.cbxOffHardware.TabIndex = 5;
+            this.cbxOffHardware.TabIndex = 11;
             this.cbxOffHardware.Text = "Отключить оборудование";
             this.cbxOffHardware.UseVisualStyleBackColor = true;
             this.cbxOffHardware.CheckedChanged += new System.EventHandler(this.cbxOffHardware_CheckStateChanged);
@@ -1155,110 +1305,29 @@
             this.checkBox10.UseVisualStyleBackColor = true;
             this.checkBox10.CheckedChanged += new System.EventHandler(this.butWriteNominal_Click);
             // 
-            // tabPage10
+            // butDelServ
             // 
-            this.tabPage10.Controls.Add(this.groupBxSettingModem);
-            this.tabPage10.Controls.Add(this.butsendsms);
-            this.tabPage10.Controls.Add(this.butinitmodem);
-            this.tabPage10.Controls.Add(this.butWriteModemComPort);
-            this.tabPage10.Controls.Add(this.label18);
-            this.tabPage10.Controls.Add(this.cBxModemComPort);
-            this.tabPage10.Location = new System.Drawing.Point(4, 22);
-            this.tabPage10.Name = "tabPage10";
-            this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage10.Size = new System.Drawing.Size(706, 438);
-            this.tabPage10.TabIndex = 5;
-            this.tabPage10.Text = "Модем";
-            this.tabPage10.UseVisualStyleBackColor = true;
+            this.butDelServ.Location = new System.Drawing.Point(187, 103);
+            this.butDelServ.Name = "butDelServ";
+            this.butDelServ.Size = new System.Drawing.Size(154, 23);
+            this.butDelServ.TabIndex = 17;
+            this.butDelServ.Text = "Удалить услугу";
+            this.butDelServ.UseVisualStyleBackColor = true;
             // 
-            // butWriteModemComPort
+            // butaddServ
             // 
-            this.butWriteModemComPort.Location = new System.Drawing.Point(257, 19);
-            this.butWriteModemComPort.Name = "butWriteModemComPort";
-            this.butWriteModemComPort.Size = new System.Drawing.Size(75, 23);
-            this.butWriteModemComPort.TabIndex = 12;
-            this.butWriteModemComPort.Text = "Записать";
-            this.butWriteModemComPort.UseVisualStyleBackColor = true;
-            this.butWriteModemComPort.Click += new System.EventHandler(this.button9_Click_1);
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(15, 22);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(32, 13);
-            this.label18.TabIndex = 11;
-            this.label18.Text = "Порт";
-            // 
-            // cBxModemComPort
-            // 
-            this.cBxModemComPort.FormattingEnabled = true;
-            this.cBxModemComPort.Location = new System.Drawing.Point(74, 19);
-            this.cBxModemComPort.Name = "cBxModemComPort";
-            this.cBxModemComPort.Size = new System.Drawing.Size(121, 21);
-            this.cBxModemComPort.TabIndex = 10;
-            // 
-            // butinitmodem
-            // 
-            this.butinitmodem.Location = new System.Drawing.Point(18, 221);
-            this.butinitmodem.Name = "butinitmodem";
-            this.butinitmodem.Size = new System.Drawing.Size(150, 24);
-            this.butinitmodem.TabIndex = 13;
-            this.butinitmodem.Text = "Инициализировать";
-            this.butinitmodem.UseVisualStyleBackColor = true;
-            // 
-            // butsendsms
-            // 
-            this.butsendsms.Location = new System.Drawing.Point(18, 251);
-            this.butsendsms.Name = "butsendsms";
-            this.butsendsms.Size = new System.Drawing.Size(150, 24);
-            this.butsendsms.TabIndex = 13;
-            this.butsendsms.Text = "Послать СМС";
-            this.butsendsms.UseVisualStyleBackColor = true;
-            // 
-            // groupBxSettingModem
-            // 
-            this.groupBxSettingModem.Controls.Add(this.label19);
-            this.groupBxSettingModem.Controls.Add(this.textBox1);
-            this.groupBxSettingModem.Location = new System.Drawing.Point(18, 55);
-            this.groupBxSettingModem.Name = "groupBxSettingModem";
-            this.groupBxSettingModem.Size = new System.Drawing.Size(341, 148);
-            this.groupBxSettingModem.TabIndex = 14;
-            this.groupBxSettingModem.TabStop = false;
-            this.groupBxSettingModem.Text = "Настройки модема";
-            // 
-            // cBxoffModem
-            // 
-            this.cBxoffModem.AutoSize = true;
-            this.cBxoffModem.Location = new System.Drawing.Point(15, 157);
-            this.cBxoffModem.Name = "cBxoffModem";
-            this.cBxoffModem.Size = new System.Drawing.Size(118, 17);
-            this.cBxoffModem.TabIndex = 5;
-            this.cBxoffModem.Text = "Отключить модем";
-            this.cBxoffModem.UseVisualStyleBackColor = true;
-            this.cBxoffModem.CheckedChanged += new System.EventHandler(this.cBxoffModem_CheckedChanged);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(133, 25);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(181, 20);
-            this.textBox1.TabIndex = 0;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(18, 32);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(93, 13);
-            this.label19.TabIndex = 1;
-            this.label19.Text = "Номер телефона";
+            this.butaddServ.Location = new System.Drawing.Point(27, 103);
+            this.butaddServ.Name = "butaddServ";
+            this.butaddServ.Size = new System.Drawing.Size(154, 23);
+            this.butaddServ.TabIndex = 18;
+            this.butaddServ.Text = "Добавить услугу";
+            this.butaddServ.UseVisualStyleBackColor = true;
             // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(728, 496);
+            this.ClientSize = new System.Drawing.Size(728, 587);
             this.Controls.Add(this.tabControl1);
             this.Name = "FormSettings";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -1281,10 +1350,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.tabPage10.ResumeLayout(false);
+            this.tabPage10.PerformLayout();
+            this.groupBxSettingModem.ResumeLayout(false);
+            this.groupBxSettingModem.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabControl3.ResumeLayout(false);
             this.tabPage6.ResumeLayout(false);
-            this.tabPage6.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            this.tabSettingService.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.tabPage9.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
@@ -1292,10 +1369,6 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.tabPage10.ResumeLayout(false);
-            this.tabPage10.PerformLayout();
-            this.groupBxSettingModem.ResumeLayout(false);
-            this.groupBxSettingModem.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1363,11 +1436,6 @@
         private System.Windows.Forms.Label Info;
         private System.Windows.Forms.TabControl tabControl3;
         private System.Windows.Forms.TabPage tabPage6;
-        private System.Windows.Forms.CheckBox cBxBillOff;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox cbxOffDataBase;
-        private System.Windows.Forms.CheckBox cbxCheckOff;
-        private System.Windows.Forms.CheckBox cbxOffHardware;
         private System.Windows.Forms.TabPage tabPage9;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.CheckBox checkchangeOn;
@@ -1378,16 +1446,12 @@
         private System.Windows.Forms.CheckBox checkBox100;
         private System.Windows.Forms.CheckBox checkBox50;
         private System.Windows.Forms.CheckBox checkBox10;
-        private System.Windows.Forms.TextBox textBoxTimeOut;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button Close2;
         private System.Windows.Forms.Button Open1;
         private System.Windows.Forms.Button Close1;
         private System.Windows.Forms.Button Close3;
         private System.Windows.Forms.Button Open3;
         private System.Windows.Forms.Button Open2;
-        private System.Windows.Forms.CheckBox offControl;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label13;
@@ -1402,8 +1466,23 @@
         private System.Windows.Forms.GroupBox groupBxSettingModem;
         private System.Windows.Forms.Button butsendsms;
         private System.Windows.Forms.Button butinitmodem;
-        private System.Windows.Forms.CheckBox cBxoffModem;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.CheckBox offControl;
+        private System.Windows.Forms.CheckBox cBxBillOff;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox cbxOffDataBase;
+        private System.Windows.Forms.CheckBox cbxCheckOff;
+        private System.Windows.Forms.CheckBox cBxoffModem;
+        private System.Windows.Forms.CheckBox cbxOffHardware;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox textBoxTimeOut;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TabControl tabSettingService;
+        private System.Windows.Forms.TabPage tabDev1;
+        private System.Windows.Forms.Button butDelServ;
+        private System.Windows.Forms.Button butaddServ;
     }
 }

@@ -109,6 +109,8 @@
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.butDelServ = new System.Windows.Forms.Button();
+            this.butaddServ = new System.Windows.Forms.Button();
             this.tabSettingService = new System.Windows.Forms.TabControl();
             this.tabDev1 = new System.Windows.Forms.TabPage();
             this.label12 = new System.Windows.Forms.Label();
@@ -135,8 +137,7 @@
             this.checkBox100 = new System.Windows.Forms.CheckBox();
             this.checkBox50 = new System.Windows.Forms.CheckBox();
             this.checkBox10 = new System.Windows.Forms.CheckBox();
-            this.butDelServ = new System.Windows.Forms.Button();
-            this.butaddServ = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -313,7 +314,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(706, 438);
+            this.tabPage3.Size = new System.Drawing.Size(706, 529);
             this.tabPage3.TabIndex = 1;
             this.tabPage3.Text = "Купюроприемник";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -550,6 +551,7 @@
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.butWriteComPortPrinter);
+            this.tabPage4.Controls.Add(this.button9);
             this.tabPage4.Controls.Add(this.butPrintCheck);
             this.tabPage4.Controls.Add(this.butWriteBarCode);
             this.tabPage4.Controls.Add(this.textBox2);
@@ -558,7 +560,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(706, 438);
+            this.tabPage4.Size = new System.Drawing.Size(706, 529);
             this.tabPage4.TabIndex = 2;
             this.tabPage4.Text = "Принтер";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -638,7 +640,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(706, 438);
+            this.tabPage5.Size = new System.Drawing.Size(706, 529);
             this.tabPage5.TabIndex = 3;
             this.tabPage5.Text = "Управляющее устройство";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -764,7 +766,7 @@
             this.tabViewDataBase.Location = new System.Drawing.Point(4, 22);
             this.tabViewDataBase.Name = "tabViewDataBase";
             this.tabViewDataBase.Padding = new System.Windows.Forms.Padding(3);
-            this.tabViewDataBase.Size = new System.Drawing.Size(706, 438);
+            this.tabViewDataBase.Size = new System.Drawing.Size(706, 529);
             this.tabViewDataBase.TabIndex = 4;
             this.tabViewDataBase.Text = "База данных";
             this.tabViewDataBase.UseVisualStyleBackColor = true;
@@ -777,7 +779,7 @@
             this.tabDataBaseSetting.Location = new System.Drawing.Point(3, 3);
             this.tabDataBaseSetting.Name = "tabDataBaseSetting";
             this.tabDataBaseSetting.SelectedIndex = 0;
-            this.tabDataBaseSetting.Size = new System.Drawing.Size(700, 432);
+            this.tabDataBaseSetting.Size = new System.Drawing.Size(700, 523);
             this.tabDataBaseSetting.TabIndex = 0;
             // 
             // tabPage7
@@ -785,7 +787,7 @@
             this.tabPage7.Location = new System.Drawing.Point(4, 22);
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(692, 406);
+            this.tabPage7.Size = new System.Drawing.Size(692, 497);
             this.tabPage7.TabIndex = 0;
             this.tabPage7.Text = "Настройка доступа";
             this.tabPage7.UseVisualStyleBackColor = true;
@@ -797,7 +799,7 @@
             this.tabPage8.Location = new System.Drawing.Point(4, 22);
             this.tabPage8.Name = "tabPage8";
             this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage8.Size = new System.Drawing.Size(692, 406);
+            this.tabPage8.Size = new System.Drawing.Size(692, 497);
             this.tabPage8.TabIndex = 1;
             this.tabPage8.Text = "Просмотр";
             this.tabPage8.UseVisualStyleBackColor = true;
@@ -808,7 +810,7 @@
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 59);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(686, 344);
+            this.dataGridView1.Size = new System.Drawing.Size(686, 435);
             this.dataGridView1.TabIndex = 1;
             // 
             // panel1
@@ -891,7 +893,7 @@
             this.tabPage10.Location = new System.Drawing.Point(4, 22);
             this.tabPage10.Name = "tabPage10";
             this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage10.Size = new System.Drawing.Size(706, 438);
+            this.tabPage10.Size = new System.Drawing.Size(706, 529);
             this.tabPage10.TabIndex = 5;
             this.tabPage10.Text = "Модем";
             this.tabPage10.UseVisualStyleBackColor = true;
@@ -1016,6 +1018,24 @@
             this.groupBox5.TabIndex = 14;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Времена";
+            // 
+            // butDelServ
+            // 
+            this.butDelServ.Location = new System.Drawing.Point(187, 103);
+            this.butDelServ.Name = "butDelServ";
+            this.butDelServ.Size = new System.Drawing.Size(154, 23);
+            this.butDelServ.TabIndex = 17;
+            this.butDelServ.Text = "Удалить услугу";
+            this.butDelServ.UseVisualStyleBackColor = true;
+            // 
+            // butaddServ
+            // 
+            this.butaddServ.Location = new System.Drawing.Point(27, 103);
+            this.butaddServ.Name = "butaddServ";
+            this.butaddServ.Size = new System.Drawing.Size(154, 23);
+            this.butaddServ.TabIndex = 18;
+            this.butaddServ.Text = "Добавить услугу";
+            this.butaddServ.UseVisualStyleBackColor = true;
             // 
             // tabSettingService
             // 
@@ -1165,7 +1185,7 @@
             this.tabPage9.Location = new System.Drawing.Point(4, 22);
             this.tabPage9.Name = "tabPage9";
             this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage9.Size = new System.Drawing.Size(706, 438);
+            this.tabPage9.Size = new System.Drawing.Size(706, 529);
             this.tabPage9.TabIndex = 1;
             this.tabPage9.Text = "Прием купюр";
             this.tabPage9.UseVisualStyleBackColor = true;
@@ -1305,23 +1325,15 @@
             this.checkBox10.UseVisualStyleBackColor = true;
             this.checkBox10.CheckedChanged += new System.EventHandler(this.butWriteNominal_Click);
             // 
-            // butDelServ
+            // button9
             // 
-            this.butDelServ.Location = new System.Drawing.Point(187, 103);
-            this.butDelServ.Name = "butDelServ";
-            this.butDelServ.Size = new System.Drawing.Size(154, 23);
-            this.butDelServ.TabIndex = 17;
-            this.butDelServ.Text = "Удалить услугу";
-            this.butDelServ.UseVisualStyleBackColor = true;
-            // 
-            // butaddServ
-            // 
-            this.butaddServ.Location = new System.Drawing.Point(27, 103);
-            this.butaddServ.Name = "butaddServ";
-            this.butaddServ.Size = new System.Drawing.Size(154, 23);
-            this.butaddServ.TabIndex = 18;
-            this.butaddServ.Text = "Добавить услугу";
-            this.butaddServ.UseVisualStyleBackColor = true;
+            this.button9.Location = new System.Drawing.Point(394, 131);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(138, 23);
+            this.button9.TabIndex = 40;
+            this.button9.Text = "Распечатать RAW";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click_2);
             // 
             // FormSettings
             // 
@@ -1484,5 +1496,6 @@
         private System.Windows.Forms.TabPage tabDev1;
         private System.Windows.Forms.Button butDelServ;
         private System.Windows.Forms.Button butaddServ;
+        private System.Windows.Forms.Button button9;
     }
 }

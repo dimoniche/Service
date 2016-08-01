@@ -1149,5 +1149,21 @@ namespace ServiceSaleMachine.Client
 
             Globals.ClientConfiguration.Save();
         }
+
+        private void button9_Click_2(object sender, EventArgs e)
+        {
+            if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
+            if (cbxComPortPrinter.SelectedIndex == -1) return;
+
+            data.drivers.printer.StartPrint((string)cbxComPortPrinter.Items[cbxComPortPrinter.SelectedIndex]);
+
+            if (data.drivers.printer.prn.PrinterIsOpen)
+            {
+                data.drivers.printer.PrintBitMap();
+
+                data.drivers.printer.PrintFooter();
+                data.drivers.printer.EndPrint();
+            }
+        }
     }
 }

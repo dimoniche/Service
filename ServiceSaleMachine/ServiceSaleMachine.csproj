@@ -45,7 +45,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClearFile\ClearFilesControlServiceTask.cs" />
+    <Compile Include="CommonForm\FormError.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CommonForm\FormError.Designer.cs">
+      <DependentUpon>FormError.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Common\CommonHelper.cs" />
     <Compile Include="Common\DefaultValueObject.cs" />
+    <Compile Include="Common\FormManager.cs" />
+    <Compile Include="Common\UserException.cs" />
     <Compile Include="Configuration\CheckConfiguration.cs" />
     <Compile Include="Configuration\CheckConfigurationProperties.cs" />
     <Compile Include="Configuration\ClientConfiguration.cs" />
@@ -118,8 +127,12 @@
     <Compile Include="Utils\FileHelper.cs" />
     <Compile Include="Utils\RegServiceActionEnum.cs" />
     <Compile Include="Utils\Utils.cs" />
+    <Compile Include="Win32\ServiceWin32.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="CommonForm\FormError.resx">
+      <DependentUpon>FormError.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Control\DeviceTabControl.resx">
       <DependentUpon>DeviceTabControl.cs</DependentUpon>
     </EmbeddedResource>

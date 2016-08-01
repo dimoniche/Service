@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace ServiceSaleMachine.Client
@@ -15,6 +16,9 @@ namespace ServiceSaleMachine.Client
         [STAThread]
         static void Main(string[] args)
         {
+            Application.ThreadException += new ThreadExceptionEventHandler(ThreadException);
+            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
+
             if (!Globals.RegistrySettings.Load())
             {
                 MessageBox.Show(Globals.ErrorMessageRegistryDontRead, "test", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -45,6 +49,8 @@ namespace ServiceSaleMachine.Client
                 Log.AllowWriteThreadId = true;
                 Log.AllowWriteThread = true;
             }
+
+            FormManager.CatchError += FormManager_CatchError;
 
             string fileName = Globals.GetPath(PathEnum.Image) + "\\";
 
@@ -80,6 +86,43 @@ namespace ServiceSaleMachine.Client
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm(WorkerStateStage.None));
+        }
+
+        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            WorkException(e.ExceptionObject as Exception);
+        }
+
+        private static void ThreadException(object sender, ThreadExceptionEventArgs e)
+        {
+            WorkException(e.Exception);
+        }
+
+        private static void FormManager_CatchError(object sender, FormErrorEventArgs e)
+        {
+            WorkException(e.Error);
+        }
+
+        private static void WorkException(Exception ex)
+        {
+            // На всякий случай
+            try
+            {
+                Form parentForm = null;
+                if (MyFormManager.MainForm != null && !MyFormManager.MainForm.IsDisposed)
+                    parentForm = FormManager.MainForm;
+
+                if (ex.IsAssignableTo(typeof(UserException)))
+                {
+                    MessageBox.Show(parentForm, ex.Message, MyFormManager.AppCaptionName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    if (Log != null) Log.Write(LogMessageType.Error, ex.GetDebugInformation());
+                    FormError.TryShow(parentForm, ex);
+                }
+            }
+            catch { }
         }
     }
 }

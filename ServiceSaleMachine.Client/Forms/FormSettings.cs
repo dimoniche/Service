@@ -77,6 +77,8 @@ namespace ServiceSaleMachine.Client
             DeviceTabControl currDeviceTab = (DeviceTabControl)currServiceTab.DeviceTab.TabPages[currServiceTab.DeviceTab.SelectedIndex].Controls[0];
 
             int.TryParse(currDeviceTab.TimeWork.Text, out stc.devs[currServiceTab.DeviceTab.SelectedIndex].timework);
+
+            Globals.ClientConfiguration.Save();
         }
 
         private void LimitTimeLeave(object sender)

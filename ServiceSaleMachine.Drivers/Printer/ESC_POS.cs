@@ -253,19 +253,6 @@ namespace ServiceSaleMachine.Drivers
             int i = 0;
             string NewStr = "", tmpStr;
 
-            /*UTF8Encoding utf8 = new UTF8Encoding();
-            Encoding cp866 = Encoding.GetEncoding(866);
-
-            Byte[] utf8Bytes = utf8.GetBytes(Str);
-            Byte[] cp866Bytes = Encoding.Convert(utf8, cp866, utf8Bytes);
-
-            char[] cp866Chars = new char[cp866.GetCharCount(cp866Bytes, 0, cp866Bytes.Length)];
-            cp866.GetChars(cp866Bytes, 0, cp866Bytes.Length, cp866Chars, 0);
-            string decodedString = new string(cp866Chars);
-
-            //return decodedString;
-            */
-
             while (i < Str.Length)
             {
                 switch (Str[i])

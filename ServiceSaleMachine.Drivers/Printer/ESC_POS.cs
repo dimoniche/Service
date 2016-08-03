@@ -25,7 +25,7 @@ namespace ServiceSaleMachine.Drivers
         static string eBigCharOn = (char)(27) + "!" + (char)(56);
         static string eBigCharOff = (char)(27) + "!" + (char)(0);
 
-        static string eSelectRusCodePage = (char)(27) + "t" + (char)(7);
+        static string eSelectRusCodePage = (char)(27) + "t" + (char)(7);// + (char)(27) + "R" + (char)(0) + (char)(27) + "G" + (char)(1);
 
         static string escUnerlineOn = (char)(27) + "" + (char)(45) + "" + (char)(1);    // Unerline On
         static string escUnerlineOnx2 = (char)(27) + "" + (char)(45) + "" + (char)(2);  // Unerline On x 2
@@ -137,8 +137,13 @@ namespace ServiceSaleMachine.Drivers
 
         public void PrintHeader()
         {
-            Print(eInit + "" + eSelectRusCodePage + "" + eCentre + "" + TransformCode(Globals.CheckConfiguration.Settings.firmsname));
-            Print(TransformCode(Globals.CheckConfiguration.Settings.secondfirmsname));
+            Print(eInit + "" + eSelectRusCodePage + "" + eCentre,false,false);
+            Print(TransformCode(Globals.CheckConfiguration.Settings.firmsname),true);
+            Print(eLeft);
+
+            Print(TransformCode(Globals.CheckConfiguration.Settings.secondfirmsname),true);
+            Print(eLeft);
+
             Print(eLeft + DateTime.Now.ToString("yyyy-MM-dd") + "                          " + DateTime.Now.ToString("HH:mm"));
             Print(eLeft);
             PrintDashes();
@@ -146,33 +151,71 @@ namespace ServiceSaleMachine.Drivers
 
         public void PrintBody(Service serv)
         {
-            Print("" + TransformCode(serv.caption) + " ".PadRight(42 - serv.caption.Length - serv.price.ToString().Length, ' ') + serv.price.ToString());
+            Print(TransformCode(serv.caption),true);
+            Print(" ".PadRight(42 - serv.caption.Length - serv.price.ToString().Length, ' ') + serv.price.ToString());
+
             PrintDashes();
-            Print(eLeft + TransformCode("ИТОГ") + " ".PadRight(42 - 4 - serv.price.ToString().Length, ' ') + serv.price.ToString());
-            Print(eLeft + TransformCode("Налич") + " ".PadRight(42 - 5 - serv.price.ToString().Length, ' ') + serv.price.ToString());
-            Print(eLeft + TransformCode("Сдача") + " ".PadRight(42 - 5 - 1, ' ') + "0");
+
+            Print(eLeft,false,false);
+            Print(TransformCode("ИТОГ"),true);
+            Print(" ".PadRight(42 - 4 - serv.price.ToString().Length, ' ') + serv.price.ToString());
+
+            Print(eLeft, false, false);
+            Print(TransformCode("Налич"),true);
+            Print(" ".PadRight(42 - 5 - serv.price.ToString().Length, ' ') + serv.price.ToString());
+
+            Print(eLeft, false, false);
+            Print(TransformCode("Сдача"),true);
+            Print(" ".PadRight(42 - 5 - 1, ' ') + "0");
         }
 
         public void PrintFooter()
         {
-            Print(eCentre + "" + TransformCode("СПАСИБО") + eLeft);
+            Print(eCentre,false,false);
+            Print(TransformCode("СПАСИБО"),true);
+            Print(eLeft);
+
             Print("");
-            Print(Globals.CheckConfiguration.Settings.advert1);
-            Print(Globals.CheckConfiguration.Settings.advert2);
-            Print(Globals.CheckConfiguration.Settings.advert3);
-            Print(Globals.CheckConfiguration.Settings.advert4);
-            Print(vbLf + vbLf + vbLf + vbLf + vbLf + eCut);
+            if (Globals.CheckConfiguration.Settings.advert1.Length > 1)
+            {
+                Print(TransformCode(Globals.CheckConfiguration.Settings.advert1), true);
+                Print(eLeft);
+            }
+            if (Globals.CheckConfiguration.Settings.advert2.Length > 1)
+            {
+                Print(TransformCode(Globals.CheckConfiguration.Settings.advert2), true);
+                Print(eLeft);
+            }
+            if (Globals.CheckConfiguration.Settings.advert3.Length > 1)
+            {
+                Print(TransformCode(Globals.CheckConfiguration.Settings.advert3), true);
+                Print(eLeft);
+            }
+            if (Globals.CheckConfiguration.Settings.advert4.Length > 1)
+            {
+                Print(TransformCode(Globals.CheckConfiguration.Settings.advert4), true);
+                Print(eLeft);
+            }
+
+            Print(vbLf + vbLf + vbLf + eCut);
         }
 
-        public void Print(String Line, bool end = true)
+        public void Print(String Line, bool uni = false,bool end = true)
         {
-            if (end)
+            if (uni)
             {
-                prn.SendStringToPrinter(PrinterName, Line + vbCrLf);
+                prn.SendStringToPrinterUni(PrinterName, Line);
             }
             else
             {
-                prn.SendStringToPrinter(PrinterName, Line);
+                if (end)
+                {
+                    prn.SendStringToPrinter(PrinterName, Line + vbCrLf);
+                }
+                else
+                {
+                    prn.SendStringToPrinter(PrinterName, Line);
+                }
             }
         }
 
@@ -209,6 +252,19 @@ namespace ServiceSaleMachine.Drivers
         {
             int i = 0;
             string NewStr = "", tmpStr;
+
+            /*UTF8Encoding utf8 = new UTF8Encoding();
+            Encoding cp866 = Encoding.GetEncoding(866);
+
+            Byte[] utf8Bytes = utf8.GetBytes(Str);
+            Byte[] cp866Bytes = Encoding.Convert(utf8, cp866, utf8Bytes);
+
+            char[] cp866Chars = new char[cp866.GetCharCount(cp866Bytes, 0, cp866Bytes.Length)];
+            cp866.GetChars(cp866Bytes, 0, cp866Bytes.Length, cp866Chars, 0);
+            string decodedString = new string(cp866Chars);
+
+            //return decodedString;
+            */
 
             while (i < Str.Length)
             {
@@ -291,16 +347,16 @@ namespace ServiceSaleMachine.Drivers
             return NewStr;
         }
 
-
+ 
         // печать картинки
-
-        public string GetLogo()
+        public string GetLogo(string file)
         {
             string logo = "";
-            if (!File.Exists(Globals.GetPath(PathEnum.Image) + "\\bitmap.bmp"))
-                return null;
-            BitmapData data = GetBitmapData(Globals.GetPath(PathEnum.Image) + "\\bitmap.bmp");
+            if (!File.Exists(Globals.GetPath(PathEnum.Image) + "\\" + file)) return null;
+
+            BitmapData data = GetBitmapData(Globals.GetPath(PathEnum.Image) + "\\" + file);
             BitArray dots = data.Dots;
+
             byte[] width = BitConverter.GetBytes(data.Width);
 
             int offset = 0;
@@ -415,9 +471,32 @@ namespace ServiceSaleMachine.Drivers
             }
         }
 
-        public void PrintBitMap()
+        public void PrintBitMap(string file)
         {
-            Print(GetLogo());
+            Print(GetLogo(file));
+        }
+
+        public void PrintBitMapHeader()
+        {
+            Print(eInit + "" + eSelectRusCodePage);
+            PrintBitMap("Header.bmp");
+            Print(eLeft + DateTime.Now.ToString("yyyy-MM-dd") + "                          " + DateTime.Now.ToString("HH:mm"));
+            Print(eLeft);
+            PrintDashes();
+        }
+
+        public void PrintBitMapBody(Service service)
+        {
+            PrintBitMap("BodyNameService.bmp");
+            PrintDashes();
+            PrintBitMap("BodyMoney.bmp");
+        }
+
+        public void PrintBitMapFooter()
+        {
+            PrintBitMap("Footer.bmp");
+            Print("");
+            Print(vbLf + vbLf + vbLf + eCut);
         }
     }
 }

@@ -588,6 +588,7 @@
             this.button9.TabIndex = 40;
             this.button9.Text = "Распечатать RAW";
             this.button9.UseVisualStyleBackColor = true;
+            this.button9.Visible = false;
             this.button9.Click += new System.EventHandler(this.button9_Click_2);
             // 
             // butPrintCheck

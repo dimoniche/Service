@@ -1226,9 +1226,10 @@ namespace ServiceSaleMachine.Client
 
             if (data.drivers.printer.prn.PrinterIsOpen)
             {
-                data.drivers.printer.PrintBitMap();
+                data.drivers.printer.PrintBitMapHeader();
+                data.drivers.printer.PrintBitMapBody(Globals.ClientConfiguration.ServiceByIndex(0));
+                data.drivers.printer.PrintBitMapFooter();
 
-                data.drivers.printer.PrintFooter();
                 data.drivers.printer.EndPrint();
             }
         }

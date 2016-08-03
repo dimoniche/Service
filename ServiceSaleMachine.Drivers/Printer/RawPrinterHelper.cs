@@ -104,5 +104,28 @@ namespace ServiceSaleMachine.Drivers
 
             return res;
         }
+
+        public bool SendStringToPrinterUni(string szPrinterName, string szString)
+        {
+            bool res = false;
+
+            if (PrinterOpen)
+            {
+                IntPtr pBytes;
+                Int32 dwCount;
+                Int32 dwWritten;
+
+                dwCount = szString.Length * 2;
+                pBytes = Marshal.StringToCoTaskMemUni(szString);
+                res = WritePrinter(hPrinter, pBytes, dwCount, out dwWritten);
+                Marshal.FreeCoTaskMem(pBytes);
+            }
+            else
+            {
+                res = false;
+            }
+
+            return res;
+        }
     }
 }

@@ -19,7 +19,11 @@ namespace ServiceSaleMachine
 
         public string comPortModem;
         public int comPortModemSpeed = 9600;
+
+        // номер телефона для отсылки СМС
         public string numberTelephoneSMS;
+        // текст сообщения о исчерпании ресурса
+        public string SMSMessageTimeEnd = "Ресурс прошел.";
 
         // Отключение железа
         public int offHardware = 1;

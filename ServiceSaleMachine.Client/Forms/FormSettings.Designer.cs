@@ -100,10 +100,13 @@
             this.label8 = new System.Windows.Forms.Label();
             this.dtDBFrom = new System.Windows.Forms.DateTimePicker();
             this.tabPage10 = new System.Windows.Forms.TabPage();
+            this.InitString = new System.Windows.Forms.Label();
             this.cBxSpeedModem = new System.Windows.Forms.ComboBox();
             this.groupBxSettingModem = new System.Windows.Forms.GroupBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.textSMSTimeEnd = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textNumberPhone = new System.Windows.Forms.TextBox();
             this.butsendsms = new System.Windows.Forms.Button();
             this.butinitmodem = new System.Windows.Forms.Button();
             this.butWriteModemComPort = new System.Windows.Forms.Button();
@@ -142,7 +145,6 @@
             this.checkBox100 = new System.Windows.Forms.CheckBox();
             this.checkBox50 = new System.Windows.Forms.CheckBox();
             this.checkBox10 = new System.Windows.Forms.CheckBox();
-            this.InitString = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -941,6 +943,15 @@
             this.tabPage10.Text = "Модем";
             this.tabPage10.UseVisualStyleBackColor = true;
             // 
+            // InitString
+            // 
+            this.InitString.AutoSize = true;
+            this.InitString.Location = new System.Drawing.Point(189, 227);
+            this.InitString.Name = "InitString";
+            this.InitString.Size = new System.Drawing.Size(48, 13);
+            this.InitString.TabIndex = 16;
+            this.InitString.Text = "InitString";
+            // 
             // cBxSpeedModem
             // 
             this.cBxSpeedModem.FormattingEnabled = true;
@@ -958,14 +969,33 @@
             // 
             // groupBxSettingModem
             // 
+            this.groupBxSettingModem.Controls.Add(this.label22);
+            this.groupBxSettingModem.Controls.Add(this.textSMSTimeEnd);
             this.groupBxSettingModem.Controls.Add(this.label19);
-            this.groupBxSettingModem.Controls.Add(this.textBox1);
+            this.groupBxSettingModem.Controls.Add(this.textNumberPhone);
             this.groupBxSettingModem.Location = new System.Drawing.Point(18, 55);
             this.groupBxSettingModem.Name = "groupBxSettingModem";
             this.groupBxSettingModem.Size = new System.Drawing.Size(341, 148);
             this.groupBxSettingModem.TabIndex = 14;
             this.groupBxSettingModem.TabStop = false;
             this.groupBxSettingModem.Text = "Настройки модема";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(18, 60);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(228, 13);
+            this.label22.TabIndex = 1;
+            this.label22.Text = "Текст СМС с сообщ о превышения ресурса";
+            // 
+            // textSMSTimeEnd
+            // 
+            this.textSMSTimeEnd.Location = new System.Drawing.Point(133, 76);
+            this.textSMSTimeEnd.Name = "textSMSTimeEnd";
+            this.textSMSTimeEnd.Size = new System.Drawing.Size(181, 20);
+            this.textSMSTimeEnd.TabIndex = 0;
+            this.textSMSTimeEnd.Leave += new System.EventHandler(this.textSMSTimeEnd_Leave);
             // 
             // label19
             // 
@@ -976,12 +1006,13 @@
             this.label19.TabIndex = 1;
             this.label19.Text = "Номер телефона";
             // 
-            // textBox1
+            // textNumberPhone
             // 
-            this.textBox1.Location = new System.Drawing.Point(133, 25);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(181, 20);
-            this.textBox1.TabIndex = 0;
+            this.textNumberPhone.Location = new System.Drawing.Point(133, 25);
+            this.textNumberPhone.Name = "textNumberPhone";
+            this.textNumberPhone.Size = new System.Drawing.Size(181, 20);
+            this.textNumberPhone.TabIndex = 0;
+            this.textNumberPhone.Leave += new System.EventHandler(this.textNumberPhone_Leave);
             // 
             // butsendsms
             // 
@@ -991,6 +1022,7 @@
             this.butsendsms.TabIndex = 13;
             this.butsendsms.Text = "Послать СМС";
             this.butsendsms.UseVisualStyleBackColor = true;
+            this.butsendsms.Click += new System.EventHandler(this.butsendsms_Click);
             // 
             // butinitmodem
             // 
@@ -1393,15 +1425,6 @@
             this.checkBox10.UseVisualStyleBackColor = true;
             this.checkBox10.CheckedChanged += new System.EventHandler(this.butWriteNominal_Click);
             // 
-            // InitString
-            // 
-            this.InitString.AutoSize = true;
-            this.InitString.Location = new System.Drawing.Point(189, 227);
-            this.InitString.Name = "InitString";
-            this.InitString.Size = new System.Drawing.Size(48, 13);
-            this.InitString.TabIndex = 16;
-            this.InitString.Text = "InitString";
-            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1546,7 +1569,7 @@
         private System.Windows.Forms.Button butsendsms;
         private System.Windows.Forms.Button butinitmodem;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textNumberPhone;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.CheckBox offControl;
         private System.Windows.Forms.CheckBox cBxBillOff;
@@ -1569,5 +1592,7 @@
         private System.Windows.Forms.ComboBox cBxSpeedModem;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label InitString;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.TextBox textSMSTimeEnd;
     }
 }

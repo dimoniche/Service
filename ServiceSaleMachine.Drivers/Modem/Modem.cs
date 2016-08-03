@@ -152,19 +152,59 @@ namespace ServiceSaleMachine.Drivers
 
         }
 
-        public void SendSMS(string sms)
+        public bool SendSMS(string sms)
         {
-            byte[] buf = CommonHelper.GetBytes("AT+CMGF=1");
-            byte[] LF = { 0x0A };
+            byte[] buf = CommonHelper.GetBytes("++++");
+            byte[] CR = { 0x0D };
+            byte[] cntrlZ = { 0x1A };
+            byte[] BufIn = new byte[20];
+
+            // в командный режим
+            Send(buf);
+
+            buf = CommonHelper.GetBytes("AT+CMGF=1");
 
             Send(buf); 
-            Send(LF);
+            Send(CR);
+
+            int val = 0;
+            if (Recieve(BufIn, 2, out val) == false)
+            {
+                return false;
+            }
+
+            if(!System.Text.Encoding.UTF8.GetString(BufIn).Contains("OK"))
+            {
+                return false;
+            }
 
             buf = CommonHelper.GetBytes("AT+CMGS=" + Globals.ClientConfiguration.Settings.numberTelephoneSMS);
             Send(buf);
-            Send(LF);
+            Send(CR);
 
+            if (Recieve(BufIn, 5, out val) == false)
+            {
+                return false;
+            }
 
+            if (!System.Text.Encoding.UTF8.GetString(BufIn).Contains("OK"))
+            {
+                return false;
+            }
+
+            buf = CommonHelper.GetBytes(sms);
+
+            if (Recieve(BufIn, 5, out val) == false)
+            {
+                return false;
+            }
+
+            if (!System.Text.Encoding.UTF8.GetString(BufIn).Contains("OK"))
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

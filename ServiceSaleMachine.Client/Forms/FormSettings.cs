@@ -467,6 +467,9 @@ namespace ServiceSaleMachine.Client
             cBxoffModem.Checked = Globals.ClientConfiguration.Settings.offModem > 0 ? true : false;
 
             textBoxTimeOut.Text = Globals.ClientConfiguration.Settings.timeout.ToString();
+
+            textNumberPhone.Text = Globals.ClientConfiguration.Settings.numberTelephoneSMS;
+            textSMSTimeEnd.Text = Globals.ClientConfiguration.Settings.SMSMessageTimeEnd;
         }
 
         public FormSettings()
@@ -1247,6 +1250,23 @@ namespace ServiceSaleMachine.Client
                 butinitmodem.Enabled = true;
                 butsendsms.Enabled = true;
             }
+        }
+
+        private void textNumberPhone_Leave(object sender, EventArgs e)
+        {
+            Globals.ClientConfiguration.Settings.numberTelephoneSMS = textNumberPhone.Text;
+            Globals.ClientConfiguration.Save();
+        }
+
+        private void textSMSTimeEnd_Leave(object sender, EventArgs e)
+        {
+            Globals.ClientConfiguration.Settings.SMSMessageTimeEnd = textSMSTimeEnd.Text;
+            Globals.ClientConfiguration.Save();
+        }
+
+        private void butsendsms_Click(object sender, EventArgs e)
+        {
+            data.drivers.modem.SendSMS(Globals.ClientConfiguration.Settings.SMSMessageTimeEnd);
         }
     }
 }

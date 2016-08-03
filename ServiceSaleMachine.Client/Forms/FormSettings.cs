@@ -169,6 +169,9 @@ namespace ServiceSaleMachine.Client
                 cBxModemComPort.Items.Add("нет");
                 cBxModemComPort.Items.AddRange(currentPort);
 
+                cBxSpeedModem.Items.Clear();
+                cBxControlSpeed.Items.Clear();
+
                 // Скорости
                 ComPortSpeedEnum[] comPortSpeeds = CommonHelper.GetEnumValues<ComPortSpeedEnum>();
                 cBxControlSpeed.Items.Clear();

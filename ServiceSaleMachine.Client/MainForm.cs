@@ -82,10 +82,11 @@ namespace ServiceSaleMachine.Client
             FormResultData result = new FormResultData();
             result.drivers = drivers;
 
-            //if (Globals.admin)
+            if (Globals.admin)
             {
                 drivers.InitAllDevice();
                 result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+                drivers.StopAllDevice();
             }
 
             initDevice:

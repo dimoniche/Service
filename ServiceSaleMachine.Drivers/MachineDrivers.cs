@@ -21,6 +21,7 @@ namespace ServiceSaleMachine.Drivers
         public CCRSProtocol CCNETDriver;
         public PrinterESC printer;
         public ControlDevice control;
+        public Modem modem;
 
         public delegate void ServiceClientResponseEventHandler(object sender, ServiceClientResponseEventArgs e);
 
@@ -55,18 +56,26 @@ namespace ServiceSaleMachine.Drivers
 
         public bool StopAllDevice()
         {
-            WorkerBillPollDriver.Abort();
-            CCNETDriver.closePort();
-
-            if (Globals.ClientConfiguration.Settings.offCheck != 1)
+            if (Globals.ClientConfiguration.Settings.offHardware != 1)
             {
-                WorkerScanerDriver.Abort();
-                scaner.closePort();
-            }
+                WorkerBillPollDriver.Abort();
+                CCNETDriver.closePort();
 
-            if (Globals.ClientConfiguration.Settings.offControl != 1)
-            {
-                control.closePort();
+                if (Globals.ClientConfiguration.Settings.offCheck != 1)
+                {
+                    WorkerScanerDriver.Abort();
+                    scaner.closePort();
+                }
+
+                if (Globals.ClientConfiguration.Settings.offControl != 1)
+                {
+                    control.closePort();
+                }
+
+                if (Globals.ClientConfiguration.Settings.offModem != 1)
+                {
+                    modem.closePort();
+                }
             }
 
             return true;
@@ -113,6 +122,11 @@ namespace ServiceSaleMachine.Drivers
             if (control == null)
             {
                 control = new ControlDevice();
+            }
+
+            if (modem == null)
+            {
+                modem = new Modem();
             }
 
             if ((Globals.ClientConfiguration.Settings.offCheck != 1 && scaner.getNumberComPort().Contains("нет"))
@@ -240,6 +254,29 @@ namespace ServiceSaleMachine.Drivers
             else
             {
                 this.log.Write(LogMessageType.Error, "Управляющее устройство не настроенo.");
+            }
+
+            // настроим драйвер модема
+            if (Globals.ClientConfiguration.Settings.offModem != 1 && !modem.getNumberComPort().Contains("нет"))
+            {
+                this.log.Write(LogMessageType.Information, "Настройка модема.");
+
+                // не платим чеком - не нужен сканер
+                if (modem.openPort(modem.getNumberComPort()))
+                {
+
+                }
+                else
+                {
+                    // неудача
+                    this.log.Write(LogMessageType.Error, "Модем не верно настроен. Порт не доступен.");
+                    sendMessage(DeviceEvent.NeedSettingProgram);
+                    res = WorkerStateStage.NeedSettingProgram;
+                }
+            }
+            else
+            {
+                this.log.Write(LogMessageType.Information, "Модем отключен.");
             }
 
             return res;

@@ -11,10 +11,15 @@ namespace ServiceSaleMachine
         // настройки драйверов
         public string comPortScanner;
         public string comPortBill;
-        public string adressBill;
+        public string adressBill = "3";
         public string comPortPrinter;
         public string NamePrinter;
         public string comPortControl;
+        public int comPortControlSpeed = 9600;
+
+        public string comPortModem;
+        public int comPortModemSpeed = 9600;
+        public string numberTelephoneSMS;
 
         // Отключение железа
         public int offHardware = 1;

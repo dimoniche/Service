@@ -169,6 +169,15 @@ namespace ServiceSaleMachine.Client
                 cBxModemComPort.Items.Add("нет");
                 cBxModemComPort.Items.AddRange(currentPort);
 
+                // Скорости
+                ComPortSpeedEnum[] comPortSpeeds = CommonHelper.GetEnumValues<ComPortSpeedEnum>();
+                cBxControlSpeed.Items.Clear();
+                foreach (ComPortSpeedEnum speed in comPortSpeeds)
+                {
+                    cBxControlSpeed.Items.Add((int)speed);
+                    cBxSpeedModem.Items.Add((int)speed);
+                }
+
 
                 if (Globals.ClientConfiguration.Settings.offHardware != 1)
                 {
@@ -232,6 +241,7 @@ namespace ServiceSaleMachine.Client
                         cBxControlPort.SelectedIndex = 0;
 
                         buttonwriteControlPort.Enabled = false;
+                        cBxControlSpeed.Enabled = false;
                         Open1.Enabled = false;
                         Open1.Enabled = false;
                         Open1.Enabled = false;
@@ -257,7 +267,9 @@ namespace ServiceSaleMachine.Client
 
                         cBxControlPort.SelectedIndex = counter;
 
-                        data.drivers.control.openPort((string)cBxControlPort.Items[cBxControlPort.SelectedIndex]);
+                        cBxControlSpeed.SelectedItem = (int)data.drivers.control.getComPortSpeed();
+
+                        data.drivers.control.openPort((string)cBxControlPort.Items[cBxControlPort.SelectedIndex], data.drivers.control.getComPortSpeed());
                     }
 
                     if (Globals.ClientConfiguration.Settings.offBill == 1 || data.drivers.CCNETDriver.getNumberComPort().Contains("нет"))
@@ -323,6 +335,37 @@ namespace ServiceSaleMachine.Client
                     else
                     {
                         cbxComPortPrinter.SelectedIndex = data.drivers.printer.findPrinterIndex(data.drivers.printer.getNamePrinter());
+                    }
+
+                    if (Globals.ClientConfiguration.Settings.offModem == 1 && data.drivers.modem.getNumberComPort().Contains("нет"))
+                    {
+                        cBxModemComPort.SelectedIndex = 0;
+
+                        groupBxSettingModem.Enabled = false;
+                        butinitmodem.Enabled = false;
+                        butsendsms.Enabled = false;
+                    }
+                    else if (data.drivers.modem.getNumberComPort().Contains("COM"))
+                    {
+                        string index = data.drivers.modem.getNumberComPort().Remove(0, 3);
+                        int int_index = 0;
+                        int.TryParse(index, out int_index);
+
+                        int counter = 0;
+                        foreach (object item in cBxControlPort.Items)
+                        {
+                            if ((string)item == data.drivers.modem.getNumberComPort())
+                            {
+                                break;
+                            }
+                            counter++;
+                        }
+
+                        cBxModemComPort.SelectedIndex = counter;
+
+                        cBxSpeedModem.SelectedItem = (int)ComPortSpeedEnum.s9600;
+
+                        data.drivers.control.openPort((string)cBxModemComPort.Items[cBxModemComPort.SelectedIndex], (int)cBxSpeedModem.SelectedItem);
                     }
                 }
                 else
@@ -610,6 +653,7 @@ namespace ServiceSaleMachine.Client
         {
             if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
             if (cBxControlPort.SelectedIndex == -1) return;
+            if (cBxControlSpeed.SelectedIndex == -1) return;
 
             if (!((string)cBxControlPort.Items[cBxControlPort.SelectedIndex]).Contains("нет"))
             {
@@ -620,7 +664,8 @@ namespace ServiceSaleMachine.Client
                data.drivers.control.closePort();
             }
 
-           data.drivers.control.setNumberComPort((string)cBxControlPort.Items[cBxControlPort.SelectedIndex]);
+            data.drivers.control.setNumberComPort((string)cBxControlPort.Items[cBxControlPort.SelectedIndex]);
+            data.drivers.control.setComPortSpeed((int)cBxControlSpeed.Items[cBxControlSpeed.SelectedIndex]);
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -1000,6 +1045,7 @@ namespace ServiceSaleMachine.Client
 
                 cBxControlPort.Enabled = false;
                 buttonwriteControlPort.Enabled = false;
+                cBxControlSpeed.Enabled = false;
                 Open1.Enabled = false;
                 Open2.Enabled = false;
                 Open3.Enabled = false;
@@ -1013,6 +1059,7 @@ namespace ServiceSaleMachine.Client
 
                 cBxControlPort.Enabled = true;
                 buttonwriteControlPort.Enabled = true;
+                cBxControlSpeed.Enabled = true;
                 Open1.Enabled = true;
                 Open1.Enabled = true;
                 Open1.Enabled = true;
@@ -1058,6 +1105,7 @@ namespace ServiceSaleMachine.Client
 
             if (((string)cBxControlPort.Items[cBxControlPort.SelectedIndex]).Contains("нет"))
             {
+                cBxControlSpeed.Enabled = false;
                 Open1.Enabled = false;
                 Open2.Enabled = false;
                 Open3.Enabled = false;
@@ -1075,6 +1123,8 @@ namespace ServiceSaleMachine.Client
                     return;
                 }
 
+                buttonwriteControlPort.Enabled = true;
+                cBxControlSpeed.Enabled = true;
                 Open1.Enabled = true;
                 Open2.Enabled = true;
                 Open3.Enabled = true;
@@ -1128,7 +1178,7 @@ namespace ServiceSaleMachine.Client
         {
             if (cBxoffModem.Checked)
             {
-                Globals.ClientConfiguration.Settings.offControl = 1;
+                Globals.ClientConfiguration.Settings.offModem = 1;
 
                 cBxModemComPort.Enabled = false;
                 butWriteModemComPort.Enabled = false;
@@ -1138,7 +1188,7 @@ namespace ServiceSaleMachine.Client
             }
             else
             {
-                Globals.ClientConfiguration.Settings.offControl = 0;
+                Globals.ClientConfiguration.Settings.offModem = 0;
 
                 cBxModemComPort.Enabled = true;
                 butWriteModemComPort.Enabled = true;
@@ -1163,6 +1213,39 @@ namespace ServiceSaleMachine.Client
 
                 data.drivers.printer.PrintFooter();
                 data.drivers.printer.EndPrint();
+            }
+        }
+
+        private void cBxSpeedModem_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cBxModemComPort_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cBxModemComPort.SelectedIndex == -1) return;
+
+            if (((string)cBxModemComPort.Items[cBxModemComPort.SelectedIndex]).Contains("нет"))
+            {
+                data.drivers.modem.closePort();
+
+                groupBxSettingModem.Enabled = false;
+                butinitmodem.Enabled = false;
+                butsendsms.Enabled = false;
+            }
+            else
+            {
+                if (!data.drivers.modem.openPort((string)cBxModemComPort.Items[cBxModemComPort.SelectedIndex]))
+                {
+                    cBxModemComPort.SelectedIndex = 0;
+                    return;
+                }
+
+                cBxModemComPort.Enabled = true;
+                butWriteModemComPort.Enabled = true;
+                groupBxSettingModem.Enabled = true;
+                butinitmodem.Enabled = true;
+                butsendsms.Enabled = true;
             }
         }
     }

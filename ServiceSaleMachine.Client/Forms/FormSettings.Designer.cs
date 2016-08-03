@@ -66,12 +66,14 @@
             this.cBxComPortBill = new System.Windows.Forms.ComboBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.butWriteComPortPrinter = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
             this.butPrintCheck = new System.Windows.Forms.Button();
             this.butWriteBarCode = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.cbxComPortPrinter = new System.Windows.Forms.ComboBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.label21 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -83,6 +85,7 @@
             this.Open1 = new System.Windows.Forms.Button();
             this.buttonwriteControlPort = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
+            this.cBxControlSpeed = new System.Windows.Forms.ComboBox();
             this.cBxControlPort = new System.Windows.Forms.ComboBox();
             this.tabViewDataBase = new System.Windows.Forms.TabPage();
             this.tabDataBaseSetting = new System.Windows.Forms.TabControl();
@@ -97,12 +100,14 @@
             this.label8 = new System.Windows.Forms.Label();
             this.dtDBFrom = new System.Windows.Forms.DateTimePicker();
             this.tabPage10 = new System.Windows.Forms.TabPage();
+            this.cBxSpeedModem = new System.Windows.Forms.ComboBox();
             this.groupBxSettingModem = new System.Windows.Forms.GroupBox();
             this.label19 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.butsendsms = new System.Windows.Forms.Button();
             this.butinitmodem = new System.Windows.Forms.Button();
             this.butWriteModemComPort = new System.Windows.Forms.Button();
+            this.label20 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.cBxModemComPort = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -137,7 +142,7 @@
             this.checkBox100 = new System.Windows.Forms.CheckBox();
             this.checkBox50 = new System.Windows.Forms.CheckBox();
             this.checkBox10 = new System.Windows.Forms.CheckBox();
-            this.button9 = new System.Windows.Forms.Button();
+            this.InitString = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -575,6 +580,16 @@
             this.butWriteComPortPrinter.UseVisualStyleBackColor = true;
             this.butWriteComPortPrinter.Click += new System.EventHandler(this.button1_Click_2);
             // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(394, 131);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(138, 23);
+            this.button9.TabIndex = 40;
+            this.button9.Text = "Распечатать RAW";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click_2);
+            // 
             // butPrintCheck
             // 
             this.butPrintCheck.Location = new System.Drawing.Point(250, 131);
@@ -625,6 +640,7 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.label21);
             this.tabPage5.Controls.Add(this.label17);
             this.tabPage5.Controls.Add(this.label15);
             this.tabPage5.Controls.Add(this.label13);
@@ -636,6 +652,7 @@
             this.tabPage5.Controls.Add(this.Open1);
             this.tabPage5.Controls.Add(this.buttonwriteControlPort);
             this.tabPage5.Controls.Add(this.label7);
+            this.tabPage5.Controls.Add(this.cBxControlSpeed);
             this.tabPage5.Controls.Add(this.cBxControlPort);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
@@ -644,6 +661,15 @@
             this.tabPage5.TabIndex = 3;
             this.tabPage5.Text = "Управляющее устройство";
             this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(208, 19);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(55, 13);
+            this.label21.TabIndex = 12;
+            this.label21.Text = "Скорость";
             // 
             // label17
             // 
@@ -734,7 +760,7 @@
             // 
             // buttonwriteControlPort
             // 
-            this.buttonwriteControlPort.Location = new System.Drawing.Point(264, 16);
+            this.buttonwriteControlPort.Location = new System.Drawing.Point(426, 14);
             this.buttonwriteControlPort.Name = "buttonwriteControlPort";
             this.buttonwriteControlPort.Size = new System.Drawing.Size(75, 23);
             this.buttonwriteControlPort.TabIndex = 9;
@@ -750,6 +776,20 @@
             this.label7.Size = new System.Drawing.Size(32, 13);
             this.label7.TabIndex = 8;
             this.label7.Text = "Порт";
+            // 
+            // cBxControlSpeed
+            // 
+            this.cBxControlSpeed.FormattingEnabled = true;
+            this.cBxControlSpeed.Items.AddRange(new object[] {
+            "9600",
+            "19200",
+            "38400",
+            "57600",
+            "115200"});
+            this.cBxControlSpeed.Location = new System.Drawing.Point(278, 16);
+            this.cBxControlSpeed.Name = "cBxControlSpeed";
+            this.cBxControlSpeed.Size = new System.Drawing.Size(121, 21);
+            this.cBxControlSpeed.TabIndex = 7;
             // 
             // cBxControlPort
             // 
@@ -884,10 +924,13 @@
             // 
             // tabPage10
             // 
+            this.tabPage10.Controls.Add(this.InitString);
+            this.tabPage10.Controls.Add(this.cBxSpeedModem);
             this.tabPage10.Controls.Add(this.groupBxSettingModem);
             this.tabPage10.Controls.Add(this.butsendsms);
             this.tabPage10.Controls.Add(this.butinitmodem);
             this.tabPage10.Controls.Add(this.butWriteModemComPort);
+            this.tabPage10.Controls.Add(this.label20);
             this.tabPage10.Controls.Add(this.label18);
             this.tabPage10.Controls.Add(this.cBxModemComPort);
             this.tabPage10.Location = new System.Drawing.Point(4, 22);
@@ -897,6 +940,21 @@
             this.tabPage10.TabIndex = 5;
             this.tabPage10.Text = "Модем";
             this.tabPage10.UseVisualStyleBackColor = true;
+            // 
+            // cBxSpeedModem
+            // 
+            this.cBxSpeedModem.FormattingEnabled = true;
+            this.cBxSpeedModem.Items.AddRange(new object[] {
+            "9600",
+            "19200",
+            "38400",
+            "57600",
+            "115200"});
+            this.cBxSpeedModem.Location = new System.Drawing.Point(262, 19);
+            this.cBxSpeedModem.Name = "cBxSpeedModem";
+            this.cBxSpeedModem.Size = new System.Drawing.Size(121, 21);
+            this.cBxSpeedModem.TabIndex = 15;
+            this.cBxSpeedModem.SelectedIndexChanged += new System.EventHandler(this.cBxSpeedModem_SelectedIndexChanged);
             // 
             // groupBxSettingModem
             // 
@@ -945,13 +1003,22 @@
             // 
             // butWriteModemComPort
             // 
-            this.butWriteModemComPort.Location = new System.Drawing.Point(257, 19);
+            this.butWriteModemComPort.Location = new System.Drawing.Point(402, 17);
             this.butWriteModemComPort.Name = "butWriteModemComPort";
             this.butWriteModemComPort.Size = new System.Drawing.Size(75, 23);
             this.butWriteModemComPort.TabIndex = 12;
             this.butWriteModemComPort.Text = "Записать";
             this.butWriteModemComPort.UseVisualStyleBackColor = true;
             this.butWriteModemComPort.Click += new System.EventHandler(this.button9_Click_1);
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(201, 22);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(55, 13);
+            this.label20.TabIndex = 11;
+            this.label20.Text = "Скорость";
             // 
             // label18
             // 
@@ -969,6 +1036,7 @@
             this.cBxModemComPort.Name = "cBxModemComPort";
             this.cBxModemComPort.Size = new System.Drawing.Size(121, 21);
             this.cBxModemComPort.TabIndex = 10;
+            this.cBxModemComPort.SelectedIndexChanged += new System.EventHandler(this.cBxModemComPort_SelectedIndexChanged);
             // 
             // tabPage2
             // 
@@ -1325,15 +1393,14 @@
             this.checkBox10.UseVisualStyleBackColor = true;
             this.checkBox10.CheckedChanged += new System.EventHandler(this.butWriteNominal_Click);
             // 
-            // button9
+            // InitString
             // 
-            this.button9.Location = new System.Drawing.Point(394, 131);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(138, 23);
-            this.button9.TabIndex = 40;
-            this.button9.Text = "Распечатать RAW";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click_2);
+            this.InitString.AutoSize = true;
+            this.InitString.Location = new System.Drawing.Point(189, 227);
+            this.InitString.Name = "InitString";
+            this.InitString.Size = new System.Drawing.Size(48, 13);
+            this.InitString.TabIndex = 16;
+            this.InitString.Text = "InitString";
             // 
             // FormSettings
             // 
@@ -1497,5 +1564,10 @@
         private System.Windows.Forms.Button butDelServ;
         private System.Windows.Forms.Button butaddServ;
         private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.ComboBox cBxControlSpeed;
+        private System.Windows.Forms.ComboBox cBxSpeedModem;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label InitString;
     }
 }

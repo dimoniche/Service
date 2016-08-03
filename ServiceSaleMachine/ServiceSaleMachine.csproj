@@ -105,6 +105,7 @@
     <Compile Include="Form\ValidateDataMessage.cs" />
     <Compile Include="Form\ValidateDataResult.cs" />
     <Compile Include="Globals.cs" />
+    <Compile Include="Hardware\ComPortSpeedEnum.cs" />
     <Compile Include="Lock\LockObject.cs" />
     <Compile Include="Lock\LockTicket.cs" />
     <Compile Include="Lock\LockTypeEnum.cs" />

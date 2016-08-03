@@ -53,6 +53,9 @@ namespace ServiceSaleMachine
                         if ((xElement = xSettings.Element("comPortPrinter")) != null) Settings.comPortPrinter = xElement.Value;
                         if ((xElement = xSettings.Element("NamePrinter")) != null) Settings.NamePrinter = xElement.Value;
                         if ((xElement = xSettings.Element("comPortControl")) != null) Settings.comPortControl = xElement.Value;
+                        if ((xElement = xSettings.Element("comPortModem")) != null) Settings.comPortModem = xElement.Value;
+                        if ((xElement = xSettings.Element("comPortControlSpeed")) != null) Settings.comPortControlSpeed = int.Parse(xElement.Value);
+                        if ((xElement = xSettings.Element("comPortModemSpeed")) != null) Settings.comPortModemSpeed = int.Parse(xElement.Value);
 
                         if ((xElement = xSettings.Element("offHardware")) != null) Settings.offHardware = int.Parse(xElement.Value);
                         if ((xElement = xSettings.Element("offCheck")) != null) Settings.offCheck = int.Parse(xElement.Value);
@@ -128,6 +131,9 @@ namespace ServiceSaleMachine
                 xSettings.Add(new XElement("comPortPrinter", Settings.comPortPrinter));
                 xSettings.Add(new XElement("NamePrinter", Settings.NamePrinter));
                 xSettings.Add(new XElement("comPortControl", Settings.comPortControl));
+                xSettings.Add(new XElement("comPortModem", Settings.comPortModem));
+                xSettings.Add(new XElement("comPortControlSpeed", Settings.comPortControlSpeed.ToString()));
+                xSettings.Add(new XElement("comPortModemSpeed", Settings.comPortModemSpeed.ToString()));
 
                 xSettings.Add(new XElement("offHardware", Settings.offHardware.ToString()));
                 xSettings.Add(new XElement("offCheck", Settings.offCheck.ToString()));

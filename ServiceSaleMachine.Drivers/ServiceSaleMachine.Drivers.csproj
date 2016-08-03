@@ -58,6 +58,7 @@
     <Compile Include="MachineDrivers.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="MessageEndPoint.cs" />
+    <Compile Include="Modem\Modem.cs" />
     <Compile Include="Printer\ESC_POS.cs" />
     <Compile Include="Printer\RawPrinterHelper.cs" />
     <Compile Include="Zebex\Zebex.cs" />

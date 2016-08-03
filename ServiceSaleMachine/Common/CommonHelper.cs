@@ -10,7 +10,7 @@ using System.Text;
 
 namespace ServiceSaleMachine
 {
-    public static class VspCommonHelper
+    public static class CommonHelper
     {
         /// <summary>
         /// Определяет, допускается ли приведение объекта к указанному типу
@@ -250,6 +250,20 @@ namespace ServiceSaleMachine
             }
 
             return result;
+        }
+
+        public static byte[] GetBytes(string str)
+        {
+            byte[] bytes = new byte[str.Length * sizeof(char)];
+            System.Buffer.BlockCopy(str.ToCharArray(), 0, bytes, 0, bytes.Length);
+            return bytes;
+        }
+
+        public static string GetString(byte[] bytes)
+        {
+            char[] chars = new char[bytes.Length / sizeof(char)];
+            System.Buffer.BlockCopy(bytes, 0, chars, 0, bytes.Length);
+            return new string(chars);
         }
     }
 }

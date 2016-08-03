@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.IO.Ports;
-using System.Linq;
-using System.Text;
 using System.Threading;
 
 namespace ServiceSaleMachine.Drivers
 {
-    public class ControlDevice
+    public class Modem
     {
         SerialPort serialPort;
 
@@ -38,7 +34,7 @@ namespace ServiceSaleMachine.Drivers
             Globals.ClientConfiguration.Save();
         }
 
-        public bool openPort(string com_port,int speed = 9600)
+        public bool openPort(string com_port, int speed = 9600)
         {
             if (serialPort == null)
             {
@@ -100,6 +96,19 @@ namespace ServiceSaleMachine.Drivers
             }
         }
 
+        public bool Send(byte[] Data)
+        {
+            try
+            {
+                serialPort.Write(Data, 0, Data.Length);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public bool Recieve(byte[] Buffer, int Length, out int count)
         {
             try
@@ -130,17 +139,32 @@ namespace ServiceSaleMachine.Drivers
 
         private void SerialPortPinChanged(object sender, SerialPinChangedEventArgs e)
         {
-            
+
         }
 
         private void SerialPortErrorRecived(object sender, SerialErrorReceivedEventArgs e)
         {
-            
+
         }
 
         private void SerialPortDataRecevied(object sender, SerialDataReceivedEventArgs e)
         {
-            
+
+        }
+
+        public void SendSMS(string sms)
+        {
+            byte[] buf = CommonHelper.GetBytes("AT+CMGF=1");
+            byte[] LF = { 0x0A };
+
+            Send(buf); 
+            Send(LF);
+
+            buf = CommonHelper.GetBytes("AT+CMGS=" + Globals.ClientConfiguration.Settings.numberTelephoneSMS);
+            Send(buf);
+            Send(LF);
+
+
         }
     }
 }

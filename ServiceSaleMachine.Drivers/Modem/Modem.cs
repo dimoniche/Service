@@ -14,23 +14,23 @@ namespace ServiceSaleMachine.Drivers
 
         public string getNumberComPort()
         {
-            return Globals.ClientConfiguration.Settings.comPortControl;
+            return Globals.ClientConfiguration.Settings.comPortModem;
         }
 
         public void setNumberComPort(string str)
         {
-            Globals.ClientConfiguration.Settings.comPortControl = str;
+            Globals.ClientConfiguration.Settings.comPortModem = str;
             Globals.ClientConfiguration.Save();
         }
 
         public int getComPortSpeed()
         {
-            return Globals.ClientConfiguration.Settings.comPortControlSpeed;
+            return Globals.ClientConfiguration.Settings.comPortModemSpeed;
         }
 
         public void setComPortSpeed(int val)
         {
-            Globals.ClientConfiguration.Settings.comPortControlSpeed = val;
+            Globals.ClientConfiguration.Settings.comPortModemSpeed = val;
             Globals.ClientConfiguration.Save();
         }
 
@@ -154,7 +154,7 @@ namespace ServiceSaleMachine.Drivers
 
         public bool SendSMS(string sms)
         {
-            byte[] buf = System.Text.Encoding.ASCII.GetBytes("++++");// CommonHelper.GetBytes("++++");
+            byte[] buf = System.Text.Encoding.ASCII.GetBytes("++++");
             byte[] CR = { 0x0D };
             byte[] cntrlZ = { 0x1A };
             byte[] BufIn = new byte[20];
@@ -193,6 +193,8 @@ namespace ServiceSaleMachine.Drivers
             }
 
             buf = System.Text.Encoding.ASCII.GetBytes(sms);
+            Send(buf);
+            Send(cntrlZ);
 
             if (Recieve(BufIn, 5, out val) == false)
             {

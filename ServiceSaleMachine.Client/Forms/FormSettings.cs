@@ -345,7 +345,6 @@ namespace ServiceSaleMachine.Client
                         cBxModemComPort.SelectedIndex = 0;
 
                         groupBxSettingModem.Enabled = false;
-                        butinitmodem.Enabled = false;
                         butsendsms.Enabled = false;
                     }
                     else if (data.drivers.modem.getNumberComPort().Contains("COM"))
@@ -1177,7 +1176,21 @@ namespace ServiceSaleMachine.Client
 
         private void button9_Click_1(object sender, EventArgs e)
         {
+            if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
+            if (cBxModemComPort.SelectedIndex == -1) return;
+            if (cBxSpeedModem.SelectedIndex == -1) return;
 
+            if (!((string)cBxModemComPort.Items[cBxModemComPort.SelectedIndex]).Contains("нет"))
+            {
+                data.drivers.modem.openPort((string)cBxModemComPort.Items[cBxModemComPort.SelectedIndex]);
+            }
+            else
+            {
+                data.drivers.modem.closePort();
+            }
+
+            data.drivers.modem.setNumberComPort((string)cBxModemComPort.Items[cBxModemComPort.SelectedIndex]);
+            data.drivers.modem.setComPortSpeed((int)cBxSpeedModem.Items[cBxSpeedModem.SelectedIndex]);
         }
 
         private void cBxoffModem_CheckedChanged(object sender, EventArgs e)
@@ -1189,7 +1202,6 @@ namespace ServiceSaleMachine.Client
                 cBxModemComPort.Enabled = false;
                 butWriteModemComPort.Enabled = false;
                 groupBxSettingModem.Enabled = false;
-                butinitmodem.Enabled = false;
                 butsendsms.Enabled = false;
             }
             else
@@ -1199,7 +1211,6 @@ namespace ServiceSaleMachine.Client
                 cBxModemComPort.Enabled = true;
                 butWriteModemComPort.Enabled = true;
                 groupBxSettingModem.Enabled = true;
-                butinitmodem.Enabled = true;
                 butsendsms.Enabled = true;
             }
 
@@ -1236,7 +1247,6 @@ namespace ServiceSaleMachine.Client
                 data.drivers.modem.closePort();
 
                 groupBxSettingModem.Enabled = false;
-                butinitmodem.Enabled = false;
                 butsendsms.Enabled = false;
             }
             else
@@ -1250,7 +1260,6 @@ namespace ServiceSaleMachine.Client
                 cBxModemComPort.Enabled = true;
                 butWriteModemComPort.Enabled = true;
                 groupBxSettingModem.Enabled = true;
-                butinitmodem.Enabled = true;
                 butsendsms.Enabled = true;
             }
         }

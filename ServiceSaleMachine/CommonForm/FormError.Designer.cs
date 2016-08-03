@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.errorData = new System.Windows.Forms.RichTextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.ShowDetailButton = new System.Windows.Forms.Button();
             this.AppContinueButton = new System.Windows.Forms.Button();
             this.AppExitButton = new System.Windows.Forms.Button();
             this.labelControl1 = new System.Windows.Forms.Label();
@@ -52,15 +51,6 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // ShowDetailButton
-            // 
-            this.ShowDetailButton.Location = new System.Drawing.Point(12, 74);
-            this.ShowDetailButton.Name = "ShowDetailButton";
-            this.ShowDetailButton.Size = new System.Drawing.Size(120, 25);
-            this.ShowDetailButton.TabIndex = 2;
-            this.ShowDetailButton.Text = "Подробности";
-            this.ShowDetailButton.UseVisualStyleBackColor = true;
-            // 
             // AppContinueButton
             // 
             this.AppContinueButton.Location = new System.Drawing.Point(235, 74);
@@ -69,6 +59,7 @@
             this.AppContinueButton.TabIndex = 2;
             this.AppContinueButton.Text = "Продолжить";
             this.AppContinueButton.UseVisualStyleBackColor = true;
+            this.AppContinueButton.Click += new System.EventHandler(this.AppContinueButton_Click);
             // 
             // AppExitButton
             // 
@@ -78,6 +69,7 @@
             this.AppExitButton.TabIndex = 2;
             this.AppExitButton.Text = "Закрыть приложение";
             this.AppExitButton.UseVisualStyleBackColor = true;
+            this.AppExitButton.Click += new System.EventHandler(this.AppExitButton_Click);
             // 
             // labelControl1
             // 
@@ -96,9 +88,9 @@
             this.Controls.Add(this.labelControl1);
             this.Controls.Add(this.AppExitButton);
             this.Controls.Add(this.AppContinueButton);
-            this.Controls.Add(this.ShowDetailButton);
             this.Controls.Add(this.errorData);
             this.Name = "FormError";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormError";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -109,7 +101,6 @@
 
         private System.Windows.Forms.RichTextBox errorData;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.Button ShowDetailButton;
         private System.Windows.Forms.Button AppContinueButton;
         private System.Windows.Forms.Button AppExitButton;
         private System.Windows.Forms.Label labelControl1;

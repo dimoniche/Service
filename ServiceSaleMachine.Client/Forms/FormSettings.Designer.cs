@@ -100,7 +100,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.dtDBFrom = new System.Windows.Forms.DateTimePicker();
             this.tabPage10 = new System.Windows.Forms.TabPage();
-            this.InitString = new System.Windows.Forms.Label();
             this.cBxSpeedModem = new System.Windows.Forms.ComboBox();
             this.groupBxSettingModem = new System.Windows.Forms.GroupBox();
             this.label22 = new System.Windows.Forms.Label();
@@ -108,7 +107,6 @@
             this.label19 = new System.Windows.Forms.Label();
             this.textNumberPhone = new System.Windows.Forms.TextBox();
             this.butsendsms = new System.Windows.Forms.Button();
-            this.butinitmodem = new System.Windows.Forms.Button();
             this.butWriteModemComPort = new System.Windows.Forms.Button();
             this.label20 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
@@ -706,7 +704,7 @@
             this.Close1.Name = "Close1";
             this.Close1.Size = new System.Drawing.Size(105, 23);
             this.Close1.TabIndex = 10;
-            this.Close1.Text = "Закрыть";
+            this.Close1.Text = "Выкл.канал 1";
             this.Close1.UseVisualStyleBackColor = true;
             this.Close1.Click += new System.EventHandler(this.Close1_Click);
             // 
@@ -716,7 +714,7 @@
             this.Close3.Name = "Close3";
             this.Close3.Size = new System.Drawing.Size(105, 23);
             this.Close3.TabIndex = 10;
-            this.Close3.Text = "Закрыть";
+            this.Close3.Text = "Выкл.канал 3";
             this.Close3.UseVisualStyleBackColor = true;
             this.Close3.Click += new System.EventHandler(this.Close3_Click);
             // 
@@ -726,7 +724,7 @@
             this.Close2.Name = "Close2";
             this.Close2.Size = new System.Drawing.Size(105, 23);
             this.Close2.TabIndex = 10;
-            this.Close2.Text = "Закрыть";
+            this.Close2.Text = "Выкл.канал 2";
             this.Close2.UseVisualStyleBackColor = true;
             this.Close2.Click += new System.EventHandler(this.Close2_Click);
             // 
@@ -736,7 +734,7 @@
             this.Open3.Name = "Open3";
             this.Open3.Size = new System.Drawing.Size(105, 23);
             this.Open3.TabIndex = 10;
-            this.Open3.Text = "Открыть";
+            this.Open3.Text = "Вкл.канал 3";
             this.Open3.UseVisualStyleBackColor = true;
             this.Open3.Click += new System.EventHandler(this.Open3_Click);
             // 
@@ -746,7 +744,7 @@
             this.Open2.Name = "Open2";
             this.Open2.Size = new System.Drawing.Size(105, 23);
             this.Open2.TabIndex = 10;
-            this.Open2.Text = "Открыть";
+            this.Open2.Text = "Вкл.канал 2";
             this.Open2.UseVisualStyleBackColor = true;
             this.Open2.Click += new System.EventHandler(this.Open2_Click);
             // 
@@ -756,7 +754,7 @@
             this.Open1.Name = "Open1";
             this.Open1.Size = new System.Drawing.Size(105, 23);
             this.Open1.TabIndex = 10;
-            this.Open1.Text = "Открыть";
+            this.Open1.Text = "Вкл.канал 1";
             this.Open1.UseVisualStyleBackColor = true;
             this.Open1.Click += new System.EventHandler(this.Open1_Click);
             // 
@@ -926,11 +924,9 @@
             // 
             // tabPage10
             // 
-            this.tabPage10.Controls.Add(this.InitString);
             this.tabPage10.Controls.Add(this.cBxSpeedModem);
             this.tabPage10.Controls.Add(this.groupBxSettingModem);
             this.tabPage10.Controls.Add(this.butsendsms);
-            this.tabPage10.Controls.Add(this.butinitmodem);
             this.tabPage10.Controls.Add(this.butWriteModemComPort);
             this.tabPage10.Controls.Add(this.label20);
             this.tabPage10.Controls.Add(this.label18);
@@ -942,15 +938,6 @@
             this.tabPage10.TabIndex = 5;
             this.tabPage10.Text = "Модем";
             this.tabPage10.UseVisualStyleBackColor = true;
-            // 
-            // InitString
-            // 
-            this.InitString.AutoSize = true;
-            this.InitString.Location = new System.Drawing.Point(189, 227);
-            this.InitString.Name = "InitString";
-            this.InitString.Size = new System.Drawing.Size(48, 13);
-            this.InitString.TabIndex = 16;
-            this.InitString.Text = "InitString";
             // 
             // cBxSpeedModem
             // 
@@ -1023,15 +1010,6 @@
             this.butsendsms.Text = "Послать СМС";
             this.butsendsms.UseVisualStyleBackColor = true;
             this.butsendsms.Click += new System.EventHandler(this.butsendsms_Click);
-            // 
-            // butinitmodem
-            // 
-            this.butinitmodem.Location = new System.Drawing.Point(18, 221);
-            this.butinitmodem.Name = "butinitmodem";
-            this.butinitmodem.Size = new System.Drawing.Size(150, 24);
-            this.butinitmodem.TabIndex = 13;
-            this.butinitmodem.Text = "Инициализировать";
-            this.butinitmodem.UseVisualStyleBackColor = true;
             // 
             // butWriteModemComPort
             // 
@@ -1567,7 +1545,6 @@
         private System.Windows.Forms.ComboBox cBxModemComPort;
         private System.Windows.Forms.GroupBox groupBxSettingModem;
         private System.Windows.Forms.Button butsendsms;
-        private System.Windows.Forms.Button butinitmodem;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox textNumberPhone;
         private System.Windows.Forms.GroupBox groupBox4;
@@ -1591,7 +1568,6 @@
         private System.Windows.Forms.ComboBox cBxControlSpeed;
         private System.Windows.Forms.ComboBox cBxSpeedModem;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label InitString;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.TextBox textSMSTimeEnd;
     }

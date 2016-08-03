@@ -154,7 +154,7 @@ namespace ServiceSaleMachine.Drivers
 
         public bool SendSMS(string sms)
         {
-            byte[] buf = CommonHelper.GetBytes("++++");
+            byte[] buf = System.Text.Encoding.ASCII.GetBytes("++++");// CommonHelper.GetBytes("++++");
             byte[] CR = { 0x0D };
             byte[] cntrlZ = { 0x1A };
             byte[] BufIn = new byte[20];
@@ -162,7 +162,7 @@ namespace ServiceSaleMachine.Drivers
             // в командный режим
             Send(buf);
 
-            buf = CommonHelper.GetBytes("AT+CMGF=1");
+            buf = System.Text.Encoding.ASCII.GetBytes("AT+CMGF=1");
 
             Send(buf); 
             Send(CR);
@@ -178,7 +178,7 @@ namespace ServiceSaleMachine.Drivers
                 return false;
             }
 
-            buf = CommonHelper.GetBytes("AT+CMGS=" + Globals.ClientConfiguration.Settings.numberTelephoneSMS);
+            buf = System.Text.Encoding.ASCII.GetBytes("AT+CMGS=" + Globals.ClientConfiguration.Settings.numberTelephoneSMS);
             Send(buf);
             Send(CR);
 
@@ -192,7 +192,7 @@ namespace ServiceSaleMachine.Drivers
                 return false;
             }
 
-            buf = CommonHelper.GetBytes(sms);
+            buf = System.Text.Encoding.ASCII.GetBytes(sms);
 
             if (Recieve(BufIn, 5, out val) == false)
             {

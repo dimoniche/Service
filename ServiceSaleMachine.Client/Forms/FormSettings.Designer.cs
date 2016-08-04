@@ -103,6 +103,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.dtDBFrom = new System.Windows.Forms.DateTimePicker();
             this.tabPage10 = new System.Windows.Forms.TabPage();
+            this.resSMS = new System.Windows.Forms.Label();
             this.cBxSpeedModem = new System.Windows.Forms.ComboBox();
             this.groupBxSettingModem = new System.Windows.Forms.GroupBox();
             this.label22 = new System.Windows.Forms.Label();
@@ -146,7 +147,14 @@
             this.checkBox100 = new System.Windows.Forms.CheckBox();
             this.checkBox50 = new System.Windows.Forms.CheckBox();
             this.checkBox10 = new System.Windows.Forms.CheckBox();
-            this.resSMS = new System.Windows.Forms.Label();
+            this.tabPage11 = new System.Windows.Forms.TabPage();
+            this.advert4 = new System.Windows.Forms.TextBox();
+            this.advert3 = new System.Windows.Forms.TextBox();
+            this.advert2 = new System.Windows.Forms.TextBox();
+            this.advert1 = new System.Windows.Forms.TextBox();
+            this.secondfirmsname = new System.Windows.Forms.TextBox();
+            this.firmsname = new System.Windows.Forms.TextBox();
+            this.checkPic = new System.Windows.Forms.PictureBox();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -171,6 +179,8 @@
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.tabPage11.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.checkPic)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -976,6 +986,15 @@
             this.tabPage10.Text = "Модем";
             this.tabPage10.UseVisualStyleBackColor = true;
             // 
+            // resSMS
+            // 
+            this.resSMS.AutoSize = true;
+            this.resSMS.Location = new System.Drawing.Point(190, 257);
+            this.resSMS.Name = "resSMS";
+            this.resSMS.Size = new System.Drawing.Size(138, 13);
+            this.resSMS.TabIndex = 16;
+            this.resSMS.Text = "Сообщение отправляется";
+            // 
             // cBxSpeedModem
             // 
             this.cBxSpeedModem.FormattingEnabled = true;
@@ -1100,6 +1119,7 @@
             // 
             this.tabControl3.Controls.Add(this.tabPage6);
             this.tabControl3.Controls.Add(this.tabPage9);
+            this.tabControl3.Controls.Add(this.tabPage11);
             this.tabControl3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl3.Location = new System.Drawing.Point(3, 3);
             this.tabControl3.Name = "tabControl3";
@@ -1440,14 +1460,85 @@
             this.checkBox10.UseVisualStyleBackColor = true;
             this.checkBox10.CheckedChanged += new System.EventHandler(this.butWriteNominal_Click);
             // 
-            // resSMS
+            // tabPage11
             // 
-            this.resSMS.AutoSize = true;
-            this.resSMS.Location = new System.Drawing.Point(190, 257);
-            this.resSMS.Name = "resSMS";
-            this.resSMS.Size = new System.Drawing.Size(138, 13);
-            this.resSMS.TabIndex = 16;
-            this.resSMS.Text = "Сообщение отправляется";
+            this.tabPage11.Controls.Add(this.advert4);
+            this.tabPage11.Controls.Add(this.advert3);
+            this.tabPage11.Controls.Add(this.advert2);
+            this.tabPage11.Controls.Add(this.advert1);
+            this.tabPage11.Controls.Add(this.secondfirmsname);
+            this.tabPage11.Controls.Add(this.firmsname);
+            this.tabPage11.Controls.Add(this.checkPic);
+            this.tabPage11.Location = new System.Drawing.Point(4, 22);
+            this.tabPage11.Name = "tabPage11";
+            this.tabPage11.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage11.Size = new System.Drawing.Size(706, 529);
+            this.tabPage11.TabIndex = 2;
+            this.tabPage11.Text = "Содержание чека";
+            this.tabPage11.UseVisualStyleBackColor = true;
+            // 
+            // advert4
+            // 
+            this.advert4.Location = new System.Drawing.Point(76, 416);
+            this.advert4.Name = "advert4";
+            this.advert4.Size = new System.Drawing.Size(482, 20);
+            this.advert4.TabIndex = 1;
+            this.advert4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.advert4.Leave += new System.EventHandler(this.advert4_Leave);
+            // 
+            // advert3
+            // 
+            this.advert3.Location = new System.Drawing.Point(76, 390);
+            this.advert3.Name = "advert3";
+            this.advert3.Size = new System.Drawing.Size(482, 20);
+            this.advert3.TabIndex = 1;
+            this.advert3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.advert3.Leave += new System.EventHandler(this.advert3_Leave);
+            // 
+            // advert2
+            // 
+            this.advert2.Location = new System.Drawing.Point(76, 364);
+            this.advert2.Name = "advert2";
+            this.advert2.Size = new System.Drawing.Size(482, 20);
+            this.advert2.TabIndex = 1;
+            this.advert2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.advert2.Leave += new System.EventHandler(this.advert2_Leave);
+            // 
+            // advert1
+            // 
+            this.advert1.Location = new System.Drawing.Point(76, 338);
+            this.advert1.Name = "advert1";
+            this.advert1.Size = new System.Drawing.Size(482, 20);
+            this.advert1.TabIndex = 1;
+            this.advert1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.advert1.Leave += new System.EventHandler(this.advert1_Leave);
+            // 
+            // secondfirmsname
+            // 
+            this.secondfirmsname.Location = new System.Drawing.Point(76, 81);
+            this.secondfirmsname.Name = "secondfirmsname";
+            this.secondfirmsname.Size = new System.Drawing.Size(482, 20);
+            this.secondfirmsname.TabIndex = 1;
+            this.secondfirmsname.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.secondfirmsname.Leave += new System.EventHandler(this.secondfirmsname_Leave);
+            // 
+            // firmsname
+            // 
+            this.firmsname.Location = new System.Drawing.Point(76, 55);
+            this.firmsname.Name = "firmsname";
+            this.firmsname.Size = new System.Drawing.Size(482, 20);
+            this.firmsname.TabIndex = 1;
+            this.firmsname.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.firmsname.Leave += new System.EventHandler(this.firmsname_Leave);
+            // 
+            // checkPic
+            // 
+            this.checkPic.Image = global::ServiceSaleMachine.Client.Properties.Resources.bitmap;
+            this.checkPic.Location = new System.Drawing.Point(58, 37);
+            this.checkPic.Name = "checkPic";
+            this.checkPic.Size = new System.Drawing.Size(515, 426);
+            this.checkPic.TabIndex = 0;
+            this.checkPic.TabStop = false;
             // 
             // FormSettings
             // 
@@ -1495,6 +1586,9 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.tabPage11.ResumeLayout(false);
+            this.tabPage11.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.checkPic)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1620,5 +1714,13 @@
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Label resSMS;
+        private System.Windows.Forms.TabPage tabPage11;
+        private System.Windows.Forms.PictureBox checkPic;
+        private System.Windows.Forms.TextBox firmsname;
+        private System.Windows.Forms.TextBox secondfirmsname;
+        private System.Windows.Forms.TextBox advert4;
+        private System.Windows.Forms.TextBox advert3;
+        private System.Windows.Forms.TextBox advert2;
+        private System.Windows.Forms.TextBox advert1;
     }
 }

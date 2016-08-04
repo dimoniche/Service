@@ -472,6 +472,14 @@ namespace ServiceSaleMachine.Client
 
             textNumberPhone.Text = Globals.ClientConfiguration.Settings.numberTelephoneSMS;
             textSMSTimeEnd.Text = Globals.ClientConfiguration.Settings.SMSMessageTimeEnd;
+
+            firmsname.Text = Globals.CheckConfiguration.Settings.firmsname;
+            secondfirmsname.Text = Globals.CheckConfiguration.Settings.secondfirmsname;
+
+            advert1.Text = Globals.CheckConfiguration.Settings.advert1;
+            advert2.Text = Globals.CheckConfiguration.Settings.advert2;
+            advert3.Text = Globals.CheckConfiguration.Settings.advert3;
+            advert4.Text = Globals.CheckConfiguration.Settings.advert4;
         }
 
         public FormSettings()
@@ -1304,6 +1312,42 @@ namespace ServiceSaleMachine.Client
         private void button11_Click(object sender, EventArgs e)
         {
             dataGridView1.DataSource = mydb.GetCounts();
+        }
+
+        private void firmsname_Leave(object sender, EventArgs e)
+        {
+            Globals.CheckConfiguration.Settings.firmsname = firmsname.Text;
+            Globals.CheckConfiguration.Save();
+        }
+
+        private void secondfirmsname_Leave(object sender, EventArgs e)
+        {
+            Globals.CheckConfiguration.Settings.secondfirmsname = secondfirmsname.Text;
+            Globals.CheckConfiguration.Save();
+        }
+
+        private void advert1_Leave(object sender, EventArgs e)
+        {
+            Globals.CheckConfiguration.Settings.advert1 = advert1.Text;
+            Globals.CheckConfiguration.Save();
+        }
+
+        private void advert2_Leave(object sender, EventArgs e)
+        {
+            Globals.CheckConfiguration.Settings.advert2 = advert2.Text;
+            Globals.CheckConfiguration.Save();
+        }
+
+        private void advert3_Leave(object sender, EventArgs e)
+        {
+            Globals.CheckConfiguration.Settings.advert3 = advert3.Text;
+            Globals.CheckConfiguration.Save();
+        }
+
+        private void advert4_Leave(object sender, EventArgs e)
+        {
+            Globals.CheckConfiguration.Settings.advert4 = advert4.Text;
+            Globals.CheckConfiguration.Save();
         }
     }
 }

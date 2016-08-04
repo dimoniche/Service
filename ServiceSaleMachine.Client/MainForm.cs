@@ -86,7 +86,7 @@ namespace ServiceSaleMachine.Client
             {
                 drivers.InitAllDevice();
                 result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-                drivers.StopAllDevice();
+              //  drivers.StopAllDevice();
             }
 
             initDevice:

@@ -1294,5 +1294,16 @@ namespace ServiceSaleMachine.Client
 
             //data.drivers.modem.SendSMSRus(Globals.ClientConfiguration.Settings.SMSMessageTimeEnd);
         }
+
+        private void button10_Click_1(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(dataGridView1[0, dataGridView1.CurrentRow.Index].Value.ToString());
+            mydb.AddToAmount(id, Convert.ToInt32(edtMoney.Text));
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            dataGridView1.DataSource = mydb.GetCounts();
+        }
     }
 }

@@ -47,40 +47,50 @@ namespace ServiceSaleMachine.Client
 
         public void LoadFullKeyBoard()
         {
-           // NumberBoard.CountRow = 3;
+           // NumberBoard.CountRow = 4;
            // NumberBoard.CountCol = 10;
             string[,] str = new string[NumberBoard.CountRow, NumberBoard.CountCol];
 
-            str[0, 0] = Globals.GetPath(PathEnum.Image) + "\\q.png";
-            str[0, 1] = Globals.GetPath(PathEnum.Image) + "\\w.png";
-            str[0, 2] = Globals.GetPath(PathEnum.Image) + "\\e.png";
-            str[0, 3] = Globals.GetPath(PathEnum.Image) + "\\r.png";
-            str[0, 4] = Globals.GetPath(PathEnum.Image) + "\\t.png";
-            str[0, 5] = Globals.GetPath(PathEnum.Image) + "\\y.png";
-            str[0, 6] = Globals.GetPath(PathEnum.Image) + "\\u.png";
-            str[0, 7] = Globals.GetPath(PathEnum.Image) + "\\i.png";
-            str[0, 8] = Globals.GetPath(PathEnum.Image) + "\\o.png";
-            str[0, 9] = Globals.GetPath(PathEnum.Image) + "\\p.png";
-            str[1, 0] = Globals.GetPath(PathEnum.Image) + "\\a.png";
-            str[1, 1] = Globals.GetPath(PathEnum.Image) + "\\s.png";
-            str[1, 2] = Globals.GetPath(PathEnum.Image) + "\\d.png";
-            str[1, 3] = Globals.GetPath(PathEnum.Image) + "\\f.png";
-            str[1, 4] = Globals.GetPath(PathEnum.Image) + "\\g.png";
-            str[1, 5] = Globals.GetPath(PathEnum.Image) + "\\h.png";
-            str[1, 6] = Globals.GetPath(PathEnum.Image) + "\\j.png";
-            str[1, 7] = Globals.GetPath(PathEnum.Image) + "\\k.png";
-            str[1, 8] = Globals.GetPath(PathEnum.Image) + "\\l.png";
-            str[1, 9] = Globals.GetPath(PathEnum.Image) + "\\delete.png";
-            str[2, 1] = Globals.GetPath(PathEnum.Image) + "\\z.png";
-            str[2, 2] = Globals.GetPath(PathEnum.Image) + "\\x.png";
-            str[2, 3] = Globals.GetPath(PathEnum.Image) + "\\c.png";
-            str[2, 4] = Globals.GetPath(PathEnum.Image) + "\\v.png";
-            str[2, 5] = Globals.GetPath(PathEnum.Image) + "\\b.png";
-            str[2, 6] = Globals.GetPath(PathEnum.Image) + "\\n.png";
-            str[2, 7] = Globals.GetPath(PathEnum.Image) + "\\m.png";
+            str[0, 0] = Globals.GetPath(PathEnum.Image) + "\\1.png";
+            str[0, 1] = Globals.GetPath(PathEnum.Image) + "\\2.png";
+            str[0, 2] = Globals.GetPath(PathEnum.Image) + "\\3.png";
+            str[0, 3] = Globals.GetPath(PathEnum.Image) + "\\4.png";
+            str[0, 4] = Globals.GetPath(PathEnum.Image) + "\\5.png";
+            str[0, 5] = Globals.GetPath(PathEnum.Image) + "\\6.png";
+            str[0, 6] = Globals.GetPath(PathEnum.Image) + "\\7.png";
+            str[0, 7] = Globals.GetPath(PathEnum.Image) + "\\8.png";
+            str[0, 8] = Globals.GetPath(PathEnum.Image) + "\\9.png";
+            str[0, 9] = Globals.GetPath(PathEnum.Image) + "\\0.png";
+            str[1, 0] = Globals.GetPath(PathEnum.Image) + "\\q.png";
+            str[1, 1] = Globals.GetPath(PathEnum.Image) + "\\w.png";
+            str[1, 2] = Globals.GetPath(PathEnum.Image) + "\\e.png";
+            str[1, 3] = Globals.GetPath(PathEnum.Image) + "\\r.png";
+            str[1, 4] = Globals.GetPath(PathEnum.Image) + "\\t.png";
+            str[1, 5] = Globals.GetPath(PathEnum.Image) + "\\y.png";
+            str[1, 6] = Globals.GetPath(PathEnum.Image) + "\\u.png";
+            str[1, 7] = Globals.GetPath(PathEnum.Image) + "\\i.png";
+            str[1, 8] = Globals.GetPath(PathEnum.Image) + "\\o.png";
+            str[1, 9] = Globals.GetPath(PathEnum.Image) + "\\p.png";
+            str[2, 0] = Globals.GetPath(PathEnum.Image) + "\\a.png";
+            str[2, 1] = Globals.GetPath(PathEnum.Image) + "\\s.png";
+            str[2, 2] = Globals.GetPath(PathEnum.Image) + "\\d.png";
+            str[2, 3] = Globals.GetPath(PathEnum.Image) + "\\f.png";
+            str[2, 4] = Globals.GetPath(PathEnum.Image) + "\\g.png";
+            str[2, 5] = Globals.GetPath(PathEnum.Image) + "\\h.png";
+            str[2, 6] = Globals.GetPath(PathEnum.Image) + "\\j.png";
+            str[2, 7] = Globals.GetPath(PathEnum.Image) + "\\k.png";
+            str[2, 8] = Globals.GetPath(PathEnum.Image) + "\\l.png";
+            str[2, 9] = Globals.GetPath(PathEnum.Image) + "\\delete.png";
+            str[3, 1] = Globals.GetPath(PathEnum.Image) + "\\z.png";
+            str[3, 2] = Globals.GetPath(PathEnum.Image) + "\\x.png";
+            str[3, 3] = Globals.GetPath(PathEnum.Image) + "\\c.png";
+            str[3, 4] = Globals.GetPath(PathEnum.Image) + "\\v.png";
+            str[3, 5] = Globals.GetPath(PathEnum.Image) + "\\b.png";
+            str[3, 6] = Globals.GetPath(PathEnum.Image) + "\\n.png";
+            str[3, 7] = Globals.GetPath(PathEnum.Image) + "\\m.png";
 
-            str[2, 0] = Globals.GetPath(PathEnum.Image) + "\\fail.png";
-            str[2, 8] = Globals.GetPath(PathEnum.Image) + "\\Yes.jpg";
+            str[3, 0] = Globals.GetPath(PathEnum.Image) + "\\fail.png";
+            str[3, 8] = Globals.GetPath(PathEnum.Image) + "\\Yes.jpg";
 
             NumberBoard.LoadPicture(str);
         }
@@ -124,14 +134,18 @@ namespace ServiceSaleMachine.Client
 
         private void NumberBoard_KeyboardEvent(object sender, KeyBoardEventArgs e)
         {
+            string row0 = "1234567890";
             string row1 = "QWERTYUIOP";
             string row2 = "ASDFGHJKL";
             string row3 = "ZXCVBNM";
              
             if (e.Message.Y == 0)//первая строка
+            { tbx.Text += row0[e.Message.X]; }
+            else
+            if (e.Message.Y == 1)//первая строка
             { tbx.Text += row1[e.Message.X]; }
             else
-            if (e.Message.Y == 1)
+            if (e.Message.Y == 2)//вторая строка
             {
                 if (e.Message.X < 9)
                 { tbx.Text += row2[e.Message.X]; }
@@ -143,7 +157,7 @@ namespace ServiceSaleMachine.Client
                 }
             }
             else
-            if (e.Message.Y == 2)
+            if (e.Message.Y == 3)//третья строка
             {
                 if ((e.Message.X < 8) && (e.Message.X > 0))
                 {
@@ -178,6 +192,11 @@ namespace ServiceSaleMachine.Client
                     else
                     {
                         //проверить - есть такой в БД?
+                        UserInfo ui = GlobalDb.GlobalBase.GetUserByName(tbxLogin.Text, tbxPassword.Text);
+                        if (ui == null) return;
+                        int sum = GlobalDb.GlobalBase.GetUserMoney(ui.Id);
+                        Globals.UserConfiguration.Amount = sum;
+
                     }
                     this.Close();
                 }

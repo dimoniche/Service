@@ -143,6 +143,9 @@
             this.checkBox100 = new System.Windows.Forms.CheckBox();
             this.checkBox50 = new System.Windows.Forms.CheckBox();
             this.checkBox10 = new System.Windows.Forms.CheckBox();
+            this.button10 = new System.Windows.Forms.Button();
+            this.edtMoney = new System.Windows.Forms.TextBox();
+            this.button11 = new System.Windows.Forms.Button();
             this.resSMS = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
@@ -850,13 +853,16 @@
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 59);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 107);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(686, 435);
+            this.dataGridView1.Size = new System.Drawing.Size(686, 387);
             this.dataGridView1.TabIndex = 1;
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.button11);
+            this.panel1.Controls.Add(this.edtMoney);
+            this.panel1.Controls.Add(this.button10);
             this.panel1.Controls.Add(this.button4);
             this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.btnShowDB);
@@ -866,7 +872,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(686, 56);
+            this.panel1.Size = new System.Drawing.Size(686, 104);
             this.panel1.TabIndex = 0;
             // 
             // button4
@@ -1406,14 +1412,33 @@
             this.checkBox10.UseVisualStyleBackColor = true;
             this.checkBox10.CheckedChanged += new System.EventHandler(this.butWriteNominal_Click);
             // 
-            // resSMS
+            // button10
             // 
-            this.resSMS.AutoSize = true;
-            this.resSMS.Location = new System.Drawing.Point(187, 257);
-            this.resSMS.Name = "resSMS";
-            this.resSMS.Size = new System.Drawing.Size(127, 13);
-            this.resSMS.TabIndex = 16;
-            this.resSMS.Text = "Сообщение отправлено";
+            this.button10.Location = new System.Drawing.Point(11, 54);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(128, 23);
+            this.button10.TabIndex = 6;
+            this.button10.Text = "\"положить деньги\"";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click_1);
+            // 
+            // edtMoney
+            // 
+            this.edtMoney.Location = new System.Drawing.Point(144, 57);
+            this.edtMoney.Name = "edtMoney";
+            this.edtMoney.Size = new System.Drawing.Size(100, 20);
+            this.edtMoney.TabIndex = 7;
+            this.edtMoney.Text = "0";
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(511, 17);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(60, 23);
+            this.button11.TabIndex = 8;
+            this.button11.Text = "Счета";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // FormSettings
             // 
@@ -1582,6 +1607,8 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.TextBox textSMSTimeEnd;
-        private System.Windows.Forms.Label resSMS;
+        private System.Windows.Forms.TextBox edtMoney;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button button11;
     }
 }

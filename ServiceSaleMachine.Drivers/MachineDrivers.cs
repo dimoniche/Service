@@ -261,8 +261,7 @@ namespace ServiceSaleMachine.Drivers
             {
                 this.log.Write(LogMessageType.Information, "Настройка модема.");
 
-                // не платим чеком - не нужен сканер
-                if (modem.openPort(modem.getNumberComPort()))
+                if (modem.openPort(modem.getNumberComPort(), modem.getComPortSpeed()))
                 {
 
                 }

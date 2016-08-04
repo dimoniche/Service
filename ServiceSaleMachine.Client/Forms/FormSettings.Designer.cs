@@ -143,6 +143,7 @@
             this.checkBox100 = new System.Windows.Forms.CheckBox();
             this.checkBox50 = new System.Windows.Forms.CheckBox();
             this.checkBox10 = new System.Windows.Forms.CheckBox();
+            this.resSMS = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -925,6 +926,7 @@
             // 
             // tabPage10
             // 
+            this.tabPage10.Controls.Add(this.resSMS);
             this.tabPage10.Controls.Add(this.cBxSpeedModem);
             this.tabPage10.Controls.Add(this.groupBxSettingModem);
             this.tabPage10.Controls.Add(this.butsendsms);
@@ -1404,6 +1406,15 @@
             this.checkBox10.UseVisualStyleBackColor = true;
             this.checkBox10.CheckedChanged += new System.EventHandler(this.butWriteNominal_Click);
             // 
+            // resSMS
+            // 
+            this.resSMS.AutoSize = true;
+            this.resSMS.Location = new System.Drawing.Point(187, 257);
+            this.resSMS.Name = "resSMS";
+            this.resSMS.Size = new System.Drawing.Size(127, 13);
+            this.resSMS.TabIndex = 16;
+            this.resSMS.Text = "Сообщение отправлено";
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1571,5 +1582,6 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.TextBox textSMSTimeEnd;
+        private System.Windows.Forms.Label resSMS;
     }
 }

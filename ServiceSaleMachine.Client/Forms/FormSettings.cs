@@ -365,7 +365,7 @@ namespace ServiceSaleMachine.Client
 
                         cBxModemComPort.SelectedIndex = counter;
 
-                        cBxSpeedModem.SelectedItem = (int)ComPortSpeedEnum.s9600;
+                        cBxSpeedModem.SelectedItem = data.drivers.modem.getComPortSpeed();
 
                         data.drivers.control.openPort((string)cBxModemComPort.Items[cBxModemComPort.SelectedIndex], (int)cBxSpeedModem.SelectedItem);
                     }
@@ -1107,6 +1107,7 @@ namespace ServiceSaleMachine.Client
         private void cBxControlPort_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cBxControlPort.SelectedIndex == -1) return;
+            if (cBxControlSpeed.SelectedIndex == -1) return;
 
             if (((string)cBxControlPort.Items[cBxControlPort.SelectedIndex]).Contains("нет"))
             {
@@ -1182,7 +1183,7 @@ namespace ServiceSaleMachine.Client
 
             if (!((string)cBxModemComPort.Items[cBxModemComPort.SelectedIndex]).Contains("нет"))
             {
-                data.drivers.modem.openPort((string)cBxModemComPort.Items[cBxModemComPort.SelectedIndex]);
+                data.drivers.modem.openPort((string)cBxModemComPort.Items[cBxModemComPort.SelectedIndex], (int)cBxSpeedModem.Items[cBxSpeedModem.SelectedIndex]);
             }
             else
             {
@@ -1242,6 +1243,7 @@ namespace ServiceSaleMachine.Client
         private void cBxModemComPort_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cBxModemComPort.SelectedIndex == -1) return;
+            if (cBxSpeedModem.SelectedIndex == -1) return;
 
             if (((string)cBxModemComPort.Items[cBxModemComPort.SelectedIndex]).Contains("нет"))
             {
@@ -1252,7 +1254,7 @@ namespace ServiceSaleMachine.Client
             }
             else
             {
-                if (!data.drivers.modem.openPort((string)cBxModemComPort.Items[cBxModemComPort.SelectedIndex]))
+                if (!data.drivers.modem.openPort((string)cBxModemComPort.Items[cBxModemComPort.SelectedIndex], (int)cBxSpeedModem.Items[cBxSpeedModem.SelectedIndex]))
                 {
                     cBxModemComPort.SelectedIndex = 0;
                     return;
@@ -1279,7 +1281,18 @@ namespace ServiceSaleMachine.Client
 
         private void butsendsms_Click(object sender, EventArgs e)
         {
-            data.drivers.modem.SendSMS(Globals.ClientConfiguration.Settings.SMSMessageTimeEnd);
+            resSMS.Text = "Сообщение отправляется";
+
+            if (data.drivers.modem.SendSMS(Globals.ClientConfiguration.Settings.SMSMessageTimeEnd))
+            {
+                resSMS.Text = "Сообщение отправлено";
+            }
+            else
+            {
+                resSMS.Text = "Сообщение не отправлено";
+            }
+
+            //data.drivers.modem.SendSMSRus(Globals.ClientConfiguration.Settings.SMSMessageTimeEnd);
         }
     }
 }

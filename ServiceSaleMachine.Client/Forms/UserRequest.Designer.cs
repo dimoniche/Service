@@ -85,7 +85,7 @@
             // NumberBoard
             // 
             this.NumberBoard.CountCol = 10;
-            this.NumberBoard.CountRow = 3;
+            this.NumberBoard.CountRow = 4;
             this.NumberBoard.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NumberBoard.Location = new System.Drawing.Point(3, 3);
             this.NumberBoard.Name = "NumberBoard";

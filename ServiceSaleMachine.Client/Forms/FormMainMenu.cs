@@ -43,7 +43,7 @@ namespace ServiceSaleMachine.Client
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            label2.Text = Globals.UserConfiguration.UserLogin;
+            label2.Text = Globals.UserConfiguration.UserLogin + "\n" + Globals.UserConfiguration.Amount.ToString();
             lblTime.Text = DateTime.Now.ToString("HH:mm:ss");
             LblDate.Text = DateTime.Now.ToString("yyyy-MM-dd dddd");
         }

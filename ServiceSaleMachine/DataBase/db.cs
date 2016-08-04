@@ -145,7 +145,22 @@ namespace ServiceSaleMachine
                 Debug.Print(ex.Message);
                 return false;
             }
+            //-------------------------------------------------------
+            query = "CREATE TABLE IF NOT EXISTS `usermoney` ( `id` int(11) NOT NULL AUTO_INCREMENT, `iduser` int(11) NOT NULL , `amount` int(11) NOT NULL," +
+               "`datetime` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP," +
+               "PRIMARY KEY(`id`)) ENGINE = InnoDB DEFAULT CHARSET = cp866;  SET FOREIGN_KEY_CHECKS = 1";
 
+            cmd = new MySqlCommand(query, con);
+            try
+            {
+                cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.Message);
+                return false;
+            }
             if (needCreate)
             {
                 query = "CREATE TABLE `users` ( `id` int(11) NOT NULL AUTO_INCREMENT, `login` varchar(255) NOT NULL, `password` varchar(255) NOT NULL, `role` int(11) NOT NULL, " +
@@ -379,6 +394,38 @@ namespace ServiceSaleMachine
 
         }
 
+        public DataTable GetCounts()
+        {
+            DataTable dt = new DataTable();
+            string queryString = @"select * from usermoney";
+
+            //using (MySqlConnection con = new MySqlConnection())
+            {
+                MySqlCommand com = new MySqlCommand(queryString, con);
+
+                try
+                {
+                    using (MySqlDataReader dr = com.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            dt.Load(dr);
+                        }
+
+                        dr.Close();
+                    }
+                }
+
+                catch (Exception ex)
+                {
+                    Debug.Print(ex.Message);
+
+                }
+            }
+            return dt;
+
+        }
+
         public bool Encashment(int iduser, int Amount)
         {
             if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
@@ -400,6 +447,36 @@ namespace ServiceSaleMachine
                 return false;
             }
         }
+
+        public int GetUserMoney(int iduser)
+        {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return 0;
+
+            string queryString = "select sum(amount) as sa from usermoney where iduser='" + iduser.ToString() + "'";
+
+            MySqlCommand com = new MySqlCommand(queryString, con);
+
+            try
+            {
+                using (MySqlDataReader dr = com.ExecuteReader())
+                {
+                    if (dr.HasRows)
+                    {
+                        dr.Read();
+                        string str = dr[0].ToString();
+                        return int.Parse(str);
+                    }
+                    dr.Close();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.Message);
+            }
+            return 0;
+        }
+
 
         public bool WriteWorkTime(int serv, int idDevice, int timeWork)
         {
@@ -426,7 +503,29 @@ namespace ServiceSaleMachine
         {
             if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
 
-            string query = "INSERT INTO payments (userid, amount, datetime) VALUES (" + userid.ToString() + "," + sum.ToString() + ","
+            string query = "INSERT INTO payments (iduser, amount, datetime) VALUES (" + userid.ToString() + "," + sum.ToString() + ","
+                  + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
+
+            Debug.Print(query);
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.Message);
+                return false;
+            }
+        }
+
+        public bool AddToAmount(int userid, int sum)
+        {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
+
+            string query = "INSERT INTO usermoney (iduser, amount, datetime) VALUES (" + userid.ToString() + "," + sum.ToString() + ",'"
                   + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
 
             Debug.Print(query);

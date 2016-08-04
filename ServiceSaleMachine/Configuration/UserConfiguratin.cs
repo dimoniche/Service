@@ -9,11 +9,13 @@ namespace ServiceSaleMachine
     {
         public string UserLogin = "";
         public string UserPassword = "";
+        public int Amount;
 
         public void Clear()
         {
             UserLogin = "";
             UserPassword = "";
+            Amount = 0;
         }
     }
 }

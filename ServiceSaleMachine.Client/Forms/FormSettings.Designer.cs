@@ -93,6 +93,9 @@
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button11 = new System.Windows.Forms.Button();
+            this.edtMoney = new System.Windows.Forms.TextBox();
+            this.button10 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.btnShowDB = new System.Windows.Forms.Button();
@@ -143,9 +146,6 @@
             this.checkBox100 = new System.Windows.Forms.CheckBox();
             this.checkBox50 = new System.Windows.Forms.CheckBox();
             this.checkBox10 = new System.Windows.Forms.CheckBox();
-            this.button10 = new System.Windows.Forms.Button();
-            this.edtMoney = new System.Windows.Forms.TextBox();
-            this.button11 = new System.Windows.Forms.Button();
             this.resSMS = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
@@ -875,6 +875,34 @@
             this.panel1.Size = new System.Drawing.Size(686, 104);
             this.panel1.TabIndex = 0;
             // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(511, 17);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(60, 23);
+            this.button11.TabIndex = 8;
+            this.button11.Text = "Счета";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
+            // edtMoney
+            // 
+            this.edtMoney.Location = new System.Drawing.Point(144, 57);
+            this.edtMoney.Name = "edtMoney";
+            this.edtMoney.Size = new System.Drawing.Size(100, 20);
+            this.edtMoney.TabIndex = 7;
+            this.edtMoney.Text = "0";
+            // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(11, 54);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(128, 23);
+            this.button10.TabIndex = 6;
+            this.button10.Text = "\"положить деньги\"";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click_1);
+            // 
             // button4
             // 
             this.button4.Location = new System.Drawing.Point(445, 17);
@@ -1412,33 +1440,14 @@
             this.checkBox10.UseVisualStyleBackColor = true;
             this.checkBox10.CheckedChanged += new System.EventHandler(this.butWriteNominal_Click);
             // 
-            // button10
+            // resSMS
             // 
-            this.button10.Location = new System.Drawing.Point(11, 54);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(128, 23);
-            this.button10.TabIndex = 6;
-            this.button10.Text = "\"положить деньги\"";
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click_1);
-            // 
-            // edtMoney
-            // 
-            this.edtMoney.Location = new System.Drawing.Point(144, 57);
-            this.edtMoney.Name = "edtMoney";
-            this.edtMoney.Size = new System.Drawing.Size(100, 20);
-            this.edtMoney.TabIndex = 7;
-            this.edtMoney.Text = "0";
-            // 
-            // button11
-            // 
-            this.button11.Location = new System.Drawing.Point(511, 17);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(60, 23);
-            this.button11.TabIndex = 8;
-            this.button11.Text = "Счета";
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
+            this.resSMS.AutoSize = true;
+            this.resSMS.Location = new System.Drawing.Point(190, 257);
+            this.resSMS.Name = "resSMS";
+            this.resSMS.Size = new System.Drawing.Size(138, 13);
+            this.resSMS.TabIndex = 16;
+            this.resSMS.Text = "Сообщение отправляется";
             // 
             // FormSettings
             // 
@@ -1610,5 +1619,6 @@
         private System.Windows.Forms.TextBox edtMoney;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Label resSMS;
     }
 }

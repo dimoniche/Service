@@ -233,6 +233,10 @@ namespace ServiceSaleMachine
             return true;
         }
 
+        /// <summary>
+        /// получить количество банктот
+        /// </summary>
+        /// <returns></returns>
         public int GetCountBankNote()
         {
             if (Globals.ClientConfiguration.Settings.offDataBase == 1) return 0;
@@ -263,7 +267,12 @@ namespace ServiceSaleMachine
             }
             return 0;
         }
-
+        /// <summary>
+        /// получить запись о юзере по его логину и паролю
+        /// </summary>
+        /// <param name="User"></param>
+        /// <param name="Password"></param>
+        /// <returns></returns>
         public UserInfo GetUserByName(string User, string Password)
         {
             string queryString = "select id, login, password, role from users where (login = '" + User + "') and (password='"+Password+"')";
@@ -297,7 +306,10 @@ namespace ServiceSaleMachine
             }
             return ui;
         }
-
+        /// <summary>
+        /// получит ьинфу о всех устройствах
+        /// </summary>
+        /// <returns></returns>
         public DataTable GetDevices()
         {
             DataTable dt = new DataTable();
@@ -329,7 +341,10 @@ namespace ServiceSaleMachine
             return dt;
             
         }
-
+        /// <summary>
+        /// прочитать логи из БД
+        /// </summary>
+        /// <returns></returns>
         public DataTable GetLogWork()
         {
             DataTable dt = new DataTable();
@@ -361,7 +376,10 @@ namespace ServiceSaleMachine
             return dt;
 
         }
-
+        /// <summary>
+        /// получить инфу о всех юзерах
+        /// </summary>
+        /// <returns></returns>
         public DataTable GetUsers()
         {
             DataTable dt = new DataTable();
@@ -393,8 +411,11 @@ namespace ServiceSaleMachine
             return dt;
 
         }
-
-        public DataTable GetCounts()
+        /// <summary>
+        /// получить список счетов активных
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetAmount()
         {
             DataTable dt = new DataTable();
             string queryString = @"select * from usermoney";
@@ -426,6 +447,12 @@ namespace ServiceSaleMachine
 
         }
 
+        /// <summary>
+        /// получить инфу о инкассациях
+        /// </summary>
+        /// <param name="iduser"></param>
+        /// <param name="Amount"></param>
+        /// <returns></returns>
         public bool Encashment(int iduser, int Amount)
         {
             if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
@@ -448,6 +475,12 @@ namespace ServiceSaleMachine
             }
         }
 
+        /// <summary>
+        /// получить инфу о сумме денег у конкретного юзера, типа сколько на счету
+        /// записей может быть несколько
+        /// </summary>
+        /// <param name="iduser"></param>
+        /// <returns></returns>
         public int GetUserMoney(int iduser)
         {
             if (Globals.ClientConfiguration.Settings.offDataBase == 1) return 0;
@@ -477,7 +510,13 @@ namespace ServiceSaleMachine
             return 0;
         }
 
-
+        /// <summary>
+        /// записать время работы устройства X от услуги Y
+        /// </summary>
+        /// <param name="serv"></param>
+        /// <param name="idDevice"></param>
+        /// <param name="timeWork"></param>
+        /// <returns></returns>
         public bool WriteWorkTime(int serv, int idDevice, int timeWork)
         {
             if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
@@ -498,7 +537,13 @@ namespace ServiceSaleMachine
                 return false;
             }
         }
-
+        /// <summary>
+        /// внести плату от юзера ... 
+        /// 
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="sum"></param>
+        /// <returns></returns>
         public bool InsertMoney(int userid, int sum)
         {
             if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
@@ -520,7 +565,12 @@ namespace ServiceSaleMachine
                 return false;
             }
         }
-
+        /// <summary>
+        /// внести деньги на счёт юзеру
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="sum"></param>
+        /// <returns></returns>
         public bool AddToAmount(int userid, int sum)
         {
             if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
@@ -542,7 +592,12 @@ namespace ServiceSaleMachine
                 return false;
             }
         }
-
+        /// <summary>
+        /// добавить пользователя
+        /// </summary>
+        /// <param name="Login"></param>
+        /// <param name="Psw"></param>
+        /// <returns></returns>
         public bool InsertUser(string Login, string Psw)
         {
             string query = "insert into users (login, password, role, datetime) values ('"+Login+"', '"+Psw+"', 2, '" +
@@ -562,7 +617,12 @@ namespace ServiceSaleMachine
             }
 
         }
-
+        /// <summary>
+        /// проверить существование юзера
+        /// </summary>
+        /// <param name="User"></param>
+        /// <param name="Password"></param>
+        /// <returns></returns>
         public bool ExistsUser(string User, string Password)
         {//хотя подойдет функция GetUserByName
             string queryString = "select id from users where (login = '" + User + "') and (password='" + Password + "')";
@@ -589,7 +649,11 @@ namespace ServiceSaleMachine
             }
             return false;
         }
-
+        /// <summary>
+        /// узнать сколько денег в аппарате с даты ХХХ (предполагается с даты инкассации, которую выяснять ранее и передадут сюда)
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
         public int GetCountMoney(DateTime dt) 
         {
             if (Globals.ClientConfiguration.Settings.offDataBase == 1) return 0;
@@ -619,7 +683,10 @@ namespace ServiceSaleMachine
             }
             return 0;
         }
-
+        /// <summary>
+        /// инфа о последней инкассации
+        /// </summary>
+        /// <returns></returns>
         public DateTime GetLastEncashment() //
         {
             if (Globals.ClientConfiguration.Settings.offDataBase == 1) return new DateTime(2016, 07, 01);
@@ -652,8 +719,14 @@ namespace ServiceSaleMachine
 
             return new DateTime(2016, 07, 01);
         }
-
-        public int GetWorkTime(int Serv, int Dev, DateTime dt) //сколько времени (секунд) девайс отработал с даты Х
+        /// <summary>
+        /// сколько времени (секунд) девайс отработал с даты Х
+        /// </summary>
+        /// <param name="Serv"></param>
+        /// <param name="Dev"></param>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public int GetWorkTime(int Serv, int Dev, DateTime dt) 
         {
             if (Globals.ClientConfiguration.Settings.offDataBase == 1) return 0;
 
@@ -683,7 +756,12 @@ namespace ServiceSaleMachine
             }
             return 0;
         }
-
+        /// <summary>
+        /// дата последнего сервисного обслуживания устройства Х от услуги У
+        /// </summary>
+        /// <param name="Serv"></param>
+        /// <param name="Dev"></param>
+        /// <returns></returns>
         public DateTime GetLastRefreshTime(int Serv, int Dev) //
         {
             if (Globals.ClientConfiguration.Settings.offDataBase == 1) return new DateTime(2016, 07, 01);
@@ -716,6 +794,39 @@ namespace ServiceSaleMachine
             }
 
             return new DateTime(2016,07,01);
+        }
+
+        public DataTable GetPaymentFromUser(int iduser)
+        {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return null;
+
+            DataTable dt = new DataTable();
+            string queryString = "select * from payment where iduser='" + iduser.ToString() + "'";
+
+            //using (MySqlConnection con = new MySqlConnection())
+            {
+                MySqlCommand com = new MySqlCommand(queryString, con);
+
+                try
+                {
+                    using (MySqlDataReader dr = com.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            dt.Load(dr);
+                        }
+
+                        dr.Close();
+                    }
+                }
+
+                catch (Exception ex)
+                {
+                    Debug.Print(ex.Message);
+
+                }
+            }
+            return dt;
         }
     }
 }

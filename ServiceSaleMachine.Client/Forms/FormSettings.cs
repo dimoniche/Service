@@ -1311,7 +1311,7 @@ namespace ServiceSaleMachine.Client
 
         private void button11_Click(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = mydb.GetCounts();
+            dataGridView1.DataSource = mydb.GetAmount();
         }
 
         private void firmsname_Leave(object sender, EventArgs e)
@@ -1348,6 +1348,15 @@ namespace ServiceSaleMachine.Client
         {
             Globals.CheckConfiguration.Settings.advert4 = advert4.Text;
             Globals.CheckConfiguration.Save();
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(dataGridView1[0, dataGridView1.CurrentRow.Index].Value.ToString());
+
+            DataTable dt = mydb.GetPaymentFromUser(id);
+            if (dt != null)
+            { dataGridView1.DataSource = dt; }
         }
     }
 }

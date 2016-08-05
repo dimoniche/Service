@@ -155,6 +155,7 @@
             this.secondfirmsname = new System.Windows.Forms.TextBox();
             this.firmsname = new System.Windows.Forms.TextBox();
             this.checkPic = new System.Windows.Forms.PictureBox();
+            this.button12 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -870,6 +871,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.button12);
             this.panel1.Controls.Add(this.button11);
             this.panel1.Controls.Add(this.edtMoney);
             this.panel1.Controls.Add(this.button10);
@@ -887,7 +889,7 @@
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(511, 17);
+            this.button11.Location = new System.Drawing.Point(430, 17);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(60, 23);
             this.button11.TabIndex = 8;
@@ -897,15 +899,15 @@
             // 
             // edtMoney
             // 
-            this.edtMoney.Location = new System.Drawing.Point(144, 57);
+            this.edtMoney.Location = new System.Drawing.Point(217, 56);
             this.edtMoney.Name = "edtMoney";
-            this.edtMoney.Size = new System.Drawing.Size(100, 20);
+            this.edtMoney.Size = new System.Drawing.Size(49, 20);
             this.edtMoney.TabIndex = 7;
             this.edtMoney.Text = "0";
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(11, 54);
+            this.button10.Location = new System.Drawing.Point(83, 54);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(128, 23);
             this.button10.TabIndex = 6;
@@ -915,7 +917,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(445, 17);
+            this.button4.Location = new System.Drawing.Point(12, 54);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(60, 23);
             this.button4.TabIndex = 5;
@@ -925,12 +927,13 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(364, 17);
+            this.button3.Location = new System.Drawing.Point(575, 75);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 4;
             this.button3.Text = "Вывести";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Visible = false;
             this.button3.Click += new System.EventHandler(this.button3_Click_1);
             // 
             // btnShowDB
@@ -1540,6 +1543,16 @@
             this.checkPic.TabIndex = 0;
             this.checkPic.TabStop = false;
             // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(272, 53);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(128, 23);
+            this.button12.TabIndex = 9;
+            this.button12.Text = "Количество платежей";
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1722,5 +1735,6 @@
         private System.Windows.Forms.TextBox advert3;
         private System.Windows.Forms.TextBox advert2;
         private System.Windows.Forms.TextBox advert1;
+        private System.Windows.Forms.Button button12;
     }
 }

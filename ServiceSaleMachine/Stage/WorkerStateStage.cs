@@ -128,5 +128,15 @@ namespace ServiceSaleMachine
         /// Главный экран
         /// </summary>
         MainScreen,
+
+        /// <summary>
+        /// Ошибка в управляющих уситройствах
+        /// </summary>
+        ErrorControl,
+
+        /// <summary>
+        /// Ощибка в управляющих устройствах завершилась
+        /// </summary>
+        ErrorEndControl,
     }
 }

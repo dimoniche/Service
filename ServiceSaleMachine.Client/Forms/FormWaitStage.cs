@@ -77,5 +77,18 @@ namespace ServiceSaleMachine.Client
                 data.stage = WorkerStateStage.ExitProgram;
             }
         }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            // читаем состояние устройства
+            byte[] res;
+            res = data.drivers.GetStatusControl();
+
+            if (res[0] == 0 && res[1] == 0)
+            {
+                data.stage = WorkerStateStage.ErrorControl;
+                this.Close();
+            }
+        }
     }
 }

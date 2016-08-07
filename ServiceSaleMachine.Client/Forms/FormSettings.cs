@@ -1358,5 +1358,34 @@ namespace ServiceSaleMachine.Client
             if (dt != null)
             { dataGridView1.DataSource = dt; }
         }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            byte[] res;
+
+            res = data.drivers.GetStatusControl();
+
+            StatusControl.Text = "Устройствол 1: ";
+
+            if(res[0] > 0)
+            {
+                StatusControl.Text += "включено";
+            }
+            else
+            {
+                StatusControl.Text += "отключено";
+            }
+
+            StatusControl.Text += " Устройствол 2: ";
+
+            if (res[1] > 0)
+            {
+                StatusControl.Text += "включено";
+            }
+            else
+            {
+                StatusControl.Text += "отключено";
+            }
+        }
     }
 }

@@ -1163,6 +1163,32 @@ namespace ServiceSaleMachine.Drivers
                     break;
             }
         }
+
+        /// <summary>
+        /// Пролучение статуса устройств
+        /// </summary>
+        /// <returns></returns>
+        public byte[] GetStatusControl()
+        {
+            byte[] res = new byte[2];
+            byte[] buf = new byte[2];
+            byte[] BufIn = new byte[10];
+
+            buf[0] = (byte)0xF0;
+            buf[1] = (byte)(0xFF - buf[0]);
+            control.Send(buf, 2);
+
+            int val = 0;
+            if (control.Recieve(BufIn, 4, out val) == false)
+            {
+                return null;
+            }
+
+            res[0] = BufIn[1];
+            res[1] = BufIn[2];
+
+            return res;
+        }
     }
 
     public class ServiceClientResponseEventArgs : EventArgs

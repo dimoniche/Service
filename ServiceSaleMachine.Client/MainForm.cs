@@ -136,6 +136,12 @@ namespace ServiceSaleMachine.Client
                         Close();
                         return;
                     }
+                    else if (result.stage == WorkerStateStage.ErrorControl)
+                    {
+                        // аппарат временно не работает
+                        result = (FormResultData)FormManager.OpenForm<FormTemporallyNoWork>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+                        continue;
+                    }
                     else if (result.stage == WorkerStateStage.ChooseService)
                     {
                         // уходим на выбор услуг
@@ -188,6 +194,15 @@ namespace ServiceSaleMachine.Client
                             result = (FormResultData)FormManager.OpenForm<FormNeedService>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
                             if (result.stage == WorkerStateStage.EndNeedService)
+                            {
+                                continue;
+                            }
+                        }
+                        else if (result.stage == WorkerStateStage.ErrorControl)
+                        {
+                            // аппарат временно не работает
+                            result = (FormResultData)FormManager.OpenForm<FormTemporallyNoWork>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+                            if (result.stage == WorkerStateStage.ErrorEndControl)
                             {
                                 continue;
                             }
@@ -371,6 +386,9 @@ namespace ServiceSaleMachine.Client
                             // отказались от услуги
                             
                         }
+
+                        // Услугу оказали - выбросим расходники
+                        result = (FormResultData)FormManager.OpenForm<FormMessageEndService>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
                         // пишем в базу строку с временем работы
                         GlobalDb.GlobalBase.WriteWorkTime(serv.id, dev.id, dev.timework);

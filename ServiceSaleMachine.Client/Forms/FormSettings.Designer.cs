@@ -93,6 +93,7 @@
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button12 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.edtMoney = new System.Windows.Forms.TextBox();
             this.button10 = new System.Windows.Forms.Button();
@@ -155,7 +156,9 @@
             this.secondfirmsname = new System.Windows.Forms.TextBox();
             this.firmsname = new System.Windows.Forms.TextBox();
             this.checkPic = new System.Windows.Forms.PictureBox();
-            this.button12 = new System.Windows.Forms.Button();
+            this.OffcheckStatus = new System.Windows.Forms.CheckBox();
+            this.button13 = new System.Windows.Forms.Button();
+            this.StatusControl = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -656,6 +659,8 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.StatusControl);
+            this.tabPage5.Controls.Add(this.OffcheckStatus);
             this.tabPage5.Controls.Add(this.label21);
             this.tabPage5.Controls.Add(this.label17);
             this.tabPage5.Controls.Add(this.label15);
@@ -663,6 +668,7 @@
             this.tabPage5.Controls.Add(this.Close1);
             this.tabPage5.Controls.Add(this.Close3);
             this.tabPage5.Controls.Add(this.Close2);
+            this.tabPage5.Controls.Add(this.button13);
             this.tabPage5.Controls.Add(this.Open3);
             this.tabPage5.Controls.Add(this.Open2);
             this.tabPage5.Controls.Add(this.Open1);
@@ -886,6 +892,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(686, 104);
             this.panel1.TabIndex = 0;
+            // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(272, 53);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(128, 23);
+            this.button12.TabIndex = 9;
+            this.button12.Text = "Количество платежей";
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // button11
             // 
@@ -1543,15 +1559,34 @@
             this.checkPic.TabIndex = 0;
             this.checkPic.TabStop = false;
             // 
-            // button12
+            // OffcheckStatus
             // 
-            this.button12.Location = new System.Drawing.Point(272, 53);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(128, 23);
-            this.button12.TabIndex = 9;
-            this.button12.Text = "Количество платежей";
-            this.button12.UseVisualStyleBackColor = true;
-            this.button12.Click += new System.EventHandler(this.button12_Click);
+            this.OffcheckStatus.AutoSize = true;
+            this.OffcheckStatus.Location = new System.Drawing.Point(25, 223);
+            this.OffcheckStatus.Name = "OffcheckStatus";
+            this.OffcheckStatus.Size = new System.Drawing.Size(173, 17);
+            this.OffcheckStatus.TabIndex = 13;
+            this.OffcheckStatus.Text = "Отключить проверку статуса";
+            this.OffcheckStatus.UseVisualStyleBackColor = true;
+            // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(25, 194);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(105, 23);
+            this.button13.TabIndex = 10;
+            this.button13.Text = "Получить статус";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
+            // 
+            // StatusControl
+            // 
+            this.StatusControl.AutoSize = true;
+            this.StatusControl.Location = new System.Drawing.Point(156, 199);
+            this.StatusControl.Name = "StatusControl";
+            this.StatusControl.Size = new System.Drawing.Size(37, 13);
+            this.StatusControl.TabIndex = 14;
+            this.StatusControl.Text = "Status";
             // 
             // FormSettings
             // 
@@ -1736,5 +1771,8 @@
         private System.Windows.Forms.TextBox advert2;
         private System.Windows.Forms.TextBox advert1;
         private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Label StatusControl;
+        private System.Windows.Forms.CheckBox OffcheckStatus;
+        private System.Windows.Forms.Button button13;
     }
 }

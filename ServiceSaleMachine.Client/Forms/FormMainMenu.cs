@@ -116,6 +116,20 @@ namespace ServiceSaleMachine.Client
                 data.stage = WorkerStateStage.TimeOut;
                 this.Close();
             }
+
+            if ((Timeout % 20) == 0)
+            {
+                // читаем состояние устройства
+                byte[] res;
+                res = data.drivers.GetStatusControl();
+
+                if (res[0] > 0 || res[1] > 0)
+                {
+                    data.stage = WorkerStateStage.ErrorControl;
+                    this.Close();
+                }
+            }
+
         }
 
         private void pbxLogin_Click(object sender, EventArgs e)

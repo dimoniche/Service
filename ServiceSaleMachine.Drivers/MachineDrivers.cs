@@ -1170,6 +1170,8 @@ namespace ServiceSaleMachine.Drivers
         /// <returns></returns>
         public byte[] GetStatusControl()
         {
+            if (Globals.ClientConfiguration.Settings.offControl == 1) return null;
+
             byte[] res = new byte[2];
             byte[] buf = new byte[2];
             byte[] BufIn = new byte[10];

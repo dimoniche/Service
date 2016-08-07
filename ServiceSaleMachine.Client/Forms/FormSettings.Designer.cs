@@ -73,6 +73,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.cbxComPortPrinter = new System.Windows.Forms.ComboBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.StatusControl = new System.Windows.Forms.Label();
+            this.OffcheckStatus = new System.Windows.Forms.CheckBox();
             this.label21 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
@@ -80,6 +82,7 @@
             this.Close1 = new System.Windows.Forms.Button();
             this.Close3 = new System.Windows.Forms.Button();
             this.Close2 = new System.Windows.Forms.Button();
+            this.button13 = new System.Windows.Forms.Button();
             this.Open3 = new System.Windows.Forms.Button();
             this.Open2 = new System.Windows.Forms.Button();
             this.Open1 = new System.Windows.Forms.Button();
@@ -156,9 +159,6 @@
             this.secondfirmsname = new System.Windows.Forms.TextBox();
             this.firmsname = new System.Windows.Forms.TextBox();
             this.checkPic = new System.Windows.Forms.PictureBox();
-            this.OffcheckStatus = new System.Windows.Forms.CheckBox();
-            this.button13 = new System.Windows.Forms.Button();
-            this.StatusControl = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -438,6 +438,7 @@
             this.butWaitNoteOff.TabIndex = 44;
             this.butWaitNoteOff.Text = "Отмена режима ожидания купюры";
             this.butWaitNoteOff.UseVisualStyleBackColor = true;
+            this.butWaitNoteOff.Visible = false;
             this.butWaitNoteOff.Click += new System.EventHandler(this.button5_Click);
             // 
             // button1
@@ -458,6 +459,7 @@
             this.butWaitNoteOn.TabIndex = 44;
             this.butWaitNoteOn.Text = "Режим ожидания купюры";
             this.butWaitNoteOn.UseVisualStyleBackColor = true;
+            this.butWaitNoteOn.Visible = false;
             this.butWaitNoteOn.Click += new System.EventHandler(this.button10_Click);
             // 
             // CountBill
@@ -684,6 +686,25 @@
             this.tabPage5.Text = "Управляющее устройство";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
+            // StatusControl
+            // 
+            this.StatusControl.AutoSize = true;
+            this.StatusControl.Location = new System.Drawing.Point(156, 199);
+            this.StatusControl.Name = "StatusControl";
+            this.StatusControl.Size = new System.Drawing.Size(37, 13);
+            this.StatusControl.TabIndex = 14;
+            this.StatusControl.Text = "Status";
+            // 
+            // OffcheckStatus
+            // 
+            this.OffcheckStatus.AutoSize = true;
+            this.OffcheckStatus.Location = new System.Drawing.Point(25, 223);
+            this.OffcheckStatus.Name = "OffcheckStatus";
+            this.OffcheckStatus.Size = new System.Drawing.Size(173, 17);
+            this.OffcheckStatus.TabIndex = 13;
+            this.OffcheckStatus.Text = "Отключить проверку статуса";
+            this.OffcheckStatus.UseVisualStyleBackColor = true;
+            // 
             // label21
             // 
             this.label21.AutoSize = true;
@@ -749,6 +770,16 @@
             this.Close2.Text = "Выкл.канал 2";
             this.Close2.UseVisualStyleBackColor = true;
             this.Close2.Click += new System.EventHandler(this.Close2_Click);
+            // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(25, 194);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(105, 23);
+            this.button13.TabIndex = 10;
+            this.button13.Text = "Получить статус";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
             // Open3
             // 
@@ -1558,35 +1589,6 @@
             this.checkPic.Size = new System.Drawing.Size(515, 426);
             this.checkPic.TabIndex = 0;
             this.checkPic.TabStop = false;
-            // 
-            // OffcheckStatus
-            // 
-            this.OffcheckStatus.AutoSize = true;
-            this.OffcheckStatus.Location = new System.Drawing.Point(25, 223);
-            this.OffcheckStatus.Name = "OffcheckStatus";
-            this.OffcheckStatus.Size = new System.Drawing.Size(173, 17);
-            this.OffcheckStatus.TabIndex = 13;
-            this.OffcheckStatus.Text = "Отключить проверку статуса";
-            this.OffcheckStatus.UseVisualStyleBackColor = true;
-            // 
-            // button13
-            // 
-            this.button13.Location = new System.Drawing.Point(25, 194);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(105, 23);
-            this.button13.TabIndex = 10;
-            this.button13.Text = "Получить статус";
-            this.button13.UseVisualStyleBackColor = true;
-            this.button13.Click += new System.EventHandler(this.button13_Click);
-            // 
-            // StatusControl
-            // 
-            this.StatusControl.AutoSize = true;
-            this.StatusControl.Location = new System.Drawing.Point(156, 199);
-            this.StatusControl.Name = "StatusControl";
-            this.StatusControl.Size = new System.Drawing.Size(37, 13);
-            this.StatusControl.TabIndex = 14;
-            this.StatusControl.Text = "Status";
             // 
             // FormSettings
             // 

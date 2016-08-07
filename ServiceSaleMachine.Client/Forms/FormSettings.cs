@@ -1365,26 +1365,29 @@ namespace ServiceSaleMachine.Client
 
             res = data.drivers.GetStatusControl();
 
-            StatusControl.Text = "Устройствол 1: ";
+            if (res != null)
+            {
+                StatusControl.Text = "Устройство 1: ";
 
-            if(res[0] > 0)
-            {
-                StatusControl.Text += "включено";
-            }
-            else
-            {
-                StatusControl.Text += "отключено";
-            }
+                if (res[0] > 0)
+                {
+                    StatusControl.Text += "включено";
+                }
+                else
+                {
+                    StatusControl.Text += "отключено";
+                }
 
-            StatusControl.Text += " Устройствол 2: ";
+                StatusControl.Text += " Устройство 2: ";
 
-            if (res[1] > 0)
-            {
-                StatusControl.Text += "включено";
-            }
-            else
-            {
-                StatusControl.Text += "отключено";
+                if (res[1] > 0)
+                {
+                    StatusControl.Text += "включено";
+                }
+                else
+                {
+                    StatusControl.Text += "отключено";
+                }
             }
         }
     }

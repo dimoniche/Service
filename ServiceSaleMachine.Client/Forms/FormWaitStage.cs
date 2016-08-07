@@ -84,10 +84,13 @@ namespace ServiceSaleMachine.Client
             byte[] res;
             res = data.drivers.GetStatusControl();
 
-            if (res[0] == 0 && res[1] == 0)
+            if (res != null)
             {
-                data.stage = WorkerStateStage.ErrorControl;
-                this.Close();
+                if (res[0] == 0 && res[1] == 0)
+                {
+                    data.stage = WorkerStateStage.ErrorControl;
+                    this.Close();
+                }
             }
         }
     }

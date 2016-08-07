@@ -197,7 +197,8 @@ namespace ServiceSaleMachine
             }
 
             // создадим таблицу платежей
-            query = "CREATE TABLE IF NOT EXISTS `payments` ( `id` int(11) NOT NULL AUTO_INCREMENT, `iduser` int(11), `amount` int(11) NOT NULL," +
+            query = "CREATE TABLE IF NOT EXISTS `payments` ( `id` int(11) NOT NULL AUTO_INCREMENT, `iduser` int(11),"+
+                "`amount` int(11) NOT NULL," +
                                "`datetime` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP," +
                                "PRIMARY KEY(`id`)) ENGINE = InnoDB DEFAULT CHARSET = cp866;  SET FOREIGN_KEY_CHECKS = 1";
 
@@ -221,6 +222,27 @@ namespace ServiceSaleMachine
             cmd = new MySqlCommand(query, con);
             try
             {
+                cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.Message);
+                return false;
+            }
+            // таблица для чеков
+               query = "CREATE TABLE IF NOT EXISTS `checks` ( `id` int(11) NOT NULL AUTO_INCREMENT," +
+                              "`dt_create` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP," +
+                              "`dt_fixed` datetime ON UPDATE CURRENT_TIMESTAMP, " +
+                              "`checkstr` varchar(255) NOT NULL, "+
+                              "`iduser` int(11)," +
+                              "active boolean DEFAULT 0, "+
+                              "`amount` int(11) NOT NULL," +
+                              "PRIMARY KEY(`id`)) ENGINE = InnoDB DEFAULT CHARSET = cp866;  SET FOREIGN_KEY_CHECKS = 1";
+            cmd = new MySqlCommand(query, con);
+            try
+            {
+                Debug.Print(query);
                 cmd.ExecuteNonQuery();
 
             }
@@ -615,6 +637,159 @@ namespace ServiceSaleMachine
                 Debug.Print(ex.Message);
                 return false;
             }
+
+        }
+        /// <summary>
+        /// добавление в таблицу check записи 
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="sum"></param>
+        /// <returns></returns>
+        public bool AddToCheck(int userid, int sum, string check)
+        {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
+
+            string query = "INSERT INTO checks (iduser, amount, checkstr, dt_create) VALUES ("
+                + userid.ToString() + "," + sum.ToString() + ",'" + check +"','" +
+                  DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
+
+            Debug.Print(query);
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.Message);
+                return false;
+            }
+        }
+        /// <summary>
+        /// погасить чек
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool FixedCheck(int id)
+        {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
+
+            string query = "UPDATE checks SET " +
+                "active = 1, " +
+                "dt_fixed = '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' " +
+                "where id=" + id.ToString();
+
+            Debug.Print(query);
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.Message);
+                return false;
+            }
+        }
+        /// <summary>
+        /// удалить чек.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool deleteCheck(int id)
+        {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
+
+            string query = "delete from checks where id="+id.ToString();
+
+            Debug.Print(query);
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.Message);
+                return false;
+            }
+        }
+
+        public CheckInfo GetCheckByStr(string check)
+        {
+            string queryString = "select id, dt_start, dt_fixed from checks where (checkstr='" + check + "')";
+
+            MySqlCommand com = new MySqlCommand(queryString, con);
+
+            CheckInfo ch = null;
+
+            try
+            {
+                using (MySqlDataReader dr = com.ExecuteReader())
+                {
+                    if (dr.HasRows)
+                    {
+                        dr.Read();
+                        ch = new CheckInfo();
+                        ch.Id = (int)dr[0];
+                        ch.dt_start = (DateTime)dr[1];
+                        ch.dt_fixed = (DateTime)dr[2];
+                        ch.active = (Boolean)dr[3];
+                        ch.IdUser = (int)dr[4];
+                        ch.checkstr = (string)dr[5];
+                        dr.Close();
+
+                        return ch;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.Message);
+
+            }
+            return ch;
+        }
+        /// <summary>
+        /// все чеки
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetChecks()
+        {
+            DataTable dt = new DataTable();
+            string queryString = @"select * from checks";
+
+            //using (MySqlConnection con = new MySqlConnection())
+            {
+                MySqlCommand com = new MySqlCommand(queryString, con);
+
+                try
+                {
+                    using (MySqlDataReader dr = com.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            dt.Load(dr);
+                        }
+
+                        dr.Close();
+                    }
+                }
+
+                catch (Exception ex)
+                {
+                    Debug.Print(ex.Message);
+
+                }
+            }
+            return dt;
 
         }
         /// <summary>

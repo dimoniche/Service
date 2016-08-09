@@ -89,7 +89,6 @@
     <Compile Include="DataBase\GlobalBase.cs" />
     <Compile Include="DataBase\db.cs" />
     <Compile Include="DataBase\UserInfo.cs" />
-    <Compile Include="Data\DeviceStatistic.cs" />
     <Compile Include="Data\MoneyStatistic.cs" />
     <Compile Include="Form\Common\Keyboard.cs">
       <SubType>UserControl</SubType>

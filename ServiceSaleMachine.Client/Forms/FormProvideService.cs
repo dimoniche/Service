@@ -47,7 +47,7 @@ namespace ServiceSaleMachine.Client
         private void timerService_Tick(object sender, System.EventArgs e)
         {
             // нарастим время наработки
-            data.dev_statistic.counterDevice1++;
+            
 
             if(Interval-- == 0)
             {

@@ -26,6 +26,9 @@ namespace ServiceSaleMachine.Client
             }
 
             data.drivers.ReceivedResponse += reciveResponse;
+
+            // 
+            moneySumm.Text = "Сумма денег в кассете: " + data.statistic.AllMoneySumm + " руб";
         }
 
         private void reciveResponse(object sender, ServiceClientResponseEventArgs e)
@@ -61,6 +64,13 @@ namespace ServiceSaleMachine.Client
 
         private void FormMoneyRecess_FormClosed(object sender, FormClosedEventArgs e)
         {
+            // обнулим статистику
+            data.statistic.AccountMoneySumm = 0;
+            data.statistic.AllMoneySumm = 0;
+            data.statistic.BarCodeMoneySumm = 0;
+            data.statistic.CountBankNote = 0;
+            data.statistic.ServiceMoneySumm = 0;
+
             data.drivers.ReceivedResponse -= reciveResponse;
             Params.Result = data;
         }

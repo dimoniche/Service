@@ -23,6 +23,8 @@ namespace ServiceSaleMachine.Client
 
         // статистика по деньгам
         public MoneyStatistic statistic;
+        // статисткика использования устройств
+        public DeviceStatistic dev_statistic;
 
         public FormResultData()
         {

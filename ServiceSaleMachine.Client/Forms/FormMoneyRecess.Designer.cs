@@ -34,7 +34,7 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.scalableLabel1 = new ServiceSaleMachine.ScalableLabel();
+            this.moneySumm = new ServiceSaleMachine.ScalableLabel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.scalableLabel2 = new ServiceSaleMachine.ScalableLabel();
             this.panel5.SuspendLayout();
@@ -86,22 +86,22 @@
             // 
             // panel7
             // 
-            this.panel7.Controls.Add(this.scalableLabel1);
+            this.panel7.Controls.Add(this.moneySumm);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel7.Location = new System.Drawing.Point(0, 100);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(477, 296);
             this.panel7.TabIndex = 1;
             // 
-            // scalableLabel1
+            // moneySumm
             // 
-            this.scalableLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scalableLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.scalableLabel1.Location = new System.Drawing.Point(0, 0);
-            this.scalableLabel1.Name = "scalableLabel1";
-            this.scalableLabel1.Size = new System.Drawing.Size(477, 296);
-            this.scalableLabel1.TabIndex = 0;
-            this.scalableLabel1.Text = "Сумма денег в кассете: 0 руб";
+            this.moneySumm.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.moneySumm.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.moneySumm.Location = new System.Drawing.Point(0, 0);
+            this.moneySumm.Name = "moneySumm";
+            this.moneySumm.Size = new System.Drawing.Size(477, 296);
+            this.moneySumm.TabIndex = 0;
+            this.moneySumm.Text = "Сумма денег в кассете: 0 руб";
             // 
             // panel6
             // 
@@ -154,7 +154,7 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Panel panel6;
-        private ScalableLabel scalableLabel1;
+        private ScalableLabel moneySumm;
         private ScalableLabel scalableLabel2;
     }
 }

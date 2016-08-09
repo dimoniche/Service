@@ -276,6 +276,26 @@ namespace ServiceSaleMachine
         }
 
         /// <summary>
+        /// Получаем данные статистики
+        /// </summary>
+        /// <returns></returns>
+        public DeviceStatistic GetDevStatistic()
+        {
+            DeviceStatistic statistic = new DeviceStatistic();
+
+            return statistic;
+        }
+
+        /// <summary>
+        /// Запоминаем данные статистики
+        /// </summary>
+        /// <param name="statistic"></param>
+        public void SetDevStatistic(DeviceStatistic statistic)
+        {
+
+        }
+
+        /// <summary>
         /// получить количество банктот
         /// </summary>
         /// <returns></returns>

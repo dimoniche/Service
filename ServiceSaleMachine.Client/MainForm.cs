@@ -30,6 +30,8 @@ namespace ServiceSaleMachine.Client
 
         // статистика по деньгам
         MoneyStatistic statistic;
+        // статистика использования расходников
+        DeviceStatistic dev_statistic;
 
         // запуск приложения
         public MainForm(WorkerStateStage StateStage)
@@ -73,6 +75,8 @@ namespace ServiceSaleMachine.Client
 
             // прочтем из базы статистику
             statistic = GlobalDb.GlobalBase.GetMoneyStatistic();
+            dev_statistic = GlobalDb.GlobalBase.GetDevStatistic();
+
             //statistic.CountBankNote = GlobalDb.GlobalBase.GetCountBankNote();
         }
 
@@ -84,6 +88,7 @@ namespace ServiceSaleMachine.Client
             FormResultData result = new FormResultData();
             result.drivers = drivers;
             result.statistic = statistic;
+            result.dev_statistic = dev_statistic;
 
             if (Globals.admin)
             {

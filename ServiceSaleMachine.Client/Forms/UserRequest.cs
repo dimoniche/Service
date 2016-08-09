@@ -109,7 +109,14 @@ namespace ServiceSaleMachine.Client
 
         private void UserRequest_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Params.Result = data;
+            if (data != null)
+            {
+                // вернем вниз ID пользователя
+                UserInfo ui = GlobalDb.GlobalBase.GetUserByName(Globals.UserConfiguration.UserLogin, Globals.UserConfiguration.UserPassword);
+                data.CurrentUserId = ui.Id;
+
+                Params.Result = data;
+            }
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)

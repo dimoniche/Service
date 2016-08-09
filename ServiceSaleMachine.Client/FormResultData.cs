@@ -12,6 +12,8 @@ namespace ServiceSaleMachine.Client
 
         public string retLogin;
         public string retPassword;
+        // ID текущего пользователя из базы
+        public int CurrentUserId;
 
         // максимальное время оказания услуги
         public int timework = 3;
@@ -26,8 +28,6 @@ namespace ServiceSaleMachine.Client
 
         // статистика по деньгам
         public MoneyStatistic statistic;
-
-        public int CurrentUserId;
 
         public FormResultData()
         {

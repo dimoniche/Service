@@ -184,7 +184,7 @@ namespace ServiceSaleMachine.Client
                                 if(data.CurrentUserId == 0)
                                 {
                                     // форма регистрации
-                                    FormManager.OpenForm<UserRequest>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify);
+                                    data = (FormResultData)FormManager.OpenForm<UserRequest>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify,data);
                                 }
 
                                 // запомним сколько внесли на аккаунт

@@ -5,6 +5,9 @@ using System.Text;
 
 namespace ServiceSaleMachine
 {
+    /// <summary>
+    /// Если будет личный кабинет то эта инфа пригодиться
+    /// </summary>
     public class UserConfiguration
     {
         public string UserLogin = "";

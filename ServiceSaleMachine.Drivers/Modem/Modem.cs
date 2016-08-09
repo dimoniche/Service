@@ -199,6 +199,9 @@ namespace ServiceSaleMachine.Drivers
 
         public bool SendSMSRus(string sms)
         {
+            if (Globals.ClientConfiguration.Settings.offModem == 1) return false;
+            if (Globals.ClientConfiguration.Settings.numberTelephoneSMS.Length < 7) return false;
+
             string LMes;
 
             string LText = StringToUSC2(sms);
@@ -293,6 +296,9 @@ namespace ServiceSaleMachine.Drivers
 
         public bool SendSMS(string sms)
         {
+            if (Globals.ClientConfiguration.Settings.offModem == 1) return false;
+            if (Globals.ClientConfiguration.Settings.numberTelephoneSMS.Length < 7) return false;
+
             byte[] buf;
             byte[] BufIn = new byte[20];
 

@@ -31,6 +31,9 @@ namespace ServiceSaleMachine.Client
             progressBar.Value = 0;
 
             timer1.Enabled = true;
+
+            // включаем подсветку
+            data.drivers.SendOpenControl(3);
         }
 
         private void timer1_Tick(object sender, System.EventArgs e)
@@ -50,6 +53,9 @@ namespace ServiceSaleMachine.Client
 
         private void FormMessageEndService_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
         {
+            // отключаем подсветку
+            data.drivers.SendCloseControl(3);
+
             Params.Result = data;
         }
     }

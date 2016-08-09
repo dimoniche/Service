@@ -225,7 +225,7 @@ namespace ServiceSaleMachine.Client
 
                     // Запомним в базе
                     GlobalDb.GlobalBase.SetMoneyStatistic(data.statistic);
-
+                    // заносим в базу платеж
                     GlobalDb.GlobalBase.InsertMoney(data.CurrentUserId, amount);
                     // заносим банкноту
                     GlobalDb.GlobalBase.InsertBankNote();
@@ -287,11 +287,6 @@ namespace ServiceSaleMachine.Client
 
             data.drivers.ReceivedResponse -= reciveResponse;
 
-            if (amount > 0)
-            {
-                // что то уже внесли в аппарат - надо эти деньги записать на счет
-            }
-
             if (Globals.ClientConfiguration.Settings.offHardware == 0)
             {
                 // вернем деньгу
@@ -300,6 +295,7 @@ namespace ServiceSaleMachine.Client
                 data.drivers.ReturnBill();
                 data.drivers.StopWaitBill();
             }
+
             Params.Result = data;
         }
 

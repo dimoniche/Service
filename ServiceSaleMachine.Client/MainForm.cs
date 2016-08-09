@@ -22,9 +22,6 @@ namespace ServiceSaleMachine.Client
         // задача очистки логов
         ClearFilesControlServiceTask ClearFilesTask { get; set; }
 
-        // текущий пользователь
-        int CurrentUserId;
-
         // статистика по деньгам
         MoneyStatistic statistic;
 
@@ -363,6 +360,7 @@ namespace ServiceSaleMachine.Client
                     if (dev != null)
                     {
                         result.timework = dev.timework;
+                        result.numberCurrentDevice = dev.id;
                         result.timeRecognize = serv.timeRecognize;
                         result.ServName = serv.caption;
 

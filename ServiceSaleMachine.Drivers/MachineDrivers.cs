@@ -1114,6 +1114,8 @@ namespace ServiceSaleMachine.Drivers
         /// <returns></returns>
         public void SendOpenControl(int controlNumber)
         {
+            if (Globals.ClientConfiguration.Settings.offControl == 1) return;
+
             byte[] buf = new byte[2];
 
             switch(controlNumber)
@@ -1133,6 +1135,11 @@ namespace ServiceSaleMachine.Drivers
                     buf[1] = (byte)(0xFF - buf[0]);
                     control.Send(buf, 2);
                     break;
+                default:
+                    buf[0] = (byte)controlNumber;
+                    buf[1] = (byte)(0xFF - buf[0]);
+                    control.Send(buf, 2);
+                    break;
             }
         }
 
@@ -1142,6 +1149,8 @@ namespace ServiceSaleMachine.Drivers
         /// <returns></returns>
         public void SendCloseControl(int controlNumber)
         {
+            if (Globals.ClientConfiguration.Settings.offControl == 1) return;
+
             byte[] buf = new byte[2];
 
             switch (controlNumber)
@@ -1158,6 +1167,11 @@ namespace ServiceSaleMachine.Drivers
                     break;
                 case 3:
                     buf[0] = (byte)Globals.ClientConfiguration.Settings.CommandControl3Close;
+                    buf[1] = (byte)(0xFF - buf[0]);
+                    control.Send(buf, 2);
+                    break;
+                default:
+                    buf[0] = (byte)controlNumber;
                     buf[1] = (byte)(0xFF - buf[0]);
                     control.Send(buf, 2);
                     break;

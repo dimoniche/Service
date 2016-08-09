@@ -19,6 +19,9 @@ namespace ServiceSaleMachine.Client
         public int timeRecognize = 60;
         public string ServName;
 
+        // номер текущего устройства
+        public int numberCurrentDevice = 1;
+
         public MachineDrivers drivers;
 
         // статистика по деньгам

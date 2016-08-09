@@ -85,7 +85,7 @@ namespace ServiceSaleMachine.Client
                 countmoney = GlobalDb.GlobalBase.GetCountMoney(new DateTime(2000, 1, 1));
             }
 
-            // запишем сколько инкассировали
+            // запишем сколько инкассировали и обновим время инкасации
             GlobalDb.GlobalBase.Encashment(data.CurrentUserId, countmoney);
 
             data.drivers.ReceivedResponse -= reciveResponse;

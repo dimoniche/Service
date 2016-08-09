@@ -43,6 +43,9 @@ namespace ServiceSaleMachine.Client
             this.WindowState = FormWindowState.Maximized;
 
             pBxInstruction.Load(Globals.GetPath(PathEnum.Image) + "\\instruction.png");
+
+            // включаем подсветку
+            data.drivers.SendOpenControl(3);
         }
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
@@ -67,6 +70,9 @@ namespace ServiceSaleMachine.Client
 
         private void FormProgress_FormClosed(object sender, FormClosedEventArgs e)
         {
+            // Отключаем подстветку
+            data.drivers.SendCloseControl(3);
+
             Params.Result = data;
         }
 

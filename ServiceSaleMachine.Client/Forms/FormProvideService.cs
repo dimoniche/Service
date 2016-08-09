@@ -30,6 +30,9 @@ namespace ServiceSaleMachine.Client
             timerService.Enabled = true;
 
             ServiceText.Text = "Идет оказание услуги. Осталось еще " + (Interval / 60).ToString() + " минуты и " + (Interval % 60).ToString() + " секунд";
+
+            // оказываем услугу
+            data.drivers.SendOpenControl(data.numberCurrentDevice);
         }
 
         private void pBxStopService_Click(object sender, System.EventArgs e)
@@ -40,6 +43,9 @@ namespace ServiceSaleMachine.Client
 
         private void FormProvideService_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
         {
+            // заканчиваем оказывать услугу
+            data.drivers.SendCloseControl(data.numberCurrentDevice);
+
             Params.Result = data;
             timerService.Enabled = false;
         }

@@ -24,6 +24,8 @@ namespace ServiceSaleMachine
         public string numberTelephoneSMS;
         // текст сообщения о исчерпании ресурса
         public string SMSMessageTimeEnd = "Ресурс прошел.";
+        // текст сообщения о необходимости инкассации
+        public string SMSMessageNeedCollect = "Необходима инкассация.";
 
         // Отключение железа
         public int offHardware = 1;
@@ -65,6 +67,9 @@ namespace ServiceSaleMachine
         // поведение со сдачей
         public int changeToAccount = 0;
         public int changeToCheck = 0;
+
+        // Максимальное количес тво банкнот для вызова инкассации
+        public int MaxCountBankNote = 500;
 
         internal ClientConfigurationProperties()
 		{

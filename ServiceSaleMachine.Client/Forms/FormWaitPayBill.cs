@@ -180,11 +180,17 @@ namespace ServiceSaleMachine.Client
 
                             if(ch == ChooseChangeEnum.ChangeToAccount)
                             {
-                                // заносим в аккаунт
+                                // заносим в аккаунт - если не авторизовались - нужна авторизация в аккаунт
+
+                                // запомним сколько внесли на аккаунт
+                                data.statistic.AccountMoneySumm += diff;
                             }
                             else
                             {
                                 // выдаем чек
+
+                                // запомним сколько выдали на чеке
+                                data.statistic.BarCodeMoneySumm += diff;
                             }
                         }
                     }
@@ -194,6 +200,16 @@ namespace ServiceSaleMachine.Client
 
                     // деньги внесли - нет пути назад
                     TimeOutTimer.Enabled = false;
+
+                    // запомним принятую сумму
+                    data.statistic.AllMoneySumm += amount;
+                    // запомним на сколько оказали услуг
+                    data.statistic.ServiceMoneySumm += data.serv.price;
+                    // Количество банкнот
+                    data.statistic.CountBankNote++;
+
+                    // Запомним в базе
+                    GlobalDb.GlobalBase.SetMoneyStatistic(data.statistic);
 
                     if (amount >= data.serv.price)
                     {

@@ -21,6 +21,9 @@ namespace ServiceSaleMachine.Client
 
         public MachineDrivers drivers;
 
+        // статистика по деньгам
+        public MoneyStatistic statistic;
+
         public FormResultData()
         {
             retLogin = "";

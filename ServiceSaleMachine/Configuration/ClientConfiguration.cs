@@ -59,6 +59,7 @@ namespace ServiceSaleMachine
 
                         if ((xElement = xSettings.Element("numberTelephoneSMS")) != null) Settings.numberTelephoneSMS = xElement.Value;
                         if ((xElement = xSettings.Element("SMSMessageTimeEnd")) != null) Settings.SMSMessageTimeEnd = xElement.Value;
+                        if ((xElement = xSettings.Element("SMSMessageNeedCollect")) != null) Settings.SMSMessageNeedCollect = xElement.Value;
 
                         if ((xElement = xSettings.Element("offHardware")) != null) Settings.offHardware = int.Parse(xElement.Value);
                         if ((xElement = xSettings.Element("offCheck")) != null) Settings.offCheck = int.Parse(xElement.Value);
@@ -79,6 +80,8 @@ namespace ServiceSaleMachine
 
                         if ((xElement = xSettings.Element("changeToAccount")) != null) Settings.changeToAccount = int.Parse(xElement.Value);
                         if ((xElement = xSettings.Element("changeToCheck")) != null) Settings.changeToCheck = int.Parse(xElement.Value);
+
+                        if ((xElement = xSettings.Element("MaxCountBankNote")) != null) Settings.MaxCountBankNote = int.Parse(xElement.Value);
 
                         if ((xElement = xSettings.Element("nominals")) != null)
                         {
@@ -139,6 +142,7 @@ namespace ServiceSaleMachine
                 xSettings.Add(new XElement("comPortModemSpeed", Settings.comPortModemSpeed.ToString()));
                 xSettings.Add(new XElement("numberTelephoneSMS", Settings.numberTelephoneSMS));
                 xSettings.Add(new XElement("SMSMessageTimeEnd", Settings.SMSMessageTimeEnd));
+                xSettings.Add(new XElement("SMSMessageNeedCollect", Settings.SMSMessageNeedCollect));
 
                 xSettings.Add(new XElement("offHardware", Settings.offHardware.ToString()));
                 xSettings.Add(new XElement("offCheck", Settings.offCheck.ToString()));
@@ -159,6 +163,8 @@ namespace ServiceSaleMachine
 
                 xSettings.Add(new XElement("changeToAccount", Settings.changeToAccount.ToString()));
                 xSettings.Add(new XElement("changeToCheck", Settings.changeToCheck.ToString()));
+
+                xSettings.Add(new XElement("MaxCountBankNote", Settings.MaxCountBankNote.ToString()));
 
                 XElement element = new XElement("nominals");
                 foreach (int nominal in Settings.nominals)

@@ -159,6 +159,11 @@
             this.secondfirmsname = new System.Windows.Forms.TextBox();
             this.firmsname = new System.Windows.Forms.TextBox();
             this.checkPic = new System.Windows.Forms.PictureBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.textMaxCountBanknote = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.textNeedCollect = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -185,6 +190,7 @@
             this.groupBox1.SuspendLayout();
             this.tabPage11.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.checkPic)).BeginInit();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -1062,13 +1068,15 @@
             // 
             // groupBxSettingModem
             // 
+            this.groupBxSettingModem.Controls.Add(this.label24);
             this.groupBxSettingModem.Controls.Add(this.label22);
+            this.groupBxSettingModem.Controls.Add(this.textNeedCollect);
             this.groupBxSettingModem.Controls.Add(this.textSMSTimeEnd);
             this.groupBxSettingModem.Controls.Add(this.label19);
             this.groupBxSettingModem.Controls.Add(this.textNumberPhone);
             this.groupBxSettingModem.Location = new System.Drawing.Point(18, 55);
             this.groupBxSettingModem.Name = "groupBxSettingModem";
-            this.groupBxSettingModem.Size = new System.Drawing.Size(341, 148);
+            this.groupBxSettingModem.Size = new System.Drawing.Size(341, 178);
             this.groupBxSettingModem.TabIndex = 14;
             this.groupBxSettingModem.TabStop = false;
             this.groupBxSettingModem.Text = "Настройки модема";
@@ -1364,6 +1372,7 @@
             // 
             // tabPage9
             // 
+            this.tabPage9.Controls.Add(this.groupBox6);
             this.tabPage9.Controls.Add(this.groupBox3);
             this.tabPage9.Controls.Add(this.groupBox2);
             this.tabPage9.Controls.Add(this.groupBox1);
@@ -1421,7 +1430,7 @@
             // checkchangeOn
             // 
             this.checkchangeOn.AutoSize = true;
-            this.checkchangeOn.Location = new System.Drawing.Point(16, 25);
+            this.checkchangeOn.Location = new System.Drawing.Point(15, 18);
             this.checkchangeOn.Name = "checkchangeOn";
             this.checkchangeOn.Size = new System.Drawing.Size(77, 17);
             this.checkchangeOn.TabIndex = 1;
@@ -1590,6 +1599,52 @@
             this.checkPic.TabIndex = 0;
             this.checkPic.TabStop = false;
             // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.textMaxCountBanknote);
+            this.groupBox6.Controls.Add(this.label23);
+            this.groupBox6.Location = new System.Drawing.Point(282, 20);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(351, 161);
+            this.groupBox6.TabIndex = 3;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Лимиты";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(20, 19);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(178, 13);
+            this.label23.TabIndex = 0;
+            this.label23.Text = "Количество банкнот в приемнике";
+            // 
+            // textMaxCountBanknote
+            // 
+            this.textMaxCountBanknote.Location = new System.Drawing.Point(215, 12);
+            this.textMaxCountBanknote.Name = "textMaxCountBanknote";
+            this.textMaxCountBanknote.Size = new System.Drawing.Size(130, 20);
+            this.textMaxCountBanknote.TabIndex = 1;
+            this.textMaxCountBanknote.Text = "500";
+            this.textMaxCountBanknote.Leave += new System.EventHandler(this.textMaxCountBanknote_Leave);
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(18, 99);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(213, 13);
+            this.label24.TabIndex = 2;
+            this.label24.Text = "Текст СМС онеобходимости инкассации";
+            // 
+            // textNeedCollect
+            // 
+            this.textNeedCollect.Location = new System.Drawing.Point(133, 115);
+            this.textNeedCollect.Name = "textNeedCollect";
+            this.textNeedCollect.Size = new System.Drawing.Size(181, 20);
+            this.textNeedCollect.TabIndex = 0;
+            this.textNeedCollect.Leave += new System.EventHandler(this.textNeedCollect_Leave);
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1639,6 +1694,8 @@
             this.tabPage11.ResumeLayout(false);
             this.tabPage11.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.checkPic)).EndInit();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1776,5 +1833,10 @@
         private System.Windows.Forms.Label StatusControl;
         private System.Windows.Forms.CheckBox OffcheckStatus;
         private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TextBox textMaxCountBanknote;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.TextBox textNeedCollect;
     }
 }

@@ -1390,5 +1390,21 @@ namespace ServiceSaleMachine.Client
                 }
             }
         }
+
+        private void textMaxCountBanknote_Leave(object sender, EventArgs e)
+        {
+            int count = 500;
+
+            int.TryParse(textMaxCountBanknote.Text, out count);
+
+            Globals.ClientConfiguration.Settings.MaxCountBankNote = count;
+            Globals.ClientConfiguration.Save();
+        }
+
+        private void textNeedCollect_Leave(object sender, EventArgs e)
+        {
+            Globals.ClientConfiguration.Settings.SMSMessageNeedCollect = textNeedCollect.Text;
+            Globals.ClientConfiguration.Save();
+        }
     }
 }

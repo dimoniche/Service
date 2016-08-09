@@ -256,6 +256,26 @@ namespace ServiceSaleMachine
         }
 
         /// <summary>
+        /// Получаем данные статистики
+        /// </summary>
+        /// <returns></returns>
+        public MoneyStatistic GetMoneyStatistic()
+        {
+            MoneyStatistic statistic = new MoneyStatistic();
+
+            return statistic;
+        }
+
+        /// <summary>
+        /// Запоминаем данные статистики
+        /// </summary>
+        /// <param name="statistic"></param>
+        public void SetMoneyStatistic(MoneyStatistic statistic)
+        {
+
+        }
+
+        /// <summary>
         /// получить количество банктот
         /// </summary>
         /// <returns></returns>

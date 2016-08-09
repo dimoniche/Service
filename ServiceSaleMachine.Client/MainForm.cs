@@ -22,14 +22,14 @@ namespace ServiceSaleMachine.Client
         // задача очистки логов
         ClearFilesControlServiceTask ClearFilesTask { get; set; }
 
-        // количество банкнот
-        int CountBankNote;
-
         // текущий пользователь
         int CurrentUserId;
 
         // выемка денег
         bool MoneyRecess;
+
+        // статистика по деньгам
+        MoneyStatistic statistic;
 
         // запуск приложения
         public MainForm(WorkerStateStage StateStage)
@@ -71,7 +71,9 @@ namespace ServiceSaleMachine.Client
 
             GlobalDb.GlobalBase.CreateTables();
 
-            CountBankNote = GlobalDb.GlobalBase.GetCountBankNote();
+            // прочтем из базы статистику
+            statistic = GlobalDb.GlobalBase.GetMoneyStatistic();
+            //statistic.CountBankNote = GlobalDb.GlobalBase.GetCountBankNote();
         }
 
         /// <summary>
@@ -81,6 +83,7 @@ namespace ServiceSaleMachine.Client
         {
             FormResultData result = new FormResultData();
             result.drivers = drivers;
+            result.statistic = statistic;
 
             if (Globals.admin)
             {
@@ -127,6 +130,20 @@ namespace ServiceSaleMachine.Client
             {
                 try
                 {
+                    // Проверка статистических данных - может пора заканчивать работать
+                    result = CheckStatistic(result);
+
+                    if (result.stage == WorkerStateStage.NeedService)
+                    {
+                        // Необходимо обслуживание аппарата
+                        result = (FormResultData)FormManager.OpenForm<FormNeedService>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                        if (result.stage == WorkerStateStage.EndNeedService)
+                        {
+                            continue;
+                        }
+                    }
+
                     // ожидание клиента
                     result = (FormResultData)FormManager.OpenForm<FormMainMenu>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
@@ -404,6 +421,24 @@ namespace ServiceSaleMachine.Client
                 }
             }
         }
+
+        /// <summary>
+        /// Проверка статистических данных
+        /// </summary>
+        private FormResultData CheckStatistic(FormResultData result)
+        {
+            if (result.statistic.CountBankNote >= Globals.ClientConfiguration.Settings.MaxCountBankNote)
+            {
+                // сообщим о необходимоcти изъятия денег
+                result.drivers.modem.SendSMS(Globals.ClientConfiguration.Settings.SMSMessageNeedCollect);
+
+                // Пора слать смс с необходимостью обслуживания
+                result.stage = WorkerStateStage.NeedService;
+            }
+
+            return result;
+        }
+
 
         /// <summary>
         /// Обработчик событий от устройств

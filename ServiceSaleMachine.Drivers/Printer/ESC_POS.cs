@@ -135,6 +135,43 @@ namespace ServiceSaleMachine.Drivers
             Globals.ClientConfiguration.Save();
         }
 
+
+        /// <summary>
+        /// Печать чека инкассации
+        /// </summary>
+        public void PrintCheckСollection(MoneyStatistic statistic)
+        {
+            Print(eInit + "" + eSelectRusCodePage + "" + eCentre, false, false);
+            Print(TransformCode(Globals.CheckConfiguration.Settings.firmsname), true);
+            Print(eLeft);
+
+            Print(eLeft + DateTime.Now.ToString("yyyy-MM-dd") + "                          " + DateTime.Now.ToString("HH:mm"));
+            Print(eLeft);
+
+            PrintDashes();
+            Print(TransformCode("Чек инкассации"), true);
+            PrintDashes();
+
+            Print(eLeft, false, false);
+            Print(TransformCode("Общая сумма"), true);
+            Print(" ".PadRight(42 - 4 - statistic.AllMoneySumm.ToString().Length, ' ') + statistic.AllMoneySumm.ToString());
+
+            Print(eLeft, false, false);
+            Print(TransformCode("Сумма на акк."), true);
+            Print(" ".PadRight(42 - 4 - statistic.AccountMoneySumm.ToString().Length, ' ') + statistic.AccountMoneySumm.ToString());
+
+            Print(eLeft, false, false);
+            Print(TransformCode("Сумма на чеках"), true);
+            Print(" ".PadRight(42 - 4 - statistic.BarCodeMoneySumm.ToString().Length, ' ') + statistic.BarCodeMoneySumm.ToString());
+
+            Print(eLeft, false, false);
+            Print(TransformCode("Оказано услуг"), true);
+            Print(" ".PadRight(42 - 4 - statistic.ServiceMoneySumm.ToString().Length, ' ') + statistic.ServiceMoneySumm.ToString());
+
+            Print("");
+            Print(vbLf + vbLf + vbLf + eCut);
+        }
+
         public void PrintHeader()
         {
             Print(eInit + "" + eSelectRusCodePage + "" + eCentre,false,false);

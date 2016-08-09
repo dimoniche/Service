@@ -181,9 +181,17 @@ namespace ServiceSaleMachine.Client
                             if(ch == ChooseChangeEnum.ChangeToAccount)
                             {
                                 // заносим в аккаунт - если не авторизовались - нужна авторизация в аккаунт
+                                if(data.CurrentUserId == 0)
+                                {
+                                    // форма регистрации
+                                    FormManager.OpenForm<UserRequest>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify);
+                                }
 
                                 // запомним сколько внесли на аккаунт
                                 data.statistic.AccountMoneySumm += diff;
+
+                                // внесем на счет
+                                GlobalDb.GlobalBase.InsertMoney(data.CurrentUserId, diff);
                             }
                             else
                             {
@@ -191,6 +199,13 @@ namespace ServiceSaleMachine.Client
 
                                 // запомним сколько выдали на чеке
                                 data.statistic.BarCodeMoneySumm += diff;
+
+                                // запомним такой чек
+                                string check = CheckHelper.GetUniqueNumberCheck();
+                                GlobalDb.GlobalBase.AddToCheck(data.CurrentUserId, diff, check);
+
+                                // и напечатем его
+                                data.drivers.printer.PrintBarCode(check);
                             }
                         }
                     }
@@ -210,6 +225,10 @@ namespace ServiceSaleMachine.Client
 
                     // Запомним в базе
                     GlobalDb.GlobalBase.SetMoneyStatistic(data.statistic);
+
+                    GlobalDb.GlobalBase.InsertMoney(data.CurrentUserId, amount);
+                    // заносим банкноту
+                    GlobalDb.GlobalBase.InsertBankNote();
 
                     if (amount >= data.serv.price)
                     {

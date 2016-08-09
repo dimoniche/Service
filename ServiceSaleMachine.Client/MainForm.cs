@@ -25,9 +25,6 @@ namespace ServiceSaleMachine.Client
         // текущий пользователь
         int CurrentUserId;
 
-        // выемка денег
-        bool MoneyRecess;
-
         // статистика по деньгам
         MoneyStatistic statistic;
 
@@ -73,8 +70,6 @@ namespace ServiceSaleMachine.Client
 
             // прочтем из базы статистику
             statistic = GlobalDb.GlobalBase.GetMoneyStatistic();
-
-            //statistic.CountBankNote = GlobalDb.GlobalBase.GetCountBankNote();
         }
 
         /// <summary>
@@ -131,6 +126,10 @@ namespace ServiceSaleMachine.Client
             {
                 try
                 {
+                    // забудем пользователя
+                    result.CurrentUserId = 0;
+                    result.stage = WorkerStateStage.None;
+
                     // Проверка статистических данных - может пора заканчивать работать
                     result = CheckStatistic(result);
 
@@ -409,7 +408,7 @@ namespace ServiceSaleMachine.Client
                         result = (FormResultData)FormManager.OpenForm<FormMessageEndService>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
                         // пишем в базу строку с временем работы
-                        GlobalDb.GlobalBase.WriteWorkTime(serv.id, dev.id, dev.timework);
+                        GlobalDb.GlobalBase.WriteWorkTime(serv.id, dev.id, result.timework);
                     }
                     else
                     {
@@ -434,6 +433,45 @@ namespace ServiceSaleMachine.Client
                 result.drivers.modem.SendSMS(Globals.ClientConfiguration.Settings.SMSMessageNeedCollect);
 
                 // Пора слать смс с необходимостью обслуживания
+                result.stage = WorkerStateStage.NeedService;
+            }
+
+            int resurs = 0;
+            int countDev = 0;
+
+            // сообщение о ресурсе устройств
+            foreach(Service service in Globals.ClientConfiguration.Settings.services)
+            {
+                foreach(Device device in service.devs)
+                {
+                    DateTime dt = GlobalDb.GlobalBase.GetLastRefreshTime(service.id,device.id);
+
+                    int count = 0;
+                    if (dt != null)
+                    {
+                        count = GlobalDb.GlobalBase.GetWorkTime(service.id, device.id, dt);
+                    }
+                    else
+                    {
+                        count = GlobalDb.GlobalBase.GetWorkTime(service.id, device.id, new DateTime(2000, 1, 1));
+                    }
+                        
+                    if (count > device.limitTime)
+                    {
+                        // ресурс выработали - сообщим об этом
+                        result.drivers.modem.SendSMS(Globals.ClientConfiguration.Settings.SMSMessageTimeEnd + " " + device.caption);
+
+                        // это устройство выработали
+                        resurs++;
+                    }
+
+                    countDev++;
+                }
+            }
+
+            if(resurs == countDev)
+            {
+                // все выработали - уйдем на обслуживание
                 result.stage = WorkerStateStage.NeedService;
             }
 
@@ -470,27 +508,7 @@ namespace ServiceSaleMachine.Client
                     // необходимо запустить настройку приложения
                     break;
                 case DeviceEvent.DropCassetteBillAcceptor:
-                    // выемка денег
-                    {
-                        if (MoneyRecess == false)
-                        {
-                            DateTime dt = GlobalDb.GlobalBase.GetLastEncashment();
 
-                            int countmoney = 0;
-                            if (dt != null)
-                            {
-                                countmoney = GlobalDb.GlobalBase.GetCountMoney(dt);
-                            }
-                            else
-                            {
-                                countmoney = GlobalDb.GlobalBase.GetCountMoney(new DateTime(2000, 1, 1));
-                            }
-
-                            GlobalDb.GlobalBase.Encashment(CurrentUserId, countmoney);
-
-                            MoneyRecess = true;
-                        }
-                    } 
                     break;
                 case DeviceEvent.DropCassetteFullBillAcceptor:
                     // я полный

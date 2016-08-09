@@ -138,6 +138,7 @@
             this.Text = "FormMoneyRecess";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormMoneyRecess_FormClosed);
+            this.Shown += new System.EventHandler(this.FormMoneyRecess_Shown);
             this.panel5.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.panel6.ResumeLayout(false);

@@ -24,6 +24,8 @@ namespace ServiceSaleMachine.Client
         // статистика по деньгам
         public MoneyStatistic statistic;
 
+        public int CurrentUserId;
+
         public FormResultData()
         {
             retLogin = "";

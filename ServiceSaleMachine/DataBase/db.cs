@@ -310,6 +310,31 @@ namespace ServiceSaleMachine
             return 0;
         }
         /// <summary>
+        /// Внесение банкноты
+        /// </summary>
+        /// <returns></returns>
+        public bool InsertBankNote()
+        {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
+
+            string query = "INSERT INTO banknotes (datetime) VALUES (" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
+
+            Debug.Print(query);
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.Message);
+                return false;
+            }
+        }
+
+        /// <summary>
         /// получить запись о юзере по его логину и паролю
         /// </summary>
         /// <param name="User"></param>
@@ -490,7 +515,7 @@ namespace ServiceSaleMachine
         }
 
         /// <summary>
-        /// получить инфу о инкассациях
+        /// записать инфу о инкассациях
         /// </summary>
         /// <param name="iduser"></param>
         /// <param name="Amount"></param>

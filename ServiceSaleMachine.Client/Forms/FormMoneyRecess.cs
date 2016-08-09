@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows.Forms;
 using ServiceSaleMachine.Drivers;
 using static ServiceSaleMachine.Drivers.MachineDrivers;
+using System;
 
 namespace ServiceSaleMachine.Client
 {
@@ -71,8 +72,29 @@ namespace ServiceSaleMachine.Client
             data.statistic.CountBankNote = 0;
             data.statistic.ServiceMoneySumm = 0;
 
+            // запишем инфу о последнем обслуживании и инкасации
+            DateTime dt = GlobalDb.GlobalBase.GetLastEncashment();
+
+            int countmoney = 0;
+            if (dt != null)
+            {
+                countmoney = GlobalDb.GlobalBase.GetCountMoney(dt);
+            }
+            else
+            {
+                countmoney = GlobalDb.GlobalBase.GetCountMoney(new DateTime(2000, 1, 1));
+            }
+
+            // запишем сколько инкассировали
+            GlobalDb.GlobalBase.Encashment(data.CurrentUserId, countmoney);
+
             data.drivers.ReceivedResponse -= reciveResponse;
             Params.Result = data;
+        }
+
+        private void FormMoneyRecess_Shown(object sender, EventArgs e)
+        {
+            // форма инкассации открылась - предложим зарегистрироваться
         }
     }
 }

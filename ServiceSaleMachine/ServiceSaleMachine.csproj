@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Check\CheckHelper.cs" />
     <Compile Include="ClearFile\ClearFilesControlServiceTask.cs" />
     <Compile Include="CommonForm\FormError.cs">
       <SubType>Form</SubType>

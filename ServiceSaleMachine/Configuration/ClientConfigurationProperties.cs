@@ -61,8 +61,11 @@ namespace ServiceSaleMachine
         public int changeToAccount = 0;
         public int changeToCheck = 0;
 
-        // Максимальное количес тво банкнот для вызова инкассации
+        // Максимальное количество банкнот для вызова инкассации
         public int MaxCountBankNote = 500;
+
+        // предельное время оказания услуги в минутах
+        public int limitServiceTime = 100;
 
         internal ClientConfigurationProperties()
 		{

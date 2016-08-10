@@ -48,11 +48,13 @@ namespace ServiceSaleMachine.Client
                 stc.LightUrnLeave += LightUrnLeave;
                 stc.CaptionServiceLeave += CaptionServiceLeave;
                 stc.PriceServiceLeave += PriceServiceLeave;
+                stc.MaxTimeServiceLeave += MaxTimeServiceLeave;
 
                 stc.TextBoxRecognize.Text = serv.timeRecognize.ToString();
                 stc.TextBoxPriceService.Text = serv.price.ToString();
                 stc.TextBoxCaptionService.Text = serv.caption;
                 stc.TextBoxLightUrn.Text = serv.timeLightUrn.ToString();
+                stc.TextBoxMaxTimeService.Text = serv.timework.ToString();
 
                 tabSettingService.TabPages[tabSettingService.TabPages.Count - 1].Controls.Add(stc);
 
@@ -83,6 +85,16 @@ namespace ServiceSaleMachine.Client
 
 
             ReLoad();
+        }
+
+        private void MaxTimeServiceLeave(object sender)
+        {
+            Service stc = Globals.ClientConfiguration.Settings.services[tabSettingService.SelectedIndex];
+            ServiceTabControl currServiceTab = ((ServiceTabControl)tabSettingService.TabPages[tabSettingService.SelectedIndex].Controls[0]);
+
+            int.TryParse(currServiceTab.TextBoxMaxTimeService.Text, out stc.timework);
+
+            Globals.ClientConfiguration.Save();
         }
 
         /// <summary>
@@ -632,7 +644,9 @@ namespace ServiceSaleMachine.Client
 
             richTextStartService.Text = Globals.ClientConfiguration.Settings.TextStartService;
             richTextEndService.Text = Globals.ClientConfiguration.Settings.TextEndService;
-        
+
+            textBoxMaxTimeService.Text = Globals.ClientConfiguration.Settings.limitServiceTime.ToString();
+
             init = false;
         }
 
@@ -1609,6 +1623,16 @@ namespace ServiceSaleMachine.Client
         private void richTextEndService_Leave(object sender, EventArgs e)
         {
             Globals.ClientConfiguration.Settings.TextEndService = richTextEndService.Text;
+            Globals.ClientConfiguration.Save();
+        }
+
+        private void textBoxMaxTimeService_Leave(object sender, EventArgs e)
+        {
+            int time = 1000;
+
+            int.TryParse(textBoxMaxTimeService.Text, out time);
+
+            Globals.ClientConfiguration.Settings.limitServiceTime = time;
             Globals.ClientConfiguration.Save();
         }
     }

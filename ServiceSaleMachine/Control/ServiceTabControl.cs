@@ -10,6 +10,7 @@ namespace ServiceSaleMachine
 
         public TextBox TextBoxCaptionService { get { return textBoxCaptionService; } set { textBoxCaptionService = value; } }
         public TextBox TextBoxPriceService { get { return textBoxPriceService; } set { textBoxPriceService = value; } }
+        public TextBox TextBoxMaxTimeService { get { return textBoxMaxTimeService; } set { textBoxMaxTimeService = value; } }
 
         public delegate void ServiceClientResponseEventHandler(object sender);
 
@@ -19,6 +20,7 @@ namespace ServiceSaleMachine
         public event ServiceClientResponseEventHandler LightUrnLeave;
         public event ServiceClientResponseEventHandler CaptionServiceLeave;
         public event ServiceClientResponseEventHandler PriceServiceLeave;
+        public event ServiceClientResponseEventHandler MaxTimeServiceLeave;
 
         public ServiceTabControl()
         {
@@ -53,6 +55,11 @@ namespace ServiceSaleMachine
         private void textBoxPriceService_Leave(object sender, System.EventArgs e)
         {
             PriceServiceLeave(sender);
+        }
+
+        private void textBoxMaxTimeService_Leave(object sender, System.EventArgs e)
+        {
+            MaxTimeServiceLeave(sender);
         }
     }
 }

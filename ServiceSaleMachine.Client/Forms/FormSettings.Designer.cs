@@ -127,6 +127,9 @@
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.groupBoxTimeLimit = new System.Windows.Forms.GroupBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.textBoxMaxTimeService = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.textBoxTimeOut = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -1257,6 +1260,9 @@
             // 
             // groupBoxTimeLimit
             // 
+            this.groupBoxTimeLimit.Controls.Add(this.label15);
+            this.groupBoxTimeLimit.Controls.Add(this.textBoxMaxTimeService);
+            this.groupBoxTimeLimit.Controls.Add(this.label17);
             this.groupBoxTimeLimit.Controls.Add(this.label12);
             this.groupBoxTimeLimit.Controls.Add(this.textBoxTimeOut);
             this.groupBoxTimeLimit.Controls.Add(this.label11);
@@ -1266,6 +1272,34 @@
             this.groupBoxTimeLimit.TabIndex = 15;
             this.groupBoxTimeLimit.TabStop = false;
             this.groupBoxTimeLimit.Text = "Времена";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(242, 71);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(27, 13);
+            this.label15.TabIndex = 21;
+            this.label15.Text = "мин";
+            // 
+            // textBoxMaxTimeService
+            // 
+            this.textBoxMaxTimeService.Location = new System.Drawing.Point(127, 68);
+            this.textBoxMaxTimeService.Name = "textBoxMaxTimeService";
+            this.textBoxMaxTimeService.Size = new System.Drawing.Size(100, 20);
+            this.textBoxMaxTimeService.TabIndex = 20;
+            this.textBoxMaxTimeService.Text = "0";
+            this.textBoxMaxTimeService.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxMaxTimeService.Leave += new System.EventHandler(this.textBoxMaxTimeService_Leave);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(13, 51);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(191, 13);
+            this.label17.TabIndex = 19;
+            this.label17.Text = "Предельное время оказания услуги";
             // 
             // label12
             // 
@@ -1986,5 +2020,8 @@
         private System.Windows.Forms.RichTextBox richTextStartService;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.RichTextBox richTextEndService;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox textBoxMaxTimeService;
+        private System.Windows.Forms.Label label17;
     }
 }

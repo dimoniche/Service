@@ -679,7 +679,7 @@ namespace ServiceSaleMachine
         }
 
         /// <summary>
-        /// сколько времени (секунд) девайс отработал с даты Х
+        /// сколько времени (минут) девайс отработал с даты Х
         /// </summary>
         /// <param name="Serv"></param>
         /// <param name="Dev"></param>
@@ -698,6 +698,26 @@ namespace ServiceSaleMachine
             return GetIntFromReq(dr);
 
         }
+
+        /// <summary>
+        /// сколько времени (минут) отработали все девайсы со всех сервисов с даты Х
+        /// </summary>
+        /// <param name="Serv"></param>
+        /// <param name="Dev"></param>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public int GetWorkTime(DateTime dt)
+        {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return 0;
+
+            string queryString = "select sum(timework) as dt from logwork where " +
+                 "(datetime >= '" + dt.ToString("yyyy-MM-dd HH:mm:ss") + "')";
+
+            MySqlDataReader dr = Execute(queryString);
+
+            return GetIntFromReq(dr);
+        }
+
         /// <summary>
         /// дата последнего сервисного обслуживания устройства Х от услуги У
         /// </summary>
@@ -724,6 +744,49 @@ namespace ServiceSaleMachine
             }
             return new DateTime(2016, 07, 01);
         }
+
+        /// <summary>
+        /// дата последнего сервисного обслуживания 
+        /// </summary>
+        /// <param name="Serv"></param>
+        /// <param name="Dev"></param>
+        /// <returns></returns>
+        public DateTime GetLastRefreshTime()
+        {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return new DateTime(2016, 07, 01);
+
+            string queryString = "select max(datetime) as dt from refreshdevices";
+
+            MySqlDataReader dr = Execute(queryString);
+            if (dr != null)
+            {
+                if (dr.HasRows)
+                {
+                    dr.Read();
+
+                    return (DateTime)dr[0];
+                }
+            }
+            return new DateTime(2016, 07, 01);
+        }
+
+        /// <summary>
+        /// обслужили устройство X от услуги Y
+        /// </summary>
+        /// <param name="serv"></param>
+        /// <param name="idDevice"></param>
+        /// <param name="timeWork"></param>
+        /// <returns></returns>
+        public bool WriteRefreshTime(int serv, int idDevice)
+        {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
+
+            string query = "INSERT INTO refreshdevices (idserv, iddev, datetime) VALUES (" + serv.ToString() + "," + idDevice.ToString() + "," +
+                  DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
+
+            return ExecuteNonQuery(query);
+        }
+
         /// <summary>
         /// Платежи от конкретного юзера
         /// </summary>

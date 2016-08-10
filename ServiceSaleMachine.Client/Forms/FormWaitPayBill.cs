@@ -201,7 +201,7 @@ namespace ServiceSaleMachine.Client
                                 data.statistic.BarCodeMoneySumm += diff;
 
                                 // запомним такой чек
-                                string check = CheckHelper.GetUniqueNumberCheck();
+                                string check = CheckHelper.GetUniqueNumberCheck(10);
                                 GlobalDb.GlobalBase.AddToCheck(data.CurrentUserId, diff, check);
 
                                 // и напечатем его

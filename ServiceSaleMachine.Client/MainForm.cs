@@ -78,7 +78,7 @@ namespace ServiceSaleMachine.Client
             result.drivers = drivers;
             result.statistic = statistic;
 
-            //if (Globals.admin)
+            if (Globals.admin)
             {
                 drivers.InitAllDevice();
                 result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
@@ -447,10 +447,13 @@ namespace ServiceSaleMachine.Client
                 count = GlobalDb.GlobalBase.GetWorkTime(new DateTime(2000, 1, 1));
             }
 
-            if (count > Globals.ClientConfiguration.Settings.limitServiceTime)
+            if (count >= Globals.ClientConfiguration.Settings.limitServiceTime)
             {
                 // ресурс выработали - сообщим об этом
                 result.drivers.modem.SendSMS(Globals.ClientConfiguration.Settings.SMSMessageTimeEnd);
+
+                // аппарат не работает
+                result.stage = WorkerStateStage.NeedService;
             }
 
             return result;

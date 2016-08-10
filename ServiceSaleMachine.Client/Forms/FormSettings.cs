@@ -451,8 +451,6 @@ namespace ServiceSaleMachine.Client
                 offControl.Checked = false;
             }
 
-            init = false;
-
             // номиналы купюр
             checkBox10.Checked = Globals.ClientConfiguration.Settings.nominals[2] > 0 ? true : false;
             checkBox50.Checked = Globals.ClientConfiguration.Settings.nominals[3] > 0 ? true : false;
@@ -480,6 +478,9 @@ namespace ServiceSaleMachine.Client
             advert2.Text = Globals.CheckConfiguration.Settings.advert2;
             advert3.Text = Globals.CheckConfiguration.Settings.advert3;
             advert4.Text = Globals.CheckConfiguration.Settings.advert4;
+
+
+            init = false;
         }
 
         public FormSettings()
@@ -1011,6 +1012,8 @@ namespace ServiceSaleMachine.Client
 
         private void butWriteNominal_Click(object sender, EventArgs e)
         {
+            if (init) return;
+
             Globals.ClientConfiguration.Settings.nominals[2] = checkBox10.Checked ? 1 : 0;
             Globals.ClientConfiguration.Settings.nominals[3] = checkBox50.Checked ? 1 : 0;
             Globals.ClientConfiguration.Settings.nominals[4] = checkBox100.Checked ? 1 : 0;

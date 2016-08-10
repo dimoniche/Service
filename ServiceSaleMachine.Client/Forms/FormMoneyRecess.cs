@@ -88,6 +88,9 @@ namespace ServiceSaleMachine.Client
             // запишем сколько инкассировали и обновим время инкасации
             GlobalDb.GlobalBase.Encashment(data.CurrentUserId, countmoney);
 
+            // очистим накопленные банктноты
+            GlobalDb.GlobalBase.ClearBankNotes();
+
             data.drivers.ReceivedResponse -= reciveResponse;
             Params.Result = data;
         }

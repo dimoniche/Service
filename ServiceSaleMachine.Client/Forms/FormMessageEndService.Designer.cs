@@ -37,7 +37,6 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.MessageText = new ServiceSaleMachine.ScalableLabel();
-            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel5.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -91,7 +90,6 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Controls.Add(this.panel6, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.progressBar, 0, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -119,15 +117,7 @@
             this.MessageText.Name = "MessageText";
             this.MessageText.Size = new System.Drawing.Size(558, 102);
             this.MessageText.TabIndex = 1;
-            this.MessageText.Text = "Просим расходник выкинуть в контейнер, который расположен в корпусе аппарата";
-            // 
-            // progressBar
-            // 
-            this.progressBar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.progressBar.Location = new System.Drawing.Point(3, 219);
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(558, 103);
-            this.progressBar.TabIndex = 1;
+            this.MessageText.Text = "Спасибо. Просим снять мундштук и выбросить его в емкость справа внизу.";
             // 
             // timer1
             // 
@@ -167,7 +157,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel6;
         private ScalableLabel MessageText;
-        private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Timer timer1;
     }
 }

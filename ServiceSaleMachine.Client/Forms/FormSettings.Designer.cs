@@ -73,8 +73,16 @@
             this.label3 = new System.Windows.Forms.Label();
             this.cbxComPortPrinter = new System.Windows.Forms.ComboBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.label27 = new System.Windows.Forms.Label();
+            this.LightOff2 = new System.Windows.Forms.Button();
+            this.LightOn2 = new System.Windows.Forms.Button();
+            this.label26 = new System.Windows.Forms.Label();
+            this.LightOff1 = new System.Windows.Forms.Button();
+            this.LightOn1 = new System.Windows.Forms.Button();
+            this.label25 = new System.Windows.Forms.Label();
+            this.Close4 = new System.Windows.Forms.Button();
+            this.Open4 = new System.Windows.Forms.Button();
             this.StatusControl = new System.Windows.Forms.Label();
-            this.OffcheckStatus = new System.Windows.Forms.CheckBox();
             this.label21 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
@@ -82,7 +90,7 @@
             this.Close1 = new System.Windows.Forms.Button();
             this.Close3 = new System.Windows.Forms.Button();
             this.Close2 = new System.Windows.Forms.Button();
-            this.button13 = new System.Windows.Forms.Button();
+            this.butReadStatus = new System.Windows.Forms.Button();
             this.Open3 = new System.Windows.Forms.Button();
             this.Open2 = new System.Windows.Forms.Button();
             this.Open1 = new System.Windows.Forms.Button();
@@ -158,6 +166,8 @@
             this.checkBox50 = new System.Windows.Forms.CheckBox();
             this.checkBox10 = new System.Windows.Forms.CheckBox();
             this.tabPage11 = new System.Windows.Forms.TabPage();
+            this.labelCurrNumberCheck = new System.Windows.Forms.Label();
+            this.resetCheckNumeration = new System.Windows.Forms.Button();
             this.advert4 = new System.Windows.Forms.TextBox();
             this.advert3 = new System.Windows.Forms.TextBox();
             this.advert2 = new System.Windows.Forms.TextBox();
@@ -165,6 +175,7 @@
             this.secondfirmsname = new System.Windows.Forms.TextBox();
             this.firmsname = new System.Windows.Forms.TextBox();
             this.checkPic = new System.Windows.Forms.PictureBox();
+            this.tabPageStatistic = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -199,6 +210,7 @@
             // 
             this.tabControl1.Controls.Add(this.DeviceSettings);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPageStatistic);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -387,6 +399,7 @@
             this.label16.Size = new System.Drawing.Size(112, 13);
             this.label16.TabIndex = 45;
             this.label16.Text = "Забор купюры сразу";
+            this.label16.Visible = false;
             // 
             // button8
             // 
@@ -487,6 +500,7 @@
             this.label9.Size = new System.Drawing.Size(115, 13);
             this.label9.TabIndex = 43;
             this.label9.Text = "С задержкой купюры";
+            this.label9.Visible = false;
             // 
             // Info
             // 
@@ -669,8 +683,16 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.label27);
+            this.tabPage5.Controls.Add(this.LightOff2);
+            this.tabPage5.Controls.Add(this.LightOn2);
+            this.tabPage5.Controls.Add(this.label26);
+            this.tabPage5.Controls.Add(this.LightOff1);
+            this.tabPage5.Controls.Add(this.LightOn1);
+            this.tabPage5.Controls.Add(this.label25);
+            this.tabPage5.Controls.Add(this.Close4);
+            this.tabPage5.Controls.Add(this.Open4);
             this.tabPage5.Controls.Add(this.StatusControl);
-            this.tabPage5.Controls.Add(this.OffcheckStatus);
             this.tabPage5.Controls.Add(this.label21);
             this.tabPage5.Controls.Add(this.label17);
             this.tabPage5.Controls.Add(this.label15);
@@ -678,7 +700,7 @@
             this.tabPage5.Controls.Add(this.Close1);
             this.tabPage5.Controls.Add(this.Close3);
             this.tabPage5.Controls.Add(this.Close2);
-            this.tabPage5.Controls.Add(this.button13);
+            this.tabPage5.Controls.Add(this.butReadStatus);
             this.tabPage5.Controls.Add(this.Open3);
             this.tabPage5.Controls.Add(this.Open2);
             this.tabPage5.Controls.Add(this.Open1);
@@ -694,24 +716,101 @@
             this.tabPage5.Text = "Управляющее устройство";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(298, 225);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(90, 13);
+            this.label27.TabIndex = 23;
+            this.label27.Text = "Подсветка урны";
+            // 
+            // LightOff2
+            // 
+            this.LightOff2.Location = new System.Drawing.Point(159, 220);
+            this.LightOff2.Name = "LightOff2";
+            this.LightOff2.Size = new System.Drawing.Size(105, 23);
+            this.LightOff2.TabIndex = 21;
+            this.LightOff2.Text = "Выкл.подсветку";
+            this.LightOff2.UseVisualStyleBackColor = true;
+            this.LightOff2.Click += new System.EventHandler(this.LightOff2_Click);
+            // 
+            // LightOn2
+            // 
+            this.LightOn2.Location = new System.Drawing.Point(25, 220);
+            this.LightOn2.Name = "LightOn2";
+            this.LightOn2.Size = new System.Drawing.Size(105, 23);
+            this.LightOn2.TabIndex = 22;
+            this.LightOn2.Text = "Вкл.подсветку";
+            this.LightOn2.UseVisualStyleBackColor = true;
+            this.LightOn2.Click += new System.EventHandler(this.LightOn2_Click);
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(298, 196);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(130, 13);
+            this.label26.TabIndex = 20;
+            this.label26.Text = "Подсветка аксессуаров";
+            // 
+            // LightOff1
+            // 
+            this.LightOff1.Location = new System.Drawing.Point(159, 191);
+            this.LightOff1.Name = "LightOff1";
+            this.LightOff1.Size = new System.Drawing.Size(105, 23);
+            this.LightOff1.TabIndex = 18;
+            this.LightOff1.Text = "Выкл.подсветку";
+            this.LightOff1.UseVisualStyleBackColor = true;
+            this.LightOff1.Click += new System.EventHandler(this.LightOff1_Click);
+            // 
+            // LightOn1
+            // 
+            this.LightOn1.Location = new System.Drawing.Point(25, 191);
+            this.LightOn1.Name = "LightOn1";
+            this.LightOn1.Size = new System.Drawing.Size(105, 23);
+            this.LightOn1.TabIndex = 19;
+            this.LightOn1.Text = "Вкл.подсветку";
+            this.LightOn1.UseVisualStyleBackColor = true;
+            this.LightOn1.Click += new System.EventHandler(this.LightOn1_Click);
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(298, 167);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(110, 13);
+            this.label25.TabIndex = 17;
+            this.label25.Text = "После тренировки 2";
+            // 
+            // Close4
+            // 
+            this.Close4.Location = new System.Drawing.Point(159, 162);
+            this.Close4.Name = "Close4";
+            this.Close4.Size = new System.Drawing.Size(105, 23);
+            this.Close4.TabIndex = 15;
+            this.Close4.Text = "Выкл.канал 6";
+            this.Close4.UseVisualStyleBackColor = true;
+            this.Close4.Click += new System.EventHandler(this.Close4_Click);
+            // 
+            // Open4
+            // 
+            this.Open4.Location = new System.Drawing.Point(25, 162);
+            this.Open4.Name = "Open4";
+            this.Open4.Size = new System.Drawing.Size(105, 23);
+            this.Open4.TabIndex = 16;
+            this.Open4.Text = "Вкл.канал 6";
+            this.Open4.UseVisualStyleBackColor = true;
+            this.Open4.Click += new System.EventHandler(this.Open4_Click);
+            // 
             // StatusControl
             // 
             this.StatusControl.AutoSize = true;
-            this.StatusControl.Location = new System.Drawing.Point(156, 199);
+            this.StatusControl.Location = new System.Drawing.Point(156, 273);
             this.StatusControl.Name = "StatusControl";
             this.StatusControl.Size = new System.Drawing.Size(37, 13);
             this.StatusControl.TabIndex = 14;
             this.StatusControl.Text = "Status";
-            // 
-            // OffcheckStatus
-            // 
-            this.OffcheckStatus.AutoSize = true;
-            this.OffcheckStatus.Location = new System.Drawing.Point(25, 223);
-            this.OffcheckStatus.Name = "OffcheckStatus";
-            this.OffcheckStatus.Size = new System.Drawing.Size(173, 17);
-            this.OffcheckStatus.TabIndex = 13;
-            this.OffcheckStatus.Text = "Отключить проверку статуса";
-            this.OffcheckStatus.UseVisualStyleBackColor = true;
             // 
             // label21
             // 
@@ -727,27 +826,27 @@
             this.label17.AutoSize = true;
             this.label17.Location = new System.Drawing.Point(298, 138);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(76, 13);
+            this.label17.Size = new System.Drawing.Size(110, 13);
             this.label17.TabIndex = 11;
-            this.label17.Text = "Устройство 3";
+            this.label17.Text = "После тренировки 1";
             // 
             // label15
             // 
             this.label15.AutoSize = true;
             this.label15.Location = new System.Drawing.Point(298, 109);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(76, 13);
+            this.label15.Size = new System.Drawing.Size(77, 13);
             this.label15.TabIndex = 11;
-            this.label15.Text = "Устройство 2";
+            this.label15.Text = "Тренировка 2";
             // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(298, 80);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(76, 13);
+            this.label13.Size = new System.Drawing.Size(77, 13);
             this.label13.TabIndex = 11;
-            this.label13.Text = "Устройство 1";
+            this.label13.Text = "Тренировка 1";
             // 
             // Close1
             // 
@@ -755,7 +854,7 @@
             this.Close1.Name = "Close1";
             this.Close1.Size = new System.Drawing.Size(105, 23);
             this.Close1.TabIndex = 10;
-            this.Close1.Text = "Выкл.канал 1";
+            this.Close1.Text = "Выкл.канал 3";
             this.Close1.UseVisualStyleBackColor = true;
             this.Close1.Click += new System.EventHandler(this.Close1_Click);
             // 
@@ -765,7 +864,7 @@
             this.Close3.Name = "Close3";
             this.Close3.Size = new System.Drawing.Size(105, 23);
             this.Close3.TabIndex = 10;
-            this.Close3.Text = "Выкл.канал 3";
+            this.Close3.Text = "Выкл.канал 5";
             this.Close3.UseVisualStyleBackColor = true;
             this.Close3.Click += new System.EventHandler(this.Close3_Click);
             // 
@@ -775,19 +874,19 @@
             this.Close2.Name = "Close2";
             this.Close2.Size = new System.Drawing.Size(105, 23);
             this.Close2.TabIndex = 10;
-            this.Close2.Text = "Выкл.канал 2";
+            this.Close2.Text = "Выкл.канал 4";
             this.Close2.UseVisualStyleBackColor = true;
             this.Close2.Click += new System.EventHandler(this.Close2_Click);
             // 
-            // button13
+            // butReadStatus
             // 
-            this.button13.Location = new System.Drawing.Point(25, 194);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(105, 23);
-            this.button13.TabIndex = 10;
-            this.button13.Text = "Получить статус";
-            this.button13.UseVisualStyleBackColor = true;
-            this.button13.Click += new System.EventHandler(this.button13_Click);
+            this.butReadStatus.Location = new System.Drawing.Point(25, 268);
+            this.butReadStatus.Name = "butReadStatus";
+            this.butReadStatus.Size = new System.Drawing.Size(105, 23);
+            this.butReadStatus.TabIndex = 10;
+            this.butReadStatus.Text = "Получить статус";
+            this.butReadStatus.UseVisualStyleBackColor = true;
+            this.butReadStatus.Click += new System.EventHandler(this.button13_Click);
             // 
             // Open3
             // 
@@ -795,7 +894,7 @@
             this.Open3.Name = "Open3";
             this.Open3.Size = new System.Drawing.Size(105, 23);
             this.Open3.TabIndex = 10;
-            this.Open3.Text = "Вкл.канал 3";
+            this.Open3.Text = "Вкл.канал 5";
             this.Open3.UseVisualStyleBackColor = true;
             this.Open3.Click += new System.EventHandler(this.Open3_Click);
             // 
@@ -805,7 +904,7 @@
             this.Open2.Name = "Open2";
             this.Open2.Size = new System.Drawing.Size(105, 23);
             this.Open2.TabIndex = 10;
-            this.Open2.Text = "Вкл.канал 2";
+            this.Open2.Text = "Вкл.канал 4";
             this.Open2.UseVisualStyleBackColor = true;
             this.Open2.Click += new System.EventHandler(this.Open2_Click);
             // 
@@ -815,7 +914,7 @@
             this.Open1.Name = "Open1";
             this.Open1.Size = new System.Drawing.Size(105, 23);
             this.Open1.TabIndex = 10;
-            this.Open1.Text = "Вкл.канал 1";
+            this.Open1.Text = "Вкл.канал 3";
             this.Open1.UseVisualStyleBackColor = true;
             this.Open1.Click += new System.EventHandler(this.Open1_Click);
             // 
@@ -1581,6 +1680,8 @@
             // 
             // tabPage11
             // 
+            this.tabPage11.Controls.Add(this.labelCurrNumberCheck);
+            this.tabPage11.Controls.Add(this.resetCheckNumeration);
             this.tabPage11.Controls.Add(this.advert4);
             this.tabPage11.Controls.Add(this.advert3);
             this.tabPage11.Controls.Add(this.advert2);
@@ -1595,6 +1696,25 @@
             this.tabPage11.TabIndex = 2;
             this.tabPage11.Text = "Содержание чека";
             this.tabPage11.UseVisualStyleBackColor = true;
+            // 
+            // labelCurrNumberCheck
+            // 
+            this.labelCurrNumberCheck.AutoSize = true;
+            this.labelCurrNumberCheck.Location = new System.Drawing.Point(611, 37);
+            this.labelCurrNumberCheck.Name = "labelCurrNumberCheck";
+            this.labelCurrNumberCheck.Size = new System.Drawing.Size(137, 13);
+            this.labelCurrNumberCheck.TabIndex = 3;
+            this.labelCurrNumberCheck.Text = "Текущий номер чека: 123";
+            // 
+            // resetCheckNumeration
+            // 
+            this.resetCheckNumeration.Location = new System.Drawing.Point(614, 55);
+            this.resetCheckNumeration.Name = "resetCheckNumeration";
+            this.resetCheckNumeration.Size = new System.Drawing.Size(145, 23);
+            this.resetCheckNumeration.TabIndex = 2;
+            this.resetCheckNumeration.Text = "Сброс нумерации чеков";
+            this.resetCheckNumeration.UseVisualStyleBackColor = true;
+            this.resetCheckNumeration.Click += new System.EventHandler(this.resetCheckNumeration_Click);
             // 
             // advert4
             // 
@@ -1658,6 +1778,16 @@
             this.checkPic.Size = new System.Drawing.Size(515, 426);
             this.checkPic.TabIndex = 0;
             this.checkPic.TabStop = false;
+            // 
+            // tabPageStatistic
+            // 
+            this.tabPageStatistic.Location = new System.Drawing.Point(4, 22);
+            this.tabPageStatistic.Name = "tabPageStatistic";
+            this.tabPageStatistic.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageStatistic.Size = new System.Drawing.Size(833, 608);
+            this.tabPageStatistic.TabIndex = 2;
+            this.tabPageStatistic.Text = "Статистика";
+            this.tabPageStatistic.UseVisualStyleBackColor = true;
             // 
             // FormSettings
             // 
@@ -1843,8 +1973,7 @@
         private System.Windows.Forms.TextBox advert1;
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Label StatusControl;
-        private System.Windows.Forms.CheckBox OffcheckStatus;
-        private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.Button butReadStatus;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.TextBox textMaxCountBanknote;
@@ -1854,5 +1983,17 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox textBoxTimeOut;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label labelCurrNumberCheck;
+        private System.Windows.Forms.Button resetCheckNumeration;
+        private System.Windows.Forms.TabPage tabPageStatistic;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Button LightOff2;
+        private System.Windows.Forms.Button LightOn2;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Button LightOff1;
+        private System.Windows.Forms.Button LightOn1;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Button Close4;
+        private System.Windows.Forms.Button Open4;
     }
 }

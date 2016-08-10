@@ -115,12 +115,12 @@
             // scalableLabel2
             // 
             this.scalableLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scalableLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.scalableLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.scalableLabel2.Location = new System.Drawing.Point(0, 0);
             this.scalableLabel2.Name = "scalableLabel2";
             this.scalableLabel2.Size = new System.Drawing.Size(477, 100);
             this.scalableLabel2.TabIndex = 0;
-            this.scalableLabel2.Text = "Выемка денег";
+            this.scalableLabel2.Text = "Инкассация";
             // 
             // FormMoneyRecess
             // 

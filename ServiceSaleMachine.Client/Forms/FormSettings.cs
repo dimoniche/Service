@@ -91,7 +91,7 @@ namespace ServiceSaleMachine.Client
         /// <returns></returns>
         int GetCountAllDevice()
         {
-            int count = 0;
+            int count = 2; // 2 устройства всегда есть - это подсветка
 
             foreach (Service serv in Globals.ClientConfiguration.Settings.services)
             {
@@ -398,6 +398,13 @@ namespace ServiceSaleMachine.Client
                         Close1.Enabled = false;
                         Close2.Enabled = false;
                         Close3.Enabled = false;
+                        Close4.Enabled = false;
+                        Open4.Enabled = false;
+                        LightOn1.Enabled = false;
+                        LightOn2.Enabled = false;
+                        LightOff1.Enabled = false;
+                        LightOff2.Enabled = false;
+                        butReadStatus.Enabled = false;
                     }
                     else if (data.drivers.control.getNumberComPort().Contains("COM"))
                     {
@@ -916,6 +923,14 @@ namespace ServiceSaleMachine.Client
             Close1.Enabled = state;
             Close2.Enabled = state;
             Close3.Enabled = state;
+            Close4.Enabled = state;
+            Open4.Enabled = state;
+            LightOn1.Enabled = state;
+            LightOn2.Enabled = state;
+            LightOff1.Enabled = state;
+            LightOff2.Enabled = state;
+
+            butReadStatus.Enabled = state;
 
             cbxCheckOff.Enabled = state;
         }
@@ -1215,6 +1230,13 @@ namespace ServiceSaleMachine.Client
                 Close1.Enabled = false;
                 Close2.Enabled = false;
                 Close3.Enabled = false;
+                Close4.Enabled = false;
+                Open4.Enabled = false;
+                LightOn1.Enabled = false;
+                LightOn2.Enabled = false;
+                LightOff1.Enabled = false;
+                LightOff2.Enabled = false;
+                butReadStatus.Enabled = false;
             }
             else
             {
@@ -1229,6 +1251,13 @@ namespace ServiceSaleMachine.Client
                 Close1.Enabled = true;
                 Close2.Enabled = true;
                 Close3.Enabled = true;
+                Close4.Enabled = true;
+                Open4.Enabled = true;
+                LightOn1.Enabled = true;
+                LightOn2.Enabled = true;
+                LightOff1.Enabled = true;
+                LightOff2.Enabled = true;
+                butReadStatus.Enabled = true;
             }
 
             Globals.ClientConfiguration.Save();
@@ -1276,6 +1305,13 @@ namespace ServiceSaleMachine.Client
                 Close1.Enabled = false;
                 Close2.Enabled = false;
                 Close3.Enabled = false;
+                Close4.Enabled = false;
+                Open4.Enabled = false;
+                LightOn1.Enabled = false;
+                LightOn2.Enabled = false;
+                LightOff1.Enabled = false;
+                LightOff2.Enabled = false;
+                butReadStatus.Enabled = false;
 
                 data.drivers.control.closePort();
             }
@@ -1295,37 +1331,44 @@ namespace ServiceSaleMachine.Client
                 Close1.Enabled = true;
                 Close2.Enabled = true;
                 Close3.Enabled = true;
+                Close4.Enabled = true;
+                Open4.Enabled = true;
+                LightOn1.Enabled = true;
+                LightOn2.Enabled = true;
+                LightOff1.Enabled = true;
+                LightOff2.Enabled = true;
+                butReadStatus.Enabled = true;
             }
         }
 
         private void Open1_Click(object sender, EventArgs e)
         {
-            data.drivers.SendOpenControl(1);
+            data.drivers.SendOpenControl((int)ControlDeviceEnum.dev3);
         }
 
         private void Open2_Click(object sender, EventArgs e)
         {
-            data.drivers.SendOpenControl(2);
+            data.drivers.SendOpenControl((int)ControlDeviceEnum.dev4);
         }
 
         private void Open3_Click(object sender, EventArgs e)
         {
-            data.drivers.SendOpenControl(3);
+            data.drivers.SendOpenControl((int)ControlDeviceEnum.dev5);
         }
 
         private void Close1_Click(object sender, EventArgs e)
         {
-            data.drivers.SendCloseControl(1);
+            data.drivers.SendCloseControl((int)ControlDeviceEnum.dev3);
         }
 
         private void Close2_Click(object sender, EventArgs e)
         {
-            data.drivers.SendCloseControl(2);
+            data.drivers.SendCloseControl((int)ControlDeviceEnum.dev4);
         }
 
         private void Close3_Click(object sender, EventArgs e)
         {
-            data.drivers.SendCloseControl(3);
+            data.drivers.SendCloseControl((int)ControlDeviceEnum.dev5);
         }
 
         private void button4_Click_1(object sender, EventArgs e)
@@ -1557,5 +1600,42 @@ namespace ServiceSaleMachine.Client
             Globals.ClientConfiguration.Save();
         }
 
+        private void resetCheckNumeration_Click(object sender, EventArgs e)
+        {
+            // сброс чека
+            int NumberCheck = 0;
+
+            labelCurrNumberCheck.Text = "Текущий номер чека: " + NumberCheck;
+        }
+
+        private void Open4_Click(object sender, EventArgs e)
+        {
+            data.drivers.SendOpenControl((int)ControlDeviceEnum.dev6);
+        }
+
+        private void Close4_Click(object sender, EventArgs e)
+        {
+            data.drivers.SendCloseControl((int)ControlDeviceEnum.dev6);
+        }
+
+        private void LightOn1_Click(object sender, EventArgs e)
+        {
+            data.drivers.SendOpenControl((int)ControlDeviceEnum.light1);
+        }
+
+        private void LightOff1_Click(object sender, EventArgs e)
+        {
+            data.drivers.SendCloseControl((int)ControlDeviceEnum.light1);
+        }
+
+        private void LightOn2_Click(object sender, EventArgs e)
+        {
+            data.drivers.SendOpenControl((int)ControlDeviceEnum.light2);
+        }
+
+        private void LightOff2_Click(object sender, EventArgs e)
+        {
+            data.drivers.SendCloseControl((int)ControlDeviceEnum.light2);
+        }
     }
 }

@@ -25,21 +25,17 @@ namespace ServiceSaleMachine.Client
                 }
             }
 
-            FTimeWork = 30;
-            progressBar.Maximum = 30;
-            progressBar.Minimum = 0;
-            progressBar.Value = 0;
+            FTimeWork = data.serv.timeLightUrn;
 
             timer1.Enabled = true;
 
             // включаем подсветку
-            data.drivers.SendOpenControl(3);
+            data.drivers.SendOpenControl((int)ControlDeviceEnum.light2);
         }
 
         private void timer1_Tick(object sender, System.EventArgs e)
         {
             CurrentWork++;
-            progressBar.Value++;
             
             if (CurrentWork >= FTimeWork)
             {
@@ -54,7 +50,7 @@ namespace ServiceSaleMachine.Client
         private void FormMessageEndService_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
         {
             // отключаем подсветку
-            data.drivers.SendCloseControl(3);
+            data.drivers.SendCloseControl((int)ControlDeviceEnum.light2);
 
             Params.Result = data;
         }

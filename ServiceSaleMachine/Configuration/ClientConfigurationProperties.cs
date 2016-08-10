@@ -52,18 +52,6 @@ namespace ServiceSaleMachine
         // настройки сервисов
         public List<Service> services;
 
-        // команды первой услуги (открыть/закрыть)
-        public int CommandControl1Open = 1;
-        public int CommandControl1Close = 2;
-
-        // команды второй услуги (открыть/закрыть)
-        public int CommandControl2Open = 3;
-        public int CommandControl2Close = 4;
-
-        // команды третьей услуги (открыть/закрыть)
-        public int CommandControl3Open = 5;
-        public int CommandControl3Close = 6;
-
         // поведение со сдачей
         public int changeToAccount = 0;
         public int changeToCheck = 0;

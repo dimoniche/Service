@@ -1118,29 +1118,9 @@ namespace ServiceSaleMachine.Drivers
 
             byte[] buf = new byte[2];
 
-            switch(controlNumber)
-            {
-                case 1:
-                    buf[0] = (byte)Globals.ClientConfiguration.Settings.CommandControl1Open;
-                    buf[1] = (byte)(0xFF - buf[0]);
-                    control.Send(buf, 2);
-                    break;
-                case 2:
-                    buf[0] = (byte)Globals.ClientConfiguration.Settings.CommandControl2Open;
-                    buf[1] = (byte)(0xFF - buf[0]);
-                    control.Send(buf, 2);
-                    break;
-                case 3:
-                    buf[0] = (byte)Globals.ClientConfiguration.Settings.CommandControl3Open;
-                    buf[1] = (byte)(0xFF - buf[0]);
-                    control.Send(buf, 2);
-                    break;
-                default:
-                    buf[0] = (byte)controlNumber;
-                    buf[1] = (byte)(0xFF - buf[0]);
-                    control.Send(buf, 2);
-                    break;
-            }
+            buf[0] = (byte)(controlNumber*2 - 1);
+            buf[1] = (byte)(0xFF - buf[0]);
+            control.Send(buf, 2);
         }
 
         /// <summary>
@@ -1153,29 +1133,9 @@ namespace ServiceSaleMachine.Drivers
 
             byte[] buf = new byte[2];
 
-            switch (controlNumber)
-            {
-                case 1:
-                    buf[0] = (byte)Globals.ClientConfiguration.Settings.CommandControl1Close;
-                    buf[1] = (byte)(0xFF - buf[0]);
-                    control.Send(buf, 2);
-                    break;
-                case 2:
-                    buf[0] = (byte)Globals.ClientConfiguration.Settings.CommandControl2Close;
-                    buf[1] = (byte)(0xFF - buf[0]);
-                    control.Send(buf, 2);
-                    break;
-                case 3:
-                    buf[0] = (byte)Globals.ClientConfiguration.Settings.CommandControl3Close;
-                    buf[1] = (byte)(0xFF - buf[0]);
-                    control.Send(buf, 2);
-                    break;
-                default:
-                    buf[0] = (byte)controlNumber;
-                    buf[1] = (byte)(0xFF - buf[0]);
-                    control.Send(buf, 2);
-                    break;
-            }
+            buf[0] = (byte)(controlNumber * 2);
+            buf[1] = (byte)(0xFF - buf[0]);
+            control.Send(buf, 2);
         }
 
         /// <summary>

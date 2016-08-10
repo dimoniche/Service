@@ -71,13 +71,6 @@ namespace ServiceSaleMachine
                         if ((xElement = xSettings.Element("changeOn")) != null) Settings.changeOn = int.Parse(xElement.Value);
                         if ((xElement = xSettings.Element("timeout")) != null) Settings.timeout = int.Parse(xElement.Value);
 
-                        if ((xElement = xSettings.Element("CommandControl1Open")) != null) Settings.CommandControl1Open = int.Parse(xElement.Value);
-                        if ((xElement = xSettings.Element("CommandControl1Close")) != null) Settings.CommandControl1Close = int.Parse(xElement.Value);
-                        if ((xElement = xSettings.Element("CommandControl2Open")) != null) Settings.CommandControl2Open = int.Parse(xElement.Value);
-                        if ((xElement = xSettings.Element("CommandControl2Close")) != null) Settings.CommandControl2Close = int.Parse(xElement.Value);
-                        if ((xElement = xSettings.Element("CommandControl3Open")) != null) Settings.CommandControl3Open = int.Parse(xElement.Value);
-                        if ((xElement = xSettings.Element("CommandControl3Close")) != null) Settings.CommandControl3Close = int.Parse(xElement.Value);
-
                         if ((xElement = xSettings.Element("changeToAccount")) != null) Settings.changeToAccount = int.Parse(xElement.Value);
                         if ((xElement = xSettings.Element("changeToCheck")) != null) Settings.changeToCheck = int.Parse(xElement.Value);
 
@@ -153,13 +146,6 @@ namespace ServiceSaleMachine
 
                 xSettings.Add(new XElement("changeOn", Settings.changeOn.ToString()));
                 xSettings.Add(new XElement("timeout", Settings.timeout.ToString()));
-
-                xSettings.Add(new XElement("CommandControl1Open", Settings.CommandControl1Open.ToString()));
-                xSettings.Add(new XElement("CommandControl1Close", Settings.CommandControl1Close.ToString()));
-                xSettings.Add(new XElement("CommandControl2Open", Settings.CommandControl2Open.ToString()));
-                xSettings.Add(new XElement("CommandControl2Close", Settings.CommandControl2Close.ToString()));
-                xSettings.Add(new XElement("CommandControl3Open", Settings.CommandControl3Open.ToString()));
-                xSettings.Add(new XElement("CommandControl3Close", Settings.CommandControl3Close.ToString()));
 
                 xSettings.Add(new XElement("changeToAccount", Settings.changeToAccount.ToString()));
                 xSettings.Add(new XElement("changeToCheck", Settings.changeToCheck.ToString()));

@@ -80,18 +80,12 @@
             this.LightOff1 = new System.Windows.Forms.Button();
             this.LightOn1 = new System.Windows.Forms.Button();
             this.label25 = new System.Windows.Forms.Label();
-            this.Close4 = new System.Windows.Forms.Button();
-            this.Open4 = new System.Windows.Forms.Button();
             this.StatusControl = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.Close1 = new System.Windows.Forms.Button();
-            this.Close3 = new System.Windows.Forms.Button();
             this.Close2 = new System.Windows.Forms.Button();
             this.butReadStatus = new System.Windows.Forms.Button();
-            this.Open3 = new System.Windows.Forms.Button();
             this.Open2 = new System.Windows.Forms.Button();
             this.Open1 = new System.Windows.Forms.Button();
             this.buttonwriteControlPort = new System.Windows.Forms.Button();
@@ -698,18 +692,12 @@
             this.tabPage5.Controls.Add(this.LightOff1);
             this.tabPage5.Controls.Add(this.LightOn1);
             this.tabPage5.Controls.Add(this.label25);
-            this.tabPage5.Controls.Add(this.Close4);
-            this.tabPage5.Controls.Add(this.Open4);
             this.tabPage5.Controls.Add(this.StatusControl);
             this.tabPage5.Controls.Add(this.label21);
-            this.tabPage5.Controls.Add(this.label17);
-            this.tabPage5.Controls.Add(this.label15);
             this.tabPage5.Controls.Add(this.label13);
             this.tabPage5.Controls.Add(this.Close1);
-            this.tabPage5.Controls.Add(this.Close3);
             this.tabPage5.Controls.Add(this.Close2);
             this.tabPage5.Controls.Add(this.butReadStatus);
-            this.tabPage5.Controls.Add(this.Open3);
             this.tabPage5.Controls.Add(this.Open2);
             this.tabPage5.Controls.Add(this.Open1);
             this.tabPage5.Controls.Add(this.buttonwriteControlPort);
@@ -727,7 +715,7 @@
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(298, 225);
+            this.label27.Location = new System.Drawing.Point(298, 169);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(90, 13);
             this.label27.TabIndex = 23;
@@ -735,7 +723,7 @@
             // 
             // LightOff2
             // 
-            this.LightOff2.Location = new System.Drawing.Point(159, 220);
+            this.LightOff2.Location = new System.Drawing.Point(159, 164);
             this.LightOff2.Name = "LightOff2";
             this.LightOff2.Size = new System.Drawing.Size(105, 23);
             this.LightOff2.TabIndex = 21;
@@ -745,7 +733,7 @@
             // 
             // LightOn2
             // 
-            this.LightOn2.Location = new System.Drawing.Point(25, 220);
+            this.LightOn2.Location = new System.Drawing.Point(25, 164);
             this.LightOn2.Name = "LightOn2";
             this.LightOn2.Size = new System.Drawing.Size(105, 23);
             this.LightOn2.TabIndex = 22;
@@ -756,7 +744,7 @@
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(298, 196);
+            this.label26.Location = new System.Drawing.Point(298, 140);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(130, 13);
             this.label26.TabIndex = 20;
@@ -764,7 +752,7 @@
             // 
             // LightOff1
             // 
-            this.LightOff1.Location = new System.Drawing.Point(159, 191);
+            this.LightOff1.Location = new System.Drawing.Point(159, 135);
             this.LightOff1.Name = "LightOff1";
             this.LightOff1.Size = new System.Drawing.Size(105, 23);
             this.LightOff1.TabIndex = 18;
@@ -774,7 +762,7 @@
             // 
             // LightOn1
             // 
-            this.LightOn1.Location = new System.Drawing.Point(25, 191);
+            this.LightOn1.Location = new System.Drawing.Point(25, 135);
             this.LightOn1.Name = "LightOn1";
             this.LightOn1.Size = new System.Drawing.Size(105, 23);
             this.LightOn1.TabIndex = 19;
@@ -785,36 +773,16 @@
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(298, 167);
+            this.label25.Location = new System.Drawing.Point(298, 109);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(110, 13);
+            this.label25.Size = new System.Drawing.Size(101, 13);
             this.label25.TabIndex = 17;
-            this.label25.Text = "После тренировки 2";
-            // 
-            // Close4
-            // 
-            this.Close4.Location = new System.Drawing.Point(159, 162);
-            this.Close4.Name = "Close4";
-            this.Close4.Size = new System.Drawing.Size(105, 23);
-            this.Close4.TabIndex = 15;
-            this.Close4.Text = "Выкл.канал 6";
-            this.Close4.UseVisualStyleBackColor = true;
-            this.Close4.Click += new System.EventHandler(this.Close4_Click);
-            // 
-            // Open4
-            // 
-            this.Open4.Location = new System.Drawing.Point(25, 162);
-            this.Open4.Name = "Open4";
-            this.Open4.Size = new System.Drawing.Size(105, 23);
-            this.Open4.TabIndex = 16;
-            this.Open4.Text = "Вкл.канал 6";
-            this.Open4.UseVisualStyleBackColor = true;
-            this.Open4.Click += new System.EventHandler(this.Open4_Click);
+            this.label25.Text = "После тренировки";
             // 
             // StatusControl
             // 
             this.StatusControl.AutoSize = true;
-            this.StatusControl.Location = new System.Drawing.Point(156, 273);
+            this.StatusControl.Location = new System.Drawing.Point(156, 231);
             this.StatusControl.Name = "StatusControl";
             this.StatusControl.Size = new System.Drawing.Size(37, 13);
             this.StatusControl.TabIndex = 14;
@@ -829,32 +797,14 @@
             this.label21.TabIndex = 12;
             this.label21.Text = "Скорость";
             // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(298, 138);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(110, 13);
-            this.label17.TabIndex = 11;
-            this.label17.Text = "После тренировки 1";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(298, 109);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(77, 13);
-            this.label15.TabIndex = 11;
-            this.label15.Text = "Тренировка 2";
-            // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(298, 80);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(77, 13);
+            this.label13.Size = new System.Drawing.Size(68, 13);
             this.label13.TabIndex = 11;
-            this.label13.Text = "Тренировка 1";
+            this.label13.Text = "Тренировка";
             // 
             // Close1
             // 
@@ -862,19 +812,9 @@
             this.Close1.Name = "Close1";
             this.Close1.Size = new System.Drawing.Size(105, 23);
             this.Close1.TabIndex = 10;
-            this.Close1.Text = "Выкл.канал 3";
+            this.Close1.Text = "Выкл.канал 1";
             this.Close1.UseVisualStyleBackColor = true;
             this.Close1.Click += new System.EventHandler(this.Close1_Click);
-            // 
-            // Close3
-            // 
-            this.Close3.Location = new System.Drawing.Point(159, 133);
-            this.Close3.Name = "Close3";
-            this.Close3.Size = new System.Drawing.Size(105, 23);
-            this.Close3.TabIndex = 10;
-            this.Close3.Text = "Выкл.канал 5";
-            this.Close3.UseVisualStyleBackColor = true;
-            this.Close3.Click += new System.EventHandler(this.Close3_Click);
             // 
             // Close2
             // 
@@ -882,13 +822,13 @@
             this.Close2.Name = "Close2";
             this.Close2.Size = new System.Drawing.Size(105, 23);
             this.Close2.TabIndex = 10;
-            this.Close2.Text = "Выкл.канал 4";
+            this.Close2.Text = "Выкл.канал 2";
             this.Close2.UseVisualStyleBackColor = true;
             this.Close2.Click += new System.EventHandler(this.Close2_Click);
             // 
             // butReadStatus
             // 
-            this.butReadStatus.Location = new System.Drawing.Point(25, 268);
+            this.butReadStatus.Location = new System.Drawing.Point(25, 226);
             this.butReadStatus.Name = "butReadStatus";
             this.butReadStatus.Size = new System.Drawing.Size(105, 23);
             this.butReadStatus.TabIndex = 10;
@@ -896,23 +836,13 @@
             this.butReadStatus.UseVisualStyleBackColor = true;
             this.butReadStatus.Click += new System.EventHandler(this.button13_Click);
             // 
-            // Open3
-            // 
-            this.Open3.Location = new System.Drawing.Point(25, 133);
-            this.Open3.Name = "Open3";
-            this.Open3.Size = new System.Drawing.Size(105, 23);
-            this.Open3.TabIndex = 10;
-            this.Open3.Text = "Вкл.канал 5";
-            this.Open3.UseVisualStyleBackColor = true;
-            this.Open3.Click += new System.EventHandler(this.Open3_Click);
-            // 
             // Open2
             // 
             this.Open2.Location = new System.Drawing.Point(25, 104);
             this.Open2.Name = "Open2";
             this.Open2.Size = new System.Drawing.Size(105, 23);
             this.Open2.TabIndex = 10;
-            this.Open2.Text = "Вкл.канал 4";
+            this.Open2.Text = "Вкл.канал 2";
             this.Open2.UseVisualStyleBackColor = true;
             this.Open2.Click += new System.EventHandler(this.Open2_Click);
             // 
@@ -922,7 +852,7 @@
             this.Open1.Name = "Open1";
             this.Open1.Size = new System.Drawing.Size(105, 23);
             this.Open1.TabIndex = 10;
-            this.Open1.Text = "Вкл.канал 3";
+            this.Open1.Text = "Вкл.канал 1";
             this.Open1.UseVisualStyleBackColor = true;
             this.Open1.Click += new System.EventHandler(this.Open1_Click);
             // 
@@ -1983,11 +1913,7 @@
         private System.Windows.Forms.Button Close2;
         private System.Windows.Forms.Button Open1;
         private System.Windows.Forms.Button Close1;
-        private System.Windows.Forms.Button Close3;
-        private System.Windows.Forms.Button Open3;
         private System.Windows.Forms.Button Open2;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.CheckBox checkBox4;
@@ -2055,8 +1981,6 @@
         private System.Windows.Forms.Button LightOff1;
         private System.Windows.Forms.Button LightOn1;
         private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.Button Close4;
-        private System.Windows.Forms.Button Open4;
         private System.Windows.Forms.TabPage tabPage12;
         private System.Windows.Forms.GroupBox groupBoxStartService;
         private System.Windows.Forms.RichTextBox richTextStartService;

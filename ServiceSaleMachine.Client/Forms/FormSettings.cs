@@ -397,9 +397,6 @@ namespace ServiceSaleMachine.Client
                         Open1.Enabled = false;
                         Close1.Enabled = false;
                         Close2.Enabled = false;
-                        Close3.Enabled = false;
-                        Close4.Enabled = false;
-                        Open4.Enabled = false;
                         LightOn1.Enabled = false;
                         LightOn2.Enabled = false;
                         LightOff1.Enabled = false;
@@ -923,12 +920,8 @@ namespace ServiceSaleMachine.Client
             buttonwriteControlPort.Enabled = state;
             Open1.Enabled = state;
             Open2.Enabled = state;
-            Open3.Enabled = state;
             Close1.Enabled = state;
             Close2.Enabled = state;
-            Close3.Enabled = state;
-            Close4.Enabled = state;
-            Open4.Enabled = state;
             LightOn1.Enabled = state;
             LightOn2.Enabled = state;
             LightOff1.Enabled = state;
@@ -1230,12 +1223,8 @@ namespace ServiceSaleMachine.Client
                 cBxControlSpeed.Enabled = false;
                 Open1.Enabled = false;
                 Open2.Enabled = false;
-                Open3.Enabled = false;
                 Close1.Enabled = false;
                 Close2.Enabled = false;
-                Close3.Enabled = false;
-                Close4.Enabled = false;
-                Open4.Enabled = false;
                 LightOn1.Enabled = false;
                 LightOn2.Enabled = false;
                 LightOff1.Enabled = false;
@@ -1254,9 +1243,6 @@ namespace ServiceSaleMachine.Client
                 Open1.Enabled = true;
                 Close1.Enabled = true;
                 Close2.Enabled = true;
-                Close3.Enabled = true;
-                Close4.Enabled = true;
-                Open4.Enabled = true;
                 LightOn1.Enabled = true;
                 LightOn2.Enabled = true;
                 LightOff1.Enabled = true;
@@ -1305,12 +1291,8 @@ namespace ServiceSaleMachine.Client
                 cBxControlSpeed.Enabled = false;
                 Open1.Enabled = false;
                 Open2.Enabled = false;
-                Open3.Enabled = false;
                 Close1.Enabled = false;
                 Close2.Enabled = false;
-                Close3.Enabled = false;
-                Close4.Enabled = false;
-                Open4.Enabled = false;
                 LightOn1.Enabled = false;
                 LightOn2.Enabled = false;
                 LightOff1.Enabled = false;
@@ -1331,12 +1313,8 @@ namespace ServiceSaleMachine.Client
                 cBxControlSpeed.Enabled = true;
                 Open1.Enabled = true;
                 Open2.Enabled = true;
-                Open3.Enabled = true;
                 Close1.Enabled = true;
                 Close2.Enabled = true;
-                Close3.Enabled = true;
-                Close4.Enabled = true;
-                Open4.Enabled = true;
                 LightOn1.Enabled = true;
                 LightOn2.Enabled = true;
                 LightOff1.Enabled = true;
@@ -1355,11 +1333,6 @@ namespace ServiceSaleMachine.Client
             data.drivers.SendOpenControl((int)ControlDeviceEnum.dev4);
         }
 
-        private void Open3_Click(object sender, EventArgs e)
-        {
-            data.drivers.SendOpenControl((int)ControlDeviceEnum.dev5);
-        }
-
         private void Close1_Click(object sender, EventArgs e)
         {
             data.drivers.SendCloseControl((int)ControlDeviceEnum.dev3);
@@ -1368,11 +1341,6 @@ namespace ServiceSaleMachine.Client
         private void Close2_Click(object sender, EventArgs e)
         {
             data.drivers.SendCloseControl((int)ControlDeviceEnum.dev4);
-        }
-
-        private void Close3_Click(object sender, EventArgs e)
-        {
-            data.drivers.SendCloseControl((int)ControlDeviceEnum.dev5);
         }
 
         private void button4_Click_1(object sender, EventArgs e)
@@ -1610,16 +1578,6 @@ namespace ServiceSaleMachine.Client
             int NumberCheck = 0;
 
             labelCurrNumberCheck.Text = "Текущий номер чека: " + NumberCheck;
-        }
-
-        private void Open4_Click(object sender, EventArgs e)
-        {
-            data.drivers.SendOpenControl((int)ControlDeviceEnum.dev6);
-        }
-
-        private void Close4_Click(object sender, EventArgs e)
-        {
-            data.drivers.SendCloseControl((int)ControlDeviceEnum.dev6);
         }
 
         private void LightOn1_Click(object sender, EventArgs e)

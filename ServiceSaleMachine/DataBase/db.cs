@@ -811,16 +811,7 @@ namespace ServiceSaleMachine
             string queryString = "select max(datetime) as dt from refreshdevices";
 
             MySqlDataReader dr = Execute(queryString);
-            if (dr != null)
-            {
-                if (dr.HasRows)
-                {
-                    dr.Read();
-
-                    return (DateTime)dr[0];
-                }
-            }
-            return new DateTime(2016, 07, 01);
+            return GetDTFromReq(dr);
         }
 
         /// <summary>

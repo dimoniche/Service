@@ -647,7 +647,7 @@ namespace ServiceSaleMachine.Client
 
             textBoxMaxTimeService.Text = Globals.ClientConfiguration.Settings.limitServiceTime.ToString();
 
-            DateTime dt = GlobalDb.GlobalBase.GetLastRefreshTime();
+            DateTime dt = GlobalDb.GlobalBase.GetLastRefreshTime(1,1);
 
             labelTimeLastRefresh.Text = "Время последнего обслуживания: " + dt.ToString();
             labelWorkFromLastRefresh.Text = "Всего проработали со времени последнего обслуживания: " + GlobalDb.GlobalBase.GetWorkTime(dt).ToString();
@@ -1646,7 +1646,7 @@ namespace ServiceSaleMachine.Client
             // обслужили устройство
             GlobalDb.GlobalBase.WriteRefreshTime(1,1);
 
-            DateTime dt = GlobalDb.GlobalBase.GetLastRefreshTime();
+            DateTime dt = GlobalDb.GlobalBase.GetLastRefreshTime(1,1);
 
             labelTimeLastRefresh.Text = "Время последнего обслуживания: " + dt.ToString();
             labelWorkFromLastRefresh.Text = "Всего проработали со времени последнего обслуживания: " + GlobalDb.GlobalBase.GetWorkTime(dt).ToString();

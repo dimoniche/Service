@@ -124,14 +124,15 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.groupBoxTimeLimit = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.textBoxTimeOut = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.butDelServ = new System.Windows.Forms.Button();
             this.butaddServ = new System.Windows.Forms.Button();
             this.tabSettingService = new System.Windows.Forms.TabControl();
             this.tabDev1 = new System.Windows.Forms.TabPage();
-            this.label12 = new System.Windows.Forms.Label();
-            this.textBoxTimeOut = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.offControl = new System.Windows.Forms.CheckBox();
             this.cBxBillOff = new System.Windows.Forms.CheckBox();
@@ -181,6 +182,7 @@
             this.tabPage2.SuspendLayout();
             this.tabControl3.SuspendLayout();
             this.tabPage6.SuspendLayout();
+            this.groupBoxTimeLimit.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.tabSettingService.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -242,7 +244,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(706, 529);
+            this.tabPage1.Size = new System.Drawing.Size(819, 576);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Сканер";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -343,7 +345,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(706, 529);
+            this.tabPage3.Size = new System.Drawing.Size(819, 576);
             this.tabPage3.TabIndex = 1;
             this.tabPage3.Text = "Купюроприемник";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -591,7 +593,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(706, 529);
+            this.tabPage4.Size = new System.Drawing.Size(819, 576);
             this.tabPage4.TabIndex = 2;
             this.tabPage4.Text = "Принтер";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -687,7 +689,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(706, 529);
+            this.tabPage5.Size = new System.Drawing.Size(819, 576);
             this.tabPage5.TabIndex = 3;
             this.tabPage5.Text = "Управляющее устройство";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -886,7 +888,7 @@
             this.tabPage7.Location = new System.Drawing.Point(4, 22);
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(692, 497);
+            this.tabPage7.Size = new System.Drawing.Size(805, 544);
             this.tabPage7.TabIndex = 0;
             this.tabPage7.Text = "Настройка доступа";
             this.tabPage7.UseVisualStyleBackColor = true;
@@ -1037,7 +1039,7 @@
             this.tabPage10.Location = new System.Drawing.Point(4, 22);
             this.tabPage10.Name = "tabPage10";
             this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage10.Size = new System.Drawing.Size(706, 529);
+            this.tabPage10.Size = new System.Drawing.Size(819, 576);
             this.tabPage10.TabIndex = 5;
             this.tabPage10.Text = "Модем";
             this.tabPage10.UseVisualStyleBackColor = true;
@@ -1185,7 +1187,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(720, 561);
+            this.tabPage2.Size = new System.Drawing.Size(833, 608);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Настройки";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -1199,89 +1201,49 @@
             this.tabControl3.Location = new System.Drawing.Point(3, 3);
             this.tabControl3.Name = "tabControl3";
             this.tabControl3.SelectedIndex = 0;
-            this.tabControl3.Size = new System.Drawing.Size(714, 555);
+            this.tabControl3.Size = new System.Drawing.Size(827, 602);
             this.tabControl3.TabIndex = 0;
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.groupBoxTimeLimit);
             this.tabPage6.Controls.Add(this.groupBox5);
             this.tabPage6.Controls.Add(this.groupBox4);
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(706, 529);
+            this.tabPage6.Size = new System.Drawing.Size(819, 576);
             this.tabPage6.TabIndex = 0;
             this.tabPage6.Text = "Основные";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
-            // groupBox5
+            // groupBoxTimeLimit
             // 
-            this.groupBox5.Controls.Add(this.butDelServ);
-            this.groupBox5.Controls.Add(this.butaddServ);
-            this.groupBox5.Controls.Add(this.tabSettingService);
-            this.groupBox5.Controls.Add(this.label12);
-            this.groupBox5.Controls.Add(this.textBoxTimeOut);
-            this.groupBox5.Controls.Add(this.label11);
-            this.groupBox5.Location = new System.Drawing.Point(313, 6);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(387, 426);
-            this.groupBox5.TabIndex = 14;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Времена";
-            // 
-            // butDelServ
-            // 
-            this.butDelServ.Location = new System.Drawing.Point(187, 103);
-            this.butDelServ.Name = "butDelServ";
-            this.butDelServ.Size = new System.Drawing.Size(154, 23);
-            this.butDelServ.TabIndex = 17;
-            this.butDelServ.Text = "Удалить услугу";
-            this.butDelServ.UseVisualStyleBackColor = true;
-            // 
-            // butaddServ
-            // 
-            this.butaddServ.Location = new System.Drawing.Point(27, 103);
-            this.butaddServ.Name = "butaddServ";
-            this.butaddServ.Size = new System.Drawing.Size(154, 23);
-            this.butaddServ.TabIndex = 18;
-            this.butaddServ.Text = "Добавить услугу";
-            this.butaddServ.UseVisualStyleBackColor = true;
-            // 
-            // tabSettingService
-            // 
-            this.tabSettingService.Controls.Add(this.tabDev1);
-            this.tabSettingService.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tabSettingService.Location = new System.Drawing.Point(3, 134);
-            this.tabSettingService.Name = "tabSettingService";
-            this.tabSettingService.SelectedIndex = 0;
-            this.tabSettingService.Size = new System.Drawing.Size(381, 289);
-            this.tabSettingService.TabIndex = 16;
-            // 
-            // tabDev1
-            // 
-            this.tabDev1.Location = new System.Drawing.Point(4, 22);
-            this.tabDev1.Name = "tabDev1";
-            this.tabDev1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDev1.Size = new System.Drawing.Size(373, 263);
-            this.tabDev1.TabIndex = 0;
-            this.tabDev1.Text = "Устройство 1";
-            this.tabDev1.UseVisualStyleBackColor = true;
+            this.groupBoxTimeLimit.Controls.Add(this.label12);
+            this.groupBoxTimeLimit.Controls.Add(this.textBoxTimeOut);
+            this.groupBoxTimeLimit.Controls.Add(this.label11);
+            this.groupBoxTimeLimit.Location = new System.Drawing.Point(15, 241);
+            this.groupBoxTimeLimit.Name = "groupBoxTimeLimit";
+            this.groupBoxTimeLimit.Size = new System.Drawing.Size(292, 314);
+            this.groupBoxTimeLimit.TabIndex = 15;
+            this.groupBoxTimeLimit.TabStop = false;
+            this.groupBoxTimeLimit.Text = "Времена";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(238, 16);
+            this.label12.Location = new System.Drawing.Point(242, 23);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(27, 13);
-            this.label12.TabIndex = 15;
+            this.label12.TabIndex = 18;
             this.label12.Text = "мин";
             // 
             // textBoxTimeOut
             // 
-            this.textBoxTimeOut.Location = new System.Drawing.Point(123, 13);
+            this.textBoxTimeOut.Location = new System.Drawing.Point(127, 20);
             this.textBoxTimeOut.Name = "textBoxTimeOut";
             this.textBoxTimeOut.Size = new System.Drawing.Size(100, 20);
-            this.textBoxTimeOut.TabIndex = 14;
+            this.textBoxTimeOut.TabIndex = 17;
             this.textBoxTimeOut.Text = "0";
             this.textBoxTimeOut.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBoxTimeOut.Leave += new System.EventHandler(this.textBoxTimeOut_Leave);
@@ -1289,11 +1251,63 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(9, 20);
+            this.label11.Location = new System.Drawing.Point(13, 27);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(108, 13);
-            this.label11.TabIndex = 13;
+            this.label11.TabIndex = 16;
             this.label11.Text = "Время бездействия";
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.butDelServ);
+            this.groupBox5.Controls.Add(this.butaddServ);
+            this.groupBox5.Controls.Add(this.tabSettingService);
+            this.groupBox5.Location = new System.Drawing.Point(313, 6);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(461, 556);
+            this.groupBox5.TabIndex = 14;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Настройки услуг";
+            // 
+            // butDelServ
+            // 
+            this.butDelServ.Location = new System.Drawing.Point(187, 26);
+            this.butDelServ.Name = "butDelServ";
+            this.butDelServ.Size = new System.Drawing.Size(154, 23);
+            this.butDelServ.TabIndex = 17;
+            this.butDelServ.Text = "Удалить услугу";
+            this.butDelServ.UseVisualStyleBackColor = true;
+            this.butDelServ.Click += new System.EventHandler(this.butDelServ_Click);
+            // 
+            // butaddServ
+            // 
+            this.butaddServ.Location = new System.Drawing.Point(27, 26);
+            this.butaddServ.Name = "butaddServ";
+            this.butaddServ.Size = new System.Drawing.Size(154, 23);
+            this.butaddServ.TabIndex = 18;
+            this.butaddServ.Text = "Добавить услугу";
+            this.butaddServ.UseVisualStyleBackColor = true;
+            this.butaddServ.Click += new System.EventHandler(this.butaddServ_Click);
+            // 
+            // tabSettingService
+            // 
+            this.tabSettingService.Controls.Add(this.tabDev1);
+            this.tabSettingService.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tabSettingService.Location = new System.Drawing.Point(3, 65);
+            this.tabSettingService.Name = "tabSettingService";
+            this.tabSettingService.SelectedIndex = 0;
+            this.tabSettingService.Size = new System.Drawing.Size(455, 488);
+            this.tabSettingService.TabIndex = 16;
+            // 
+            // tabDev1
+            // 
+            this.tabDev1.Location = new System.Drawing.Point(4, 22);
+            this.tabDev1.Name = "tabDev1";
+            this.tabDev1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabDev1.Size = new System.Drawing.Size(447, 462);
+            this.tabDev1.TabIndex = 0;
+            this.tabDev1.Text = "Устройство 1";
+            this.tabDev1.UseVisualStyleBackColor = true;
             // 
             // groupBox4
             // 
@@ -1306,7 +1320,7 @@
             this.groupBox4.Controls.Add(this.cbxOffHardware);
             this.groupBox4.Location = new System.Drawing.Point(15, 6);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(292, 426);
+            this.groupBox4.Size = new System.Drawing.Size(292, 229);
             this.groupBox4.TabIndex = 13;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Отключение оборудования";
@@ -1396,7 +1410,7 @@
             this.tabPage9.Location = new System.Drawing.Point(4, 22);
             this.tabPage9.Name = "tabPage9";
             this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage9.Size = new System.Drawing.Size(706, 529);
+            this.tabPage9.Size = new System.Drawing.Size(819, 576);
             this.tabPage9.TabIndex = 1;
             this.tabPage9.Text = "Прием купюр";
             this.tabPage9.UseVisualStyleBackColor = true;
@@ -1577,7 +1591,7 @@
             this.tabPage11.Location = new System.Drawing.Point(4, 22);
             this.tabPage11.Name = "tabPage11";
             this.tabPage11.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage11.Size = new System.Drawing.Size(706, 529);
+            this.tabPage11.Size = new System.Drawing.Size(819, 576);
             this.tabPage11.TabIndex = 2;
             this.tabPage11.Text = "Содержание чека";
             this.tabPage11.UseVisualStyleBackColor = true;
@@ -1679,8 +1693,9 @@
             this.tabPage2.ResumeLayout(false);
             this.tabControl3.ResumeLayout(false);
             this.tabPage6.ResumeLayout(false);
+            this.groupBoxTimeLimit.ResumeLayout(false);
+            this.groupBoxTimeLimit.PerformLayout();
             this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
             this.tabSettingService.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
@@ -1803,9 +1818,6 @@
         private System.Windows.Forms.CheckBox cBxoffModem;
         private System.Windows.Forms.CheckBox cbxOffHardware;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox textBoxTimeOut;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TabControl tabSettingService;
         private System.Windows.Forms.TabPage tabDev1;
         private System.Windows.Forms.Button butDelServ;
@@ -1838,5 +1850,9 @@
         private System.Windows.Forms.TextBox textMaxCountBanknote;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.TextBox textNeedCollect;
+        private System.Windows.Forms.GroupBox groupBoxTimeLimit;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox textBoxTimeOut;
+        private System.Windows.Forms.Label label11;
     }
 }

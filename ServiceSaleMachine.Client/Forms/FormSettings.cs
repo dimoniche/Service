@@ -42,32 +42,125 @@ namespace ServiceSaleMachine.Client
                 ServiceTabControl stc = new ServiceTabControl();
                 stc.Dock = DockStyle.Fill;
                 stc.AddDevice += AddDevice;
-                stc.DeleteDevice += DeleteDivice;
+                stc.DeleteDevice += DeleteDevice;
+
                 stc.RecognizeLeave += RecognizeLeave;
+                stc.LightUrnLeave += LightUrnLeave;
+                stc.CaptionServiceLeave += CaptionServiceLeave;
+                stc.PriceServiceLeave += PriceServiceLeave;
+
                 stc.TextBoxRecognize.Text = serv.timeRecognize.ToString();
+                stc.TextBoxPriceService.Text = serv.price.ToString();
+                stc.TextBoxCaptionService.Text = serv.caption;
+                stc.TextBoxLightUrn.Text = serv.timeLightUrn.ToString();
 
                 tabSettingService.TabPages[tabSettingService.TabPages.Count - 1].Controls.Add(stc);
 
                 stc.DeviceTab.TabPages.Clear();
 
-                foreach (Device dev in serv.devs)
+                if (serv.devs != null)
                 {
-                    stc.DeviceTab.TabPages.Add(dev.caption);
+                    foreach (Device dev in serv.devs)
+                    {
+                        stc.DeviceTab.TabPages.Add(dev.caption);
 
-                    DeviceTabControl devTab = new DeviceTabControl();
-                    devTab.Dock = DockStyle.Fill;
-                    devTab.LimitTimeLeave += LimitTimeLeave;
-                    devTab.TimeWorkLeave += TimeWorkLeave;
+                        DeviceTabControl devTab = new DeviceTabControl();
+                        devTab.Dock = DockStyle.Fill;
+                        devTab.LimitTimeLeave += LimitTimeLeave;
+                        devTab.TimeWorkLeave += TimeWorkLeave;
+                        devTab.IdDeviceLeave += IdDeviceLeave;
+                        devTab.NameDeviceLeave += NameDeviceLeave;
 
-                    devTab.LimitTime.Text = dev.limitTime.ToString();
-                    devTab.TimeWork.Text = dev.timework.ToString();
+                        devTab.LimitTime.Text = dev.limitTime.ToString();
+                        devTab.TimeWork.Text = dev.timework.ToString();
+                        devTab.TextBoxIdDevice.Text = dev.id.ToString();
+                        devTab.TextBoxNameDevice.Text = dev.caption;
 
-                    stc.DeviceTab.TabPages[stc.DeviceTab.TabPages.Count - 1].Controls.Add(devTab);
+                        stc.DeviceTab.TabPages[stc.DeviceTab.TabPages.Count - 1].Controls.Add(devTab);
+                    }
                 }
             }
 
 
             ReLoad();
+        }
+
+        /// <summary>
+        /// Получение всего количества устройств
+        /// </summary>
+        /// <returns></returns>
+        int GetCountAllDevice()
+        {
+            int count = 0;
+
+            foreach (Service serv in Globals.ClientConfiguration.Settings.services)
+            {
+                if (serv.devs != null)
+                {
+                    foreach (Device dev in serv.devs)
+                    {
+                        count++;
+                    }
+                }
+            }
+
+            return count;
+        }
+
+        private void NameDeviceLeave(object sender)
+        {
+            Service stc = Globals.ClientConfiguration.Settings.services[tabSettingService.SelectedIndex];
+            ServiceTabControl currServiceTab = ((ServiceTabControl)tabSettingService.TabPages[tabSettingService.SelectedIndex].Controls[0]);
+            DeviceTabControl currDeviceTab = (DeviceTabControl)currServiceTab.DeviceTab.TabPages[currServiceTab.DeviceTab.SelectedIndex].Controls[0];
+
+            stc.devs[currServiceTab.DeviceTab.SelectedIndex].caption = currDeviceTab.TextBoxNameDevice.Text;
+
+            Globals.ClientConfiguration.Save();
+
+            currServiceTab.DeviceTab.TabPages[currServiceTab.DeviceTab.SelectedIndex].Text = currDeviceTab.TextBoxNameDevice.Text;
+        }
+
+        private void IdDeviceLeave(object sender)
+        {
+            Service stc = Globals.ClientConfiguration.Settings.services[tabSettingService.SelectedIndex];
+            ServiceTabControl currServiceTab = ((ServiceTabControl)tabSettingService.TabPages[tabSettingService.SelectedIndex].Controls[0]);
+            DeviceTabControl currDeviceTab = (DeviceTabControl)currServiceTab.DeviceTab.TabPages[currServiceTab.DeviceTab.SelectedIndex].Controls[0];
+
+            int.TryParse(currDeviceTab.TextBoxIdDevice.Text, out stc.devs[currServiceTab.DeviceTab.SelectedIndex].id);
+
+            Globals.ClientConfiguration.Save();
+        }
+
+        private void PriceServiceLeave(object sender)
+        {
+            Service stc = Globals.ClientConfiguration.Settings.services[tabSettingService.SelectedIndex];
+            ServiceTabControl currServiceTab = ((ServiceTabControl)tabSettingService.TabPages[tabSettingService.SelectedIndex].Controls[0]);
+
+            int.TryParse(currServiceTab.TextBoxPriceService.Text, out stc.price);
+
+            Globals.ClientConfiguration.Save();
+        }
+
+        private void CaptionServiceLeave(object sender)
+        {
+            Service stc = Globals.ClientConfiguration.Settings.services[tabSettingService.SelectedIndex];
+            ServiceTabControl currServiceTab = ((ServiceTabControl)tabSettingService.TabPages[tabSettingService.SelectedIndex].Controls[0]);
+
+            stc.caption = currServiceTab.TextBoxCaptionService.Text;
+
+            Globals.ClientConfiguration.Save();
+
+            tabSettingService.TabPages[tabSettingService.SelectedIndex].Text = stc.caption;
+        }
+
+        private void LightUrnLeave(object sender)
+        {
+            Service stc = Globals.ClientConfiguration.Settings.services[tabSettingService.SelectedIndex];
+            ServiceTabControl currServiceTab = ((ServiceTabControl)tabSettingService.TabPages[tabSettingService.SelectedIndex].Controls[0]);
+
+            int.TryParse(currServiceTab.TextBoxLightUrn.Text, out stc.timeLightUrn);
+
+            Globals.ClientConfiguration.Save();
         }
 
         private void TimeWorkLeave(object sender)
@@ -102,16 +195,16 @@ namespace ServiceSaleMachine.Client
             Globals.ClientConfiguration.Save();
         }
 
-        private void DeleteDivice(object sender)
+        private void DeleteDevice(object sender)
         {
             Service stc = Globals.ClientConfiguration.Settings.services[tabSettingService.SelectedIndex];
 
             ServiceTabControl currServiceTab = ((ServiceTabControl)tabSettingService.TabPages[tabSettingService.SelectedIndex].Controls[0]);
             DeviceTabControl currDeviceTab = (DeviceTabControl)currServiceTab.DeviceTab.TabPages[currServiceTab.DeviceTab.SelectedIndex].Controls[0];
 
-            currServiceTab.DeviceTab.TabPages.Remove(currServiceTab.DeviceTab.TabPages[currServiceTab.DeviceTab.SelectedIndex]);
-
             stc.devs.RemoveAt(currServiceTab.DeviceTab.SelectedIndex);
+
+            currServiceTab.DeviceTab.TabPages.Remove(currServiceTab.DeviceTab.TabPages[currServiceTab.DeviceTab.SelectedIndex]);
 
             Globals.ClientConfiguration.Save();
         }
@@ -121,10 +214,14 @@ namespace ServiceSaleMachine.Client
             Service stc = Globals.ClientConfiguration.Settings.services[tabSettingService.SelectedIndex];
 
             ServiceTabControl currServiceTab = ((ServiceTabControl)tabSettingService.TabPages[tabSettingService.SelectedIndex].Controls[0]);
-            DeviceTabControl currDeviceTab = (DeviceTabControl)currServiceTab.DeviceTab.TabPages[currServiceTab.DeviceTab.SelectedIndex].Controls[0];
+            DeviceTabControl currDeviceTab;
 
             Device dev = new Device();
-            dev.caption = "Устройство " + (currServiceTab.DeviceTab.TabPages.Count + 1);
+            dev.id = GetCountAllDevice() + 1;
+            dev.caption = "Устройство " + dev.id;
+            
+
+            if (stc.devs == null) stc.devs = new List<Device>();
             stc.devs.Add(dev);
 
             currDeviceTab = new DeviceTabControl();
@@ -132,13 +229,63 @@ namespace ServiceSaleMachine.Client
             currServiceTab.DeviceTab.TabPages.Add(dev.caption);
 
             currDeviceTab.Dock = DockStyle.Fill;
+
             currDeviceTab.LimitTimeLeave += LimitTimeLeave;
             currDeviceTab.TimeWorkLeave += TimeWorkLeave;
+            currDeviceTab.IdDeviceLeave += IdDeviceLeave;
+            currDeviceTab.NameDeviceLeave += NameDeviceLeave;
 
             currDeviceTab.LimitTime.Text = dev.limitTime.ToString();
             currDeviceTab.TimeWork.Text = dev.timework.ToString();
+            currDeviceTab.TextBoxIdDevice.Text = dev.id.ToString();
+            currDeviceTab.TextBoxNameDevice.Text = dev.caption;
 
             currServiceTab.DeviceTab.TabPages[currServiceTab.DeviceTab.TabPages.Count - 1].Controls.Add(currDeviceTab);
+
+            Globals.ClientConfiguration.Save();
+        }
+
+        private void butaddServ_Click(object sender, EventArgs e)
+        {
+            Service stc = new Service();
+
+            stc.caption = "Услуга " + (tabSettingService.TabPages.Count + 1);
+            stc.id = tabSettingService.TabPages.Count + 1;
+
+            ServiceTabControl currServiceTab = new ServiceTabControl();
+
+            currServiceTab.Dock = DockStyle.Fill;
+            currServiceTab.AddDevice += AddDevice;
+            currServiceTab.DeleteDevice += DeleteDevice;
+
+            currServiceTab.RecognizeLeave += RecognizeLeave;
+            currServiceTab.LightUrnLeave += LightUrnLeave;
+            currServiceTab.CaptionServiceLeave += CaptionServiceLeave;
+            currServiceTab.PriceServiceLeave += PriceServiceLeave;
+
+            currServiceTab.TextBoxRecognize.Text = stc.timeRecognize.ToString();
+            currServiceTab.TextBoxPriceService.Text = stc.price.ToString();
+            currServiceTab.TextBoxCaptionService.Text = stc.caption;
+            currServiceTab.TextBoxLightUrn.Text = stc.timeLightUrn.ToString();
+
+            currServiceTab.TextBoxRecognize.Text = stc.timeRecognize.ToString();
+            currServiceTab.TextBoxPriceService.Text = stc.price.ToString();
+            currServiceTab.TextBoxCaptionService.Text = stc.caption;
+            currServiceTab.TextBoxLightUrn.Text = stc.timeLightUrn.ToString();
+
+            tabSettingService.TabPages.Add(stc.caption);
+            tabSettingService.TabPages[tabSettingService.TabPages.Count - 1].Controls.Add(currServiceTab);
+
+            currServiceTab.DeviceTab.TabPages.Clear();
+
+            Globals.ClientConfiguration.Settings.services.Add(stc);
+            Globals.ClientConfiguration.Save();
+        }
+
+        private void butDelServ_Click(object sender, EventArgs e)
+        {
+            Globals.ClientConfiguration.Settings.services.RemoveAt(tabSettingService.SelectedIndex);
+            tabSettingService.TabPages.Remove(tabSettingService.TabPages[tabSettingService.SelectedIndex]);
 
             Globals.ClientConfiguration.Save();
         }
@@ -1032,7 +1179,7 @@ namespace ServiceSaleMachine.Client
 
         private void textBoxTimeOut_Leave(object sender, EventArgs e)
         {
-           int time = 0;
+           int time = 1;
 
             int.TryParse(textBoxTimeOut.Text, out time);
 
@@ -1409,5 +1556,6 @@ namespace ServiceSaleMachine.Client
             Globals.ClientConfiguration.Settings.SMSMessageNeedCollect = textNeedCollect.Text;
             Globals.ClientConfiguration.Save();
         }
+
     }
 }

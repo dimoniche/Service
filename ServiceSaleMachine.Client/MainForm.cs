@@ -78,7 +78,7 @@ namespace ServiceSaleMachine.Client
             result.drivers = drivers;
             result.statistic = statistic;
 
-            if (Globals.admin)
+            //if (Globals.admin)
             {
                 drivers.InitAllDevice();
                 result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);

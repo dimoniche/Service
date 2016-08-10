@@ -136,7 +136,10 @@ namespace ServiceSaleMachine.Client
         private bool AddInDB()
         {
             if (GlobalDb.GlobalBase.InsertUser(tbxLogin.Text, tbxPassword.Text))
-            { return true; }
+            {
+                return true; 
+                
+            }
             return false;
         }
 
@@ -190,10 +193,16 @@ namespace ServiceSaleMachine.Client
                         if (AddInDB())
                         {
                             //успешно занеслось в БД
-                        }else
+                            UserInfo ui = GlobalDb.GlobalBase.GetUserByName(tbxLogin.Text, tbxPassword.Text);
+                            if (ui != null)
+                            {
+                                Globals.UserConfiguration.ID = ui.Id;
+                                //получили ID из БД
+                            }
+                        }
+                        else
                         {
-                            Globals.UserConfiguration.UserLogin = "";
-                            Globals.UserConfiguration.UserPassword = "";
+                            Globals.UserConfiguration.Clear();
                         }
 
                     }

@@ -30,6 +30,13 @@ namespace ServiceSaleMachine.Client
                     Nominal = (string)obj;
                 }
             }
+
+            timer1.Enabled = true;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

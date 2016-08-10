@@ -175,6 +175,11 @@
             this.secondfirmsname = new System.Windows.Forms.TextBox();
             this.firmsname = new System.Windows.Forms.TextBox();
             this.checkPic = new System.Windows.Forms.PictureBox();
+            this.tabPage12 = new System.Windows.Forms.TabPage();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.richTextEndService = new System.Windows.Forms.RichTextBox();
+            this.groupBoxStartService = new System.Windows.Forms.GroupBox();
+            this.richTextStartService = new System.Windows.Forms.RichTextBox();
             this.tabPageStatistic = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
@@ -204,6 +209,9 @@
             this.groupBox1.SuspendLayout();
             this.tabPage11.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.checkPic)).BeginInit();
+            this.tabPage12.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.groupBoxStartService.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -1296,6 +1304,7 @@
             this.tabControl3.Controls.Add(this.tabPage6);
             this.tabControl3.Controls.Add(this.tabPage9);
             this.tabControl3.Controls.Add(this.tabPage11);
+            this.tabControl3.Controls.Add(this.tabPage12);
             this.tabControl3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl3.Location = new System.Drawing.Point(3, 3);
             this.tabControl3.Name = "tabControl3";
@@ -1779,6 +1788,56 @@
             this.checkPic.TabIndex = 0;
             this.checkPic.TabStop = false;
             // 
+            // tabPage12
+            // 
+            this.tabPage12.Controls.Add(this.groupBox7);
+            this.tabPage12.Controls.Add(this.groupBoxStartService);
+            this.tabPage12.Location = new System.Drawing.Point(4, 22);
+            this.tabPage12.Name = "tabPage12";
+            this.tabPage12.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage12.Size = new System.Drawing.Size(819, 576);
+            this.tabPage12.TabIndex = 3;
+            this.tabPage12.Text = "Текст сообщений на экране";
+            this.tabPage12.UseVisualStyleBackColor = true;
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.richTextEndService);
+            this.groupBox7.Location = new System.Drawing.Point(329, 6);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(317, 215);
+            this.groupBox7.TabIndex = 1;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Текст окончания оказания услуги";
+            // 
+            // richTextEndService
+            // 
+            this.richTextEndService.Location = new System.Drawing.Point(6, 32);
+            this.richTextEndService.Name = "richTextEndService";
+            this.richTextEndService.Size = new System.Drawing.Size(305, 177);
+            this.richTextEndService.TabIndex = 0;
+            this.richTextEndService.Text = "";
+            this.richTextEndService.Leave += new System.EventHandler(this.richTextEndService_Leave);
+            // 
+            // groupBoxStartService
+            // 
+            this.groupBoxStartService.Controls.Add(this.richTextStartService);
+            this.groupBoxStartService.Location = new System.Drawing.Point(6, 6);
+            this.groupBoxStartService.Name = "groupBoxStartService";
+            this.groupBoxStartService.Size = new System.Drawing.Size(317, 215);
+            this.groupBoxStartService.TabIndex = 0;
+            this.groupBoxStartService.TabStop = false;
+            this.groupBoxStartService.Text = "Текст начала оказания услуги";
+            // 
+            // richTextStartService
+            // 
+            this.richTextStartService.Location = new System.Drawing.Point(6, 32);
+            this.richTextStartService.Name = "richTextStartService";
+            this.richTextStartService.Size = new System.Drawing.Size(305, 177);
+            this.richTextStartService.TabIndex = 0;
+            this.richTextStartService.Text = "";
+            this.richTextStartService.Leave += new System.EventHandler(this.richTextStartService_Leave);
+            // 
             // tabPageStatistic
             // 
             this.tabPageStatistic.Location = new System.Drawing.Point(4, 22);
@@ -1841,6 +1900,9 @@
             this.tabPage11.ResumeLayout(false);
             this.tabPage11.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.checkPic)).EndInit();
+            this.tabPage12.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
+            this.groupBoxStartService.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1995,5 +2057,10 @@
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Button Close4;
         private System.Windows.Forms.Button Open4;
+        private System.Windows.Forms.TabPage tabPage12;
+        private System.Windows.Forms.GroupBox groupBoxStartService;
+        private System.Windows.Forms.RichTextBox richTextStartService;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.RichTextBox richTextEndService;
     }
 }

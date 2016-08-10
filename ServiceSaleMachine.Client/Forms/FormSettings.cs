@@ -633,7 +633,9 @@ namespace ServiceSaleMachine.Client
             advert3.Text = Globals.CheckConfiguration.Settings.advert3;
             advert4.Text = Globals.CheckConfiguration.Settings.advert4;
 
-
+            richTextStartService.Text = Globals.ClientConfiguration.Settings.TextStartService;
+            richTextEndService.Text = Globals.ClientConfiguration.Settings.TextEndService;
+        
             init = false;
         }
 
@@ -694,6 +696,8 @@ namespace ServiceSaleMachine.Client
             {
 
             }
+
+            Globals.ClientConfiguration.Save();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -1636,6 +1640,18 @@ namespace ServiceSaleMachine.Client
         private void LightOff2_Click(object sender, EventArgs e)
         {
             data.drivers.SendCloseControl((int)ControlDeviceEnum.light2);
+        }
+
+        private void richTextStartService_Leave(object sender, EventArgs e)
+        {
+            Globals.ClientConfiguration.Settings.TextStartService = richTextStartService.Text;
+            Globals.ClientConfiguration.Save();
+        }
+
+        private void richTextEndService_Leave(object sender, EventArgs e)
+        {
+            Globals.ClientConfiguration.Settings.TextEndService = richTextEndService.Text;
+            Globals.ClientConfiguration.Save();
         }
     }
 }

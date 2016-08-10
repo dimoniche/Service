@@ -61,6 +61,9 @@ namespace ServiceSaleMachine
                         if ((xElement = xSettings.Element("SMSMessageTimeEnd")) != null) Settings.SMSMessageTimeEnd = xElement.Value;
                         if ((xElement = xSettings.Element("SMSMessageNeedCollect")) != null) Settings.SMSMessageNeedCollect = xElement.Value;
 
+                        if ((xElement = xSettings.Element("TextStartService")) != null) Settings.TextStartService = xElement.Value;
+                        if ((xElement = xSettings.Element("TextEndService")) != null) Settings.TextEndService = xElement.Value;
+
                         if ((xElement = xSettings.Element("offHardware")) != null) Settings.offHardware = int.Parse(xElement.Value);
                         if ((xElement = xSettings.Element("offCheck")) != null) Settings.offCheck = int.Parse(xElement.Value);
                         if ((xElement = xSettings.Element("offDataBase")) != null) Settings.offDataBase = int.Parse(xElement.Value);
@@ -133,9 +136,13 @@ namespace ServiceSaleMachine
                 xSettings.Add(new XElement("comPortModem", Settings.comPortModem));
                 xSettings.Add(new XElement("comPortControlSpeed", Settings.comPortControlSpeed.ToString()));
                 xSettings.Add(new XElement("comPortModemSpeed", Settings.comPortModemSpeed.ToString()));
+
                 xSettings.Add(new XElement("numberTelephoneSMS", Settings.numberTelephoneSMS));
                 xSettings.Add(new XElement("SMSMessageTimeEnd", Settings.SMSMessageTimeEnd));
                 xSettings.Add(new XElement("SMSMessageNeedCollect", Settings.SMSMessageNeedCollect));
+
+                xSettings.Add(new XElement("TextStartService", Settings.TextStartService));
+                xSettings.Add(new XElement("TextEndService", Settings.TextEndService));
 
                 xSettings.Add(new XElement("offHardware", Settings.offHardware.ToString()));
                 xSettings.Add(new XElement("offCheck", Settings.offCheck.ToString()));

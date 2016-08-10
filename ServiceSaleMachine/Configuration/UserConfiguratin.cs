@@ -13,12 +13,14 @@ namespace ServiceSaleMachine
         public string UserLogin = "";
         public string UserPassword = "";
         public int Amount;
+        public int ID;
 
         public void Clear()
         {
             UserLogin = "";
             UserPassword = "";
             Amount = 0;
+            ID = 0;
         }
     }
 }

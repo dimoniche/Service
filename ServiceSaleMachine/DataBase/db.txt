@@ -1,0 +1,103 @@
+﻿        /// Получаем данные статистики
+        public MoneyStatistic GetMoneyStatistic()
+		
+        /// Запоминаем данные статистики
+        public void SetMoneyStatistic(MoneyStatistic statistic)
+
+
+        /// получить количество банктот
+        public bool ClearBankNotes()
+
+		
+        /// Внесение банкноты
+        public bool InsertBankNote()
+
+
+        /// получить запись о юзере по его логину и паролю
+        public UserInfo GetUserByName(string User, string Password)
+
+        /// получить инфу о всех устройствах
+        public DataTable GetDevices()
+
+        /// прочитать логи из БД
+        public DataTable GetLogWork()
+
+
+        /// получить инфу о всех юзерах
+        public DataTable GetUsers()
+
+		
+        /// получить список счетов активных
+        public DataTable GetAmount()
+
+
+        /// записать инфу о инкассациях
+        public bool Encashment(int iduser, int Amount)
+
+		
+        /// получить инфу о сумме денег у конкретного юзера, типа сколько на счету
+        public int GetUserMoney(int iduser)
+
+		/// получить деньги на всех счетах
+        public int GetSummFromAccount()
+
+
+        /// записать время работы устройства X от услуги Y
+        public bool WriteWorkTime(int serv, int idDevice, int timeWork)
+        {
+
+
+        /// внести плату от юзера ... 
+        public bool InsertMoney(int userid, int sum)
+
+		
+        /// внести деньги на счёт юзеру
+        public bool AddToAmount(int userid, int sum)
+
+
+        /// добавить пользователя
+        public bool InsertUser(string Login, string Psw)
+
+
+        /// добавление в таблицу check записи 
+        public bool AddToCheck(int userid, int sum, string check)
+
+		
+        /// погасить чек
+        public bool FixedCheck(int id)
+
+
+        /// удалить чек.
+        public bool deleteCheck(int id)
+
+		// найти чек по Id
+        public CheckInfo GetCheckByStr(string check)
+
+
+        /// все чеки
+        public DataTable GetChecks()
+
+
+        /// проверить существование юзера
+        public bool ExistsUser(string User, string Password)
+
+
+        /// узнать сколько денег в аппарате с даты ХХХ (предполагается с даты инкассации, которую выяснять ранее и передадут сюда)
+        public int GetCountMoney(DateTime dt) 
+
+        /// инфа о последней инкассации
+        public DateTime GetLastEncashment() //
+
+
+        /// сколько времени (секунд) девайс отработал с даты Х
+        public int GetWorkTime(int Serv, int Dev, DateTime dt) 
+
+
+        /// дата последнего сервисного обслуживания устройства Х от услуги У
+        public DateTime GetLastRefreshTime(int Serv, int Dev) //
+
+		// получить все платежи от юзера
+        public DataTable GetPaymentFromUser(int iduser)
+
+		
+		А вы кто по профессии? Чему обучены?

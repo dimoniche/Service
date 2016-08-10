@@ -113,7 +113,8 @@ namespace ServiceSaleMachine.Client
             {
                 // вернем вниз ID пользователя
                 UserInfo ui = GlobalDb.GlobalBase.GetUserByName(Globals.UserConfiguration.UserLogin, Globals.UserConfiguration.UserPassword);
-                data.CurrentUserId = ui.Id;
+                if ( ui != null)
+                { data.CurrentUserId = ui.Id; }
 
                 Params.Result = data;
             }

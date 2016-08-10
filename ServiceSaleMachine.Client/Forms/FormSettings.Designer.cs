@@ -110,7 +110,9 @@
             this.resSMS = new System.Windows.Forms.Label();
             this.cBxSpeedModem = new System.Windows.Forms.ComboBox();
             this.groupBxSettingModem = new System.Windows.Forms.GroupBox();
+            this.label24 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
+            this.textNeedCollect = new System.Windows.Forms.TextBox();
             this.textSMSTimeEnd = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
             this.textNumberPhone = new System.Windows.Forms.TextBox();
@@ -139,6 +141,9 @@
             this.cBxoffModem = new System.Windows.Forms.CheckBox();
             this.cbxOffHardware = new System.Windows.Forms.CheckBox();
             this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.textMaxCountBanknote = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
@@ -159,11 +164,6 @@
             this.secondfirmsname = new System.Windows.Forms.TextBox();
             this.firmsname = new System.Windows.Forms.TextBox();
             this.checkPic = new System.Windows.Forms.PictureBox();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.label23 = new System.Windows.Forms.Label();
-            this.textMaxCountBanknote = new System.Windows.Forms.TextBox();
-            this.label24 = new System.Windows.Forms.Label();
-            this.textNeedCollect = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -185,12 +185,12 @@
             this.tabSettingService.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.tabPage9.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage11.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.checkPic)).BeginInit();
-            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -201,7 +201,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(728, 587);
+            this.tabControl1.Size = new System.Drawing.Size(841, 634);
             this.tabControl1.TabIndex = 0;
             // 
             // DeviceSettings
@@ -210,7 +210,7 @@
             this.DeviceSettings.Location = new System.Drawing.Point(4, 22);
             this.DeviceSettings.Name = "DeviceSettings";
             this.DeviceSettings.Padding = new System.Windows.Forms.Padding(3);
-            this.DeviceSettings.Size = new System.Drawing.Size(720, 561);
+            this.DeviceSettings.Size = new System.Drawing.Size(833, 608);
             this.DeviceSettings.TabIndex = 0;
             this.DeviceSettings.Text = "Оборудование";
             this.DeviceSettings.UseVisualStyleBackColor = true;
@@ -227,7 +227,7 @@
             this.tabControl2.Location = new System.Drawing.Point(3, 3);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(714, 555);
+            this.tabControl2.Size = new System.Drawing.Size(827, 602);
             this.tabControl2.TabIndex = 0;
             // 
             // tabPage1
@@ -865,7 +865,7 @@
             this.tabViewDataBase.Location = new System.Drawing.Point(4, 22);
             this.tabViewDataBase.Name = "tabViewDataBase";
             this.tabViewDataBase.Padding = new System.Windows.Forms.Padding(3);
-            this.tabViewDataBase.Size = new System.Drawing.Size(706, 529);
+            this.tabViewDataBase.Size = new System.Drawing.Size(819, 576);
             this.tabViewDataBase.TabIndex = 4;
             this.tabViewDataBase.Text = "База данных";
             this.tabViewDataBase.UseVisualStyleBackColor = true;
@@ -878,7 +878,7 @@
             this.tabDataBaseSetting.Location = new System.Drawing.Point(3, 3);
             this.tabDataBaseSetting.Name = "tabDataBaseSetting";
             this.tabDataBaseSetting.SelectedIndex = 0;
-            this.tabDataBaseSetting.Size = new System.Drawing.Size(700, 523);
+            this.tabDataBaseSetting.Size = new System.Drawing.Size(813, 570);
             this.tabDataBaseSetting.TabIndex = 0;
             // 
             // tabPage7
@@ -898,7 +898,7 @@
             this.tabPage8.Location = new System.Drawing.Point(4, 22);
             this.tabPage8.Name = "tabPage8";
             this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage8.Size = new System.Drawing.Size(692, 497);
+            this.tabPage8.Size = new System.Drawing.Size(805, 544);
             this.tabPage8.TabIndex = 1;
             this.tabPage8.Text = "Просмотр";
             this.tabPage8.UseVisualStyleBackColor = true;
@@ -909,7 +909,7 @@
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 107);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(686, 387);
+            this.dataGridView1.Size = new System.Drawing.Size(799, 434);
             this.dataGridView1.TabIndex = 1;
             // 
             // panel1
@@ -927,7 +927,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(686, 104);
+            this.panel1.Size = new System.Drawing.Size(799, 104);
             this.panel1.TabIndex = 0;
             // 
             // button12
@@ -1081,6 +1081,15 @@
             this.groupBxSettingModem.TabStop = false;
             this.groupBxSettingModem.Text = "Настройки модема";
             // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(18, 99);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(213, 13);
+            this.label24.TabIndex = 2;
+            this.label24.Text = "Текст СМС онеобходимости инкассации";
+            // 
             // label22
             // 
             this.label22.AutoSize = true;
@@ -1089,6 +1098,14 @@
             this.label22.Size = new System.Drawing.Size(228, 13);
             this.label22.TabIndex = 1;
             this.label22.Text = "Текст СМС с сообщ о превышения ресурса";
+            // 
+            // textNeedCollect
+            // 
+            this.textNeedCollect.Location = new System.Drawing.Point(133, 115);
+            this.textNeedCollect.Name = "textNeedCollect";
+            this.textNeedCollect.Size = new System.Drawing.Size(181, 20);
+            this.textNeedCollect.TabIndex = 0;
+            this.textNeedCollect.Leave += new System.EventHandler(this.textNeedCollect_Leave);
             // 
             // textSMSTimeEnd
             // 
@@ -1384,6 +1401,35 @@
             this.tabPage9.Text = "Прием купюр";
             this.tabPage9.UseVisualStyleBackColor = true;
             // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.textMaxCountBanknote);
+            this.groupBox6.Controls.Add(this.label23);
+            this.groupBox6.Location = new System.Drawing.Point(282, 20);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(351, 161);
+            this.groupBox6.TabIndex = 3;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Лимиты";
+            // 
+            // textMaxCountBanknote
+            // 
+            this.textMaxCountBanknote.Location = new System.Drawing.Point(215, 12);
+            this.textMaxCountBanknote.Name = "textMaxCountBanknote";
+            this.textMaxCountBanknote.Size = new System.Drawing.Size(130, 20);
+            this.textMaxCountBanknote.TabIndex = 1;
+            this.textMaxCountBanknote.Text = "500";
+            this.textMaxCountBanknote.Leave += new System.EventHandler(this.textMaxCountBanknote_Leave);
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(20, 19);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(178, 13);
+            this.label23.TabIndex = 0;
+            this.label23.Text = "Количество банкнот в приемнике";
+            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.checkBox4);
@@ -1599,57 +1645,11 @@
             this.checkPic.TabIndex = 0;
             this.checkPic.TabStop = false;
             // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.textMaxCountBanknote);
-            this.groupBox6.Controls.Add(this.label23);
-            this.groupBox6.Location = new System.Drawing.Point(282, 20);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(351, 161);
-            this.groupBox6.TabIndex = 3;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Лимиты";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(20, 19);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(178, 13);
-            this.label23.TabIndex = 0;
-            this.label23.Text = "Количество банкнот в приемнике";
-            // 
-            // textMaxCountBanknote
-            // 
-            this.textMaxCountBanknote.Location = new System.Drawing.Point(215, 12);
-            this.textMaxCountBanknote.Name = "textMaxCountBanknote";
-            this.textMaxCountBanknote.Size = new System.Drawing.Size(130, 20);
-            this.textMaxCountBanknote.TabIndex = 1;
-            this.textMaxCountBanknote.Text = "500";
-            this.textMaxCountBanknote.Leave += new System.EventHandler(this.textMaxCountBanknote_Leave);
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(18, 99);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(213, 13);
-            this.label24.TabIndex = 2;
-            this.label24.Text = "Текст СМС онеобходимости инкассации";
-            // 
-            // textNeedCollect
-            // 
-            this.textNeedCollect.Location = new System.Drawing.Point(133, 115);
-            this.textNeedCollect.Name = "textNeedCollect";
-            this.textNeedCollect.Size = new System.Drawing.Size(181, 20);
-            this.textNeedCollect.TabIndex = 0;
-            this.textNeedCollect.Leave += new System.EventHandler(this.textNeedCollect_Leave);
-            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(728, 587);
+            this.ClientSize = new System.Drawing.Size(841, 634);
             this.Controls.Add(this.tabControl1);
             this.Name = "FormSettings";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -1685,6 +1685,8 @@
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.tabPage9.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -1694,8 +1696,6 @@
             this.tabPage11.ResumeLayout(false);
             this.tabPage11.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.checkPic)).EndInit();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
 
         }

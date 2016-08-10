@@ -115,6 +115,15 @@ namespace ServiceSaleMachine
 
             ExecuteNonQuery(query);
 
+            // -------------- таблица системных значений
+            query = "CREATE TABLE IF NOT EXISTS `systemvalues` ( `namevalue` string(255) NOT NULL , "+
+                "value string(255) NOT NULL" +
+                    ") ENGINE = InnoDB DEFAULT CHARSET = cp866;  SET FOREIGN_KEY_CHECKS = 1";
+
+            ExecuteNonQuery(query);
+
+            FillSystemValues();
+
 
             if (needCreate)
             {
@@ -151,12 +160,41 @@ namespace ServiceSaleMachine
                               "`dt_fixed` datetime ON UPDATE CURRENT_TIMESTAMP, " +
                               "`checkstr` varchar(255) NOT NULL, "+
                               "`iduser` int(11)," +
-                              "active boolean DEFAULT 0, "+
+                              "`number` int(11)," +
+                              "active boolean DEFAULT 0, " +
                               "`amount` int(11) NOT NULL," +
                               "PRIMARY KEY(`id`)) ENGINE = InnoDB DEFAULT CHARSET = cp866;  SET FOREIGN_KEY_CHECKS = 1";
             return true;
         }
 
+        private String GetSystemValue(string name)
+        {
+            MySqlDataReader dr = Execute("'select namevalue, value from systemvalues where namevalue='"+name);
+            if (dr != null)
+            {
+                if (!dr.HasRows)
+                {
+                    dr.Read();
+                    String str = dr[1].ToString();
+                    dr.Close();
+                    return str;
+                }
+            }
+            return "";
+        }
+        private void FillSystemValues()
+        {
+            String str = GetSystemValue("nextnumbercheck");
+            MySqlDataReader dsv = Execute("'select * from systemvalues where namevalue='nextnumbercheck')");
+            if (dsv != null)
+            {
+                if (!dsv.HasRows)
+                {
+                    string query = "insert into systemvalues (namevalue, value) values ('nextnumbercheck', 0)";
+                    ExecuteNonQuery(query);
+                }
+            }
+        }
         /// <summary>
         /// Получаем данные статистики
         /// </summary>
@@ -188,10 +226,8 @@ namespace ServiceSaleMachine
 
             try
             {
-                using (MySqlDataReader dr = com.ExecuteReader())
-                {
-                    return dr;
-                }
+                MySqlDataReader dr = com.ExecuteReader();
+                return dr;
             }
             catch (Exception ex)
             {
@@ -224,21 +260,37 @@ namespace ServiceSaleMachine
         /// <returns></returns>
         private int GetIntFromReq(MySqlDataReader dr )
         {
+            string str = "0";
             if (dr != null)
             {
                 if (dr.HasRows)
                 {
                     dr.Read();
-                    string str = dr[0].ToString();
-                    dr.Close();
-                    return int.Parse(str);
+                    if (dr.HasRows && dr.Depth > 0 && dr.IsDBNull(0) != true)
+                    {
+                        str = dr[0].ToString();
+                    }
                 }
-                return 0;
+                dr.Close();
             }
-            else
+            return int.Parse(str);
+        }
+        private DateTime GetDTFromReq(MySqlDataReader dr)
+        {
+            DateTime dt = new DateTime(2016, 07, 01); ;
+            if (dr != null)
             {
-                return 0;
+                if (dr.HasRows)
+                {
+                    dr.Read();
+                    if (dr.HasRows && dr.Depth > 0 && dr.IsDBNull(0) != true)
+                    {
+                        dt = (DateTime) dr[0];
+                    }
+                }
+                dr.Close();
             }
+            return dt;
         }
         /// <summary>
         /// подсчитать деньги на незакрытых штрихкодах
@@ -248,7 +300,7 @@ namespace ServiceSaleMachine
         {
             if (Globals.ClientConfiguration.Settings.offDataBase == 1) return 0;
 
-            MySqlDataReader dr = Execute("select count(id) from checks where active = 0");
+            MySqlDataReader dr = Execute("select sum(id) from checks where active = 0");
 
             return GetIntFromReq(dr);
 
@@ -526,6 +578,27 @@ namespace ServiceSaleMachine
             return ExecuteNonQuery(query);
 
         }
+
+        public int GetCurrentNumberCheck() //
+        {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return 0;
+
+            string queryString = "";//"select namevalues, value from  from systemvalues where " +
+         //        "(idserv = " + Serv.ToString() + ") and (iddev = " + Dev.ToString() + ")";
+
+
+            MySqlDataReader dr = Execute(queryString);
+            if (dr != null)
+            {
+                if (dr.HasRows)
+                {
+                    dr.Read();
+                    if (dr.HasRows && dr.Depth > 0 && dr.IsDBNull(0) != true)
+                        return (int)dr[0];
+                }
+            }
+            return 0;
+        }
         /// <summary>
         /// добавление в таблицу check записи 
         /// </summary>
@@ -536,9 +609,9 @@ namespace ServiceSaleMachine
         public bool AddToCheck(int userid, int sum, string check)
         {
             if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
-
-            string query = "INSERT INTO checks (iduser, amount, checkstr, dt_create) VALUES ("
-                + userid.ToString() + "," + sum.ToString() + ",'" + check +"','" +
+            int nc = GetCurrentNumberCheck();
+            string query = "INSERT INTO checks (iduser, amount, checkstr, number, dt_create) VALUES ("
+                + userid.ToString() + "," + sum.ToString() + ",'" + check +"','" + nc.ToString() + ","+
                   DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
 
             return ExecuteNonQuery(query);
@@ -662,19 +735,9 @@ namespace ServiceSaleMachine
             if (Globals.ClientConfiguration.Settings.offDataBase == 1) return new DateTime(2016, 07, 01);
 
             string queryString = "select max(datetime) as dt from encashment";
-
-
             MySqlDataReader dr = Execute(queryString);
-            if (dr != null)
-            {
-                if (dr.HasRows)
-                {
-                    dr.Read();
+            return GetDTFromReq(dr);
 
-                    return (DateTime) dr[0];
-                }
-            }
-            return new DateTime(2016, 07, 01); 
 
         }
 
@@ -710,19 +773,9 @@ namespace ServiceSaleMachine
 
             string queryString = "select max(datetime) as dt from refreshdevices where " +
                  "(idserv = " + Serv.ToString() + ") and (iddev = " + Dev.ToString() + ")";
-
-
             MySqlDataReader dr = Execute(queryString);
-            if (dr != null)
-            {
-                if (dr.HasRows)
-                {
-                    dr.Read();
+            return GetDTFromReq(dr);
 
-                    return (DateTime) dr[0];
-                }
-            }
-            return new DateTime(2016, 07, 01);
         }
         /// <summary>
         /// Платежи от конкретного юзера

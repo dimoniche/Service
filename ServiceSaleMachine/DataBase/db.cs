@@ -781,7 +781,7 @@ namespace ServiceSaleMachine
         {
             if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
 
-            string query = "INSERT INTO refreshdevices (idserv, iddev, datetime) VALUES (" + serv.ToString() + "," + idDevice.ToString() + "," +
+            string query = "INSERT INTO refreshdevices (idserv, iddev, iduser, datetime) VALUES (" + serv.ToString() + "," + idDevice.ToString() + "," + "0" + ",'" +
                   DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
 
             return ExecuteNonQuery(query);

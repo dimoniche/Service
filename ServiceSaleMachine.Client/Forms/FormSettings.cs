@@ -647,6 +647,11 @@ namespace ServiceSaleMachine.Client
 
             textBoxMaxTimeService.Text = Globals.ClientConfiguration.Settings.limitServiceTime.ToString();
 
+            DateTime dt = GlobalDb.GlobalBase.GetLastRefreshTime();
+
+            labelTimeLastRefresh.Text = "Время последнего обслуживания: " + dt.ToString();
+            labelWorkFromLastRefresh.Text = "Всего проработали со времени последнего обслуживания: " + GlobalDb.GlobalBase.GetWorkTime(dt).ToString();
+
             init = false;
         }
 
@@ -1634,6 +1639,42 @@ namespace ServiceSaleMachine.Client
 
             Globals.ClientConfiguration.Settings.limitServiceTime = time;
             Globals.ClientConfiguration.Save();
+        }
+
+        private void buttonResetTimeRefresh_Click(object sender, EventArgs e)
+        {
+            // обслужили устройство
+            GlobalDb.GlobalBase.WriteRefreshTime(1,1);
+
+            DateTime dt = GlobalDb.GlobalBase.GetLastRefreshTime();
+
+            labelTimeLastRefresh.Text = "Время последнего обслуживания: " + dt.ToString();
+            labelWorkFromLastRefresh.Text = "Всего проработали со времени последнего обслуживания: " + GlobalDb.GlobalBase.GetWorkTime(dt).ToString();
+        }
+
+        private void button13_Click_1(object sender, EventArgs e)
+        {
+            // запишем инфу о последнем обслуживании и инкасации
+            DateTime dt = GlobalDb.GlobalBase.GetLastEncashment();
+
+            int countmoney = 0;
+            if (dt != null)
+            {
+                countmoney = GlobalDb.GlobalBase.GetCountMoney(dt);
+            }
+            else
+            {
+                countmoney = GlobalDb.GlobalBase.GetCountMoney(new DateTime(2000, 1, 1));
+            }
+
+            // запишем сколько инкассировали и обновим время инкасации
+            GlobalDb.GlobalBase.Encashment(data.CurrentUserId, countmoney);
+
+            // очистим накопленные банктноты
+            GlobalDb.GlobalBase.ClearBankNotes();
+
+            // печатаем чек
+            data.drivers.printer.PrintCheckСollection(data.statistic);
         }
     }
 }

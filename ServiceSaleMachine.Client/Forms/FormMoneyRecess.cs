@@ -91,6 +91,9 @@ namespace ServiceSaleMachine.Client
             // очистим накопленные банктноты
             GlobalDb.GlobalBase.ClearBankNotes();
 
+            // печатаем чек
+            data.drivers.printer.PrintCheckСollection(data.statistic);
+
             data.drivers.ReceivedResponse -= reciveResponse;
             Params.Result = data;
         }

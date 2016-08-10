@@ -178,6 +178,19 @@
             this.groupBoxStartService = new System.Windows.Forms.GroupBox();
             this.richTextStartService = new System.Windows.Forms.RichTextBox();
             this.tabPageStatistic = new System.Windows.Forms.TabPage();
+            this.tabPageChecking = new System.Windows.Forms.TabPage();
+            this.tabControl4 = new System.Windows.Forms.TabControl();
+            this.tabPageReacess = new System.Windows.Forms.TabPage();
+            this.buttonEncashment = new System.Windows.Forms.Button();
+            this.tabPage14 = new System.Windows.Forms.TabPage();
+            this.labelTimeLastRefresh = new System.Windows.Forms.Label();
+            this.labelWorkFromLastRefresh = new System.Windows.Forms.Label();
+            this.buttonResetTimeRefresh = new System.Windows.Forms.Button();
+            this.labelAllMoneySumm = new System.Windows.Forms.Label();
+            this.labelAccountMoneySumm = new System.Windows.Forms.Label();
+            this.labelBarCodeMoneySumm = new System.Windows.Forms.Label();
+            this.labelServiceMoneySumm = new System.Windows.Forms.Label();
+            this.labelCountBankNote = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -209,6 +222,10 @@
             this.tabPage12.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBoxStartService.SuspendLayout();
+            this.tabPageChecking.SuspendLayout();
+            this.tabControl4.SuspendLayout();
+            this.tabPageReacess.SuspendLayout();
+            this.tabPage14.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -216,6 +233,7 @@
             this.tabControl1.Controls.Add(this.DeviceSettings);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPageStatistic);
+            this.tabControl1.Controls.Add(this.tabPageChecking);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -1812,6 +1830,140 @@
             this.tabPageStatistic.Text = "Статистика";
             this.tabPageStatistic.UseVisualStyleBackColor = true;
             // 
+            // tabPageChecking
+            // 
+            this.tabPageChecking.Controls.Add(this.tabControl4);
+            this.tabPageChecking.Location = new System.Drawing.Point(4, 22);
+            this.tabPageChecking.Name = "tabPageChecking";
+            this.tabPageChecking.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageChecking.Size = new System.Drawing.Size(833, 608);
+            this.tabPageChecking.TabIndex = 3;
+            this.tabPageChecking.Text = "Обслуживание";
+            this.tabPageChecking.UseVisualStyleBackColor = true;
+            // 
+            // tabControl4
+            // 
+            this.tabControl4.Controls.Add(this.tabPageReacess);
+            this.tabControl4.Controls.Add(this.tabPage14);
+            this.tabControl4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl4.Location = new System.Drawing.Point(3, 3);
+            this.tabControl4.Name = "tabControl4";
+            this.tabControl4.SelectedIndex = 0;
+            this.tabControl4.Size = new System.Drawing.Size(827, 602);
+            this.tabControl4.TabIndex = 0;
+            // 
+            // tabPageReacess
+            // 
+            this.tabPageReacess.Controls.Add(this.labelCountBankNote);
+            this.tabPageReacess.Controls.Add(this.labelServiceMoneySumm);
+            this.tabPageReacess.Controls.Add(this.labelBarCodeMoneySumm);
+            this.tabPageReacess.Controls.Add(this.labelAccountMoneySumm);
+            this.tabPageReacess.Controls.Add(this.labelAllMoneySumm);
+            this.tabPageReacess.Controls.Add(this.buttonEncashment);
+            this.tabPageReacess.Location = new System.Drawing.Point(4, 22);
+            this.tabPageReacess.Name = "tabPageReacess";
+            this.tabPageReacess.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageReacess.Size = new System.Drawing.Size(819, 576);
+            this.tabPageReacess.TabIndex = 0;
+            this.tabPageReacess.Text = "Инкассация";
+            this.tabPageReacess.UseVisualStyleBackColor = true;
+            // 
+            // buttonEncashment
+            // 
+            this.buttonEncashment.Location = new System.Drawing.Point(35, 177);
+            this.buttonEncashment.Name = "buttonEncashment";
+            this.buttonEncashment.Size = new System.Drawing.Size(201, 23);
+            this.buttonEncashment.TabIndex = 1;
+            this.buttonEncashment.Text = "Обновить время инкассации";
+            this.buttonEncashment.UseVisualStyleBackColor = true;
+            this.buttonEncashment.Click += new System.EventHandler(this.button13_Click_1);
+            // 
+            // tabPage14
+            // 
+            this.tabPage14.Controls.Add(this.labelTimeLastRefresh);
+            this.tabPage14.Controls.Add(this.labelWorkFromLastRefresh);
+            this.tabPage14.Controls.Add(this.buttonResetTimeRefresh);
+            this.tabPage14.Location = new System.Drawing.Point(4, 22);
+            this.tabPage14.Name = "tabPage14";
+            this.tabPage14.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage14.Size = new System.Drawing.Size(819, 576);
+            this.tabPage14.TabIndex = 1;
+            this.tabPage14.Text = "Расходники";
+            this.tabPage14.UseVisualStyleBackColor = true;
+            // 
+            // labelTimeLastRefresh
+            // 
+            this.labelTimeLastRefresh.AutoSize = true;
+            this.labelTimeLastRefresh.Location = new System.Drawing.Point(23, 30);
+            this.labelTimeLastRefresh.Name = "labelTimeLastRefresh";
+            this.labelTimeLastRefresh.Size = new System.Drawing.Size(238, 13);
+            this.labelTimeLastRefresh.TabIndex = 1;
+            this.labelTimeLastRefresh.Text = "Время последнего обслуживания: 01.01.2016";
+            // 
+            // labelWorkFromLastRefresh
+            // 
+            this.labelWorkFromLastRefresh.AutoSize = true;
+            this.labelWorkFromLastRefresh.Location = new System.Drawing.Point(23, 52);
+            this.labelWorkFromLastRefresh.Name = "labelWorkFromLastRefresh";
+            this.labelWorkFromLastRefresh.Size = new System.Drawing.Size(340, 13);
+            this.labelWorkFromLastRefresh.TabIndex = 1;
+            this.labelWorkFromLastRefresh.Text = "Всего проработали со времени последнего обслуживания: 0 мин";
+            // 
+            // buttonResetTimeRefresh
+            // 
+            this.buttonResetTimeRefresh.Location = new System.Drawing.Point(26, 125);
+            this.buttonResetTimeRefresh.Name = "buttonResetTimeRefresh";
+            this.buttonResetTimeRefresh.Size = new System.Drawing.Size(201, 23);
+            this.buttonResetTimeRefresh.TabIndex = 0;
+            this.buttonResetTimeRefresh.Text = "Обновить время обслуживания";
+            this.buttonResetTimeRefresh.UseVisualStyleBackColor = true;
+            this.buttonResetTimeRefresh.Click += new System.EventHandler(this.buttonResetTimeRefresh_Click);
+            // 
+            // labelAllMoneySumm
+            // 
+            this.labelAllMoneySumm.AutoSize = true;
+            this.labelAllMoneySumm.Location = new System.Drawing.Point(32, 34);
+            this.labelAllMoneySumm.Name = "labelAllMoneySumm";
+            this.labelAllMoneySumm.Size = new System.Drawing.Size(124, 13);
+            this.labelAllMoneySumm.TabIndex = 2;
+            this.labelAllMoneySumm.Text = "Сумма принятых денег";
+            // 
+            // labelAccountMoneySumm
+            // 
+            this.labelAccountMoneySumm.AutoSize = true;
+            this.labelAccountMoneySumm.Location = new System.Drawing.Point(32, 56);
+            this.labelAccountMoneySumm.Name = "labelAccountMoneySumm";
+            this.labelAccountMoneySumm.Size = new System.Drawing.Size(142, 13);
+            this.labelAccountMoneySumm.TabIndex = 2;
+            this.labelAccountMoneySumm.Text = "Cумма денег на аккаунтах";
+            // 
+            // labelBarCodeMoneySumm
+            // 
+            this.labelBarCodeMoneySumm.AutoSize = true;
+            this.labelBarCodeMoneySumm.Location = new System.Drawing.Point(32, 79);
+            this.labelBarCodeMoneySumm.Name = "labelBarCodeMoneySumm";
+            this.labelBarCodeMoneySumm.Size = new System.Drawing.Size(170, 13);
+            this.labelBarCodeMoneySumm.TabIndex = 2;
+            this.labelBarCodeMoneySumm.Text = "Cумма денег на штрихкод-чеках";
+            // 
+            // labelServiceMoneySumm
+            // 
+            this.labelServiceMoneySumm.AutoSize = true;
+            this.labelServiceMoneySumm.Location = new System.Drawing.Point(32, 101);
+            this.labelServiceMoneySumm.Name = "labelServiceMoneySumm";
+            this.labelServiceMoneySumm.Size = new System.Drawing.Size(131, 13);
+            this.labelServiceMoneySumm.TabIndex = 2;
+            this.labelServiceMoneySumm.Text = "Oказано услуг на сумму";
+            // 
+            // labelCountBankNote
+            // 
+            this.labelCountBankNote.AutoSize = true;
+            this.labelCountBankNote.Location = new System.Drawing.Point(32, 124);
+            this.labelCountBankNote.Name = "labelCountBankNote";
+            this.labelCountBankNote.Size = new System.Drawing.Size(161, 13);
+            this.labelCountBankNote.TabIndex = 2;
+            this.labelCountBankNote.Text = "Количество принятых банкнот";
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1867,6 +2019,12 @@
             this.tabPage12.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
             this.groupBoxStartService.ResumeLayout(false);
+            this.tabPageChecking.ResumeLayout(false);
+            this.tabControl4.ResumeLayout(false);
+            this.tabPageReacess.ResumeLayout(false);
+            this.tabPageReacess.PerformLayout();
+            this.tabPage14.ResumeLayout(false);
+            this.tabPage14.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2023,5 +2181,18 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox textBoxMaxTimeService;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TabPage tabPageChecking;
+        private System.Windows.Forms.TabControl tabControl4;
+        private System.Windows.Forms.TabPage tabPageReacess;
+        private System.Windows.Forms.TabPage tabPage14;
+        private System.Windows.Forms.Label labelTimeLastRefresh;
+        private System.Windows.Forms.Label labelWorkFromLastRefresh;
+        private System.Windows.Forms.Button buttonResetTimeRefresh;
+        private System.Windows.Forms.Button buttonEncashment;
+        private System.Windows.Forms.Label labelAllMoneySumm;
+        private System.Windows.Forms.Label labelAccountMoneySumm;
+        private System.Windows.Forms.Label labelBarCodeMoneySumm;
+        private System.Windows.Forms.Label labelServiceMoneySumm;
+        private System.Windows.Forms.Label labelCountBankNote;
     }
 }

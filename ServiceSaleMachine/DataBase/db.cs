@@ -266,7 +266,7 @@ namespace ServiceSaleMachine
                 if (dr.HasRows)
                 {
                     dr.Read();
-                    if (dr.HasRows && dr.Depth > 0 && dr.IsDBNull(0) != true)
+                    if (dr.HasRows && dr.IsDBNull(0) != true)
                     {
                         str = dr[0].ToString();
                     }
@@ -283,7 +283,7 @@ namespace ServiceSaleMachine
                 if (dr.HasRows)
                 {
                     dr.Read();
-                    if (dr.HasRows && dr.Depth > 0 && dr.IsDBNull(0) != true)
+                    if (dr.HasRows && dr.IsDBNull(0) != true)
                     {
                         dt = (DateTime) dr[0];
                     }
@@ -481,7 +481,7 @@ namespace ServiceSaleMachine
         {
             if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
 
-            string query = "INSERT INTO encashment (iduser, amount, datetime) VALUES (" + iduser.ToString() + "," + amount.ToString() + "," +
+            string query = "INSERT INTO encashment (iduser, amount, datetime) VALUES (" + iduser.ToString() + "," + amount.ToString() + ",'" +
                   DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
 
             Debug.Print(query);
@@ -543,7 +543,7 @@ namespace ServiceSaleMachine
         {
             if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
 
-            string query = "INSERT INTO payments (iduser, amount, datetime) VALUES (" + userid.ToString() + "," + sum.ToString() + ","
+            string query = "INSERT INTO payments (iduser, amount, datetime) VALUES (" + userid.ToString() + "," + sum.ToString() + ",'"
                   + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
 
             return ExecuteNonQuery(query);
@@ -611,7 +611,7 @@ namespace ServiceSaleMachine
             if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
             int nc = GetCurrentNumberCheck();
             string query = "INSERT INTO checks (iduser, amount, checkstr, number, dt_create) VALUES ("
-                + userid.ToString() + "," + sum.ToString() + ",'" + check +"','" + nc.ToString() + ","+
+                + userid.ToString() + "," + sum.ToString() + ",'" + check +"','" + nc.ToString() + ",'"+
                   DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
 
             return ExecuteNonQuery(query);

@@ -325,6 +325,24 @@ namespace ServiceSaleMachine.Client
                 }
             }
 
+            if (!(Globals.ClientConfiguration.Settings.offHardware == 0 && Globals.ClientConfiguration.Settings.offBill == 0))
+            {
+                // отладка
+                // запомним принятую сумму
+                data.statistic.AllMoneySumm += 100;
+                // запомним на сколько оказали услуг
+                data.statistic.ServiceMoneySumm += data.serv.price;
+                // Количество банкнот
+                data.statistic.CountBankNote++;
+
+                // Запомним в базе
+                GlobalDb.GlobalBase.SetMoneyStatistic(data.statistic);
+                // заносим в базу платеж
+                GlobalDb.GlobalBase.InsertMoney(data.CurrentUserId, 100);
+                // заносим банкноту
+                GlobalDb.GlobalBase.InsertBankNote();
+            }
+
             this.Close();
         }
 

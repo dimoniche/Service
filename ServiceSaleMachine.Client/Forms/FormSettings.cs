@@ -647,10 +647,17 @@ namespace ServiceSaleMachine.Client
 
             textBoxMaxTimeService.Text = Globals.ClientConfiguration.Settings.limitServiceTime.ToString();
 
-            DateTime dt = GlobalDb.GlobalBase.GetLastRefreshTime(1,1);
+            DateTime dt = GlobalDb.GlobalBase.GetLastRefreshTime();
 
             labelTimeLastRefresh.Text = "Время последнего обслуживания: " + dt.ToString();
-            labelWorkFromLastRefresh.Text = "Всего проработали со времени последнего обслуживания: " + GlobalDb.GlobalBase.GetWorkTime(dt).ToString();
+            labelWorkFromLastRefresh.Text = "Всего проработали со времени последнего обслуживания: " + GlobalDb.GlobalBase.GetWorkTime(dt).ToString() + " мин";
+
+            labelAllMoneySumm.Text = "Сумма принятых денег " + data.statistic.AllMoneySumm.ToString() + " руб.";
+            labelAccountMoneySumm.Text = "Cумма денег на аккаунтах " + data.statistic.AccountMoneySumm.ToString() + " руб.";
+            labelBarCodeMoneySumm.Text = "Cумма денег на штрихкод-чеках " + data.statistic.BarCodeMoneySumm.ToString() + " руб.";
+            labelServiceMoneySumm.Text = "Cумма денег на штрихкод-чеках " + data.statistic.ServiceMoneySumm.ToString() + " руб.";
+            labelServiceMoneySumm.Text = "Oказано услуг на сумму " + data.statistic.ServiceMoneySumm.ToString() + " руб.";
+            labelCountBankNote.Text = "Количество принятых банкнот " + data.statistic.CountBankNote.ToString() + " шт.";
 
             init = false;
         }
@@ -1646,7 +1653,7 @@ namespace ServiceSaleMachine.Client
             // обслужили устройство
             GlobalDb.GlobalBase.WriteRefreshTime(1,1);
 
-            DateTime dt = GlobalDb.GlobalBase.GetLastRefreshTime(1,1);
+            DateTime dt = GlobalDb.GlobalBase.GetLastRefreshTime();
 
             labelTimeLastRefresh.Text = "Время последнего обслуживания: " + dt.ToString();
             labelWorkFromLastRefresh.Text = "Всего проработали со времени последнего обслуживания: " + GlobalDb.GlobalBase.GetWorkTime(dt).ToString();

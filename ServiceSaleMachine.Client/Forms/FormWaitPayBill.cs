@@ -191,7 +191,7 @@ namespace ServiceSaleMachine.Client
                                 data.statistic.AccountMoneySumm += diff;
 
                                 // внесем на счет
-                                GlobalDb.GlobalBase.InsertMoney(data.CurrentUserId, diff);
+                                GlobalDb.GlobalBase.AddToAmount(data.CurrentUserId, diff);
                             }
                             else
                             {

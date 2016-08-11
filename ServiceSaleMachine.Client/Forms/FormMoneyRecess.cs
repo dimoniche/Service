@@ -30,6 +30,9 @@ namespace ServiceSaleMachine.Client
 
             // 
             moneySumm.Text = "Сумма денег в кассете: " + data.statistic.AllMoneySumm + " руб";
+
+            // печатаем чек c инкассацией
+            data.drivers.printer.PrintCheckСollection(data.statistic);
         }
 
         private void reciveResponse(object sender, ServiceClientResponseEventArgs e)
@@ -90,9 +93,6 @@ namespace ServiceSaleMachine.Client
 
             // очистим накопленные банктноты
             GlobalDb.GlobalBase.ClearBankNotes();
-
-            // печатаем чек
-            data.drivers.printer.PrintCheckСollection(data.statistic);
 
             data.drivers.ReceivedResponse -= reciveResponse;
             Params.Result = data;

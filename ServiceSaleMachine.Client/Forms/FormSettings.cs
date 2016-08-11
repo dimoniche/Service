@@ -348,6 +348,18 @@ namespace ServiceSaleMachine.Client
             butReadStatus.Enabled = state;
         }
 
+        /// <summary>
+        /// Установка контролов относящихся к сканеру
+        /// </summary>
+        /// <param name="state"></param>
+        void SetStateScaner(bool state)
+        {
+            buttonStartScanerPoll.Enabled = state;
+            buttonStopScanerPoll.Enabled = state;
+            cBxComPortScaner.Enabled = state;
+            butWriteComPortScaner.Enabled = state;
+        }
+
         void ReLoad()
         {
             init = true;
@@ -404,17 +416,11 @@ namespace ServiceSaleMachine.Client
                             data.drivers.scaner.openPort((string)cBxComPortScaner.Items[cBxComPortScaner.SelectedIndex]);
                         }
 
-                        buttonStartScanerPoll.Enabled = true;
-                        buttonStopScanerPoll.Enabled = true;
-                        cBxComPortScaner.Enabled = true;
-                        butWriteComPortScaner.Enabled = true;
+                        SetStateScaner(true);
                     }
                     else
                     {
-                        buttonStartScanerPoll.Enabled = false;
-                        buttonStopScanerPoll.Enabled = false;
-                        cBxComPortScaner.Enabled = false;
-                        butWriteComPortScaner.Enabled = false;
+                        SetStateScaner(false);
                     }
 
                     if (Globals.ClientConfiguration.Settings.offControl == 1 && data.drivers.control.getNumberComPort().Contains("нет"))
@@ -450,18 +456,7 @@ namespace ServiceSaleMachine.Client
                     {
                         cBxComPortBill.SelectedIndex = 0;
 
-                        butStartPoll.Enabled = false;
-                        butStopPoll.Enabled = false;
-                        butResetBill.Enabled = false;
-                        butWaitNoteOn.Enabled = false;
-                        butWaitNoteOff.Enabled = false;
-
-                        button1.Enabled = false;
-                        button2.Enabled = false;
-                        button7.Enabled = false;
-                        button8.Enabled = false;
-                        button6.Enabled = false;
-                        button5.Enabled = false;
+                        SetStatePoll(false);
                     }
                     else if (data.drivers.CCNETDriver.getNumberComPort().Contains("COM"))
                     {
@@ -682,6 +677,10 @@ namespace ServiceSaleMachine.Client
                 case DeviceEvent.BillAcceptorEscrow:
                     label5.Text = ((BillNominal)e.Message.Content).Denomination + " руб";
                     break;
+                case DeviceEvent.DropCassetteBillAcceptor:
+                    // открыли кассету с деньгами
+                    buttonEncashment.Enabled = true;
+                    break;
             }
         }
 
@@ -690,23 +689,6 @@ namespace ServiceSaleMachine.Client
             data.drivers.ReceivedResponse -= reciveResponse;
 
             Params.Result = data;
-
-            try
-            {
-
-                if (Globals.ClientConfiguration.Settings.offCheck != 1)
-                {
-                    // не платим чеком - не нужен сканер
-                    //data.drivers.scaner.closePort();
-                }
-
-                //data.drivers.CCNETDriver.closePort();
-                //data.drivers.printer.ClosePrint();
-            }
-            catch
-            {
-
-            }
 
             Globals.ClientConfiguration.Save();
         }
@@ -902,26 +884,13 @@ namespace ServiceSaleMachine.Client
             MessageBox.Show(dt.ToString());
         }
 
-        void changeStateHardWare(bool state)
+        void SetStatePoll(bool state)
         {
-            buttonStartScanerPoll.Enabled = state;
-            buttonStopScanerPoll.Enabled = state;
-            cBxComPortScaner.Enabled = state;
-            butWriteComPortScaner.Enabled = state;
-
-            cBxComPortBill.Enabled = state;
-            tBxAdress.Enabled = state;
-            butWriteComPortBill.Enabled = state;
             butStartPoll.Enabled = state;
             butStopPoll.Enabled = state;
             butResetBill.Enabled = state;
             butWaitNoteOn.Enabled = state;
             butWaitNoteOff.Enabled = state;
-
-            cbxComPortPrinter.Enabled = state;
-            butWriteComPortPrinter.Enabled = state;
-            butWriteBarCode.Enabled = state;
-            butPrintCheck.Enabled = state;
 
             button1.Enabled = state;
             button2.Enabled = state;
@@ -930,8 +899,22 @@ namespace ServiceSaleMachine.Client
             button7.Enabled = state;
             button5.Enabled = state;
 
+        }
+
+        void changeStateHardWare(bool state)
+        {
+            SetStateScaner(state);
+
+            cBxComPortBill.Enabled = state;
+            tBxAdress.Enabled = state;
+            butWriteComPortBill.Enabled = state;
+
             cBxControlPort.Enabled = state;
-            buttonwriteControlPort.Enabled = state;
+
+            cbxComPortPrinter.Enabled = state;
+            butWriteComPortPrinter.Enabled = state;
+            butWriteBarCode.Enabled = state;
+            butPrintCheck.Enabled = state;
 
             SetStateControl(state);
 
@@ -977,19 +960,13 @@ namespace ServiceSaleMachine.Client
                 {
                     Globals.ClientConfiguration.Settings.offCheck = 1;
 
-                    buttonStartScanerPoll.Enabled = false;
-                    buttonStopScanerPoll.Enabled = false;
-                    cBxComPortScaner.Enabled = false;
-                    butWriteComPortScaner.Enabled = false;
+                    SetStateScaner(false);
                 }
                 else
                 {
                     Globals.ClientConfiguration.Settings.offCheck = 0;
 
-                    buttonStartScanerPoll.Enabled = true;
-                    buttonStopScanerPoll.Enabled = true;
-                    cBxComPortScaner.Enabled = true;
-                    butWriteComPortScaner.Enabled = true;
+                    SetStateScaner(true);
                 }
 
                 Globals.ClientConfiguration.Save();
@@ -1025,18 +1002,7 @@ namespace ServiceSaleMachine.Client
 
             if (((string)cBxComPortBill.Items[cBxComPortBill.SelectedIndex]).Contains("нет"))
             {
-                butStartPoll.Enabled = false;
-                butStopPoll.Enabled = false;
-                butResetBill.Enabled = false;
-                butWaitNoteOn.Enabled = false;
-                butWaitNoteOff.Enabled = false;
-
-                button1.Enabled = false;
-                button2.Enabled = false;
-                button6.Enabled = false;
-                button8.Enabled = false;
-                button7.Enabled = false;
-                button5.Enabled = false;
+                SetStatePoll(false);
 
                 data.drivers.CCNETDriver.closePort();
             }
@@ -1048,18 +1014,7 @@ namespace ServiceSaleMachine.Client
                     return;
                 }
 
-                butStartPoll.Enabled = true;
-                butStopPoll.Enabled = true;
-                butResetBill.Enabled = true;
-                butWaitNoteOn.Enabled = true;
-                butWaitNoteOff.Enabled = true;
-
-                button1.Enabled = true;
-                button2.Enabled = true;
-                button6.Enabled = true;
-                button8.Enabled = true;
-                button7.Enabled = true;
-                button5.Enabled = true;
+                SetStatePoll(true);
             }
         }
 
@@ -1069,35 +1024,13 @@ namespace ServiceSaleMachine.Client
             {
                 Globals.ClientConfiguration.Settings.offBill = 1;
 
-                butStartPoll.Enabled = false;
-                butStopPoll.Enabled = false;
-                butResetBill.Enabled = false;
-                butWaitNoteOn.Enabled = false;
-                butWaitNoteOff.Enabled = false;
-
-                button1.Enabled = false;
-                button2.Enabled = false;
-                button6.Enabled = false;
-                button8.Enabled = false;
-                button7.Enabled = false;
-                button5.Enabled = false;
+                SetStatePoll(false);
             }
             else
             {
                 Globals.ClientConfiguration.Settings.offBill = 0;
 
-                butStartPoll.Enabled = true;
-                butStopPoll.Enabled = true;
-                butResetBill.Enabled = true;
-                butWaitNoteOn.Enabled = true;
-                butWaitNoteOff.Enabled = true;
-
-                button1.Enabled = true;
-                button2.Enabled = true;
-                button6.Enabled = true;
-                button8.Enabled = true;
-                button7.Enabled = true;
-                button5.Enabled = true;
+                SetStatePoll(true);
             }
 
             Globals.ClientConfiguration.Save();
@@ -1215,10 +1148,7 @@ namespace ServiceSaleMachine.Client
 
             if (((string)cBxComPortScaner.Items[cBxComPortScaner.SelectedIndex]).Contains("нет"))
             {
-                buttonStartScanerPoll.Enabled = false;
-                buttonStopScanerPoll.Enabled = false;
-                cBxComPortScaner.Enabled = false;
-                butWriteComPortScaner.Enabled = false;
+                SetStateScaner(false);
 
                 data.drivers.scaner.closePort();
             }
@@ -1230,10 +1160,7 @@ namespace ServiceSaleMachine.Client
                     return;
                 }
 
-                buttonStartScanerPoll.Enabled = true;
-                buttonStopScanerPoll.Enabled = true;
-                cBxComPortScaner.Enabled = true;
-                butWriteComPortScaner.Enabled = true;
+                SetStateScaner(true);
             }
         }
 

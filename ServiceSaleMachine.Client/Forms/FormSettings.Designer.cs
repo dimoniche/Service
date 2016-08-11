@@ -181,16 +181,16 @@
             this.tabPageChecking = new System.Windows.Forms.TabPage();
             this.tabControl4 = new System.Windows.Forms.TabControl();
             this.tabPageReacess = new System.Windows.Forms.TabPage();
+            this.labelCountBankNote = new System.Windows.Forms.Label();
+            this.labelServiceMoneySumm = new System.Windows.Forms.Label();
+            this.labelBarCodeMoneySumm = new System.Windows.Forms.Label();
+            this.labelAccountMoneySumm = new System.Windows.Forms.Label();
+            this.labelAllMoneySumm = new System.Windows.Forms.Label();
             this.buttonEncashment = new System.Windows.Forms.Button();
             this.tabPage14 = new System.Windows.Forms.TabPage();
             this.labelTimeLastRefresh = new System.Windows.Forms.Label();
             this.labelWorkFromLastRefresh = new System.Windows.Forms.Label();
             this.buttonResetTimeRefresh = new System.Windows.Forms.Button();
-            this.labelAllMoneySumm = new System.Windows.Forms.Label();
-            this.labelAccountMoneySumm = new System.Windows.Forms.Label();
-            this.labelBarCodeMoneySumm = new System.Windows.Forms.Label();
-            this.labelServiceMoneySumm = new System.Windows.Forms.Label();
-            this.labelCountBankNote = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -1868,8 +1868,54 @@
             this.tabPageReacess.Text = "Инкассация";
             this.tabPageReacess.UseVisualStyleBackColor = true;
             // 
+            // labelCountBankNote
+            // 
+            this.labelCountBankNote.AutoSize = true;
+            this.labelCountBankNote.Location = new System.Drawing.Point(32, 124);
+            this.labelCountBankNote.Name = "labelCountBankNote";
+            this.labelCountBankNote.Size = new System.Drawing.Size(161, 13);
+            this.labelCountBankNote.TabIndex = 2;
+            this.labelCountBankNote.Text = "Количество принятых банкнот";
+            // 
+            // labelServiceMoneySumm
+            // 
+            this.labelServiceMoneySumm.AutoSize = true;
+            this.labelServiceMoneySumm.Location = new System.Drawing.Point(32, 101);
+            this.labelServiceMoneySumm.Name = "labelServiceMoneySumm";
+            this.labelServiceMoneySumm.Size = new System.Drawing.Size(131, 13);
+            this.labelServiceMoneySumm.TabIndex = 2;
+            this.labelServiceMoneySumm.Text = "Oказано услуг на сумму";
+            // 
+            // labelBarCodeMoneySumm
+            // 
+            this.labelBarCodeMoneySumm.AutoSize = true;
+            this.labelBarCodeMoneySumm.Location = new System.Drawing.Point(32, 79);
+            this.labelBarCodeMoneySumm.Name = "labelBarCodeMoneySumm";
+            this.labelBarCodeMoneySumm.Size = new System.Drawing.Size(170, 13);
+            this.labelBarCodeMoneySumm.TabIndex = 2;
+            this.labelBarCodeMoneySumm.Text = "Cумма денег на штрихкод-чеках";
+            // 
+            // labelAccountMoneySumm
+            // 
+            this.labelAccountMoneySumm.AutoSize = true;
+            this.labelAccountMoneySumm.Location = new System.Drawing.Point(32, 56);
+            this.labelAccountMoneySumm.Name = "labelAccountMoneySumm";
+            this.labelAccountMoneySumm.Size = new System.Drawing.Size(142, 13);
+            this.labelAccountMoneySumm.TabIndex = 2;
+            this.labelAccountMoneySumm.Text = "Cумма денег на аккаунтах";
+            // 
+            // labelAllMoneySumm
+            // 
+            this.labelAllMoneySumm.AutoSize = true;
+            this.labelAllMoneySumm.Location = new System.Drawing.Point(32, 34);
+            this.labelAllMoneySumm.Name = "labelAllMoneySumm";
+            this.labelAllMoneySumm.Size = new System.Drawing.Size(124, 13);
+            this.labelAllMoneySumm.TabIndex = 2;
+            this.labelAllMoneySumm.Text = "Сумма принятых денег";
+            // 
             // buttonEncashment
             // 
+            this.buttonEncashment.Enabled = false;
             this.buttonEncashment.Location = new System.Drawing.Point(35, 177);
             this.buttonEncashment.Name = "buttonEncashment";
             this.buttonEncashment.Size = new System.Drawing.Size(201, 23);
@@ -1918,51 +1964,6 @@
             this.buttonResetTimeRefresh.Text = "Обновить время обслуживания";
             this.buttonResetTimeRefresh.UseVisualStyleBackColor = true;
             this.buttonResetTimeRefresh.Click += new System.EventHandler(this.buttonResetTimeRefresh_Click);
-            // 
-            // labelAllMoneySumm
-            // 
-            this.labelAllMoneySumm.AutoSize = true;
-            this.labelAllMoneySumm.Location = new System.Drawing.Point(32, 34);
-            this.labelAllMoneySumm.Name = "labelAllMoneySumm";
-            this.labelAllMoneySumm.Size = new System.Drawing.Size(124, 13);
-            this.labelAllMoneySumm.TabIndex = 2;
-            this.labelAllMoneySumm.Text = "Сумма принятых денег";
-            // 
-            // labelAccountMoneySumm
-            // 
-            this.labelAccountMoneySumm.AutoSize = true;
-            this.labelAccountMoneySumm.Location = new System.Drawing.Point(32, 56);
-            this.labelAccountMoneySumm.Name = "labelAccountMoneySumm";
-            this.labelAccountMoneySumm.Size = new System.Drawing.Size(142, 13);
-            this.labelAccountMoneySumm.TabIndex = 2;
-            this.labelAccountMoneySumm.Text = "Cумма денег на аккаунтах";
-            // 
-            // labelBarCodeMoneySumm
-            // 
-            this.labelBarCodeMoneySumm.AutoSize = true;
-            this.labelBarCodeMoneySumm.Location = new System.Drawing.Point(32, 79);
-            this.labelBarCodeMoneySumm.Name = "labelBarCodeMoneySumm";
-            this.labelBarCodeMoneySumm.Size = new System.Drawing.Size(170, 13);
-            this.labelBarCodeMoneySumm.TabIndex = 2;
-            this.labelBarCodeMoneySumm.Text = "Cумма денег на штрихкод-чеках";
-            // 
-            // labelServiceMoneySumm
-            // 
-            this.labelServiceMoneySumm.AutoSize = true;
-            this.labelServiceMoneySumm.Location = new System.Drawing.Point(32, 101);
-            this.labelServiceMoneySumm.Name = "labelServiceMoneySumm";
-            this.labelServiceMoneySumm.Size = new System.Drawing.Size(131, 13);
-            this.labelServiceMoneySumm.TabIndex = 2;
-            this.labelServiceMoneySumm.Text = "Oказано услуг на сумму";
-            // 
-            // labelCountBankNote
-            // 
-            this.labelCountBankNote.AutoSize = true;
-            this.labelCountBankNote.Location = new System.Drawing.Point(32, 124);
-            this.labelCountBankNote.Name = "labelCountBankNote";
-            this.labelCountBankNote.Size = new System.Drawing.Size(161, 13);
-            this.labelCountBankNote.TabIndex = 2;
-            this.labelCountBankNote.Text = "Количество принятых банкнот";
             // 
             // FormSettings
             // 

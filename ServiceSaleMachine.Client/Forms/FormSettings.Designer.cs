@@ -974,7 +974,6 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.button13);
             this.panel1.Controls.Add(this.button12);
             this.panel1.Controls.Add(this.button11);
             this.panel1.Controls.Add(this.edtMoney);
@@ -993,7 +992,7 @@
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(337, 53);
+            this.button12.Location = new System.Drawing.Point(272, 53);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(128, 23);
             this.button12.TabIndex = 9;
@@ -1015,7 +1014,7 @@
             // 
             this.edtMoney.Location = new System.Drawing.Point(217, 56);
             this.edtMoney.Name = "edtMoney";
-            this.edtMoney.Size = new System.Drawing.Size(114, 20);
+            this.edtMoney.Size = new System.Drawing.Size(49, 20);
             this.edtMoney.TabIndex = 7;
             this.edtMoney.Text = "0";
             // 

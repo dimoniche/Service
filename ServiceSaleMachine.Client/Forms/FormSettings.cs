@@ -560,7 +560,6 @@ namespace ServiceSaleMachine.Client
                 }
 
                 mydb.CreateTables();
-                
 
                 tabDataBaseSetting.Enabled = true;
             }

@@ -55,9 +55,10 @@
     <Compile Include="CCNET\_Identification.cs" />
     <Compile Include="CCNET\_Time.cs" />
     <Compile Include="ControlDevice\ControlDevice.cs" />
+    <Compile Include="Events\ServiceClientResponseEventArgs.cs" />
     <Compile Include="MachineDrivers.cs" />
-    <Compile Include="Message.cs" />
-    <Compile Include="MessageEndPoint.cs" />
+    <Compile Include="Events\Message.cs" />
+    <Compile Include="Enums\MessageEndPoint.cs" />
     <Compile Include="Modem\Modem.cs" />
     <Compile Include="Printer\ESC_POS.cs" />
     <Compile Include="Printer\RawPrinterHelper.cs" />
@@ -74,6 +75,7 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

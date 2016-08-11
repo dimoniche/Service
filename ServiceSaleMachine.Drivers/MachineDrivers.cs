@@ -8,9 +8,14 @@ namespace ServiceSaleMachine.Drivers
         private SaleThread WorkerScanerDriver { get; set; }
         private SaleThread WorkerBillPollDriver { get; set; }
 
-        // событие необходимости обработки данных сканера
+        /// <summary>
+        /// событие необходимости обработки данных сканера
+        /// </summary>
         public static AutoResetEvent ScanerEvent = new AutoResetEvent(false);
-        // событие необходимости обработки данных купюроприемника
+
+        /// <summary>
+        /// событие необходимости обработки данных купюроприемника
+        /// </summary>
         public static AutoResetEvent BillAcceptorEvent = new AutoResetEvent(false);
 
         // Драйвера устройств
@@ -42,13 +47,17 @@ namespace ServiceSaleMachine.Drivers
 
         public delegate void ServiceClientResponseEventHandler(object sender, ServiceClientResponseEventArgs e);
 
-        // событие обновления данных
+        /// <summary>
+        /// событие обновления данных
+        /// </summary>
         public event ServiceClientResponseEventHandler ReceivedResponse;
 
         public bool gettingBill = false;        // грузим купюру
         public bool gettingEscrowBill = false;  // задержали купюру
 
-        // логгер
+        /// <summary>
+        /// логгер
+        /// </summary>
         Log log;
 
         // количество драйверов
@@ -65,27 +74,31 @@ namespace ServiceSaleMachine.Drivers
             this.log.Write(LogMessageType.Information, "Старт драйверов. Версия " + Globals.ProductVersion);
         }
 
+        /// <summary>
+        /// Останов всех устройств
+        /// </summary>
+        /// <returns></returns>
         public bool StopAllDevice()
         {
             if (Globals.ClientConfiguration.Settings.offHardware != 1)
             {
-                WorkerBillPollDriver.Abort();
-                CCNETDriver.closePort();
+                if (WorkerBillPollDriver != null) WorkerBillPollDriver.Abort();
+                if (CCNETDriver != null) CCNETDriver.closePort();
 
                 if (Globals.ClientConfiguration.Settings.offCheck != 1)
                 {
-                    WorkerScanerDriver.Abort();
-                    scaner.closePort();
+                    if (WorkerBillPollDriver != null) WorkerScanerDriver.Abort();
+                    if (scaner != null) scaner.closePort();
                 }
 
                 if (Globals.ClientConfiguration.Settings.offControl != 1)
                 {
-                    control.closePort();
+                    if (control != null) control.closePort();
                 }
 
                 if (Globals.ClientConfiguration.Settings.offModem != 1)
                 {
-                    modem.closePort();
+                    if (modem != null) modem.closePort();
                 }
             }
 
@@ -178,7 +191,7 @@ namespace ServiceSaleMachine.Drivers
                 this.log.Write(LogMessageType.Information, "Сканер отключен.");
             }
 
-            this.log.Write(LogMessageType.Information, "Настройка купюроприемникa.");
+            this.log.Write(LogMessageType.Information, "BILL: Настройка купюроприемникa.");
 
             if (Globals.ClientConfiguration.Settings.offBill != 1 && !CCNETDriver.getNumberComPort().Contains("нет"))
             {
@@ -190,7 +203,7 @@ namespace ServiceSaleMachine.Drivers
                         if (CCNETDriver.restartBill().Contains("СБОЙ"))
                         {
                             // неудача
-                            this.log.Write(LogMessageType.Error, "Купюроприемник не работает или не подключен.");
+                            this.log.Write(LogMessageType.Error, "BILL: Купюроприемник не работает или не подключен.");
                             sendMessage(DeviceEvent.NeedSettingProgram);
                             res = WorkerStateStage.NeedSettingProgram;
                         }
@@ -207,45 +220,45 @@ namespace ServiceSaleMachine.Drivers
                     else
                     {
                         // неудача
-                        this.log.Write(LogMessageType.Error, "Купюроприемник не верно настроен. Порт не доступен.");
+                        this.log.Write(LogMessageType.Error, "BILL: Купюроприемник не верно настроен. Порт не доступен.");
                         sendMessage(DeviceEvent.NeedSettingProgram);
                         res = WorkerStateStage.NeedSettingProgram;
                     }
                 }
                 catch (Exception exp)
                 {
-
+                    log.Write(LogMessageType.Error, "BILL: " + exp.ToString());
                 }
             }
             else
             {
-                this.log.Write(LogMessageType.Error, "Купюроприемник не настроен.");
+                this.log.Write(LogMessageType.Error, "BILL: Купюроприемник не настроен.");
             }
 
-            this.log.Write(LogMessageType.Information, "Настройка принтера.");
+            this.log.Write(LogMessageType.Information, "PRINTER: Настройка принтера.");
 
             if (!printer.getNamePrinter().Contains("нет"))
             {
                 // настроим принтер
-                if (printer.OpenPrint("Citizen PPU-700"))
+                if (printer.OpenPrint(Globals.ClientConfiguration.Settings.NamePrinter))
                 {
 
                 }
                 else
                 {
                     // неудача
-                    this.log.Write(LogMessageType.Error, "Принтер не верно настроен. Порт не доступен.");
+                    this.log.Write(LogMessageType.Error, "PRINTER: Принтер не верно настроен. Порт не доступен.");
                     sendMessage(DeviceEvent.NeedSettingProgram);
                     res = WorkerStateStage.NeedSettingProgram;
                 }
             }
             else
             {
-                this.log.Write(LogMessageType.Error, "Принтер не настроен.");
+                this.log.Write(LogMessageType.Error, "PRINTER: Принтер не настроен.");
             }
 
             // настроим управляющее устройство
-            this.log.Write(LogMessageType.Information, "Настройка управлящего устройства.");
+            this.log.Write(LogMessageType.Information, "CONTROL: Настройка управлящего устройства.");
 
             if (Globals.ClientConfiguration.Settings.offControl != 1 && !control.getNumberComPort().Contains("нет"))
             {
@@ -257,20 +270,22 @@ namespace ServiceSaleMachine.Drivers
                 else
                 {
                     // неудача
-                    this.log.Write(LogMessageType.Error, "Управляющее устройство не верно настроено. Порт не доступен.");
+                    this.log.Write(LogMessageType.Error, "CONTROL: Управляющее устройство не верно настроено. Порт не доступен.");
                     sendMessage(DeviceEvent.NeedSettingProgram);
                     res = WorkerStateStage.NeedSettingProgram;
                 }
             }
             else
             {
-                this.log.Write(LogMessageType.Error, "Управляющее устройство не настроенo.");
+                this.log.Write(LogMessageType.Error, "CONTROL: Управляющее устройство не настроенo.");
             }
 
             // настроим драйвер модема
+            this.log.Write(LogMessageType.Information, "MODEM: Настройка модема.");
+
             if (Globals.ClientConfiguration.Settings.offModem != 1 && !modem.getNumberComPort().Contains("нет"))
             {
-                this.log.Write(LogMessageType.Information, "Настройка модема.");
+                this.log.Write(LogMessageType.Information, "MODEM: Настройка модема.");
 
                 if (modem.openPort(modem.getNumberComPort(), modem.getComPortSpeed()))
                 {
@@ -279,14 +294,14 @@ namespace ServiceSaleMachine.Drivers
                 else
                 {
                     // неудача
-                    this.log.Write(LogMessageType.Error, "Модем не верно настроен. Порт не доступен.");
+                    this.log.Write(LogMessageType.Error, "MODEM: Модем не верно настроен. Порт не доступен.");
                     sendMessage(DeviceEvent.NeedSettingProgram);
                     res = WorkerStateStage.NeedSettingProgram;
                 }
             }
             else
             {
-                this.log.Write(LogMessageType.Information, "Модем отключен.");
+                this.log.Write(LogMessageType.Information, "MODEM: Модем отключен.");
             }
 
             return res;
@@ -294,7 +309,6 @@ namespace ServiceSaleMachine.Drivers
 
         public void ManualInitDevice()
         {
-
             if (Globals.ClientConfiguration.Settings.offCheck != 1)
             {
                 // не платим чеком - не нужен сканер
@@ -317,6 +331,11 @@ namespace ServiceSaleMachine.Drivers
             if (Globals.ClientConfiguration.Settings.offControl != 1)
             {
                 control = new ControlDevice();
+            }
+
+            if (Globals.ClientConfiguration.Settings.offModem != 1)
+            {
+                modem = new Modem();
             }
         }
 
@@ -419,8 +438,6 @@ namespace ServiceSaleMachine.Drivers
 
             while (!e.Cancel)
             {
-                bool hasErrors = false;
-
                 try
                 {
                     if (!CCNETDriver.send_bill_command)
@@ -441,6 +458,8 @@ namespace ServiceSaleMachine.Drivers
 
                             message.Event = DeviceEvent.BillAcceptor;
                             message.Content = CCNETDriver.pollStatus();
+
+                            log.Write(LogMessageType.Information, "BILL: " + message.Content);
 
                             ReceivedResponse(this, new ServiceClientResponseEventArgs(message));
                         }
@@ -547,16 +566,11 @@ namespace ServiceSaleMachine.Drivers
                 }
                 catch (Exception exp)
                 {
-                    hasErrors = true;
+                    log.Write(LogMessageType.Error, "BILL: " + exp.ToString());
                     CCNETDriver.send_bill_command = false;
                 }
                 finally
                 {
-                    if (hasErrors)
-                    {
-
-                    }
-
                     if (!e.Cancel)
                     {
                         // Нормальная работа
@@ -599,6 +613,8 @@ namespace ServiceSaleMachine.Drivers
             message.Event = DeviceEvent.Scaner;
             message.Content = str;
 
+            log.Write(LogMessageType.Information, "SCANNER: " + message.Content);
+
             ReceivedResponse(this, new ServiceClientResponseEventArgs(message));
         }
 
@@ -621,24 +637,17 @@ namespace ServiceSaleMachine.Drivers
 
             while (!e.Cancel)
             {
-                bool hasErrors = false;
-
                 try
                 {
                     // обработка строк от сканера
                     ScannerProcessResponse();
                 }
-                catch
+                catch (Exception exp)
                 {
-                    hasErrors = true;
+                    log.Write(LogMessageType.Error, "SCANNER: " + exp.ToString());
                 }
                 finally
                 {
-                    if (hasErrors)
-                    {
-                        //logDrivers.Write(LogMessageType.Information, "ScanerDriver : ERROR");
-                    }
-
                     if (!e.Cancel)
                     {
                         // Нормальная работа
@@ -659,16 +668,6 @@ namespace ServiceSaleMachine.Drivers
                     }
                 }
             }
-        }
-    }
-
-    public class ServiceClientResponseEventArgs : EventArgs
-    {
-        public Message Message { get; private set; }
-
-        public ServiceClientResponseEventArgs(Message message)
-        {
-            Message = message;
         }
     }
 }

@@ -1833,6 +1833,8 @@ namespace ServiceSaleMachine.Drivers
         {
             bool empty = true;
 
+            if (bill_record == null) return true;
+
             foreach (_BillRecord record in bill_record)
             {
                 if (record.Denomination > 0)
@@ -1844,6 +1846,5 @@ namespace ServiceSaleMachine.Drivers
 
             return empty;
         }
-
     }
 }

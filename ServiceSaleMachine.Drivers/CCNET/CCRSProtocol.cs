@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading;
 
@@ -227,6 +226,21 @@ namespace ServiceSaleMachine.Drivers
 
         public List<_Cassete> Cassetes = new List<_Cassete>();       //!< List of the cassettes 
         public _Cassete EscrCassete = new _Cassete();                //!< Escrow cassette
+
+        /// <summary>
+        /// отправляем в данный момент команду в приемник купюр
+        /// </summary>
+        public bool send_bill_command = false;
+
+        /// <summary>
+        /// удерживать купюру
+        /// </summary>
+        public bool hold_bill = false;
+
+        /// <summary>
+        /// массив номиналов купюр
+        /// </summary>
+        public _BillRecord[] bill_record = new _BillRecord[24];
 
         public CCRSProtocol()
         {
@@ -1371,6 +1385,464 @@ namespace ServiceSaleMachine.Drivers
             {
                 return false;
             }
+        }
+
+        /// <summary>
+        /// Запрос поддерживаемых купюр
+        /// </summary>
+        /// <returns></returns>
+        public string GetBillTable()
+        {
+            string result = "";
+            int count = 0;
+
+            // если занято - ждем - но не более 1сек
+            while (send_bill_command == true) { if (count++ == 1000) { break; } Thread.Sleep(1); }
+
+            send_bill_command = true;
+
+            try
+            {
+                if (this.Cmd(CCNETCommandEnum.GetBillTable, (byte)this.BillAdr, bill_record) == true)
+                {
+                    foreach (_BillRecord rec in bill_record)
+                    {
+                        if (rec.Denomination != 0)
+                        {
+                            result += Encoding.UTF8.GetString(rec.sCountryCode) + rec.Denomination.ToString() + " ";
+                        }
+                    }
+                }
+                else
+                {
+                    result = "СБОЙ";
+                }
+
+                send_bill_command = false;
+            }
+            catch
+            {
+                send_bill_command = false;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Ожидание ввода купюры, забор купюр сразу
+        /// </summary>
+        /// <returns></returns>
+        public string WaitBill()
+        {
+            string result = "";
+            int count = 0;
+
+            // если занято - ждем - но не более 1сек
+            while (send_bill_command == true) { if (count++ == 1000) { break; } Thread.Sleep(1); }
+
+            send_bill_command = true;
+
+            long mask = 0x00;
+            int i = 0;
+
+            foreach (int nominal in Globals.ClientConfiguration.Settings.nominals)
+            {
+                if (nominal > 0)
+                {
+                    mask |= (((long)1) << i);
+                }
+                else
+                {
+                    mask &= ~(((long)1) << i);
+                }
+
+                i++;
+            }
+
+            try
+            {
+                if (this.Cmd(CCNETCommandEnum.BillType, (byte)this.BillAdr, mask, (long)0x00) == true)
+                {
+                    result = "ОК";
+                }
+                else
+                {
+                    result = "СБОЙ";
+                }
+
+                send_bill_command = false;
+            }
+            catch
+            {
+                send_bill_command = false;
+            }
+
+            hold_bill = false;
+
+            return result;
+        }
+
+        /// <summary>
+        /// Ожидание ввода купюры, держим купюру
+        /// </summary>
+        /// <returns></returns>
+        public string WaitBillEscrow()
+        {
+            string result = "";
+            int count = 0;
+
+            // если занято - ждем - но не более 1сек
+            while (send_bill_command == true) { if (count++ == 1000) { break; } Thread.Sleep(1); }
+
+            send_bill_command = true;
+
+            long mask = 0x00;
+            int i = 0;
+
+            foreach (int nominal in Globals.ClientConfiguration.Settings.nominals)
+            {
+                if (nominal > 0)
+                {
+                    mask |= (((long)1) << i);
+                }
+                else
+                {
+                    mask &= ~(((long)1) << i);
+                }
+
+                i++;
+            }
+
+            try
+            {
+                if (this.Cmd(CCNETCommandEnum.BillType, (byte)this.BillAdr, mask, mask) == true)
+                {
+                    result = "ОК";
+                }
+                else
+                {
+                    result = "СБОЙ";
+                }
+
+                send_bill_command = false;
+            }
+            catch
+            {
+                send_bill_command = false;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Окончание ожидания ввода купюры
+        /// </summary>
+        /// <returns></returns>
+        public string StopWaitBill()
+        {
+            string result = "";
+            int count = 0;
+
+            // если занято - ждем - но не более 1сек
+            while (send_bill_command == true) { if (count++ == 1000) { break; } Thread.Sleep(1); }
+
+            send_bill_command = true;
+
+            try
+            {
+                if (this.Cmd(CCNETCommandEnum.BillType, (byte)this.BillAdr, (long)0x00ffffff, (long)0x00) == true)
+                {
+                    result = "ОК";
+                }
+                else
+                {
+                    result = "СБОЙ";
+                }
+
+                if (this.Cmd(CCNETCommandEnum.BillType, (byte)this.BillAdr, (long)0x00, (long)0x00) == true)
+                {
+
+                }
+                else
+                {
+                    result = "СБОЙ";
+                }
+
+                send_bill_command = false;
+            }
+            catch
+            {
+                send_bill_command = false;
+            }
+
+            hold_bill = false;
+
+            return result;
+        }
+
+        /// <summary>
+        /// Перезагрузка приемника
+        /// </summary>
+        /// <returns></returns>
+        public string restartBill()
+        {
+            string result = "";
+            int count = 0;
+
+            // если занято - ждем - но не более 1сек
+            while (send_bill_command == true) { if (count++ == 1000) { break; } Thread.Sleep(1); }
+
+            send_bill_command = true;
+
+            try
+            {
+                if (this.Cmd(CCNETCommandEnum.Reset, (byte)this.BillAdr) == true)
+                {
+                    result = "ОК";
+                }
+                else
+                {
+                    result = "СБОЙ";
+                }
+
+                send_bill_command = false;
+            }
+            catch
+            {
+                send_bill_command = false;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Возврат купюры
+        /// </summary>
+        /// <returns></returns>
+        public string returnBill()
+        {
+            string result = "";
+            int count = 0;
+
+            // если занято - ждем - но не более 1сек
+            while (send_bill_command == true) { if (count++ == 1000) { break; } Thread.Sleep(1); }
+
+            send_bill_command = true;
+
+            try
+            {
+                if (this.Cmd(CCNETCommandEnum.Pack, (byte)this.BillAdr))
+                {
+                    result = "ОК";
+                }
+                else
+                {
+                    result = "СБОЙ";
+                }
+
+                send_bill_command = false;
+            }
+            catch
+            {
+                send_bill_command = false;
+            }
+
+            hold_bill = false;
+
+            return result;
+        }
+
+        /// <summary>
+        /// Забрать купюру
+        /// </summary>
+        /// <returns></returns>
+        public string StackBill()
+        {
+            string result = "";
+            int count = 0;
+
+            // если занято - ждем - но не более 1сек
+            while (send_bill_command == true) { if (count++ == 1000) { break; } Thread.Sleep(1); }
+
+            send_bill_command = true;
+
+            try
+            {
+                if (this.Cmd(CCNETCommandEnum.Pack, (byte)this.BillAdr))
+                {
+                    result = "ОК";
+                }
+                else
+                {
+                    result = "СБОЙ";
+                }
+
+                send_bill_command = false;
+            }
+            catch
+            {
+                send_bill_command = false;
+            }
+
+            hold_bill = false;
+
+            return result;
+        }
+
+        /// <summary>
+        /// Идентификатор
+        /// </summary>
+        /// <returns></returns>
+        public string getInfoBill()
+        {
+            string result = "";
+            int count = 0;
+
+            // если занято - ждем - но не более 1сек
+            while (send_bill_command == true) { if (count++ == 1000) { break; } Thread.Sleep(1); }
+
+            send_bill_command = true;
+
+            try
+            {
+                if (this.Cmd(CCNETCommandEnum.Information, (byte)this.BillAdr) == true)
+                {
+                    result = Encoding.UTF8.GetString(this.Ident.PartNumber) + " " + Encoding.UTF8.GetString(this.Ident.SN);
+                }
+                else
+                {
+                    result = "СБОЙ";
+                }
+
+                send_bill_command = false;
+            }
+            catch
+            {
+                send_bill_command = false;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// получение статуса
+        /// </summary>
+        /// <returns></returns>
+        public List<_Cassete> GetStatus()
+        {
+            int count = 0;
+
+            // если занято - ждем - но не более 1сек
+            while (send_bill_command == true) { if (count++ == 1000) { break; } Thread.Sleep(1); }
+
+            send_bill_command = true;
+
+            try
+            {
+                if (this.Cmd(CCNETCommandEnum.GetCassetteStatus, (byte)this.BillAdr))
+                {
+
+                }
+                else
+                {
+
+                }
+
+                send_bill_command = false;
+            }
+            catch
+            {
+                send_bill_command = false;
+            }
+
+
+            return this.Cassetes;
+        }
+
+        /// <summary>
+        /// Забрать купюру
+        /// </summary>
+        /// <returns></returns>
+        public List<_Cassete> PackBill()
+        {
+            int count = 0;
+
+            // если занято - ждем - но не более 1сек
+            while (send_bill_command == true) { if (count++ == 1000) { break; } Thread.Sleep(1); }
+
+            send_bill_command = true;
+
+            try
+            {
+                if (this.Cmd(CCNETCommandEnum.Pack, (byte)this.BillAdr))
+                {
+
+                }
+                else
+                {
+
+                }
+
+                send_bill_command = false;
+            }
+            catch
+            {
+                send_bill_command = false;
+            }
+
+
+            return this.Cassetes;
+        }
+
+        /// <summary>
+        /// Вернуть купюру
+        /// </summary>
+        /// <returns></returns>
+        public List<_Cassete> ReturnBill()
+        {
+            int count = 0;
+
+            // если занято - ждем - но не более 1сек
+            while (send_bill_command == true) { if (count++ == 1000) { break; } Thread.Sleep(1); }
+
+            send_bill_command = true;
+
+            try
+            {
+                if (this.Cmd(CCNETCommandEnum.Return, (byte)this.BillAdr))
+                {
+
+                }
+                else
+                {
+
+                }
+
+                send_bill_command = false;
+            }
+            catch
+            {
+                send_bill_command = false;
+            }
+
+
+            return this.Cassetes;
+        }
+
+        public bool bill_recordIsEmpty()
+        {
+            bool empty = true;
+
+            foreach (_BillRecord record in bill_record)
+            {
+                if (record.Denomination > 0)
+                {
+                    empty = false;
+                    break;
+                }
+            }
+
+            return empty;
         }
 
     }

@@ -818,13 +818,13 @@ namespace ServiceSaleMachine.Client
         private void button8_Click(object sender, EventArgs e)
         {
             if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
-            label14.Text = data.drivers.restartBill();
+            label14.Text = data.drivers.CCNETDriver.restartBill();
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
             if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
-            label16.Text = data.drivers.WaitBill();
+            label16.Text = data.drivers.CCNETDriver.WaitBill();
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -985,7 +985,7 @@ namespace ServiceSaleMachine.Client
         private void button5_Click(object sender, EventArgs e)
         {
             if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
-            data.drivers.StopWaitBill();
+            data.drivers.CCNETDriver.StopWaitBill();
         }
 
         private void cbxCheckOff_CheckedChanged(object sender, EventArgs e)
@@ -1155,12 +1155,12 @@ namespace ServiceSaleMachine.Client
         private void button1_Click_3(object sender, EventArgs e)
         {
             if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
-            label16.Text = data.drivers.WaitBillEscrow();
+            label16.Text = data.drivers.CCNETDriver.WaitBillEscrow();
         }
 
         private void button5_Click_1(object sender, EventArgs e)
         {
-            List<_Cassete> cassets = data.drivers.GetStatus();
+            List<_Cassete> cassets = data.drivers.CCNETDriver.GetStatus();
             int position = 0;
             int countmoney = 0;
 
@@ -1180,19 +1180,19 @@ namespace ServiceSaleMachine.Client
         private void button2_Click_1(object sender, EventArgs e)
         {
             if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
-            data.drivers.ReturnBill();
+            data.drivers.CCNETDriver.ReturnBill();
         }
 
         private void button7_Click_1(object sender, EventArgs e)
         {
             if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
-            data.drivers.PackBill();
+            data.drivers.CCNETDriver.PackBill();
         }
 
         private void button8_Click_1(object sender, EventArgs e)
         {
             if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
-            Info.Text = data.drivers.getInfoBill();
+            Info.Text = data.drivers.CCNETDriver.getInfoBill();
         }
 
         private void butWriteNominal_Click(object sender, EventArgs e)

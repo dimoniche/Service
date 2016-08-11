@@ -61,7 +61,7 @@ namespace ServiceSaleMachine.Client
             if (Globals.ClientConfiguration.Settings.offHardware == 0)
             {
                 // перейдем в режим ожидания купюр
-                data.drivers.WaitBillEscrow();
+                data.drivers.CCNETDriver.WaitBillEscrow();
             }
         }
 
@@ -94,7 +94,7 @@ namespace ServiceSaleMachine.Client
                         moneyFixed = false;
                         if (Globals.ClientConfiguration.Settings.offHardware == 0)
                         {
-                            data.drivers.ReturnBill();
+                            data.drivers.CCNETDriver.ReturnBill();
                         }
                         return;
                     }
@@ -123,7 +123,7 @@ namespace ServiceSaleMachine.Client
 
                             if (Globals.ClientConfiguration.Settings.offHardware == 0)
                             {
-                                data.drivers.ReturnBill();
+                                data.drivers.CCNETDriver.ReturnBill();
                             }
 
                             // сообщим о том что купюра великовата
@@ -148,7 +148,7 @@ namespace ServiceSaleMachine.Client
                         if (Globals.ClientConfiguration.Settings.offHardware == 0)
                         {
                             moneyFixed = false;
-                            data.drivers.StackBill();
+                            data.drivers.CCNETDriver.StackBill();
                         }
                     }
                     else
@@ -160,7 +160,7 @@ namespace ServiceSaleMachine.Client
 
                         if (Globals.ClientConfiguration.Settings.offHardware == 0)
                         {
-                            data.drivers.ReturnBill();
+                            data.drivers.CCNETDriver.ReturnBill();
                         }
                         return;
                     }
@@ -239,7 +239,7 @@ namespace ServiceSaleMachine.Client
 
                         if (Globals.ClientConfiguration.Settings.offHardware == 0)
                         {
-                            data.drivers.StopWaitBill();
+                            data.drivers.CCNETDriver.StopWaitBill();
                             moneyFixed = false;
                         }
                     }
@@ -292,8 +292,8 @@ namespace ServiceSaleMachine.Client
                 // вернем деньгу
                 moneyFixed = false;
 
-                data.drivers.ReturnBill();
-                data.drivers.StopWaitBill();
+                data.drivers.CCNETDriver.ReturnBill();
+                data.drivers.CCNETDriver.StopWaitBill();
             }
 
             Params.Result = data;

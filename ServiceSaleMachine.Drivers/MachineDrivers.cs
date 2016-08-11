@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 
 namespace ServiceSaleMachine.Drivers
@@ -16,8 +14,20 @@ namespace ServiceSaleMachine.Drivers
         public static AutoResetEvent BillAcceptorEvent = new AutoResetEvent(false);
 
         // Драйвера устройств
+
+        /// <summary>
+        /// Драйвер сканера
+        /// </summary>
         public ZebexScaner scaner;
+
+        /// <summary>
+        /// Драйвер купюроприемника
+        /// </summary>
         public CCRSProtocol CCNETDriver;
+
+        /// <summary>
+        /// Драйвер принтера
+        /// </summary>
         public PrinterESC printer;
 
         /// <summary>
@@ -25,19 +35,15 @@ namespace ServiceSaleMachine.Drivers
         /// </summary>
         public ControlDevice control;
 
-
+        /// <summary>
+        /// Драйвер модема
+        /// </summary>
         public Modem modem;
 
         public delegate void ServiceClientResponseEventHandler(object sender, ServiceClientResponseEventArgs e);
 
         // событие обновления данных
         public event ServiceClientResponseEventHandler ReceivedResponse;
-
-        // массив номиналов купюр
-        public _BillRecord[] bill_record = new _BillRecord[24];
-
-        public bool hold_bill = false;  // удерживать купюру
-        bool send_bill_command = false; // отправляем в данный момент команду в приемник купюр
 
         public bool gettingBill = false;        // грузим купюру
         public bool gettingEscrowBill = false;  // задержали купюру
@@ -181,7 +187,7 @@ namespace ServiceSaleMachine.Drivers
                     // настроим купюроприемник
                     if (CCNETDriver.openPort(CCNETDriver.getNumberComPort()))
                     {
-                        if (restartBill().Contains("СБОЙ"))
+                        if (CCNETDriver.restartBill().Contains("СБОЙ"))
                         {
                             // неудача
                             this.log.Write(LogMessageType.Error, "Купюроприемник не работает или не подключен.");
@@ -195,7 +201,7 @@ namespace ServiceSaleMachine.Drivers
 
                         for (int i = 0; i < 24; i++)
                         {
-                            bill_record[i] = new _BillRecord();
+                            CCNETDriver.bill_record[i] = new _BillRecord();
                         }
                     }
                     else
@@ -286,22 +292,6 @@ namespace ServiceSaleMachine.Drivers
             return res;
         }
 
-        public bool bill_recordIsEmpty()
-        {
-            bool empty = true;
-
-            foreach (_BillRecord record in bill_record)
-            {
-                if (record.Denomination > 0)
-                {
-                    empty = false;
-                    break;
-                }
-            }
-
-            return empty;
-        }
-
         public void ManualInitDevice()
         {
 
@@ -369,13 +359,13 @@ namespace ServiceSaleMachine.Drivers
             {
                 WorkerBillPollDriver.Abort();
 
-                send_bill_command = true;
+                CCNETDriver.send_bill_command = true;
 
                 if (CCNETDriver.Cmd(CCNETCommandEnum.BillType, (byte)CCNETDriver.BillAdr, (long)0x00, (long)0x00) == true)
                 {
 
                 }
-                send_bill_command = false;
+                CCNETDriver.send_bill_command = false;
             }
         }
 
@@ -411,343 +401,6 @@ namespace ServiceSaleMachine.Drivers
         }
 
         /// <summary>
-        /// Запрос поддерживаемых купюр
-        /// </summary>
-        /// <returns></returns>
-        public string GetBillTable()
-        {
-            string result = "";
-            int count = 0;
-
-            // если занято - ждем - но не более 1сек
-            while (send_bill_command == true) { if (count++ == 1000) { break; } Thread.Sleep(1); }
-
-            send_bill_command = true;
-
-            try
-            {
-                if (CCNETDriver.Cmd(CCNETCommandEnum.GetBillTable, (byte)CCNETDriver.BillAdr, bill_record) == true)
-                {
-                    foreach (_BillRecord rec in bill_record)
-                    {
-                        if (rec.Denomination != 0)
-                        {
-                            result += Encoding.UTF8.GetString(rec.sCountryCode) + rec.Denomination.ToString() + " ";
-                        }
-                    }
-                }
-                else
-                {
-                    result = "СБОЙ";
-                }
-
-                send_bill_command = false;
-            }
-            catch
-            {
-                send_bill_command = false;
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Ожидание ввода купюры, забор купюр сразу
-        /// </summary>
-        /// <returns></returns>
-        public string WaitBill()
-        {
-            string result = "";
-            int count = 0;
-
-            // если занято - ждем - но не более 1сек
-            while (send_bill_command == true) { if (count++ == 1000) { break; } Thread.Sleep(1); }
-
-            send_bill_command = true;
-
-            long mask = 0x00;
-            int i = 0;
-
-            foreach (int nominal in Globals.ClientConfiguration.Settings.nominals)
-            {
-                if (nominal > 0)
-                {
-                    mask |= (((long)1) << i);
-                }
-                else
-                {
-                    mask &= ~(((long)1) << i);
-                }
-
-                i++;
-            }
-
-            try
-            {
-                if (CCNETDriver.Cmd(CCNETCommandEnum.BillType, (byte)CCNETDriver.BillAdr, mask, (long)0x00) == true)
-                {
-                    result = "ОК";
-                }
-                else
-                {
-                    result = "СБОЙ";
-                }
-
-                send_bill_command = false;
-            }
-            catch
-            {
-                send_bill_command = false;
-            }
-
-            hold_bill = false;
-
-            return result;
-        }
-
-        /// <summary>
-        /// Ожидание ввода купюры, держим купюру
-        /// </summary>
-        /// <returns></returns>
-        public string WaitBillEscrow()
-        {
-            string result = "";
-            int count = 0;
-
-            // если занято - ждем - но не более 1сек
-            while (send_bill_command == true) { if (count++ == 1000) { break; } Thread.Sleep(1); }
-
-            send_bill_command = true;
-
-            long mask = 0x00;
-            int i = 0;
-
-            foreach (int nominal in Globals.ClientConfiguration.Settings.nominals)
-            {
-                if (nominal > 0)
-                {
-                    mask |= (((long)1) << i);
-                }
-                else
-                {
-                    mask &= ~(((long)1) << i);
-                }
-
-                i++;
-            }
-
-            try
-            {
-                if (CCNETDriver.Cmd(CCNETCommandEnum.BillType, (byte)CCNETDriver.BillAdr, mask, mask) == true)
-                {
-                    result = "ОК";
-                }
-                else
-                {
-                    result = "СБОЙ";
-                }
-
-                send_bill_command = false;
-            }
-            catch
-            {
-                send_bill_command = false;
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Окончание ожидания ввода купюры
-        /// </summary>
-        /// <returns></returns>
-        public string StopWaitBill()
-        {
-            string result = "";
-            int count = 0;
-
-            // если занято - ждем - но не более 1сек
-            while (send_bill_command == true) { if (count++ == 1000) { break; } Thread.Sleep(1); }
-
-            send_bill_command = true;
-
-            try
-            {
-                if (CCNETDriver.Cmd(CCNETCommandEnum.BillType, (byte)CCNETDriver.BillAdr, (long)0x00ffffff, (long)0x00) == true)
-                {
-                    result = "ОК";
-                }
-                else
-                {
-                    result = "СБОЙ";
-                }
-
-                if (CCNETDriver.Cmd(CCNETCommandEnum.BillType, (byte)CCNETDriver.BillAdr, (long)0x00, (long)0x00) == true)
-                {
-
-                }
-                else
-                {
-                    result = "СБОЙ";
-                }
-
-                send_bill_command = false;
-            }
-            catch
-            {
-                send_bill_command = false;
-            }
-
-            hold_bill = false;
-
-            return result;
-        }
-
-        /// <summary>
-        /// Перезагрузка приемника
-        /// </summary>
-        /// <returns></returns>
-        public string restartBill()
-        {
-            string result = "";
-            int count = 0;
-
-            // если занято - ждем - но не более 1сек
-            while (send_bill_command == true) { if (count++ == 1000) { break; } Thread.Sleep(1); }
-
-            send_bill_command = true;
-
-            try
-            {
-                if (CCNETDriver.Cmd(CCNETCommandEnum.Reset, (byte)CCNETDriver.BillAdr) == true)
-                {
-                    result = "ОК";
-                }
-                else
-                {
-                    result = "СБОЙ";
-                }
-
-                send_bill_command = false;
-            }
-            catch
-            {
-                send_bill_command = false;
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Возврат купюры
-        /// </summary>
-        /// <returns></returns>
-        public string returnBill()
-        {
-            string result = "";
-            int count = 0;
-
-            // если занято - ждем - но не более 1сек
-            while (send_bill_command == true) { if (count++ == 1000) { break; } Thread.Sleep(1); }
-
-            send_bill_command = true;
-
-            try
-            {
-                if (CCNETDriver.Cmd(CCNETCommandEnum.Pack, (byte)CCNETDriver.BillAdr))
-                {
-                    result = "ОК";
-                }
-                else
-                {
-                    result = "СБОЙ";
-                }
-
-                send_bill_command = false;
-            }
-            catch
-            {
-                send_bill_command = false;
-            }
-
-            hold_bill = false;
-
-            return result;
-        }
-
-        /// <summary>
-        /// Забрать купюру
-        /// </summary>
-        /// <returns></returns>
-        public string StackBill()
-        {
-            string result = "";
-            int count = 0;
-
-            // если занято - ждем - но не более 1сек
-            while (send_bill_command == true) { if (count++ == 1000) { break; } Thread.Sleep(1); }
-
-            send_bill_command = true;
-
-            try
-            {
-                if (CCNETDriver.Cmd(CCNETCommandEnum.Pack, (byte)CCNETDriver.BillAdr))
-                {
-                    result = "ОК";
-                }
-                else
-                {
-                    result = "СБОЙ";
-                }
-
-                send_bill_command = false;
-            }
-            catch
-            {
-                send_bill_command = false;
-            }
-
-            hold_bill = false;
-
-            return result;
-        }
-
-        /// <summary>
-        /// Идентификатор
-        /// </summary>
-        /// <returns></returns>
-        public string getInfoBill()
-        {
-            string result = "";
-            int count = 0;
-
-            // если занято - ждем - но не более 1сек
-            while (send_bill_command == true) { if (count++ == 1000) { break; } Thread.Sleep(1); }
-
-            send_bill_command = true;
-
-            try
-            {
-                if (CCNETDriver.Cmd(CCNETCommandEnum.Information, (byte)CCNETDriver.BillAdr) == true)
-                {
-                    result = Encoding.UTF8.GetString(CCNETDriver.Ident.PartNumber) + " " + Encoding.UTF8.GetString(CCNETDriver.Ident.SN);
-                }
-                else
-                {
-                    result = "СБОЙ";
-                }
-
-                send_bill_command = false;
-            }
-            catch
-            {
-                send_bill_command = false;
-            }
-
-            return result;
-        }
-
-        /// <summary>
         /// Обработчик опроса состояния приемника
         /// </summary>
         /// <param name="sender"></param>
@@ -757,9 +410,9 @@ namespace ServiceSaleMachine.Drivers
             int stepCount = 0;
 
             // сначала загрузим массив принимаемых купюр
-            while (bill_recordIsEmpty())
+            while (CCNETDriver.bill_recordIsEmpty())
             {
-                GetBillTable();
+                CCNETDriver.GetBillTable();
             }
 
             CCNETDriver.Cmd(CCNETCommandEnum.Information, (byte)CCNETDriver.BillAdr);
@@ -770,16 +423,16 @@ namespace ServiceSaleMachine.Drivers
 
                 try
                 {
-                    if (!send_bill_command)
+                    if (!CCNETDriver.send_bill_command)
                     {
-                        send_bill_command = true;
-                        if (hold_bill && (stepCount % 10) == 0)
+                        CCNETDriver.send_bill_command = true;
+                        if (CCNETDriver.hold_bill && (stepCount % 10) == 0)
                         {
                             CCNETDriver.Cmd(CCNETCommandEnum.Hold, (byte)CCNETDriver.BillAdr);
                         }
 
                         CCNETDriver.Cmd(CCNETCommandEnum.Poll, (byte)CCNETDriver.BillAdr);
-                        send_bill_command = false;
+                        CCNETDriver.send_bill_command = false;
 
                         // все события купюроприемника
                         if (CCNETDriver.PollResults.Z1 != 0 && CCNETDriver.PollResults.Z2 != 0)
@@ -832,7 +485,7 @@ namespace ServiceSaleMachine.Drivers
                             gettingEscrowBill = true;
 
                             // удерживаем купюру
-                            hold_bill = true;
+                            CCNETDriver.hold_bill = true;
 
                             Message message = new Message();
 
@@ -840,9 +493,9 @@ namespace ServiceSaleMachine.Drivers
 
                             BillNominal nominal = new BillNominal();
 
-                            nominal.record = bill_record[CCNETDriver.PollResults.Z2];
+                            nominal.record = CCNETDriver.bill_record[CCNETDriver.PollResults.Z2];
                             nominal.nominalNumber = CCNETDriver.PollResults.Z2;
-                            nominal.Denomination = bill_record[CCNETDriver.PollResults.Z2].Denomination.ToString();
+                            nominal.Denomination = CCNETDriver.bill_record[CCNETDriver.PollResults.Z2].Denomination.ToString();
 
                             message.Content = nominal;
 
@@ -866,9 +519,9 @@ namespace ServiceSaleMachine.Drivers
 
                             BillNominal nominal = new BillNominal();
 
-                            nominal.record = bill_record[CCNETDriver.PollResults.Z2];
+                            nominal.record = CCNETDriver.bill_record[CCNETDriver.PollResults.Z2];
                             nominal.nominalNumber = CCNETDriver.PollResults.Z2;
-                            nominal.Denomination = bill_record[CCNETDriver.PollResults.Z2].Denomination.ToString();
+                            nominal.Denomination = CCNETDriver.bill_record[CCNETDriver.PollResults.Z2].Denomination.ToString();
 
                             message.Content = nominal;
 
@@ -895,7 +548,7 @@ namespace ServiceSaleMachine.Drivers
                 catch (Exception exp)
                 {
                     hasErrors = true;
-                    send_bill_command = false;
+                    CCNETDriver.send_bill_command = false;
                 }
                 finally
                 {
@@ -1006,111 +659,6 @@ namespace ServiceSaleMachine.Drivers
                     }
                 }
             }
-        }
-
-        /// <summary>
-        /// получение статуса
-        /// </summary>
-        /// <returns></returns>
-        public List<_Cassete> GetStatus()
-        {
-            int count = 0;
-
-            // если занято - ждем - но не более 1сек
-            while (send_bill_command == true) { if (count++ == 1000) { break; } Thread.Sleep(1); }
-
-            send_bill_command = true;
-
-            try
-            {
-                if (CCNETDriver.Cmd(CCNETCommandEnum.GetCassetteStatus, (byte)CCNETDriver.BillAdr))
-                {
-
-                }
-                else
-                {
-
-                }
-
-                send_bill_command = false;
-            }
-            catch
-            {
-                send_bill_command = false;
-            }
-
-
-            return CCNETDriver.Cassetes;
-        }
-
-        /// <summary>
-        /// Забрать купюру
-        /// </summary>
-        /// <returns></returns>
-        public List<_Cassete> PackBill()
-        {
-            int count = 0;
-
-            // если занято - ждем - но не более 1сек
-            while (send_bill_command == true) { if (count++ == 1000) { break; } Thread.Sleep(1); }
-
-            send_bill_command = true;
-
-            try
-            {
-                if (CCNETDriver.Cmd(CCNETCommandEnum.Pack, (byte)CCNETDriver.BillAdr))
-                {
-
-                }
-                else
-                {
-
-                }
-
-                send_bill_command = false;
-            }
-            catch
-            {
-                send_bill_command = false;
-            }
-
-
-            return CCNETDriver.Cassetes;
-        }
-
-        /// <summary>
-        /// Вернуть купюру
-        /// </summary>
-        /// <returns></returns>
-        public List<_Cassete> ReturnBill()
-        {
-            int count = 0;
-
-            // если занято - ждем - но не более 1сек
-            while (send_bill_command == true) { if (count++ == 1000) { break; } Thread.Sleep(1); }
-
-            send_bill_command = true;
-
-            try
-            {
-                if (CCNETDriver.Cmd(CCNETCommandEnum.Return, (byte)CCNETDriver.BillAdr))
-                {
-
-                }
-                else
-                {
-
-                }
-
-                send_bill_command = false;
-            }
-            catch
-            {
-                send_bill_command = false;
-            }
-
-
-            return CCNETDriver.Cassetes;
         }
     }
 

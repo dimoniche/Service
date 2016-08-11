@@ -484,7 +484,7 @@ namespace ServiceSaleMachine
         {
             if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
 
-            string query = "INSERT INTO encashment (iduser, amount, datetime) VALUES (" + iduser.ToString() + "," + amount.ToString() + "," +
+            string query = "INSERT INTO encashment (iduser, amount, datetime) VALUES (" + iduser.ToString() + "," + amount.ToString() + ",'" +
                   DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
 
             Debug.Print(query);
@@ -546,7 +546,7 @@ namespace ServiceSaleMachine
         {
             if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
 
-            string query = "INSERT INTO payments (iduser, amount, datetime) VALUES (" + userid.ToString() + "," + sum.ToString() + ","
+            string query = "INSERT INTO payments (iduser, amount, datetime) VALUES (" + userid.ToString() + "," + sum.ToString() + ",'"
                   + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
 
             return ExecuteNonQuery(query);
@@ -620,7 +620,7 @@ namespace ServiceSaleMachine
             if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
             int nc = GetCurrentNumberCheck();
             string query = "INSERT INTO checks (iduser, amount, checkstr, number, dt_create) VALUES ("
-                + userid.ToString() + "," + sum.ToString() + ",'" + check +"','" + nc.ToString() + ","+
+                + userid.ToString() + "," + sum.ToString() + ",'" + check +"','" + nc.ToString() + ",'"+
                   DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
             IncNumberCheck(nc + 1);
             return ExecuteNonQuery(query);
@@ -751,7 +751,7 @@ namespace ServiceSaleMachine
         }
 
         /// <summary>
-        /// сколько времени (секунд) девайс отработал с даты Х
+        /// сколько времени (минут) девайс отработал с даты Х
         /// </summary>
         /// <param name="Serv"></param>
         /// <param name="Dev"></param>
@@ -770,6 +770,26 @@ namespace ServiceSaleMachine
             return GetIntFromReq(dr);
 
         }
+
+        /// <summary>
+        /// сколько времени (минут) отработали все девайсы со всех сервисов с даты Х
+        /// </summary>
+        /// <param name="Serv"></param>
+        /// <param name="Dev"></param>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public int GetWorkTime(DateTime dt)
+        {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return 0;
+
+            string queryString = "select sum(timework) as dt from logwork where " +
+                 "(datetime >= '" + dt.ToString("yyyy-MM-dd HH:mm:ss") + "')";
+
+            MySqlDataReader dr = Execute(queryString);
+
+            return GetIntFromReq(dr);
+        }
+
         /// <summary>
         /// дата последнего сервисного обслуживания устройства Х от услуги У
         /// </summary>
@@ -786,6 +806,40 @@ namespace ServiceSaleMachine
             return GetDTFromReq(dr);
 
         }
+
+        /// <summary>
+        /// дата последнего сервисного обслуживания 
+        /// </summary>
+        /// <param name="Serv"></param>
+        /// <param name="Dev"></param>
+        /// <returns></returns>
+        public DateTime GetLastRefreshTime()
+        {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return new DateTime(2016, 07, 01);
+
+            string queryString = "select max(datetime) as dt from refreshdevices";
+
+            MySqlDataReader dr = Execute(queryString);
+            return GetDTFromReq(dr);
+        }
+
+        /// <summary>
+        /// обслужили устройство X от услуги Y
+        /// </summary>
+        /// <param name="serv"></param>
+        /// <param name="idDevice"></param>
+        /// <param name="timeWork"></param>
+        /// <returns></returns>
+        public bool WriteRefreshTime(int serv, int idDevice)
+        {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
+
+            string query = "INSERT INTO refreshdevices (idserv, iddev, iduser, datetime) VALUES (" + serv.ToString() + "," + idDevice.ToString() + "," + "0" + ",'" +
+                  DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
+
+            return ExecuteNonQuery(query);
+        }
+
         /// <summary>
         /// Платежи от конкретного юзера
         /// </summary>

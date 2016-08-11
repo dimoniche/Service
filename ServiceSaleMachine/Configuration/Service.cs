@@ -15,10 +15,12 @@ namespace ServiceSaleMachine
 
         public List<Device> devs;
 
-        // время ознакомления с услугой и забор аксессуаров (минуты)
-        public int timeRecognize = 3;
+        // время оказания услуги
+        public int timework = 10;
+        // время ознакомления с услугой и забор аксессуаров (сек)
+        public int timeRecognize = 20;
         // время подсветки урны для выброса акссесуаров (сек)
-        public int timeLightUrn = 30;
+        public int timeLightUrn = 20;
 
         public Service()
         {
@@ -41,6 +43,7 @@ namespace ServiceSaleMachine
             xOut.Add(new XElement("price", price.ToString()));
             xOut.Add(new XElement("caption", caption));
             xOut.Add(new XElement("filename", filename));
+            xOut.Add(new XElement("timework", timework));
             xOut.Add(new XElement("timeRecognize", timeRecognize));
             xOut.Add(new XElement("timeLightUrn", timeLightUrn));
 
@@ -70,6 +73,7 @@ namespace ServiceSaleMachine
             if ((xElement = xObject.Element("caption")) != null) result.caption = xElement.Value;
             if ((xElement = xObject.Element("filename")) != null) result.filename = xElement.Value;
             if ((xElement = xObject.Element("price")) != null) result.price = int.Parse(xElement.Value);
+            if ((xElement = xObject.Element("timework")) != null) result.timework = int.Parse(xElement.Value);
             if ((xElement = xObject.Element("timeRecognize")) != null) result.timeRecognize = int.Parse(xElement.Value);
             if ((xElement = xObject.Element("timeLightUrn")) != null) result.timeLightUrn = int.Parse(xElement.Value);
 

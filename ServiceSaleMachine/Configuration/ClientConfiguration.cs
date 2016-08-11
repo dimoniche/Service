@@ -78,6 +78,7 @@ namespace ServiceSaleMachine
                         if ((xElement = xSettings.Element("changeToCheck")) != null) Settings.changeToCheck = int.Parse(xElement.Value);
 
                         if ((xElement = xSettings.Element("MaxCountBankNote")) != null) Settings.MaxCountBankNote = int.Parse(xElement.Value);
+                        if ((xElement = xSettings.Element("limitServiceTime")) != null) Settings.limitServiceTime = int.Parse(xElement.Value);
 
                         if ((xElement = xSettings.Element("nominals")) != null)
                         {
@@ -158,6 +159,7 @@ namespace ServiceSaleMachine
                 xSettings.Add(new XElement("changeToCheck", Settings.changeToCheck.ToString()));
 
                 xSettings.Add(new XElement("MaxCountBankNote", Settings.MaxCountBankNote.ToString()));
+                xSettings.Add(new XElement("limitServiceTime", Settings.limitServiceTime.ToString()));
 
                 XElement element = new XElement("nominals");
                 foreach (int nominal in Settings.nominals)

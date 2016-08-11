@@ -48,11 +48,13 @@ namespace ServiceSaleMachine.Client
                 stc.LightUrnLeave += LightUrnLeave;
                 stc.CaptionServiceLeave += CaptionServiceLeave;
                 stc.PriceServiceLeave += PriceServiceLeave;
+                stc.MaxTimeServiceLeave += MaxTimeServiceLeave;
 
                 stc.TextBoxRecognize.Text = serv.timeRecognize.ToString();
                 stc.TextBoxPriceService.Text = serv.price.ToString();
                 stc.TextBoxCaptionService.Text = serv.caption;
                 stc.TextBoxLightUrn.Text = serv.timeLightUrn.ToString();
+                stc.TextBoxMaxTimeService.Text = serv.timework.ToString();
 
                 tabSettingService.TabPages[tabSettingService.TabPages.Count - 1].Controls.Add(stc);
 
@@ -83,6 +85,16 @@ namespace ServiceSaleMachine.Client
 
 
             ReLoad();
+        }
+
+        private void MaxTimeServiceLeave(object sender)
+        {
+            Service stc = Globals.ClientConfiguration.Settings.services[tabSettingService.SelectedIndex];
+            ServiceTabControl currServiceTab = ((ServiceTabControl)tabSettingService.TabPages[tabSettingService.SelectedIndex].Controls[0]);
+
+            int.TryParse(currServiceTab.TextBoxMaxTimeService.Text, out stc.timework);
+
+            Globals.ClientConfiguration.Save();
         }
 
         /// <summary>
@@ -397,9 +409,6 @@ namespace ServiceSaleMachine.Client
                         Open1.Enabled = false;
                         Close1.Enabled = false;
                         Close2.Enabled = false;
-                        Close3.Enabled = false;
-                        Close4.Enabled = false;
-                        Open4.Enabled = false;
                         LightOn1.Enabled = false;
                         LightOn2.Enabled = false;
                         LightOff1.Enabled = false;
@@ -636,7 +645,21 @@ namespace ServiceSaleMachine.Client
 
             richTextStartService.Text = Globals.ClientConfiguration.Settings.TextStartService;
             richTextEndService.Text = Globals.ClientConfiguration.Settings.TextEndService;
-        
+
+            textBoxMaxTimeService.Text = Globals.ClientConfiguration.Settings.limitServiceTime.ToString();
+
+            DateTime dt = GlobalDb.GlobalBase.GetLastRefreshTime();
+
+            labelTimeLastRefresh.Text = "Время последнего обслуживания: " + dt.ToString();
+            labelWorkFromLastRefresh.Text = "Всего проработали со времени последнего обслуживания: " + GlobalDb.GlobalBase.GetWorkTime(dt).ToString() + " мин";
+
+            labelAllMoneySumm.Text = "Сумма принятых денег " + data.statistic.AllMoneySumm.ToString() + " руб.";
+            labelAccountMoneySumm.Text = "Cумма денег на аккаунтах " + data.statistic.AccountMoneySumm.ToString() + " руб.";
+            labelBarCodeMoneySumm.Text = "Cумма денег на штрихкод-чеках " + data.statistic.BarCodeMoneySumm.ToString() + " руб.";
+            labelServiceMoneySumm.Text = "Cумма денег на штрихкод-чеках " + data.statistic.ServiceMoneySumm.ToString() + " руб.";
+            labelServiceMoneySumm.Text = "Oказано услуг на сумму " + data.statistic.ServiceMoneySumm.ToString() + " руб.";
+            labelCountBankNote.Text = "Количество принятых банкнот " + data.statistic.CountBankNote.ToString() + " шт.";
+
             init = false;
         }
 
@@ -924,12 +947,8 @@ namespace ServiceSaleMachine.Client
             buttonwriteControlPort.Enabled = state;
             Open1.Enabled = state;
             Open2.Enabled = state;
-            Open3.Enabled = state;
             Close1.Enabled = state;
             Close2.Enabled = state;
-            Close3.Enabled = state;
-            Close4.Enabled = state;
-            Open4.Enabled = state;
             LightOn1.Enabled = state;
             LightOn2.Enabled = state;
             LightOff1.Enabled = state;
@@ -1231,12 +1250,8 @@ namespace ServiceSaleMachine.Client
                 cBxControlSpeed.Enabled = false;
                 Open1.Enabled = false;
                 Open2.Enabled = false;
-                Open3.Enabled = false;
                 Close1.Enabled = false;
                 Close2.Enabled = false;
-                Close3.Enabled = false;
-                Close4.Enabled = false;
-                Open4.Enabled = false;
                 LightOn1.Enabled = false;
                 LightOn2.Enabled = false;
                 LightOff1.Enabled = false;
@@ -1255,9 +1270,6 @@ namespace ServiceSaleMachine.Client
                 Open1.Enabled = true;
                 Close1.Enabled = true;
                 Close2.Enabled = true;
-                Close3.Enabled = true;
-                Close4.Enabled = true;
-                Open4.Enabled = true;
                 LightOn1.Enabled = true;
                 LightOn2.Enabled = true;
                 LightOff1.Enabled = true;
@@ -1306,12 +1318,8 @@ namespace ServiceSaleMachine.Client
                 cBxControlSpeed.Enabled = false;
                 Open1.Enabled = false;
                 Open2.Enabled = false;
-                Open3.Enabled = false;
                 Close1.Enabled = false;
                 Close2.Enabled = false;
-                Close3.Enabled = false;
-                Close4.Enabled = false;
-                Open4.Enabled = false;
                 LightOn1.Enabled = false;
                 LightOn2.Enabled = false;
                 LightOff1.Enabled = false;
@@ -1332,12 +1340,8 @@ namespace ServiceSaleMachine.Client
                 cBxControlSpeed.Enabled = true;
                 Open1.Enabled = true;
                 Open2.Enabled = true;
-                Open3.Enabled = true;
                 Close1.Enabled = true;
                 Close2.Enabled = true;
-                Close3.Enabled = true;
-                Close4.Enabled = true;
-                Open4.Enabled = true;
                 LightOn1.Enabled = true;
                 LightOn2.Enabled = true;
                 LightOff1.Enabled = true;
@@ -1356,11 +1360,6 @@ namespace ServiceSaleMachine.Client
             data.drivers.SendOpenControl((int)ControlDeviceEnum.dev4);
         }
 
-        private void Open3_Click(object sender, EventArgs e)
-        {
-            data.drivers.SendOpenControl((int)ControlDeviceEnum.dev5);
-        }
-
         private void Close1_Click(object sender, EventArgs e)
         {
             data.drivers.SendCloseControl((int)ControlDeviceEnum.dev3);
@@ -1369,11 +1368,6 @@ namespace ServiceSaleMachine.Client
         private void Close2_Click(object sender, EventArgs e)
         {
             data.drivers.SendCloseControl((int)ControlDeviceEnum.dev4);
-        }
-
-        private void Close3_Click(object sender, EventArgs e)
-        {
-            data.drivers.SendCloseControl((int)ControlDeviceEnum.dev5);
         }
 
         private void button4_Click_1(object sender, EventArgs e)
@@ -1613,16 +1607,6 @@ namespace ServiceSaleMachine.Client
             labelCurrNumberCheck.Text = "Текущий номер чека: " + NumberCheck;
         }
 
-        private void Open4_Click(object sender, EventArgs e)
-        {
-            data.drivers.SendOpenControl((int)ControlDeviceEnum.dev6);
-        }
-
-        private void Close4_Click(object sender, EventArgs e)
-        {
-            data.drivers.SendCloseControl((int)ControlDeviceEnum.dev6);
-        }
-
         private void LightOn1_Click(object sender, EventArgs e)
         {
             data.drivers.SendOpenControl((int)ControlDeviceEnum.light1);
@@ -1655,10 +1639,50 @@ namespace ServiceSaleMachine.Client
             Globals.ClientConfiguration.Save();
         }
 
+        private void textBoxMaxTimeService_Leave(object sender, EventArgs e)
+        {
+            int time = 1000;
+
+            int.TryParse(textBoxMaxTimeService.Text, out time);
+
+            Globals.ClientConfiguration.Settings.limitServiceTime = time;
+            Globals.ClientConfiguration.Save();
+        }
+
+        private void buttonResetTimeRefresh_Click(object sender, EventArgs e)
+        {
+            // обслужили устройство
+            GlobalDb.GlobalBase.WriteRefreshTime(1,1);
+
+            DateTime dt = GlobalDb.GlobalBase.GetLastRefreshTime();
+
+            labelTimeLastRefresh.Text = "Время последнего обслуживания: " + dt.ToString();
+            labelWorkFromLastRefresh.Text = "Всего проработали со времени последнего обслуживания: " + GlobalDb.GlobalBase.GetWorkTime(dt).ToString();
+        }
+
         private void button13_Click_1(object sender, EventArgs e)
         {
-            GlobalDb.GlobalBase.FillSystemValues();
-            GlobalDb.GlobalBase.AddToCheck(0, 100, CheckHelper.GetUniqueNumberCheck(10));
+            // запишем инфу о последнем обслуживании и инкасации
+            DateTime dt = GlobalDb.GlobalBase.GetLastEncashment();
+
+            int countmoney = 0;
+            if (dt != null)
+            {
+                countmoney = GlobalDb.GlobalBase.GetCountMoney(dt);
+            }
+            else
+            {
+                countmoney = GlobalDb.GlobalBase.GetCountMoney(new DateTime(2000, 1, 1));
+            }
+
+            // запишем сколько инкассировали и обновим время инкасации
+            GlobalDb.GlobalBase.Encashment(data.CurrentUserId, countmoney);
+
+            // очистим накопленные банктноты
+            GlobalDb.GlobalBase.ClearBankNotes();
+
+            // печатаем чек
+            data.drivers.printer.PrintCheckСollection(data.statistic);
         }
     }
 }

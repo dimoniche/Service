@@ -78,7 +78,7 @@ namespace ServiceSaleMachine.Client
             result.drivers = drivers;
             result.statistic = statistic;
 
-            //if (Globals.admin)
+            if (Globals.admin)
             {
                 drivers.InitAllDevice();
                 result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
@@ -434,42 +434,25 @@ namespace ServiceSaleMachine.Client
                 result.stage = WorkerStateStage.NeedService;
             }
 
-            int resurs = 0;
-            int countDev = 0;
-
             // сообщение о ресурсе устройств
-            foreach(Service service in Globals.ClientConfiguration.Settings.services)
+            DateTime dt = GlobalDb.GlobalBase.GetLastRefreshTime();
+
+            int count = 0;
+            if (dt != null)
             {
-                foreach(Device device in service.devs)
-                {
-                    DateTime dt = GlobalDb.GlobalBase.GetLastRefreshTime(service.id,device.id);
-
-                    int count = 0;
-                    if (dt != null)
-                    {
-                        count = GlobalDb.GlobalBase.GetWorkTime(service.id, device.id, dt);
-                    }
-                    else
-                    {
-                        count = GlobalDb.GlobalBase.GetWorkTime(service.id, device.id, new DateTime(2000, 1, 1));
-                    }
-                        
-                    if (count > device.limitTime)
-                    {
-                        // ресурс выработали - сообщим об этом
-                        result.drivers.modem.SendSMS(Globals.ClientConfiguration.Settings.SMSMessageTimeEnd + " " + device.caption);
-
-                        // это устройство выработали
-                        resurs++;
-                    }
-
-                    countDev++;
-                }
+                count = GlobalDb.GlobalBase.GetWorkTime(dt);
+            }
+            else
+            {
+                count = GlobalDb.GlobalBase.GetWorkTime(new DateTime(2000, 1, 1));
             }
 
-            if(resurs == countDev)
+            if (count >= Globals.ClientConfiguration.Settings.limitServiceTime)
             {
-                // все выработали - уйдем на обслуживание
+                // ресурс выработали - сообщим об этом
+                result.drivers.modem.SendSMS(Globals.ClientConfiguration.Settings.SMSMessageTimeEnd);
+
+                // аппарат не работает
                 result.stage = WorkerStateStage.NeedService;
             }
 

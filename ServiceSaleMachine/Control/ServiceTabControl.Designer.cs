@@ -47,6 +47,9 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.DevicetabControl = new System.Windows.Forms.TabControl();
             this.tabPageDevice = new System.Windows.Forms.TabPage();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBoxMaxTimeService = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -73,13 +76,16 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 66.66666F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(514, 591);
             this.tableLayoutPanel1.TabIndex = 6;
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.label4);
+            this.panel2.Controls.Add(this.textBoxMaxTimeService);
+            this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.textBoxPriceService);
             this.panel2.Controls.Add(this.label7);
@@ -96,13 +102,13 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(508, 191);
+            this.panel2.Size = new System.Drawing.Size(508, 289);
             this.panel2.TabIndex = 0;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(361, 82);
+            this.label6.Location = new System.Drawing.Point(361, 104);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(24, 13);
             this.label6.TabIndex = 18;
@@ -110,7 +116,7 @@
             // 
             // textBoxPriceService
             // 
-            this.textBoxPriceService.Location = new System.Drawing.Point(255, 75);
+            this.textBoxPriceService.Location = new System.Drawing.Point(255, 97);
             this.textBoxPriceService.Name = "textBoxPriceService";
             this.textBoxPriceService.Size = new System.Drawing.Size(100, 20);
             this.textBoxPriceService.TabIndex = 17;
@@ -120,7 +126,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 82);
+            this.label7.Location = new System.Drawing.Point(3, 104);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(98, 13);
             this.label7.TabIndex = 16;
@@ -128,7 +134,7 @@
             // 
             // textBoxCaptionService
             // 
-            this.textBoxCaptionService.Location = new System.Drawing.Point(255, 51);
+            this.textBoxCaptionService.Location = new System.Drawing.Point(255, 73);
             this.textBoxCaptionService.Name = "textBoxCaptionService";
             this.textBoxCaptionService.Size = new System.Drawing.Size(133, 20);
             this.textBoxCaptionService.TabIndex = 14;
@@ -138,7 +144,7 @@
             // labCaptionService
             // 
             this.labCaptionService.AutoSize = true;
-            this.labCaptionService.Location = new System.Drawing.Point(3, 58);
+            this.labCaptionService.Location = new System.Drawing.Point(3, 80);
             this.labCaptionService.Name = "labCaptionService";
             this.labCaptionService.Size = new System.Drawing.Size(93, 13);
             this.labCaptionService.TabIndex = 13;
@@ -182,7 +188,7 @@
             // 
             // butDelDev
             // 
-            this.butDelDev.Location = new System.Drawing.Point(166, 109);
+            this.butDelDev.Location = new System.Drawing.Point(166, 124);
             this.butDelDev.Name = "butDelDev";
             this.butDelDev.Size = new System.Drawing.Size(154, 23);
             this.butDelDev.TabIndex = 8;
@@ -192,7 +198,7 @@
             // 
             // butaddDev
             // 
-            this.butaddDev.Location = new System.Drawing.Point(6, 109);
+            this.butaddDev.Location = new System.Drawing.Point(6, 124);
             this.butaddDev.Name = "butaddDev";
             this.butaddDev.Size = new System.Drawing.Size(154, 23);
             this.butaddDev.TabIndex = 8;
@@ -222,9 +228,9 @@
             // 
             this.panel3.Controls.Add(this.DevicetabControl);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(3, 200);
+            this.panel3.Location = new System.Drawing.Point(3, 298);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(508, 388);
+            this.panel3.Size = new System.Drawing.Size(508, 290);
             this.panel3.TabIndex = 1;
             // 
             // DevicetabControl
@@ -234,7 +240,7 @@
             this.DevicetabControl.Location = new System.Drawing.Point(0, 0);
             this.DevicetabControl.Name = "DevicetabControl";
             this.DevicetabControl.SelectedIndex = 0;
-            this.DevicetabControl.Size = new System.Drawing.Size(508, 388);
+            this.DevicetabControl.Size = new System.Drawing.Size(508, 290);
             this.DevicetabControl.TabIndex = 0;
             // 
             // tabPageDevice
@@ -242,10 +248,37 @@
             this.tabPageDevice.Location = new System.Drawing.Point(4, 22);
             this.tabPageDevice.Name = "tabPageDevice";
             this.tabPageDevice.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageDevice.Size = new System.Drawing.Size(500, 362);
+            this.tabPageDevice.Size = new System.Drawing.Size(500, 264);
             this.tabPageDevice.TabIndex = 0;
             this.tabPageDevice.Text = "Устройство 1";
             this.tabPageDevice.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(361, 57);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(27, 13);
+            this.label4.TabIndex = 21;
+            this.label4.Text = "мин";
+            // 
+            // textBoxMaxTimeService
+            // 
+            this.textBoxMaxTimeService.Location = new System.Drawing.Point(255, 50);
+            this.textBoxMaxTimeService.Name = "textBoxMaxTimeService";
+            this.textBoxMaxTimeService.Size = new System.Drawing.Size(100, 20);
+            this.textBoxMaxTimeService.TabIndex = 20;
+            this.textBoxMaxTimeService.Text = "0";
+            this.textBoxMaxTimeService.Leave += new System.EventHandler(this.textBoxMaxTimeService_Leave);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 57);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(193, 13);
+            this.label5.TabIndex = 19;
+            this.label5.Text = "Максимальная длительность услуги";
             // 
             // ServiceTabControl
             // 
@@ -285,5 +318,8 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox textBoxCaptionService;
         private System.Windows.Forms.Label labCaptionService;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textBoxMaxTimeService;
+        private System.Windows.Forms.Label label5;
     }
 }

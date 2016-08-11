@@ -6,8 +6,13 @@ namespace ServiceSaleMachine
     public class Device
     {
         public int id;
-        public int limitTime = 100;
+
+        // предельное время конкретного устройства (не используется)
+        public int limitTime = 100000;
+
         public string caption = "";
+
+        // время работы конкретного устройства (не используется)
         public int timework = 10;
 
         public Device(int id, string caption, int limitTime,int timework)

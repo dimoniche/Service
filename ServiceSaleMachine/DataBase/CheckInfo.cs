@@ -10,5 +10,6 @@ namespace ServiceSaleMachine
         public DateTime dt_fixed;
         public Boolean active;
         public int IdUser;
+        public int Number;
     }
 }

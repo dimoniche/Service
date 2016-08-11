@@ -669,7 +669,8 @@ namespace ServiceSaleMachine
 
         public CheckInfo GetCheckByStr(string check)
         {
-            string queryString = "select id, dt_start, dt_fixed from checks where (checkstr='" + check + "')";
+            string queryString = "select id, dt_create, dt_fixed, active, iduser, checkstr," +
+                  " number from checks where (checkstr='" + check + "')";
 
             MySqlCommand com = new MySqlCommand(queryString, con);
 
@@ -692,6 +693,7 @@ namespace ServiceSaleMachine
                 ch.active = (Boolean)dr[3];
                 ch.IdUser = (int)dr[4];
                 ch.checkstr = (string)dr[5];
+                ch.Number = (int) dr[6];
                 dr.Close();
 
                 return ch;

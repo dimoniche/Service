@@ -1,6 +1,7 @@
 ﻿using ServiceSaleMachine.Drivers;
 using System;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using static ServiceSaleMachine.Drivers.MachineDrivers;
@@ -15,10 +16,13 @@ namespace ServiceSaleMachine.Client
         {
             InitializeComponent();
 
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pbxHelp, Globals.DesignConfiguration.Settings.ButtonHelp);
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pbxLogo, Globals.DesignConfiguration.Settings.ButtonLogo);
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pbxStart, Globals.DesignConfiguration.Settings.ButtonStartServices);
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pbxLogin, Globals.DesignConfiguration.Settings.ButtonUser);
+            Image image = Image.FromFile(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.PanelBackGround);
+
+            this.BackgroundImage = image;
+
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxBegin, Globals.DesignConfiguration.Settings.ButtonStartServices);
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxPhilosof, Globals.DesignConfiguration.Settings.ButtonPhilosof);
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxInstruction, Globals.DesignConfiguration.Settings.ButtonHelp);
 
             TimeOutTimer.Enabled = true;
             Timeout = 0;
@@ -43,9 +47,9 @@ namespace ServiceSaleMachine.Client
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            label2.Text = Globals.UserConfiguration.UserLogin + "\n" + Globals.UserConfiguration.Amount.ToString();
-            lblTime.Text = DateTime.Now.ToString("HH:mm:ss");
-            LblDate.Text = DateTime.Now.ToString("yyyy-MM-dd dddd");
+            //label2.Text = Globals.UserConfiguration.UserLogin + "\n" + Globals.UserConfiguration.Amount.ToString();
+            //lblTime.Text = DateTime.Now.ToString("HH:mm:ss");
+            //LblDate.Text = DateTime.Now.ToString("yyyy-MM-dd dddd");
         }
 
         private void FormMainMenu_FormClosed(object sender, FormClosedEventArgs e)
@@ -143,7 +147,7 @@ namespace ServiceSaleMachine.Client
            // ureq.ShowDialog();
         }
 
-        private void pbxLogo_Click(object sender, EventArgs e)
+        private void pBxPhilosof_Click(object sender, EventArgs e)
         {
 
         }

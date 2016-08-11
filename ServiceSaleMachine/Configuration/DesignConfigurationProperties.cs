@@ -11,16 +11,23 @@ namespace ServiceSaleMachine
 
         // настройки отображения - изображения
         const string defpicture = "default.png";
+
+        public string PanelBackGround = defpicture;
         public string ButtonStartServices = defpicture;
-        public string ButtonLogo = defpicture;
         public string ButtonHelp = defpicture;
-        public string ButtonFail = defpicture;
+        public string ButtonPhilosof = defpicture;
+        public string ButtonService = defpicture;
+        public string ButtonService1 = defpicture;
+        public string ButtonService2 = defpicture;
         public string ButtonRetToMain = defpicture;
+        public string ButtonWhatsDiff = defpicture;
+
+        public string ButtonLogo = defpicture;
+        public string ButtonFail = defpicture;
         public string ButtonYes = defpicture;
         public string ButtonUser = defpicture;
         public string ButtonCheck = defpicture;
         public string ButtonMoney = defpicture;
-        public string ButtonService = defpicture;
         public string ButtonServiceEmpty = defpicture;
         public string ButtonBack = defpicture;
         public string ButtonForward = defpicture;

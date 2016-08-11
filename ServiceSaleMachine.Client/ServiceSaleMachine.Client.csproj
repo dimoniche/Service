@@ -60,6 +60,12 @@
     <Compile Include="Forms\FormChooseChange.Designer.cs">
       <DependentUpon>FormChooseChange.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormChooseService1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormChooseService1.Designer.cs">
+      <DependentUpon>FormChooseService1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormInsertBill.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -187,6 +193,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormChooseChange.resx">
       <DependentUpon>FormChooseChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormChooseService1.resx">
+      <DependentUpon>FormChooseService1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormInsertBill.resx">
       <DependentUpon>FormInsertBill.cs</DependentUpon>

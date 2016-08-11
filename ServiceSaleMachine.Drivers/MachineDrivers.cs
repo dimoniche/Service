@@ -71,7 +71,14 @@ namespace ServiceSaleMachine.Drivers
         {
             this.log = log;
 
-            this.log.Write(LogMessageType.Information, "Старт драйверов. Версия " + Globals.ProductVersion);
+            this.log.Write(LogMessageType.Information, "DRIVERS: Старт драйверов. Версия " + Globals.ProductVersion);
+
+            // создаем все объекты драйверов
+            if (scaner == null) { scaner = new ZebexScaner(); }
+            if (CCNETDriver == null) { CCNETDriver = new CCRSProtocol(); }
+            if (printer == null) { printer = new PrinterESC(); }
+            if (control == null) { control = new ControlDevice(); }
+            if (modem == null) { modem = new Modem(); }
         }
 
         /// <summary>
@@ -121,36 +128,22 @@ namespace ServiceSaleMachine.Drivers
             if (Globals.ClientConfiguration.Settings.offCheck != 1)
             {
                 // не платим чеком - не нужен сканер
-                if (scaner == null)
+                if (!WorkerScanerDriver.IsWork)
                 {
-                    scaner = new ZebexScaner();
                     WorkerScanerDriver = new SaleThread { ThreadName = "WorkerScanerDriver" };
                     WorkerScanerDriver.Work += WorkerScanerDriver_Work;
                     WorkerScanerDriver.Complete += WorkerScanerDriver_Complete;
                 }
             }
 
-            if (CCNETDriver == null)
+            if (Globals.ClientConfiguration.Settings.offBill != 1)
             {
-                CCNETDriver = new CCRSProtocol();
-                WorkerBillPollDriver = new SaleThread { ThreadName = "WorkerBillPollDriver" };
-                WorkerBillPollDriver.Work += WorkerBillPollDriver_Work;
-                WorkerBillPollDriver.Complete += WorkerBillPollDriver_Complete;
-            }
-
-            if (printer == null)
-            {
-                printer = new PrinterESC();
-            }
-
-            if (control == null)
-            {
-                control = new ControlDevice();
-            }
-
-            if (modem == null)
-            {
-                modem = new Modem();
+                if (WorkerBillPollDriver.IsWork)
+                {
+                    WorkerBillPollDriver = new SaleThread { ThreadName = "WorkerBillPollDriver" };
+                    WorkerBillPollDriver.Work += WorkerBillPollDriver_Work;
+                    WorkerBillPollDriver.Complete += WorkerBillPollDriver_Complete;
+                }
             }
 
             if ((Globals.ClientConfiguration.Settings.offCheck != 1 && scaner.getNumberComPort().Contains("нет"))

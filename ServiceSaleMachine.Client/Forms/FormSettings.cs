@@ -20,9 +20,6 @@ namespace ServiceSaleMachine.Client
 
         bool init = false;
 
-        FormWait wait;
-        private SaleThread WorkerWait { get; set; }
-
         public override void LoadData()
         {
             foreach (object obj in Params.Objects.Where(obj => obj != null))
@@ -665,11 +662,6 @@ namespace ServiceSaleMachine.Client
         public FormSettings()
         {
             InitializeComponent();
-
-            // задача отображения долгих операций
-            WorkerWait = new SaleThread { ThreadName = "WorkerWaitSetting" };
-            WorkerWait.Work += WorkerWait_Work;
-            WorkerWait.Complete += WorkerWait_Complete;
         }
 
         private void reciveResponse(object sender, ServiceClientResponseEventArgs e)
@@ -978,7 +970,6 @@ namespace ServiceSaleMachine.Client
                 //WorkerWait.Run();
                 data.drivers.InitAllDevice();
                 ReLoad();
-                if (WorkerWait.IsWork) WorkerWait.Abort();
             }
         }
 
@@ -1018,7 +1009,6 @@ namespace ServiceSaleMachine.Client
                     //WorkerWait.Run();
                     data.drivers.InitAllDevice();
                     ReLoad();
-                    if (WorkerWait.IsWork) WorkerWait.Abort();
                 }
             }
         }
@@ -1080,35 +1070,6 @@ namespace ServiceSaleMachine.Client
                 button8.Enabled = true;
                 button7.Enabled = true;
                 button5.Enabled = true;
-            }
-        }
-
-        private void WorkerWait_Complete(object sender, ThreadCompleteEventArgs e)
-        {
-            wait.Hide();
-        }
-
-        private void WorkerWait_Work(object sender, ThreadWorkEventArgs e)
-        {
-            wait = new FormWait();
-            wait.Show();
-
-            while (!e.Cancel)
-            {
-                try
-                {
-                    wait.Refresh();
-                }
-                catch
-                {
-                }
-                finally
-                {
-                    if (!e.Cancel)
-                    {
-                        Thread.Sleep(100);
-                    }
-                }
             }
         }
 

@@ -1,48 +1,29 @@
-﻿using ServiceSaleMachine.Drivers;
-using System;
-using System.Threading;
+﻿using System;
 using System.Windows.Forms;
-using static ServiceSaleMachine.Drivers.MachineDrivers;
 
 namespace ServiceSaleMachine.Client
 {
     public partial class MainForm : MyForm
     {
-        // стадии работы
-        public WorkerStateStage Stage { get; set; }
-
-        // драйвера
-        MachineDrivers drivers;
-
-        FormWait wait;
-
-        // потоки
-        private SaleThread WorkerWait { get; set; }
-
-        // задача очистки логов
+        /// <summary>
+        /// задача очистки логов
+        /// </summary>
         ClearFilesControlServiceTask ClearFilesTask { get; set; }
 
-        // статистика по деньгам
-        MoneyStatistic statistic;
+        /// <summary>
+        /// Данные передаваемые между окнами
+        /// </summary>
+        FormResultData result;
 
         // запуск приложения
-        public MainForm(WorkerStateStage StateStage)
+        public MainForm()
         {
             InitializeComponent();
 
             // запустим задачу очистки от логов директории
             ClearFilesTask = new ClearFilesControlServiceTask(Program.Log);
 
-            drivers = new MachineDrivers(Program.Log);
-            drivers.ReceivedResponse += reciveResponse;
-
-            // задача отображения долгих операций
-            WorkerWait = new SaleThread { ThreadName = "WorkerWait" };
-            WorkerWait.Work += WorkerWait_Work;
-            WorkerWait.Complete += WorkerWait_Complete;
-
-
-            Stage = StateStage;// WorkerStateStage.None;
+            result = new FormResultData(Program.Log);
 
             // база данных
             if (GlobalDb.GlobalBase.CreateDB())
@@ -64,9 +45,6 @@ namespace ServiceSaleMachine.Client
             }
 
             GlobalDb.GlobalBase.CreateTables();
-
-            // прочтем из базы статистику
-            statistic = GlobalDb.GlobalBase.GetMoneyStatistic();
         }
 
         /// <summary>
@@ -74,13 +52,9 @@ namespace ServiceSaleMachine.Client
         /// </summary>
         private void MainWorker()
         {
-            FormResultData result = new FormResultData();
-            result.drivers = drivers;
-            result.statistic = statistic;
-
             if (Globals.admin)
             {
-                drivers.InitAllDevice();
+                result.drivers.InitAllDevice();
                 result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
               //  drivers.StopAllDevice();
             }
@@ -91,18 +65,15 @@ namespace ServiceSaleMachine.Client
             if(Globals.ClientConfiguration.Settings.offHardware == 0)   // если не отключено
             {
                 // инициализация оборудования
-                switch (drivers.InitAllDevice())
+                switch (result.drivers.InitAllDevice())
                 {
                     case WorkerStateStage.None:
                         break;
                     case WorkerStateStage.NoCOMPort:
-                        if (WorkerWait.IsWork) WorkerWait.Abort();
                         result = (FormResultData)FormManager.OpenForm<FormWelcomeUser>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
                         break;
                     case WorkerStateStage.NeedSettingProgram:
                         {
-                            if (WorkerWait.IsWork) WorkerWait.Abort();
-
                             result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
                             if (Globals.ClientConfiguration.Settings.offHardware == 0)
                             {
@@ -116,8 +87,6 @@ namespace ServiceSaleMachine.Client
             {
                 
             }
-
-            if(WorkerWait.IsWork) WorkerWait.Abort();
 
             while (true)
             {
@@ -253,7 +222,7 @@ namespace ServiceSaleMachine.Client
                             // проинициализируем железо после настроек
                             if (Globals.ClientConfiguration.Settings.offHardware == 0)
                             {
-                                drivers.InitAllDevice();
+                                result.drivers.InitAllDevice();
                             }
 
                             continue;
@@ -295,9 +264,6 @@ namespace ServiceSaleMachine.Client
                         // ожидание внесение денег
                         result = (FormResultData)FormManager.OpenForm<FormWaitPayBill>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
-                        // проверим результат
-                        drivers.ReceivedResponse += reciveResponse;
-
                         if (result.stage == WorkerStateStage.Fail || result.stage == WorkerStateStage.EndDropCassette)
                         {
                             // отказ - выход в выбор услуг
@@ -318,9 +284,6 @@ namespace ServiceSaleMachine.Client
                     {
                         // ожидание считывания чека
                         result = (FormResultData)FormManager.OpenForm<FormWaitPayCheck>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-
-                        // проверим результат
-                        drivers.ReceivedResponse += reciveResponse;
 
                         if (result.stage == WorkerStateStage.Fail || result.stage == WorkerStateStage.EndDropCassette)
                         {
@@ -459,89 +422,14 @@ namespace ServiceSaleMachine.Client
             return result;
         }
 
-
-        /// <summary>
-        /// Обработчик событий от устройств
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public void reciveResponse(object sender, ServiceClientResponseEventArgs e)
-        {
-            if (InvokeRequired)
-            {
-                BeginInvoke(new ServiceClientResponseEventHandler(reciveResponse), sender, e);
-                return;
-            }
-
-            switch (e.Message.Event)
-            {
-                case DeviceEvent.Scaner:
-
-                    break;
-                case DeviceEvent.BillAcceptor:
-
-                    break;
-                case DeviceEvent.NoCOMPort:
-                    break;
-                case DeviceEvent.InitializationOK:
-                    break;
-                case DeviceEvent.NeedSettingProgram:
-                    // необходимо запустить настройку приложения
-                    break;
-                case DeviceEvent.DropCassetteBillAcceptor:
-
-                    break;
-                case DeviceEvent.DropCassetteFullBillAcceptor:
-                    // я полный
-                    break;
-            }
-        }
-
         private void MainForm_Shown(object sender, EventArgs e)
         {
+            // Запустим основной разработчик
             MainWorker();
-        }
-
-        private void WorkerWait_Complete(object sender, ThreadCompleteEventArgs e)
-        {
-            wait.Hide();
-        }
-
-        private void WorkerWait_Work(object sender, ThreadWorkEventArgs e)
-        {
-            wait = new FormWait();
-            try
-            {
-                wait.Show();
-            }
-            catch
-            {
-                return;
-            }
-
-            while (!e.Cancel)
-            {
-                try
-                {
-                    wait.Refresh();
-                }
-                catch
-                {
-                }
-                finally
-                {
-                    if (!e.Cancel)
-                    {
-                        Thread.Sleep(100);
-                    }
-                }
-            }
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            WorkerWait.Abort();
-
             try
             {
                 //drivers.StopAllDevice();

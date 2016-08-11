@@ -297,9 +297,8 @@ namespace ServiceSaleMachine
                         dt = (DateTime) dr[0];
                     }
                 }
-                
+                dr.Close();
             }
-            dr.Close();
             return dt;
         }
         /// <summary>

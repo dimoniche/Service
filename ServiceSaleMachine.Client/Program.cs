@@ -85,7 +85,7 @@ namespace ServiceSaleMachine.Client
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm(WorkerStateStage.None));
+            Application.Run(new MainForm());
         }
 
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)

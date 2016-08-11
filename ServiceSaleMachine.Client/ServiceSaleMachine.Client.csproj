@@ -138,12 +138,6 @@
     <Compile Include="Forms\FormTemporallyNoWork.Designer.cs">
       <DependentUpon>FormTemporallyNoWork.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormWait.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormWait.Designer.cs">
-      <DependentUpon>FormWait.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\FormWaitPayCheck.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -232,9 +226,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormTemporallyNoWork.resx">
       <DependentUpon>FormTemporallyNoWork.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormWait.resx">
-      <DependentUpon>FormWait.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormWaitPayBill.resx">
       <DependentUpon>FormWaitPayBill.cs</DependentUpon>

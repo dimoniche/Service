@@ -128,7 +128,7 @@ namespace ServiceSaleMachine.Drivers
             if (Globals.ClientConfiguration.Settings.offCheck != 1)
             {
                 // не платим чеком - не нужен сканер
-                if (!WorkerScanerDriver.IsWork)
+                if (WorkerScanerDriver == null)
                 {
                     WorkerScanerDriver = new SaleThread { ThreadName = "WorkerScanerDriver" };
                     WorkerScanerDriver.Work += WorkerScanerDriver_Work;
@@ -138,7 +138,7 @@ namespace ServiceSaleMachine.Drivers
 
             if (Globals.ClientConfiguration.Settings.offBill != 1)
             {
-                if (WorkerBillPollDriver.IsWork)
+                if (WorkerBillPollDriver == null)
                 {
                     WorkerBillPollDriver = new SaleThread { ThreadName = "WorkerBillPollDriver" };
                     WorkerBillPollDriver.Work += WorkerBillPollDriver_Work;

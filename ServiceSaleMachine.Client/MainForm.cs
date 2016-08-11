@@ -52,7 +52,7 @@ namespace ServiceSaleMachine.Client
         /// </summary>
         private void MainWorker()
         {
-            //if (Globals.admin)
+            if (Globals.admin)
             {
                 result.drivers.InitAllDevice();
                 result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
@@ -60,7 +60,6 @@ namespace ServiceSaleMachine.Client
             }
 
             initDevice:
-            //WorkerWait.Run();
 
             if(Globals.ClientConfiguration.Settings.offHardware == 0)   // если не отключено
             {

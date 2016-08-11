@@ -640,14 +640,19 @@ namespace ServiceSaleMachine.Client
             labelTimeLastRefresh.Text = "Время последнего обслуживания: " + dt.ToString();
             labelWorkFromLastRefresh.Text = "Всего проработали со времени последнего обслуживания: " + GlobalDb.GlobalBase.GetWorkTime(dt).ToString() + " мин";
 
+            MoneyStatistic();
+
+            init = false;
+        }
+
+        void MoneyStatistic()
+        {
             labelAllMoneySumm.Text = "Сумма принятых денег " + data.statistic.AllMoneySumm.ToString() + " руб.";
             labelAccountMoneySumm.Text = "Cумма денег на аккаунтах " + data.statistic.AccountMoneySumm.ToString() + " руб.";
             labelBarCodeMoneySumm.Text = "Cумма денег на штрихкод-чеках " + data.statistic.BarCodeMoneySumm.ToString() + " руб.";
             labelServiceMoneySumm.Text = "Cумма денег на штрихкод-чеках " + data.statistic.ServiceMoneySumm.ToString() + " руб.";
             labelServiceMoneySumm.Text = "Oказано услуг на сумму " + data.statistic.ServiceMoneySumm.ToString() + " руб.";
             labelCountBankNote.Text = "Количество принятых банкнот " + data.statistic.CountBankNote.ToString() + " шт.";
-
-            init = false;
         }
 
         public FormSettings()
@@ -1507,8 +1512,8 @@ namespace ServiceSaleMachine.Client
             // очистим накопленные банктноты
             GlobalDb.GlobalBase.ClearBankNotes();
 
-            // печатаем чек
-            data.drivers.printer.PrintCheckСollection(data.statistic);
+            // обновляем статистику
+            MoneyStatistic();
         }
     }
 }

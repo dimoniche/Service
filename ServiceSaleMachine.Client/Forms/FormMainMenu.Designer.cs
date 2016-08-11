@@ -41,9 +41,9 @@
             this.pbxHelp = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.pbxLogin = new System.Windows.Forms.PictureBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.TimeOutTimer = new System.Windows.Forms.Timer(this.components);
-            this.label2 = new System.Windows.Forms.Label();
             this.panel3.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -210,16 +210,6 @@
             this.pbxLogin.TabStop = false;
             this.pbxLogin.Click += new System.EventHandler(this.pbxLogin_Click);
             // 
-            // timer1
-            // 
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // TimeOutTimer
-            // 
-            this.TimeOutTimer.Interval = 1000;
-            this.TimeOutTimer.Tick += new System.EventHandler(this.TimeOutTimer_Tick);
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -230,6 +220,16 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "label2";
             this.label2.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // TimeOutTimer
+            // 
+            this.TimeOutTimer.Interval = 1000;
+            this.TimeOutTimer.Tick += new System.EventHandler(this.TimeOutTimer_Tick);
             // 
             // FormMainMenu
             // 

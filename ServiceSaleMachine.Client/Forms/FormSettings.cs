@@ -551,6 +551,7 @@ namespace ServiceSaleMachine.Client
                 }
 
                 mydb.CreateTables();
+                
 
                 tabDataBaseSetting.Enabled = true;
             }
@@ -1652,6 +1653,12 @@ namespace ServiceSaleMachine.Client
         {
             Globals.ClientConfiguration.Settings.TextEndService = richTextEndService.Text;
             Globals.ClientConfiguration.Save();
+        }
+
+        private void button13_Click_1(object sender, EventArgs e)
+        {
+            GlobalDb.GlobalBase.FillSystemValues();
+            GlobalDb.GlobalBase.AddToCheck(0, 100, CheckHelper.GetUniqueNumberCheck(10));
         }
     }
 }

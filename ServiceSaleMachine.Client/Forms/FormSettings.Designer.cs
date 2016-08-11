@@ -181,6 +181,7 @@
             this.groupBoxStartService = new System.Windows.Forms.GroupBox();
             this.richTextStartService = new System.Windows.Forms.RichTextBox();
             this.tabPageStatistic = new System.Windows.Forms.TabPage();
+            this.button13 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -1023,6 +1024,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.button13);
             this.panel1.Controls.Add(this.button12);
             this.panel1.Controls.Add(this.button11);
             this.panel1.Controls.Add(this.edtMoney);
@@ -1041,7 +1043,7 @@
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(272, 53);
+            this.button12.Location = new System.Drawing.Point(337, 53);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(128, 23);
             this.button12.TabIndex = 9;
@@ -1063,7 +1065,7 @@
             // 
             this.edtMoney.Location = new System.Drawing.Point(217, 56);
             this.edtMoney.Name = "edtMoney";
-            this.edtMoney.Size = new System.Drawing.Size(49, 20);
+            this.edtMoney.Size = new System.Drawing.Size(114, 20);
             this.edtMoney.TabIndex = 7;
             this.edtMoney.Text = "0";
             // 
@@ -1848,6 +1850,16 @@
             this.tabPageStatistic.Text = "Статистика";
             this.tabPageStatistic.UseVisualStyleBackColor = true;
             // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(310, 76);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(129, 22);
+            this.button13.TabIndex = 10;
+            this.button13.Text = "button13";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click_1);
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2062,5 +2074,6 @@
         private System.Windows.Forms.RichTextBox richTextStartService;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.RichTextBox richTextEndService;
+        private System.Windows.Forms.Button button13;
     }
 }

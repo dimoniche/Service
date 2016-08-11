@@ -17,7 +17,6 @@ namespace ServiceSaleMachine.Client
             InitializeComponent();
 
             Image image = Image.FromFile(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.PanelBackGround);
-
             this.BackgroundImage = image;
 
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxBegin, Globals.DesignConfiguration.Settings.ButtonStartServices);

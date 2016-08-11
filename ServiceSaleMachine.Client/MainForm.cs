@@ -238,6 +238,13 @@ namespace ServiceSaleMachine.Client
                         // вернемся в выбор услуги (уж не думал что goto буду использовать)
                         goto ChooseService;
                     }
+                    else if (result.stage == WorkerStateStage.WhatsDiff)
+                    {
+                        result = (FormResultData)FormManager.OpenForm<FormWhatsDiff>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                        // вернемся в выбор услуги (уж не думал что goto буду использовать)
+                        goto ChooseService;
+                    }
                     else if (result.stage == WorkerStateStage.TimeOut)
                     {
                         continue;

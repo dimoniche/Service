@@ -87,7 +87,8 @@ namespace ServiceSaleMachine.Client
 
         private void pBxWhatsDiff_Click(object sender, System.EventArgs e)
         {
-
+            data.stage = WorkerStateStage.WhatsDiff;
+            this.Close();
         }
     }
 }

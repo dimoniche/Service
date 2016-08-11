@@ -138,5 +138,10 @@ namespace ServiceSaleMachine
         /// Ощибка в управляющих устройствах завершилась
         /// </summary>
         ErrorEndControl,
+
+        /// <summary>
+        /// Переход в меню с разницей
+        /// </summary>
+        WhatsDiff,
     }
 }

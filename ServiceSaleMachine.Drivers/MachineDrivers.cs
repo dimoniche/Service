@@ -1146,7 +1146,7 @@ namespace ServiceSaleMachine.Drivers
         {
             if (Globals.ClientConfiguration.Settings.offControl == 1) return null;
 
-            byte[] res = new byte[2];
+            byte[] res = new byte[1];
             byte[] buf = new byte[2];
             byte[] BufIn = new byte[10];
 
@@ -1155,13 +1155,13 @@ namespace ServiceSaleMachine.Drivers
             control.Send(buf, 2);
 
             int val = 0;
-            if (control.Recieve(BufIn, 4, out val) == false)
+            if (control.Recieve(BufIn, 3, out val) == false)
             {
                 return null;
             }
 
+            // состояние 
             res[0] = BufIn[1];
-            res[1] = BufIn[2];
 
             return res;
         }

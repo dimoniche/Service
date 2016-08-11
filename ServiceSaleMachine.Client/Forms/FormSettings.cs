@@ -1558,20 +1558,9 @@ namespace ServiceSaleMachine.Client
 
             if (res != null)
             {
-                StatusControl.Text = "Устройство 1: ";
+                StatusControl.Text = "Устройство: ";
 
                 if (res[0] > 0)
-                {
-                    StatusControl.Text += "включено";
-                }
-                else
-                {
-                    StatusControl.Text += "отключено";
-                }
-
-                StatusControl.Text += " Устройство 2: ";
-
-                if (res[1] > 0)
                 {
                     StatusControl.Text += "включено";
                 }

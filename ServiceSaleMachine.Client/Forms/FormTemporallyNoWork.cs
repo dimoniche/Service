@@ -31,7 +31,7 @@ namespace ServiceSaleMachine.Client
 
             if (res != null)
             {
-                if (res[0] == 0 && res[1] == 0)
+                if (res[0] == 0)
                 {
                     data.stage = WorkerStateStage.ErrorEndControl;
                     this.Close();

@@ -187,14 +187,19 @@ namespace ServiceSaleMachine
         }
         public void FillSystemValues()
         {
-            String str = GetSystemValue("nextnumbercheck");
+           // String str = GetSystemValue("nextnumbercheck");
             MySqlDataReader dsv = Execute("select * from systemvalues where namevalue='nextnumbercheck'");
             if (dsv != null)
             {
                 if (!dsv.HasRows)
                 {
+                    dsv.Close();//обязательно!
                     string query = "insert into systemvalues (namevalue, ownvalue) values ('nextnumbercheck', '0')";
                     ExecuteNonQuery(query);
+                }
+                else
+                {
+                    dsv.Close();//обязательно!
                 }
             }
         }
@@ -235,6 +240,7 @@ namespace ServiceSaleMachine
             catch (Exception ex)
             {
                 Debug.Print(ex.Message);
+                
                 return null;
             }
         }
@@ -242,10 +248,10 @@ namespace ServiceSaleMachine
         private bool ExecuteNonQuery(string query)
         {
 
-            MySqlCommand cmd = new MySqlCommand(query, con);
+            MySqlCommand cmd2 = new MySqlCommand(query, con);
             try
             {
-                cmd.ExecuteNonQuery();
+                cmd2.ExecuteNonQuery();
                 return true;
 
             }
@@ -291,8 +297,9 @@ namespace ServiceSaleMachine
                         dt = (DateTime) dr[0];
                     }
                 }
-                dr.Close();
+                
             }
+            dr.Close();
             return dt;
         }
         /// <summary>
@@ -586,8 +593,8 @@ namespace ServiceSaleMachine
         {
             if (Globals.ClientConfiguration.Settings.offDataBase == 1) return 0;
 
-            string queryString = "select namevalues, ownvalue from  from systemvalues where " +
-                 "namevalues = 'nextnumbercheck'";
+            string queryString = "select namevalue, ownvalue from  systemvalues where " +
+                 "namevalue= 'nextnumbercheck'";
 
 
             MySqlDataReader dr = Execute(queryString);
@@ -596,8 +603,13 @@ namespace ServiceSaleMachine
                 if (dr.HasRows)
                 {
                     dr.Read();
+                    string s = "0";
+                    int i;
                     if (dr.IsDBNull(0) != true)
-                        return (int)dr[0];
+                        s = (string)dr[1];
+                    dr.Close();
+                    int.TryParse(s, out i);
+                    return i;
                 }
             }
             return 0;
@@ -605,7 +617,7 @@ namespace ServiceSaleMachine
 
         public bool IncNumberCheck(int CurrentN)
         {
-            string query = "update namevalues set value=" + CurrentN.ToString() + "where namevalue = 'nextnumbercheck'";
+            string query = "update systemvalues set ownvalue=" + CurrentN.ToString() + " where namevalue = 'nextnumbercheck'";
             return ExecuteNonQuery(query);
         }
         /// <summary>
@@ -620,7 +632,7 @@ namespace ServiceSaleMachine
             if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
             int nc = GetCurrentNumberCheck();
             string query = "INSERT INTO checks (iduser, amount, checkstr, number, dt_create) VALUES ("
-                + userid.ToString() + "," + sum.ToString() + ",'" + check +"','" + nc.ToString() + ",'"+
+                + userid.ToString() + "," + sum.ToString() + ",'" + check +"','" + nc.ToString() + "','"+
                   DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
             IncNumberCheck(nc + 1);
             return ExecuteNonQuery(query);

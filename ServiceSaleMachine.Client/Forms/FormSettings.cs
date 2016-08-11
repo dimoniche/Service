@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Threading;
 using System.Windows.Forms;
 using static ServiceSaleMachine.Drivers.MachineDrivers;
 
@@ -14,9 +13,6 @@ namespace ServiceSaleMachine.Client
         FormResultData data;
 
         string[] currentPort;
-
-        // база данных
-        public db mydb;
 
         bool init = false;
 
@@ -544,20 +540,6 @@ namespace ServiceSaleMachine.Client
 
             if (Globals.ClientConfiguration.Settings.offDataBase != 1)
             {
-                // база данных
-                mydb = new db();
-
-                if (mydb.Connect())
-                {
-
-                }
-                else
-                {
-
-                }
-
-                mydb.CreateTables();
-
                 tabDataBaseSetting.Enabled = true;
             }
             else
@@ -894,15 +876,15 @@ namespace ServiceSaleMachine.Client
 
         private void btnShowDB_Click(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = mydb.GetLogWork();
+            dataGridView1.DataSource = GlobalDb.GlobalBase.GetLogWork();
         }
 
         private void button3_Click_1(object sender, EventArgs e)
         {
-            int count = mydb.GetWorkTime(1, 1, new DateTime(2016, 07, 12));
+            int count = GlobalDb.GlobalBase.GetWorkTime(1, 1, new DateTime(2016, 07, 12));
             MessageBox.Show(count.ToString());
 
-            DateTime dt = mydb.GetLastRefreshTime(1, 1);
+            DateTime dt = GlobalDb.GlobalBase.GetLastRefreshTime(1, 1);
             MessageBox.Show(dt.ToString());
         }
 
@@ -1332,7 +1314,7 @@ namespace ServiceSaleMachine.Client
 
         private void button4_Click_1(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = mydb.GetUsers();
+            dataGridView1.DataSource = GlobalDb.GlobalBase.GetUsers();
         }
 
         private void button9_Click_1(object sender, EventArgs e)
@@ -1458,12 +1440,12 @@ namespace ServiceSaleMachine.Client
         private void button10_Click_1(object sender, EventArgs e)
         {
             int id = Convert.ToInt32(dataGridView1[0, dataGridView1.CurrentRow.Index].Value.ToString());
-            mydb.AddToAmount(id, Convert.ToInt32(edtMoney.Text));
+            GlobalDb.GlobalBase.AddToAmount(id, Convert.ToInt32(edtMoney.Text));
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = mydb.GetAmount();
+            dataGridView1.DataSource = GlobalDb.GlobalBase.GetAmount();
         }
 
         private void firmsname_Leave(object sender, EventArgs e)
@@ -1506,7 +1488,7 @@ namespace ServiceSaleMachine.Client
         {
             int id = Convert.ToInt32(dataGridView1[0, dataGridView1.CurrentRow.Index].Value.ToString());
 
-            DataTable dt = mydb.GetPaymentFromUser(id);
+            DataTable dt = GlobalDb.GlobalBase.GetPaymentFromUser(id);
             if (dt != null)
             { dataGridView1.DataSource = dt; }
         }

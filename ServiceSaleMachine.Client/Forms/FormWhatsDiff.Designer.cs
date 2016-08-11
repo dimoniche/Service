@@ -168,8 +168,8 @@
             this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 2;
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
             this.tableLayoutPanel6.Size = new System.Drawing.Size(421, 113);
             this.tableLayoutPanel6.TabIndex = 0;
             // 
@@ -211,14 +211,13 @@
             // 
             this.tableLayoutPanel7.ColumnCount = 1;
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel7.Controls.Add(this.scalableLabel3, 0, 0);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel7.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 2;
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
             this.tableLayoutPanel7.Size = new System.Drawing.Size(421, 113);
             this.tableLayoutPanel7.TabIndex = 0;
             // 
@@ -366,7 +365,7 @@
             this.scalableLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.scalableLabel2.Location = new System.Drawing.Point(3, 3);
             this.scalableLabel2.Name = "scalableLabel2";
-            this.scalableLabel2.Size = new System.Drawing.Size(415, 27);
+            this.scalableLabel2.Size = new System.Drawing.Size(415, 16);
             this.scalableLabel2.TabIndex = 0;
             this.scalableLabel2.Text = "До тренировки";
             // 
@@ -376,7 +375,7 @@
             this.scalableLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.scalableLabel3.Location = new System.Drawing.Point(3, 3);
             this.scalableLabel3.Name = "scalableLabel3";
-            this.scalableLabel3.Size = new System.Drawing.Size(415, 27);
+            this.scalableLabel3.Size = new System.Drawing.Size(415, 16);
             this.scalableLabel3.TabIndex = 0;
             this.scalableLabel3.Text = "После тренировки";
             // 

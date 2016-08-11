@@ -12,8 +12,6 @@ namespace ServiceSaleMachine.Client
     {
         FormResultData data;
 
-        string[] currentPort;
-
         bool init = false;
 
         public override void LoadData()
@@ -295,44 +293,72 @@ namespace ServiceSaleMachine.Client
             Globals.ClientConfiguration.Save();
         }
 
+        /// <summary>
+        /// Установка всех доступных ком портов
+        /// </summary>
+        void setAvailableComPort()
+        {
+            string[] currentPort = SerialPortHelper.GetSerialPorts();
+
+            cBxComPortScaner.Items.Clear();
+            cBxComPortScaner.Items.Add("нет");
+            cBxComPortScaner.Items.AddRange(currentPort);
+
+            cBxComPortBill.Items.Clear();
+            cBxComPortBill.Items.Add("нет");
+            cBxComPortBill.Items.AddRange(currentPort);
+
+            cBxControlPort.Items.Clear();
+            cBxControlPort.Items.Add("нет");
+            cBxControlPort.Items.AddRange(currentPort);
+
+            cBxModemComPort.Items.Clear();
+            cBxModemComPort.Items.Add("нет");
+            cBxModemComPort.Items.AddRange(currentPort);
+
+            cBxSpeedModem.Items.Clear();
+            cBxControlSpeed.Items.Clear();
+
+            // Скорости
+            ComPortSpeedEnum[] comPortSpeeds = CommonHelper.GetEnumValues<ComPortSpeedEnum>();
+            cBxControlSpeed.Items.Clear();
+            foreach (ComPortSpeedEnum speed in comPortSpeeds)
+            {
+                cBxControlSpeed.Items.Add((int)speed);
+                cBxSpeedModem.Items.Add((int)speed);
+            }
+        }
+
+        /// <summary>
+        /// Установка контролов относящихся к управляющему устройству
+        /// </summary>
+        /// <param name="state"></param>
+        void SetStateControl (bool state)
+        {
+            buttonwriteControlPort.Enabled = state;
+            cBxControlSpeed.Enabled = state;
+            Open1.Enabled = state;
+            Open2.Enabled = state;
+            Close1.Enabled = state;
+            Close2.Enabled = state;
+            LightOn1.Enabled = state;
+            LightOn2.Enabled = state;
+            LightOff1.Enabled = state;
+            LightOff2.Enabled = state;
+            butReadStatus.Enabled = state;
+        }
+
         void ReLoad()
         {
             init = true;
 
             try
             {
+                // обработчик событий
                 data.drivers.ReceivedResponse += reciveResponse;
 
-                currentPort = SerialPortHelper.GetSerialPorts();
-
-                cBxComPortScaner.Items.Clear();
-                cBxComPortScaner.Items.Add("нет");
-                cBxComPortScaner.Items.AddRange(currentPort);
-
-                cBxComPortBill.Items.Clear();
-                cBxComPortBill.Items.Add("нет");
-                cBxComPortBill.Items.AddRange(currentPort);
-
-                cBxControlPort.Items.Clear();
-                cBxControlPort.Items.Add("нет");
-                cBxControlPort.Items.AddRange(currentPort);
-
-                cBxModemComPort.Items.Clear();
-                cBxModemComPort.Items.Add("нет");
-                cBxModemComPort.Items.AddRange(currentPort);
-
-                cBxSpeedModem.Items.Clear();
-                cBxControlSpeed.Items.Clear();
-
-                // Скорости
-                ComPortSpeedEnum[] comPortSpeeds = CommonHelper.GetEnumValues<ComPortSpeedEnum>();
-                cBxControlSpeed.Items.Clear();
-                foreach (ComPortSpeedEnum speed in comPortSpeeds)
-                {
-                    cBxControlSpeed.Items.Add((int)speed);
-                    cBxSpeedModem.Items.Add((int)speed);
-                }
-
+                // все ком порты
+                setAvailableComPort();
 
                 if (Globals.ClientConfiguration.Settings.offHardware != 1)
                 {
@@ -395,18 +421,7 @@ namespace ServiceSaleMachine.Client
                     {
                         cBxControlPort.SelectedIndex = 0;
 
-                        buttonwriteControlPort.Enabled = false;
-                        cBxControlSpeed.Enabled = false;
-                        Open1.Enabled = false;
-                        Open1.Enabled = false;
-                        Open1.Enabled = false;
-                        Close1.Enabled = false;
-                        Close2.Enabled = false;
-                        LightOn1.Enabled = false;
-                        LightOn2.Enabled = false;
-                        LightOff1.Enabled = false;
-                        LightOff2.Enabled = false;
-                        butReadStatus.Enabled = false;
+                        SetStateControl(false);
                     }
                     else if (data.drivers.control.getNumberComPort().Contains("COM"))
                     {
@@ -546,7 +561,6 @@ namespace ServiceSaleMachine.Client
             {
                 tabDataBaseSetting.Enabled = false;
             }
-
 
             if (Globals.ClientConfiguration.Settings.offDataBase == 1)
             {
@@ -918,14 +932,8 @@ namespace ServiceSaleMachine.Client
 
             cBxControlPort.Enabled = state;
             buttonwriteControlPort.Enabled = state;
-            Open1.Enabled = state;
-            Open2.Enabled = state;
-            Close1.Enabled = state;
-            Close2.Enabled = state;
-            LightOn1.Enabled = state;
-            LightOn2.Enabled = state;
-            LightOff1.Enabled = state;
-            LightOff2.Enabled = state;
+
+            SetStateControl(state);
 
             butReadStatus.Enabled = state;
 
@@ -1188,35 +1196,14 @@ namespace ServiceSaleMachine.Client
                 Globals.ClientConfiguration.Settings.offControl = 1;
 
                 cBxControlPort.Enabled = false;
-                buttonwriteControlPort.Enabled = false;
-                cBxControlSpeed.Enabled = false;
-                Open1.Enabled = false;
-                Open2.Enabled = false;
-                Close1.Enabled = false;
-                Close2.Enabled = false;
-                LightOn1.Enabled = false;
-                LightOn2.Enabled = false;
-                LightOff1.Enabled = false;
-                LightOff2.Enabled = false;
-                butReadStatus.Enabled = false;
+                SetStateControl(false);
             }
             else
             {
                 Globals.ClientConfiguration.Settings.offControl = 0;
 
                 cBxControlPort.Enabled = true;
-                buttonwriteControlPort.Enabled = true;
-                cBxControlSpeed.Enabled = true;
-                Open1.Enabled = true;
-                Open1.Enabled = true;
-                Open1.Enabled = true;
-                Close1.Enabled = true;
-                Close2.Enabled = true;
-                LightOn1.Enabled = true;
-                LightOn2.Enabled = true;
-                LightOff1.Enabled = true;
-                LightOff2.Enabled = true;
-                butReadStatus.Enabled = true;
+                SetStateControl(true);
             }
 
             Globals.ClientConfiguration.Save();
@@ -1257,16 +1244,7 @@ namespace ServiceSaleMachine.Client
 
             if (((string)cBxControlPort.Items[cBxControlPort.SelectedIndex]).Contains("нет"))
             {
-                cBxControlSpeed.Enabled = false;
-                Open1.Enabled = false;
-                Open2.Enabled = false;
-                Close1.Enabled = false;
-                Close2.Enabled = false;
-                LightOn1.Enabled = false;
-                LightOn2.Enabled = false;
-                LightOff1.Enabled = false;
-                LightOff2.Enabled = false;
-                butReadStatus.Enabled = false;
+                SetStateControl(false);
 
                 data.drivers.control.closePort();
             }
@@ -1278,17 +1256,7 @@ namespace ServiceSaleMachine.Client
                     return;
                 }
 
-                buttonwriteControlPort.Enabled = true;
-                cBxControlSpeed.Enabled = true;
-                Open1.Enabled = true;
-                Open2.Enabled = true;
-                Close1.Enabled = true;
-                Close2.Enabled = true;
-                LightOn1.Enabled = true;
-                LightOn2.Enabled = true;
-                LightOff1.Enabled = true;
-                LightOff2.Enabled = true;
-                butReadStatus.Enabled = true;
+                SetStateControl(true);
             }
         }
 

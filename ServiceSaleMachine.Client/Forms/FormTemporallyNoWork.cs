@@ -27,7 +27,7 @@ namespace ServiceSaleMachine.Client
         {
             // читаем состояние устройства
             byte[] res;
-            res = data.drivers.GetStatusControl();
+            res = data.drivers.control.GetStatusControl();
 
             if (res != null)
             {

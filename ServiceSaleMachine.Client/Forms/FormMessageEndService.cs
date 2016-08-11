@@ -30,7 +30,7 @@ namespace ServiceSaleMachine.Client
             timer1.Enabled = true;
 
             // включаем подсветку
-            data.drivers.SendOpenControl((int)ControlDeviceEnum.light2);
+            data.drivers.control.SendOpenControl((int)ControlDeviceEnum.light2);
         }
 
         private void timer1_Tick(object sender, System.EventArgs e)
@@ -50,7 +50,7 @@ namespace ServiceSaleMachine.Client
         private void FormMessageEndService_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
         {
             // отключаем подсветку
-            data.drivers.SendCloseControl((int)ControlDeviceEnum.light2);
+            data.drivers.control.SendCloseControl((int)ControlDeviceEnum.light2);
 
             Params.Result = data;
         }

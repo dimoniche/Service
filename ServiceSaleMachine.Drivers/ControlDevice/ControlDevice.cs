@@ -128,6 +128,64 @@ namespace ServiceSaleMachine.Drivers
             }
         }
 
+        /// <summary>
+        /// Команда открыть
+        /// </summary>
+        /// <returns></returns>
+        public void SendOpenControl(int controlNumber)
+        {
+            if (Globals.ClientConfiguration.Settings.offControl == 1) return;
+
+            byte[] buf = new byte[2];
+
+            buf[0] = (byte)(controlNumber * 2 - 1);
+            buf[1] = (byte)(0xFF - buf[0]);
+            this.Send(buf, 2);
+        }
+
+        /// <summary>
+        /// Команда закрыть
+        /// </summary>
+        /// <returns></returns>
+        public void SendCloseControl(int controlNumber)
+        {
+            if (Globals.ClientConfiguration.Settings.offControl == 1) return;
+
+            byte[] buf = new byte[2];
+
+            buf[0] = (byte)(controlNumber * 2);
+            buf[1] = (byte)(0xFF - buf[0]);
+            this.Send(buf, 2);
+        }
+
+        /// <summary>
+        /// Пролучение статуса устройств
+        /// </summary>
+        /// <returns></returns>
+        public byte[] GetStatusControl()
+        {
+            if (Globals.ClientConfiguration.Settings.offControl == 1) return null;
+
+            byte[] res = new byte[1];
+            byte[] buf = new byte[2];
+            byte[] BufIn = new byte[10];
+
+            buf[0] = (byte)0xF0;
+            buf[1] = (byte)(0xFF - buf[0]);
+            this.Send(buf, 2);
+
+            int val = 0;
+            if (this.Recieve(BufIn, 3, out val) == false)
+            {
+                return null;
+            }
+
+            // состояние 
+            res[0] = BufIn[1];
+
+            return res;
+        }
+
         private void SerialPortPinChanged(object sender, SerialPinChangedEventArgs e)
         {
             

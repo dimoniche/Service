@@ -1351,22 +1351,22 @@ namespace ServiceSaleMachine.Client
 
         private void Open1_Click(object sender, EventArgs e)
         {
-            data.drivers.SendOpenControl((int)ControlDeviceEnum.dev3);
+            data.drivers.control.SendOpenControl((int)ControlDeviceEnum.dev3);
         }
 
         private void Open2_Click(object sender, EventArgs e)
         {
-            data.drivers.SendOpenControl((int)ControlDeviceEnum.dev4);
+            data.drivers.control.SendOpenControl((int)ControlDeviceEnum.dev4);
         }
 
         private void Close1_Click(object sender, EventArgs e)
         {
-            data.drivers.SendCloseControl((int)ControlDeviceEnum.dev3);
+            data.drivers.control.SendCloseControl((int)ControlDeviceEnum.dev3);
         }
 
         private void Close2_Click(object sender, EventArgs e)
         {
-            data.drivers.SendCloseControl((int)ControlDeviceEnum.dev4);
+            data.drivers.control.SendCloseControl((int)ControlDeviceEnum.dev4);
         }
 
         private void button4_Click_1(object sender, EventArgs e)
@@ -1554,7 +1554,7 @@ namespace ServiceSaleMachine.Client
         {
             byte[] res;
 
-            res = data.drivers.GetStatusControl();
+            res = data.drivers.control.GetStatusControl();
 
             if (res != null)
             {
@@ -1597,22 +1597,22 @@ namespace ServiceSaleMachine.Client
 
         private void LightOn1_Click(object sender, EventArgs e)
         {
-            data.drivers.SendOpenControl((int)ControlDeviceEnum.light1);
+            data.drivers.control.SendOpenControl((int)ControlDeviceEnum.light1);
         }
 
         private void LightOff1_Click(object sender, EventArgs e)
         {
-            data.drivers.SendCloseControl((int)ControlDeviceEnum.light1);
+            data.drivers.control.SendCloseControl((int)ControlDeviceEnum.light1);
         }
 
         private void LightOn2_Click(object sender, EventArgs e)
         {
-            data.drivers.SendOpenControl((int)ControlDeviceEnum.light2);
+            data.drivers.control.SendOpenControl((int)ControlDeviceEnum.light2);
         }
 
         private void LightOff2_Click(object sender, EventArgs e)
         {
-            data.drivers.SendCloseControl((int)ControlDeviceEnum.light2);
+            data.drivers.control.SendCloseControl((int)ControlDeviceEnum.light2);
         }
 
         private void richTextStartService_Leave(object sender, EventArgs e)

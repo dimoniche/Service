@@ -45,7 +45,7 @@ namespace ServiceSaleMachine.Client
             pBxInstruction.Load(Globals.GetPath(PathEnum.Image) + "\\instruction.png");
 
             // включаем подсветку
-            data.drivers.SendOpenControl((int)ControlDeviceEnum.light1);
+            data.drivers.control.SendOpenControl((int)ControlDeviceEnum.light1);
         }
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
@@ -71,7 +71,7 @@ namespace ServiceSaleMachine.Client
         private void FormProgress_FormClosed(object sender, FormClosedEventArgs e)
         {
             // Отключаем подстветку
-            data.drivers.SendCloseControl((int)ControlDeviceEnum.light1);
+            data.drivers.control.SendCloseControl((int)ControlDeviceEnum.light1);
 
             Params.Result = data;
         }

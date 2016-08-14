@@ -185,6 +185,9 @@ namespace ServiceSaleMachine
             }
             return "";
         }
+        /// <summary>
+        /// заполнение таблицы системных значений при старте
+        /// </summary>
         public void FillSystemValues()
         {
            // String str = GetSystemValue("nextnumbercheck");
@@ -613,8 +616,12 @@ namespace ServiceSaleMachine
             }
             return 0;
         }
-
-        public bool IncNumberCheck(int CurrentN)
+        /// <summary>
+        /// записать значение в текущий номер чеков (увеличенный или обнулить по команде)
+        /// </summary>
+        /// <param name="CurrentN"></param>
+        /// <returns></returns>
+        public bool SetNumberCheck(int CurrentN)
         {
             string query = "update systemvalues set ownvalue=" + CurrentN.ToString() + " where namevalue = 'nextnumbercheck'";
             return ExecuteNonQuery(query);
@@ -633,7 +640,7 @@ namespace ServiceSaleMachine
             string query = "INSERT INTO checks (iduser, amount, checkstr, number, dt_create) VALUES ("
                 + userid.ToString() + "," + sum.ToString() + ",'" + check +"','" + nc.ToString() + "','"+
                   DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
-            IncNumberCheck(nc + 1);
+            SetNumberCheck(nc + 1);
             return ExecuteNonQuery(query);
         }
         /// <summary>

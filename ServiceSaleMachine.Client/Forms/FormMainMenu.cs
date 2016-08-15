@@ -46,9 +46,18 @@ namespace ServiceSaleMachine.Client
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            //label2.Text = Globals.UserConfiguration.UserLogin + "\n" + Globals.UserConfiguration.Amount.ToString();
-            //lblTime.Text = DateTime.Now.ToString("HH:mm:ss");
-            //LblDate.Text = DateTime.Now.ToString("yyyy-MM-dd dddd");
+            // читаем состояние устройства
+            byte[] res;
+            res = data.drivers.control.GetStatusControl();
+
+            if (res != null)
+            {
+                if (res[0] == 0)
+                {
+                    data.stage = WorkerStateStage.ErrorControl;
+                    this.Close();
+                }
+            }
         }
 
         private void FormMainMenu_FormClosed(object sender, FormClosedEventArgs e)
@@ -119,23 +128,6 @@ namespace ServiceSaleMachine.Client
                 data.stage = WorkerStateStage.TimeOut;
                 this.Close();
             }
-
-            if ((Timeout % 20) == 0)
-            {
-                // читаем состояние устройства
-                byte[] res;
-                res = data.drivers.control.GetStatusControl();
-
-                if (res != null)
-                {
-                    if (res[0] > 0)
-                    {
-                        data.stage = WorkerStateStage.ErrorControl;
-                        this.Close();
-                    }
-                }
-            }
-
         }
 
         private void pbxLogin_Click(object sender, EventArgs e)

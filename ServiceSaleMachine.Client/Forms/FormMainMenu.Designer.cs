@@ -33,15 +33,15 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.TimeOutTimer = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pBxBegin = new System.Windows.Forms.PictureBox();
             this.pBxPhilosof = new System.Windows.Forms.PictureBox();
             this.pBxInstruction = new System.Windows.Forms.PictureBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBxBegin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBxPhilosof)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBxInstruction)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel3
@@ -54,7 +54,8 @@
             // 
             // timer1
             // 
-            this.timer1.Interval = 1000;
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 30000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // TimeOutTimer
@@ -82,21 +83,6 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(400, 460);
             this.tableLayoutPanel2.TabIndex = 4;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 25);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(678, 466);
-            this.tableLayoutPanel1.TabIndex = 4;
             // 
             // pBxBegin
             // 
@@ -131,6 +117,21 @@
             this.pBxInstruction.TabStop = false;
             this.pBxInstruction.Click += new System.EventHandler(this.pbxHelp_Click);
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 25);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(678, 466);
+            this.tableLayoutPanel1.TabIndex = 4;
+            // 
             // FormMainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -145,10 +146,10 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormMainMenu_FormClosed);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormMainMenu_KeyDown);
             this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pBxBegin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBxPhilosof)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBxInstruction)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

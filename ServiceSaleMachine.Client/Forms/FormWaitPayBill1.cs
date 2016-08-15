@@ -44,7 +44,7 @@ namespace ServiceSaleMachine.Client
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxGiveOxigen, Globals.DesignConfiguration.Settings.ButtonGetOxigen);
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxReturnBack, Globals.DesignConfiguration.Settings.ButtonRetToMain);
 
-            AmountServiceText.Text = "Внесено: 100 руб.";
+            AmountServiceText.Text = "Внесено: 0 руб.";
             AmountServiceText.ForeColor = System.Drawing.Color.Red;
 
             LabelNameService2.Text = Globals.ClientConfiguration.Settings.services[data.numberService].caption.ToLower();

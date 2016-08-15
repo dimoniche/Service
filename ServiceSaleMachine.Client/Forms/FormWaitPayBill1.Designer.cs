@@ -289,7 +289,7 @@
             this.AmountServiceText.Name = "AmountServiceText";
             this.AmountServiceText.Size = new System.Drawing.Size(372, 48);
             this.AmountServiceText.TabIndex = 0;
-            this.AmountServiceText.Text = "Внесено: 100 руб.";
+            this.AmountServiceText.Text = "Внесено: 0 руб.";
             // 
             // panel4
             // 

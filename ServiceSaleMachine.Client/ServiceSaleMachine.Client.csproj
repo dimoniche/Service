@@ -72,6 +72,12 @@
     <Compile Include="Forms\FormInsertBill.Designer.cs">
       <DependentUpon>FormInsertBill.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormProgress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormProgress.Designer.cs">
+      <DependentUpon>FormProgress.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormProvideService.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,12 +89,6 @@
     </Compile>
     <Compile Include="Forms\FormProvideServiceStart.Designer.cs">
       <DependentUpon>FormProvideServiceStart.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FormRules.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormRules.Designer.cs">
-      <DependentUpon>FormRules.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormMainMenu.cs">
       <SubType>Form</SubType>
@@ -114,17 +114,11 @@
     <Compile Include="Forms\FormNeedService.Designer.cs">
       <DependentUpon>FormNeedService.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormProgress.cs">
+    <Compile Include="Forms\FormRules.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormProgress.Designer.cs">
-      <DependentUpon>FormProgress.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FormRules1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormRules1.Designer.cs">
-      <DependentUpon>FormRules1.cs</DependentUpon>
+    <Compile Include="Forms\FormRules.Designer.cs">
+      <DependentUpon>FormRules.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormSettings.cs">
       <SubType>Form</SubType>
@@ -213,14 +207,14 @@
     <EmbeddedResource Include="Forms\FormInsertBill.resx">
       <DependentUpon>FormInsertBill.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormProgress.resx">
+      <DependentUpon>FormProgress.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormProvideService.resx">
       <DependentUpon>FormProvideService.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormProvideServiceStart.resx">
       <DependentUpon>FormProvideServiceStart.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormRules.resx">
-      <DependentUpon>FormRules.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormMainMenu.resx">
       <DependentUpon>FormMainMenu.cs</DependentUpon>
@@ -234,11 +228,8 @@
     <EmbeddedResource Include="Forms\FormNeedService.resx">
       <DependentUpon>FormNeedService.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormProgress.resx">
-      <DependentUpon>FormProgress.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormRules1.resx">
-      <DependentUpon>FormRules1.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormRules.resx">
+      <DependentUpon>FormRules.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSettings.resx">
       <DependentUpon>FormSettings.cs</DependentUpon>

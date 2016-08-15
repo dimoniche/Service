@@ -131,7 +131,7 @@ namespace ServiceSaleMachine.Client
                     else if (result.stage == WorkerStateStage.Rules || result.stage == WorkerStateStage.Philosof)
                     {
                         // ознакомление с правилами
-                        result = (FormResultData)FormManager.OpenForm<FormRules1>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+                        result = (FormResultData)FormManager.OpenForm<FormRules>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
                         if (result.stage == WorkerStateStage.MainScreen)
                         {

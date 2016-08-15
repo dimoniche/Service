@@ -13,6 +13,8 @@ namespace ServiceSaleMachine.Client
         public int FTimeWork;
         public string ServName;
 
+        private bool fileLoaded = false;
+
         public FormProgress()
         {
             InitializeComponent();
@@ -28,16 +30,14 @@ namespace ServiceSaleMachine.Client
                 }
             }
 
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxStart, Globals.DesignConfiguration.Settings.ButtonStartServices);
+
+            LabelNameService2.Text = Globals.ClientConfiguration.Settings.services[data.numberService].caption.ToLower();
+
             FTimeWork = data.timeRecognize;
-            progressBar.Maximum = data.timeRecognize;
-            progressBar.Minimum = 0;
-            progressBar.Value = 0;
             CurrentWork = 0;
 
             timer1.Enabled = true;
-            this.WindowState = FormWindowState.Maximized;
-
-            pBxInstruction.Load(Globals.GetPath(PathEnum.Image) + "\\instruction.png");
 
             // включаем подсветку
             data.drivers.control.SendOpenControl((int)ControlDeviceEnum.light1);
@@ -45,9 +45,16 @@ namespace ServiceSaleMachine.Client
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            if (!fileLoaded)
+            {
+                TextInstruction.LoadFile(Globals.GetPath(PathEnum.Text) + "\\service_step1.rtf");
+                fileLoaded = true;
+                timer1.Interval = 1000;
+                return;
+            }
+
             CurrentWork++;
-            progressBar.Value++;
-            label1.Text = String.Format("{0} \nОсталось времени работы {1} секунд.", ServName, FTimeWork - CurrentWork);
+
             if (CurrentWork >= FTimeWork)
             {
                 timer1.Enabled = false;
@@ -58,20 +65,20 @@ namespace ServiceSaleMachine.Client
             }
         }
 
-        private void FormProgress_FormClosed(object sender, FormClosedEventArgs e)
+        private void FormProgress1_FormClosed(object sender, FormClosedEventArgs e)
         {
             // Отключаем подстветку
             data.drivers.control.SendCloseControl((int)ControlDeviceEnum.light1);
+            timer1.Enabled = false;
 
             Params.Result = data;
         }
 
-        private void FormProgress_KeyDown(object sender, KeyEventArgs e)
+        private void pBxStart_Click(object sender, EventArgs e)
         {
-            if (e.Alt & e.KeyCode == Keys.F4)
-            {
-                data.stage = WorkerStateStage.ExitProgram;
-            }
+            timer1.Enabled = false;
+            data.stage = WorkerStateStage.EndService;
+            this.Close();
         }
     }
 }

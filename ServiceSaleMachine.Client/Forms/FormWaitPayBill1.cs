@@ -41,15 +41,7 @@ namespace ServiceSaleMachine.Client
                 }
             }
 
-            if (data.numberService == 0)
-            {
-                Globals.DesignConfiguration.Settings.LoadPictureBox(pBxGiveOxigen, Globals.DesignConfiguration.Settings.ButtonService1);
-            }
-            else
-            {
-                Globals.DesignConfiguration.Settings.LoadPictureBox(pBxGiveOxigen, Globals.DesignConfiguration.Settings.ButtonService2);
-            }
-
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxGiveOxigen, Globals.DesignConfiguration.Settings.ButtonGetOxigen);
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxReturnBack, Globals.DesignConfiguration.Settings.ButtonRetToMain);
 
             AmountServiceText.Text = "Внесено: 100 руб.";

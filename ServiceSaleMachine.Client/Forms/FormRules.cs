@@ -10,21 +10,14 @@ namespace ServiceSaleMachine.Client
         FormResultData data;
         private int Timeout;
 
+        bool fileLoaded = false;
+
         public FormRules()
         {
-
             InitializeComponent();
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pbxRetToMain, Globals.DesignConfiguration.Settings.ButtonRetToMain);
-            try
-            {
-                richTextBoxEx1.LoadFile(Globals.GetPath(PathEnum.Text) + "\\" +  Globals.HelpFileName, RichTextBoxStreamType.PlainText);
-            }
-            catch
-            {
-                richTextBoxEx1.Text = "Ошибка загрузки файла с инструкцией";
-            }
 
-            Timeout = 0;
+            timer1.Enabled = true;
+            timer1.Interval = 50;
         }
 
         public override void LoadData()
@@ -36,24 +29,23 @@ namespace ServiceSaleMachine.Client
                     data = (FormResultData)obj;
                 }
             }
-            timer1.Enabled = true;
-            this.WindowState = FormWindowState.Maximized;
 
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxMainMenu, Globals.DesignConfiguration.Settings.ButtonRetToMain);
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxStartService, Globals.DesignConfiguration.Settings.ButtonStartServices);
+
+            InstructionText.LoadFile(Globals.HelpFileName);
         }
 
-        private void FormRules_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Params.Result = data;
-        }
-
-        private void pbxRetToMain_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void timerTimeOut_Tick(object sender, EventArgs e)
+        private void timer1_Tick(object sender, EventArgs e)
         {
             Timeout++;
+
+            if (!fileLoaded)
+            {
+                InstructionText.LoadFile(Globals.HelpFileName);
+                fileLoaded = true;
+                timer1.Interval = 1000;
+            }
 
             if (Globals.ClientConfiguration.Settings.timeout == 0)
             {
@@ -65,6 +57,32 @@ namespace ServiceSaleMachine.Client
             {
                 data.stage = WorkerStateStage.TimeOut;
                 this.Close();
+            }
+        }
+
+        private void FormRules1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Params.Result = data;
+        }
+
+        private void pBxMainMenu_Click(object sender, EventArgs e)
+        {
+            data.stage = WorkerStateStage.MainScreen;
+            this.Close();
+        }
+
+        private void pBxStartService_Click(object sender, EventArgs e)
+        {
+            data.stage = WorkerStateStage.ChooseService;
+            this.Close();
+        }
+
+        private void FormRules1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Alt & e.KeyCode == Keys.F4)
+            {
+                data.stage = WorkerStateStage.ExitProgram;
+                Close();
             }
         }
     }

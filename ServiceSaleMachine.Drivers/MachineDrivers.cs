@@ -119,9 +119,6 @@ namespace ServiceSaleMachine.Drivers
             if (!CheckSerialPort() && getCountSerialPort() < COUNT_DEVICE)
             {
                 this.log.Write(LogMessageType.Error, "COM портов нет. Работа не возможна.");
-
-                sendMessage(DeviceEvent.NoCOMPort);
-
                 return WorkerStateStage.NoCOMPort;
             }
 
@@ -152,8 +149,6 @@ namespace ServiceSaleMachine.Drivers
             {
                 // необходима настройка приложения
                 this.log.Write(LogMessageType.Error, "Необходима настройка приложения");
-
-                sendMessage(DeviceEvent.NeedSettingProgram);
                 res = WorkerStateStage.NeedSettingProgram;
             }
 

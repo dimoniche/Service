@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.InstructionText = new ServiceSaleMachine.RichTextBoxEx();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -38,7 +39,6 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.pBxStartService = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.InstructionText = new ServiceSaleMachine.RichTextBoxEx();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -78,6 +78,17 @@
             this.panel1.Size = new System.Drawing.Size(763, 456);
             this.panel1.TabIndex = 0;
             // 
+            // InstructionText
+            // 
+            this.InstructionText.BackColor = System.Drawing.SystemColors.Control;
+            this.InstructionText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.InstructionText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.InstructionText.Location = new System.Drawing.Point(0, 0);
+            this.InstructionText.Name = "InstructionText";
+            this.InstructionText.Size = new System.Drawing.Size(763, 456);
+            this.InstructionText.TabIndex = 0;
+            this.InstructionText.Text = "";
+            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.tableLayoutPanel2);
@@ -90,9 +101,9 @@
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 3;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
             this.tableLayoutPanel2.Controls.Add(this.panel3, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.panel4, 2, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -100,7 +111,6 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 93F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(763, 93);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
@@ -110,7 +120,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(3, 3);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(299, 87);
+            this.panel3.Size = new System.Drawing.Size(337, 87);
             this.panel3.TabIndex = 0;
             // 
             // pBxMainMenu
@@ -118,7 +128,7 @@
             this.pBxMainMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pBxMainMenu.Location = new System.Drawing.Point(0, 0);
             this.pBxMainMenu.Name = "pBxMainMenu";
-            this.pBxMainMenu.Size = new System.Drawing.Size(299, 87);
+            this.pBxMainMenu.Size = new System.Drawing.Size(337, 87);
             this.pBxMainMenu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pBxMainMenu.TabIndex = 0;
             this.pBxMainMenu.TabStop = false;
@@ -128,9 +138,9 @@
             // 
             this.panel4.Controls.Add(this.pBxStartService);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(460, 3);
+            this.panel4.Location = new System.Drawing.Point(422, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(300, 87);
+            this.panel4.Size = new System.Drawing.Size(338, 87);
             this.panel4.TabIndex = 1;
             // 
             // pBxStartService
@@ -138,7 +148,7 @@
             this.pBxStartService.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pBxStartService.Location = new System.Drawing.Point(0, 0);
             this.pBxStartService.Name = "pBxStartService";
-            this.pBxStartService.Size = new System.Drawing.Size(300, 87);
+            this.pBxStartService.Size = new System.Drawing.Size(338, 87);
             this.pBxStartService.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pBxStartService.TabIndex = 1;
             this.pBxStartService.TabStop = false;
@@ -149,25 +159,14 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // InstructionText
-            // 
-            this.InstructionText.BackColor = System.Drawing.SystemColors.Control;
-            this.InstructionText.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.InstructionText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.InstructionText.Location = new System.Drawing.Point(0, 0);
-            this.InstructionText.Name = "InstructionText";
-            this.InstructionText.Size = new System.Drawing.Size(763, 456);
-            this.InstructionText.TabIndex = 0;
-            this.InstructionText.Text = "";
-            // 
-            // FormRules1
+            // FormRules
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(962, 661);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "FormRules1";
+            this.Name = "FormRules";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormRules1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

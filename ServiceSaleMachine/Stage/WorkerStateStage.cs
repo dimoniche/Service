@@ -143,5 +143,10 @@ namespace ServiceSaleMachine
         /// Переход в меню с разницей
         /// </summary>
         WhatsDiff,
+
+        /// <summary>
+        /// Показ философии проекта
+        /// </summary>
+        Philosof,
     }
 }

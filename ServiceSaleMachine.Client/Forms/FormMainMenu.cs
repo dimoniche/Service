@@ -89,7 +89,7 @@ namespace ServiceSaleMachine.Client
 
         private void pbxHelp_Click(object sender, EventArgs e)
         {
-            Globals.HelpFileName = "HelpMain.txt";
+            Globals.HelpFileName = Globals.GetPath(PathEnum.Text) + "\\Instruction.rtf";
             data.stage = WorkerStateStage.Rules;
             this.Close();
         }
@@ -148,7 +148,9 @@ namespace ServiceSaleMachine.Client
 
         private void pBxPhilosof_Click(object sender, EventArgs e)
         {
-
+            Globals.HelpFileName = Globals.GetPath(PathEnum.Text) + "\\Philosof.rtf";
+            data.stage = WorkerStateStage.Philosof;
+            this.Close();
         }
     }
 }

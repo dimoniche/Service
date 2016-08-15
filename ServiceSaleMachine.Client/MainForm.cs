@@ -128,12 +128,20 @@ namespace ServiceSaleMachine.Client
                     {
                         // уходим на выбор услуг
                     }
-                    else if (result.stage == WorkerStateStage.Rules)
+                    else if (result.stage == WorkerStateStage.Rules || result.stage == WorkerStateStage.Philosof)
                     {
                         // ознакомление с правилами
-                        result = (FormResultData)FormManager.OpenForm<FormRules>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-                        // ознакомились - возвращаемся обратно
-                        continue;
+                        result = (FormResultData)FormManager.OpenForm<FormRules1>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                        if (result.stage == WorkerStateStage.MainScreen)
+                        {
+                            // ознакомились - возвращаемся обратно
+                            continue;
+                        }
+                        else if (result.stage == WorkerStateStage.ChooseService)
+                        {
+                            // уходим на выбор услуг
+                        }
                     }
                     else if (result.stage == WorkerStateStage.DropCassettteBill)
                     {

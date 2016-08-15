@@ -120,6 +120,12 @@
     <Compile Include="Forms\FormProgress.Designer.cs">
       <DependentUpon>FormProgress.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormRules1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormRules1.Designer.cs">
+      <DependentUpon>FormRules1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormSettings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -186,6 +192,7 @@
     <Compile Include="Forms\UserRequest.Designer.cs">
       <DependentUpon>UserRequest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Enum\InstructionEnum.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -229,6 +236,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormProgress.resx">
       <DependentUpon>FormProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormRules1.resx">
+      <DependentUpon>FormRules1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSettings.resx">
       <DependentUpon>FormSettings.cs</DependentUpon>

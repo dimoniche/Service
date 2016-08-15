@@ -50,6 +50,11 @@ namespace ServiceSaleMachine.Client
         public MachineDrivers drivers;
 
         /// <summary>
+        /// Тип инструкции 
+        /// </summary>
+        public InstructionEnum Instruction;
+
+        /// <summary>
         /// статистика по деньгам
         /// </summary>
         public MoneyStatistic statistic;

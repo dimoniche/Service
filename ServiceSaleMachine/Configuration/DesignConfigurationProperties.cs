@@ -25,6 +25,10 @@ namespace ServiceSaleMachine
         public string LogoService2 = defpicture;
         public string ButtonGetOxigen = defpicture;
 
+        public string ButtonTakeAwayMoney = defpicture;
+        public string ButtonreturnMoney = defpicture;
+        public string ButtonOK = defpicture;
+
         public string ButtonLogo = defpicture;
         public string ButtonFail = defpicture;
         public string ButtonYes = defpicture;

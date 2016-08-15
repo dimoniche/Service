@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Data;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace ServiceSaleMachine.Client
 {
@@ -12,16 +14,9 @@ namespace ServiceSaleMachine.Client
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
         public override void LoadData()
         {
             Nominal = "00";
-
-            pictureBox1.Load(Globals.GetPath(PathEnum.Image) + "\\TakeAwayMoney.png");
 
             foreach (object obj in Params.Objects.Where(obj => obj != null))
             {
@@ -31,11 +26,25 @@ namespace ServiceSaleMachine.Client
                 }
             }
 
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTakeAwayMoney, Globals.DesignConfiguration.Settings.ButtonOK);
+
             timer1.Enabled = true;
+        }
+
+        private void FormBigBill1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            timer1.Enabled = false;
+            Close();
+        }
+
+        private void pBxTakeAwayMoney_Click(object sender, EventArgs e)
+        {
+            timer1.Enabled = false;
             Close();
         }
     }

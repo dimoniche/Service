@@ -52,6 +52,9 @@ namespace ServiceSaleMachine
                         if ((xElement = xSettings.Element("LogoService2")) != null) Settings.LogoService2 = xElement.Value;
 
                         if ((xElement = xSettings.Element("ButtonGetOxigen")) != null) Settings.ButtonGetOxigen = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonTakeAwayMoney")) != null) Settings.ButtonTakeAwayMoney = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonreturnMoney")) != null) Settings.ButtonreturnMoney = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonOK")) != null) Settings.ButtonOK = xElement.Value;
 
                         if ((xElement = xSettings.Element("ButtonLogo")) != null) Settings.ButtonLogo = xElement.Value;
 

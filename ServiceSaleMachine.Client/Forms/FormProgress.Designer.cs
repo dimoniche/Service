@@ -31,14 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.TextInstruction = new ServiceSaleMachine.RichTextBoxEx();
-            this.pBxStart = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
@@ -46,19 +40,25 @@
             this.panel8 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.LabelNameService2 = new ServiceSaleMachine.ScalableLabel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.TextInstruction = new ServiceSaleMachine.RichTextBoxEx();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.pBxStart = new System.Windows.Forms.PictureBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pBxStart)).BeginInit();
             this.tableLayoutPanel4.SuspendLayout();
             this.panel7.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.panel8.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pBxStart)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -85,11 +85,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(490, 682);
             this.panel1.TabIndex = 0;
-            // 
-            // timer1
-            // 
-            this.timer1.Interval = 50;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // tableLayoutPanel2
             // 
@@ -121,62 +116,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(484, 96);
             this.panel2.TabIndex = 0;
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.TextInstruction);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(3, 173);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(484, 335);
-            this.panel3.TabIndex = 1;
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.tableLayoutPanel3);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(3, 548);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(484, 96);
-            this.panel4.TabIndex = 2;
-            // 
-            // tableLayoutPanel3
-            // 
-            this.tableLayoutPanel3.ColumnCount = 3;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel3.Controls.Add(this.pBxStart, 1, 0);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 1;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 96F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(484, 96);
-            this.tableLayoutPanel3.TabIndex = 0;
-            // 
-            // TextInstruction
-            // 
-            this.TextInstruction.BackColor = System.Drawing.SystemColors.Control;
-            this.TextInstruction.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.TextInstruction.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TextInstruction.Location = new System.Drawing.Point(0, 0);
-            this.TextInstruction.Name = "TextInstruction";
-            this.TextInstruction.Size = new System.Drawing.Size(484, 335);
-            this.TextInstruction.TabIndex = 0;
-            this.TextInstruction.Text = "";
-            // 
-            // pBxStart
-            // 
-            this.pBxStart.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pBxStart.Location = new System.Drawing.Point(99, 3);
-            this.pBxStart.Name = "pBxStart";
-            this.pBxStart.Size = new System.Drawing.Size(284, 90);
-            this.pBxStart.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pBxStart.TabIndex = 0;
-            this.pBxStart.TabStop = false;
-            this.pBxStart.Click += new System.EventHandler(this.pBxStart_Click);
             // 
             // tableLayoutPanel4
             // 
@@ -262,14 +201,75 @@
             this.LabelNameService2.TabIndex = 0;
             this.LabelNameService2.Text = "после тренировки";
             // 
-            // FormProgress1
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.TextInstruction);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(3, 173);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(484, 335);
+            this.panel3.TabIndex = 1;
+            // 
+            // TextInstruction
+            // 
+            this.TextInstruction.BackColor = System.Drawing.SystemColors.Control;
+            this.TextInstruction.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TextInstruction.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TextInstruction.Location = new System.Drawing.Point(0, 0);
+            this.TextInstruction.Name = "TextInstruction";
+            this.TextInstruction.Size = new System.Drawing.Size(484, 335);
+            this.TextInstruction.TabIndex = 0;
+            this.TextInstruction.Text = "";
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.tableLayoutPanel3);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel4.Location = new System.Drawing.Point(3, 548);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(484, 96);
+            this.panel4.TabIndex = 2;
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 3;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel3.Controls.Add(this.pBxStart, 1, 0);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 1;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 96F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(484, 96);
+            this.tableLayoutPanel3.TabIndex = 0;
+            // 
+            // pBxStart
+            // 
+            this.pBxStart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pBxStart.Location = new System.Drawing.Point(99, 3);
+            this.pBxStart.Name = "pBxStart";
+            this.pBxStart.Size = new System.Drawing.Size(284, 90);
+            this.pBxStart.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pBxStart.TabIndex = 0;
+            this.pBxStart.TabStop = false;
+            this.pBxStart.Click += new System.EventHandler(this.pBxStart_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 50;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // FormProgress
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(827, 688);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "FormProgress1";
+            this.Name = "FormProgress";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormProgress1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -278,15 +278,15 @@
             this.panel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.tableLayoutPanel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pBxStart)).EndInit();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.tableLayoutPanel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pBxStart)).EndInit();
             this.ResumeLayout(false);
 
         }

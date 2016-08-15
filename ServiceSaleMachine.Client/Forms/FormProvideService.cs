@@ -25,7 +25,7 @@ namespace ServiceSaleMachine.Client
                 }
             }
 
-            pBxStopService.Load(Globals.GetPath(PathEnum.Image) + "\\fail.png");
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxStopService, Globals.DesignConfiguration.Settings.ButtonRetToMain);
 
             timerService.Enabled = true;
 

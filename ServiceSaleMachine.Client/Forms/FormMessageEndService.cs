@@ -1,5 +1,7 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace ServiceSaleMachine.Client
 {
@@ -25,6 +27,8 @@ namespace ServiceSaleMachine.Client
                 }
             }
 
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxFinish, Globals.DesignConfiguration.Settings.ButtonRetToMain);
+
             FTimeWork = data.serv.timeLightUrn;
 
             timer1.Enabled = true;
@@ -33,26 +37,31 @@ namespace ServiceSaleMachine.Client
             data.drivers.control.SendOpenControl((int)ControlDeviceEnum.light2);
         }
 
-        private void timer1_Tick(object sender, System.EventArgs e)
-        {
-            CurrentWork++;
-            
-            if (CurrentWork >= FTimeWork)
-            {
-                timer1.Enabled = false;
-
-                data.stage = WorkerStateStage.EndService;
-
-                this.Close();
-            }
-        }
-
-        private void FormMessageEndService_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
+        private void FormMessageEndService1_FormClosed(object sender, FormClosedEventArgs e)
         {
             // отключаем подсветку
             data.drivers.control.SendCloseControl((int)ControlDeviceEnum.light2);
 
             Params.Result = data;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            CurrentWork++;
+
+            if (CurrentWork >= FTimeWork)
+            {
+                timer1.Enabled = false;
+                data.stage = WorkerStateStage.EndService;
+                this.Close();
+            }
+        }
+
+        private void pBxFinish_Click(object sender, EventArgs e)
+        {
+            timer1.Enabled = false;
+            data.stage = WorkerStateStage.EndService;
+            this.Close();
         }
     }
 }

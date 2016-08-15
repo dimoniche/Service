@@ -95,9 +95,9 @@
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 3;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel2.Controls.Add(this.panel4, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 356);
@@ -111,9 +111,9 @@
             // 
             this.panel4.Controls.Add(this.pBxStopService);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(176, 3);
+            this.panel4.Location = new System.Drawing.Point(107, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(167, 77);
+            this.panel4.Size = new System.Drawing.Size(306, 77);
             this.panel4.TabIndex = 0;
             // 
             // pBxStopService
@@ -121,7 +121,7 @@
             this.pBxStopService.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pBxStopService.Location = new System.Drawing.Point(0, 0);
             this.pBxStopService.Name = "pBxStopService";
-            this.pBxStopService.Size = new System.Drawing.Size(167, 77);
+            this.pBxStopService.Size = new System.Drawing.Size(306, 77);
             this.pBxStopService.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pBxStopService.TabIndex = 0;
             this.pBxStopService.TabStop = false;

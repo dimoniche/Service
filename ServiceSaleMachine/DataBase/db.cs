@@ -13,10 +13,10 @@ namespace ServiceSaleMachine
         public db()
         {
             mysqlCSB = new MySqlConnectionStringBuilder();
-            mysqlCSB.Server = "localhost";
-            mysqlCSB.Database = "servterminal";
-            mysqlCSB.UserID = "root";
-            mysqlCSB.Password = "vzljot";
+            mysqlCSB.Server = Globals.DbConfiguration.Server;
+            mysqlCSB.Database = Globals.DbConfiguration.Database;
+            mysqlCSB.UserID = Globals.DbConfiguration.UserID;
+            mysqlCSB.Password = Globals.DbConfiguration.Password;
         }
 
         public bool CreateDB()

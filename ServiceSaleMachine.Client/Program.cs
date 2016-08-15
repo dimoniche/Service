@@ -57,6 +57,12 @@ namespace ServiceSaleMachine.Client
             if (!Globals.DesignConfiguration.Load())
             { }
 
+            if (!Globals.DbConfiguration.Load())
+            {
+                Globals.DbConfiguration.Save();
+                Globals.DbConfiguration.Load();
+            }
+
             if (!Globals.CheckConfiguration.Load())
             {
                 Globals.CheckConfiguration.Save();

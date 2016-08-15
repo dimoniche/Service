@@ -23,6 +23,7 @@ namespace ServiceSaleMachine
         public static ClientConfiguration ClientConfiguration { get; set; }
         public static UserConfiguration UserConfiguration { get; private set; }
         public static DesignConfiguration DesignConfiguration { get; private set; }
+        public static DBConfiguration DbConfiguration { get; private set; }
         public static CheckConfiguration CheckConfiguration { get; private set; }
 
         public static RegistrySettings RegistrySettings { get; private set; }
@@ -48,6 +49,7 @@ namespace ServiceSaleMachine
             DesignConfiguration = new DesignConfiguration();
             CheckConfiguration = new CheckConfiguration();
             UserConfiguration = new UserConfiguration();
+            DbConfiguration = new DBConfiguration();
         }
 
         public static string GetProcessFileName(bool extension)

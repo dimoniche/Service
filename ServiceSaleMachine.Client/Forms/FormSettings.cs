@@ -371,6 +371,10 @@ namespace ServiceSaleMachine.Client
 
                 // все ком порты
                 setAvailableComPort();
+                edtBDname.Text = Globals.DbConfiguration.Database;
+                edtDBServer.Text = Globals.DbConfiguration.Server;
+                edtDBUserName.Text = Globals.DbConfiguration.UserID;
+                edtDBPsw.Text = Globals.DbConfiguration.Password;
 
                 if (Globals.ClientConfiguration.Settings.offHardware != 1)
                 {
@@ -696,6 +700,12 @@ namespace ServiceSaleMachine.Client
             Params.Result = data;
 
             Globals.ClientConfiguration.Save();
+
+            Globals.DbConfiguration.Database = edtBDname.Text;
+            Globals.DbConfiguration.Server = edtDBServer.Text;
+            Globals.DbConfiguration.UserID = edtDBUserName.Text;
+            Globals.DbConfiguration.Password = edtDBPsw.Text;
+            Globals.DbConfiguration.Save();
         }
 
         private void button2_Click(object sender, EventArgs e)

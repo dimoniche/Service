@@ -191,6 +191,14 @@
             this.labelTimeLastRefresh = new System.Windows.Forms.Label();
             this.labelWorkFromLastRefresh = new System.Windows.Forms.Label();
             this.buttonResetTimeRefresh = new System.Windows.Forms.Button();
+            this.label28 = new System.Windows.Forms.Label();
+            this.edtBDname = new System.Windows.Forms.TextBox();
+            this.label29 = new System.Windows.Forms.Label();
+            this.edtDBUserName = new System.Windows.Forms.TextBox();
+            this.label30 = new System.Windows.Forms.Label();
+            this.edtDBPsw = new System.Windows.Forms.TextBox();
+            this.label31 = new System.Windows.Forms.Label();
+            this.edtDBServer = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -200,6 +208,7 @@
             this.tabPage5.SuspendLayout();
             this.tabViewDataBase.SuspendLayout();
             this.tabDataBaseSetting.SuspendLayout();
+            this.tabPage7.SuspendLayout();
             this.tabPage8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -943,6 +952,14 @@
             // 
             // tabPage7
             // 
+            this.tabPage7.Controls.Add(this.label31);
+            this.tabPage7.Controls.Add(this.edtDBServer);
+            this.tabPage7.Controls.Add(this.label30);
+            this.tabPage7.Controls.Add(this.edtDBPsw);
+            this.tabPage7.Controls.Add(this.label29);
+            this.tabPage7.Controls.Add(this.edtDBUserName);
+            this.tabPage7.Controls.Add(this.label28);
+            this.tabPage7.Controls.Add(this.edtBDname);
             this.tabPage7.Location = new System.Drawing.Point(4, 22);
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
@@ -1965,6 +1982,70 @@
             this.buttonResetTimeRefresh.UseVisualStyleBackColor = true;
             this.buttonResetTimeRefresh.Click += new System.EventHandler(this.buttonResetTimeRefresh_Click);
             // 
+            // label28
+            // 
+            this.label28.Location = new System.Drawing.Point(117, 36);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(93, 13);
+            this.label28.TabIndex = 3;
+            this.label28.Text = "Сервер";
+            this.label28.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // edtBDname
+            // 
+            this.edtBDname.Location = new System.Drawing.Point(216, 56);
+            this.edtBDname.Name = "edtBDname";
+            this.edtBDname.Size = new System.Drawing.Size(181, 20);
+            this.edtBDname.TabIndex = 4;
+            // 
+            // label29
+            // 
+            this.label29.Location = new System.Drawing.Point(117, 57);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(93, 13);
+            this.label29.TabIndex = 5;
+            this.label29.Text = "База данных";
+            this.label29.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // edtDBUserName
+            // 
+            this.edtDBUserName.Location = new System.Drawing.Point(216, 80);
+            this.edtDBUserName.Name = "edtDBUserName";
+            this.edtDBUserName.Size = new System.Drawing.Size(181, 20);
+            this.edtDBUserName.TabIndex = 6;
+            // 
+            // label30
+            // 
+            this.label30.Location = new System.Drawing.Point(64, 81);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(146, 14);
+            this.label30.TabIndex = 7;
+            this.label30.Text = "Имя пользователя";
+            this.label30.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // edtDBPsw
+            // 
+            this.edtDBPsw.Location = new System.Drawing.Point(216, 105);
+            this.edtDBPsw.Name = "edtDBPsw";
+            this.edtDBPsw.Size = new System.Drawing.Size(181, 20);
+            this.edtDBPsw.TabIndex = 8;
+            // 
+            // label31
+            // 
+            this.label31.Location = new System.Drawing.Point(117, 108);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(93, 13);
+            this.label31.TabIndex = 9;
+            this.label31.Text = "Пароль";
+            this.label31.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // edtDBServer
+            // 
+            this.edtDBServer.Location = new System.Drawing.Point(216, 34);
+            this.edtDBServer.Name = "edtDBServer";
+            this.edtDBServer.Size = new System.Drawing.Size(181, 20);
+            this.edtDBServer.TabIndex = 2;
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1988,6 +2069,8 @@
             this.tabPage5.PerformLayout();
             this.tabViewDataBase.ResumeLayout(false);
             this.tabDataBaseSetting.ResumeLayout(false);
+            this.tabPage7.ResumeLayout(false);
+            this.tabPage7.PerformLayout();
             this.tabPage8.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -2195,5 +2278,13 @@
         private System.Windows.Forms.Label labelBarCodeMoneySumm;
         private System.Windows.Forms.Label labelServiceMoneySumm;
         private System.Windows.Forms.Label labelCountBankNote;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.TextBox edtDBServer;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.TextBox edtDBPsw;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.TextBox edtDBUserName;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.TextBox edtBDname;
     }
 }

@@ -39,5 +39,13 @@ namespace ServiceSaleMachine.Client
             data.stage = WorkerStateStage.ChoosePay;
             Close();
         }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            TextService1.LoadFile(Globals.GetPath(PathEnum.Text) + "\\service1.rtf");
+            TextService2.LoadFile(Globals.GetPath(PathEnum.Text) + "\\service2.rtf");
+
+            timer1.Enabled = false;
+        }
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -35,24 +36,27 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.scalableLabel2 = new ServiceSaleMachine.ScalableLabel();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
+            this.pBxLabelService1 = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+            this.scalableLabel3 = new ServiceSaleMachine.ScalableLabel();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
+            this.pBxLabelService2 = new System.Windows.Forms.PictureBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.pBxBegin = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.scalableLabel1 = new ServiceSaleMachine.ScalableLabel();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
-            this.pBxLabelService1 = new System.Windows.Forms.PictureBox();
-            this.panel9 = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
-            this.pBxLabelService2 = new System.Windows.Forms.PictureBox();
-            this.scalableLabel2 = new ServiceSaleMachine.ScalableLabel();
-            this.scalableLabel3 = new ServiceSaleMachine.ScalableLabel();
+            this.TextService1 = new ServiceSaleMachine.RichTextBoxEx();
+            this.TextService2 = new ServiceSaleMachine.RichTextBoxEx();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -60,21 +64,21 @@
             this.tableLayoutPanel3.SuspendLayout();
             this.panel5.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
+            this.panel8.SuspendLayout();
+            this.tableLayoutPanel9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pBxLabelService1)).BeginInit();
             this.panel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.panel6.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
+            this.panel9.SuspendLayout();
+            this.tableLayoutPanel10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pBxLabelService2)).BeginInit();
             this.panel4.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBxBegin)).BeginInit();
             this.tableLayoutPanel8.SuspendLayout();
             this.panel7.SuspendLayout();
-            this.panel8.SuspendLayout();
-            this.tableLayoutPanel9.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pBxLabelService1)).BeginInit();
-            this.panel9.SuspendLayout();
-            this.tableLayoutPanel10.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pBxLabelService2)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -164,6 +168,7 @@
             this.tableLayoutPanel6.ColumnCount = 1;
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel6.Controls.Add(this.scalableLabel2, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.TextService1, 0, 1);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
@@ -172,6 +177,50 @@
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
             this.tableLayoutPanel6.Size = new System.Drawing.Size(421, 113);
             this.tableLayoutPanel6.TabIndex = 0;
+            // 
+            // scalableLabel2
+            // 
+            this.scalableLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scalableLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.scalableLabel2.Location = new System.Drawing.Point(3, 3);
+            this.scalableLabel2.Name = "scalableLabel2";
+            this.scalableLabel2.Size = new System.Drawing.Size(415, 16);
+            this.scalableLabel2.TabIndex = 0;
+            this.scalableLabel2.Text = "До тренировки";
+            // 
+            // panel8
+            // 
+            this.panel8.Controls.Add(this.tableLayoutPanel9);
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel8.Location = new System.Drawing.Point(3, 3);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(136, 113);
+            this.panel8.TabIndex = 1;
+            // 
+            // tableLayoutPanel9
+            // 
+            this.tableLayoutPanel9.ColumnCount = 2;
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel9.Controls.Add(this.pBxLabelService1, 0, 0);
+            this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel9.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel9.Name = "tableLayoutPanel9";
+            this.tableLayoutPanel9.RowCount = 2;
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(136, 113);
+            this.tableLayoutPanel9.TabIndex = 0;
+            // 
+            // pBxLabelService1
+            // 
+            this.pBxLabelService1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pBxLabelService1.Location = new System.Drawing.Point(3, 3);
+            this.pBxLabelService1.Name = "pBxLabelService1";
+            this.pBxLabelService1.Size = new System.Drawing.Size(96, 78);
+            this.pBxLabelService1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pBxLabelService1.TabIndex = 2;
+            this.pBxLabelService1.TabStop = false;
             // 
             // panel3
             // 
@@ -211,6 +260,7 @@
             // 
             this.tableLayoutPanel7.ColumnCount = 1;
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel7.Controls.Add(this.TextService2, 0, 1);
             this.tableLayoutPanel7.Controls.Add(this.scalableLabel3, 0, 0);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel7.Location = new System.Drawing.Point(0, 0);
@@ -220,6 +270,50 @@
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
             this.tableLayoutPanel7.Size = new System.Drawing.Size(421, 113);
             this.tableLayoutPanel7.TabIndex = 0;
+            // 
+            // scalableLabel3
+            // 
+            this.scalableLabel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scalableLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.scalableLabel3.Location = new System.Drawing.Point(3, 3);
+            this.scalableLabel3.Name = "scalableLabel3";
+            this.scalableLabel3.Size = new System.Drawing.Size(415, 16);
+            this.scalableLabel3.TabIndex = 0;
+            this.scalableLabel3.Text = "После тренировки";
+            // 
+            // panel9
+            // 
+            this.panel9.Controls.Add(this.tableLayoutPanel10);
+            this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel9.Location = new System.Drawing.Point(3, 3);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(136, 113);
+            this.panel9.TabIndex = 1;
+            // 
+            // tableLayoutPanel10
+            // 
+            this.tableLayoutPanel10.ColumnCount = 2;
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel10.Controls.Add(this.pBxLabelService2, 0, 0);
+            this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel10.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel10.Name = "tableLayoutPanel10";
+            this.tableLayoutPanel10.RowCount = 2;
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel10.Size = new System.Drawing.Size(136, 113);
+            this.tableLayoutPanel10.TabIndex = 0;
+            // 
+            // pBxLabelService2
+            // 
+            this.pBxLabelService2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pBxLabelService2.Location = new System.Drawing.Point(3, 3);
+            this.pBxLabelService2.Name = "pBxLabelService2";
+            this.pBxLabelService2.Size = new System.Drawing.Size(96, 78);
+            this.pBxLabelService2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pBxLabelService2.TabIndex = 2;
+            this.pBxLabelService2.TabStop = false;
             // 
             // panel4
             // 
@@ -291,93 +385,35 @@
             this.scalableLabel1.TabIndex = 1;
             this.scalableLabel1.Text = "Дыхательная смесь";
             // 
-            // panel8
+            // TextService1
             // 
-            this.panel8.Controls.Add(this.tableLayoutPanel9);
-            this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel8.Location = new System.Drawing.Point(3, 3);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(136, 113);
-            this.panel8.TabIndex = 1;
+            this.TextService1.BackColor = System.Drawing.SystemColors.Control;
+            this.TextService1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TextService1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TextService1.Location = new System.Drawing.Point(3, 25);
+            this.TextService1.Name = "TextService1";
+            this.TextService1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.TextService1.Size = new System.Drawing.Size(415, 85);
+            this.TextService1.TabIndex = 1;
+            this.TextService1.Text = "";
             // 
-            // tableLayoutPanel9
+            // TextService2
             // 
-            this.tableLayoutPanel9.ColumnCount = 2;
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75F));
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel9.Controls.Add(this.pBxLabelService1, 0, 0);
-            this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel9.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel9.Name = "tableLayoutPanel9";
-            this.tableLayoutPanel9.RowCount = 2;
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(136, 113);
-            this.tableLayoutPanel9.TabIndex = 0;
+            this.TextService2.BackColor = System.Drawing.SystemColors.Control;
+            this.TextService2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TextService2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TextService2.Location = new System.Drawing.Point(3, 25);
+            this.TextService2.Name = "TextService2";
+            this.TextService2.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.TextService2.Size = new System.Drawing.Size(415, 85);
+            this.TextService2.TabIndex = 2;
+            this.TextService2.Text = "";
             // 
-            // pBxLabelService1
+            // timer1
             // 
-            this.pBxLabelService1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pBxLabelService1.Location = new System.Drawing.Point(3, 3);
-            this.pBxLabelService1.Name = "pBxLabelService1";
-            this.pBxLabelService1.Size = new System.Drawing.Size(96, 78);
-            this.pBxLabelService1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pBxLabelService1.TabIndex = 2;
-            this.pBxLabelService1.TabStop = false;
-            // 
-            // panel9
-            // 
-            this.panel9.Controls.Add(this.tableLayoutPanel10);
-            this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel9.Location = new System.Drawing.Point(3, 3);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(136, 113);
-            this.panel9.TabIndex = 1;
-            // 
-            // tableLayoutPanel10
-            // 
-            this.tableLayoutPanel10.ColumnCount = 2;
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75F));
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel10.Controls.Add(this.pBxLabelService2, 0, 0);
-            this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel10.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel10.Name = "tableLayoutPanel10";
-            this.tableLayoutPanel10.RowCount = 2;
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75F));
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel10.Size = new System.Drawing.Size(136, 113);
-            this.tableLayoutPanel10.TabIndex = 0;
-            // 
-            // pBxLabelService2
-            // 
-            this.pBxLabelService2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pBxLabelService2.Location = new System.Drawing.Point(3, 3);
-            this.pBxLabelService2.Name = "pBxLabelService2";
-            this.pBxLabelService2.Size = new System.Drawing.Size(96, 78);
-            this.pBxLabelService2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pBxLabelService2.TabIndex = 2;
-            this.pBxLabelService2.TabStop = false;
-            // 
-            // scalableLabel2
-            // 
-            this.scalableLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scalableLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.scalableLabel2.Location = new System.Drawing.Point(3, 3);
-            this.scalableLabel2.Name = "scalableLabel2";
-            this.scalableLabel2.Size = new System.Drawing.Size(415, 16);
-            this.scalableLabel2.TabIndex = 0;
-            this.scalableLabel2.Text = "До тренировки";
-            // 
-            // scalableLabel3
-            // 
-            this.scalableLabel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scalableLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.scalableLabel3.Location = new System.Drawing.Point(3, 3);
-            this.scalableLabel3.Name = "scalableLabel3";
-            this.scalableLabel3.Size = new System.Drawing.Size(415, 16);
-            this.scalableLabel3.TabIndex = 0;
-            this.scalableLabel3.Text = "После тренировки";
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 50;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // FormWhatsDiff
             // 
@@ -398,21 +434,21 @@
             this.tableLayoutPanel3.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
+            this.panel8.ResumeLayout(false);
+            this.tableLayoutPanel9.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pBxLabelService1)).EndInit();
             this.panel3.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.tableLayoutPanel7.ResumeLayout(false);
+            this.panel9.ResumeLayout(false);
+            this.tableLayoutPanel10.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pBxLabelService2)).EndInit();
             this.panel4.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pBxBegin)).EndInit();
             this.tableLayoutPanel8.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
-            this.panel8.ResumeLayout(false);
-            this.tableLayoutPanel9.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pBxLabelService1)).EndInit();
-            this.panel9.ResumeLayout(false);
-            this.tableLayoutPanel10.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pBxLabelService2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -444,5 +480,8 @@
         private System.Windows.Forms.PictureBox pBxLabelService2;
         private ScalableLabel scalableLabel2;
         private ScalableLabel scalableLabel3;
+        private RichTextBoxEx TextService1;
+        private RichTextBoxEx TextService2;
+        private System.Windows.Forms.Timer timer1;
     }
 }

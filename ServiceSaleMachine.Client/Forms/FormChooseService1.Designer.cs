@@ -84,23 +84,23 @@
             // 
             this.tableLayoutPanel2.ColumnCount = 1;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Controls.Add(this.scalableLabel1, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.panel2, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.panel3, 0, 4);
-            this.tableLayoutPanel2.Controls.Add(this.panel4, 0, 6);
+            this.tableLayoutPanel2.Controls.Add(this.scalableLabel1, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.panel2, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.panel3, 0, 5);
+            this.tableLayoutPanel2.Controls.Add(this.panel4, 0, 7);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 8;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel2.RowCount = 9;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(436, 552);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
@@ -108,9 +108,9 @@
             // 
             this.scalableLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.scalableLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.scalableLabel1.Location = new System.Drawing.Point(3, 3);
+            this.scalableLabel1.Location = new System.Drawing.Point(3, 30);
             this.scalableLabel1.Name = "scalableLabel1";
-            this.scalableLabel1.Size = new System.Drawing.Size(430, 63);
+            this.scalableLabel1.Size = new System.Drawing.Size(430, 76);
             this.scalableLabel1.TabIndex = 0;
             this.scalableLabel1.Text = "Дыхательная смесь";
             // 
@@ -118,9 +118,9 @@
             // 
             this.panel2.Controls.Add(this.pBxService1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(3, 141);
+            this.panel2.Location = new System.Drawing.Point(3, 139);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(430, 63);
+            this.panel2.Size = new System.Drawing.Size(430, 76);
             this.panel2.TabIndex = 1;
             // 
             // pBxService1
@@ -128,7 +128,7 @@
             this.pBxService1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pBxService1.Location = new System.Drawing.Point(0, 0);
             this.pBxService1.Name = "pBxService1";
-            this.pBxService1.Size = new System.Drawing.Size(430, 63);
+            this.pBxService1.Size = new System.Drawing.Size(430, 76);
             this.pBxService1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pBxService1.TabIndex = 0;
             this.pBxService1.TabStop = false;
@@ -138,9 +138,9 @@
             // 
             this.panel3.Controls.Add(this.pBxService2);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(3, 279);
+            this.panel3.Location = new System.Drawing.Point(3, 276);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(430, 63);
+            this.panel3.Size = new System.Drawing.Size(430, 76);
             this.panel3.TabIndex = 2;
             // 
             // pBxService2
@@ -148,7 +148,7 @@
             this.pBxService2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pBxService2.Location = new System.Drawing.Point(0, 0);
             this.pBxService2.Name = "pBxService2";
-            this.pBxService2.Size = new System.Drawing.Size(430, 63);
+            this.pBxService2.Size = new System.Drawing.Size(430, 76);
             this.pBxService2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pBxService2.TabIndex = 0;
             this.pBxService2.TabStop = false;
@@ -158,9 +158,9 @@
             // 
             this.panel4.Controls.Add(this.tableLayoutPanel3);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(3, 417);
+            this.panel4.Location = new System.Drawing.Point(3, 413);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(430, 63);
+            this.panel4.Size = new System.Drawing.Size(430, 76);
             this.panel4.TabIndex = 3;
             // 
             // tableLayoutPanel3
@@ -177,7 +177,7 @@
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 63F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(430, 63);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(430, 76);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // pBxreturntoMain
@@ -185,7 +185,7 @@
             this.pBxreturntoMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pBxreturntoMain.Location = new System.Drawing.Point(3, 3);
             this.pBxreturntoMain.Name = "pBxreturntoMain";
-            this.pBxreturntoMain.Size = new System.Drawing.Size(209, 57);
+            this.pBxreturntoMain.Size = new System.Drawing.Size(209, 70);
             this.pBxreturntoMain.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pBxreturntoMain.TabIndex = 0;
             this.pBxreturntoMain.TabStop = false;
@@ -196,7 +196,7 @@
             this.pBxWhatsDiff.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pBxWhatsDiff.Location = new System.Drawing.Point(261, 3);
             this.pBxWhatsDiff.Name = "pBxWhatsDiff";
-            this.pBxWhatsDiff.Size = new System.Drawing.Size(166, 57);
+            this.pBxWhatsDiff.Size = new System.Drawing.Size(166, 70);
             this.pBxWhatsDiff.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pBxWhatsDiff.TabIndex = 1;
             this.pBxWhatsDiff.TabStop = false;

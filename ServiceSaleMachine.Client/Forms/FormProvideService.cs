@@ -1,5 +1,7 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace ServiceSaleMachine.Client
 {
@@ -35,13 +37,7 @@ namespace ServiceSaleMachine.Client
             data.drivers.control.SendOpenControl(data.numberCurrentDevice);
         }
 
-        private void pBxStopService_Click(object sender, System.EventArgs e)
-        {
-            data.stage = WorkerStateStage.Fail;
-            Close();
-        }
-
-        private void FormProvideService_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
+        private void FormProvideService1_FormClosed(object sender, FormClosedEventArgs e)
         {
             // заканчиваем оказывать услугу
             data.drivers.control.SendCloseControl(data.numberCurrentDevice);
@@ -50,19 +46,22 @@ namespace ServiceSaleMachine.Client
             timerService.Enabled = false;
         }
 
-        private void timerService_Tick(object sender, System.EventArgs e)
+        private void timerService_Tick(object sender, EventArgs e)
         {
-            // нарастим время наработки
-            
-
-            if(Interval-- == 0)
+            if (Interval-- == 0)
             {
                 // услугу оказали полностью
                 data.stage = WorkerStateStage.EndService;
                 Close();
             }
 
-            ServiceText.Text = "Идет оказание услуги. Осталось еще " + (Interval/60).ToString() + " минуты и " + (Interval % 60).ToString() + " секунд";
+            ServiceText.Text = "Идет оказание услуги. Осталось еще " + (Interval / 60).ToString() + " минуты и " + (Interval % 60).ToString() + " секунд";
+        }
+
+        private void pBxStopService_Click(object sender, EventArgs e)
+        {
+            data.stage = WorkerStateStage.Fail;
+            Close();
         }
     }
 }

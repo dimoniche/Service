@@ -49,7 +49,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(678, 25);
+            this.panel3.Size = new System.Drawing.Size(800, 25);
             this.panel3.TabIndex = 3;
             // 
             // timer1
@@ -71,7 +71,7 @@
             this.tableLayoutPanel2.Controls.Add(this.pBxPhilosof, 0, 3);
             this.tableLayoutPanel2.Controls.Add(this.pBxInstruction, 0, 5);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(138, 3);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(163, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 7;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
@@ -81,15 +81,15 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(400, 460);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(474, 569);
             this.tableLayoutPanel2.TabIndex = 4;
             // 
             // pBxBegin
             // 
             this.pBxBegin.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pBxBegin.Location = new System.Drawing.Point(3, 72);
+            this.pBxBegin.Location = new System.Drawing.Point(3, 88);
             this.pBxBegin.Name = "pBxBegin";
-            this.pBxBegin.Size = new System.Drawing.Size(394, 63);
+            this.pBxBegin.Size = new System.Drawing.Size(468, 79);
             this.pBxBegin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pBxBegin.TabIndex = 0;
             this.pBxBegin.TabStop = false;
@@ -98,9 +98,9 @@
             // pBxPhilosof
             // 
             this.pBxPhilosof.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pBxPhilosof.Location = new System.Drawing.Point(3, 198);
+            this.pBxPhilosof.Location = new System.Drawing.Point(3, 244);
             this.pBxPhilosof.Name = "pBxPhilosof";
-            this.pBxPhilosof.Size = new System.Drawing.Size(394, 63);
+            this.pBxPhilosof.Size = new System.Drawing.Size(468, 79);
             this.pBxPhilosof.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pBxPhilosof.TabIndex = 1;
             this.pBxPhilosof.TabStop = false;
@@ -109,9 +109,9 @@
             // pBxInstruction
             // 
             this.pBxInstruction.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pBxInstruction.Location = new System.Drawing.Point(3, 324);
+            this.pBxInstruction.Location = new System.Drawing.Point(3, 400);
             this.pBxInstruction.Name = "pBxInstruction";
-            this.pBxInstruction.Size = new System.Drawing.Size(394, 63);
+            this.pBxInstruction.Size = new System.Drawing.Size(468, 79);
             this.pBxInstruction.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pBxInstruction.TabIndex = 2;
             this.pBxInstruction.TabStop = false;
@@ -129,14 +129,14 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(678, 466);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 575);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // FormMainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(678, 491);
+            this.ClientSize = new System.Drawing.Size(800, 600);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.panel3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

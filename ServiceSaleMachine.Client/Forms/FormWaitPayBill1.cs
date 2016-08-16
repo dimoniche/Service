@@ -49,6 +49,8 @@ namespace ServiceSaleMachine.Client
 
             LabelNameService2.Text = Globals.ClientConfiguration.Settings.services[data.numberService].caption.ToLower();
 
+            TextPayBill.LoadFile(Globals.GetPath(PathEnum.Text) + "\\WaitPayBill.rtf");
+
             // заменим обработчик событий
             data.drivers.ReceivedResponse += reciveResponse;
 

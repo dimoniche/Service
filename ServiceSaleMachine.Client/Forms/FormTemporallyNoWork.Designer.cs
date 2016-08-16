@@ -44,23 +44,23 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(664, 50);
+            this.panel1.Size = new System.Drawing.Size(800, 50);
             this.panel1.TabIndex = 0;
             // 
             // panel2
             // 
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 375);
+            this.panel2.Location = new System.Drawing.Point(0, 550);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(664, 50);
+            this.panel2.Size = new System.Drawing.Size(800, 50);
             this.panel2.TabIndex = 1;
             // 
             // panel3
             // 
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(614, 50);
+            this.panel3.Location = new System.Drawing.Point(750, 50);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(50, 325);
+            this.panel3.Size = new System.Drawing.Size(50, 500);
             this.panel3.TabIndex = 2;
             // 
             // panel4
@@ -68,7 +68,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel4.Location = new System.Drawing.Point(0, 50);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(50, 325);
+            this.panel4.Size = new System.Drawing.Size(50, 500);
             this.panel4.TabIndex = 3;
             // 
             // panel5
@@ -77,7 +77,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(50, 50);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(564, 325);
+            this.panel5.Size = new System.Drawing.Size(700, 500);
             this.panel5.TabIndex = 4;
             // 
             // MessageText
@@ -86,7 +86,7 @@
             this.MessageText.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MessageText.Location = new System.Drawing.Point(0, 0);
             this.MessageText.Name = "MessageText";
-            this.MessageText.Size = new System.Drawing.Size(564, 325);
+            this.MessageText.Size = new System.Drawing.Size(700, 500);
             this.MessageText.TabIndex = 0;
             this.MessageText.Text = "Извините, аппарат временно не работает.";
             // 
@@ -99,7 +99,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(664, 425);
+            this.ClientSize = new System.Drawing.Size(800, 600);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
@@ -111,6 +111,7 @@
             this.Text = "FormTemporallyNoWork";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormTemporallyNoWork_FormClosed);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormTemporallyNoWork_KeyDown);
             this.panel5.ResumeLayout(false);
             this.ResumeLayout(false);
 

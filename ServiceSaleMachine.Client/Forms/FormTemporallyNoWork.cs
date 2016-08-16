@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace ServiceSaleMachine.Client
 {
@@ -43,6 +44,14 @@ namespace ServiceSaleMachine.Client
         {
             timer1.Enabled = false;
             Params.Result = data;
+        }
+
+        private void FormTemporallyNoWork_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+            if (e.Alt & e.KeyCode == Keys.F4)
+            {
+                data.stage = WorkerStateStage.ExitProgram;
+            }
         }
     }
 }

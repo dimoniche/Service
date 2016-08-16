@@ -65,16 +65,16 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(629, 527);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 600);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.tableLayoutPanel2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(65, 3);
+            this.panel1.Location = new System.Drawing.Point(83, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(497, 521);
+            this.panel1.Size = new System.Drawing.Size(634, 594);
             this.panel1.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -95,16 +95,16 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(497, 521);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(634, 594);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.tableLayoutPanel5);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(3, 29);
+            this.panel2.Location = new System.Drawing.Point(3, 32);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(491, 254);
+            this.panel2.Size = new System.Drawing.Size(628, 291);
             this.panel2.TabIndex = 0;
             // 
             // tableLayoutPanel5
@@ -119,26 +119,27 @@
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(491, 254);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(628, 291);
             this.tableLayoutPanel5.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(3, 87);
+            this.label1.Location = new System.Drawing.Point(3, 100);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(485, 78);
+            this.label1.Size = new System.Drawing.Size(622, 91);
             this.label1.TabIndex = 0;
             this.label1.Text = "Вы внесли купюру достоинством   руб.";
+            this.label1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.label1_KeyDown);
             // 
             // panel3
             // 
             this.panel3.Controls.Add(this.tableLayoutPanel3);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(3, 315);
+            this.panel3.Location = new System.Drawing.Point(3, 358);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(491, 72);
+            this.panel3.Size = new System.Drawing.Size(628, 83);
             this.panel3.TabIndex = 1;
             // 
             // tableLayoutPanel3
@@ -153,15 +154,15 @@
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(491, 72);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(628, 83);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // pBxTakeAwayMoney
             // 
             this.pBxTakeAwayMoney.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pBxTakeAwayMoney.Location = new System.Drawing.Point(101, 3);
+            this.pBxTakeAwayMoney.Location = new System.Drawing.Point(128, 3);
             this.pBxTakeAwayMoney.Name = "pBxTakeAwayMoney";
-            this.pBxTakeAwayMoney.Size = new System.Drawing.Size(288, 66);
+            this.pBxTakeAwayMoney.Size = new System.Drawing.Size(370, 77);
             this.pBxTakeAwayMoney.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pBxTakeAwayMoney.TabIndex = 0;
             this.pBxTakeAwayMoney.TabStop = false;
@@ -171,9 +172,9 @@
             // 
             this.panel4.Controls.Add(this.tableLayoutPanel4);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(3, 419);
+            this.panel4.Location = new System.Drawing.Point(3, 476);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(491, 72);
+            this.panel4.Size = new System.Drawing.Size(628, 83);
             this.panel4.TabIndex = 2;
             // 
             // tableLayoutPanel4
@@ -188,15 +189,15 @@
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(491, 72);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(628, 83);
             this.tableLayoutPanel4.TabIndex = 1;
             // 
             // pBxreturnMoney
             // 
             this.pBxreturnMoney.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pBxreturnMoney.Location = new System.Drawing.Point(101, 3);
+            this.pBxreturnMoney.Location = new System.Drawing.Point(128, 3);
             this.pBxreturnMoney.Name = "pBxreturnMoney";
-            this.pBxreturnMoney.Size = new System.Drawing.Size(288, 66);
+            this.pBxreturnMoney.Size = new System.Drawing.Size(370, 77);
             this.pBxreturnMoney.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pBxreturnMoney.TabIndex = 0;
             this.pBxreturnMoney.TabStop = false;
@@ -206,7 +207,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(629, 527);
+            this.ClientSize = new System.Drawing.Size(800, 600);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormInsertBill";

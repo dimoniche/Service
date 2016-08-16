@@ -63,5 +63,13 @@ namespace ServiceSaleMachine.Client
             data.stage = WorkerStateStage.Fail;
             Close();
         }
+
+        private void ServiceText_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Alt & e.KeyCode == Keys.F4)
+            {
+                data.stage = WorkerStateStage.ExitProgram;
+            }
+        }
     }
 }

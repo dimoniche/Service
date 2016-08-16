@@ -6,6 +6,7 @@ namespace ServiceSaleMachine.Client
 {
     public partial class FormInsertBill : MyForm
     {
+        FormResultData data;
         string Nominal;
         bool result = false;
 
@@ -20,7 +21,11 @@ namespace ServiceSaleMachine.Client
 
             foreach (object obj in Params.Objects.Where(obj => obj != null))
             {
-                if (obj.GetType() == typeof(string))
+                if (obj.GetType() == typeof(FormResultData))
+                {
+                    data = (FormResultData)obj;
+                }
+                else if (obj.GetType() == typeof(string))
                 {
                     Nominal = (string)obj;
                 }
@@ -47,6 +52,14 @@ namespace ServiceSaleMachine.Client
         {
             result = false;
             Close();
+        }
+
+        private void label1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Alt & e.KeyCode == Keys.F4)
+            {
+                data.stage = WorkerStateStage.ExitProgram;
+            }
         }
     }
 }

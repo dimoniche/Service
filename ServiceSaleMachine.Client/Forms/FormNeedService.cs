@@ -1,6 +1,7 @@
 ﻿using ServiceSaleMachine.Drivers;
 using System.Data;
 using System.Linq;
+using System.Windows.Forms;
 using static ServiceSaleMachine.Drivers.MachineDrivers;
 
 namespace ServiceSaleMachine.Client
@@ -63,6 +64,14 @@ namespace ServiceSaleMachine.Client
         {
             Params.Result = data;
             data.drivers.ReceivedResponse -= reciveResponse;
+        }
+
+        private void FormNeedService_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+            if (e.Alt & e.KeyCode == Keys.F4)
+            {
+                data.stage = WorkerStateStage.ExitProgram;
+            }
         }
     }
 }

@@ -102,5 +102,13 @@ namespace ServiceSaleMachine.Client
         {
             // форма инкассации открылась - предложим зарегистрироваться
         }
+
+        private void scalableLabel2_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Alt & e.KeyCode == Keys.F4)
+            {
+                data.stage = WorkerStateStage.ExitProgram;
+            }
+        }
     }
 }

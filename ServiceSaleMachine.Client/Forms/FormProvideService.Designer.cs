@@ -34,9 +34,9 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.ServiceText = new ServiceSaleMachine.ScalableLabel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.ServiceText = new ServiceSaleMachine.ScalableLabel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.pBxStopService = new System.Windows.Forms.PictureBox();
@@ -67,16 +67,16 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(706, 601);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 600);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.tableLayoutPanel2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(73, 3);
+            this.panel1.Location = new System.Drawing.Point(83, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(558, 595);
+            this.panel1.Size = new System.Drawing.Size(634, 594);
             this.panel1.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -97,7 +97,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(558, 595);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(634, 594);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // panel2
@@ -106,15 +106,26 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 32);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(552, 83);
+            this.panel2.Size = new System.Drawing.Size(628, 83);
             this.panel2.TabIndex = 0;
+            // 
+            // ServiceText
+            // 
+            this.ServiceText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ServiceText.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ServiceText.Location = new System.Drawing.Point(0, 0);
+            this.ServiceText.Name = "ServiceText";
+            this.ServiceText.Size = new System.Drawing.Size(628, 83);
+            this.ServiceText.TabIndex = 0;
+            this.ServiceText.Text = "Идет оказание услуги. Осталось еще 3 минуты.";
+            this.ServiceText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ServiceText_KeyDown);
             // 
             // panel3
             // 
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(3, 150);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(552, 291);
+            this.panel3.Size = new System.Drawing.Size(628, 291);
             this.panel3.TabIndex = 1;
             // 
             // panel4
@@ -123,18 +134,8 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(3, 476);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(552, 83);
+            this.panel4.Size = new System.Drawing.Size(628, 83);
             this.panel4.TabIndex = 2;
-            // 
-            // ServiceText
-            // 
-            this.ServiceText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ServiceText.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ServiceText.Location = new System.Drawing.Point(0, 0);
-            this.ServiceText.Name = "ServiceText";
-            this.ServiceText.Size = new System.Drawing.Size(552, 83);
-            this.ServiceText.TabIndex = 0;
-            this.ServiceText.Text = "Идет оказание услуги. Осталось еще 3 минуты.";
             // 
             // tableLayoutPanel3
             // 
@@ -148,16 +149,16 @@
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(552, 83);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(628, 83);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
             // panel5
             // 
             this.panel5.Controls.Add(this.pBxStopService);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(113, 3);
+            this.panel5.Location = new System.Drawing.Point(128, 3);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(325, 77);
+            this.panel5.Size = new System.Drawing.Size(370, 77);
             this.panel5.TabIndex = 0;
             // 
             // pBxStopService
@@ -165,20 +166,20 @@
             this.pBxStopService.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pBxStopService.Location = new System.Drawing.Point(0, 0);
             this.pBxStopService.Name = "pBxStopService";
-            this.pBxStopService.Size = new System.Drawing.Size(325, 77);
+            this.pBxStopService.Size = new System.Drawing.Size(370, 77);
             this.pBxStopService.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pBxStopService.TabIndex = 0;
             this.pBxStopService.TabStop = false;
             this.pBxStopService.Click += new System.EventHandler(this.pBxStopService_Click);
             // 
-            // FormProvideService1
+            // FormProvideService
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(706, 601);
+            this.ClientSize = new System.Drawing.Size(800, 600);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "FormProvideService1";
+            this.Name = "FormProvideService";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormProvideService1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

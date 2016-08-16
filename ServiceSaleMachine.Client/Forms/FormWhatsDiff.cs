@@ -47,5 +47,13 @@ namespace ServiceSaleMachine.Client
 
             timer1.Enabled = false;
         }
+
+        private void scalableLabel1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Alt & e.KeyCode == Keys.F4)
+            {
+                data.stage = WorkerStateStage.ExitProgram;
+            }
+        }
     }
 }

@@ -80,5 +80,13 @@ namespace ServiceSaleMachine.Client
             data.stage = WorkerStateStage.EndService;
             this.Close();
         }
+
+        private void LabelNameService1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Alt & e.KeyCode == Keys.F4)
+            {
+                data.stage = WorkerStateStage.ExitProgram;
+            }
+        }
     }
 }

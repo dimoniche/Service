@@ -88,6 +88,8 @@ namespace ServiceSaleMachine.Client
 
         private void CreditMoney(ServiceClientResponseEventArgs e)
         {
+            pBxReturnBack.Enabled = false;
+
             lock (Params)
             {
                 try
@@ -351,6 +353,10 @@ namespace ServiceSaleMachine.Client
         }
 
         private void FormWaitPayBill1_KeyDown(object sender, KeyEventArgs e)
+        {
+        }
+
+        private void LabelNameService1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Alt & e.KeyCode == Keys.F4)
             {

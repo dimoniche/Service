@@ -49,6 +49,7 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel11 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+            this.TextPayBill = new ServiceSaleMachine.RichTextBoxEx();
             this.panel5 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.panel14 = new System.Windows.Forms.Panel();
@@ -57,7 +58,6 @@
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.panel15 = new System.Windows.Forms.Panel();
             this.pBxReturnBack = new System.Windows.Forms.PictureBox();
-            this.TextPayBill = new ServiceSaleMachine.RichTextBoxEx();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -199,6 +199,7 @@
             this.LabelNameService1.Size = new System.Drawing.Size(305, 29);
             this.LabelNameService1.TabIndex = 0;
             this.LabelNameService1.Text = "Дыхательная смесь";
+            this.LabelNameService1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LabelNameService1_KeyDown);
             // 
             // panel8
             // 
@@ -319,6 +320,18 @@
             this.tableLayoutPanel7.Size = new System.Drawing.Size(628, 83);
             this.tableLayoutPanel7.TabIndex = 0;
             // 
+            // TextPayBill
+            // 
+            this.TextPayBill.BackColor = System.Drawing.SystemColors.Control;
+            this.TextPayBill.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TextPayBill.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TextPayBill.Location = new System.Drawing.Point(65, 3);
+            this.TextPayBill.Name = "TextPayBill";
+            this.TextPayBill.ReadOnly = true;
+            this.TextPayBill.Size = new System.Drawing.Size(496, 77);
+            this.TextPayBill.TabIndex = 0;
+            this.TextPayBill.Text = "";
+            // 
             // panel5
             // 
             this.panel5.Controls.Add(this.tableLayoutPanel8);
@@ -406,18 +419,6 @@
             this.pBxReturnBack.TabIndex = 0;
             this.pBxReturnBack.TabStop = false;
             this.pBxReturnBack.Click += new System.EventHandler(this.pBxReturnBack_Click);
-            // 
-            // TextPayBill
-            // 
-            this.TextPayBill.BackColor = System.Drawing.SystemColors.Control;
-            this.TextPayBill.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.TextPayBill.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TextPayBill.Location = new System.Drawing.Point(65, 3);
-            this.TextPayBill.Name = "TextPayBill";
-            this.TextPayBill.ReadOnly = true;
-            this.TextPayBill.Size = new System.Drawing.Size(496, 77);
-            this.TextPayBill.TabIndex = 0;
-            this.TextPayBill.Text = "";
             // 
             // FormWaitPayBill1
             // 

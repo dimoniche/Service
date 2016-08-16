@@ -44,7 +44,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(749, 60);
+            this.panel1.Size = new System.Drawing.Size(800, 60);
             this.panel1.TabIndex = 2;
             // 
             // label1
@@ -60,9 +60,9 @@
             // panel2
             // 
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(641, 60);
+            this.panel2.Location = new System.Drawing.Point(692, 60);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(108, 406);
+            this.panel2.Size = new System.Drawing.Size(108, 540);
             this.panel2.TabIndex = 3;
             // 
             // panel3
@@ -70,15 +70,15 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel3.Location = new System.Drawing.Point(0, 60);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(108, 406);
+            this.panel3.Size = new System.Drawing.Size(108, 540);
             this.panel3.TabIndex = 4;
             // 
             // panel4
             // 
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(108, 406);
+            this.panel4.Location = new System.Drawing.Point(108, 540);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(533, 60);
+            this.panel4.Size = new System.Drawing.Size(584, 60);
             this.panel4.TabIndex = 5;
             // 
             // timer1
@@ -91,7 +91,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(749, 466);
+            this.ClientSize = new System.Drawing.Size(800, 600);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);

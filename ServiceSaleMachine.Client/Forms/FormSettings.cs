@@ -386,8 +386,11 @@ namespace ServiceSaleMachine.Client
                         buttonStopScanerPoll.Enabled = data.drivers.ScanerIsWork();
                     }
 
-                    butStartPoll.Enabled = !data.drivers.BillPollIsWork();
-                    butStopPoll.Enabled = data.drivers.BillPollIsWork();
+                    if (Globals.ClientConfiguration.Settings.offBill != 1)
+                    {
+                        butStartPoll.Enabled = !data.drivers.BillPollIsWork();
+                        butStopPoll.Enabled = data.drivers.BillPollIsWork();
+                    }
 
                     if (Globals.ClientConfiguration.Settings.offCheck != 1)
                     {
@@ -645,6 +648,9 @@ namespace ServiceSaleMachine.Client
             labelWorkFromLastRefresh.Text = "Всего проработали со времени последнего обслуживания: " + GlobalDb.GlobalBase.GetWorkTime(dt).ToString() + " мин";
 
             MoneyStatistic();
+
+            int NumberCheck = GlobalDb.GlobalBase.GetCurrentNumberCheck();
+            labelCurrNumberCheck.Text = "Текущий номер чека: " + NumberCheck;
 
             init = false;
         }
@@ -1444,6 +1450,8 @@ namespace ServiceSaleMachine.Client
         {
             // сброс чека
             int NumberCheck = 0;
+
+            GlobalDb.GlobalBase.SetNumberCheck(NumberCheck);
 
             labelCurrNumberCheck.Text = "Текущий номер чека: " + NumberCheck;
         }

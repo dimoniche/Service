@@ -602,17 +602,21 @@ namespace ServiceSaleMachine
             MySqlDataReader dr = Execute(queryString);
             if (dr != null)
             {
+                int i = 0;
+
                 if (dr.HasRows)
                 {
                     dr.Read();
                     string s = "0";
-                    int i;
+
                     if (dr.IsDBNull(0) != true)
                         s = (string)dr[1];
-                    dr.Close();
+
                     int.TryParse(s, out i);
-                    return i;
                 }
+
+                dr.Close();
+                return i;
             }
             return 0;
         }

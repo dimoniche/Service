@@ -40,6 +40,7 @@ namespace ServiceSaleMachine.Client
             }
 
             GlobalDb.GlobalBase.CreateTables();
+            GlobalDb.GlobalBase.FillSystemValues();
 
             // запустим задачу очистки от логов директории
             ClearFilesTask = new ClearFilesControlServiceTask(Program.Log);
@@ -52,7 +53,7 @@ namespace ServiceSaleMachine.Client
         /// </summary>
         private void MainWorker()
         {
-            if (Globals.admin)
+            //if (Globals.admin)
             {
                 result.drivers.InitAllDevice();
                 result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);

@@ -181,6 +181,10 @@ namespace ServiceSaleMachine.Drivers
             Print(TransformCode(Globals.CheckConfiguration.Settings.secondfirmsname),true);
             Print(eLeft);
 
+            // номер чека
+            Print(TransformCode("Чек N: ") + GlobalDb.GlobalBase.GetCurrentNumberCheck().ToString("00000"), true);
+            Print(eLeft);
+
             Print(eLeft + DateTime.Now.ToString("yyyy-MM-dd") + "                          " + DateTime.Now.ToString("HH:mm"));
             Print(eLeft);
             PrintDashes();
@@ -189,21 +193,21 @@ namespace ServiceSaleMachine.Drivers
         public void PrintBody(Service serv)
         {
             Print(TransformCode(serv.caption),true);
-            Print(" ".PadRight(42 - serv.caption.Length - serv.price.ToString().Length, ' ') + serv.price.ToString());
+            Print(" ".PadRight(42 - 3 - serv.caption.Length - serv.price.ToString().Length, ' ') + serv.price.ToString("#.00"));
 
             PrintDashes();
 
             Print(eLeft,false,false);
             Print(TransformCode("ИТОГ"),true);
-            Print(" ".PadRight(42 - 4 - serv.price.ToString().Length, ' ') + serv.price.ToString());
+            Print(" ".PadRight(42 - 7 - serv.price.ToString().Length, ' ') + serv.price.ToString("#.00"));
 
             Print(eLeft, false, false);
             Print(TransformCode("Налич"),true);
-            Print(" ".PadRight(42 - 5 - serv.price.ToString().Length, ' ') + serv.price.ToString());
+            Print(" ".PadRight(42 - 8 - serv.price.ToString().Length, ' ') + serv.price.ToString("#.00"));
 
             Print(eLeft, false, false);
             Print(TransformCode("Сдача"),true);
-            Print(" ".PadRight(42 - 5 - 1, ' ') + "0");
+            Print(" ".PadRight(42 - 8 - 1, ' ') + "0,00");
         }
 
         public void PrintFooter()

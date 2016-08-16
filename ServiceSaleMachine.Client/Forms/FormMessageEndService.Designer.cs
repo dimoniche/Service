@@ -37,10 +37,10 @@
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.scalableLabel1 = new ServiceSaleMachine.ScalableLabel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.pBxFinish = new System.Windows.Forms.PictureBox();
+            this.TextEndService = new ServiceSaleMachine.RichTextBoxEx();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -55,7 +55,7 @@
             // 
             // timer1
             // 
-            this.timer1.Interval = 1000;
+            this.timer1.Interval = 50;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // tableLayoutPanel1
@@ -137,7 +137,7 @@
             // 
             this.tableLayoutPanel5.ColumnCount = 1;
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel5.Controls.Add(this.scalableLabel1, 0, 1);
+            this.tableLayoutPanel5.Controls.Add(this.TextEndService, 0, 1);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel5.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
@@ -147,17 +147,6 @@
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel5.Size = new System.Drawing.Size(622, 130);
             this.tableLayoutPanel5.TabIndex = 0;
-            // 
-            // scalableLabel1
-            // 
-            this.scalableLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scalableLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.scalableLabel1.Location = new System.Drawing.Point(3, 29);
-            this.scalableLabel1.Name = "scalableLabel1";
-            this.scalableLabel1.Size = new System.Drawing.Size(616, 72);
-            this.scalableLabel1.TabIndex = 0;
-            this.scalableLabel1.Text = "Спасибо. Просим снять мундштук и выбросить его в емкость справа внизу.";
-            this.scalableLabel1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.scalableLabel1_KeyDown);
             // 
             // panel3
             // 
@@ -194,6 +183,19 @@
             this.pBxFinish.TabIndex = 0;
             this.pBxFinish.TabStop = false;
             this.pBxFinish.Click += new System.EventHandler(this.pBxFinish_Click);
+            // 
+            // TextEndService
+            // 
+            this.TextEndService.BackColor = System.Drawing.SystemColors.Control;
+            this.TextEndService.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TextEndService.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TextEndService.Location = new System.Drawing.Point(3, 29);
+            this.TextEndService.Name = "TextEndService";
+            this.TextEndService.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.TextEndService.Size = new System.Drawing.Size(616, 72);
+            this.TextEndService.TabIndex = 0;
+            this.TextEndService.Text = "";
+            this.TextEndService.KeyDown += new System.Windows.Forms.KeyEventHandler(this.scalableLabel1_KeyDown);
             // 
             // FormMessageEndService
             // 
@@ -234,6 +236,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
-        private ScalableLabel scalableLabel1;
+        private RichTextBoxEx TextEndService;
     }
 }

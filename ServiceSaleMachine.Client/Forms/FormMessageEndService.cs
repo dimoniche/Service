@@ -11,6 +11,7 @@ namespace ServiceSaleMachine.Client
 
         public int CurrentWork;
         public int FTimeWork;
+        private bool fileLoaded = false;
 
         public FormMessageEndService()
         {
@@ -49,6 +50,13 @@ namespace ServiceSaleMachine.Client
         {
             CurrentWork++;
 
+            if (!fileLoaded)
+            {
+                TextEndService.LoadFile(Globals.GetPath(PathEnum.Text) + "\\EndService.rtf");
+                fileLoaded = true;
+                timer1.Interval = 1000;
+            }
+              
             if (CurrentWork >= FTimeWork)
             {
                 timer1.Enabled = false;

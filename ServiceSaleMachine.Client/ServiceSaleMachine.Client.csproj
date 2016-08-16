@@ -48,12 +48,6 @@
     <Compile Include="FormResultData.cs" />
     <Compile Include="Forms\Enum\ControlDeviceEnum.cs" />
     <Compile Include="Forms\Enum\ChooseChangeEnum.cs" />
-    <Compile Include="Forms\FormBigBill.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormBigBill.Designer.cs">
-      <DependentUpon>FormBigBill.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\FormChooseChange.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -195,9 +189,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\FormBigBill.resx">
-      <DependentUpon>FormBigBill.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormChooseChange.resx">
       <DependentUpon>FormChooseChange.cs</DependentUpon>
     </EmbeddedResource>

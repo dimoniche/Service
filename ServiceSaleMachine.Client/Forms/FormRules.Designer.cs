@@ -88,6 +88,7 @@
             this.InstructionText.Size = new System.Drawing.Size(634, 414);
             this.InstructionText.TabIndex = 0;
             this.InstructionText.Text = "";
+            this.InstructionText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InstructionText_KeyDown);
             // 
             // panel2
             // 

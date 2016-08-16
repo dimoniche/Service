@@ -138,6 +138,12 @@ namespace ServiceSaleMachine.Client
                             // ознакомились - возвращаемся обратно
                             continue;
                         }
+                        else if (result.stage == WorkerStateStage.ExitProgram)
+                        {
+                            // выход
+                            Close();
+                            return;
+                        }
                         else if (result.stage == WorkerStateStage.ChooseService)
                         {
                             // уходим на выбор услуг
@@ -177,6 +183,12 @@ namespace ServiceSaleMachine.Client
                             {
                                 continue;
                             }
+                            else if (result.stage == WorkerStateStage.ExitProgram)
+                            {
+                                // выход
+                                Close();
+                                return;
+                            }
                         }
                         else if (result.stage == WorkerStateStage.NeedService)
                         {
@@ -187,6 +199,12 @@ namespace ServiceSaleMachine.Client
                             {
                                 continue;
                             }
+                            else if (result.stage == WorkerStateStage.ExitProgram)
+                            {
+                                // выход
+                                Close();
+                                return;
+                            }
                         }
                         else if (result.stage == WorkerStateStage.ErrorControl)
                         {
@@ -195,6 +213,12 @@ namespace ServiceSaleMachine.Client
                             if (result.stage == WorkerStateStage.ErrorEndControl)
                             {
                                 continue;
+                            }
+                            else if (result.stage == WorkerStateStage.ExitProgram)
+                            {
+                                // выход
+                                Close();
+                                return;
                             }
                         }
                         else
@@ -249,6 +273,13 @@ namespace ServiceSaleMachine.Client
                     else if (result.stage == WorkerStateStage.WhatsDiff)
                     {
                         result = (FormResultData)FormManager.OpenForm<FormWhatsDiff>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                        if (result.stage == WorkerStateStage.ExitProgram)
+                        {
+                            // выход
+                            Close();
+                            return;
+                        }
 
                         // вернемся в выбор услуги (уж не думал что goto буду использовать)
                         goto ChooseService;

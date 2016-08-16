@@ -146,7 +146,7 @@ namespace ServiceSaleMachine.Client
                             }
 
                             // сообщим о том что купюра великовата
-                            FormManager.OpenForm<FormBigBill>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify);
+                            AmountServiceText.Text = "Внесите купюру меньшего номинала.";
                             return;
                         }
                     }
@@ -156,7 +156,7 @@ namespace ServiceSaleMachine.Client
                         if (amount > data.serv.price)
                         {
                             // купюра великовата - спросим может вернуть ее
-                            res = (bool)FormManager.OpenForm<FormInsertBill>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, ((BillNominal)e.Message.Content).Denomination);
+                            res = (bool)FormManager.OpenForm<FormInsertBill>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, data, ((BillNominal)e.Message.Content).Denomination);
                         }
                     }
 

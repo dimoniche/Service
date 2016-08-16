@@ -127,7 +127,7 @@ namespace ServiceSaleMachine.Client
                             }
 
                             // сообщим о том что купюра великовата
-                            FormManager.OpenForm<FormBigBill>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify);
+                            AmountServiceText.Text = "Внесите купюру меньшего номинала.";
                             return;
                         }
                     }

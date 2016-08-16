@@ -28,7 +28,6 @@ namespace ServiceSaleMachine.Client
 
             LabelNameService2.Text = Globals.ClientConfiguration.Settings.services[data.numberService].caption.ToLower();
 
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxMainMenu, Globals.DesignConfiguration.Settings.ButtonRetToMain);
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxStartService, Globals.DesignConfiguration.Settings.ButtonStartServices);
 
             intervalLabel.Text = interval.ToString() + " мин";
@@ -46,13 +45,6 @@ namespace ServiceSaleMachine.Client
         {
             TextInstruction.LoadFile(Globals.GetPath(PathEnum.Text) + "\\service_step2.rtf");
             timer1.Enabled = false;
-        }
-
-        private void pBxMainMenu_Click(object sender, System.EventArgs e)
-        {
-            // отказались от услуги
-            data.stage = WorkerStateStage.Fail;
-            this.Close();
         }
 
         private void pBxStartService_Click(object sender, System.EventArgs e)

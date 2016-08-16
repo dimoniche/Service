@@ -51,9 +51,8 @@
             this.intervalLabel = new ServiceSaleMachine.ScalableLabel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.pBxMainMenu = new System.Windows.Forms.PictureBox();
             this.panel9 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
             this.pBxStartService = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1.SuspendLayout();
@@ -75,8 +74,6 @@
             this.panel5.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.panel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pBxMainMenu)).BeginInit();
-            this.panel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBxStartService)).BeginInit();
             this.SuspendLayout();
             // 
@@ -336,11 +333,11 @@
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.ColumnCount = 3;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
-            this.tableLayoutPanel3.Controls.Add(this.panel6, 0, 0);
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel3.Controls.Add(this.panel9, 2, 0);
+            this.tableLayoutPanel3.Controls.Add(this.panel6, 1, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -349,43 +346,31 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(628, 83);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
-            // panel6
-            // 
-            this.panel6.Controls.Add(this.pBxMainMenu);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel6.Location = new System.Drawing.Point(3, 3);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(276, 77);
-            this.panel6.TabIndex = 0;
-            // 
-            // pBxMainMenu
-            // 
-            this.pBxMainMenu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pBxMainMenu.Location = new System.Drawing.Point(0, 0);
-            this.pBxMainMenu.Name = "pBxMainMenu";
-            this.pBxMainMenu.Size = new System.Drawing.Size(276, 77);
-            this.pBxMainMenu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pBxMainMenu.TabIndex = 0;
-            this.pBxMainMenu.TabStop = false;
-            this.pBxMainMenu.Click += new System.EventHandler(this.pBxMainMenu_Click);
-            // 
             // panel9
             // 
-            this.panel9.Controls.Add(this.pBxStartService);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel9.Location = new System.Drawing.Point(347, 3);
+            this.panel9.Location = new System.Drawing.Point(504, 3);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(278, 77);
+            this.panel9.Size = new System.Drawing.Size(121, 77);
             this.panel9.TabIndex = 1;
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.pBxStartService);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel6.Location = new System.Drawing.Point(128, 3);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(370, 77);
+            this.panel6.TabIndex = 2;
             // 
             // pBxStartService
             // 
             this.pBxStartService.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pBxStartService.Location = new System.Drawing.Point(0, 0);
             this.pBxStartService.Name = "pBxStartService";
-            this.pBxStartService.Size = new System.Drawing.Size(278, 77);
+            this.pBxStartService.Size = new System.Drawing.Size(370, 77);
             this.pBxStartService.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pBxStartService.TabIndex = 1;
+            this.pBxStartService.TabIndex = 2;
             this.pBxStartService.TabStop = false;
             this.pBxStartService.Click += new System.EventHandler(this.pBxStartService_Click);
             // 
@@ -426,8 +411,6 @@
             this.panel5.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pBxMainMenu)).EndInit();
-            this.panel9.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pBxStartService)).EndInit();
             this.ResumeLayout(false);
 
@@ -451,10 +434,7 @@
         private ScalableLabel LabelNameService2;
         private RichTextBoxEx TextInstruction;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.PictureBox pBxMainMenu;
         private System.Windows.Forms.Panel panel9;
-        private System.Windows.Forms.PictureBox pBxStartService;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
         private System.Windows.Forms.PictureBox pBxMinus;
@@ -462,5 +442,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
         private System.Windows.Forms.Panel panel10;
         private ScalableLabel intervalLabel;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.PictureBox pBxStartService;
     }
 }

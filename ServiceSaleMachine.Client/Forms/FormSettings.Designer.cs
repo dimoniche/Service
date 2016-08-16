@@ -1996,6 +1996,7 @@
             // 
             // buttonEncashment
             // 
+            this.buttonEncashment.Enabled = false;
             this.buttonEncashment.Location = new System.Drawing.Point(35, 177);
             this.buttonEncashment.Name = "buttonEncashment";
             this.buttonEncashment.Size = new System.Drawing.Size(201, 23);

@@ -150,26 +150,33 @@ namespace ServiceSaleMachine.Drivers
 
             PrintDashes();
             Print(TransformCode("Чек инкассации"), true);
+            Print(eLeft);
             PrintDashes();
 
             Print(eLeft, false, false);
-            Print(TransformCode("Общая сумма"), true);
-            Print(" ".PadRight(42 - 4 - statistic.AllMoneySumm.ToString().Length, ' ') + statistic.AllMoneySumm.ToString());
+            Print(TransformCode("Общая сумма   "), true);
+            Print(" ".PadRight(42 - 20 - statistic.AllMoneySumm.ToString().Length, ' ') + statistic.AllMoneySumm.ToString("00000.00") + TransformCode(" руб"), true);
+            Print(eLeft);
 
             Print(eLeft, false, false);
-            Print(TransformCode("Сумма на акк."), true);
-            Print(" ".PadRight(42 - 4 - statistic.AccountMoneySumm.ToString().Length, ' ') + statistic.AccountMoneySumm.ToString());
+            Print(TransformCode("Сумма на акк. "), true);
+            Print(" ".PadRight(42 - 20 - statistic.AccountMoneySumm.ToString().Length, ' ') + statistic.AccountMoneySumm.ToString("00000.00") + TransformCode(" руб"), true);
+            Print(eLeft);
 
             Print(eLeft, false, false);
             Print(TransformCode("Сумма на чеках"), true);
-            Print(" ".PadRight(42 - 4 - statistic.BarCodeMoneySumm.ToString().Length, ' ') + statistic.BarCodeMoneySumm.ToString());
+            Print(" ".PadRight(42 - 20 - statistic.BarCodeMoneySumm.ToString().Length, ' ') + statistic.BarCodeMoneySumm.ToString("00000.00") + TransformCode(" руб"), true);
+            Print(eLeft);
 
             Print(eLeft, false, false);
-            Print(TransformCode("Оказано услуг"), true);
-            Print(" ".PadRight(42 - 4 - statistic.ServiceMoneySumm.ToString().Length, ' ') + statistic.ServiceMoneySumm.ToString());
+            Print(TransformCode("Оказано услуг "), true);
+            Print(" ".PadRight(42 - 20 - statistic.ServiceMoneySumm.ToString().Length, ' ') + statistic.ServiceMoneySumm.ToString("00000.00") + TransformCode(" руб"), true);
+            Print(eLeft);
 
             Print("");
             Print(vbLf + vbLf + vbLf + eCut);
+
+            prn.ClosePrint();
         }
 
         public void PrintHeader()

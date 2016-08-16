@@ -95,6 +95,14 @@
             this.tabViewDataBase = new System.Windows.Forms.TabPage();
             this.tabDataBaseSetting = new System.Windows.Forms.TabControl();
             this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.label31 = new System.Windows.Forms.Label();
+            this.edtDBServer = new System.Windows.Forms.TextBox();
+            this.label30 = new System.Windows.Forms.Label();
+            this.edtDBPsw = new System.Windows.Forms.TextBox();
+            this.label29 = new System.Windows.Forms.Label();
+            this.edtDBUserName = new System.Windows.Forms.TextBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.edtBDname = new System.Windows.Forms.TextBox();
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -191,14 +199,6 @@
             this.labelTimeLastRefresh = new System.Windows.Forms.Label();
             this.labelWorkFromLastRefresh = new System.Windows.Forms.Label();
             this.buttonResetTimeRefresh = new System.Windows.Forms.Button();
-            this.label28 = new System.Windows.Forms.Label();
-            this.edtBDname = new System.Windows.Forms.TextBox();
-            this.label29 = new System.Windows.Forms.Label();
-            this.edtDBUserName = new System.Windows.Forms.TextBox();
-            this.label30 = new System.Windows.Forms.Label();
-            this.edtDBPsw = new System.Windows.Forms.TextBox();
-            this.label31 = new System.Windows.Forms.Label();
-            this.edtDBServer = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -967,6 +967,70 @@
             this.tabPage7.TabIndex = 0;
             this.tabPage7.Text = "Настройка доступа";
             this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // label31
+            // 
+            this.label31.Location = new System.Drawing.Point(117, 108);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(93, 13);
+            this.label31.TabIndex = 9;
+            this.label31.Text = "Пароль";
+            this.label31.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // edtDBServer
+            // 
+            this.edtDBServer.Location = new System.Drawing.Point(216, 34);
+            this.edtDBServer.Name = "edtDBServer";
+            this.edtDBServer.Size = new System.Drawing.Size(181, 20);
+            this.edtDBServer.TabIndex = 2;
+            // 
+            // label30
+            // 
+            this.label30.Location = new System.Drawing.Point(64, 81);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(146, 14);
+            this.label30.TabIndex = 7;
+            this.label30.Text = "Имя пользователя";
+            this.label30.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // edtDBPsw
+            // 
+            this.edtDBPsw.Location = new System.Drawing.Point(216, 105);
+            this.edtDBPsw.Name = "edtDBPsw";
+            this.edtDBPsw.Size = new System.Drawing.Size(181, 20);
+            this.edtDBPsw.TabIndex = 8;
+            // 
+            // label29
+            // 
+            this.label29.Location = new System.Drawing.Point(117, 57);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(93, 13);
+            this.label29.TabIndex = 5;
+            this.label29.Text = "База данных";
+            this.label29.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // edtDBUserName
+            // 
+            this.edtDBUserName.Location = new System.Drawing.Point(216, 80);
+            this.edtDBUserName.Name = "edtDBUserName";
+            this.edtDBUserName.Size = new System.Drawing.Size(181, 20);
+            this.edtDBUserName.TabIndex = 6;
+            // 
+            // label28
+            // 
+            this.label28.Location = new System.Drawing.Point(117, 36);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(93, 13);
+            this.label28.TabIndex = 3;
+            this.label28.Text = "Сервер";
+            this.label28.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // edtBDname
+            // 
+            this.edtBDname.Location = new System.Drawing.Point(216, 56);
+            this.edtBDname.Name = "edtBDname";
+            this.edtBDname.Size = new System.Drawing.Size(181, 20);
+            this.edtBDname.TabIndex = 4;
             // 
             // tabPage8
             // 
@@ -1932,7 +1996,6 @@
             // 
             // buttonEncashment
             // 
-            this.buttonEncashment.Enabled = false;
             this.buttonEncashment.Location = new System.Drawing.Point(35, 177);
             this.buttonEncashment.Name = "buttonEncashment";
             this.buttonEncashment.Size = new System.Drawing.Size(201, 23);
@@ -1981,70 +2044,6 @@
             this.buttonResetTimeRefresh.Text = "Обновить время обслуживания";
             this.buttonResetTimeRefresh.UseVisualStyleBackColor = true;
             this.buttonResetTimeRefresh.Click += new System.EventHandler(this.buttonResetTimeRefresh_Click);
-            // 
-            // label28
-            // 
-            this.label28.Location = new System.Drawing.Point(117, 36);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(93, 13);
-            this.label28.TabIndex = 3;
-            this.label28.Text = "Сервер";
-            this.label28.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // edtBDname
-            // 
-            this.edtBDname.Location = new System.Drawing.Point(216, 56);
-            this.edtBDname.Name = "edtBDname";
-            this.edtBDname.Size = new System.Drawing.Size(181, 20);
-            this.edtBDname.TabIndex = 4;
-            // 
-            // label29
-            // 
-            this.label29.Location = new System.Drawing.Point(117, 57);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(93, 13);
-            this.label29.TabIndex = 5;
-            this.label29.Text = "База данных";
-            this.label29.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // edtDBUserName
-            // 
-            this.edtDBUserName.Location = new System.Drawing.Point(216, 80);
-            this.edtDBUserName.Name = "edtDBUserName";
-            this.edtDBUserName.Size = new System.Drawing.Size(181, 20);
-            this.edtDBUserName.TabIndex = 6;
-            // 
-            // label30
-            // 
-            this.label30.Location = new System.Drawing.Point(64, 81);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(146, 14);
-            this.label30.TabIndex = 7;
-            this.label30.Text = "Имя пользователя";
-            this.label30.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // edtDBPsw
-            // 
-            this.edtDBPsw.Location = new System.Drawing.Point(216, 105);
-            this.edtDBPsw.Name = "edtDBPsw";
-            this.edtDBPsw.Size = new System.Drawing.Size(181, 20);
-            this.edtDBPsw.TabIndex = 8;
-            // 
-            // label31
-            // 
-            this.label31.Location = new System.Drawing.Point(117, 108);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(93, 13);
-            this.label31.TabIndex = 9;
-            this.label31.Text = "Пароль";
-            this.label31.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // edtDBServer
-            // 
-            this.edtDBServer.Location = new System.Drawing.Point(216, 34);
-            this.edtDBServer.Name = "edtDBServer";
-            this.edtDBServer.Size = new System.Drawing.Size(181, 20);
-            this.edtDBServer.TabIndex = 2;
             // 
             // FormSettings
             // 

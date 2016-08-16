@@ -32,7 +32,10 @@ namespace ServiceSaleMachine.Client
             moneySumm.Text = "Сумма денег в кассете: " + data.statistic.AllMoneySumm + " руб";
 
             // печатаем чек c инкассацией
-            data.drivers.printer.PrintCheckСollection(data.statistic);
+            if (data.drivers.printer.prn.PrinterIsOpen)
+            {
+                data.drivers.printer.PrintCheckСollection(data.statistic);
+            }
         }
 
         private void reciveResponse(object sender, ServiceClientResponseEventArgs e)

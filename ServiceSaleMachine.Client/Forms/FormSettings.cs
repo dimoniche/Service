@@ -1511,6 +1511,12 @@ namespace ServiceSaleMachine.Client
 
         private void button13_Click_1(object sender, EventArgs e)
         {
+            // печатаем чек c инкассацией
+            if (data.drivers.printer.prn.PrinterIsOpen)
+            {
+                data.drivers.printer.PrintCheckСollection(data.statistic);
+            }
+
             // запишем инфу о последнем обслуживании и инкасации
             DateTime dt = GlobalDb.GlobalBase.GetLastEncashment();
 
@@ -1529,6 +1535,13 @@ namespace ServiceSaleMachine.Client
 
             // очистим накопленные банктноты
             GlobalDb.GlobalBase.ClearBankNotes();
+
+            // обнулим статистику
+            data.statistic.AccountMoneySumm = 0;
+            data.statistic.AllMoneySumm = 0;
+            data.statistic.BarCodeMoneySumm = 0;
+            data.statistic.CountBankNote = 0;
+            data.statistic.ServiceMoneySumm = 0;
 
             // обновляем статистику
             MoneyStatistic();

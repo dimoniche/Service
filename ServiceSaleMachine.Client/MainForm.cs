@@ -53,7 +53,7 @@ namespace ServiceSaleMachine.Client
         /// </summary>
         private void MainWorker()
         {
-            if (Globals.admin)
+            //if (Globals.admin)
             {
                 result.drivers.InitAllDevice();
                 result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
@@ -368,7 +368,7 @@ namespace ServiceSaleMachine.Client
 
                     if (dev != null)
                     {
-                        result.timework = dev.timework;
+                        result.timework = serv.timework;
                         result.numberCurrentDevice = dev.id;
                         result.timeRecognize = serv.timeRecognize;
                         result.ServName = serv.caption;

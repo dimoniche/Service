@@ -2,6 +2,8 @@
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using ServiceSaleMachine.Drivers;
+using static ServiceSaleMachine.Drivers.MachineDrivers;
 
 namespace ServiceSaleMachine.Client
 {
@@ -43,6 +45,33 @@ namespace ServiceSaleMachine.Client
                 data.drivers.control.SendOpenControl((int)ControlDeviceEnum.dev3);
                 data.drivers.control.SendOpenControl((int)ControlDeviceEnum.dev4);
             }
+
+            data.drivers.ReceivedResponse += reciveResponse;
+        }
+
+        private void reciveResponse(object sender, ServiceClientResponseEventArgs e)
+        {
+            if (InvokeRequired)
+            {
+                BeginInvoke(new ServiceClientResponseEventHandler(reciveResponse), sender, e);
+                return;
+            }
+
+            switch (e.Message.Event)
+            {
+                case DeviceEvent.DropCassetteBillAcceptor:
+                    {
+                        data.stage = WorkerStateStage.DropCassettteBill;
+                        this.Close();
+                    }
+                    break;
+                case DeviceEvent.DropCassetteFullBillAcceptor:
+
+                    break;
+                case DeviceEvent.BillAcceptorError:
+
+                    break;
+            }
         }
 
         private void FormProvideService1_FormClosed(object sender, FormClosedEventArgs e)
@@ -60,6 +89,8 @@ namespace ServiceSaleMachine.Client
 
             Params.Result = data;
             timerService.Enabled = false;
+
+            data.drivers.ReceivedResponse -= reciveResponse;
         }
 
         private void timerService_Tick(object sender, EventArgs e)

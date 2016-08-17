@@ -63,6 +63,7 @@ namespace ServiceSaleMachine.Client
         private void FormMainMenu_FormClosed(object sender, FormClosedEventArgs e)
         {
             Params.Result = data;
+            data.drivers.ReceivedResponse -= reciveResponse;
         }
 
         private void reciveResponse(object sender, ServiceClientResponseEventArgs e)

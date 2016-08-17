@@ -1,6 +1,9 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using ServiceSaleMachine.Drivers;
+using static ServiceSaleMachine.Drivers.MachineDrivers;
 
 namespace ServiceSaleMachine.Client
 {
@@ -34,11 +37,39 @@ namespace ServiceSaleMachine.Client
 
             pBxMinus.Load(Globals.GetPath(PathEnum.Image) + "\\back.png");
             pBxPlus.Load(Globals.GetPath(PathEnum.Image) + "\\forward.png");
+
+            data.drivers.ReceivedResponse += reciveResponse;
+        }
+
+        private void reciveResponse(object sender, ServiceClientResponseEventArgs e)
+        {
+            if (InvokeRequired)
+            {
+                BeginInvoke(new ServiceClientResponseEventHandler(reciveResponse), sender, e);
+                return;
+            }
+
+            switch (e.Message.Event)
+            {
+                case DeviceEvent.DropCassetteBillAcceptor:
+                    {
+                        data.stage = WorkerStateStage.DropCassettteBill;
+                        this.Close();
+                    }
+                    break;
+                case DeviceEvent.DropCassetteFullBillAcceptor:
+
+                    break;
+                case DeviceEvent.BillAcceptorError:
+
+                    break;
+            }
         }
 
         private void FormProvideServiceStart1_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
         {
             Params.Result = data;
+            data.drivers.ReceivedResponse -= reciveResponse;
         }
 
         private void timer1_Tick(object sender, System.EventArgs e)

@@ -1,6 +1,9 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using ServiceSaleMachine.Drivers;
+using static ServiceSaleMachine.Drivers.MachineDrivers;
 
 namespace ServiceSaleMachine.Client
 {
@@ -21,6 +24,33 @@ namespace ServiceSaleMachine.Client
                 {
                     data = (FormResultData)obj;
                 }
+            }
+
+            data.drivers.ReceivedResponse += reciveResponse;
+        }
+
+        private void reciveResponse(object sender, ServiceClientResponseEventArgs e)
+        {
+            if (InvokeRequired)
+            {
+                BeginInvoke(new ServiceClientResponseEventHandler(reciveResponse), sender, e);
+                return;
+            }
+
+            switch (e.Message.Event)
+            {
+                case DeviceEvent.DropCassetteBillAcceptor:
+                    {
+                        data.stage = WorkerStateStage.DropCassettteBill;
+                        this.Close();
+                    }
+                    break;
+                case DeviceEvent.DropCassetteFullBillAcceptor:
+
+                    break;
+                case DeviceEvent.BillAcceptorError:
+
+                    break;
             }
         }
 
@@ -44,6 +74,7 @@ namespace ServiceSaleMachine.Client
         {
             timer1.Enabled = false;
             Params.Result = data;
+            data.drivers.ReceivedResponse -= reciveResponse;
         }
 
         private void FormTemporallyNoWork_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)

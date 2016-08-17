@@ -81,6 +81,12 @@ namespace ServiceSaleMachine.Client
                 case DeviceEvent.BillAcceptorCredit:
                     //CreditMoney(e);
                     break;
+                case DeviceEvent.DropCassetteBillAcceptor:
+                    {
+                        data.stage = WorkerStateStage.DropCassettteBill;
+                        this.Close();
+                    }
+                    break;
                 default:
                     // Остальные события нас не интересуют
                     break;

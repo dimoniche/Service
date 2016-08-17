@@ -2,6 +2,8 @@
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using ServiceSaleMachine.Drivers;
+using static ServiceSaleMachine.Drivers.MachineDrivers;
 
 namespace ServiceSaleMachine.Client
 {
@@ -34,6 +36,33 @@ namespace ServiceSaleMachine.Client
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxStartService, Globals.DesignConfiguration.Settings.ButtonStartServices);
 
             InstructionText.LoadFile(Globals.HelpFileName);
+
+            data.drivers.ReceivedResponse += reciveResponse;
+        }
+
+        private void reciveResponse(object sender, ServiceClientResponseEventArgs e)
+        {
+            if (InvokeRequired)
+            {
+                BeginInvoke(new ServiceClientResponseEventHandler(reciveResponse), sender, e);
+                return;
+            }
+
+            switch (e.Message.Event)
+            {
+                case DeviceEvent.DropCassetteBillAcceptor:
+                    {
+                        data.stage = WorkerStateStage.DropCassettteBill;
+                        this.Close();
+                    }
+                    break;
+                case DeviceEvent.DropCassetteFullBillAcceptor:
+
+                    break;
+                case DeviceEvent.BillAcceptorError:
+
+                    break;
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -63,6 +92,7 @@ namespace ServiceSaleMachine.Client
         private void FormRules1_FormClosed(object sender, FormClosedEventArgs e)
         {
             Params.Result = data;
+            data.drivers.ReceivedResponse -= reciveResponse;
         }
 
         private void pBxMainMenu_Click(object sender, EventArgs e)

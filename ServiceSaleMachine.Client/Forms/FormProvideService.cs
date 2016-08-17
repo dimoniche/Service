@@ -50,12 +50,12 @@ namespace ServiceSaleMachine.Client
             // заканчиваем оказывать услугу
             if (data.numberCurrentDevice == (int)ControlDeviceEnum.dev3)
             {
-                data.drivers.control.SendOpenControl((int)ControlDeviceEnum.dev3);
+                data.drivers.control.SendCloseControl((int)ControlDeviceEnum.dev3);
             }
             else
             {
-                data.drivers.control.SendOpenControl((int)ControlDeviceEnum.dev3);
-                data.drivers.control.SendOpenControl((int)ControlDeviceEnum.dev4);
+                data.drivers.control.SendCloseControl((int)ControlDeviceEnum.dev3);
+                data.drivers.control.SendCloseControl((int)ControlDeviceEnum.dev4);
             }
 
             Params.Result = data;

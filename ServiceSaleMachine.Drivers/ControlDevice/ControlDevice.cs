@@ -170,7 +170,7 @@ namespace ServiceSaleMachine.Drivers
             byte[] buf = new byte[2];
             byte[] BufIn = new byte[10];
 
-            buf[0] = (byte)0xF0;
+            buf[0] = (byte)0x0F;
             buf[1] = (byte)(0xFF - buf[0]);
             this.Send(buf, 2);
 

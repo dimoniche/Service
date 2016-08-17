@@ -53,7 +53,7 @@ namespace ServiceSaleMachine.Client
         /// </summary>
         private void MainWorker()
         {
-            //if (Globals.admin)
+            if (Globals.admin)
             {
                 result.drivers.InitAllDevice();
                 result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
@@ -145,6 +145,16 @@ namespace ServiceSaleMachine.Client
                             Close();
                             return;
                         }
+                        else if (result.stage == WorkerStateStage.DropCassettteBill)
+                        {
+                            // выемка денег
+                            result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                            if (result.stage == WorkerStateStage.EndDropCassette)
+                            {
+                                continue;
+                            }
+                        }
                         else if (result.stage == WorkerStateStage.ChooseService)
                         {
                             // уходим на выбор услуг
@@ -168,6 +178,16 @@ namespace ServiceSaleMachine.Client
                         if (result.stage == WorkerStateStage.EndNeedService)
                         {
                             continue;
+                        }
+                        else if (result.stage == WorkerStateStage.DropCassettteBill)
+                        {
+                            // выемка денег
+                            result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                            if (result.stage == WorkerStateStage.EndDropCassette)
+                            {
+                                continue;
+                            }
                         }
                     }
                     else if (result.stage == WorkerStateStage.TimeOut)
@@ -239,6 +259,16 @@ namespace ServiceSaleMachine.Client
                         // выход
                         Close();
                         return;
+                    }
+                    else if (result.stage == WorkerStateStage.DropCassettteBill)
+                    {
+                        // выемка денег
+                        result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                        if (result.stage == WorkerStateStage.EndDropCassette)
+                        {
+                            continue;
+                        }
                     }
                     else if (result.stage == WorkerStateStage.UserRequestService)
                     {
@@ -315,6 +345,16 @@ namespace ServiceSaleMachine.Client
                             // отказ - выход в выбор услуг
                             goto ChooseService;
                         }
+                        else if (result.stage == WorkerStateStage.DropCassettteBill)
+                        {
+                            // выемка денег
+                            result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                            if (result.stage == WorkerStateStage.EndDropCassette)
+                            {
+                                continue;
+                            }
+                        }
                         else if (result.stage == WorkerStateStage.ExitProgram)
                         {
                             // выход
@@ -341,6 +381,16 @@ namespace ServiceSaleMachine.Client
                             // выход
                             Close();
                             return;
+                        }
+                        else if (result.stage == WorkerStateStage.DropCassettteBill)
+                        {
+                            // выемка денег
+                            result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                            if (result.stage == WorkerStateStage.EndDropCassette)
+                            {
+                                continue;
+                            }
                         }
                         else if (result.stage == WorkerStateStage.TimeOut)
                         {
@@ -394,6 +444,16 @@ namespace ServiceSaleMachine.Client
                             Close();
                             return;
                         }
+                        else if (result.stage == WorkerStateStage.DropCassettteBill)
+                        {
+                            // выемка денег
+                            result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                            if (result.stage == WorkerStateStage.EndDropCassette)
+                            {
+                                continue;
+                            }
+                        }
 
                         // теперь собственно окажем услугу - сначала спросим надо ли 
                         result = (FormResultData)FormManager.OpenForm<FormProvideServiceStart>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
@@ -408,6 +468,16 @@ namespace ServiceSaleMachine.Client
                         {
                             // услуга не нужна
                             continue;
+                        }
+                        else if (result.stage == WorkerStateStage.DropCassettteBill)
+                        {
+                            // выемка денег
+                            result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                            if (result.stage == WorkerStateStage.EndDropCassette)
+                            {
+                                continue;
+                            }
                         }
                         else if (result.stage == WorkerStateStage.TimeOut)
                         {
@@ -425,6 +495,17 @@ namespace ServiceSaleMachine.Client
 
                         // Услугу оказали - выбросим расходники
                         result = (FormResultData)FormManager.OpenForm<FormMessageEndService>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                        if (result.stage == WorkerStateStage.DropCassettteBill)
+                        {
+                            // выемка денег
+                            result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                            if (result.stage == WorkerStateStage.EndDropCassette)
+                            {
+                                continue;
+                            }
+                        }
 
                         // пишем в базу строку с временем работы
                         GlobalDb.GlobalBase.WriteWorkTime(serv.id, result.numberCurrentDevice, result.timework);

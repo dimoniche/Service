@@ -236,7 +236,6 @@ namespace ServiceSaleMachine.Drivers
                 {
                     // неудача
                     this.log.Write(LogMessageType.Error, "PRINTER: Принтер не верно настроен. Порт не доступен.");
-                    sendMessage(DeviceEvent.NeedSettingProgram);
                     res = WorkerStateStage.NeedSettingProgram;
                 }
             }
@@ -259,7 +258,6 @@ namespace ServiceSaleMachine.Drivers
                 {
                     // неудача
                     this.log.Write(LogMessageType.Error, "CONTROL: Управляющее устройство не верно настроено. Порт не доступен.");
-                    sendMessage(DeviceEvent.NeedSettingProgram);
                     res = WorkerStateStage.NeedSettingProgram;
                 }
             }
@@ -283,7 +281,6 @@ namespace ServiceSaleMachine.Drivers
                 {
                     // неудача
                     this.log.Write(LogMessageType.Error, "MODEM: Модем не верно настроен. Порт не доступен.");
-                    sendMessage(DeviceEvent.NeedSettingProgram);
                     res = WorkerStateStage.NeedSettingProgram;
                 }
             }

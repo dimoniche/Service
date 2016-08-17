@@ -58,6 +58,9 @@
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.panel15 = new System.Windows.Forms.Panel();
             this.pBxReturnBack = new System.Windows.Forms.PictureBox();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
+            this.SecondMessageText = new ServiceSaleMachine.ScalableLabel();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -82,6 +85,8 @@
             this.tableLayoutPanel9.SuspendLayout();
             this.panel15.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBxReturnBack)).BeginInit();
+            this.panel12.SuspendLayout();
+            this.tableLayoutPanel10.SuspendLayout();
             this.SuspendLayout();
             // 
             // TimeOutTimer
@@ -117,12 +122,12 @@
             // 
             this.tableLayoutPanel2.ColumnCount = 1;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Controls.Add(this.panel2, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.panel3, 0, 3);
             this.tableLayoutPanel2.Controls.Add(this.panel4, 0, 5);
             this.tableLayoutPanel2.Controls.Add(this.panel5, 0, 7);
             this.tableLayoutPanel2.Controls.Add(this.panel6, 0, 9);
+            this.tableLayoutPanel2.Controls.Add(this.panel12, 0, 4);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -130,8 +135,8 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.5F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.5F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
@@ -178,9 +183,9 @@
             // tableLayoutPanel4
             // 
             this.tableLayoutPanel4.ColumnCount = 3;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel4.Controls.Add(this.LabelNameService1, 1, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
@@ -194,9 +199,9 @@
             // 
             this.LabelNameService1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LabelNameService1.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.LabelNameService1.Location = new System.Drawing.Point(158, 3);
+            this.LabelNameService1.Location = new System.Drawing.Point(189, 0);
             this.LabelNameService1.Name = "LabelNameService1";
-            this.LabelNameService1.Size = new System.Drawing.Size(305, 29);
+            this.LabelNameService1.Size = new System.Drawing.Size(242, 35);
             this.LabelNameService1.TabIndex = 0;
             this.LabelNameService1.Text = "Дыхательная смесь";
             this.LabelNameService1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LabelNameService1_KeyDown);
@@ -213,9 +218,9 @@
             // tableLayoutPanel5
             // 
             this.tableLayoutPanel5.ColumnCount = 3;
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.5F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.5F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel5.Controls.Add(this.LabelNameService2, 1, 0);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel5.Location = new System.Drawing.Point(0, 0);
@@ -229,9 +234,9 @@
             // 
             this.LabelNameService2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LabelNameService2.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.LabelNameService2.Location = new System.Drawing.Point(174, 3);
+            this.LabelNameService2.Location = new System.Drawing.Point(189, 0);
             this.LabelNameService2.Name = "LabelNameService2";
-            this.LabelNameService2.Size = new System.Drawing.Size(273, 30);
+            this.LabelNameService2.Size = new System.Drawing.Size(242, 36);
             this.LabelNameService2.TabIndex = 0;
             this.LabelNameService2.Text = "после тренировки";
             // 
@@ -241,7 +246,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(3, 150);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(628, 53);
+            this.panel3.Size = new System.Drawing.Size(628, 38);
             this.panel3.TabIndex = 1;
             // 
             // panel9
@@ -250,31 +255,31 @@
             this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel9.Location = new System.Drawing.Point(0, 0);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(628, 53);
+            this.panel9.Size = new System.Drawing.Size(628, 38);
             this.panel9.TabIndex = 0;
             // 
             // tableLayoutPanel6
             // 
             this.tableLayoutPanel6.ColumnCount = 3;
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel6.Controls.Add(this.panel10, 1, 0);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 1;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(628, 53);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(628, 38);
             this.tableLayoutPanel6.TabIndex = 0;
             // 
             // panel10
             // 
             this.panel10.Controls.Add(this.AmountServiceText);
             this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel10.Location = new System.Drawing.Point(128, 3);
+            this.panel10.Location = new System.Drawing.Point(191, 3);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(370, 47);
+            this.panel10.Size = new System.Drawing.Size(245, 32);
             this.panel10.TabIndex = 0;
             // 
             // AmountServiceText
@@ -283,9 +288,10 @@
             this.AmountServiceText.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.AmountServiceText.Location = new System.Drawing.Point(0, 0);
             this.AmountServiceText.Name = "AmountServiceText";
-            this.AmountServiceText.Size = new System.Drawing.Size(370, 47);
+            this.AmountServiceText.Size = new System.Drawing.Size(245, 32);
             this.AmountServiceText.TabIndex = 0;
             this.AmountServiceText.Text = "Внесено: 0 руб.";
+            this.AmountServiceText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LabelNameService1_KeyDown);
             // 
             // panel4
             // 
@@ -420,6 +426,41 @@
             this.pBxReturnBack.TabStop = false;
             this.pBxReturnBack.Click += new System.EventHandler(this.pBxReturnBack_Click);
             // 
+            // panel12
+            // 
+            this.panel12.Controls.Add(this.tableLayoutPanel10);
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel12.Location = new System.Drawing.Point(3, 194);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(628, 38);
+            this.panel12.TabIndex = 5;
+            // 
+            // tableLayoutPanel10
+            // 
+            this.tableLayoutPanel10.ColumnCount = 3;
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel10.Controls.Add(this.SecondMessageText, 1, 0);
+            this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel10.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel10.Name = "tableLayoutPanel10";
+            this.tableLayoutPanel10.RowCount = 1;
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel10.Size = new System.Drawing.Size(628, 38);
+            this.tableLayoutPanel10.TabIndex = 0;
+            // 
+            // SecondMessageText
+            // 
+            this.SecondMessageText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SecondMessageText.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.SecondMessageText.Location = new System.Drawing.Point(128, 0);
+            this.SecondMessageText.Name = "SecondMessageText";
+            this.SecondMessageText.Size = new System.Drawing.Size(370, 38);
+            this.SecondMessageText.TabIndex = 0;
+            this.SecondMessageText.Text = "Внесите купюру меньшего номинала.";
+            this.SecondMessageText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LabelNameService1_KeyDown);
+            // 
             // FormWaitPayBill1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -457,6 +498,8 @@
             this.tableLayoutPanel9.ResumeLayout(false);
             this.panel15.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pBxReturnBack)).EndInit();
+            this.panel12.ResumeLayout(false);
+            this.tableLayoutPanel10.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -492,5 +535,8 @@
         private System.Windows.Forms.Panel panel15;
         private System.Windows.Forms.PictureBox pBxReturnBack;
         private RichTextBoxEx TextPayBill;
+        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel10;
+        private ScalableLabel SecondMessageText;
     }
 }

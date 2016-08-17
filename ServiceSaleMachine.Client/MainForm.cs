@@ -364,9 +364,9 @@ namespace ServiceSaleMachine.Client
                     }
 
                     // оказание услуги
-                    Device dev = serv.GetActualDevice();
+                    //Device dev = serv.GetActualDevice();  // устройств пока всего 2 - поэтому решаем в лоб
 
-                    if (dev != null)
+                    //if (dev != null)
                     {
                         result.timework = serv.timework;
 
@@ -427,12 +427,12 @@ namespace ServiceSaleMachine.Client
                         result = (FormResultData)FormManager.OpenForm<FormMessageEndService>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
                         // пишем в базу строку с временем работы
-                        GlobalDb.GlobalBase.WriteWorkTime(serv.id, dev.id, result.timework);
+                        GlobalDb.GlobalBase.WriteWorkTime(serv.id, result.numberCurrentDevice, result.timework);
                     }
-                    else
-                    {
-                        MessageBox.Show("Услуга " + serv.caption + " не может быть предоставлена");
-                    }
+                    //else
+                    //{
+                    //    MessageBox.Show("Услуга " + serv.caption + " не может быть предоставлена");
+                    //}
                 }
                 catch (Exception exp)
                 {

@@ -46,6 +46,7 @@ namespace ServiceSaleMachine.Client
 
             AmountServiceText.Text = "Внесено: 0 руб.";
             AmountServiceText.ForeColor = System.Drawing.Color.Red;
+            SecondMessageText.Text = "";
 
             LabelNameService2.Text = Globals.ClientConfiguration.Settings.services[data.numberService].caption.ToLower();
 
@@ -89,6 +90,7 @@ namespace ServiceSaleMachine.Client
         private void CreditMoney(ServiceClientResponseEventArgs e)
         {
             pBxReturnBack.Enabled = false;
+            SecondMessageText.Text = "";
 
             lock (Params)
             {
@@ -133,7 +135,7 @@ namespace ServiceSaleMachine.Client
                     if (Globals.ClientConfiguration.Settings.changeOn == 0)
                     {
                         // без сдачи
-                        if (count > data.serv.price)
+                        if (amount > data.serv.price)
                         {
                             // купюра великовата - вернем ее
                             amount -= count;
@@ -146,7 +148,7 @@ namespace ServiceSaleMachine.Client
                             }
 
                             // сообщим о том что купюра великовата
-                            AmountServiceText.Text = "Внесите купюру меньшего номинала.";
+                            SecondMessageText.Text = "Внесите купюру меньшего номинала.";
                             return;
                         }
                     }

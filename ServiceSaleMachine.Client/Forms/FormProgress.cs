@@ -39,7 +39,7 @@ namespace ServiceSaleMachine.Client
 
             timer1.Enabled = true;
 
-            // включаем подсветку
+            // включаем подсветку расходников
             data.drivers.control.SendOpenControl((int)ControlDeviceEnum.light1);
         }
 
@@ -67,7 +67,7 @@ namespace ServiceSaleMachine.Client
 
         private void FormProgress1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            // Отключаем подстветку
+            // Отключаем подстветку расходников
             data.drivers.control.SendCloseControl((int)ControlDeviceEnum.light1);
             timer1.Enabled = false;
 

@@ -34,13 +34,13 @@ namespace ServiceSaleMachine.Client
 
             timer1.Enabled = true;
 
-            // включаем подсветку
+            // включаем подсветку урны
             data.drivers.control.SendOpenControl((int)ControlDeviceEnum.light2);
         }
 
         private void FormMessageEndService1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            // отключаем подсветку
+            // отключаем подсветку урны
             data.drivers.control.SendCloseControl((int)ControlDeviceEnum.light2);
 
             Params.Result = data;

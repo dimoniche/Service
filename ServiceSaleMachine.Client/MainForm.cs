@@ -369,7 +369,19 @@ namespace ServiceSaleMachine.Client
                     if (dev != null)
                     {
                         result.timework = serv.timework;
-                        result.numberCurrentDevice = dev.id;
+
+                        // пока так
+                        if(result.numberService == 0)
+                        {
+                            // первая услуга - устройство 3
+                            result.numberCurrentDevice = (int)ControlDeviceEnum.dev3;
+                        }
+                        else
+                        {
+                            // вторая услуга - устройство 4
+                            result.numberCurrentDevice = (int)ControlDeviceEnum.dev4;
+                        }
+
                         result.timeRecognize = serv.timeRecognize;
                         result.ServName = serv.caption;
 

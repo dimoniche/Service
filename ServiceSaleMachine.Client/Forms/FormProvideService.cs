@@ -33,14 +33,30 @@ namespace ServiceSaleMachine.Client
 
             ServiceText.Text = "Идет оказание услуги. Осталось еще " + (Interval / 60).ToString() + " минуты и " + (Interval % 60).ToString() + " секунд";
 
-            // оказываем услугу
-            data.drivers.control.SendOpenControl(data.numberCurrentDevice);
+            // оказываем услугу пока так
+            if(data.numberCurrentDevice == (int)ControlDeviceEnum.dev3)
+            {
+                data.drivers.control.SendOpenControl((int)ControlDeviceEnum.dev3);
+            }
+            else
+            {
+                data.drivers.control.SendOpenControl((int)ControlDeviceEnum.dev3);
+                data.drivers.control.SendOpenControl((int)ControlDeviceEnum.dev4);
+            }
         }
 
         private void FormProvideService1_FormClosed(object sender, FormClosedEventArgs e)
         {
             // заканчиваем оказывать услугу
-            data.drivers.control.SendCloseControl(data.numberCurrentDevice);
+            if (data.numberCurrentDevice == (int)ControlDeviceEnum.dev3)
+            {
+                data.drivers.control.SendOpenControl((int)ControlDeviceEnum.dev3);
+            }
+            else
+            {
+                data.drivers.control.SendOpenControl((int)ControlDeviceEnum.dev3);
+                data.drivers.control.SendOpenControl((int)ControlDeviceEnum.dev4);
+            }
 
             Params.Result = data;
             timerService.Enabled = false;

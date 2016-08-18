@@ -35,7 +35,7 @@ namespace ServiceSaleMachine
                     {
                         if ((xElement = xSettings.Element("firmsname")) != null) Settings.firmsname = xElement.Value;
                         if ((xElement = xSettings.Element("secondfirmsname")) != null) Settings.secondfirmsname = xElement.Value;
-
+                        if ((xElement = xSettings.Element("PreviouslyService")) != null) Settings.PreviouslyService = xElement.Value;
                         if ((xElement = xSettings.Element("advert1")) != null) Settings.advert1 = xElement.Value;
                         if ((xElement = xSettings.Element("advert2")) != null) Settings.advert2 = xElement.Value;
                         if ((xElement = xSettings.Element("advert3")) != null) Settings.advert3 = xElement.Value;
@@ -62,6 +62,7 @@ namespace ServiceSaleMachine
 
                 xSettings.Add(new XElement("firmsname", Settings.firmsname));
                 xSettings.Add(new XElement("secondfirmsname", Settings.secondfirmsname));
+                xSettings.Add(new XElement("PreviouslyService", Settings.PreviouslyService));
                 xSettings.Add(new XElement("advert1", Settings.advert1));
                 xSettings.Add(new XElement("advert2", Settings.advert2));
                 xSettings.Add(new XElement("advert3", Settings.advert3));

@@ -194,6 +194,7 @@
             this.labelTimeLastRefresh = new System.Windows.Forms.Label();
             this.labelWorkFromLastRefresh = new System.Windows.Forms.Label();
             this.buttonResetTimeRefresh = new System.Windows.Forms.Button();
+            this.PreviouslyName = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -1743,6 +1744,7 @@
             // 
             // tabPage11
             // 
+            this.tabPage11.Controls.Add(this.PreviouslyName);
             this.tabPage11.Controls.Add(this.labelCurrNumberCheck);
             this.tabPage11.Controls.Add(this.resetCheckNumeration);
             this.tabPage11.Controls.Add(this.advert4);
@@ -1781,7 +1783,7 @@
             // 
             // advert4
             // 
-            this.advert4.Location = new System.Drawing.Point(76, 416);
+            this.advert4.Location = new System.Drawing.Point(76, 470);
             this.advert4.Name = "advert4";
             this.advert4.Size = new System.Drawing.Size(482, 20);
             this.advert4.TabIndex = 1;
@@ -1790,7 +1792,7 @@
             // 
             // advert3
             // 
-            this.advert3.Location = new System.Drawing.Point(76, 390);
+            this.advert3.Location = new System.Drawing.Point(76, 444);
             this.advert3.Name = "advert3";
             this.advert3.Size = new System.Drawing.Size(482, 20);
             this.advert3.TabIndex = 1;
@@ -1799,7 +1801,7 @@
             // 
             // advert2
             // 
-            this.advert2.Location = new System.Drawing.Point(76, 364);
+            this.advert2.Location = new System.Drawing.Point(76, 418);
             this.advert2.Name = "advert2";
             this.advert2.Size = new System.Drawing.Size(482, 20);
             this.advert2.TabIndex = 1;
@@ -1808,7 +1810,7 @@
             // 
             // advert1
             // 
-            this.advert1.Location = new System.Drawing.Point(76, 338);
+            this.advert1.Location = new System.Drawing.Point(76, 392);
             this.advert1.Name = "advert1";
             this.advert1.Size = new System.Drawing.Size(482, 20);
             this.advert1.TabIndex = 1;
@@ -1817,7 +1819,7 @@
             // 
             // secondfirmsname
             // 
-            this.secondfirmsname.Location = new System.Drawing.Point(76, 81);
+            this.secondfirmsname.Location = new System.Drawing.Point(76, 84);
             this.secondfirmsname.Name = "secondfirmsname";
             this.secondfirmsname.Size = new System.Drawing.Size(482, 20);
             this.secondfirmsname.TabIndex = 1;
@@ -1826,7 +1828,7 @@
             // 
             // firmsname
             // 
-            this.firmsname.Location = new System.Drawing.Point(76, 55);
+            this.firmsname.Location = new System.Drawing.Point(76, 60);
             this.firmsname.Name = "firmsname";
             this.firmsname.Size = new System.Drawing.Size(482, 20);
             this.firmsname.TabIndex = 1;
@@ -1838,7 +1840,8 @@
             this.checkPic.Image = global::ServiceSaleMachine.Client.Properties.Resources.bitmap;
             this.checkPic.Location = new System.Drawing.Point(58, 37);
             this.checkPic.Name = "checkPic";
-            this.checkPic.Size = new System.Drawing.Size(515, 426);
+            this.checkPic.Size = new System.Drawing.Size(515, 431);
+            this.checkPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.checkPic.TabIndex = 0;
             this.checkPic.TabStop = false;
             // 
@@ -1986,6 +1989,14 @@
             this.buttonResetTimeRefresh.Text = "Обновить время обслуживания";
             this.buttonResetTimeRefresh.UseVisualStyleBackColor = true;
             this.buttonResetTimeRefresh.Click += new System.EventHandler(this.buttonResetTimeRefresh_Click);
+            // 
+            // PreviouslyName
+            // 
+            this.PreviouslyName.Location = new System.Drawing.Point(76, 182);
+            this.PreviouslyName.Name = "PreviouslyName";
+            this.PreviouslyName.Size = new System.Drawing.Size(157, 20);
+            this.PreviouslyName.TabIndex = 4;
+            this.PreviouslyName.Leave += new System.EventHandler(this.PreviouslyName_Leave);
             // 
             // FormSettings
             // 
@@ -2219,5 +2230,6 @@
         private System.Windows.Forms.TextBox edtDBUserName;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.TextBox edtBDname;
+        private System.Windows.Forms.TextBox PreviouslyName;
     }
 }

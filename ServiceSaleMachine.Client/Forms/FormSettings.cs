@@ -631,6 +631,7 @@ namespace ServiceSaleMachine.Client
 
             firmsname.Text = Globals.CheckConfiguration.Settings.firmsname;
             secondfirmsname.Text = Globals.CheckConfiguration.Settings.secondfirmsname;
+            PreviouslyName.Text = Globals.CheckConfiguration.Settings.PreviouslyService;
 
             advert1.Text = Globals.CheckConfiguration.Settings.advert1;
             advert2.Text = Globals.CheckConfiguration.Settings.advert2;
@@ -1530,6 +1531,12 @@ namespace ServiceSaleMachine.Client
 
             // обновляем статистику
             MoneyStatistic();
+        }
+
+        private void PreviouslyName_Leave(object sender, EventArgs e)
+        {
+            Globals.CheckConfiguration.Settings.PreviouslyService = PreviouslyName.Text;
+            Globals.CheckConfiguration.Save();
         }
     }
 }

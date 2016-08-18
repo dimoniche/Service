@@ -199,7 +199,7 @@ namespace ServiceSaleMachine.Drivers
 
         public void PrintBody(Service serv)
         {
-            Print(TransformCode(serv.caption),true);
+            Print(TransformCode(Globals.CheckConfiguration.Settings.PreviouslyService) + " " + TransformCode(serv.caption),true);
             Print(" ".PadRight(42 - 3 - serv.caption.Length - serv.price.ToString().Length, ' ') + serv.price.ToString("#.00"));
 
             PrintDashes();

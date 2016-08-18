@@ -1410,7 +1410,7 @@ namespace ServiceSaleMachine.Client
         {
             byte[] res;
 
-            res = data.drivers.control.GetStatusControl();
+            res = data.drivers.control.GetStatusControl(data.log);
 
             if (res != null)
             {

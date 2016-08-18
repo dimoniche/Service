@@ -99,15 +99,14 @@ namespace ServiceSaleMachine.Client
                     // Проверка статистических данных - может пора заканчивать работать
                     result = CheckStatistic(result);
 
-                    if (result.stage == WorkerStateStage.NeedService)
-                    {
-                        // Необходимо обслуживание аппарата
-                        result = (FormResultData)FormManager.OpenForm<FormNeedService>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+                    //result.stage = WorkerStateStage.ErrorControl;
 
-                        if (result.stage == WorkerStateStage.EndNeedService)
-                        {
-                            continue;
-                        }
+                    if (result.stage != WorkerStateStage.None)
+                    {
+                        // аппарат не работает
+                        result = (FormResultData)FormManager.OpenForm<FormTemporallyNoWork>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                        continue;
                     }
 
                     // ожидание клиента
@@ -123,6 +122,13 @@ namespace ServiceSaleMachine.Client
                     {
                         // аппарат временно не работает
                         result = (FormResultData)FormManager.OpenForm<FormTemporallyNoWork>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                        if (result.stage == WorkerStateStage.DropCassettteBill)
+                        {
+                            // выемка денег
+                            result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+                        }
+
                         continue;
                     }
                     else if (result.stage == WorkerStateStage.ChooseService)
@@ -170,26 +176,6 @@ namespace ServiceSaleMachine.Client
                             continue;
                         }
                     }
-                    else if (result.stage == WorkerStateStage.NeedService)
-                    {
-                        // необходимо обслуживание
-                        result = (FormResultData)FormManager.OpenForm<FormNeedService>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-
-                        if (result.stage == WorkerStateStage.EndNeedService)
-                        {
-                            continue;
-                        }
-                        else if (result.stage == WorkerStateStage.DropCassettteBill)
-                        {
-                            // выемка денег
-                            result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-
-                            if (result.stage == WorkerStateStage.EndDropCassette)
-                            {
-                                continue;
-                            }
-                        }
-                    }
                     else if (result.stage == WorkerStateStage.TimeOut)
                     {
                         // по тайм ауту вышли в рекламу
@@ -201,22 +187,6 @@ namespace ServiceSaleMachine.Client
                             result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
                             if (result.stage == WorkerStateStage.EndDropCassette)
-                            {
-                                continue;
-                            }
-                            else if (result.stage == WorkerStateStage.ExitProgram)
-                            {
-                                // выход
-                                Close();
-                                return;
-                            }
-                        }
-                        else if (result.stage == WorkerStateStage.NeedService)
-                        {
-                            // необходимо обслуживание
-                            result = (FormResultData)FormManager.OpenForm<FormNeedService>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-
-                            if (result.stage == WorkerStateStage.EndNeedService)
                             {
                                 continue;
                             }
@@ -527,13 +497,17 @@ namespace ServiceSaleMachine.Client
         /// </summary>
         private FormResultData CheckStatistic(FormResultData result)
         {
+            result.stage = WorkerStateStage.None;
+
             if (result.statistic.CountBankNote >= Globals.ClientConfiguration.Settings.MaxCountBankNote)
             {
                 // сообщим о необходимоcти изъятия денег
                 result.drivers.modem.SendSMS(Globals.ClientConfiguration.Settings.SMSMessageNeedCollect);
 
                 // Пора слать смс с необходимостью обслуживания
-                result.stage = WorkerStateStage.NeedService;
+                result.stage = WorkerStateStage.BillFull;
+
+                Program.Log.Write(LogMessageType.Error, "CHECK_STAT: необходимо изъять купюры. Предел " + Globals.ClientConfiguration.Settings.MaxCountBankNote + " сейчас " + result.statistic.CountBankNote);
             }
 
             // сообщение о ресурсе устройств
@@ -555,7 +529,23 @@ namespace ServiceSaleMachine.Client
                 result.drivers.modem.SendSMS(Globals.ClientConfiguration.Settings.SMSMessageTimeEnd);
 
                 // аппарат не работает
-                result.stage = WorkerStateStage.NeedService;
+                result.stage = WorkerStateStage.ResursEnd;
+
+                Program.Log.Write(LogMessageType.Error, "CHECK_STAT: выработали ресурс. Было установлено:" + Globals.ClientConfiguration.Settings.limitServiceTime + " проработали " + count);
+            }
+
+            // читаем состояние устройства
+            byte[] res;
+            res = result.drivers.control.GetStatusControl(Program.Log);
+
+            if (res != null)
+            {
+                if (res[0] == 0)
+                {
+                    result.stage = WorkerStateStage.ErrorControl;
+
+                    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: ошибка управляющего устройства.");
+                }
             }
 
             return result;

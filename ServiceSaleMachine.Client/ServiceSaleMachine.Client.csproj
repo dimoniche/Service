@@ -96,12 +96,6 @@
     <Compile Include="Forms\FormMoneyRecess.Designer.cs">
       <DependentUpon>FormMoneyRecess.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormNeedService.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormNeedService.Designer.cs">
-      <DependentUpon>FormNeedService.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\FormProvideService.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -212,9 +206,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormMoneyRecess.resx">
       <DependentUpon>FormMoneyRecess.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormNeedService.resx">
-      <DependentUpon>FormNeedService.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormProvideService.resx">
       <DependentUpon>FormProvideService.cs</DependentUpon>

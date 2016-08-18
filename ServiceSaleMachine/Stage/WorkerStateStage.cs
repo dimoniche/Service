@@ -148,5 +148,25 @@ namespace ServiceSaleMachine
         /// Показ философии проекта
         /// </summary>
         Philosof,
+
+        /// <summary>
+        /// приемник полон деньгами
+        /// </summary>
+        BillFull,
+
+        /// <summary>
+        /// Выработан установленный ресурс
+        /// </summary>
+        ResursEnd,
+
+        /// <summary>
+        /// Ошибка купюроприемника
+        /// </summary>
+        ErrorBill,
+
+        /// <summary>
+        /// Купюроприемник обслужили
+        /// </summary>
+        EndBillFull,
     }
 }

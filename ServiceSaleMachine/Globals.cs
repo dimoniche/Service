@@ -25,8 +25,12 @@ namespace ServiceSaleMachine
         public static DesignConfiguration DesignConfiguration { get; private set; }
         public static DBConfiguration DbConfiguration { get; private set; }
         public static CheckConfiguration CheckConfiguration { get; private set; }
-
         public static RegistrySettings RegistrySettings { get; private set; }
+
+        /// <summary>
+        /// период опроса управляющего устройства
+        /// </summary>
+        public static int IntervalCheckControl { get; set; }
 
         // Сообщения об ошибках
         public const string ErrorMessageRegistryDontRead = "Не удалось прочитать реестр.";
@@ -50,6 +54,8 @@ namespace ServiceSaleMachine
             CheckConfiguration = new CheckConfiguration();
             UserConfiguration = new UserConfiguration();
             DbConfiguration = new DBConfiguration();
+
+            IntervalCheckControl = 1000;
         }
 
         public static string GetProcessFileName(bool extension)

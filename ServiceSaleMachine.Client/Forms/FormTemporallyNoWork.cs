@@ -11,6 +11,8 @@ namespace ServiceSaleMachine.Client
     {
         FormResultData data;
 
+        private bool fileLoaded = false;
+
         public FormTemporallyNoWork()
         {
             InitializeComponent();
@@ -27,6 +29,26 @@ namespace ServiceSaleMachine.Client
             }
 
             data.drivers.ReceivedResponse += reciveResponse;
+
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pictureError, Globals.DesignConfiguration.Settings.ButtonFail);
+
+            // список ошибок
+            if (data.stage == WorkerStateStage.BillFull)
+            {
+                error.Text = "Ошибка E010";
+            }
+            else if (data.stage == WorkerStateStage.ErrorBill)
+            {
+                error.Text = "Ошибка E020";
+            }
+            else if (data.stage == WorkerStateStage.ResursEnd)
+            {
+                error.Text = "Ошибка E030";
+            }
+            else if (data.stage == WorkerStateStage.ErrorControl)
+            {
+                error.Text = "Ошибка E040";
+            }
         }
 
         private void reciveResponse(object sender, ServiceClientResponseEventArgs e)
@@ -51,18 +73,36 @@ namespace ServiceSaleMachine.Client
                 case DeviceEvent.BillAcceptorError:
 
                     break;
+                default:
+                    // другие события
+                    if (!((string)e.Message.Content).Contains("Drop Cassette out of position")
+                     || !((string)e.Message.Content).Contains("Drop Cassette Full"))
+                    {
+                        // не выемка
+                        data.stage = WorkerStateStage.EndBillFull;
+                        this.Close();
+                    }
+
+                    break;
             }
         }
 
         private void timer1_Tick(object sender, System.EventArgs e)
         {
+            if (!fileLoaded)
+            {
+                MessageText.LoadFile(Globals.GetPath(PathEnum.Text) + "\\ErrorText.rtf");
+                fileLoaded = true;
+                timer1.Interval = Globals.IntervalCheckControl;
+            }
+
             // читаем состояние устройства
             byte[] res;
-            res = data.drivers.control.GetStatusControl();
+            res = data.drivers.control.GetStatusControl(data.log);
 
             if (res != null)
             {
-                if (res[0] == 0)
+                if (res[0] > 0)
                 {
                     data.stage = WorkerStateStage.ErrorEndControl;
                     this.Close();
@@ -72,6 +112,11 @@ namespace ServiceSaleMachine.Client
 
         private void FormTemporallyNoWork_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
         {
+            if (data.stage == WorkerStateStage.ErrorEndControl)
+            {
+                data.log.Write(LogMessageType.Error, "CHECK_STAT: управляющее устройство работает нормально");
+            }
+
             timer1.Enabled = false;
             Params.Result = data;
             data.drivers.ReceivedResponse -= reciveResponse;
@@ -81,7 +126,7 @@ namespace ServiceSaleMachine.Client
         {
             if (e.Alt & e.KeyCode == Keys.F4)
             {
-                data.stage = WorkerStateStage.ExitProgram;
+                //data.stage = WorkerStateStage.ExitProgram;
             }
         }
     }

@@ -48,7 +48,7 @@ namespace ServiceSaleMachine.Client
             AmountServiceText.ForeColor = System.Drawing.Color.Red;
             SecondMessageText.Text = "";
 
-            LabelNameService2.Text = Globals.ClientConfiguration.Settings.services[data.numberService].caption.ToLower();
+            LabelNameService2.Text = Globals.ClientConfiguration.Settings.services[data.numberService].caption;
 
             TextPayBill.LoadFile(Globals.GetPath(PathEnum.Text) + "\\WaitPayBill.rtf");
 

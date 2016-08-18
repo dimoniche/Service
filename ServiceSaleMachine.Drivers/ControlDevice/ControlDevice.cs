@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.IO.Ports;
-using System.Linq;
-using System.Text;
 using System.Threading;
 
 namespace ServiceSaleMachine.Drivers
@@ -162,7 +158,7 @@ namespace ServiceSaleMachine.Drivers
         /// Пролучение статуса устройств
         /// </summary>
         /// <returns></returns>
-        public byte[] GetStatusControl()
+        public byte[] GetStatusControl(Log log = null)
         {
             if (Globals.ClientConfiguration.Settings.offControl == 1) return null;
 
@@ -174,10 +170,20 @@ namespace ServiceSaleMachine.Drivers
             buf[1] = (byte)(0xFF - buf[0]);
             this.Send(buf, 2);
 
+            if (log != null)
+            {
+                log.Write(LogMessageType.Error, "CONTROL: Transmit: " + buf[0].ToString("X") + " " + buf[1].ToString("X"));
+            }
+
             int val = 0;
             if (this.Recieve(BufIn, 3, out val) == false)
             {
                 return null;
+            }
+
+            if(log != null)
+            {
+                log.Write(LogMessageType.Error, "CONTROL: Data: " + BufIn[0].ToString("X") + " " + BufIn[1].ToString("X") + " " + BufIn[2].ToString("X") + " ");
             }
 
             // состояние 

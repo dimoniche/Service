@@ -21,6 +21,7 @@ namespace ServiceSaleMachine.Client
             }
 
             data.drivers.ReceivedResponse += reciveResponse;
+            timer1.Enabled = true;
         }
 
         private void reciveResponse(object sender, ServiceClientResponseEventArgs e)
@@ -63,6 +64,7 @@ namespace ServiceSaleMachine.Client
         {
             Params.Result = data;
             data.drivers.ReceivedResponse -= reciveResponse;
+            timer1.Enabled = false;
         }
 
         //private void MediaPlayer_ClickEvent(object sender, AxWMPLib._WMPOCXEvents_ClickEvent e)
@@ -82,7 +84,7 @@ namespace ServiceSaleMachine.Client
         {
             // читаем состояние устройства
             byte[] res;
-            res = data.drivers.control.GetStatusControl();
+            res = data.drivers.control.GetStatusControl(data.log);
 
             if (res != null)
             {

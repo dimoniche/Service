@@ -62,7 +62,7 @@ namespace ServiceSaleMachine.Client
         /// <summary>
         /// Глобальный лог приложения
         /// </summary>
-        Log log;
+        public Log log;
 
         public FormResultData(Log log)
         {

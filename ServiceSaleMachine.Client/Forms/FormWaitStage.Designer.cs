@@ -59,6 +59,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 600);
             this.tableLayoutPanel1.TabIndex = 0;
+            this.tableLayoutPanel1.Click += new System.EventHandler(this.FormWaitStage_Click);
             // 
             // panel1
             // 
@@ -96,6 +97,7 @@
             this.TextWaitClient.Size = new System.Drawing.Size(468, 528);
             this.TextWaitClient.TabIndex = 0;
             this.TextWaitClient.Text = "";
+            this.TextWaitClient.Click += new System.EventHandler(this.FormWaitStage_Click);
             this.TextWaitClient.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormWaitStage_KeyDown);
             // 
             // FormWaitStage

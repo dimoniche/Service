@@ -49,6 +49,10 @@ namespace ServiceSaleMachine.Client
                 Log.AllowWriteThreadId = true;
                 Log.AllowWriteThread = true;
             }
+            else
+            {
+                Log.MinMessageType = LogMessageTypeEnum.Debug;
+            }
 
             FormManager.CatchError += FormManager_CatchError;
 

@@ -137,6 +137,9 @@ namespace ServiceSaleMachine.Drivers
             buf[0] = (byte)(controlNumber * 2 - 1);
             buf[1] = (byte)(0xFF - buf[0]);
             this.Send(buf, 2);
+
+            // нужна задержка - устройство видимо не успевает
+            Thread.Sleep(50);
         }
 
         /// <summary>
@@ -152,6 +155,9 @@ namespace ServiceSaleMachine.Drivers
             buf[0] = (byte)(controlNumber * 2);
             buf[1] = (byte)(0xFF - buf[0]);
             this.Send(buf, 2);
+
+            // нужна задержка - устройство видимо не успевает
+            Thread.Sleep(50);
         }
 
         /// <summary>
@@ -168,23 +174,38 @@ namespace ServiceSaleMachine.Drivers
 
             buf[0] = (byte)0x0F;
             buf[1] = (byte)(0xFF - buf[0]);
-            this.Send(buf, 2);
 
-            if (log != null)
-            {
-                log.Write(LogMessageType.Error, "CONTROL: Transmit: " + buf[0].ToString("X") + " " + buf[1].ToString("X"));
-            }
+            int Count = 0;
 
-            int val = 0;
-            if (this.Recieve(BufIn, 3, out val) == false)
+            do
             {
-                return null;
-            }
+                this.Send(buf, 2);
 
-            if(log != null)
-            {
-                log.Write(LogMessageType.Error, "CONTROL: Data: " + BufIn[0].ToString("X") + " " + BufIn[1].ToString("X") + " " + BufIn[2].ToString("X") + " ");
-            }
+                if (log != null)
+                {
+                    log.Write(LogMessageType.Information, "CONTROL: Transmit: " + buf[0].ToString("X") + " " + buf[1].ToString("X"));
+                }
+
+                int val = 0;
+                if (this.Recieve(BufIn, 3, out val) == false)
+                {
+                    return null;
+                }
+
+                if (log != null)
+                {
+                    log.Write(LogMessageType.Information, "CONTROL: Data: " + BufIn[0].ToString("X") + " " + BufIn[1].ToString("X") + " " + BufIn[2].ToString("X") + " ");
+                }
+
+                Count++;
+
+                // проверим КС и количество попыток
+                if ((BufIn[2] == ((0xFF - BufIn[0] - BufIn[1]) & 0xff)) || (Count > 3)) break;
+
+                // нужна задержка - устройство видимо не успевает
+                Thread.Sleep(50);
+
+            } while (true);
 
             // состояние 
             res[0] = BufIn[1];

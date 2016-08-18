@@ -10,6 +10,8 @@ namespace ServiceSaleMachine.Client
     {
         FormResultData data;
 
+        private bool fileLoaded = false;
+
         public override void LoadData()
         {
             foreach (object obj in Params.Objects.Where(obj => obj != null))
@@ -67,11 +69,6 @@ namespace ServiceSaleMachine.Client
             timer1.Enabled = false;
         }
 
-        //private void MediaPlayer_ClickEvent(object sender, AxWMPLib._WMPOCXEvents_ClickEvent e)
-        //{
-        //    this.Close();
-        //}
-
         private void FormWaitStage_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Alt & e.KeyCode == Keys.F4)
@@ -82,6 +79,13 @@ namespace ServiceSaleMachine.Client
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            if (!fileLoaded)
+            {
+                TextWaitClient.LoadFile(Globals.GetPath(PathEnum.Text) + "\\WaitClient.rtf");
+                fileLoaded = true;
+                timer1.Interval = Globals.IntervalCheckControl;
+            }
+
             // читаем состояние устройства
             byte[] res;
             res = data.drivers.control.GetStatusControl(data.log);

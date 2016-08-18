@@ -99,8 +99,6 @@ namespace ServiceSaleMachine.Client
                     // Проверка статистических данных - может пора заканчивать работать
                     result = CheckStatistic(result);
 
-                    //result.stage = WorkerStateStage.ErrorControl;
-
                     if (result.stage != WorkerStateStage.None)
                     {
                         // аппарат не работает

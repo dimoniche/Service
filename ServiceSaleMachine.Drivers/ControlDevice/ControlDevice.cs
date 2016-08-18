@@ -181,6 +181,9 @@ namespace ServiceSaleMachine.Drivers
             {
                 this.Send(buf, 2);
 
+                // нужна задержка - устройство видимо не успевает
+                Thread.Sleep(50);
+
                 if (log != null)
                 {
                     log.Write(LogMessageType.Information, "CONTROL: Transmit: " + buf[0].ToString("X") + " " + buf[1].ToString("X"));

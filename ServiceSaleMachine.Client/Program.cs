@@ -51,7 +51,7 @@ namespace ServiceSaleMachine.Client
             }
             else
             {
-                Log.MinMessageType = LogMessageTypeEnum.Debug;
+                //Log.MinMessageType = LogMessageTypeEnum.Debug;
             }
 
             FormManager.CatchError += FormManager_CatchError;

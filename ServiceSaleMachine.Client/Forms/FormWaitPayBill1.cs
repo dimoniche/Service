@@ -123,6 +123,8 @@ namespace ServiceSaleMachine.Client
                         {
                             data.drivers.CCNETDriver.ReturnBill();
                         }
+
+                        SecondMessageText.Text = "Внесите купюру другого номинала.";
                         return;
                     }
 

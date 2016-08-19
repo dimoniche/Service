@@ -49,7 +49,7 @@ namespace ServiceSaleMachine.Drivers
                 serialPort.Handshake = Handshake.None;
                 serialPort.NewLine = "\r\n"; // Пусть пока будет "\r\n".
                 serialPort.DtrEnable = true;
-                serialPort.ReadTimeout = 1000;
+                serialPort.ReadTimeout = 5000;
 
                 try
                 {
@@ -118,7 +118,7 @@ namespace ServiceSaleMachine.Drivers
                 count = serialPort.Read(Buffer, 0, Length);
                 return true;
             }
-            catch
+            catch(Exception ex)
             {
                 count = 0;
                 return false;
@@ -294,13 +294,13 @@ namespace ServiceSaleMachine.Drivers
             return str;
         }
 
-        public bool SendSMS(string sms)
+        public bool SendSMS(string sms, Log log = null)
         {
             if (Globals.ClientConfiguration.Settings.offModem == 1) return false;
             if (Globals.ClientConfiguration.Settings.numberTelephoneSMS.Length < 7) return false;
 
             byte[] buf;
-            byte[] BufIn = new byte[20];
+            byte[] BufIn = new byte[200];
 
             sms = Translit(sms);
 
@@ -313,12 +313,14 @@ namespace ServiceSaleMachine.Drivers
             int val = 0;
             if (Recieve(BufIn, 20, out val) == false)
             {
+                if(log != null) log.Write(LogMessageType.Error, "MODEM: не послали шаг 1");
                 return false;
             }
 
             string str = System.Text.Encoding.UTF8.GetString(BufIn);
             if (!str.Contains("OK"))
             {
+                if (log != null) log.Write(LogMessageType.Error, "MODEM: не приняли шаг 1: " + str);
                 return false;
             }
 
@@ -327,14 +329,17 @@ namespace ServiceSaleMachine.Drivers
 
             Thread.Sleep(500);
 
-            if (Recieve(BufIn, 20, out val) == false)
+            if (Recieve(BufIn, 200, out val) == false)
             {
+                if (log != null) log.Write(LogMessageType.Error, "MODEM: не послали шаг 2");
                 return false;
             }
 
+            str = "";
             str = System.Text.Encoding.UTF8.GetString(BufIn);
             if (!str.Contains(">") && !str.Contains("OK"))
             {
+                if (log != null) log.Write(LogMessageType.Error, "MODEM: не приняли шаг 2: " + str);
                 return false;
             }
 
@@ -345,12 +350,15 @@ namespace ServiceSaleMachine.Drivers
 
             if (Recieve(BufIn, 20, out val) == false)
             {
+                if (log != null) log.Write(LogMessageType.Error, "MODEM: не послали шаг 3");
                 return false;
             }
 
+            str = "";
             str = System.Text.Encoding.UTF8.GetString(BufIn);
             if (!str.Contains(">") && !str.Contains("OK"))
             {
+                if (log != null) log.Write(LogMessageType.Error, "MODEM: не приняли шаг 3: " + str);
                 return false;
             }
 

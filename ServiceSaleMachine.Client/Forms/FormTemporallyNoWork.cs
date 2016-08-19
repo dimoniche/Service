@@ -75,15 +75,30 @@ namespace ServiceSaleMachine.Client
                     break;
                 default:
                     // другие события
-                    if (!((string)e.Message.Content).Contains("Drop Cassette out of position")
-                     || !((string)e.Message.Content).Contains("Drop Cassette Full"))
+                    if (data.stage == WorkerStateStage.BillFull)
                     {
-                        // не выемка
-                        data.stage = WorkerStateStage.EndBillFull;
-                        this.Close();
+                        // только если вошли сюда с полным баком денег
+                        if (!((string)e.Message.Content).Contains("Drop Cassette out of position")
+                        || !((string)e.Message.Content).Contains("Drop Cassette Full"))
+                        {
+                            // не выемка
+                            data.stage = WorkerStateStage.EndBillFull;
+                            this.Close();
+                        }
                     }
+                    else if (data.stage == WorkerStateStage.ErrorBill)
+                    {
 
-                    break;
+                    }
+                    else if (data.stage == WorkerStateStage.ResursEnd)
+                    {
+
+                    }
+                    else if (data.stage == WorkerStateStage.ErrorControl)
+                    {
+
+                    }
+                        break;
             }
         }
 

@@ -628,6 +628,7 @@ namespace ServiceSaleMachine.Client
 
             textNumberPhone.Text = Globals.ClientConfiguration.Settings.numberTelephoneSMS;
             textSMSTimeEnd.Text = Globals.ClientConfiguration.Settings.SMSMessageTimeEnd;
+            textNeedCollect.Text = Globals.ClientConfiguration.Settings.SMSMessageNeedCollect;
 
             firmsname.Text = Globals.CheckConfiguration.Settings.firmsname;
             secondfirmsname.Text = Globals.CheckConfiguration.Settings.secondfirmsname;
@@ -1337,9 +1338,11 @@ namespace ServiceSaleMachine.Client
 
         private void butsendsms_Click(object sender, EventArgs e)
         {
+            butsendsms.Enabled = false;
+
             resSMS.Text = "Сообщение отправляется";
 
-            if (data.drivers.modem.SendSMS(Globals.ClientConfiguration.Settings.SMSMessageTimeEnd))
+            if (data.drivers.modem.SendSMS(Globals.ClientConfiguration.Settings.SMSMessageTimeEnd,data.log))
             {
                 resSMS.Text = "Сообщение отправлено";
             }
@@ -1347,6 +1350,8 @@ namespace ServiceSaleMachine.Client
             {
                 resSMS.Text = "Сообщение не отправлено";
             }
+
+            butsendsms.Enabled = true;
 
             //data.drivers.modem.SendSMSRus(Globals.ClientConfiguration.Settings.SMSMessageTimeEnd);
         }

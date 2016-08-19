@@ -500,7 +500,7 @@ namespace ServiceSaleMachine.Client
             if (result.statistic.CountBankNote >= Globals.ClientConfiguration.Settings.MaxCountBankNote)
             {
                 // сообщим о необходимоcти изъятия денег
-                result.drivers.modem.SendSMS(Globals.ClientConfiguration.Settings.SMSMessageNeedCollect);
+                result.drivers.modem.SendSMS(Globals.ClientConfiguration.Settings.SMSMessageNeedCollect,result.log);
 
                 // Пора слать смс с необходимостью обслуживания
                 result.stage = WorkerStateStage.BillFull;
@@ -524,7 +524,7 @@ namespace ServiceSaleMachine.Client
             if (count >= Globals.ClientConfiguration.Settings.limitServiceTime)
             {
                 // ресурс выработали - сообщим об этом
-                result.drivers.modem.SendSMS(Globals.ClientConfiguration.Settings.SMSMessageTimeEnd);
+                result.drivers.modem.SendSMS(Globals.ClientConfiguration.Settings.SMSMessageTimeEnd, result.log);
 
                 // аппарат не работает
                 result.stage = WorkerStateStage.ResursEnd;

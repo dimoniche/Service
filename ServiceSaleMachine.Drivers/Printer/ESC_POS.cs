@@ -89,6 +89,7 @@ namespace ServiceSaleMachine.Drivers
                 index++;
             }
 
+            if (index == PrinterSettings.InstalledPrinters.Count) return -1;
 
             return index;
         }
@@ -200,7 +201,8 @@ namespace ServiceSaleMachine.Drivers
         public void PrintBody(Service serv)
         {
             Print(TransformCode(Globals.CheckConfiguration.Settings.PreviouslyService) + " " + TransformCode(serv.caption),true);
-            Print(" ".PadRight(42 - 3 - serv.caption.Length - serv.price.ToString().Length, ' ') + serv.price.ToString("#.00"));
+            Print(eLeft);
+            Print(" ".PadRight(42 - serv.price.ToString().Length, ' ') + serv.price.ToString("#.00"));
 
             PrintDashes();
 

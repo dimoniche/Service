@@ -54,7 +54,6 @@
     </Compile>
     <Compile Include="Common\CommonHelper.cs" />
     <Compile Include="Common\DefaultValueObject.cs" />
-    <Compile Include="Common\FormManager.cs" />
     <Compile Include="Common\UserException.cs" />
     <Compile Include="Configuration\CheckConfiguration.cs" />
     <Compile Include="Configuration\CheckConfigurationProperties.cs" />

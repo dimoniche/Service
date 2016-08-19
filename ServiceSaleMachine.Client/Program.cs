@@ -119,12 +119,12 @@ namespace ServiceSaleMachine.Client
             try
             {
                 Form parentForm = null;
-                if (MyFormManager.MainForm != null && !MyFormManager.MainForm.IsDisposed)
+                if (FormManager.MainForm != null && !FormManager.MainForm.IsDisposed)
                     parentForm = FormManager.MainForm;
 
                 if (ex.IsAssignableTo(typeof(UserException)))
                 {
-                    MessageBox.Show(parentForm, ex.Message, MyFormManager.AppCaptionName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(parentForm, ex.Message, FormManager.AppCaptionName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {

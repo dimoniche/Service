@@ -202,7 +202,7 @@ namespace ServiceSaleMachine.Drivers
         {
             Print(TransformCode(Globals.CheckConfiguration.Settings.PreviouslyService) + " " + TransformCode(serv.caption),true);
             Print(eLeft);
-            Print(" ".PadRight(42 - serv.price.ToString().Length, ' ') + serv.price.ToString("#.00"));
+            Print(" ".PadRight(42 - 3 - serv.price.ToString().Length, ' ') + serv.price.ToString("#.00"));
 
             PrintDashes();
 

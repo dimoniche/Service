@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using ServiceSaleMachine.Drivers;
 using static ServiceSaleMachine.Drivers.MachineDrivers;
+using System.Drawing.Imaging;
 
 namespace ServiceSaleMachine.Client
 {
@@ -31,6 +32,7 @@ namespace ServiceSaleMachine.Client
             }
         }
 
+        private GifImage gifImage = null;
         public override void LoadData()
         {
             foreach (object obj in Params.Objects.Where(obj => obj != null))
@@ -41,7 +43,10 @@ namespace ServiceSaleMachine.Client
                 }
             }
 
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxGiveOxigen, Globals.DesignConfiguration.Settings.ButtonGetOxigen);
+            gifImage = new GifImage(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonGetOxigen);
+            gifImage.ReverseAtEnd = false; //dont reverse at end
+
+            //Globals.DesignConfiguration.Settings.LoadPictureBox(pBxGiveOxigen, Globals.DesignConfiguration.Settings.ButtonGetOxigen);
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxReturnBack, Globals.DesignConfiguration.Settings.ButtonRetToMain);
 
             AmountServiceText.Text = "Внесено: 0 руб.";
@@ -358,6 +363,11 @@ namespace ServiceSaleMachine.Client
             {
                 data.stage = WorkerStateStage.ExitProgram;
             }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            pBxGiveOxigen.Image = gifImage.GetNextFrame();
         }
     }
 }

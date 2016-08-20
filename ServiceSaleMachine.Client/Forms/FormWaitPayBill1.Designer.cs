@@ -61,6 +61,7 @@
             this.panel12 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
             this.SecondMessageText = new ServiceSaleMachine.ScalableLabel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -199,9 +200,9 @@
             // 
             this.LabelNameService1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LabelNameService1.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.LabelNameService1.Location = new System.Drawing.Point(189, 0);
+            this.LabelNameService1.Location = new System.Drawing.Point(189, 3);
             this.LabelNameService1.Name = "LabelNameService1";
-            this.LabelNameService1.Size = new System.Drawing.Size(242, 35);
+            this.LabelNameService1.Size = new System.Drawing.Size(242, 29);
             this.LabelNameService1.TabIndex = 0;
             this.LabelNameService1.Text = "Дыхательная смесь";
             this.LabelNameService1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LabelNameService1_KeyDown);
@@ -234,9 +235,9 @@
             // 
             this.LabelNameService2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LabelNameService2.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.LabelNameService2.Location = new System.Drawing.Point(189, 0);
+            this.LabelNameService2.Location = new System.Drawing.Point(189, 3);
             this.LabelNameService2.Name = "LabelNameService2";
-            this.LabelNameService2.Size = new System.Drawing.Size(242, 36);
+            this.LabelNameService2.Size = new System.Drawing.Size(242, 30);
             this.LabelNameService2.TabIndex = 0;
             this.LabelNameService2.Text = "после тренировки";
             // 
@@ -380,7 +381,6 @@
             this.pBxGiveOxigen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pBxGiveOxigen.TabIndex = 0;
             this.pBxGiveOxigen.TabStop = false;
-            this.pBxGiveOxigen.Click += new System.EventHandler(this.pBxGiveOxigen_Click);
             // 
             // panel6
             // 
@@ -454,12 +454,18 @@
             // 
             this.SecondMessageText.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SecondMessageText.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.SecondMessageText.Location = new System.Drawing.Point(128, 0);
+            this.SecondMessageText.Location = new System.Drawing.Point(128, 3);
             this.SecondMessageText.Name = "SecondMessageText";
-            this.SecondMessageText.Size = new System.Drawing.Size(370, 38);
+            this.SecondMessageText.Size = new System.Drawing.Size(370, 32);
             this.SecondMessageText.TabIndex = 0;
             this.SecondMessageText.Text = "Внесите купюру меньшего номинала.";
             this.SecondMessageText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LabelNameService1_KeyDown);
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 50;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // FormWaitPayBill1
             // 
@@ -530,7 +536,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
         private System.Windows.Forms.Panel panel14;
-        private System.Windows.Forms.PictureBox pBxGiveOxigen;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
         private System.Windows.Forms.Panel panel15;
         private System.Windows.Forms.PictureBox pBxReturnBack;
@@ -538,5 +543,7 @@
         private System.Windows.Forms.Panel panel12;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel10;
         private ScalableLabel SecondMessageText;
+        private System.Windows.Forms.PictureBox pBxGiveOxigen;
+        private System.Windows.Forms.Timer timer1;
     }
 }

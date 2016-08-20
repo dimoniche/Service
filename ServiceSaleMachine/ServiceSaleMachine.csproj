@@ -126,6 +126,7 @@
     <Compile Include="Thread\ThreadProgressChangedEventArgs.cs" />
     <Compile Include="Thread\ThreadWorkEventArgs.cs" />
     <Compile Include="Users\UserRole.cs" />
+    <Compile Include="Utils\GifImage.cs" />
     <Compile Include="Utils\SerialPortHelper.cs" />
     <Compile Include="Utils\DirectoryHelper.cs" />
     <Compile Include="Utils\FileHelper.cs" />

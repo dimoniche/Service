@@ -44,7 +44,7 @@ namespace ServiceSaleMachine.Client
             }
 
             gifImage = new GifImage(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonGetOxigen);
-            //gifImage.ReverseAtEnd = false; //dont reverse at end
+            gifImage.ReverseAtEnd = false; //dont reverse at end
 
             //Globals.DesignConfiguration.Settings.LoadPictureBox(pBxGiveOxigen, Globals.DesignConfiguration.Settings.ButtonGetOxigen);
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxReturnBack, Globals.DesignConfiguration.Settings.ButtonRetToMain);
@@ -368,7 +368,7 @@ namespace ServiceSaleMachine.Client
         private void timer1_Tick(object sender, EventArgs e)
         {
             pBxGiveOxigen.Image = gifImage.GetNextFrame();
-            timer1.Enabled = false;
+            //timer1.Enabled = false;
         }
     }
 }

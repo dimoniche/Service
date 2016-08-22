@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
+using ServiceSaleMachine.Drivers;
+using static ServiceSaleMachine.Drivers.MachineDrivers;
 
 namespace ServiceSaleMachine.Client
 {
@@ -56,8 +58,11 @@ namespace ServiceSaleMachine.Client
             if (Globals.admin)
             {
                 result.drivers.InitAllDevice();
+                SaleThread.Sleep(100);
                 result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-              //  drivers.StopAllDevice();
+
+                // местный обработчик
+                result.drivers.ReceivedResponse += reciveResponse;
             }
 
             initDevice:
@@ -74,6 +79,7 @@ namespace ServiceSaleMachine.Client
                         break;
                     case WorkerStateStage.NeedSettingProgram:
                         {
+                            SaleThread.Sleep(100);
                             result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
                             if (Globals.ClientConfiguration.Settings.offHardware == 0)
                             {
@@ -92,6 +98,9 @@ namespace ServiceSaleMachine.Client
             {
                 try
                 {
+                    // местный обработчик
+                    result.drivers.ReceivedResponse += reciveResponse;
+
                     // забудем пользователя
                     result.CurrentUserId = 0;
                     result.stage = WorkerStateStage.None;
@@ -487,6 +496,15 @@ namespace ServiceSaleMachine.Client
                 {
                     // вернемся к исходной позиции - какая то ошибка
                 }
+            }
+        }
+
+        private void reciveResponse(object sender, ServiceClientResponseEventArgs e)
+        {
+            if (InvokeRequired)
+            {
+                BeginInvoke(new ServiceClientResponseEventHandler(reciveResponse), sender, e);
+                return;
             }
         }
 

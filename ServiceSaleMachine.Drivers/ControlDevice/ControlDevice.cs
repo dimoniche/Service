@@ -48,7 +48,7 @@ namespace ServiceSaleMachine.Drivers
                 serialPort.Handshake = Handshake.None;
                 serialPort.NewLine = "\r\n"; // Пусть пока будет "\r\n".
                 serialPort.DtrEnable = true;
-                serialPort.ReadTimeout = 3000;
+                serialPort.ReadTimeout = 1000;
                 try
                 {
                     serialPort.Open();

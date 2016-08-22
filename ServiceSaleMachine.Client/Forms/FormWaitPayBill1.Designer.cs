@@ -381,6 +381,7 @@
             this.pBxGiveOxigen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pBxGiveOxigen.TabIndex = 0;
             this.pBxGiveOxigen.TabStop = false;
+            this.pBxGiveOxigen.Click += new System.EventHandler(this.pBxGiveOxigen_Click);
             // 
             // panel6
             // 

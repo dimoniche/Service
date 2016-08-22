@@ -48,6 +48,8 @@ namespace ServiceSaleMachine.Client
             ClearFilesTask = new ClearFilesControlServiceTask(Program.Log);
 
             result = new FormResultData(Program.Log);
+            // инициализируем задачи
+            result.drivers.InitAllTask();
         }
 
         /// <summary>
@@ -58,7 +60,6 @@ namespace ServiceSaleMachine.Client
             if (Globals.admin)
             {
                 result.drivers.InitAllDevice();
-                SaleThread.Sleep(100);
                 result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
                 // местный обработчик
@@ -79,7 +80,6 @@ namespace ServiceSaleMachine.Client
                         break;
                     case WorkerStateStage.NeedSettingProgram:
                         {
-                            SaleThread.Sleep(100);
                             result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
                             if (Globals.ClientConfiguration.Settings.offHardware == 0)
                             {

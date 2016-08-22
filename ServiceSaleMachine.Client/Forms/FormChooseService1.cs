@@ -1,6 +1,9 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using ServiceSaleMachine.Drivers;
+using static ServiceSaleMachine.Drivers.MachineDrivers;
 
 namespace ServiceSaleMachine.Client
 {
@@ -32,6 +35,38 @@ namespace ServiceSaleMachine.Client
                     data = (FormResultData)obj;
                 }
             }
+
+            data.drivers.ReceivedResponse += reciveResponse;
+        }
+
+        private void reciveResponse(object sender, ServiceClientResponseEventArgs e)
+        {
+            if (InvokeRequired)
+            {
+                BeginInvoke(new ServiceClientResponseEventHandler(reciveResponse), sender, e);
+                return;
+            }
+
+            if (data.log != null)
+            {
+                data.log.Write(LogMessageType.Information, "CHOOSE SERVICE: Событие: " + e.Message.Content + ".");
+            }
+
+            switch (e.Message.Event)
+            {
+                case DeviceEvent.DropCassetteBillAcceptor:
+                    {
+                        data.stage = WorkerStateStage.DropCassettteBill;
+                        this.Close();
+                    }
+                    break;
+                case DeviceEvent.DropCassetteFullBillAcceptor:
+
+                    break;
+                case DeviceEvent.BillAcceptorError:
+
+                    break;
+            }
         }
 
         private void TimeOutTimer_Tick(object sender, System.EventArgs e)
@@ -54,6 +89,7 @@ namespace ServiceSaleMachine.Client
         private void FormChooseService1_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
         {
             TimeOutTimer.Enabled = false;
+            data.drivers.ReceivedResponse -= reciveResponse;
             Params.Result = data;
         }
 

@@ -64,6 +64,7 @@ namespace ServiceSaleMachine.Client
             {
                 // перейдем в режим ожидания купюр
                 data.drivers.CCNETDriver.WaitBillEscrow();
+                data.log.Write(LogMessageType.Information, "WAIT BILL: запускаем режим ожидания купюр.");
             }
         }
 
@@ -73,6 +74,11 @@ namespace ServiceSaleMachine.Client
             {
                 BeginInvoke(new ServiceClientResponseEventHandler(reciveResponse), sender, e);
                 return;
+            }
+
+            if (data.log != null)
+            {
+                data.log.Write(LogMessageType.Information, "WAIT BILL: Событие: " + e.Message.Content + ".");
             }
 
             switch (e.Message.Event)
@@ -89,6 +95,8 @@ namespace ServiceSaleMachine.Client
                 case DeviceEvent.DropCassetteBillAcceptor:
                     {
                         data.stage = WorkerStateStage.DropCassettteBill;
+                        data.log.Write(LogMessageType.Information, "WAIT BILL: Вытащили купюроприемник.");
+
                         this.Close();
                     }
                     break;
@@ -110,6 +118,8 @@ namespace ServiceSaleMachine.Client
                     if (moneyFixed) return;
                     moneyFixed = true;
 
+                    data.log.Write(LogMessageType.Information, "BILL: Обработаем получение денег");
+
                     // сбросим таймаут
                     Timeout = 0;
 
@@ -128,6 +138,8 @@ namespace ServiceSaleMachine.Client
                         {
                             data.drivers.CCNETDriver.ReturnBill();
                         }
+
+                        data.log.Write(LogMessageType.Information, "WAIT BILL: Купюру " + numberNominal + " не принимаем");
 
                         SecondMessageText.Text = "Внесите купюру другого номинала.";
                         return;
@@ -269,6 +281,9 @@ namespace ServiceSaleMachine.Client
                 }
                 catch (Exception exp)
                 {
+                    data.log.Write(LogMessageType.Error, "WAIT BILL: ошибка управляющего устройства.");
+                    data.log.Write(LogMessageType.Error, "WAIT BILL: " + exp.ToString());
+
                     moneyFixed = false;
                 }
             }
@@ -290,6 +305,8 @@ namespace ServiceSaleMachine.Client
             }
 
             Params.Result = data;
+
+            data.log.Write(LogMessageType.Information, "WAIT BILL: Выход на оказание услуги.");
         }
 
         int Timeout = 0;
@@ -342,6 +359,8 @@ namespace ServiceSaleMachine.Client
             GlobalDb.GlobalBase.SetMoneyStatistic(data.statistic);
             // заносим в базу платеж
             GlobalDb.GlobalBase.InsertMoney(data.CurrentUserId, amount);
+
+            data.log.Write(LogMessageType.Information, "WAIT BILL: Оказываем услугу.");
 
             this.Close();
         }

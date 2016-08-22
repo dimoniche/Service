@@ -112,16 +112,8 @@ namespace ServiceSaleMachine.Drivers
             return true;
         }
 
-        public WorkerStateStage InitAllDevice()
+        public void InitAllTask()
         {
-            WorkerStateStage res = WorkerStateStage.None;
-
-            if (!CheckSerialPort() && getCountSerialPort() < COUNT_DEVICE)
-            {
-                this.log.Write(LogMessageType.Error, "COM портов нет. Работа не возможна.");
-                return WorkerStateStage.NoCOMPort;
-            }
-
             if (Globals.ClientConfiguration.Settings.offCheck != 1)
             {
                 // не платим чеком - не нужен сканер
@@ -141,6 +133,17 @@ namespace ServiceSaleMachine.Drivers
                     WorkerBillPollDriver.Work += WorkerBillPollDriver_Work;
                     WorkerBillPollDriver.Complete += WorkerBillPollDriver_Complete;
                 }
+            }
+        }
+
+        public WorkerStateStage InitAllDevice()
+        {
+            WorkerStateStage res = WorkerStateStage.None;
+
+            if (!CheckSerialPort() && getCountSerialPort() < COUNT_DEVICE)
+            {
+                this.log.Write(LogMessageType.Error, "COM портов нет. Работа не возможна.");
+                return WorkerStateStage.NoCOMPort;
             }
 
             if ((Globals.ClientConfiguration.Settings.offCheck != 1 && scaner.getNumberComPort().Contains("нет"))
@@ -169,8 +172,7 @@ namespace ServiceSaleMachine.Drivers
                 else
                 {
                     // неудача
-                    this.log.Write(LogMessageType.Error, "Сканер не верно настроен. Порт не доступен.");
-                    sendMessage(DeviceEvent.NeedSettingProgram);
+                    this.log.Write(LogMessageType.Error, "Сканер не верно настроен. Порт не доступен.");                    
                     res = WorkerStateStage.NeedSettingProgram;
                 }
             }
@@ -188,34 +190,35 @@ namespace ServiceSaleMachine.Drivers
                     // настроим купюроприемник
                     if (CCNETDriver.openPort(CCNETDriver.getNumberComPort()))
                     {
+                        for (int i = 0; i < 24; i++)
+                        {
+                            CCNETDriver.bill_record[i] = new _BillRecord();
+                        }
+
                         if (CCNETDriver.restartBill().Contains("СБОЙ"))
                         {
                             // неудача
                             this.log.Write(LogMessageType.Error, "BILL: Купюроприемник не работает или не подключен.");
-                            sendMessage(DeviceEvent.NeedSettingProgram);
                             res = WorkerStateStage.NeedSettingProgram;
                         }
 
                         // запустим задачу опроса купюроприемника
                         if (!WorkerBillPollDriver.IsWork)
-                            WorkerBillPollDriver.Run();
-
-                        for (int i = 0; i < 24; i++)
                         {
-                            CCNETDriver.bill_record[i] = new _BillRecord();
+                            WorkerBillPollDriver.Run();
+                            this.log.Write(LogMessageType.Information, "BILL: Задачу Купюроприемника запустили.");
                         }
                     }
                     else
                     {
                         // неудача
                         this.log.Write(LogMessageType.Error, "BILL: Купюроприемник не верно настроен. Порт не доступен.");
-                        sendMessage(DeviceEvent.NeedSettingProgram);
                         res = WorkerStateStage.NeedSettingProgram;
                     }
                 }
                 catch (Exception exp)
                 {
-                    log.Write(LogMessageType.Error, "BILL: " + exp.ToString());
+                    log.Write(LogMessageType.Error, "BILL INIT ALL: " + exp.ToString());
                 }
             }
             else
@@ -288,6 +291,8 @@ namespace ServiceSaleMachine.Drivers
             {
                 this.log.Write(LogMessageType.Information, "MODEM: Модем отключен.");
             }
+
+            this.log.Write(LogMessageType.Information, "INIT: Оборудование полностью настроили.");
 
             return res;
         }
@@ -413,20 +418,36 @@ namespace ServiceSaleMachine.Drivers
         {
             int stepCount = 0;
 
-            // сначала загрузим массив принимаемых купюр
-            while (CCNETDriver.bill_recordIsEmpty())
+            this.log.Write(LogMessageType.Information, "BILL TASK: Запускаем задачу приемника.");
+
+            try
             {
-                CCNETDriver.GetBillTable();
+
+                // сначала загрузим массив принимаемых купюр
+                while (CCNETDriver.bill_recordIsEmpty())
+                {
+                    CCNETDriver.GetBillTable();
+                }
+
+                CCNETDriver.Cmd(CCNETCommandEnum.Information, (byte)CCNETDriver.BillAdr);
+            }
+            catch(Exception exp)
+            {
+                this.log.Write(LogMessageType.Error, "BILL TASK: Ошибка: " + exp.ToString());
             }
 
-            CCNETDriver.Cmd(CCNETCommandEnum.Information, (byte)CCNETDriver.BillAdr);
+            this.log.Write(LogMessageType.Information, "BILL TASK: Задачу приемника проинициализировали.");
 
             while (!e.Cancel)
             {
                 try
                 {
+                    //this.log.Write(LogMessageType.Information, "BILL TASK: Шаг обработчика.");
+
                     if (!CCNETDriver.send_bill_command)
                     {
+                        //this.log.Write(LogMessageType.Information, "BILL TASK: Запуск комманды опроса.");
+
                         CCNETDriver.send_bill_command = true;
                         if (CCNETDriver.hold_bill && (stepCount % 10) == 0)
                         {
@@ -444,7 +465,7 @@ namespace ServiceSaleMachine.Drivers
                             message.Event = DeviceEvent.BillAcceptor;
                             message.Content = CCNETDriver.pollStatus();
 
-                            log.Write(LogMessageType.Information, "BILL: " + message.Content);
+                            log.Write(LogMessageType.Information, "BILL TASK: " + message.Content);
 
                             ReceivedResponse(this, new ServiceClientResponseEventArgs(message));
                         }
@@ -551,7 +572,7 @@ namespace ServiceSaleMachine.Drivers
                 }
                 catch (Exception exp)
                 {
-                    log.Write(LogMessageType.Error, "BILL: " + exp.ToString());
+                    log.Write(LogMessageType.Error, "TASK BILL: " + exp.ToString());
                     CCNETDriver.send_bill_command = false;
                 }
                 finally

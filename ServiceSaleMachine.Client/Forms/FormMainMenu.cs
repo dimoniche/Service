@@ -75,6 +75,11 @@ namespace ServiceSaleMachine.Client
                 return;
             }
 
+            if (data.log != null)
+            {
+                data.log.Write(LogMessageType.Information, "MAIN MENU: Событие: " + e.Message.Content + ".");
+            }
+
             switch (e.Message.Event)
             {
                 case DeviceEvent.DropCassetteBillAcceptor:

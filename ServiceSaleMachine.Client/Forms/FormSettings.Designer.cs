@@ -67,6 +67,7 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.butWriteComPortPrinter = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
+            this.Incasbutton = new System.Windows.Forms.Button();
             this.butPrintCheck = new System.Windows.Forms.Button();
             this.butWriteBarCode = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -195,7 +196,6 @@
             this.labelTimeLastRefresh = new System.Windows.Forms.Label();
             this.labelWorkFromLastRefresh = new System.Windows.Forms.Label();
             this.buttonResetTimeRefresh = new System.Windows.Forms.Button();
-            this.Incasbutton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -659,6 +659,17 @@
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Visible = false;
             this.button9.Click += new System.EventHandler(this.button9_Click_2);
+            // 
+            // Incasbutton
+            // 
+            this.Incasbutton.Location = new System.Drawing.Point(394, 160);
+            this.Incasbutton.Name = "Incasbutton";
+            this.Incasbutton.Size = new System.Drawing.Size(138, 23);
+            this.Incasbutton.TabIndex = 40;
+            this.Incasbutton.Text = "Распечатать инкасац. чек";
+            this.Incasbutton.UseVisualStyleBackColor = true;
+            this.Incasbutton.Visible = false;
+            this.Incasbutton.Click += new System.EventHandler(this.Incasbutton_Click);
             // 
             // butPrintCheck
             // 
@@ -1999,16 +2010,6 @@
             this.buttonResetTimeRefresh.Text = "Обновить время обслуживания";
             this.buttonResetTimeRefresh.UseVisualStyleBackColor = true;
             this.buttonResetTimeRefresh.Click += new System.EventHandler(this.buttonResetTimeRefresh_Click);
-            // 
-            // Incasbutton
-            // 
-            this.Incasbutton.Location = new System.Drawing.Point(394, 160);
-            this.Incasbutton.Name = "Incasbutton";
-            this.Incasbutton.Size = new System.Drawing.Size(138, 23);
-            this.Incasbutton.TabIndex = 40;
-            this.Incasbutton.Text = "Распечатать инкасац. чек";
-            this.Incasbutton.UseVisualStyleBackColor = true;
-            this.Incasbutton.Click += new System.EventHandler(this.Incasbutton_Click);
             // 
             // FormSettings
             // 

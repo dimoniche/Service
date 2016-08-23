@@ -171,6 +171,7 @@
             this.checkBox50 = new System.Windows.Forms.CheckBox();
             this.checkBox10 = new System.Windows.Forms.CheckBox();
             this.tabPage11 = new System.Windows.Forms.TabPage();
+            this.PreviouslyName = new System.Windows.Forms.TextBox();
             this.labelCurrNumberCheck = new System.Windows.Forms.Label();
             this.resetCheckNumeration = new System.Windows.Forms.Button();
             this.advert4 = new System.Windows.Forms.TextBox();
@@ -194,7 +195,7 @@
             this.labelTimeLastRefresh = new System.Windows.Forms.Label();
             this.labelWorkFromLastRefresh = new System.Windows.Forms.Label();
             this.buttonResetTimeRefresh = new System.Windows.Forms.Button();
-            this.PreviouslyName = new System.Windows.Forms.TextBox();
+            this.Incasbutton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -624,6 +625,7 @@
             // 
             this.tabPage4.Controls.Add(this.butWriteComPortPrinter);
             this.tabPage4.Controls.Add(this.button9);
+            this.tabPage4.Controls.Add(this.Incasbutton);
             this.tabPage4.Controls.Add(this.butPrintCheck);
             this.tabPage4.Controls.Add(this.butWriteBarCode);
             this.tabPage4.Controls.Add(this.textBox2);
@@ -1762,6 +1764,14 @@
             this.tabPage11.Text = "Содержание чека";
             this.tabPage11.UseVisualStyleBackColor = true;
             // 
+            // PreviouslyName
+            // 
+            this.PreviouslyName.Location = new System.Drawing.Point(76, 182);
+            this.PreviouslyName.Name = "PreviouslyName";
+            this.PreviouslyName.Size = new System.Drawing.Size(157, 20);
+            this.PreviouslyName.TabIndex = 4;
+            this.PreviouslyName.Leave += new System.EventHandler(this.PreviouslyName_Leave);
+            // 
             // labelCurrNumberCheck
             // 
             this.labelCurrNumberCheck.AutoSize = true;
@@ -1990,13 +2000,15 @@
             this.buttonResetTimeRefresh.UseVisualStyleBackColor = true;
             this.buttonResetTimeRefresh.Click += new System.EventHandler(this.buttonResetTimeRefresh_Click);
             // 
-            // PreviouslyName
+            // Incasbutton
             // 
-            this.PreviouslyName.Location = new System.Drawing.Point(76, 182);
-            this.PreviouslyName.Name = "PreviouslyName";
-            this.PreviouslyName.Size = new System.Drawing.Size(157, 20);
-            this.PreviouslyName.TabIndex = 4;
-            this.PreviouslyName.Leave += new System.EventHandler(this.PreviouslyName_Leave);
+            this.Incasbutton.Location = new System.Drawing.Point(394, 160);
+            this.Incasbutton.Name = "Incasbutton";
+            this.Incasbutton.Size = new System.Drawing.Size(138, 23);
+            this.Incasbutton.TabIndex = 40;
+            this.Incasbutton.Text = "Распечатать инкасац. чек";
+            this.Incasbutton.UseVisualStyleBackColor = true;
+            this.Incasbutton.Click += new System.EventHandler(this.Incasbutton_Click);
             // 
             // FormSettings
             // 
@@ -2231,5 +2243,6 @@
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.TextBox edtBDname;
         private System.Windows.Forms.TextBox PreviouslyName;
+        private System.Windows.Forms.Button Incasbutton;
     }
 }

@@ -1502,6 +1502,8 @@ namespace ServiceSaleMachine.Client
 
         private void button13_Click_1(object sender, EventArgs e)
         {
+            data.drivers.printer.StartPrint(data.drivers.printer.getNamePrinter());
+
             // печатаем чек c инкассацией
             if (data.drivers.printer.prn.PrinterIsOpen)
             {
@@ -1542,6 +1544,17 @@ namespace ServiceSaleMachine.Client
         {
             Globals.CheckConfiguration.Settings.PreviouslyService = PreviouslyName.Text;
             Globals.CheckConfiguration.Save();
+        }
+
+        private void Incasbutton_Click(object sender, EventArgs e)
+        {
+            data.drivers.printer.StartPrint(data.drivers.printer.getNamePrinter());
+
+            // печатаем чек c инкассацией
+            if (data.drivers.printer.prn.PrinterIsOpen)
+            {
+                data.drivers.printer.PrintCheckСollection(data.statistic);
+            }
         }
     }
 }

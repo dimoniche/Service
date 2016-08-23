@@ -31,6 +31,8 @@ namespace ServiceSaleMachine.Client
             // 
             moneySumm.Text = "Сумма денег в кассете: " + data.statistic.AllMoneySumm + " руб";
 
+            data.drivers.printer.StartPrint(data.drivers.printer.getNamePrinter());
+
             // печатаем чек c инкассацией
             if (data.drivers.printer.prn.PrinterIsOpen)
             {

@@ -24,6 +24,7 @@ namespace ServiceSaleMachine.Client
 
             TimeOutTimer.Enabled = true;
             Timeout = 0;
+            amount = 0;
 
             if (Globals.ClientConfiguration.Settings.offHardware == 0 && Globals.ClientConfiguration.Settings.offBill == 0)
             {
@@ -60,7 +61,15 @@ namespace ServiceSaleMachine.Client
             // заменим обработчик событий
             data.drivers.ReceivedResponse += reciveResponse;
 
-            if (Globals.ClientConfiguration.Settings.offHardware == 0)
+            if (data.serv.price == 0)
+            {
+                // может быть цена нулевая - и это демо режим - можно сразу без денег работать
+                AmountServiceText.ForeColor = System.Drawing.Color.Green;
+                pBxGiveOxigen.Enabled = true;
+
+                data.log.Write(LogMessageType.Information, "WAIT BILL: работаем в демо режиме.");
+            }
+            else if (Globals.ClientConfiguration.Settings.offHardware == 0)
             {
                 // перейдем в режим ожидания купюр
                 data.drivers.CCNETDriver.WaitBillEscrow();

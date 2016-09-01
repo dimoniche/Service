@@ -62,8 +62,9 @@ namespace ServiceSaleMachine.Client
                 result.drivers.InitAllDevice();
                 result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
-                // местный обработчик
-                result.drivers.ReceivedResponse += reciveResponse;
+                // на выход сразу - не надо в настроечном режиме продолжать работать
+                Close();
+                return;
             }
 
             initDevice:
@@ -562,6 +563,13 @@ namespace ServiceSaleMachine.Client
 
                     Program.Log.Write(LogMessageType.Error, "CHECK_STAT: ошибка управляющего устройства.");
                 }
+            }
+
+            // проверяем наличие бумаги в принтере
+            if(result.drivers.printer.status.CheckPaper() == PaperEnableEnum.PaperEnd)
+            {
+                // бумага кончилась
+
             }
 
             return result;

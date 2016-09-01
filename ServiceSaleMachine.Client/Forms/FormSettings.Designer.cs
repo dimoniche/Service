@@ -65,6 +65,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.cBxComPortBill = new System.Windows.Forms.ComboBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.cBxNoPaperWork = new System.Windows.Forms.CheckBox();
             this.butWriteComPortPrinter = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.Incasbutton = new System.Windows.Forms.Button();
@@ -196,6 +197,8 @@
             this.labelTimeLastRefresh = new System.Windows.Forms.Label();
             this.labelWorkFromLastRefresh = new System.Windows.Forms.Label();
             this.buttonResetTimeRefresh = new System.Windows.Forms.Button();
+            this.label32 = new System.Windows.Forms.Label();
+            this.cBxPrinterPort = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -623,6 +626,9 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.label32);
+            this.tabPage4.Controls.Add(this.cBxPrinterPort);
+            this.tabPage4.Controls.Add(this.cBxNoPaperWork);
             this.tabPage4.Controls.Add(this.butWriteComPortPrinter);
             this.tabPage4.Controls.Add(this.button9);
             this.tabPage4.Controls.Add(this.Incasbutton);
@@ -639,6 +645,17 @@
             this.tabPage4.Text = "Принтер";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // cBxNoPaperWork
+            // 
+            this.cBxNoPaperWork.AutoSize = true;
+            this.cBxNoPaperWork.Location = new System.Drawing.Point(250, 62);
+            this.cBxNoPaperWork.Name = "cBxNoPaperWork";
+            this.cBxNoPaperWork.Size = new System.Drawing.Size(254, 17);
+            this.cBxNoPaperWork.TabIndex = 43;
+            this.cBxNoPaperWork.Text = "Продолжать работать при окончании бумаги";
+            this.cBxNoPaperWork.UseVisualStyleBackColor = true;
+            this.cBxNoPaperWork.CheckedChanged += new System.EventHandler(this.cBxNoPaperWork_CheckedChanged);
+            // 
             // butWriteComPortPrinter
             // 
             this.butWriteComPortPrinter.Location = new System.Drawing.Point(250, 31);
@@ -651,7 +668,7 @@
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(394, 131);
+            this.button9.Location = new System.Drawing.Point(394, 148);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(138, 23);
             this.button9.TabIndex = 40;
@@ -662,7 +679,7 @@
             // 
             // Incasbutton
             // 
-            this.Incasbutton.Location = new System.Drawing.Point(394, 160);
+            this.Incasbutton.Location = new System.Drawing.Point(394, 177);
             this.Incasbutton.Name = "Incasbutton";
             this.Incasbutton.Size = new System.Drawing.Size(138, 23);
             this.Incasbutton.TabIndex = 40;
@@ -673,7 +690,7 @@
             // 
             // butPrintCheck
             // 
-            this.butPrintCheck.Location = new System.Drawing.Point(250, 131);
+            this.butPrintCheck.Location = new System.Drawing.Point(250, 148);
             this.butPrintCheck.Name = "butPrintCheck";
             this.butPrintCheck.Size = new System.Drawing.Size(138, 23);
             this.butPrintCheck.TabIndex = 40;
@@ -683,7 +700,7 @@
             // 
             // butWriteBarCode
             // 
-            this.butWriteBarCode.Location = new System.Drawing.Point(250, 89);
+            this.butWriteBarCode.Location = new System.Drawing.Point(250, 119);
             this.butWriteBarCode.Name = "butWriteBarCode";
             this.butWriteBarCode.Size = new System.Drawing.Size(138, 23);
             this.butWriteBarCode.TabIndex = 41;
@@ -693,7 +710,7 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(103, 89);
+            this.textBox2.Location = new System.Drawing.Point(103, 119);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(121, 20);
             this.textBox2.TabIndex = 39;
@@ -2011,6 +2028,24 @@
             this.buttonResetTimeRefresh.UseVisualStyleBackColor = true;
             this.buttonResetTimeRefresh.Click += new System.EventHandler(this.buttonResetTimeRefresh_Click);
             // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(27, 61);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(32, 13);
+            this.label32.TabIndex = 45;
+            this.label32.Text = "Порт";
+            // 
+            // cBxPrinterPort
+            // 
+            this.cBxPrinterPort.FormattingEnabled = true;
+            this.cBxPrinterPort.Location = new System.Drawing.Point(103, 58);
+            this.cBxPrinterPort.Name = "cBxPrinterPort";
+            this.cBxPrinterPort.Size = new System.Drawing.Size(121, 21);
+            this.cBxPrinterPort.TabIndex = 44;
+            this.cBxPrinterPort.SelectedIndexChanged += new System.EventHandler(this.cBxPrinterPort_SelectedIndexChanged);
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2245,5 +2280,8 @@
         private System.Windows.Forms.TextBox edtBDname;
         private System.Windows.Forms.TextBox PreviouslyName;
         private System.Windows.Forms.Button Incasbutton;
+        private System.Windows.Forms.CheckBox cBxNoPaperWork;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.ComboBox cBxPrinterPort;
     }
 }

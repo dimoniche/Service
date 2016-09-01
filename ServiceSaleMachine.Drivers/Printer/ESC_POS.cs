@@ -46,8 +46,14 @@ namespace ServiceSaleMachine.Drivers
         static string SelectBarcodeHeght = (char)(29) + "h" + (char)(80);
         static string PrintBarcode = (char)(29) + "k" + (char)(69) + "" + (char)(13);
 
+        // Запрос состояния датчика бумаги
+        static string PaperStatus = "" + (char)(0x10) + (char)(0x04) + (char)(4);
+
         public RawPrinterHelper prn = new RawPrinterHelper();
         string PrinterName = "CITIZEN PPU-700";
+
+        // статус принтера
+        public printerStatus status;
 
         byte[] GetBytes(string str)
         {
@@ -65,7 +71,7 @@ namespace ServiceSaleMachine.Drivers
 
         public PrinterESC()
         {
-
+            status = new printerStatus();
         }
 
         public PrinterESC(string name)

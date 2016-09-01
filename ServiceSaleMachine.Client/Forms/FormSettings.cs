@@ -316,6 +316,10 @@ namespace ServiceSaleMachine.Client
             cBxModemComPort.Items.Add("нет");
             cBxModemComPort.Items.AddRange(currentPort);
 
+            cBxPrinterPort.Items.Clear();
+            cBxPrinterPort.Items.Add("нет");
+            cBxPrinterPort.Items.AddRange(currentPort);
+
             cBxSpeedModem.Items.Clear();
             cBxControlSpeed.Items.Clear();
 
@@ -513,6 +517,25 @@ namespace ServiceSaleMachine.Client
                         cbxComPortPrinter.SelectedIndex = data.drivers.printer.findPrinterIndex(data.drivers.printer.getNamePrinter());
                     }
 
+                    if (data.drivers.printer.status.getNumberComPort().Contains("COM"))
+                    {
+                        string index = data.drivers.printer.status.getNumberComPort().Remove(0, 3);
+                        int int_index = 0;
+                        int.TryParse(index, out int_index);
+
+                        int counter = 0;
+                        foreach (object item in cBxPrinterPort.Items)
+                        {
+                            if ((string)item == data.drivers.printer.status.getNumberComPort())
+                            {
+                                break;
+                            }
+                            counter++;
+                        }
+
+                        cBxPrinterPort.SelectedIndex = counter;
+                    }
+
                     if (Globals.ClientConfiguration.Settings.offModem == 1 && data.drivers.modem.getNumberComPort().Contains("нет"))
                     {
                         cBxModemComPort.SelectedIndex = 0;
@@ -623,6 +646,8 @@ namespace ServiceSaleMachine.Client
             checkBox4.Checked = Globals.ClientConfiguration.Settings.changeToCheck > 0 ? true : false;
 
             cBxoffModem.Checked = Globals.ClientConfiguration.Settings.offModem > 0 ? true : false;
+
+            cBxNoPaperWork.Checked = Globals.ClientConfiguration.Settings.NoPaperWork > 0 ? true : false;
 
             textBoxTimeOut.Text = Globals.ClientConfiguration.Settings.timeout.ToString();
 
@@ -1555,6 +1580,30 @@ namespace ServiceSaleMachine.Client
             {
                 data.drivers.printer.PrintCheckСollection(data.statistic);
             }
+        }
+
+        private void cBxNoPaperWork_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cBxNoPaperWork.Checked)
+            {
+                Globals.ClientConfiguration.Settings.NoPaperWork = 1;
+            }
+            else
+            {
+                Globals.ClientConfiguration.Settings.NoPaperWork = 0;
+            }
+
+            Globals.ClientConfiguration.Save();
+        }
+
+        private void buttonPrinterPort_Click(object sender, EventArgs e)
+        {
+            data.drivers.printer.status.setNumberComPort((string)cBxPrinterPort.Items[cBxPrinterPort.SelectedIndex]);
+        }
+
+        private void cBxPrinterPort_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            data.drivers.printer.status.setNumberComPort((string)cBxPrinterPort.Items[cBxPrinterPort.SelectedIndex]);
         }
     }
 }

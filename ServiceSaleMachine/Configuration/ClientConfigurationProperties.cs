@@ -67,6 +67,9 @@ namespace ServiceSaleMachine
         // предельное время оказания услуги в минутах
         public int limitServiceTime = 100;
 
+        // работaем без бумаги в принтере
+        public int NoPaperWork = 1;
+
         internal ClientConfigurationProperties()
 		{
 			

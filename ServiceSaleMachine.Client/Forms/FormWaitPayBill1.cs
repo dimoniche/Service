@@ -293,6 +293,9 @@ namespace ServiceSaleMachine.Client
                     data.log.Write(LogMessageType.Error, "WAIT BILL: ошибка управляющего устройства.");
                     data.log.Write(LogMessageType.Error, "WAIT BILL: " + exp.ToString());
 
+                    // если какая либо ошибка - вернем купюру
+                    data.drivers.CCNETDriver.ReturnBill();
+
                     moneyFixed = false;
                 }
             }

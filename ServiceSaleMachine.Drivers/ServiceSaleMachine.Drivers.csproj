@@ -61,6 +61,8 @@
     <Compile Include="Enums\MessageEndPoint.cs" />
     <Compile Include="Modem\Modem.cs" />
     <Compile Include="Printer\ESC_POS.cs" />
+    <Compile Include="Printer\PaperEnableEnum.cs" />
+    <Compile Include="Printer\printerStatus.cs" />
     <Compile Include="Printer\RawPrinterHelper.cs" />
     <Compile Include="Zebex\Zebex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

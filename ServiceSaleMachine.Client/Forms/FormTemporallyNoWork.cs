@@ -35,7 +35,7 @@ namespace ServiceSaleMachine.Client
             // список ошибок
             if (data.stage == WorkerStateStage.BillFull)
             {
-                error.Text = "Ошибка E010";
+                error.Text = "Ошибка E030";
             }
             else if (data.stage == WorkerStateStage.ErrorBill)
             {
@@ -43,11 +43,11 @@ namespace ServiceSaleMachine.Client
             }
             else if (data.stage == WorkerStateStage.ResursEnd)
             {
-                error.Text = "Ошибка E030";
+                error.Text = "Ошибка E040";
             }
             else if (data.stage == WorkerStateStage.ErrorControl)
             {
-                error.Text = "Ошибка E040";
+                error.Text = "Ошибка E010";
             }
         }
 

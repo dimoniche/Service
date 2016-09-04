@@ -150,13 +150,15 @@ namespace ServiceSaleMachine.Drivers
             openPort(getNumberComPort());
 
             byte[] buf = new byte[3];
-            byte[] BufIn = new byte[20];            
+            byte[] BufIn = new byte[20];
 
+            // считаем статус бумаги
             buf[0] = 0x10;
             buf[1] = 0x04;
             buf[2] = 0x04;
 
             Send(buf);
+
 
             Thread.Sleep(5);
 
@@ -164,6 +166,8 @@ namespace ServiceSaleMachine.Drivers
             if (Recieve(BufIn, 1, out val) == false)
             {
                 if (log != null) log.Write(LogMessageType.Error, "PRINTER: не послали проверку статуса");
+
+                closePort();
                 return PaperEnableEnum.PaperError;
             }
 

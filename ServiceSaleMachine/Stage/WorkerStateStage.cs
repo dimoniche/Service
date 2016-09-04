@@ -168,5 +168,10 @@ namespace ServiceSaleMachine
         /// Купюроприемник обслужили
         /// </summary>
         EndBillFull,
+
+        /// <summary>
+        /// бумага закончилась
+        /// </summary>
+        PaperEnd,
     }
 }

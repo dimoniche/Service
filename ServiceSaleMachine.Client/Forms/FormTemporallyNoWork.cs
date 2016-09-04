@@ -49,6 +49,10 @@ namespace ServiceSaleMachine.Client
             {
                 error.Text = "Ошибка E010";
             }
+            else if (data.stage == WorkerStateStage.PaperEnd)
+            {
+                error.Text = "Ошибка E050";
+            }
         }
 
         private void reciveResponse(object sender, ServiceClientResponseEventArgs e)

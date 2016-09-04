@@ -233,7 +233,7 @@ namespace ServiceSaleMachine.Drivers
                 // настроим принтер
                 if (printer.OpenPrint(Globals.ClientConfiguration.Settings.NamePrinter))
                 {
-
+                    // настроим сенсор бумаги
                 }
                 else
                 {
@@ -241,6 +241,8 @@ namespace ServiceSaleMachine.Drivers
                     this.log.Write(LogMessageType.Error, "PRINTER: Принтер не верно настроен. Порт не доступен.");
                     res = WorkerStateStage.NeedSettingProgram;
                 }
+
+                printer.ClosePrint();
             }
             else
             {

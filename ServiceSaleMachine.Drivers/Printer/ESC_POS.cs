@@ -126,6 +126,11 @@ namespace ServiceSaleMachine.Drivers
             return prn.OpenPrint(PrinterName);
         }
 
+        public void GetStatus()
+        {
+            prn.GetPrinterStatusInt(PrinterName);
+        }
+
         public void ClosePrint()
         {
             prn.ClosePrint();

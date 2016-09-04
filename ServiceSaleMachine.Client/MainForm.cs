@@ -570,6 +570,13 @@ namespace ServiceSaleMachine.Client
             {
                 // бумага кончилась
 
+                if (Globals.ClientConfiguration.Settings.NoPaperWork == 0)
+                {
+                    // с такой ошибкой не работаем
+                    result.stage = WorkerStateStage.PaperEnd;
+                }
+
+                Program.Log.Write(LogMessageType.Error, "CHECK_STAT: кончилась бумага.");
             }
 
             return result;

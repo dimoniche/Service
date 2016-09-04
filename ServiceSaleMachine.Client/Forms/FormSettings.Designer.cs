@@ -65,9 +65,12 @@
             this.label4 = new System.Windows.Forms.Label();
             this.cBxComPortBill = new System.Windows.Forms.ComboBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.label32 = new System.Windows.Forms.Label();
+            this.cBxPrinterPort = new System.Windows.Forms.ComboBox();
             this.cBxNoPaperWork = new System.Windows.Forms.CheckBox();
             this.butWriteComPortPrinter = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
+            this.butStatus = new System.Windows.Forms.Button();
             this.Incasbutton = new System.Windows.Forms.Button();
             this.butPrintCheck = new System.Windows.Forms.Button();
             this.butWriteBarCode = new System.Windows.Forms.Button();
@@ -197,8 +200,7 @@
             this.labelTimeLastRefresh = new System.Windows.Forms.Label();
             this.labelWorkFromLastRefresh = new System.Windows.Forms.Label();
             this.buttonResetTimeRefresh = new System.Windows.Forms.Button();
-            this.label32 = new System.Windows.Forms.Label();
-            this.cBxPrinterPort = new System.Windows.Forms.ComboBox();
+            this.labelStatusPaper = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -626,11 +628,13 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.labelStatusPaper);
             this.tabPage4.Controls.Add(this.label32);
             this.tabPage4.Controls.Add(this.cBxPrinterPort);
             this.tabPage4.Controls.Add(this.cBxNoPaperWork);
             this.tabPage4.Controls.Add(this.butWriteComPortPrinter);
             this.tabPage4.Controls.Add(this.button9);
+            this.tabPage4.Controls.Add(this.butStatus);
             this.tabPage4.Controls.Add(this.Incasbutton);
             this.tabPage4.Controls.Add(this.butPrintCheck);
             this.tabPage4.Controls.Add(this.butWriteBarCode);
@@ -644,6 +648,24 @@
             this.tabPage4.TabIndex = 2;
             this.tabPage4.Text = "Принтер";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(27, 61);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(32, 13);
+            this.label32.TabIndex = 45;
+            this.label32.Text = "Порт";
+            // 
+            // cBxPrinterPort
+            // 
+            this.cBxPrinterPort.FormattingEnabled = true;
+            this.cBxPrinterPort.Location = new System.Drawing.Point(103, 58);
+            this.cBxPrinterPort.Name = "cBxPrinterPort";
+            this.cBxPrinterPort.Size = new System.Drawing.Size(121, 21);
+            this.cBxPrinterPort.TabIndex = 44;
+            this.cBxPrinterPort.SelectedIndexChanged += new System.EventHandler(this.cBxPrinterPort_SelectedIndexChanged);
             // 
             // cBxNoPaperWork
             // 
@@ -676,6 +698,16 @@
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Visible = false;
             this.button9.Click += new System.EventHandler(this.button9_Click_2);
+            // 
+            // butStatus
+            // 
+            this.butStatus.Location = new System.Drawing.Point(250, 177);
+            this.butStatus.Name = "butStatus";
+            this.butStatus.Size = new System.Drawing.Size(138, 23);
+            this.butStatus.TabIndex = 40;
+            this.butStatus.Text = "Статус";
+            this.butStatus.UseVisualStyleBackColor = true;
+            this.butStatus.Click += new System.EventHandler(this.butStatus_Click);
             // 
             // Incasbutton
             // 
@@ -2028,23 +2060,14 @@
             this.buttonResetTimeRefresh.UseVisualStyleBackColor = true;
             this.buttonResetTimeRefresh.Click += new System.EventHandler(this.buttonResetTimeRefresh_Click);
             // 
-            // label32
+            // labelStatusPaper
             // 
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(27, 61);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(32, 13);
-            this.label32.TabIndex = 45;
-            this.label32.Text = "Порт";
-            // 
-            // cBxPrinterPort
-            // 
-            this.cBxPrinterPort.FormattingEnabled = true;
-            this.cBxPrinterPort.Location = new System.Drawing.Point(103, 58);
-            this.cBxPrinterPort.Name = "cBxPrinterPort";
-            this.cBxPrinterPort.Size = new System.Drawing.Size(121, 21);
-            this.cBxPrinterPort.TabIndex = 44;
-            this.cBxPrinterPort.SelectedIndexChanged += new System.EventHandler(this.cBxPrinterPort_SelectedIndexChanged);
+            this.labelStatusPaper.AutoSize = true;
+            this.labelStatusPaper.Location = new System.Drawing.Point(247, 203);
+            this.labelStatusPaper.Name = "labelStatusPaper";
+            this.labelStatusPaper.Size = new System.Drawing.Size(70, 13);
+            this.labelStatusPaper.TabIndex = 46;
+            this.labelStatusPaper.Text = "Бумага есть";
             // 
             // FormSettings
             // 
@@ -2283,5 +2306,7 @@
         private System.Windows.Forms.CheckBox cBxNoPaperWork;
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.ComboBox cBxPrinterPort;
+        private System.Windows.Forms.Button butStatus;
+        private System.Windows.Forms.Label labelStatusPaper;
     }
 }

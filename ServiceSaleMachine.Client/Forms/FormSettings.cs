@@ -851,10 +851,8 @@ namespace ServiceSaleMachine.Client
             {
                data.drivers.printer.OpenPrint((string)cbxComPortPrinter.Items[cbxComPortPrinter.SelectedIndex]);
             }
-            else
-            {
-               data.drivers.printer.ClosePrint();
-            }
+
+            data.drivers.printer.ClosePrint();
 
            data.drivers.printer.setNamePrinter((string)cbxComPortPrinter.Items[cbxComPortPrinter.SelectedIndex]);
         }
@@ -1604,6 +1602,27 @@ namespace ServiceSaleMachine.Client
         private void cBxPrinterPort_SelectedIndexChanged(object sender, EventArgs e)
         {
             data.drivers.printer.status.setNumberComPort((string)cBxPrinterPort.Items[cBxPrinterPort.SelectedIndex]);
+        }
+
+        private void butStatus_Click(object sender, EventArgs e)
+        {
+            //data.drivers.printer.GetStatus();
+
+            switch (data.drivers.printer.status.CheckPaper())
+            {
+                case PaperEnableEnum.PaperEnd:
+                    labelStatusPaper.Text = "Бумага кончилась";
+                    break;
+                case PaperEnableEnum.PaperError:
+                    labelStatusPaper.Text = "Ошибка принтера";
+                    break;
+                case PaperEnableEnum.PaperNearEnd:
+                    labelStatusPaper.Text = "Бумага заканчивается";
+                    break;
+                case PaperEnableEnum.PaperOk:
+                    labelStatusPaper.Text = "Бумага есть";
+                    break;
+            }
         }
     }
 }

@@ -35,15 +35,15 @@ namespace ServiceSaleMachine.Client
 
             ServiceText.Text = "Идет оказание услуги. Осталось еще " + (Interval / 60).ToString() + " минуты и " + (Interval % 60).ToString() + " секунд";
 
-            // оказываем услугу пока так
+            // оказываем услугу пока так (перепутали устройства - поменял местами)
             if(data.numberCurrentDevice == (int)ControlDeviceEnum.dev3)
             {
                 data.drivers.control.SendOpenControl((int)ControlDeviceEnum.dev3);
+                data.drivers.control.SendOpenControl((int)ControlDeviceEnum.dev4);
             }
             else
             {
                 data.drivers.control.SendOpenControl((int)ControlDeviceEnum.dev3);
-                data.drivers.control.SendOpenControl((int)ControlDeviceEnum.dev4);
             }
 
             data.drivers.ReceivedResponse += reciveResponse;

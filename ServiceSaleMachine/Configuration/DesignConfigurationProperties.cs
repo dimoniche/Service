@@ -35,6 +35,8 @@ namespace ServiceSaleMachine
         public string ButtonUser = defpicture;
         public string ButtonCheck = defpicture;
         public string ButtonMoney = defpicture;
+        public string ButtonMoneyToAccount = defpicture;
+        public string ButtonMoneyToCheck = defpicture;
         public string ButtonServiceEmpty = defpicture;
         public string ButtonBack = defpicture;
         public string ButtonForward = defpicture;

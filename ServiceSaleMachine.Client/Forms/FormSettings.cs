@@ -676,6 +676,13 @@ namespace ServiceSaleMachine.Client
             int NumberCheck = GlobalDb.GlobalBase.GetCurrentNumberCheck();
             labelCurrNumberCheck.Text = "Текущий номер чека: " + NumberCheck;
 
+            cBxCommand.Items.Clear();
+            cBxCommand.Items.Add("Включить");
+            cBxCommand.Items.Add("Выключить");
+            cBxCommand.Items.Add("Подать питание");
+            cBxCommand.Items.Add("Уснуть");
+            cBxCommand.Items.Add("Проснуться");
+
             init = false;
         }
 
@@ -706,6 +713,17 @@ namespace ServiceSaleMachine.Client
             {
                 case DeviceEvent.Scaner:
                     LabelCode.Text = (string)e.Message.Content;
+                    {
+                        CheckInfo info = GlobalDb.GlobalBase.GetCheckByStr((string)e.Message.Content);
+
+                        if (info == null)
+                        {
+                            // нет такого чека
+                            return;
+                        }
+
+                        labSummCheck.Text = info.Amount.ToString();
+                    }
                     break;
                 case DeviceEvent.BillAcceptor:
                     richTextBox1.Text = (string)e.Message.Content + "\n" + richTextBox1.Text;
@@ -763,7 +781,7 @@ namespace ServiceSaleMachine.Client
             data.drivers.startScanerPoll();
 
             buttonStartScanerPoll.Enabled = !data.drivers.ScanerIsWork();
-            buttonStopScanerPoll.Enabled =data.drivers.ScanerIsWork();
+            buttonStopScanerPoll.Enabled = data.drivers.ScanerIsWork();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -773,7 +791,7 @@ namespace ServiceSaleMachine.Client
             data.drivers.stopScanerPoll();
 
             buttonStartScanerPoll.Enabled = !data.drivers.ScanerIsWork();
-            buttonStopScanerPoll.Enabled =data.drivers.ScanerIsWork();
+            buttonStopScanerPoll.Enabled = data.drivers.ScanerIsWork();
         }
 
         private void button30_Click(object sender, EventArgs e)
@@ -886,7 +904,11 @@ namespace ServiceSaleMachine.Client
             if (data.drivers.printer.prn.PrinterIsOpen)
             {
                data.drivers.printer.PrintHeader();
-               data.drivers.printer.PrintBarCode(textBox2.Text);
+
+               int summ = 0;
+               int.TryParse(tBxsumm.Text, out summ);
+
+               data.drivers.printer.PrintBarCode(textBox2.Text,summ);
                data.drivers.printer.PrintFooter();
                data.drivers.printer.EndPrint();
             }
@@ -1205,6 +1227,9 @@ namespace ServiceSaleMachine.Client
 
                 SetStateScaner(true);
             }
+
+            data.drivers.scaner.setNumberComPort((string)cBxComPortScaner.Items[cBxComPortScaner.SelectedIndex]);
+            Globals.ClientConfiguration.Save();
         }
 
         private void cBxControlPort_SelectedIndexChanged(object sender, EventArgs e)
@@ -1623,6 +1648,31 @@ namespace ServiceSaleMachine.Client
                     labelStatusPaper.Text = "Бумага есть";
                     break;
             }
+        }
+
+        private void buttoninsertcheck_Click(object sender, EventArgs e)
+        {
+            // запомним такой чек
+            string check = CheckHelper.GetUniqueNumberCheck(12);
+            textBox2.Text = check;
+
+            int summ = 0;
+
+            int.TryParse(tBxsumm.Text, out summ);
+            GlobalDb.GlobalBase.AddToCheck(data.CurrentUserId, summ, check);
+
+            // распечатем чек
+            button16_Click(sender,e);
+        }
+
+        private void cBxCommand_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void butSendCode_Click(object sender, EventArgs e)
+        {
+            data.drivers.scaner.Request((ZebexCommandEnum)cBxCommand.SelectedIndex);
         }
     }
 }

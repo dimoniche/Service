@@ -290,9 +290,15 @@ namespace ServiceSaleMachine.Drivers
             prn.ClosePrint();
         }
 
-        public void PrintBarCode(string msg)
+        public void PrintBarCode(string msg, int summ)
         {
-            Print(eCentre + getBarcodeStr(msg) + vbCrLf);
+            Print(eLeft, false, false);
+            Print(TransformCode("СУММА"), true);
+            Print(" ".PadRight(42 - 8 - summ.ToString().Length, ' ') + summ.ToString("#.00"));
+
+            PrintDashes();
+
+            Print(eCentre + getBarcodeStr(msg) + vbCrLf, false, false);
         }
 
         public string getBarcodeStr(string msg)
@@ -303,7 +309,7 @@ namespace ServiceSaleMachine.Drivers
             str += GS + "w" + (char)(4);                    // Barcode Width 
             str += GS + "f" + (char)(0);                    // Font for HRI characters
             str += GS + "H" + (char)(2);                    // Position of HRI characters
-            str += GS + "k" + (char)(2);                    // Print Barcode Smb 39
+            str += GS + "k" + (char)(0);                    // Print Barcode Smb 39
             str += msg + (char)(0) + "" + vbCrLf;           // Print Text Under
 
             return str;

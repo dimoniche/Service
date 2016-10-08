@@ -63,6 +63,8 @@ namespace ServiceSaleMachine
                         if ((xElement = xSettings.Element("ButtonUser")) != null) Settings.ButtonUser = xElement.Value;
                         if ((xElement = xSettings.Element("ButtonCheck")) != null) Settings.ButtonCheck = xElement.Value;
                         if ((xElement = xSettings.Element("ButtonMoney")) != null) Settings.ButtonMoney = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonMoneyToCheck")) != null) Settings.ButtonMoneyToCheck = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonMoneyToAccount")) != null) Settings.ButtonMoneyToAccount = xElement.Value;
                         if ((xElement = xSettings.Element("ButtonServiceEmpty")) != null) Settings.ButtonServiceEmpty = xElement.Value;
                         if ((xElement = xSettings.Element("ButtonBack")) != null) Settings.ButtonBack = xElement.Value;
                         if ((xElement = xSettings.Element("ButtonForward")) != null) Settings.ButtonForward = xElement.Value;

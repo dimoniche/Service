@@ -10,6 +10,9 @@ namespace ServiceSaleMachine.Client
         string Nominal;
         bool result = false;
 
+        int Amount = 0;
+        bool check = false;
+
         public FormInsertBill()
         {
             InitializeComponent();
@@ -29,12 +32,27 @@ namespace ServiceSaleMachine.Client
                 {
                     Nominal = (string)obj;
                 }
+                else if (obj.GetType() == typeof(int))
+                {
+                    Amount = (int)obj;
+                }
+                else if (obj.GetType() == typeof(bool))
+                {
+                    check = (bool)obj;
+                }
             }
 
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTakeAwayMoney, Globals.DesignConfiguration.Settings.ButtonTakeAwayMoney);
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxreturnMoney, Globals.DesignConfiguration.Settings.ButtonreturnMoney);
 
-            label1.Text = "Вы внесли купюру достоинством " + Nominal + " руб";
+            if (check)
+            {
+                label1.Text = "Вы внесли чек достоинством " + Amount + " руб";
+            }
+            else
+            {
+                label1.Text = "Вы внесли купюру достоинством " + Nominal + " руб";
+            }
         }
 
         private void FormInsertBill1_FormClosed(object sender, FormClosedEventArgs e)

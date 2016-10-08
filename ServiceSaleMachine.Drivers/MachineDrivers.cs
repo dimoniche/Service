@@ -168,6 +168,9 @@ namespace ServiceSaleMachine.Drivers
                     {
                         WorkerScanerDriver.Run();
                     }
+
+                    // при старте сканер усыпим
+                    scaner.Request(ZebexCommandEnum.sleep);
                 }
                 else
                 {

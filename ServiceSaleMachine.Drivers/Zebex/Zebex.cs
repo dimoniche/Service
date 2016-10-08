@@ -103,7 +103,7 @@ namespace ServiceSaleMachine.Drivers
                 {
                     int bytes = port.BytesToRead;
 
-                    if (bytes > 0)
+                    if (bytes >= 12)    // штрих код больше 12 символов
                     {
                         // Прочитаем все из СОМ-порта в буфер
                         byte[] byteAnswer = new byte[bytes];
@@ -147,6 +147,8 @@ namespace ServiceSaleMachine.Drivers
         /// <param name="command"></param>
         public void Request(ZebexCommandEnum command)
         {
+            if (serialPort == null) return;
+
             if (serialPort.IsOpen)
             {
                 // Сначала действия перед отсылкой данных

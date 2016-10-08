@@ -65,6 +65,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.cBxComPortBill = new System.Windows.Forms.ComboBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.labelStatusPaper = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
             this.cBxPrinterPort = new System.Windows.Forms.ComboBox();
             this.cBxNoPaperWork = new System.Windows.Forms.CheckBox();
@@ -200,7 +201,13 @@
             this.labelTimeLastRefresh = new System.Windows.Forms.Label();
             this.labelWorkFromLastRefresh = new System.Windows.Forms.Label();
             this.buttonResetTimeRefresh = new System.Windows.Forms.Button();
-            this.labelStatusPaper = new System.Windows.Forms.Label();
+            this.buttoninsertcheck = new System.Windows.Forms.Button();
+            this.label33 = new System.Windows.Forms.Label();
+            this.tBxsumm = new System.Windows.Forms.TextBox();
+            this.cBxCommand = new System.Windows.Forms.ComboBox();
+            this.butSendCode = new System.Windows.Forms.Button();
+            this.label34 = new System.Windows.Forms.Label();
+            this.labSummCheck = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -277,6 +284,10 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.labSummCheck);
+            this.tabPage1.Controls.Add(this.label34);
+            this.tabPage1.Controls.Add(this.butSendCode);
+            this.tabPage1.Controls.Add(this.cBxCommand);
             this.tabPage1.Controls.Add(this.buttonStopScanerPoll);
             this.tabPage1.Controls.Add(this.buttonStartScanerPoll);
             this.tabPage1.Controls.Add(this.LabelCode);
@@ -628,6 +639,9 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.tBxsumm);
+            this.tabPage4.Controls.Add(this.label33);
+            this.tabPage4.Controls.Add(this.buttoninsertcheck);
             this.tabPage4.Controls.Add(this.labelStatusPaper);
             this.tabPage4.Controls.Add(this.label32);
             this.tabPage4.Controls.Add(this.cBxPrinterPort);
@@ -648,6 +662,15 @@
             this.tabPage4.TabIndex = 2;
             this.tabPage4.Text = "Принтер";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // labelStatusPaper
+            // 
+            this.labelStatusPaper.AutoSize = true;
+            this.labelStatusPaper.Location = new System.Drawing.Point(247, 203);
+            this.labelStatusPaper.Name = "labelStatusPaper";
+            this.labelStatusPaper.Size = new System.Drawing.Size(70, 13);
+            this.labelStatusPaper.TabIndex = 46;
+            this.labelStatusPaper.Text = "Бумага есть";
             // 
             // label32
             // 
@@ -2060,14 +2083,70 @@
             this.buttonResetTimeRefresh.UseVisualStyleBackColor = true;
             this.buttonResetTimeRefresh.Click += new System.EventHandler(this.buttonResetTimeRefresh_Click);
             // 
-            // labelStatusPaper
+            // buttoninsertcheck
             // 
-            this.labelStatusPaper.AutoSize = true;
-            this.labelStatusPaper.Location = new System.Drawing.Point(247, 203);
-            this.labelStatusPaper.Name = "labelStatusPaper";
-            this.labelStatusPaper.Size = new System.Drawing.Size(70, 13);
-            this.labelStatusPaper.TabIndex = 46;
-            this.labelStatusPaper.Text = "Бумага есть";
+            this.buttoninsertcheck.Location = new System.Drawing.Point(394, 119);
+            this.buttoninsertcheck.Name = "buttoninsertcheck";
+            this.buttoninsertcheck.Size = new System.Drawing.Size(138, 23);
+            this.buttoninsertcheck.TabIndex = 47;
+            this.buttoninsertcheck.Text = "Внести чек в базу";
+            this.buttoninsertcheck.UseVisualStyleBackColor = true;
+            this.buttoninsertcheck.Click += new System.EventHandler(this.buttoninsertcheck_Click);
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(538, 124);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(57, 13);
+            this.label33.TabIndex = 48;
+            this.label33.Text = "на сумму ";
+            // 
+            // tBxsumm
+            // 
+            this.tBxsumm.Location = new System.Drawing.Point(601, 119);
+            this.tBxsumm.Name = "tBxsumm";
+            this.tBxsumm.Size = new System.Drawing.Size(121, 20);
+            this.tBxsumm.TabIndex = 49;
+            this.tBxsumm.Text = "250";
+            // 
+            // cBxCommand
+            // 
+            this.cBxCommand.FormattingEnabled = true;
+            this.cBxCommand.Location = new System.Drawing.Point(76, 195);
+            this.cBxCommand.Name = "cBxCommand";
+            this.cBxCommand.Size = new System.Drawing.Size(121, 21);
+            this.cBxCommand.TabIndex = 11;
+            this.cBxCommand.SelectedIndexChanged += new System.EventHandler(this.cBxCommand_SelectedIndexChanged);
+            // 
+            // butSendCode
+            // 
+            this.butSendCode.Location = new System.Drawing.Point(224, 193);
+            this.butSendCode.Name = "butSendCode";
+            this.butSendCode.Size = new System.Drawing.Size(75, 23);
+            this.butSendCode.TabIndex = 12;
+            this.butSendCode.Text = "Послать";
+            this.butSendCode.UseVisualStyleBackColor = true;
+            this.butSendCode.Click += new System.EventHandler(this.butSendCode_Click);
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(17, 114);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(82, 13);
+            this.label34.TabIndex = 13;
+            this.label34.Text = "Сумма на чеке";
+            // 
+            // labSummCheck
+            // 
+            this.labSummCheck.AutoSize = true;
+            this.labSummCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labSummCheck.Location = new System.Drawing.Point(135, 102);
+            this.labSummCheck.Name = "labSummCheck";
+            this.labSummCheck.Size = new System.Drawing.Size(24, 25);
+            this.labSummCheck.TabIndex = 14;
+            this.labSummCheck.Text = "0";
             // 
             // FormSettings
             // 
@@ -2308,5 +2387,12 @@
         private System.Windows.Forms.ComboBox cBxPrinterPort;
         private System.Windows.Forms.Button butStatus;
         private System.Windows.Forms.Label labelStatusPaper;
+        private System.Windows.Forms.Button buttoninsertcheck;
+        private System.Windows.Forms.TextBox tBxsumm;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Button butSendCode;
+        private System.Windows.Forms.ComboBox cBxCommand;
+        private System.Windows.Forms.Label labSummCheck;
+        private System.Windows.Forms.Label label34;
     }
 }

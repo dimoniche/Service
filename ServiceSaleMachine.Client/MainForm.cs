@@ -316,7 +316,7 @@ namespace ServiceSaleMachine.Client
                     if (result.stage == WorkerStateStage.PayBillService)
                     {
                         // ожидание внесение денег
-                        result = (FormResultData)FormManager.OpenForm<FormWaitPayBill1>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+                        result = (FormResultData)FormManager.OpenForm<FormWaitPayBill>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
                         if (result.stage == WorkerStateStage.Fail || result.stage == WorkerStateStage.EndDropCassette)
                         {

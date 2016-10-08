@@ -679,8 +679,18 @@ namespace ServiceSaleMachine
 
         public CheckInfo GetCheckByStr(string check)
         {
+            int index = check.IndexOf('\n');
+
+            if(index != -1)
+                check = check.Remove(check.IndexOf('\n'), 1);
+
+            index = check.IndexOf('\r');
+
+            if (index != -1)
+                check = check.Remove(check.IndexOf('\r'), 1);
+
             string queryString = "select id, dt_create, dt_fixed, active, iduser, checkstr," +
-                  " number from checks where (checkstr='" + check + "')";
+                  " number, amount from checks where (checkstr='" + check + "')";
 
             MySqlCommand com = new MySqlCommand(queryString, con);
 
@@ -698,12 +708,26 @@ namespace ServiceSaleMachine
                 dr.Read();
                 ch = new CheckInfo();
                 ch.Id = (int)dr[0];
-                ch.dt_start = (DateTime)dr[1];
-                ch.dt_fixed = (DateTime)dr[2];
+
+                if(dr[1] != null)
+                    ch.dt_start = (DateTime)dr[1];
+
+                try
+                {
+                    if (dr[2] != null)
+                        ch.dt_fixed = (DateTime)dr[2];
+                }
+                catch
+                {
+                    ch.dt_fixed = new DateTime();
+                }
+
                 ch.active = (Boolean)dr[3];
                 ch.IdUser = (int)dr[4];
                 ch.checkstr = (string)dr[5];
                 ch.Number = (int) dr[6];
+
+                ch.Amount = (int)dr[7];
                 dr.Close();
 
                 return ch;

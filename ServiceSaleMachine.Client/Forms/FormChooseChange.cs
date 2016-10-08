@@ -8,6 +8,7 @@ namespace ServiceSaleMachine.Client
     {
         ChooseChangeEnum ch = ChooseChangeEnum.None;
         string Nominal = "";
+        int Amount = 0;
 
         public FormChooseChange()
         {
@@ -16,22 +17,25 @@ namespace ServiceSaleMachine.Client
 
         public override void LoadData()
         {
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxAccount, Globals.DesignConfiguration.Settings.ButtonMoneyToAccount);
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxCheck, Globals.DesignConfiguration.Settings.ButtonMoneyToCheck);
+
             if (Globals.ClientConfiguration.Settings.changeToAccount > 0)
             {
-                pictureBox2.Load(Globals.GetPath(PathEnum.Image) + "\\ChangeToAccount.png");
+                pBxAccount.Enabled = true;
             }
             else
             {
-                pictureBox2.Enabled = false;
+                pBxAccount.Enabled = false;
             }
 
             if (Globals.ClientConfiguration.Settings.changeToCheck > 0)
             {
-                pictureBox1.Load(Globals.GetPath(PathEnum.Image) + "\\ChangeToCheck.png");
+                pBxCheck.Enabled = true;
             }
             else
             {
-                pictureBox1.Enabled = false;
+                pBxCheck.Enabled = false;
             }
 
             foreach (object obj in Params.Objects.Where(obj => obj != null))
@@ -40,9 +44,20 @@ namespace ServiceSaleMachine.Client
                 {
                     Nominal = (string)obj;
                 }
+                else if (obj.GetType() == typeof(int))
+                {
+                    Amount = (int)obj;
+                }
             }
 
-            label1.Text = "Остается сдача в размере " + Nominal + " руб";
+            if (!string.IsNullOrEmpty(Nominal))
+            {
+                label1.Text = "Остается сдача в размере " + Nominal + " руб";
+            }
+            if (Amount != 0)
+            {
+                label1.Text = "Остается сдача в размере " + Amount + " руб";
+            }
         }
 
         private void FormChooseChange_FormClosed(object sender, FormClosedEventArgs e)

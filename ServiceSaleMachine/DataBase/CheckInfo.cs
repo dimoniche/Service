@@ -11,5 +11,6 @@ namespace ServiceSaleMachine
         public Boolean active;
         public int IdUser;
         public int Number;
+        public int Amount;
     }
 }

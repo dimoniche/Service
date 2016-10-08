@@ -9,12 +9,18 @@ namespace ServiceSaleMachine.Client
     {
         FormResultData data;
 
+        int Timeout = 0;
+
         public FormChoosePay()
         {
             InitializeComponent();
 
-            pbxCheck.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonCheck);
-            pbxMoney.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonMoney);
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pbxCheck, Globals.DesignConfiguration.Settings.ButtonCheck);
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pbxMoney, Globals.DesignConfiguration.Settings.ButtonMoney);
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxreturntoMain, Globals.DesignConfiguration.Settings.ButtonRetToMain);
+
+            TimeOutTimer.Enabled = true;
+            Timeout = 0;
         }
 
         public override void LoadData()
@@ -59,6 +65,29 @@ namespace ServiceSaleMachine.Client
             if (e.Alt & e.KeyCode == Keys.F4)
             {
                 data.stage = WorkerStateStage.ExitProgram;
+            }
+        }
+
+        private void pBxreturntoMain_Click(object sender, EventArgs e)
+        {
+            data.stage = WorkerStateStage.TimeOut;
+            this.Close();
+        }
+
+        private void TimeOutTimer_Tick(object sender, EventArgs e)
+        {
+            Timeout++;
+
+            if (Globals.ClientConfiguration.Settings.timeout == 0)
+            {
+                Timeout = 0;
+                return;
+            }
+
+            if (Timeout > Globals.ClientConfiguration.Settings.timeout * 60)
+            {
+                data.stage = WorkerStateStage.TimeOut;
+                this.Close();
             }
         }
     }

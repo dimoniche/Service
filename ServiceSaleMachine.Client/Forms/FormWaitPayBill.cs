@@ -13,8 +13,6 @@ namespace ServiceSaleMachine.Client
 
         // количество внесенных денег
         int amount;
-        // остаток денег - на чек
-        int balance;
 
         // зафиксировали купюру
         bool moneyFixed = false;
@@ -23,23 +21,18 @@ namespace ServiceSaleMachine.Client
         {
             InitializeComponent();
 
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pbxFail, Globals.DesignConfiguration.Settings.ButtonRetToMain);
+            TimeOutTimer.Enabled = true;
+            Timeout = 0;
+            amount = 0;
 
             if (Globals.ClientConfiguration.Settings.offHardware == 0 && Globals.ClientConfiguration.Settings.offBill == 0)
             {
-                Globals.DesignConfiguration.Settings.LoadPictureBox(pbxForward, Globals.DesignConfiguration.Settings.ButtonNoForward);
                 // пока не внесли нужную сумму - не жамкаем кнопку
-                pbxForward.Enabled = false;
+                pBxGiveOxigen.Enabled = false;
             }
-            else
-            {
-                Globals.DesignConfiguration.Settings.LoadPictureBox(pbxForward, Globals.DesignConfiguration.Settings.ButtonForward);
-            }
-
-            TimeOutTimer.Enabled = true;
-            Timeout = 0;
         }
 
+        private GifImage gifImage = null;
         public override void LoadData()
         {
             foreach (object obj in Params.Objects.Where(obj => obj != null))
@@ -50,33 +43,90 @@ namespace ServiceSaleMachine.Client
                 }
             }
 
-            // стоимость
-            price.Text = data.serv.price + " руб";
-            AmountServiceText.Text = "0 руб";
+            gifImage = new GifImage(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonGetOxigen);
+            gifImage.ReverseAtEnd = false; //dont reverse at end
+
+            //Globals.DesignConfiguration.Settings.LoadPictureBox(pBxGiveOxigen, Globals.DesignConfiguration.Settings.ButtonGetOxigen);
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxReturnBack, Globals.DesignConfiguration.Settings.ButtonRetToMain);
+
+            AmountServiceText.Text = "Внесено: 0 руб.";
             AmountServiceText.ForeColor = System.Drawing.Color.Red;
+            SecondMessageText.Text = "";
+
+            LabelNameService2.Text = Globals.ClientConfiguration.Settings.services[data.numberService].caption;
+
+            TextPayBill.LoadFile(Globals.GetPath(PathEnum.Text) + "\\WaitPayBill.rtf");
 
             // заменим обработчик событий
             data.drivers.ReceivedResponse += reciveResponse;
 
-            if (Globals.ClientConfiguration.Settings.offHardware == 0)
+            if (data.serv.price == 0)
+            {
+                // может быть цена нулевая - и это демо режим - можно сразу без денег работать
+                AmountServiceText.ForeColor = System.Drawing.Color.Green;
+                pBxGiveOxigen.Enabled = true;
+
+                data.log.Write(LogMessageType.Information, "WAIT BILL: работаем в демо режиме.");
+            }
+            else if (Globals.ClientConfiguration.Settings.offHardware == 0)
             {
                 // перейдем в режим ожидания купюр
                 data.drivers.CCNETDriver.WaitBillEscrow();
+                data.log.Write(LogMessageType.Information, "WAIT BILL: запускаем режим ожидания купюр.");
             }
         }
 
-        /// <summary>
-        /// Внесли деньги
-        /// </summary>
-        /// <param name="e"></param>
-        void CreditMoney(ServiceClientResponseEventArgs e)
+        private void reciveResponse(object sender, ServiceClientResponseEventArgs e)
         {
+            if (InvokeRequired)
+            {
+                BeginInvoke(new ServiceClientResponseEventHandler(reciveResponse), sender, e);
+                return;
+            }
+
+            if (data.log != null)
+            {
+                data.log.Write(LogMessageType.Information, "WAIT BILL: Событие: " + e.Message.Content + ".");
+            }
+
+            switch (e.Message.Event)
+            {
+                case DeviceEvent.BillAcceptor:
+
+                    break;
+                case DeviceEvent.BillAcceptorEscrow:
+                    CreditMoney(e);
+                    break;
+                case DeviceEvent.BillAcceptorCredit:
+                    //CreditMoney(e);
+                    break;
+                case DeviceEvent.DropCassetteBillAcceptor:
+                    {
+                        data.stage = WorkerStateStage.DropCassettteBill;
+                        data.log.Write(LogMessageType.Information, "WAIT BILL: Вытащили купюроприемник.");
+
+                        this.Close();
+                    }
+                    break;
+                default:
+                    // Остальные события нас не интересуют
+                    break;
+            }
+        }
+
+        private void CreditMoney(ServiceClientResponseEventArgs e)
+        {
+            pBxReturnBack.Enabled = false;
+            SecondMessageText.Text = "";
+
             lock (Params)
             {
                 try
                 {
                     if (moneyFixed) return;
                     moneyFixed = true;
+
+                    data.log.Write(LogMessageType.Information, "BILL: Обработаем получение денег");
 
                     // сбросим таймаут
                     Timeout = 0;
@@ -96,6 +146,10 @@ namespace ServiceSaleMachine.Client
                         {
                             data.drivers.CCNETDriver.ReturnBill();
                         }
+
+                        data.log.Write(LogMessageType.Information, "WAIT BILL: Купюру " + numberNominal + " не принимаем");
+
+                        SecondMessageText.Text = "Внесите купюру другого номинала.";
                         return;
                     }
 
@@ -114,7 +168,7 @@ namespace ServiceSaleMachine.Client
                     if (Globals.ClientConfiguration.Settings.changeOn == 0)
                     {
                         // без сдачи
-                        if (count > data.serv.price)
+                        if (amount > data.serv.price)
                         {
                             // купюра великовата - вернем ее
                             amount -= count;
@@ -126,8 +180,13 @@ namespace ServiceSaleMachine.Client
                                 data.drivers.CCNETDriver.ReturnBill();
                             }
 
+                            if (amount == 0)
+                            {
+                                pBxReturnBack.Enabled = true;
+                            }
+
                             // сообщим о том что купюра великовата
-                            AmountServiceText.Text = "Внесите купюру меньшего номинала.";
+                            SecondMessageText.Text = "Внесите купюру меньшего номинала.";
                             return;
                         }
                     }
@@ -137,7 +196,7 @@ namespace ServiceSaleMachine.Client
                         if (amount > data.serv.price)
                         {
                             // купюра великовата - спросим может вернуть ее
-                            res = (bool)FormManager.OpenForm<FormInsertBill>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, ((BillNominal)e.Message.Content).Denomination);
+                            res = (bool)FormManager.OpenForm<FormInsertBill>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, data, ((BillNominal)e.Message.Content).Denomination);
                         }
                     }
 
@@ -162,6 +221,12 @@ namespace ServiceSaleMachine.Client
                         {
                             data.drivers.CCNETDriver.ReturnBill();
                         }
+
+                        if (amount == 0)
+                        {
+                            pBxReturnBack.Enabled = true;
+                        }
+
                         return;
                     }
 
@@ -169,22 +234,35 @@ namespace ServiceSaleMachine.Client
 
                     if (Globals.ClientConfiguration.Settings.changeOn > 0)
                     {
+                        // посчитаем размер сдачи
+                        diff = amount - data.serv.price;
+
                         // сдача на чек
                         if (amount > data.serv.price)
                         {
-                            // посчитаем размер сдачи
-                            diff = amount - data.serv.price;
+                            ChooseChangeEnum ch = ChooseChangeEnum.None;
 
-                            // тут надо решить как выдать сдачу - спросим пользователя
-                            ChooseChangeEnum ch = (ChooseChangeEnum)FormManager.OpenForm<FormChooseChange>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, diff.ToString());
+                            if (Globals.ClientConfiguration.Settings.changeToAccount == 1 && Globals.ClientConfiguration.Settings.changeToCheck == 1)
+                            {
+                                // тут надо решить как выдать сдачу - спросим пользователя
+                                ch = (ChooseChangeEnum)FormManager.OpenForm<FormChooseChange>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, diff.ToString());
+                            }
+                            else if (Globals.ClientConfiguration.Settings.changeToAccount == 1)
+                            {
+                                ch = ChooseChangeEnum.ChangeToAccount;
+                            }
+                            else if (Globals.ClientConfiguration.Settings.changeToCheck == 1)
+                            {
+                                ch = ChooseChangeEnum.ChangeToCheck;
+                            }
 
-                            if(ch == ChooseChangeEnum.ChangeToAccount)
+                            if (ch == ChooseChangeEnum.ChangeToAccount)
                             {
                                 // заносим в аккаунт - если не авторизовались - нужна авторизация в аккаунт
-                                if(data.CurrentUserId == 0)
+                                if (data.CurrentUserId == 0)
                                 {
                                     // форма регистрации
-                                    data = (FormResultData)FormManager.OpenForm<UserRequest>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify,data);
+                                    data = (FormResultData)FormManager.OpenForm<UserRequest>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, data);
                                 }
 
                                 // запомним сколько внесли на аккаунт
@@ -201,41 +279,30 @@ namespace ServiceSaleMachine.Client
                                 data.statistic.BarCodeMoneySumm += diff;
 
                                 // запомним такой чек
-                                string check = CheckHelper.GetUniqueNumberCheck(10);
+                                string check = CheckHelper.GetUniqueNumberCheck(12);
                                 GlobalDb.GlobalBase.AddToCheck(data.CurrentUserId, diff, check);
 
                                 // и напечатем его
-                                data.drivers.printer.PrintBarCode(check);
+                                data.drivers.printer.PrintBarCode(check,diff);
                             }
                         }
                     }
 
                     // напишем на экране
-                    AmountServiceText.Text = amount + " руб";
+                    AmountServiceText.Text = "Внесено: " + amount + " руб.";
 
                     // деньги внесли - нет пути назад
                     TimeOutTimer.Enabled = false;
 
-                    // запомним принятую сумму
-                    data.statistic.AllMoneySumm += amount;
-                    // запомним на сколько оказали услуг
-                    data.statistic.ServiceMoneySumm += data.serv.price;
                     // Количество банкнот
                     data.statistic.CountBankNote++;
-
-                    // Запомним в базе
-                    GlobalDb.GlobalBase.SetMoneyStatistic(data.statistic);
-                    // заносим в базу платеж
-                    GlobalDb.GlobalBase.InsertMoney(data.CurrentUserId, amount);
                     // заносим банкноту
                     GlobalDb.GlobalBase.InsertBankNote();
 
                     if (amount >= data.serv.price)
                     {
                         AmountServiceText.ForeColor = System.Drawing.Color.Green;
-                        // внесли нужную сумму - можно идти вперед
-                        Globals.DesignConfiguration.Settings.LoadPictureBox(pbxForward, Globals.DesignConfiguration.Settings.ButtonForward);
-                        pbxForward.Enabled = true;
+                        pBxGiveOxigen.Enabled = true;
 
                         if (Globals.ClientConfiguration.Settings.offHardware == 0)
                         {
@@ -244,44 +311,20 @@ namespace ServiceSaleMachine.Client
                         }
                     }
                 }
-                catch(Exception exp)
+                catch (Exception exp)
                 {
+                    data.log.Write(LogMessageType.Error, "WAIT BILL: ошибка управляющего устройства.");
+                    data.log.Write(LogMessageType.Error, "WAIT BILL: " + exp.ToString());
+
+                    // если какая либо ошибка - вернем купюру
+                    data.drivers.CCNETDriver.ReturnBill();
+
                     moneyFixed = false;
                 }
             }
         }
 
-        /// <summary>
-        /// События от приемника денег
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void reciveResponse(object sender, ServiceClientResponseEventArgs e)
-        {
-            if (InvokeRequired)
-            {
-                BeginInvoke(new ServiceClientResponseEventHandler(reciveResponse), sender, e);
-                return;
-            }
-
-            switch (e.Message.Event)
-            {
-                case DeviceEvent.BillAcceptor:
-                    
-                    break;
-                case DeviceEvent.BillAcceptorEscrow:
-                    CreditMoney(e);
-                    break;
-                case DeviceEvent.BillAcceptorCredit:
-                    //CreditMoney(e);
-                    break;
-                default:
-                    // Остальные события нас не интересуют
-                    break;
-            }
-        }
-
-        private void FormWaitPayBill_FormClosed(object sender, FormClosedEventArgs e)
+        private void FormWaitPayBill1_FormClosed(object sender, FormClosedEventArgs e)
         {
             TimeOutTimer.Enabled = false;
 
@@ -297,16 +340,30 @@ namespace ServiceSaleMachine.Client
             }
 
             Params.Result = data;
+
+            data.log.Write(LogMessageType.Information, "WAIT BILL: Выход на оказание услуги.");
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        int Timeout = 0;
+
+        private void TimeOutTimer_Tick(object sender, EventArgs e)
         {
-            // уходим в ожидание клиента
-            data.stage = WorkerStateStage.Fail;
-            this.Close();
+            Timeout++;
+
+            if (Globals.ClientConfiguration.Settings.timeout == 0)
+            {
+                Timeout = 0;
+                return;
+            }
+
+            if (Timeout > Globals.ClientConfiguration.Settings.timeout * 60)
+            {
+                data.stage = WorkerStateStage.TimeOut;
+                this.Close();
+            }
         }
 
-        private void pictureBox2_Click(object sender, EventArgs e)
+        private void pBxGiveOxigen_Click(object sender, EventArgs e)
         {
             // запуск услуги
             data.stage = WorkerStateStage.StartService;
@@ -322,31 +379,39 @@ namespace ServiceSaleMachine.Client
                     data.drivers.printer.PrintBody(data.serv);
                     data.drivers.printer.PrintFooter();
                     data.drivers.printer.EndPrint();
+
+                    // увеличим номер чека
+                    GlobalDb.GlobalBase.SetNumberCheck(GlobalDb.GlobalBase.GetCurrentNumberCheck() + 1);
                 }
             }
 
-            if (!(Globals.ClientConfiguration.Settings.offHardware == 0 && Globals.ClientConfiguration.Settings.offBill == 0))
-            {
-                // отладка
-                // запомним принятую сумму
-                data.statistic.AllMoneySumm += 100;
-                // запомним на сколько оказали услуг
-                data.statistic.ServiceMoneySumm += data.serv.price;
-                // Количество банкнот
-                data.statistic.CountBankNote++;
+            // запомним принятую сумму
+            data.statistic.AllMoneySumm += amount;
+            // запомним на сколько оказали услуг
+            data.statistic.ServiceMoneySumm += data.serv.price;
 
-                // Запомним в базе
-                GlobalDb.GlobalBase.SetMoneyStatistic(data.statistic);
-                // заносим в базу платеж
-                GlobalDb.GlobalBase.InsertMoney(data.CurrentUserId, 100);
-                // заносим банкноту
-                GlobalDb.GlobalBase.InsertBankNote();
-            }
+            // Запомним в базе
+            GlobalDb.GlobalBase.SetMoneyStatistic(data.statistic);
+            // заносим в базу платеж
+            GlobalDb.GlobalBase.InsertMoney(data.CurrentUserId, amount);
+
+            data.log.Write(LogMessageType.Information, "WAIT BILL: Оказываем услугу.");
 
             this.Close();
         }
 
-        private void FormWaitPayBill_KeyDown(object sender, KeyEventArgs e)
+        private void pBxReturnBack_Click(object sender, EventArgs e)
+        {
+            // уходим в ожидание клиента
+            data.stage = WorkerStateStage.Fail;
+            this.Close();
+        }
+
+        private void FormWaitPayBill1_KeyDown(object sender, KeyEventArgs e)
+        {
+        }
+
+        private void LabelNameService1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Alt & e.KeyCode == Keys.F4)
             {
@@ -354,23 +419,10 @@ namespace ServiceSaleMachine.Client
             }
         }
 
-        int Timeout = 0;
-
-        private void TimeOutTimer_Tick(object sender, EventArgs e)
+        private void timer1_Tick(object sender, EventArgs e)
         {
-            Timeout++;
-
-            if(Globals.ClientConfiguration.Settings.timeout == 0)
-            {
-                Timeout = 0;
-                return;
-            }
-
-            if (Timeout > Globals.ClientConfiguration.Settings.timeout * 60)
-            {
-                data.stage = WorkerStateStage.TimeOut;
-                this.Close();
-            }
+            pBxGiveOxigen.Image = gifImage.GetNextFrame();
+            //timer1.Enabled = false;
         }
     }
 }

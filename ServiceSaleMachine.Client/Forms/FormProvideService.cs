@@ -76,15 +76,15 @@ namespace ServiceSaleMachine.Client
 
         private void FormProvideService1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            // заканчиваем оказывать услугу
+            // заканчиваем оказывать услугу (перепутали устройства - поменял местами)
             if (data.numberCurrentDevice == (int)ControlDeviceEnum.dev3)
             {
                 data.drivers.control.SendCloseControl((int)ControlDeviceEnum.dev3);
+                data.drivers.control.SendCloseControl((int)ControlDeviceEnum.dev4);
             }
             else
             {
                 data.drivers.control.SendCloseControl((int)ControlDeviceEnum.dev3);
-                data.drivers.control.SendCloseControl((int)ControlDeviceEnum.dev4);
             }
 
             Params.Result = data;

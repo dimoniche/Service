@@ -180,6 +180,28 @@ namespace ServiceSaleMachine.Drivers
             return intRet;
         }
   
+        public bool WriteByteArrayToPrinter(string PrinterName, byte[] array)
+        {
+            bool res = false;
+
+            IntPtr hPrinter;
+
+            if (OpenPrinter(PrinterName, out hPrinter, (int)IntPtr.Zero))
+            {
+                IntPtr pBytes = new IntPtr();
+                Int32 dwWritten;
+
+                Marshal.Copy(array,0,pBytes,array.Length);
+
+                res = WritePrinter(hPrinter, pBytes, array.Length, out dwWritten);
+                Marshal.FreeCoTaskMem(pBytes);
+
+                ClosePrinter(hPrinter);
+            }
+
+            return res;
+        }
+
         public bool SendStringToPrinter(string szPrinterName, string szString)
         {
             bool res = false;

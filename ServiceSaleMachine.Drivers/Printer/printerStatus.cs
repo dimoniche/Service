@@ -2,6 +2,7 @@
 using System;
 using System.IO.Ports;
 using System.Threading;
+using System.Management;
 
 namespace ServiceSaleMachine.Drivers
 {
@@ -35,7 +36,7 @@ namespace ServiceSaleMachine.Drivers
                 serialPort.Handshake = Handshake.None;
                 serialPort.NewLine = "\r\n"; // Пусть пока будет "\r\n".
                 serialPort.DtrEnable = true;
-                serialPort.ReadTimeout = 5000;
+                serialPort.ReadTimeout = 2000;
 
                 try
                 {
@@ -159,9 +160,20 @@ namespace ServiceSaleMachine.Drivers
         {
             this.log = Log;
 
+            if(Globals.ClientConfiguration.Settings.comPortPrinter.Contains("нет")) return PaperEnableEnum.PaperError;
+
+            // сменим порт у принтера
+            SetPrinterPort(Globals.ClientConfiguration.Settings.NamePrinter,"FILE:");
+
             openPort(getNumberComPort());
 
-            if (serialPort == null && serialPort.IsOpen == false) return PaperEnableEnum.PaperError;
+            if (serialPort == null || serialPort.IsOpen == false)
+            {
+                // вернем порт обратно
+                SetPrinterPort(Globals.ClientConfiguration.Settings.NamePrinter, Globals.ClientConfiguration.Settings.comPortPrinter + ":");
+
+                return PaperEnableEnum.PaperError;
+            }
 
             byte[] buf = new byte[3];
             byte[] BufIn = new byte[20];
@@ -174,6 +186,11 @@ namespace ServiceSaleMachine.Drivers
             if (Send(buf) == false)
             {
                 if (log != null) log.Write(LogMessageType.Error, "PRINTER: не послали проверку статуса");
+
+                // вернем порт обратно
+                SetPrinterPort(Globals.ClientConfiguration.Settings.NamePrinter, Globals.ClientConfiguration.Settings.comPortPrinter + ":");
+
+                return PaperEnableEnum.PaperError;
             }
 
             Thread.Sleep(50);
@@ -184,6 +201,10 @@ namespace ServiceSaleMachine.Drivers
                 if (log != null) log.Write(LogMessageType.Error, "PRINTER: не приняли проверку статуса");
 
                 closePort();
+
+                // вернем порт обратно
+                SetPrinterPort(Globals.ClientConfiguration.Settings.NamePrinter, Globals.ClientConfiguration.Settings.comPortPrinter + ":");
+
                 return PaperEnableEnum.PaperError;
             }
 
@@ -194,7 +215,30 @@ namespace ServiceSaleMachine.Drivers
 
             closePort();
 
+            // вернем порт обратно
+            SetPrinterPort(Globals.ClientConfiguration.Settings.NamePrinter, Globals.ClientConfiguration.Settings.comPortPrinter + ":");
+
             return PaperEnableEnum.PaperOk;
+        }
+
+        public static void SetPrinterPort(string printerName, string portName)
+        {
+            var oManagementScope = new ManagementScope(ManagementPath.DefaultPath);
+            oManagementScope.Connect();
+
+            SelectQuery oSelectQuery = new SelectQuery();
+            oSelectQuery.QueryString = @"SELECT * FROM Win32_Printer 
+            WHERE Name = '" + printerName.Replace("\\", "\\\\") + "'";
+
+            ManagementObjectSearcher oObjectSearcher =
+               new ManagementObjectSearcher(oManagementScope, @oSelectQuery);
+            ManagementObjectCollection oObjectCollection = oObjectSearcher.Get();
+
+            foreach (ManagementObject oItem in oObjectCollection)
+            {
+                oItem.Properties["PortName"].Value = portName;
+                oItem.Put();
+            }
         }
     }
 }

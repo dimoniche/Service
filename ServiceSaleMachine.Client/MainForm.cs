@@ -95,6 +95,8 @@ namespace ServiceSaleMachine.Client
                 
             }
 
+            bool check = true;
+
             while (true)
             {
                 try
@@ -107,7 +109,12 @@ namespace ServiceSaleMachine.Client
                     result.stage = WorkerStateStage.None;
 
                     // Проверка статистических данных - может пора заканчивать работать
-                    result = CheckStatistic(result);
+                    if (check)
+                    {
+                        result = CheckStatistic(result);
+                    }
+
+                    check = true;
 
                     if (result.stage != WorkerStateStage.None)
                     {
@@ -151,6 +158,7 @@ namespace ServiceSaleMachine.Client
                         if (result.stage == WorkerStateStage.MainScreen)
                         {
                             // ознакомились - возвращаемся обратно
+                            check = false;
                             continue;
                         }
                         else if (result.stage == WorkerStateStage.ExitProgram)
@@ -172,6 +180,7 @@ namespace ServiceSaleMachine.Client
                         else if (result.stage == WorkerStateStage.ChooseService)
                         {
                             // уходим на выбор услуг
+                            check = false;
                         }
                     }
                     else if (result.stage == WorkerStateStage.DropCassettteBill)
@@ -223,6 +232,7 @@ namespace ServiceSaleMachine.Client
                         else
                         {
                             // вышли из рекламы
+                            check = false;
                             continue;
                         }
                     }
@@ -295,6 +305,7 @@ namespace ServiceSaleMachine.Client
                     }
                     else if (result.stage == WorkerStateStage.TimeOut)
                     {
+                        check = false;
                         continue;
                     }
 
@@ -341,6 +352,7 @@ namespace ServiceSaleMachine.Client
                         }
                         else if (result.stage == WorkerStateStage.TimeOut)
                         {
+                            check = false;
                             continue;
                         }
                     }
@@ -372,6 +384,7 @@ namespace ServiceSaleMachine.Client
                         }
                         else if (result.stage == WorkerStateStage.TimeOut)
                         {
+                            check = false;
                             continue;
                         }
                     }
@@ -388,6 +401,7 @@ namespace ServiceSaleMachine.Client
                     }
                     else if (result.stage == WorkerStateStage.TimeOut)
                     {
+                        check = false;
                         continue;
                     }
 
@@ -566,7 +580,7 @@ namespace ServiceSaleMachine.Client
             }
 
             // проверяем наличие бумаги в принтере
-            if(result.drivers.printer.status.CheckPaper() == PaperEnableEnum.PaperEnd)
+            if(result.drivers.printer.status.CheckPaper(Program.Log) == PaperEnableEnum.PaperEnd)
             {
                 // бумага кончилась
 

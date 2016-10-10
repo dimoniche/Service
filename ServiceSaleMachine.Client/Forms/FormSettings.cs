@@ -1633,7 +1633,9 @@ namespace ServiceSaleMachine.Client
         {
             //data.drivers.printer.GetStatus();
 
-            switch (data.drivers.printer.status.CheckPaper())
+            data.drivers.printer.ClosePrint();
+
+            switch (data.drivers.printer.status.CheckPaper(Program.Log))
             {
                 case PaperEnableEnum.PaperEnd:
                     labelStatusPaper.Text = "Бумага кончилась";

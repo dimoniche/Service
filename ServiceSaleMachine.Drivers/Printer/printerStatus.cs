@@ -8,6 +8,7 @@ namespace ServiceSaleMachine.Drivers
     public class printerStatus
     {
         SerialPort serialPort;
+        Log log = null;
 
         public string getNumberComPort()
         {
@@ -40,9 +41,10 @@ namespace ServiceSaleMachine.Drivers
                 {
                     serialPort.Open();
                 }
-                catch
+                catch (Exception e)
                 {
                     serialPort = null;
+                    if (log != null) log.Write(LogMessageType.Error, "PRINTER OPEN: " + e.ToString());
                     return false;
                 }
             }
@@ -60,9 +62,9 @@ namespace ServiceSaleMachine.Drivers
                     {
                         serialPort.Close();
                     }
-                    catch
+                    catch (Exception e)
                     {
-
+                        if (log != null) log.Write(LogMessageType.Error, "PRINTER CLOSE: " + e.ToString());
                     }
 
                     serialPort = null;
@@ -77,8 +79,9 @@ namespace ServiceSaleMachine.Drivers
                 serialPort.Write(Data, 0, Number);
                 return true;
             }
-            catch
+            catch (Exception e)
             {
+                if (log != null) log.Write(LogMessageType.Error, "PRINTER SEND: " + e.ToString());
                 return false;
             }
         }
@@ -90,8 +93,9 @@ namespace ServiceSaleMachine.Drivers
                 serialPort.Write(Data, 0, Data.Length);
                 return true;
             }
-            catch
+            catch(Exception e)
             {
+                if (log != null) log.Write(LogMessageType.Error, "PRINTER SEND: " + e.ToString());
                 return false;
             }
         }
@@ -106,6 +110,9 @@ namespace ServiceSaleMachine.Drivers
             catch (Exception e)
             {
                 count = 0;
+
+                if (log != null) log.Write(LogMessageType.Error, "PRINTER RECIVE: " + e.ToString());
+
                 return false;
             }
         }
@@ -117,9 +124,12 @@ namespace ServiceSaleMachine.Drivers
                 count = serialPort.Read(Buffer, offset, Length);
                 return true;
             }
-            catch
+            catch (Exception e)
             {
                 count = 0;
+
+                if (log != null) log.Write(LogMessageType.Error, "PRINTER RECIVE: " + e.ToString());
+
                 return false;
             }
         }
@@ -145,9 +155,13 @@ namespace ServiceSaleMachine.Drivers
         /// <param name="sms"></param>
         /// <param name="log"></param>
         /// <returns></returns>
-        public PaperEnableEnum CheckPaper(Log log = null)
+        public PaperEnableEnum CheckPaper(Log Log = null)
         {
+            this.log = Log;
+
             openPort(getNumberComPort());
+
+            if (serialPort == null && serialPort.IsOpen == false) return PaperEnableEnum.PaperError;
 
             byte[] buf = new byte[3];
             byte[] BufIn = new byte[20];
@@ -157,15 +171,17 @@ namespace ServiceSaleMachine.Drivers
             buf[1] = 0x04;
             buf[2] = 0x04;
 
-            Send(buf);
+            if (Send(buf) == false)
+            {
+                if (log != null) log.Write(LogMessageType.Error, "PRINTER: не послали проверку статуса");
+            }
 
-
-            Thread.Sleep(5);
+            Thread.Sleep(50);
 
             int val = 0;
             if (Recieve(BufIn, 1, out val) == false)
             {
-                if (log != null) log.Write(LogMessageType.Error, "PRINTER: не послали проверку статуса");
+                if (log != null) log.Write(LogMessageType.Error, "PRINTER: не приняли проверку статуса");
 
                 closePort();
                 return PaperEnableEnum.PaperError;

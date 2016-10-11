@@ -32,6 +32,10 @@
             this.DeviceSettings = new System.Windows.Forms.TabPage();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.labSummCheck = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.butSendCode = new System.Windows.Forms.Button();
+            this.cBxCommand = new System.Windows.Forms.ComboBox();
             this.buttonStopScanerPoll = new System.Windows.Forms.Button();
             this.buttonStartScanerPoll = new System.Windows.Forms.Button();
             this.LabelCode = new System.Windows.Forms.Label();
@@ -65,6 +69,9 @@
             this.label4 = new System.Windows.Forms.Label();
             this.cBxComPortBill = new System.Windows.Forms.ComboBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tBxsumm = new System.Windows.Forms.TextBox();
+            this.label33 = new System.Windows.Forms.Label();
+            this.buttoninsertcheck = new System.Windows.Forms.Button();
             this.labelStatusPaper = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
             this.cBxPrinterPort = new System.Windows.Forms.ComboBox();
@@ -109,7 +116,7 @@
             this.edtDBUserName = new System.Windows.Forms.TextBox();
             this.label28 = new System.Windows.Forms.Label();
             this.edtBDname = new System.Windows.Forms.TextBox();
-            this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.tabViewUser = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button12 = new System.Windows.Forms.Button();
@@ -118,10 +125,19 @@
             this.button10 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.btnShowDB = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label8 = new System.Windows.Forms.Label();
             this.dtDBFrom = new System.Windows.Forms.DateTimePicker();
+            this.tabCheckView = new System.Windows.Forms.TabPage();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.CheckView = new System.Windows.Forms.DataGridView();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.butCheck = new System.Windows.Forms.Button();
+            this.tabLog = new System.Windows.Forms.TabPage();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.LogView = new System.Windows.Forms.DataGridView();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.button13 = new System.Windows.Forms.Button();
             this.tabPage10 = new System.Windows.Forms.TabPage();
             this.resSMS = new System.Windows.Forms.Label();
             this.cBxSpeedModem = new System.Windows.Forms.ComboBox();
@@ -201,13 +217,7 @@
             this.labelTimeLastRefresh = new System.Windows.Forms.Label();
             this.labelWorkFromLastRefresh = new System.Windows.Forms.Label();
             this.buttonResetTimeRefresh = new System.Windows.Forms.Button();
-            this.buttoninsertcheck = new System.Windows.Forms.Button();
-            this.label33 = new System.Windows.Forms.Label();
-            this.tBxsumm = new System.Windows.Forms.TextBox();
-            this.cBxCommand = new System.Windows.Forms.ComboBox();
-            this.butSendCode = new System.Windows.Forms.Button();
-            this.label34 = new System.Windows.Forms.Label();
-            this.labSummCheck = new System.Windows.Forms.Label();
+            this.cbxAllUser = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -218,9 +228,17 @@
             this.tabViewDataBase.SuspendLayout();
             this.tabDataBaseSetting.SuspendLayout();
             this.tabPage7.SuspendLayout();
-            this.tabPage8.SuspendLayout();
+            this.tabViewUser.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
+            this.tabCheckView.SuspendLayout();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CheckView)).BeginInit();
+            this.panel2.SuspendLayout();
+            this.tabLog.SuspendLayout();
+            this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LogView)).BeginInit();
+            this.panel4.SuspendLayout();
             this.tabPage10.SuspendLayout();
             this.groupBxSettingModem.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -302,6 +320,44 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Сканер";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // labSummCheck
+            // 
+            this.labSummCheck.AutoSize = true;
+            this.labSummCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labSummCheck.Location = new System.Drawing.Point(135, 102);
+            this.labSummCheck.Name = "labSummCheck";
+            this.labSummCheck.Size = new System.Drawing.Size(24, 25);
+            this.labSummCheck.TabIndex = 14;
+            this.labSummCheck.Text = "0";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(17, 114);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(82, 13);
+            this.label34.TabIndex = 13;
+            this.label34.Text = "Сумма на чеке";
+            // 
+            // butSendCode
+            // 
+            this.butSendCode.Location = new System.Drawing.Point(224, 193);
+            this.butSendCode.Name = "butSendCode";
+            this.butSendCode.Size = new System.Drawing.Size(75, 23);
+            this.butSendCode.TabIndex = 12;
+            this.butSendCode.Text = "Послать";
+            this.butSendCode.UseVisualStyleBackColor = true;
+            this.butSendCode.Click += new System.EventHandler(this.butSendCode_Click);
+            // 
+            // cBxCommand
+            // 
+            this.cBxCommand.FormattingEnabled = true;
+            this.cBxCommand.Location = new System.Drawing.Point(76, 195);
+            this.cBxCommand.Name = "cBxCommand";
+            this.cBxCommand.Size = new System.Drawing.Size(121, 21);
+            this.cBxCommand.TabIndex = 11;
+            this.cBxCommand.SelectedIndexChanged += new System.EventHandler(this.cBxCommand_SelectedIndexChanged);
             // 
             // buttonStopScanerPoll
             // 
@@ -663,6 +719,33 @@
             this.tabPage4.Text = "Принтер";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // tBxsumm
+            // 
+            this.tBxsumm.Location = new System.Drawing.Point(601, 119);
+            this.tBxsumm.Name = "tBxsumm";
+            this.tBxsumm.Size = new System.Drawing.Size(121, 20);
+            this.tBxsumm.TabIndex = 49;
+            this.tBxsumm.Text = "250";
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(538, 124);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(57, 13);
+            this.label33.TabIndex = 48;
+            this.label33.Text = "на сумму ";
+            // 
+            // buttoninsertcheck
+            // 
+            this.buttoninsertcheck.Location = new System.Drawing.Point(394, 119);
+            this.buttoninsertcheck.Name = "buttoninsertcheck";
+            this.buttoninsertcheck.Size = new System.Drawing.Size(138, 23);
+            this.buttoninsertcheck.TabIndex = 47;
+            this.buttoninsertcheck.Text = "Внести чек в базу";
+            this.buttoninsertcheck.UseVisualStyleBackColor = true;
+            this.buttoninsertcheck.Click += new System.EventHandler(this.buttoninsertcheck_Click);
+            // 
             // labelStatusPaper
             // 
             this.labelStatusPaper.AutoSize = true;
@@ -1020,7 +1103,9 @@
             // tabDataBaseSetting
             // 
             this.tabDataBaseSetting.Controls.Add(this.tabPage7);
-            this.tabDataBaseSetting.Controls.Add(this.tabPage8);
+            this.tabDataBaseSetting.Controls.Add(this.tabViewUser);
+            this.tabDataBaseSetting.Controls.Add(this.tabCheckView);
+            this.tabDataBaseSetting.Controls.Add(this.tabLog);
             this.tabDataBaseSetting.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabDataBaseSetting.Location = new System.Drawing.Point(3, 3);
             this.tabDataBaseSetting.Name = "tabDataBaseSetting";
@@ -1110,17 +1195,17 @@
             this.edtBDname.Size = new System.Drawing.Size(181, 20);
             this.edtBDname.TabIndex = 4;
             // 
-            // tabPage8
+            // tabViewUser
             // 
-            this.tabPage8.Controls.Add(this.dataGridView1);
-            this.tabPage8.Controls.Add(this.panel1);
-            this.tabPage8.Location = new System.Drawing.Point(4, 22);
-            this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage8.Size = new System.Drawing.Size(805, 544);
-            this.tabPage8.TabIndex = 1;
-            this.tabPage8.Text = "Просмотр";
-            this.tabPage8.UseVisualStyleBackColor = true;
+            this.tabViewUser.Controls.Add(this.dataGridView1);
+            this.tabViewUser.Controls.Add(this.panel1);
+            this.tabViewUser.Location = new System.Drawing.Point(4, 22);
+            this.tabViewUser.Name = "tabViewUser";
+            this.tabViewUser.Padding = new System.Windows.Forms.Padding(3);
+            this.tabViewUser.Size = new System.Drawing.Size(805, 544);
+            this.tabViewUser.TabIndex = 1;
+            this.tabViewUser.Text = "Просмотр данных пользователя";
+            this.tabViewUser.UseVisualStyleBackColor = true;
             // 
             // dataGridView1
             // 
@@ -1133,13 +1218,13 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.cbxAllUser);
             this.panel1.Controls.Add(this.button12);
             this.panel1.Controls.Add(this.button11);
             this.panel1.Controls.Add(this.edtMoney);
             this.panel1.Controls.Add(this.button10);
             this.panel1.Controls.Add(this.button4);
             this.panel1.Controls.Add(this.button3);
-            this.panel1.Controls.Add(this.btnShowDB);
             this.panel1.Controls.Add(this.dateTimePicker1);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.dtDBFrom);
@@ -1151,7 +1236,8 @@
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(272, 53);
+            this.button12.Enabled = false;
+            this.button12.Location = new System.Drawing.Point(78, 54);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(128, 23);
             this.button12.TabIndex = 9;
@@ -1161,17 +1247,18 @@
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(430, 17);
+            this.button11.Enabled = false;
+            this.button11.Location = new System.Drawing.Point(442, 53);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(60, 23);
             this.button11.TabIndex = 8;
-            this.button11.Text = "Счета";
+            this.button11.Text = "Счет";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // edtMoney
             // 
-            this.edtMoney.Location = new System.Drawing.Point(217, 56);
+            this.edtMoney.Location = new System.Drawing.Point(387, 56);
             this.edtMoney.Name = "edtMoney";
             this.edtMoney.Size = new System.Drawing.Size(49, 20);
             this.edtMoney.TabIndex = 7;
@@ -1179,11 +1266,12 @@
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(83, 54);
+            this.button10.Enabled = false;
+            this.button10.Location = new System.Drawing.Point(212, 54);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(128, 23);
+            this.button10.Size = new System.Drawing.Size(169, 23);
             this.button10.TabIndex = 6;
-            this.button10.Text = "\"положить деньги\"";
+            this.button10.Text = "\"Положить деньги\" на счет";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click_1);
             // 
@@ -1199,7 +1287,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(575, 75);
+            this.button3.Location = new System.Drawing.Point(721, 75);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 4;
@@ -1207,16 +1295,6 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Visible = false;
             this.button3.Click += new System.EventHandler(this.button3_Click_1);
-            // 
-            // btnShowDB
-            // 
-            this.btnShowDB.Location = new System.Drawing.Point(310, 17);
-            this.btnShowDB.Name = "btnShowDB";
-            this.btnShowDB.Size = new System.Drawing.Size(48, 23);
-            this.btnShowDB.TabIndex = 3;
-            this.btnShowDB.Text = "Логи";
-            this.btnShowDB.UseVisualStyleBackColor = true;
-            this.btnShowDB.Click += new System.EventHandler(this.btnShowDB_Click);
             // 
             // dateTimePicker1
             // 
@@ -1242,6 +1320,104 @@
             this.dtDBFrom.Name = "dtDBFrom";
             this.dtDBFrom.Size = new System.Drawing.Size(128, 20);
             this.dtDBFrom.TabIndex = 0;
+            // 
+            // tabCheckView
+            // 
+            this.tabCheckView.Controls.Add(this.panel3);
+            this.tabCheckView.Controls.Add(this.panel2);
+            this.tabCheckView.Location = new System.Drawing.Point(4, 22);
+            this.tabCheckView.Name = "tabCheckView";
+            this.tabCheckView.Padding = new System.Windows.Forms.Padding(3);
+            this.tabCheckView.Size = new System.Drawing.Size(805, 544);
+            this.tabCheckView.TabIndex = 2;
+            this.tabCheckView.Text = "Просмотр чеков";
+            this.tabCheckView.UseVisualStyleBackColor = true;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.CheckView);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(3, 83);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(799, 458);
+            this.panel3.TabIndex = 4;
+            // 
+            // CheckView
+            // 
+            this.CheckView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.CheckView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CheckView.Location = new System.Drawing.Point(0, 0);
+            this.CheckView.Name = "CheckView";
+            this.CheckView.Size = new System.Drawing.Size(799, 458);
+            this.CheckView.TabIndex = 3;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.butCheck);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(3, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(799, 80);
+            this.panel2.TabIndex = 3;
+            // 
+            // butCheck
+            // 
+            this.butCheck.Location = new System.Drawing.Point(12, 27);
+            this.butCheck.Name = "butCheck";
+            this.butCheck.Size = new System.Drawing.Size(60, 23);
+            this.butCheck.TabIndex = 6;
+            this.butCheck.Text = "Все чеки";
+            this.butCheck.UseVisualStyleBackColor = true;
+            this.butCheck.Click += new System.EventHandler(this.butCheck_Click);
+            // 
+            // tabLog
+            // 
+            this.tabLog.Controls.Add(this.panel5);
+            this.tabLog.Controls.Add(this.panel4);
+            this.tabLog.Location = new System.Drawing.Point(4, 22);
+            this.tabLog.Name = "tabLog";
+            this.tabLog.Padding = new System.Windows.Forms.Padding(3);
+            this.tabLog.Size = new System.Drawing.Size(805, 544);
+            this.tabLog.TabIndex = 3;
+            this.tabLog.Text = "Просмотр логов";
+            this.tabLog.UseVisualStyleBackColor = true;
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.LogView);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel5.Location = new System.Drawing.Point(3, 103);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(799, 438);
+            this.panel5.TabIndex = 1;
+            // 
+            // LogView
+            // 
+            this.LogView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.LogView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LogView.Location = new System.Drawing.Point(0, 0);
+            this.LogView.Name = "LogView";
+            this.LogView.Size = new System.Drawing.Size(799, 438);
+            this.LogView.TabIndex = 4;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.button13);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(3, 3);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(799, 100);
+            this.panel4.TabIndex = 0;
+            // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(34, 32);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(48, 23);
+            this.button13.TabIndex = 4;
+            this.button13.Text = "Логи";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click_2);
             // 
             // tabPage10
             // 
@@ -2083,70 +2259,16 @@
             this.buttonResetTimeRefresh.UseVisualStyleBackColor = true;
             this.buttonResetTimeRefresh.Click += new System.EventHandler(this.buttonResetTimeRefresh_Click);
             // 
-            // buttoninsertcheck
+            // cbxAllUser
             // 
-            this.buttoninsertcheck.Location = new System.Drawing.Point(394, 119);
-            this.buttoninsertcheck.Name = "buttoninsertcheck";
-            this.buttoninsertcheck.Size = new System.Drawing.Size(138, 23);
-            this.buttoninsertcheck.TabIndex = 47;
-            this.buttoninsertcheck.Text = "Внести чек в базу";
-            this.buttoninsertcheck.UseVisualStyleBackColor = true;
-            this.buttoninsertcheck.Click += new System.EventHandler(this.buttoninsertcheck_Click);
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(538, 124);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(57, 13);
-            this.label33.TabIndex = 48;
-            this.label33.Text = "на сумму ";
-            // 
-            // tBxsumm
-            // 
-            this.tBxsumm.Location = new System.Drawing.Point(601, 119);
-            this.tBxsumm.Name = "tBxsumm";
-            this.tBxsumm.Size = new System.Drawing.Size(121, 20);
-            this.tBxsumm.TabIndex = 49;
-            this.tBxsumm.Text = "250";
-            // 
-            // cBxCommand
-            // 
-            this.cBxCommand.FormattingEnabled = true;
-            this.cBxCommand.Location = new System.Drawing.Point(76, 195);
-            this.cBxCommand.Name = "cBxCommand";
-            this.cBxCommand.Size = new System.Drawing.Size(121, 21);
-            this.cBxCommand.TabIndex = 11;
-            this.cBxCommand.SelectedIndexChanged += new System.EventHandler(this.cBxCommand_SelectedIndexChanged);
-            // 
-            // butSendCode
-            // 
-            this.butSendCode.Location = new System.Drawing.Point(224, 193);
-            this.butSendCode.Name = "butSendCode";
-            this.butSendCode.Size = new System.Drawing.Size(75, 23);
-            this.butSendCode.TabIndex = 12;
-            this.butSendCode.Text = "Послать";
-            this.butSendCode.UseVisualStyleBackColor = true;
-            this.butSendCode.Click += new System.EventHandler(this.butSendCode_Click);
-            // 
-            // label34
-            // 
-            this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(17, 114);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(82, 13);
-            this.label34.TabIndex = 13;
-            this.label34.Text = "Сумма на чеке";
-            // 
-            // labSummCheck
-            // 
-            this.labSummCheck.AutoSize = true;
-            this.labSummCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labSummCheck.Location = new System.Drawing.Point(135, 102);
-            this.labSummCheck.Name = "labSummCheck";
-            this.labSummCheck.Size = new System.Drawing.Size(24, 25);
-            this.labSummCheck.TabIndex = 14;
-            this.labSummCheck.Text = "0";
+            this.cbxAllUser.AutoSize = true;
+            this.cbxAllUser.Location = new System.Drawing.Point(315, 20);
+            this.cbxAllUser.Name = "cbxAllUser";
+            this.cbxAllUser.Size = new System.Drawing.Size(119, 17);
+            this.cbxAllUser.TabIndex = 10;
+            this.cbxAllUser.Text = "Все пользователи";
+            this.cbxAllUser.UseVisualStyleBackColor = true;
+            this.cbxAllUser.CheckedChanged += new System.EventHandler(this.cbxAllUser_CheckedChanged);
             // 
             // FormSettings
             // 
@@ -2173,10 +2295,18 @@
             this.tabDataBaseSetting.ResumeLayout(false);
             this.tabPage7.ResumeLayout(false);
             this.tabPage7.PerformLayout();
-            this.tabPage8.ResumeLayout(false);
+            this.tabViewUser.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.tabCheckView.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.CheckView)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.tabLog.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.LogView)).EndInit();
+            this.panel4.ResumeLayout(false);
             this.tabPage10.ResumeLayout(false);
             this.tabPage10.PerformLayout();
             this.groupBxSettingModem.ResumeLayout(false);
@@ -2254,9 +2384,8 @@
         private System.Windows.Forms.TabPage tabViewDataBase;
         private System.Windows.Forms.TabControl tabDataBaseSetting;
         private System.Windows.Forms.TabPage tabPage7;
-        private System.Windows.Forms.TabPage tabPage8;
+        private System.Windows.Forms.TabPage tabViewUser;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button btnShowDB;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DateTimePicker dtDBFrom;
@@ -2394,5 +2523,16 @@
         private System.Windows.Forms.ComboBox cBxCommand;
         private System.Windows.Forms.Label labSummCheck;
         private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.TabPage tabCheckView;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button butCheck;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.DataGridView CheckView;
+        private System.Windows.Forms.TabPage tabLog;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.DataGridView LogView;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.CheckBox cbxAllUser;
     }
 }

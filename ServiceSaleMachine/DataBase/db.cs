@@ -471,6 +471,7 @@ namespace ServiceSaleMachine
             return getDataTable(queryString);
 
         }
+
         /// <summary>
         /// получить список счетов активных
         /// </summary>
@@ -481,6 +482,14 @@ namespace ServiceSaleMachine
             string queryString = @"select * from usermoney";
             return getDataTable(queryString);
 
+        }
+
+        public DataTable GetAmount(int id)
+        {
+            DataTable dt = new DataTable();
+
+            string queryString = @"select * from usermoney where iduser='" + id.ToString() + "'";
+            return getDataTable(queryString);
         }
 
         /// <summary>
@@ -576,6 +585,7 @@ namespace ServiceSaleMachine
             return ExecuteNonQuery(query);
 
         }
+
         /// <summary>
         /// добавить пользователя
         /// </summary>
@@ -897,11 +907,23 @@ namespace ServiceSaleMachine
         {
             if (Globals.ClientConfiguration.Settings.offDataBase == 1) return null;
 
-            string queryString = "select * from payment where iduser='" + iduser.ToString() + "'";
+            string queryString = "select * from payments where iduser='" + iduser.ToString() + "'";
 
             return getDataTable(queryString);
+        }
 
+        /// <summary>
+        /// Платежи всех пользователей
+        /// </summary>
+        /// <param name="iduser"></param>
+        /// <returns></returns>
+        public DataTable GetPaymentAllUser()
+        {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return null;
 
+            string queryString = "select * from payments";
+
+            return getDataTable(queryString);
         }
     }
 }

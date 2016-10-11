@@ -937,7 +937,7 @@ namespace ServiceSaleMachine.Client
 
         private void btnShowDB_Click(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = GlobalDb.GlobalBase.GetLogWork();
+           
         }
 
         private void button3_Click_1(object sender, EventArgs e)
@@ -1275,9 +1275,17 @@ namespace ServiceSaleMachine.Client
             data.drivers.control.SendCloseControl((int)ControlDeviceEnum.dev4);
         }
 
+        bool login = false;
+
         private void button4_Click_1(object sender, EventArgs e)
         {
             dataGridView1.DataSource = GlobalDb.GlobalBase.GetUsers();
+
+            login = true;
+
+            button12.Enabled = true;
+            button10.Enabled = true;
+            button11.Enabled = true;
         }
 
         private void button9_Click_1(object sender, EventArgs e)
@@ -1406,13 +1414,49 @@ namespace ServiceSaleMachine.Client
 
         private void button10_Click_1(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(dataGridView1[0, dataGridView1.CurrentRow.Index].Value.ToString());
+            int id = 0;
+
+            try
+            {
+                id = Convert.ToInt32(dataGridView1[0, dataGridView1.CurrentRow.Index].Value.ToString());
+            }
+            catch
+            {
+                return;
+            }
+            
             GlobalDb.GlobalBase.AddToAmount(id, Convert.ToInt32(edtMoney.Text));
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = GlobalDb.GlobalBase.GetAmount();
+            int id = 0;
+
+            if (cbxAllUser.Checked)
+            {
+                DataTable dt1 = GlobalDb.GlobalBase.GetAmount();
+                if (dt1 != null)
+                {
+                    dataGridView1.DataSource = dt1;
+                }
+
+                return;
+            }
+
+            try
+            {
+                id = Convert.ToInt32(dataGridView1[0, dataGridView1.CurrentRow.Index].Value.ToString());
+            }
+            catch
+            {
+                return;
+            }
+
+            dataGridView1.DataSource = GlobalDb.GlobalBase.GetAmount(id);
+
+            button12.Enabled = false;
+            button10.Enabled = false;
+            button11.Enabled = false;
         }
 
         private void firmsname_Leave(object sender, EventArgs e)
@@ -1453,11 +1497,38 @@ namespace ServiceSaleMachine.Client
 
         private void button12_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(dataGridView1[0, dataGridView1.CurrentRow.Index].Value.ToString());
+            int id = 0;
+
+            if (cbxAllUser.Checked)
+            {
+                DataTable dt1 = GlobalDb.GlobalBase.GetPaymentAllUser();
+                if (dt1 != null)
+                {
+                    dataGridView1.DataSource = dt1;
+                }
+
+                return;
+            }
+
+            try
+            {
+                id = Convert.ToInt32(dataGridView1[0, dataGridView1.CurrentRow.Index].Value.ToString());
+            }
+            catch
+            {
+                id = 0;
+            }
+            
 
             DataTable dt = GlobalDb.GlobalBase.GetPaymentFromUser(id);
             if (dt != null)
-            { dataGridView1.DataSource = dt; }
+            {
+                dataGridView1.DataSource = dt;
+
+                button12.Enabled = false;
+                button10.Enabled = false;
+                button11.Enabled = false;
+            }
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -1675,6 +1746,35 @@ namespace ServiceSaleMachine.Client
         private void butSendCode_Click(object sender, EventArgs e)
         {
             data.drivers.scaner.Request((ZebexCommandEnum)cBxCommand.SelectedIndex);
+        }
+
+        private void butCheck_Click(object sender, EventArgs e)
+        {
+            CheckView.DataSource = GlobalDb.GlobalBase.GetChecks();
+        }
+
+        private void button13_Click_2(object sender, EventArgs e)
+        {
+            LogView.DataSource = GlobalDb.GlobalBase.GetLogWork();
+        }
+
+        private void cbxAllUser_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbxAllUser.Checked)
+            {
+                button4.Enabled = false;
+                button11.Enabled = true;
+                button12.Enabled = true;
+                button10.Enabled = false;
+            }
+            else
+            {
+                button4.Enabled = true;
+
+                button10.Enabled = false;
+                button11.Enabled = false;
+                button12.Enabled = false;
+            }
         }
     }
 }

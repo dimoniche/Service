@@ -160,20 +160,9 @@ namespace ServiceSaleMachine.Drivers
         {
             this.log = Log;
 
-            if(Globals.ClientConfiguration.Settings.comPortPrinter.Contains("нет")) return PaperEnableEnum.PaperError;
-
-            // сменим порт у принтера
-            SetPrinterPort(Globals.ClientConfiguration.Settings.NamePrinter,"FILE:");
-
             openPort(getNumberComPort());
 
-            if (serialPort == null || serialPort.IsOpen == false)
-            {
-                // вернем порт обратно
-                SetPrinterPort(Globals.ClientConfiguration.Settings.NamePrinter, Globals.ClientConfiguration.Settings.comPortPrinter + ":");
-
-                return PaperEnableEnum.PaperError;
-            }
+            if (serialPort == null || serialPort.IsOpen == false) return PaperEnableEnum.PaperError;
 
             byte[] buf = new byte[3];
             byte[] BufIn = new byte[20];
@@ -186,11 +175,6 @@ namespace ServiceSaleMachine.Drivers
             if (Send(buf) == false)
             {
                 if (log != null) log.Write(LogMessageType.Error, "PRINTER: не послали проверку статуса");
-
-                // вернем порт обратно
-                SetPrinterPort(Globals.ClientConfiguration.Settings.NamePrinter, Globals.ClientConfiguration.Settings.comPortPrinter + ":");
-
-                return PaperEnableEnum.PaperError;
             }
 
             Thread.Sleep(50);
@@ -201,10 +185,6 @@ namespace ServiceSaleMachine.Drivers
                 if (log != null) log.Write(LogMessageType.Error, "PRINTER: не приняли проверку статуса");
 
                 closePort();
-
-                // вернем порт обратно
-                SetPrinterPort(Globals.ClientConfiguration.Settings.NamePrinter, Globals.ClientConfiguration.Settings.comPortPrinter + ":");
-
                 return PaperEnableEnum.PaperError;
             }
 
@@ -214,9 +194,6 @@ namespace ServiceSaleMachine.Drivers
             if ((BufIn[0] & 0x40) > 0) return PaperEnableEnum.PaperEnd;
 
             closePort();
-
-            // вернем порт обратно
-            SetPrinterPort(Globals.ClientConfiguration.Settings.NamePrinter, Globals.ClientConfiguration.Settings.comPortPrinter + ":");
 
             return PaperEnableEnum.PaperOk;
         }

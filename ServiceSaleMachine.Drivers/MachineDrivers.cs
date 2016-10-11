@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Threading;
 
 namespace ServiceSaleMachine.Drivers
@@ -622,7 +623,10 @@ namespace ServiceSaleMachine.Drivers
             Message message = new Message();
 
             message.Event = DeviceEvent.Scaner;
-            message.Content = str;
+
+            string result = Regex.Replace(str, "[^0-9]+", "");
+
+            message.Content = result;
 
             log.Write(LogMessageType.Information, "SCANNER: " + message.Content);
 

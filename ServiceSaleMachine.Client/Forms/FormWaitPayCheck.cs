@@ -118,6 +118,12 @@ namespace ServiceSaleMachine.Client
                     {
                         // нет такого чека
                         SecondMessageText.Text = "Чек не существует.";
+
+                        if (amount == 0)
+                        {
+                            pBxReturnBack.Enabled = true;
+                        }
+
                         return;
                     }
 
@@ -125,6 +131,12 @@ namespace ServiceSaleMachine.Client
                     {
                         // чек погашен - отклоним его
                         SecondMessageText.Text = "Чек уже был использован ранее.";
+
+                        if (amount == 0)
+                        {
+                            pBxReturnBack.Enabled = true;
+                        }
+
                         return;
                     }
 

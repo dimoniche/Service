@@ -312,7 +312,7 @@ namespace ServiceSaleMachine
         {
             if (Globals.ClientConfiguration.Settings.offDataBase == 1) return 0;
 
-            MySqlDataReader dr = Execute("select sum(id) from checks where active = 0");
+            MySqlDataReader dr = Execute("select sum(amount) from checks where active = 0");
 
             return GetIntFromReq(dr);
 

@@ -240,6 +240,8 @@ namespace ServiceSaleMachine.Client
                         // сдача на чек
                         if (amount > data.serv.price)
                         {
+                            data.log.Write(LogMessageType.Information, "WAIT BILL: Сумма сдачи " + diff);
+
                             ChooseChangeEnum ch = ChooseChangeEnum.None;
 
                             if (Globals.ClientConfiguration.Settings.changeToAccount == 1 && Globals.ClientConfiguration.Settings.changeToCheck == 1)
@@ -258,6 +260,8 @@ namespace ServiceSaleMachine.Client
 
                             if (ch == ChooseChangeEnum.ChangeToAccount)
                             {
+                                data.log.Write(LogMessageType.Information, "WAIT BILL: сдача на аккаунт. Сумма сдачи " + diff);
+
                                 // заносим в аккаунт - если не авторизовались - нужна авторизация в аккаунт
                                 if (data.CurrentUserId == 0)
                                 {
@@ -274,6 +278,7 @@ namespace ServiceSaleMachine.Client
                             else
                             {
                                 // выдаем чек
+                                data.log.Write(LogMessageType.Information, "WAIT BILL: сдача на чек. Сумма сдачи " + diff);
 
                                 // запомним сколько выдали на чеке
                                 data.statistic.BarCodeMoneySumm += diff;

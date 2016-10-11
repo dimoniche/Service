@@ -119,6 +119,7 @@
             this.tabViewUser = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cbxAllUser = new System.Windows.Forms.CheckBox();
             this.button12 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.edtMoney = new System.Windows.Forms.TextBox();
@@ -217,7 +218,6 @@
             this.labelTimeLastRefresh = new System.Windows.Forms.Label();
             this.labelWorkFromLastRefresh = new System.Windows.Forms.Label();
             this.buttonResetTimeRefresh = new System.Windows.Forms.Button();
-            this.cbxAllUser = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -1234,6 +1234,17 @@
             this.panel1.Size = new System.Drawing.Size(799, 104);
             this.panel1.TabIndex = 0;
             // 
+            // cbxAllUser
+            // 
+            this.cbxAllUser.AutoSize = true;
+            this.cbxAllUser.Location = new System.Drawing.Point(315, 20);
+            this.cbxAllUser.Name = "cbxAllUser";
+            this.cbxAllUser.Size = new System.Drawing.Size(119, 17);
+            this.cbxAllUser.TabIndex = 10;
+            this.cbxAllUser.Text = "Все пользователи";
+            this.cbxAllUser.UseVisualStyleBackColor = true;
+            this.cbxAllUser.CheckedChanged += new System.EventHandler(this.cbxAllUser_CheckedChanged);
+            // 
             // button12
             // 
             this.button12.Enabled = false;
@@ -2179,6 +2190,7 @@
             this.labelServiceMoneySumm.Size = new System.Drawing.Size(131, 13);
             this.labelServiceMoneySumm.TabIndex = 2;
             this.labelServiceMoneySumm.Text = "Oказано услуг на сумму";
+            this.labelServiceMoneySumm.Visible = false;
             // 
             // labelBarCodeMoneySumm
             // 
@@ -2258,17 +2270,6 @@
             this.buttonResetTimeRefresh.Text = "Обновить время обслуживания";
             this.buttonResetTimeRefresh.UseVisualStyleBackColor = true;
             this.buttonResetTimeRefresh.Click += new System.EventHandler(this.buttonResetTimeRefresh_Click);
-            // 
-            // cbxAllUser
-            // 
-            this.cbxAllUser.AutoSize = true;
-            this.cbxAllUser.Location = new System.Drawing.Point(315, 20);
-            this.cbxAllUser.Name = "cbxAllUser";
-            this.cbxAllUser.Size = new System.Drawing.Size(119, 17);
-            this.cbxAllUser.TabIndex = 10;
-            this.cbxAllUser.Text = "Все пользователи";
-            this.cbxAllUser.UseVisualStyleBackColor = true;
-            this.cbxAllUser.CheckedChanged += new System.EventHandler(this.cbxAllUser_CheckedChanged);
             // 
             // FormSettings
             // 

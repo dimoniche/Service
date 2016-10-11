@@ -691,7 +691,6 @@ namespace ServiceSaleMachine.Client
             labelAllMoneySumm.Text = "Сумма принятых денег " + data.statistic.AllMoneySumm.ToString() + " руб.";
             labelAccountMoneySumm.Text = "Cумма денег на аккаунтах " + data.statistic.AccountMoneySumm.ToString() + " руб.";
             labelBarCodeMoneySumm.Text = "Cумма денег на штрихкод-чеках " + data.statistic.BarCodeMoneySumm.ToString() + " руб.";
-            labelServiceMoneySumm.Text = "Cумма денег на штрихкод-чеках " + data.statistic.ServiceMoneySumm.ToString() + " руб.";
             labelServiceMoneySumm.Text = "Oказано услуг на сумму " + data.statistic.ServiceMoneySumm.ToString() + " руб.";
             labelCountBankNote.Text = "Количество принятых банкнот " + data.statistic.CountBankNote.ToString() + " шт.";
         }

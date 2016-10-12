@@ -28,6 +28,11 @@ namespace ServiceSaleMachine
             int step3 = (step1 + step2) % 10;
             array[length - 1] = 10 - step3;
 
+            if(array[length - 1] == 10)
+            {
+                array[length - 1] = 0;
+            }
+
             for (int i = 0; i < length; i++)
             {
                 str = str + Convert.ToChar(48 + array[i]);

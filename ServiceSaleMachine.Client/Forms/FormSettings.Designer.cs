@@ -844,6 +844,7 @@
             this.butWriteBarCode.TabIndex = 41;
             this.butWriteBarCode.Text = "Распечатать баркод";
             this.butWriteBarCode.UseVisualStyleBackColor = true;
+            this.butWriteBarCode.Visible = false;
             this.butWriteBarCode.Click += new System.EventHandler(this.button16_Click);
             // 
             // textBox2

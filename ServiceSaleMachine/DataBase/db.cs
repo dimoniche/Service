@@ -9,6 +9,18 @@ namespace ServiceSaleMachine
     {
         MySqlConnectionStringBuilder mysqlCSB;
         MySqlConnection con;
+        Log log;
+
+        public db(Log log)
+        {
+            mysqlCSB = new MySqlConnectionStringBuilder();
+            mysqlCSB.Server = Globals.DbConfiguration.Server;
+            mysqlCSB.Database = Globals.DbConfiguration.Database;
+            mysqlCSB.UserID = Globals.DbConfiguration.UserID;
+            mysqlCSB.Password = Globals.DbConfiguration.Password;
+
+            this.log = log;
+        }
 
         public db()
         {
@@ -17,6 +29,8 @@ namespace ServiceSaleMachine
             mysqlCSB.Database = Globals.DbConfiguration.Database;
             mysqlCSB.UserID = Globals.DbConfiguration.UserID;
             mysqlCSB.Password = Globals.DbConfiguration.Password;
+
+            this.log = null;
         }
 
         public bool CreateDB()
@@ -177,8 +191,16 @@ namespace ServiceSaleMachine
                 {
                     dr.Read();
                     String str = "";
-                    if (dr.IsDBNull(0) != true)
-                        str = dr[1].ToString();
+
+                    try
+                    {
+                        if (dr.IsDBNull(0) != true)
+                            str = dr[1].ToString();
+                    }
+                    catch
+                    {
+                    }
+
                     dr.Close();
                     return str;
                 }
@@ -243,7 +265,6 @@ namespace ServiceSaleMachine
             catch (Exception ex)
             {
                 Debug.Print(ex.Message);
-                
                 return null;
             }
         }
@@ -278,14 +299,29 @@ namespace ServiceSaleMachine
                 if (dr.HasRows)
                 {
                     dr.Read();
-                    if (dr.IsDBNull(0) != true)
+
+                    try
                     {
-                        str = dr[0].ToString();
+                        if (dr.IsDBNull(0) != true)
+                        {
+                            str = dr[0].ToString();
+                        }
+                    }
+                    catch
+                    {
                     }
                 }
                 dr.Close();
             }
-            return int.Parse(str);
+
+            try
+            {
+                return int.Parse(str);
+            }
+            catch
+            {
+                return 0;
+            }
         }
         private DateTime GetDTFromReq(MySqlDataReader dr)
         {
@@ -295,9 +331,16 @@ namespace ServiceSaleMachine
                 if (dr.HasRows)
                 {
                     dr.Read();
-                    if ( dr.IsDBNull(0) != true)
+
+                    try
                     {
-                        dt = (DateTime) dr[0];
+                        if (dr.IsDBNull(0) != true)
+                        {
+                            dt = (DateTime)dr[0];
+                        }
+                    }
+                    catch
+                    {
                     }
                 }
                 dr.Close();
@@ -382,29 +425,33 @@ namespace ServiceSaleMachine
 
             UserInfo ui = null;
 
-            try
+            using (MySqlDataReader dr = com.ExecuteReader())
             {
-                using (MySqlDataReader dr = com.ExecuteReader())
+                if (dr != null)
                 {
                     if (dr.HasRows)
                     {
                         dr.Read();
-                        ui = new UserInfo();
-                        ui.Id = (int)dr[0];
-                        ui.Login = (string)dr[1];
-                        ui.Role = (UserRole)dr[3];
+
+                        try
+                        {
+                            ui = new UserInfo();
+                            ui.Id = (int)dr[0];
+                            ui.Login = (string)dr[1];
+                            ui.Role = (UserRole)dr[3];
+                        }
+                        catch
+                        {
+
+                        }
+
                         dr.Close();
 
                         return ui;
                     }
-
                 }
             }
-            catch (Exception ex)
-            {
-                Debug.Print(ex.Message);
 
-            }
             return ui;//null
         }
 
@@ -414,9 +461,9 @@ namespace ServiceSaleMachine
 
             DataTable dt = new DataTable();
 
-            try
+            using (MySqlDataReader dr = com.ExecuteReader())
             {
-                using (MySqlDataReader dr = com.ExecuteReader())
+                if (dr != null)
                 {
                     if (dr.HasRows)
                     {
@@ -427,15 +474,8 @@ namespace ServiceSaleMachine
                 }
             }
 
-            catch (Exception ex)
-            {
-                Debug.Print(ex.Message);
-                return null;
-            }
             return dt;            
         }
-
-
 
         /// <summary>
         /// получить инфу о всех устройствах
@@ -619,15 +659,22 @@ namespace ServiceSaleMachine
                     dr.Read();
                     string s = "0";
 
-                    if (dr.IsDBNull(0) != true)
-                        s = (string)dr[1];
+                    try
+                    {
+                        if (dr.IsDBNull(0) != true)
+                            s = (string)dr[1];
 
-                    int.TryParse(s, out i);
+                        int.TryParse(s, out i);
+                    }
+                    catch
+                    {
+                    }
                 }
 
                 dr.Close();
                 return i;
             }
+
             return 0;
         }
         /// <summary>
@@ -709,18 +756,25 @@ namespace ServiceSaleMachine
             MySqlDataReader dr = Execute(queryString);
             if (dr == null)
             {
-                return ch;
+                dr.Close();
+                return null;
             }
             
-
             if (dr.HasRows)
             {
                 dr.Read();
                 ch = new CheckInfo();
                 ch.Id = (int)dr[0];
 
-                if(dr[1] != null)
-                    ch.dt_start = (DateTime)dr[1];
+                try
+                {
+                    if (dr[1] != null)
+                        ch.dt_start = (DateTime)dr[1];
+                }
+                catch
+                {
+                    ch.dt_start = new DateTime();
+                }
 
                 try
                 {
@@ -732,12 +786,18 @@ namespace ServiceSaleMachine
                     ch.dt_fixed = new DateTime();
                 }
 
-                ch.active = (Boolean)dr[3];
-                ch.IdUser = (int)dr[4];
-                ch.checkstr = (string)dr[5];
-                ch.Number = (int) dr[6];
+                try
+                {
+                    ch.active = (Boolean)dr[3];
+                    ch.IdUser = (int)dr[4];
+                    ch.checkstr = (string)dr[5];
+                    ch.Number = (int)dr[6];
+                    ch.Amount = (int)dr[7];
+                }
+                catch
+                {
+                }
 
-                ch.Amount = (int)dr[7];
                 dr.Close();
 
                 return ch;
@@ -768,6 +828,8 @@ namespace ServiceSaleMachine
             string queryString = "select id from users where (login = '" + User + "') and (password='" + Password + "')";
 
             MySqlDataReader dr = Execute(queryString);
+
+            dr.Close();
             if (dr.HasRows)
             {
                 return true;
@@ -790,8 +852,6 @@ namespace ServiceSaleMachine
             MySqlDataReader dr = Execute(queryString);
 
             return GetIntFromReq(dr);
-
-
         }
         /// <summary>
         /// инфа о последней инкассации

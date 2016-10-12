@@ -1730,11 +1730,16 @@ namespace ServiceSaleMachine.Client
 
             int summ = 0;
 
-            int.TryParse(tBxsumm.Text, out summ);
-            GlobalDb.GlobalBase.AddToCheck(data.CurrentUserId, summ, check);
+            if (int.TryParse(tBxsumm.Text, out summ) == true)
+            {
+                GlobalDb.GlobalBase.AddToCheck(data.CurrentUserId, summ, check);
 
-            // распечатем чек
-            button16_Click(sender,e);
+                // распечатем чек
+                button16_Click(sender, e);
+            }
+            else
+            {
+            }
         }
 
         private void cBxCommand_SelectedIndexChanged(object sender, EventArgs e)

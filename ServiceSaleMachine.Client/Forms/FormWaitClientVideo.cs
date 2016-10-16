@@ -24,7 +24,7 @@ namespace ServiceSaleMachine.Client
             timer1.Enabled = true;
 
             VideoPlayer.settings.setMode("loop", true);
-            VideoPlayer.URL = Globals.GetPath(PathEnum.Video) + "\\o2.mp4";
+            VideoPlayer.URL = Globals.GetPath(PathEnum.Video) + "\\o2.avi";
         }
 
         private void reciveResponse(object sender, ServiceClientResponseEventArgs e)

@@ -581,18 +581,18 @@ namespace ServiceSaleMachine.Client
             }
 
             // проверяем наличие бумаги в принтере
-            if(result.drivers.printer.status.CheckPaper(Program.Log) == PaperEnableEnum.PaperEnd)
-            {
-                // бумага кончилась
+            //if(result.drivers.printer.status.CheckPaper(Program.Log) == PaperEnableEnum.PaperEnd)
+            //{
+            //    // бумага кончилась
 
-                if (Globals.ClientConfiguration.Settings.NoPaperWork == 0)
-                {
-                    // с такой ошибкой не работаем
-                    result.stage = WorkerStateStage.PaperEnd;
-                }
+            //    if (Globals.ClientConfiguration.Settings.NoPaperWork == 0)
+            //    {
+            //        // с такой ошибкой не работаем
+            //        result.stage = WorkerStateStage.PaperEnd;
+            //    }
 
-                Program.Log.Write(LogMessageType.Error, "CHECK_STAT: кончилась бумага.");
-            }
+            //    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: кончилась бумага.");
+            //}
 
             return result;
         }

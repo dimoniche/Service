@@ -23,8 +23,11 @@ namespace ServiceSaleMachine.Client
             data.drivers.ReceivedResponse += reciveResponse;
             timer1.Enabled = true;
 
+            VideoPlayer.uiMode = "none";
             VideoPlayer.settings.setMode("loop", true);
+
             VideoPlayer.URL = Globals.GetPath(PathEnum.Video) + "\\o2.avi";
+            VideoPlayer.Ctlcontrols.play();
         }
 
         private void reciveResponse(object sender, ServiceClientResponseEventArgs e)
@@ -83,11 +86,29 @@ namespace ServiceSaleMachine.Client
 
         private void VideoPlayer_PlayStateChange(object sender, AxWMPLib._WMPOCXEvents_PlayStateChangeEvent e)
         {
-            if (e.newState == 1)
+            if (e.newState == 0)
+            {
+                if (data.log != null)
+                {
+                    data.log.Write(LogMessageType.Error, "Видео не найдено.");
+                }
+            }
+            else if (e.newState == 1)
+            {
+                if (data.log != null)
+                {
+                    data.log.Write(LogMessageType.Error, "Видео остановлено.");
+                }
+            }
+            else if (e.newState == 2)
             {
             }
             else if (e.newState == 8)
             {
+                //if (data.log != null)
+                //{
+                //    data.log.Write(LogMessageType.Error, "Видео закончилось.");
+                //}
             }
         }
 

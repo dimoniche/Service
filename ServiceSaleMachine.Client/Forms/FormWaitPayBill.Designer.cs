@@ -240,6 +240,7 @@
             this.LabelNameService2.Size = new System.Drawing.Size(242, 30);
             this.LabelNameService2.TabIndex = 0;
             this.LabelNameService2.Text = "после тренировки";
+            this.LabelNameService2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormWaitPayBill1_KeyDown);
             // 
             // panel3
             // 
@@ -468,14 +469,14 @@
             this.timer1.Interval = 50;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // FormWaitPayBill1
+            // FormWaitPayBill
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 600);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "FormWaitPayBill1";
+            this.Name = "FormWaitPayBill";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormWaitPayBill1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

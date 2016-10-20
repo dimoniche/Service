@@ -170,15 +170,21 @@ namespace ServiceSaleMachine.Drivers
             Print(" ".PadRight(42 - 20 - statistic.AllMoneySumm.ToString().Length, ' ') + statistic.AllMoneySumm.ToString("00000.00") + TransformCode(" руб"), true);
             Print(eLeft);
 
-            Print(eLeft, false, false);
-            Print(TransformCode("Сумма на акк. "), true);
-            Print(" ".PadRight(42 - 20 - statistic.AccountMoneySumm.ToString().Length, ' ') + statistic.AccountMoneySumm.ToString("00000.00") + TransformCode(" руб"), true);
-            Print(eLeft);
+            if (Globals.ClientConfiguration.Settings.changeToAccount == 1)
+            {
+                Print(eLeft, false, false);
+                Print(TransformCode("Сумма на акк. "), true);
+                Print(" ".PadRight(42 - 20 - statistic.AccountMoneySumm.ToString().Length, ' ') + statistic.AccountMoneySumm.ToString("00000.00") + TransformCode(" руб"), true);
+                Print(eLeft);
+            }
 
-            Print(eLeft, false, false);
-            Print(TransformCode("Сумма на чеках"), true);
-            Print(" ".PadRight(42 - 20 - statistic.BarCodeMoneySumm.ToString().Length, ' ') + statistic.BarCodeMoneySumm.ToString("00000.00") + TransformCode(" руб"), true);
-            Print(eLeft);
+            if (Globals.ClientConfiguration.Settings.changeToCheck == 1)
+            {
+                Print(eLeft, false, false);
+                Print(TransformCode("Сумма на чеках"), true);
+                Print(" ".PadRight(42 - 20 - statistic.BarCodeMoneySumm.ToString().Length, ' ') + statistic.BarCodeMoneySumm.ToString("00000.00") + TransformCode(" руб"), true);
+                Print(eLeft);
+            }
 
             Print(eLeft, false, false);
             Print(TransformCode("Оказано услуг "), true);

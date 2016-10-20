@@ -200,6 +200,7 @@
             this.LabelNameService1.Size = new System.Drawing.Size(242, 29);
             this.LabelNameService1.TabIndex = 0;
             this.LabelNameService1.Text = "Дыхательная смесь";
+            this.LabelNameService1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormWaitPayCheck_KeyDown);
             // 
             // panel8
             // 
@@ -234,6 +235,7 @@
             this.LabelNameService2.Size = new System.Drawing.Size(242, 30);
             this.LabelNameService2.TabIndex = 0;
             this.LabelNameService2.Text = "после тренировки";
+            this.LabelNameService2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormWaitPayCheck_KeyDown);
             // 
             // panel3
             // 
@@ -286,6 +288,7 @@
             this.AmountServiceText.Size = new System.Drawing.Size(245, 32);
             this.AmountServiceText.TabIndex = 0;
             this.AmountServiceText.Text = "Внесено: 0 руб.";
+            this.AmountServiceText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormWaitPayCheck_KeyDown);
             // 
             // panel4
             // 
@@ -331,6 +334,7 @@
             this.TextPayBill.Size = new System.Drawing.Size(496, 77);
             this.TextPayBill.TabIndex = 0;
             this.TextPayBill.Text = "";
+            this.TextPayBill.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormWaitPayCheck_KeyDown);
             // 
             // panel5
             // 
@@ -432,9 +436,9 @@
             // tableLayoutPanel10
             // 
             this.tableLayoutPanel10.ColumnCount = 3;
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.07692F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 53.84615F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.07692F));
             this.tableLayoutPanel10.Controls.Add(this.SecondMessageText, 1, 0);
             this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel10.Location = new System.Drawing.Point(0, 0);
@@ -448,9 +452,9 @@
             // 
             this.SecondMessageText.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SecondMessageText.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.SecondMessageText.Location = new System.Drawing.Point(128, 3);
+            this.SecondMessageText.Location = new System.Drawing.Point(147, 3);
             this.SecondMessageText.Name = "SecondMessageText";
-            this.SecondMessageText.Size = new System.Drawing.Size(370, 32);
+            this.SecondMessageText.Size = new System.Drawing.Size(332, 32);
             this.SecondMessageText.TabIndex = 0;
             // 
             // TimeOutTimer

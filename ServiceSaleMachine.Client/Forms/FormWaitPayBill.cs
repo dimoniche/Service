@@ -3,7 +3,6 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 using ServiceSaleMachine.Drivers;
-using static ServiceSaleMachine.Drivers.MachineDrivers;
 
 namespace ServiceSaleMachine.Client
 {
@@ -13,6 +12,11 @@ namespace ServiceSaleMachine.Client
 
         // количество внесенных денег
         int amount;
+
+        // положили на чек
+        int difftoCheck = 0;
+        // положили на аккаунт
+        int difftoAccount = 0;
 
         // зафиксировали купюру
         bool moneyFixed = false;
@@ -80,7 +84,7 @@ namespace ServiceSaleMachine.Client
         {
             if (InvokeRequired)
             {
-                BeginInvoke(new ServiceClientResponseEventHandler(reciveResponse), sender, e);
+                BeginInvoke(new MachineDrivers.ServiceClientResponseEventHandler(reciveResponse), sender, e);
                 return;
             }
 
@@ -272,6 +276,8 @@ namespace ServiceSaleMachine.Client
                                 // запомним сколько внесли на аккаунт
                                 data.statistic.AccountMoneySumm += diff;
 
+                                difftoAccount += diff;
+
                                 // внесем на счет
                                 GlobalDb.GlobalBase.AddToAmount(data.CurrentUserId, diff);
                             }
@@ -283,12 +289,17 @@ namespace ServiceSaleMachine.Client
                                 // запомним сколько выдали на чеке
                                 data.statistic.BarCodeMoneySumm += diff;
 
+                                difftoCheck += diff;
+
                                 // запомним такой чек
                                 string check = CheckHelper.GetUniqueNumberCheck(12);
                                 GlobalDb.GlobalBase.AddToCheck(data.CurrentUserId, diff, check);
 
                                 // и напечатем его
+                                data.drivers.printer.PrintHeader();
                                 data.drivers.printer.PrintBarCode(check,diff);
+                                data.drivers.printer.PrintFooter();
+                                data.drivers.printer.EndPrint();
                             }
                         }
                     }
@@ -390,15 +401,15 @@ namespace ServiceSaleMachine.Client
                 }
             }
 
-            // запомним принятую сумму
-            data.statistic.AllMoneySumm += amount;
+            // запомним принятую купюру
+            data.statistic.AllMoneySumm += (amount);
             // запомним на сколько оказали услуг
             data.statistic.ServiceMoneySumm += data.serv.price;
 
-            // Запомним в базе
+            // Запомним в базе принятую купюру
             GlobalDb.GlobalBase.SetMoneyStatistic(data.statistic);
             // заносим в базу платеж
-            GlobalDb.GlobalBase.InsertMoney(data.CurrentUserId, amount);
+            GlobalDb.GlobalBase.InsertMoney(data.CurrentUserId, (amount));
 
             data.log.Write(LogMessageType.Information, "WAIT BILL: Оказываем услугу.");
 
@@ -421,6 +432,23 @@ namespace ServiceSaleMachine.Client
             if (e.Alt & e.KeyCode == Keys.F4)
             {
                 data.stage = WorkerStateStage.ExitProgram;
+            }
+            else if (e.Alt & e.KeyCode == Keys.F5)
+            {
+                if(Globals.IsDebug)
+                {
+                    // в дебаге - вносим деньги руками
+                    Drivers.Message message = new Drivers.Message();
+
+                    message.Content = new BillNominal();
+
+                    ((BillNominal)message.Content).nominalNumber = 3;
+                    ((BillNominal)message.Content).Denomination = "500";
+
+                    ServiceClientResponseEventArgs e1 = new ServiceClientResponseEventArgs(message);
+
+                    CreditMoney(e1);
+                }
             }
         }
 

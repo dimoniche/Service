@@ -40,6 +40,7 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.pBxreturnMoney = new System.Windows.Forms.PictureBox();
+            this.scalableLabel1 = new ServiceSaleMachine.ScalableLabel();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -112,6 +113,7 @@
             this.tableLayoutPanel5.ColumnCount = 1;
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel5.Controls.Add(this.label1, 0, 1);
+            this.tableLayoutPanel5.Controls.Add(this.scalableLabel1, 0, 2);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel5.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
@@ -130,7 +132,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(622, 91);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Вы внесли купюру достоинством   руб.";
+            this.label1.Text = "Вы внесли купюру руб.";
             this.label1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.label1_KeyDown);
             // 
             // panel3
@@ -203,6 +205,16 @@
             this.pBxreturnMoney.TabStop = false;
             this.pBxreturnMoney.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
+            // scalableLabel1
+            // 
+            this.scalableLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scalableLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.scalableLabel1.Location = new System.Drawing.Point(3, 197);
+            this.scalableLabel1.Name = "scalableLabel1";
+            this.scalableLabel1.Size = new System.Drawing.Size(622, 91);
+            this.scalableLabel1.TabIndex = 1;
+            this.scalableLabel1.Text = "Ваша сдача будет на чеке";
+            // 
             // FormInsertBill
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -244,5 +256,6 @@
         private System.Windows.Forms.PictureBox pBxreturnMoney;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private ScalableLabel label1;
+        private ScalableLabel scalableLabel1;
     }
 }

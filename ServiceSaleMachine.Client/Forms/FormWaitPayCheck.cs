@@ -14,6 +14,11 @@ namespace ServiceSaleMachine.Client
         // количество внесенных денег
         int amount;
 
+        // положили на чек
+        int difftoCheck = 0;
+        // положили на аккаунт
+        int difftoAccount = 0;
+
         int Timeout = 0;
 
         private GifImage gifImage = null;
@@ -232,6 +237,8 @@ namespace ServiceSaleMachine.Client
                                 // запомним сколько внесли на аккаунт
                                 data.statistic.AccountMoneySumm += diff;
 
+                                difftoAccount += diff;
+
                                 // внесем на счет
                                 GlobalDb.GlobalBase.AddToAmount(data.CurrentUserId, diff);
                             }
@@ -239,15 +246,20 @@ namespace ServiceSaleMachine.Client
                             {
                                 // выдаем чек
 
-                                // запомним сколько выдали на чеке
-                                data.statistic.BarCodeMoneySumm += diff;
+                                // запомним сколько выдали на чеке - печатаем новый чек - часть денег отоварили
+                                data.statistic.BarCodeMoneySumm -= data.serv.price;
+
+                                difftoCheck += diff;
 
                                 // запомним такой чек
                                 string check = CheckHelper.GetUniqueNumberCheck(12);
                                 GlobalDb.GlobalBase.AddToCheck(data.CurrentUserId, diff, check);
 
                                 // и напечатем его
-                                data.drivers.printer.PrintBarCode(check,diff);
+                                data.drivers.printer.PrintHeader();
+                                data.drivers.printer.PrintBarCode(check, diff);
+                                data.drivers.printer.PrintFooter();
+                                data.drivers.printer.EndPrint();
                             }
                         }
                     }
@@ -308,6 +320,21 @@ namespace ServiceSaleMachine.Client
             if (e.Alt & e.KeyCode == Keys.F4)
             {
                 data.stage = WorkerStateStage.ExitProgram;
+                this.Close();
+            }
+            else if (e.Alt & e.KeyCode == Keys.F5)
+            {
+                if (Globals.IsDebug)
+                {
+                    // в дебаге - вносим деньги руками
+                    Drivers.Message message = new Drivers.Message();
+
+                    message.Content = "834141186"; //"834141186725";
+
+                    ServiceClientResponseEventArgs e1 = new ServiceClientResponseEventArgs(message);
+
+                    CreditMoney(e1);
+                }
             }
         }
 
@@ -350,15 +377,11 @@ namespace ServiceSaleMachine.Client
                 }
             }
 
-            // запомним принятую сумму
-            data.statistic.AllMoneySumm += amount;
             // запомним на сколько оказали услуг
             data.statistic.ServiceMoneySumm += data.serv.price;
 
             // Запомним в базе
             GlobalDb.GlobalBase.SetMoneyStatistic(data.statistic);
-            // заносим в базу платеж
-            GlobalDb.GlobalBase.InsertMoney(data.CurrentUserId, amount);
 
             data.log.Write(LogMessageType.Information, "WAIT CHECK: Оказываем услугу.");
 

@@ -20,7 +20,7 @@ namespace ServiceSaleMachine.Client
 
         public override void LoadData()
         {
-            Nominal = "00";
+            Nominal = "0";
 
             foreach (object obj in Params.Objects.Where(obj => obj != null))
             {
@@ -47,11 +47,11 @@ namespace ServiceSaleMachine.Client
 
             if (check)
             {
-                label1.Text = "Вы внесли чек достоинством " + Amount + " руб";
+                label1.Text = "Вы внесли чек на сумму " + Amount + " руб";
             }
             else
             {
-                label1.Text = "Вы внесли купюру достоинством " + Nominal + " руб";
+                label1.Text = "Вы внесли купюру " + Nominal + " руб";
             }
         }
 
@@ -77,6 +77,7 @@ namespace ServiceSaleMachine.Client
             if (e.Alt & e.KeyCode == Keys.F4)
             {
                 data.stage = WorkerStateStage.ExitProgram;
+                Close();
             }
         }
     }

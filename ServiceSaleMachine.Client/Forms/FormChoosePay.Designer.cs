@@ -32,7 +32,6 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.scalableLabel1 = new ServiceSaleMachine.ScalableLabel();
@@ -44,6 +43,7 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.panel8 = new System.Windows.Forms.Panel();
             this.pBxreturntoMain = new System.Windows.Forms.PictureBox();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.TimeOutTimer = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -93,14 +93,6 @@
             this.panel2.Size = new System.Drawing.Size(474, 594);
             this.panel2.TabIndex = 1;
             // 
-            // panel3
-            // 
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(3, 3);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(154, 594);
-            this.panel3.TabIndex = 2;
-            // 
             // panel4
             // 
             this.panel4.Controls.Add(this.tableLayoutPanel2);
@@ -142,7 +134,7 @@
             this.scalableLabel1.Name = "scalableLabel1";
             this.scalableLabel1.Size = new System.Drawing.Size(468, 83);
             this.scalableLabel1.TabIndex = 0;
-            this.scalableLabel1.Text = "Форма оплаты";
+            this.scalableLabel1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormChoosePay_KeyDown);
             // 
             // panel5
             // 
@@ -227,6 +219,14 @@
             this.pBxreturntoMain.TabIndex = 1;
             this.pBxreturntoMain.TabStop = false;
             this.pBxreturntoMain.Click += new System.EventHandler(this.pBxreturntoMain_Click);
+            // 
+            // panel3
+            // 
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(3, 3);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(154, 594);
+            this.panel3.TabIndex = 2;
             // 
             // TimeOutTimer
             // 

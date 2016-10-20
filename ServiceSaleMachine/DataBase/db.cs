@@ -756,7 +756,6 @@ namespace ServiceSaleMachine
             MySqlDataReader dr = Execute(queryString);
             if (dr == null)
             {
-                dr.Close();
                 return null;
             }
             

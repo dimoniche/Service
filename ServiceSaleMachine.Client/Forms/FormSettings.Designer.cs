@@ -194,6 +194,9 @@
             this.checkBox50 = new System.Windows.Forms.CheckBox();
             this.checkBox10 = new System.Windows.Forms.CheckBox();
             this.tabPage11 = new System.Windows.Forms.TabPage();
+            this.button14 = new System.Windows.Forms.Button();
+            this.labeldelivery = new System.Windows.Forms.Label();
+            this.buttonDelivery = new System.Windows.Forms.Button();
             this.PreviouslyName = new System.Windows.Forms.TextBox();
             this.labelCurrNumberCheck = new System.Windows.Forms.Label();
             this.resetCheckNumeration = new System.Windows.Forms.Button();
@@ -208,6 +211,7 @@
             this.tabPageChecking = new System.Windows.Forms.TabPage();
             this.tabControl4 = new System.Windows.Forms.TabControl();
             this.tabPageReacess = new System.Windows.Forms.TabPage();
+            this.button15 = new System.Windows.Forms.Button();
             this.labelCountBankNote = new System.Windows.Forms.Label();
             this.labelServiceMoneySumm = new System.Windows.Forms.Label();
             this.labelBarCodeMoneySumm = new System.Windows.Forms.Label();
@@ -2017,6 +2021,9 @@
             // 
             // tabPage11
             // 
+            this.tabPage11.Controls.Add(this.button14);
+            this.tabPage11.Controls.Add(this.labeldelivery);
+            this.tabPage11.Controls.Add(this.buttonDelivery);
             this.tabPage11.Controls.Add(this.PreviouslyName);
             this.tabPage11.Controls.Add(this.labelCurrNumberCheck);
             this.tabPage11.Controls.Add(this.resetCheckNumeration);
@@ -2034,6 +2041,35 @@
             this.tabPage11.TabIndex = 2;
             this.tabPage11.Text = "Содержание чека";
             this.tabPage11.UseVisualStyleBackColor = true;
+            // 
+            // button14
+            // 
+            this.button14.Location = new System.Drawing.Point(600, 192);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(213, 23);
+            this.button14.TabIndex = 7;
+            this.button14.Text = "Сброс всех чеков со сдачей";
+            this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
+            // 
+            // labeldelivery
+            // 
+            this.labeldelivery.AutoSize = true;
+            this.labeldelivery.Location = new System.Drawing.Point(611, 97);
+            this.labeldelivery.Name = "labeldelivery";
+            this.labeldelivery.Size = new System.Drawing.Size(137, 13);
+            this.labeldelivery.TabIndex = 6;
+            this.labeldelivery.Text = "Текущий номер чека: 123";
+            // 
+            // buttonDelivery
+            // 
+            this.buttonDelivery.Location = new System.Drawing.Point(600, 115);
+            this.buttonDelivery.Name = "buttonDelivery";
+            this.buttonDelivery.Size = new System.Drawing.Size(213, 23);
+            this.buttonDelivery.TabIndex = 5;
+            this.buttonDelivery.Text = "Сброс нумерации чеков со сдачей";
+            this.buttonDelivery.UseVisualStyleBackColor = true;
+            this.buttonDelivery.Click += new System.EventHandler(this.buttonDelivery_Click);
             // 
             // PreviouslyName
             // 
@@ -2054,11 +2090,11 @@
             // 
             // resetCheckNumeration
             // 
-            this.resetCheckNumeration.Location = new System.Drawing.Point(614, 55);
+            this.resetCheckNumeration.Location = new System.Drawing.Point(600, 55);
             this.resetCheckNumeration.Name = "resetCheckNumeration";
-            this.resetCheckNumeration.Size = new System.Drawing.Size(145, 23);
+            this.resetCheckNumeration.Size = new System.Drawing.Size(213, 23);
             this.resetCheckNumeration.TabIndex = 2;
-            this.resetCheckNumeration.Text = "Сброс нумерации чеков";
+            this.resetCheckNumeration.Text = "Сброс нумерации фискальных чеков";
             this.resetCheckNumeration.UseVisualStyleBackColor = true;
             this.resetCheckNumeration.Click += new System.EventHandler(this.resetCheckNumeration_Click);
             // 
@@ -2160,6 +2196,7 @@
             // 
             // tabPageReacess
             // 
+            this.tabPageReacess.Controls.Add(this.button15);
             this.tabPageReacess.Controls.Add(this.labelCountBankNote);
             this.tabPageReacess.Controls.Add(this.labelServiceMoneySumm);
             this.tabPageReacess.Controls.Add(this.labelBarCodeMoneySumm);
@@ -2173,6 +2210,16 @@
             this.tabPageReacess.TabIndex = 0;
             this.tabPageReacess.Text = "Инкассация";
             this.tabPageReacess.UseVisualStyleBackColor = true;
+            // 
+            // button15
+            // 
+            this.button15.Location = new System.Drawing.Point(35, 220);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(201, 23);
+            this.button15.TabIndex = 8;
+            this.button15.Text = "Сброс всех чеков со сдачей";
+            this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
             // labelCountBankNote
             // 
@@ -2191,7 +2238,6 @@
             this.labelServiceMoneySumm.Size = new System.Drawing.Size(131, 13);
             this.labelServiceMoneySumm.TabIndex = 2;
             this.labelServiceMoneySumm.Text = "Oказано услуг на сумму";
-            this.labelServiceMoneySumm.Visible = false;
             // 
             // labelBarCodeMoneySumm
             // 
@@ -2536,5 +2582,9 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.CheckBox cbxAllUser;
+        private System.Windows.Forms.Label labeldelivery;
+        private System.Windows.Forms.Button buttonDelivery;
+        private System.Windows.Forms.Button button14;
+        private System.Windows.Forms.Button button15;
     }
 }

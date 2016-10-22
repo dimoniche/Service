@@ -116,6 +116,21 @@ namespace ServiceSaleMachine.Client
             {
                 data.stage = WorkerStateStage.ExitProgram;
             }
+            else if (e.Alt & e.KeyCode == Keys.F5)
+            {
+                if (Globals.IsDebug)
+                {
+                    // пошлем событие вставки обратно приемника
+                    Drivers.Message message = new Drivers.Message();
+
+                    message.Event = DeviceEvent.DropCassetteBillAcceptor;
+                    message.Content = "Drop bill";
+
+                    ServiceClientResponseEventArgs e1 = new ServiceClientResponseEventArgs(message);
+
+                    reciveResponse(null, e1);
+                }
+            }
         }
 
         int Timeout = 0;

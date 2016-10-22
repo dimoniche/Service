@@ -241,6 +241,9 @@ namespace ServiceSaleMachine.Client
                         // посчитаем размер сдачи
                         diff = amount - data.serv.price;
 
+                        // денег не достаточно - сдачи нет
+                        if (diff < 0) diff = 0;
+
                         // сдача на чек
                         if (amount > data.serv.price)
                         {
@@ -295,8 +298,10 @@ namespace ServiceSaleMachine.Client
                                 string check = CheckHelper.GetUniqueNumberCheck(12);
                                 GlobalDb.GlobalBase.AddToCheck(data.CurrentUserId, diff, check);
 
+                                data.drivers.printer.StartPrint(data.drivers.printer.getNamePrinter());
+
                                 // и напечатем его
-                                data.drivers.printer.PrintHeader();
+                                data.drivers.printer.PrintHeader(true);
                                 data.drivers.printer.PrintBarCode(check,diff);
                                 data.drivers.printer.PrintFooter();
                                 data.drivers.printer.EndPrint();
@@ -396,7 +401,7 @@ namespace ServiceSaleMachine.Client
                     data.drivers.printer.PrintFooter();
                     data.drivers.printer.EndPrint();
 
-                    // увеличим номер чека
+                    // увеличим номер фискального чека
                     GlobalDb.GlobalBase.SetNumberCheck(GlobalDb.GlobalBase.GetCurrentNumberCheck() + 1);
                 }
             }
@@ -410,6 +415,8 @@ namespace ServiceSaleMachine.Client
             GlobalDb.GlobalBase.SetMoneyStatistic(data.statistic);
             // заносим в базу платеж
             GlobalDb.GlobalBase.InsertMoney(data.CurrentUserId, (amount));
+            // запоминаем оказанную услугу этому пользователю
+            GlobalDb.GlobalBase.InsertService(data.CurrentUserId, (data.serv.price));
 
             data.log.Write(LogMessageType.Information, "WAIT BILL: Оказываем услугу.");
 

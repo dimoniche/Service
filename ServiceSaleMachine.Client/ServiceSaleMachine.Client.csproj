@@ -126,6 +126,12 @@
     <Compile Include="Forms\FormTemporallyNoWork.Designer.cs">
       <DependentUpon>FormTemporallyNoWork.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormWaitClientGif.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormWaitClientGif.Designer.cs">
+      <DependentUpon>FormWaitClientGif.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormWaitClientVideo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -221,6 +227,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormTemporallyNoWork.resx">
       <DependentUpon>FormTemporallyNoWork.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormWaitClientGif.resx">
+      <DependentUpon>FormWaitClientGif.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormWaitClientVideo.resx">
       <DependentUpon>FormWaitClientVideo.cs</DependentUpon>

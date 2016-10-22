@@ -122,6 +122,7 @@ namespace ServiceSaleMachine
                 Debug.Print(ex.Message);
                 return false;
             }
+
             //-------------------------------------------------------
             query = "CREATE TABLE IF NOT EXISTS `usermoney` ( `id` int(11) NOT NULL AUTO_INCREMENT, `iduser` int(11) NOT NULL , `amount` int(11) NOT NULL," +
                "`datetime` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP," +
@@ -178,7 +179,14 @@ namespace ServiceSaleMachine
 
             ExecuteNonQuery(query);
 
-            
+            // создадим таблицу оказанных услуг
+            query = "CREATE TABLE IF NOT EXISTS `serviceset` ( `id` int(11) NOT NULL AUTO_INCREMENT, `iduser` int(11) NOT NULL , `amount` int(11) NOT NULL," +
+                           "`datetime` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP," +
+                           "PRIMARY KEY(`id`)) ENGINE = InnoDB DEFAULT CHARSET = cp866;  SET FOREIGN_KEY_CHECKS = 1";
+
+            ExecuteNonQuery(query);
+
+
             return true;
         }
 
@@ -227,7 +235,23 @@ namespace ServiceSaleMachine
                     dsv.Close();//обязательно!
                 }
             }
+
+            dsv = Execute("select * from systemvalues where namevalue='nextnumberdeliverycheck'");
+            if (dsv != null)
+            {
+                if (!dsv.HasRows)
+                {
+                    dsv.Close();//обязательно!
+                    string query = "insert into systemvalues (namevalue, ownvalue) values ('nextnumberdeliverycheck', '0')";
+                    ExecuteNonQuery(query);
+                }
+                else
+                {
+                    dsv.Close();//обязательно!
+                }
+            }
         }
+
         /// <summary>
         /// Получаем данные статистики
         /// </summary>
@@ -238,9 +262,8 @@ namespace ServiceSaleMachine
 
             DateTime dt = GetLastEncashment(); //дата последней инкассации
 
-                statistic.AllMoneySumm = GlobalDb.GlobalBase.GetCountMoney(dt); //платежи с даты последней инкассации
-//                statistic.AllMoneySumm = GlobalDb.GlobalBase.GetCountMoney(new DateTime(2000, 1, 1));
-
+            statistic.AllMoneySumm = GlobalDb.GlobalBase.GetCountMoney(dt);             // платежи с даты последней инкассации
+            statistic.ServiceMoneySumm = GlobalDb.GlobalBase.GetCountMoneyService(dt);  // сумма оказанных услуг
             statistic.AccountMoneySumm = GlobalDb.GlobalBase.GetSummFromAccount();
             statistic.CountBankNote = GlobalDb.GlobalBase.GetCountBankNote();
             statistic.BarCodeMoneySumm = GlobalDb.GlobalBase.GetSummFromBarCode(); 
@@ -609,6 +632,23 @@ namespace ServiceSaleMachine
 
             return ExecuteNonQuery(query);
         }
+
+        /// <summary>
+        /// Занесем оказанную услугу в базу
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="sum"></param>
+        /// <returns></returns>
+        public bool InsertService(int userid, int sum)
+        {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
+
+            string query = "INSERT INTO serviceset (iduser, amount, datetime) VALUES (" + userid.ToString() + "," + sum.ToString() + ",'"
+                  + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
+
+            return ExecuteNonQuery(query);
+        }
+
         /// <summary>
         /// внести деньги на счёт юзеру
         /// </summary>
@@ -641,6 +681,10 @@ namespace ServiceSaleMachine
 
         }
 
+        /// <summary>
+        /// Получить номер фискального чека
+        /// </summary>
+        /// <returns></returns>
         public int GetCurrentNumberCheck() //
         {
             if (Globals.ClientConfiguration.Settings.offDataBase == 1) return 0;
@@ -668,6 +712,7 @@ namespace ServiceSaleMachine
                     }
                     catch
                     {
+                        i = 0;
                     }
                 }
 
@@ -677,8 +722,9 @@ namespace ServiceSaleMachine
 
             return 0;
         }
+
         /// <summary>
-        /// записать значение в текущий номер чеков (увеличенный или обнулить по команде)
+        /// записать значение в текущий номер фискальных чеков (увеличенный или обнулить по команде)
         /// </summary>
         /// <param name="CurrentN"></param>
         /// <returns></returns>
@@ -687,6 +733,60 @@ namespace ServiceSaleMachine
             string query = "update systemvalues set ownvalue=" + CurrentN.ToString() + " where namevalue = 'nextnumbercheck'";
             return ExecuteNonQuery(query);
         }
+
+        /// <summary>
+        /// получить номер чека со сдачей
+        /// </summary>
+        /// <returns></returns>
+        public int GetCurrentNumberDeliveryCheck() //
+        {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return 0;
+
+            string queryString = "select namevalue, ownvalue from  systemvalues where " +
+                 "namevalue= 'nextnumberdeliverycheck'";
+
+
+            MySqlDataReader dr = Execute(queryString);
+            if (dr != null)
+            {
+                int i = 0;
+
+                if (dr.HasRows)
+                {
+                    dr.Read();
+                    string s = "0";
+
+                    try
+                    {
+                        if (dr.IsDBNull(0) != true)
+                            s = (string)dr[1];
+
+                        int.TryParse(s, out i);
+                    }
+                    catch
+                    {
+                        i = 0;
+                    }
+                }
+
+                dr.Close();
+                return i;
+            }
+
+            return 0;
+        }
+
+        /// <summary>
+        /// записать значение в текущий номер чеков со сдачей (увеличенный или обнулить по команде)
+        /// </summary>
+        /// <param name="CurrentN"></param>
+        /// <returns></returns>
+        public bool SetNumberDeliveryCheck(int CurrentN)
+        {
+            string query = "update systemvalues set ownvalue=" + CurrentN.ToString() + " where namevalue = 'nextnumberdeliverycheck'";
+            return ExecuteNonQuery(query);
+        }
+
         /// <summary>
         /// добавление в таблицу check записи 
         /// </summary>
@@ -697,13 +797,18 @@ namespace ServiceSaleMachine
         public bool AddToCheck(int userid, int sum, string check)
         {
             if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
-            int nc = GetCurrentNumberCheck();
+
+            // получим текущий номер чека со сдачей
+            int nc = GetCurrentNumberDeliveryCheck();
+
             string query = "INSERT INTO checks (iduser, amount, checkstr, number, dt_create) VALUES ("
                 + userid.ToString() + "," + sum.ToString() + ",'" + check +"','" + nc.ToString() + "','"+
                   DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
-            SetNumberCheck(nc + 1);
+
+            SetNumberDeliveryCheck(nc + 1);
             return ExecuteNonQuery(query);
         }
+
         /// <summary>
         /// погасить чек
         /// </summary>
@@ -720,6 +825,22 @@ namespace ServiceSaleMachine
 
             return ExecuteNonQuery(query);
         }
+
+        /// <summary>
+        /// Фиксируем все чеки
+        /// </summary>
+        /// <returns></returns>
+        public bool FixedAllCheck()
+        {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
+
+            string query = "UPDATE checks SET " +
+                "active = 1, " +
+                "dt_fixed = '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "'";
+
+            return ExecuteNonQuery(query);
+        }
+
         /// <summary>
         /// удалить чек.
         /// </summary>
@@ -852,6 +973,24 @@ namespace ServiceSaleMachine
 
             return GetIntFromReq(dr);
         }
+
+        /// <summary>
+        /// узнать на какую сумму оказано услуг с даты ХХХ
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public int GetCountMoneyService(DateTime dt)
+        {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return 0;
+
+            string queryString = "select sum(amount) as dt from serviceset where " +
+                "(datetime >= '" + dt.ToString("yyyy-MM-dd HH:mm:ss") + "')";
+
+            MySqlDataReader dr = Execute(queryString);
+
+            return GetIntFromReq(dr);
+        }
+
         /// <summary>
         /// инфа о последней инкассации
         /// </summary>

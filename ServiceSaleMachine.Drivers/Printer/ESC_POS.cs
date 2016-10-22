@@ -166,7 +166,7 @@ namespace ServiceSaleMachine.Drivers
             PrintDashes();
 
             Print(eLeft, false, false);
-            Print(TransformCode("Общая сумма   "), true);
+            Print(TransformCode("Наличные      "), true);
             Print(" ".PadRight(42 - 20 - statistic.AllMoneySumm.ToString().Length, ' ') + statistic.AllMoneySumm.ToString("00000.00") + TransformCode(" руб"), true);
             Print(eLeft);
 
@@ -188,7 +188,7 @@ namespace ServiceSaleMachine.Drivers
 
             Print(eLeft, false, false);
             Print(TransformCode("Оказано услуг "), true);
-            Print(" ".PadRight(42 - 20 - statistic.ServiceMoneySumm.ToString().Length, ' ') + statistic.ServiceMoneySumm.ToString("00000.00") + TransformCode(" руб"), true);
+            Print(" ".PadRight(42 - 20 - statistic.ServiceMoneySumm.ToString().Length, ' ') + (statistic.AllMoneySumm - statistic.BarCodeMoneySumm - statistic.BarCodeMoneySumm).ToString("00000.00") + TransformCode(" руб"), true);
             Print(eLeft);
 
             Print("");
@@ -197,7 +197,7 @@ namespace ServiceSaleMachine.Drivers
             prn.ClosePrint();
         }
 
-        public void PrintHeader()
+        public void PrintHeader(bool barcode = false)
         {
             Print(eInit + "" + eSelectRusCodePage + "" + eCentre,false,false);
             Print(TransformCode(Globals.CheckConfiguration.Settings.firmsname),true);
@@ -207,7 +207,16 @@ namespace ServiceSaleMachine.Drivers
             Print(eLeft);
 
             // номер чека
-            Print(TransformCode("Чек N: ") + GlobalDb.GlobalBase.GetCurrentNumberCheck().ToString("00000"), true);
+            if (barcode)
+            {   
+                // если печатаем чек со сдачей - своя нумерация
+                Print(TransformCode("Чек N: ") + GlobalDb.GlobalBase.GetCurrentNumberDeliveryCheck().ToString("00000"), true);
+            }
+            else
+            {
+                Print(TransformCode("Чек N: ") + GlobalDb.GlobalBase.GetCurrentNumberCheck().ToString("00000"), true);
+            }
+
             Print(eLeft);
 
             Print(eLeft + DateTime.Now.ToString("yyyy-MM-dd") + "                          " + DateTime.Now.ToString("HH:mm"));

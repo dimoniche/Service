@@ -676,6 +676,9 @@ namespace ServiceSaleMachine.Client
             int NumberCheck = GlobalDb.GlobalBase.GetCurrentNumberCheck();
             labelCurrNumberCheck.Text = "Текущий номер чека: " + NumberCheck;
 
+            NumberCheck = GlobalDb.GlobalBase.GetCurrentNumberDeliveryCheck();
+            labeldelivery.Text = "Текущий номер чека: " + NumberCheck;
+
             cBxCommand.Items.Clear();
             cBxCommand.Items.Add("Включить");
             cBxCommand.Items.Add("Выключить");
@@ -902,7 +905,7 @@ namespace ServiceSaleMachine.Client
 
             if (data.drivers.printer.prn.PrinterIsOpen)
             {
-               data.drivers.printer.PrintHeader();
+               data.drivers.printer.PrintHeader(true);
 
                int summ = 0;
                int.TryParse(tBxsumm.Text, out summ);
@@ -1648,9 +1651,7 @@ namespace ServiceSaleMachine.Client
             GlobalDb.GlobalBase.ClearBankNotes();
 
             // обнулим статистику
-            data.statistic.AccountMoneySumm = 0;
             data.statistic.AllMoneySumm = 0;
-            data.statistic.BarCodeMoneySumm = 0;
             data.statistic.CountBankNote = 0;
             data.statistic.ServiceMoneySumm = 0;
 
@@ -1779,6 +1780,36 @@ namespace ServiceSaleMachine.Client
                 button11.Enabled = false;
                 button12.Enabled = false;
             }
+        }
+
+        private void buttonDelivery_Click(object sender, EventArgs e)
+        {
+            // сброс чека
+            int NumberCheck = 0;
+
+            GlobalDb.GlobalBase.SetNumberDeliveryCheck(NumberCheck);
+
+            labeldelivery.Text = "Текущий номер чека: " + NumberCheck;
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            // Сбросим все чеки со сдачей
+            if(MessageBox.Show(this, "Вы уверены что хотите сбросить все чеки со сдачей? \n Все данные будут потеряны.", FormManager.AppCaptionName, MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                // сбрасываем чеки
+                GlobalDb.GlobalBase.FixedAllCheck();
+            }
+
+            // обновляем статистику
+            data.statistic.BarCodeMoneySumm = 0;
+
+            MoneyStatistic();
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            button14_Click(sender, e);
         }
     }
 }

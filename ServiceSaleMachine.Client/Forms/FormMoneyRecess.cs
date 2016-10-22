@@ -74,9 +74,7 @@ namespace ServiceSaleMachine.Client
         private void FormMoneyRecess_FormClosed(object sender, FormClosedEventArgs e)
         {
             // обнулим статистику
-            data.statistic.AccountMoneySumm = 0;
             data.statistic.AllMoneySumm = 0;
-            data.statistic.BarCodeMoneySumm = 0;
             data.statistic.CountBankNote = 0;
             data.statistic.ServiceMoneySumm = 0;
 
@@ -113,6 +111,21 @@ namespace ServiceSaleMachine.Client
             if (e.Alt & e.KeyCode == Keys.F4)
             {
                 data.stage = WorkerStateStage.ExitProgram;
+            }
+            else if (e.Alt & e.KeyCode == Keys.F5)
+            {
+                if(Globals.IsDebug)
+                {
+                    // пошлем событие вставки обратно приемника
+                    Drivers.Message message = new Drivers.Message();
+
+                    message.Event = DeviceEvent.InitializationOK;
+                    message.Content = "Insert bill";
+
+                    ServiceClientResponseEventArgs e1 = new ServiceClientResponseEventArgs(message);
+
+                    reciveResponse(null, e1);
+                }
             }
         }
     }

@@ -102,7 +102,7 @@ namespace ServiceSaleMachine.Client
 
         private void CreditMoney(ServiceClientResponseEventArgs e)
         {
-            pBxReturnBack.Enabled = false;
+            pBxReturnBack.Enabled = true;   // блокировать возврат не будем - можем ведь чеком сдачу давать
             SecondMessageText.Text = "";
 
             lock (Params)
@@ -149,62 +149,21 @@ namespace ServiceSaleMachine.Client
 
                     amount += count;
 
-                    // сдача
-                    int diff = 0;
-                    bool res = true;    // чек забираем всегда - предлагаем вернуть - только если перебор
-
-                    if (Globals.ClientConfiguration.Settings.changeOn == 0)
-                    {
-                        // работа без сдачи
-                        if (amount > data.serv.price)
-                        {
-                            // сумма на чеке великовата - вернем ее
-                            amount -= count;
-
-                            if (amount == 0)
-                            {
-                                pBxReturnBack.Enabled = true;
-                            }
-
-                            // сообщим о том что купюра великовата
-                            SecondMessageText.Text = "Внесите чек меньшего номинала.";
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        // со сдачей
-                        if (amount > data.serv.price)
-                        {
-                            // чек великоват - спросим может не стоит его гасить
-                            res = (bool)FormManager.OpenForm<FormInsertBill>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, data, info.Amount, true);
-                        }
-                    }
-
-                    if (res)
-                    {
-                        // гасим чек
-                        GlobalDb.GlobalBase.FixedCheck(info.Id);
-                    }
-                    else
-                    {
-                        // не гасим чек - сумму откатываем
-                        amount -= count;
-
-                        if(amount == 0)
-                        {
-                            pBxReturnBack.Enabled = true;
-                        }
-
-                        return;
-                    }
+                    // всегда со сдачей - сразу забираем деньгу c чека - никого не спрашиваем - гасим текущий чек - распечатаем новый
+                    GlobalDb.GlobalBase.FixedCheck(info.Id);
 
                     // внесли достаточную для услуги сумму
+
+                    // сдача
+                    int diff = 0;
 
                     if (Globals.ClientConfiguration.Settings.changeOn > 0)
                     {
                         // посчитаем размер сдачи
                         diff = amount - data.serv.price;
+
+                        // денег не достаточно - сдачи нет
+                        if (diff < 0) diff = 0;
 
                         // сдача на чек
                         if (amount > data.serv.price)
@@ -255,8 +214,10 @@ namespace ServiceSaleMachine.Client
                                 string check = CheckHelper.GetUniqueNumberCheck(12);
                                 GlobalDb.GlobalBase.AddToCheck(data.CurrentUserId, diff, check);
 
+                                data.drivers.printer.StartPrint(data.drivers.printer.getNamePrinter());
+
                                 // и напечатем его
-                                data.drivers.printer.PrintHeader();
+                                data.drivers.printer.PrintHeader(true);
                                 data.drivers.printer.PrintBarCode(check, diff);
                                 data.drivers.printer.PrintFooter();
                                 data.drivers.printer.EndPrint();
@@ -265,7 +226,24 @@ namespace ServiceSaleMachine.Client
                     }
 
                     // напишем на экране
-                    AmountServiceText.Text = "Внесено: " + amount + " руб.";
+                    if (amount >= data.serv.price)
+                    {
+                        AmountServiceText.Text = "ПРИНЯТО: " + data.serv.price + " руб.";
+
+                        if (diff > 0)
+                        {
+                            SecondMessageText.Text = "Остаток на чеке: " + diff + " руб.";
+                        }
+                        else
+                        {
+                            SecondMessageText.Text = "";
+                        }
+                    }
+                    else
+                    {
+                        AmountServiceText.Text = "ПРИНЯТО: " + amount + " руб.";
+                        SecondMessageText.Text = "Недостаточно денег для оказания услуги.";
+                    }
 
                     // деньги внесли - нет пути назад
                     TimeOutTimer.Enabled = false;
@@ -305,6 +283,23 @@ namespace ServiceSaleMachine.Client
             // при завершении сканер усыпим
             data.drivers.scaner.Request(ZebexCommandEnum.sleep);
 
+            if (amount < data.serv.price && amount > 0)
+            {
+                // не внесли необходимую сумму - но хотим уйти - вернем чек на всю введенную ранее сумму
+
+                // запомним такой новый чек
+                string check = CheckHelper.GetUniqueNumberCheck(12);
+                GlobalDb.GlobalBase.AddToCheck(data.CurrentUserId, amount, check);
+
+                data.drivers.printer.StartPrint(data.drivers.printer.getNamePrinter());
+
+                // и напечатем его
+                data.drivers.printer.PrintHeader(true);
+                data.drivers.printer.PrintBarCode(check, amount);
+                data.drivers.printer.PrintFooter();
+                data.drivers.printer.EndPrint();
+            }
+
             data.log.Write(LogMessageType.Information, "WAIT CHECK: Выход на оказание услуги.");
         }
 
@@ -329,7 +324,21 @@ namespace ServiceSaleMachine.Client
                     // в дебаге - вносим деньги руками
                     Drivers.Message message = new Drivers.Message();
 
-                    message.Content = "834141186"; //"834141186725";
+                    message.Content = "834141186725";
+
+                    ServiceClientResponseEventArgs e1 = new ServiceClientResponseEventArgs(message);
+
+                    CreditMoney(e1);
+                }
+            }
+            else if (e.Alt & e.KeyCode == Keys.F6)
+            {
+                if (Globals.IsDebug)
+                {
+                    // в дебаге - вносим деньги руками
+                    Drivers.Message message = new Drivers.Message();
+
+                    message.Content = "047759717704";
 
                     ServiceClientResponseEventArgs e1 = new ServiceClientResponseEventArgs(message);
 
@@ -362,23 +371,14 @@ namespace ServiceSaleMachine.Client
 
             if (Globals.ClientConfiguration.Settings.offHardware != 1)
             {
-                // Распечатать чек за услугу
-                data.drivers.printer.StartPrint(data.drivers.printer.getNamePrinter());
-
-                if (data.drivers.printer.prn.PrinterIsOpen)
-                {
-                    data.drivers.printer.PrintHeader();
-                    data.drivers.printer.PrintBody(data.serv);
-                    data.drivers.printer.PrintFooter();
-                    data.drivers.printer.EndPrint();
-
-                    // увеличим номер чека
-                    GlobalDb.GlobalBase.SetNumberCheck(GlobalDb.GlobalBase.GetCurrentNumberCheck() + 1);
-                }
+                // Распечатать чек за услугу печатать не надо - деньги то не принимаем же
             }
 
             // запомним на сколько оказали услуг
             data.statistic.ServiceMoneySumm += data.serv.price;
+
+            // запоминаем оказанную услугу этому пользователю
+            GlobalDb.GlobalBase.InsertService(data.CurrentUserId, (data.serv.price));
 
             // Запомним в базе
             GlobalDb.GlobalBase.SetMoneyStatistic(data.statistic);

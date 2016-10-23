@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data;
+﻿using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 using ServiceSaleMachine.Drivers;
@@ -52,6 +51,10 @@ namespace ServiceSaleMachine.Client
             else if (data.stage == WorkerStateStage.PaperEnd)
             {
                 error.Text = "Ошибка E050";
+            }
+            else if (data.stage == WorkerStateStage.ErrorPrinter)
+            {
+                error.Text = "Ошибка E060";
             }
         }
 
@@ -127,6 +130,20 @@ namespace ServiceSaleMachine.Client
                     this.Close();
                 }
             }
+
+            PrinterStatus status = data.drivers.printer.GetStatus();
+
+            if (status != PrinterStatus.PRINTER_STATUS_PAPER_OUT
+            &&  status != PrinterStatus.PRINTER_STATUS_PAPER_JAM
+            &&  status != PrinterStatus.PRINTER_STATUS_PAPER_PROBLEM
+            &&  status != PrinterStatus.PRINTER_STATUS_ERROR)
+            {
+                // с бумагой стало OK
+                data.stage = WorkerStateStage.ErrorEndControl;
+                this.Close();
+
+                Program.Log.Write(LogMessageType.Error, "CHECK_STAT: бумага появилась.");
+            }
         }
 
         private void FormTemporallyNoWork_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
@@ -145,7 +162,7 @@ namespace ServiceSaleMachine.Client
         {
             if (e.Alt & e.KeyCode == Keys.F4)
             {
-                //data.stage = WorkerStateStage.ExitProgram;
+                data.stage = WorkerStateStage.ExitProgram;
             }
         }
     }

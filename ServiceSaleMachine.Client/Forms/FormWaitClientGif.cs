@@ -72,6 +72,18 @@ namespace ServiceSaleMachine.Client
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            // читаем состояние устройства
+            byte[] res;
+            res = data.drivers.control.GetStatusControl(data.log);
+
+            if (res != null)
+            {
+                if (res[0] == 0)
+                {
+                    data.stage = WorkerStateStage.ErrorControl;
+                    this.Close();
+                }
+            }
         }
 
         private void ScreenSever_Click(object sender, EventArgs e)

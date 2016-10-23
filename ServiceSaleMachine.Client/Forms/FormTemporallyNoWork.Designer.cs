@@ -37,9 +37,9 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.MessageText = new ServiceSaleMachine.RichTextBoxEx();
             this.error = new ServiceSaleMachine.ScalableLabel();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureError = new System.Windows.Forms.PictureBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel5.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -115,6 +115,7 @@
             this.MessageText.Size = new System.Drawing.Size(694, 344);
             this.MessageText.TabIndex = 0;
             this.MessageText.Text = "";
+            this.MessageText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormTemporallyNoWork_KeyDown);
             // 
             // error
             // 
@@ -125,12 +126,7 @@
             this.error.Size = new System.Drawing.Size(694, 19);
             this.error.TabIndex = 1;
             this.error.Text = "Ошибка Е010";
-            // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 50;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.error.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormTemporallyNoWork_KeyDown);
             // 
             // tableLayoutPanel2
             // 
@@ -156,6 +152,12 @@
             this.pictureError.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureError.TabIndex = 0;
             this.pictureError.TabStop = false;
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 50;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // FormTemporallyNoWork
             // 

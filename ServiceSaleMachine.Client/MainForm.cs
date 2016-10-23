@@ -121,6 +121,13 @@ namespace ServiceSaleMachine.Client
                         // аппарат не работает
                         result = (FormResultData)FormManager.OpenForm<FormTemporallyNoWork>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
+                        if (result.stage == WorkerStateStage.ExitProgram)
+                        {
+                            // выход
+                            Close();
+                            return;
+                        }
+
                         continue;
                     }
 
@@ -142,6 +149,12 @@ namespace ServiceSaleMachine.Client
                         {
                             // выемка денег
                             result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+                        }
+                        else if (result.stage == WorkerStateStage.ExitProgram)
+                        {
+                            // выход
+                            Close();
+                            return;
                         }
 
                         continue;
@@ -230,6 +243,8 @@ namespace ServiceSaleMachine.Client
                                 Close();
                                 return;
                             }
+
+                            continue;
                         }
                         else
                         {
@@ -535,7 +550,7 @@ namespace ServiceSaleMachine.Client
             if (result.statistic.CountBankNote >= Globals.ClientConfiguration.Settings.MaxCountBankNote)
             {
                 // сообщим о необходимоcти изъятия денег
-                result.drivers.modem.SendSMS(Globals.ClientConfiguration.Settings.SMSMessageNeedCollect,result.log);
+                result.drivers.modem.SendSMS(Globals.ClientConfiguration.Settings.SMSMessageNeedCollect, result.log);
 
                 // Пора слать смс с необходимостью обслуживания
                 result.stage = WorkerStateStage.BillFull;
@@ -594,6 +609,23 @@ namespace ServiceSaleMachine.Client
 
             //    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: кончилась бумага.");
             //}
+
+            PrinterStatus status = result.drivers.printer.GetStatus();
+
+            if ((status & (PrinterStatus.PRINTER_STATUS_PAPER_OUT 
+                         | PrinterStatus.PRINTER_STATUS_PAPER_JAM 
+                         | PrinterStatus.PRINTER_STATUS_PAPER_PROBLEM 
+                         | PrinterStatus.PRINTER_STATUS_ERROR)) > 0)
+            {
+                // что то с бумагой
+                if (Globals.ClientConfiguration.Settings.NoPaperWork == 0)
+                {
+                    // с такой ошибкой не работаем
+                    result.stage = WorkerStateStage.PaperEnd;
+                }
+
+                Program.Log.Write(LogMessageType.Error, "CHECK_STAT: кончилась бумага.");
+            }
 
             return result;
         }

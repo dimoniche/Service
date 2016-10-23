@@ -173,5 +173,10 @@ namespace ServiceSaleMachine
         /// бумага закончилась
         /// </summary>
         PaperEnd,
+
+        /// <summary>
+        /// ошибка принтера
+        /// </summary>
+        ErrorPrinter,
     }
 }

@@ -767,6 +767,7 @@
             this.label32.Size = new System.Drawing.Size(32, 13);
             this.label32.TabIndex = 45;
             this.label32.Text = "Порт";
+            this.label32.Visible = false;
             // 
             // cBxPrinterPort
             // 
@@ -775,6 +776,7 @@
             this.cBxPrinterPort.Name = "cBxPrinterPort";
             this.cBxPrinterPort.Size = new System.Drawing.Size(121, 21);
             this.cBxPrinterPort.TabIndex = 44;
+            this.cBxPrinterPort.Visible = false;
             this.cBxPrinterPort.SelectedIndexChanged += new System.EventHandler(this.cBxPrinterPort_SelectedIndexChanged);
             // 
             // cBxNoPaperWork

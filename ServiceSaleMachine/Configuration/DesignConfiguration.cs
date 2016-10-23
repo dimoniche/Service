@@ -72,7 +72,7 @@ namespace ServiceSaleMachine
                         if ((xElement = xSettings.Element("ButtonEnterUserName")) != null) Settings.ButtonEnterUserName = xElement.Value;
                         if ((xElement = xSettings.Element("ButtonEnterUserPasw")) != null) Settings.ButtonEnterUserPasw = xElement.Value;
 
-                        if ((xElement = xSettings.Element("ScreenServer")) != null) Settings.ScreenServer = xElement.Value;
+                        if ((xElement = xSettings.Element("ScreenSaver")) != null) Settings.ScreenSaver = xElement.Value;
                     }
 
                     return true;

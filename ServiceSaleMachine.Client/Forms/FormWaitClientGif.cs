@@ -27,7 +27,7 @@ namespace ServiceSaleMachine.Client
 
             data.drivers.ReceivedResponse += reciveResponse;
 
-            Globals.DesignConfiguration.Settings.LoadPictureBox(ScreenSever, Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ScreenServer);
+            Globals.DesignConfiguration.Settings.LoadPictureBox(ScreenSever, Globals.DesignConfiguration.Settings.ScreenSaver);
         }
 
         private void reciveResponse(object sender, ServiceClientResponseEventArgs e)

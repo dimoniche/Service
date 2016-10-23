@@ -59,7 +59,9 @@
             this.Controls.Add(this.ScreenSever);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormWaitClientGif";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormWaitClientGif";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormWaitClientGif_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormWaitClientGif_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.ScreenSever)).EndInit();

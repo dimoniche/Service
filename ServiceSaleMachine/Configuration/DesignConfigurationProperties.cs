@@ -24,7 +24,7 @@ namespace ServiceSaleMachine
         public string LogoService1 = defpicture;
         public string LogoService2 = defpicture;
         public string ButtonGetOxigen = defpicture;
-        public string ScreenServer = defpicture;
+        public string ScreenSaver = defpicture;
 
         public string ButtonTakeAwayMoney = defpicture;
         public string ButtonreturnMoney = defpicture;

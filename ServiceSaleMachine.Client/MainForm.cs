@@ -57,8 +57,6 @@ namespace ServiceSaleMachine.Client
         /// </summary>
         private void MainWorker()
         {
-            result = (FormResultData)FormManager.OpenForm<FormWaitClientGif>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-
             if (Globals.admin)
             {
                 result.drivers.InitAllDevice();

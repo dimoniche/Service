@@ -147,6 +147,15 @@ namespace ServiceSaleMachine.Client
 
                     int count = info.Amount;
 
+                    if (count < data.serv.price)
+                    {
+                        // на чеке слишком мало денег - пока так - может в будущем и по другому сделаем
+                        AmountServiceText.Text = "Недостаточно денег";
+                        SecondMessageText.Text = "Остаток на чеке: " + count + " руб.";
+
+                        return;
+                    }
+
                     amount += count;
 
                     // всегда со сдачей - сразу забираем деньгу c чека - никого не спрашиваем - гасим текущий чек - распечатаем новый
@@ -283,22 +292,23 @@ namespace ServiceSaleMachine.Client
             // при завершении сканер усыпим
             data.drivers.scaner.Request(ZebexCommandEnum.sleep);
 
-            if (amount < data.serv.price && amount > 0)
-            {
-                // не внесли необходимую сумму - но хотим уйти - вернем чек на всю введенную ранее сумму
+            // пока этого нет
+            //if (amount < data.serv.price && amount > 0)
+            //{
+            //    // не внесли необходимую сумму - но хотим уйти - вернем чек на всю введенную ранее сумму
 
-                // запомним такой новый чек
-                string check = CheckHelper.GetUniqueNumberCheck(12);
-                GlobalDb.GlobalBase.AddToCheck(data.CurrentUserId, amount, check);
+            //    // запомним такой новый чек
+            //    string check = CheckHelper.GetUniqueNumberCheck(12);
+            //    GlobalDb.GlobalBase.AddToCheck(data.CurrentUserId, amount, check);
 
-                data.drivers.printer.StartPrint(data.drivers.printer.getNamePrinter());
+            //    data.drivers.printer.StartPrint(data.drivers.printer.getNamePrinter());
 
-                // и напечатем его
-                data.drivers.printer.PrintHeader(true);
-                data.drivers.printer.PrintBarCode(check, amount);
-                data.drivers.printer.PrintFooter();
-                data.drivers.printer.EndPrint();
-            }
+            //    // и напечатем его
+            //    data.drivers.printer.PrintHeader(true);
+            //    data.drivers.printer.PrintBarCode(check, amount);
+            //    data.drivers.printer.PrintFooter();
+            //    data.drivers.printer.EndPrint();
+            //}
 
             data.log.Write(LogMessageType.Information, "WAIT CHECK: Выход на оказание услуги.");
         }

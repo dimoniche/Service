@@ -49,7 +49,7 @@ namespace ServiceSaleMachine.Client
 
             if (data.log != null)
             {
-                data.log.Write(LogMessageType.Information, "CHOOSE SERVICE: Событие: " + e.Message.Content + ".");
+                data.log.Write(LogMessageType.Debug, "CHOOSE SERVICE: Событие: " + e.Message.Content + ".");
             }
 
             switch (e.Message.Event)

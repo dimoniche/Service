@@ -143,7 +143,7 @@ namespace ServiceSaleMachine.Drivers
 
             if (!CheckSerialPort() && getCountSerialPort() < COUNT_DEVICE)
             {
-                this.log.Write(LogMessageType.Error, "COM портов нет. Работа не возможна.");
+                this.log.Write(LogMessageType.Error, "INIT: COM портов нет. Работа не возможна.");
                 return WorkerStateStage.NoCOMPort;
             }
 
@@ -152,14 +152,14 @@ namespace ServiceSaleMachine.Drivers
             || printer.getNamePrinter().Contains("нет"))
             {
                 // необходима настройка приложения
-                this.log.Write(LogMessageType.Error, "Необходима настройка приложения");
+                this.log.Write(LogMessageType.Error, "INIT: Необходима настройка приложения");
                 res = WorkerStateStage.NeedSettingProgram;
             }
 
             // настроим драйвер сканера
             if (Globals.ClientConfiguration.Settings.offCheck != 1 && !scaner.getNumberComPort().Contains("нет"))
             {
-                this.log.Write(LogMessageType.Information, "Настройка сканера.");
+                this.log.Write(LogMessageType.Information, "SCANNER: Настройка сканера.");
 
                 // не платим чеком - не нужен сканер
                 if (scaner.openPort(scaner.getNumberComPort()))
@@ -176,13 +176,13 @@ namespace ServiceSaleMachine.Drivers
                 else
                 {
                     // неудача
-                    this.log.Write(LogMessageType.Error, "Сканер не верно настроен. Порт не доступен.");                    
+                    this.log.Write(LogMessageType.Error, "SCANNER: Сканер не верно настроен. Порт не доступен.");                    
                     res = WorkerStateStage.NeedSettingProgram;
                 }
             }
             else
             {
-                this.log.Write(LogMessageType.Information, "Сканер отключен.");
+                this.log.Write(LogMessageType.Information, "SCANNER: Сканер отключен.");
             }
 
             this.log.Write(LogMessageType.Information, "BILL: Настройка купюроприемникa.");
@@ -439,7 +439,7 @@ namespace ServiceSaleMachine.Drivers
             }
             catch(Exception exp)
             {
-                this.log.Write(LogMessageType.Error, "BILL TASK: Ошибка: " + exp.ToString());
+                this.log.Write(LogMessageType.Debug, "BILL TASK: Ошибка: " + exp.ToString());
             }
 
             this.log.Write(LogMessageType.Information, "BILL TASK: Задачу приемника проинициализировали.");
@@ -471,7 +471,7 @@ namespace ServiceSaleMachine.Drivers
                             message.Event = DeviceEvent.BillAcceptor;
                             message.Content = CCNETDriver.pollStatus();
 
-                            log.Write(LogMessageType.Information, "BILL TASK: " + message.Content);
+                            log.Write(LogMessageType.Debug, "BILL TASK: " + message.Content);
 
                             ReceivedResponse(this, new ServiceClientResponseEventArgs(message));
                         }
@@ -578,7 +578,7 @@ namespace ServiceSaleMachine.Drivers
                 }
                 catch (Exception exp)
                 {
-                    log.Write(LogMessageType.Error, "TASK BILL: " + exp.ToString());
+                    log.Write(LogMessageType.Debug, "TASK BILL: " + exp.ToString());
                     CCNETDriver.send_bill_command = false;
                 }
                 finally
@@ -628,7 +628,7 @@ namespace ServiceSaleMachine.Drivers
 
             message.Content = result;
 
-            log.Write(LogMessageType.Information, "SCANNER: " + message.Content);
+            log.Write(LogMessageType.Debug, "SCANNER: " + message.Content);
 
             ReceivedResponse(this, new ServiceClientResponseEventArgs(message));
         }

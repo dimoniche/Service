@@ -77,7 +77,7 @@ namespace ServiceSaleMachine.Client
 
             if (data.log != null)
             {
-                data.log.Write(LogMessageType.Information, "MAIN MENU: Событие: " + e.Message.Content + ".");
+                data.log.Write(LogMessageType.Debug, "MAIN MENU: Событие: " + e.Message.Content + ".");
             }
 
             switch (e.Message.Event)

@@ -90,7 +90,7 @@ namespace ServiceSaleMachine.Client
 
             if (data.log != null)
             {
-                data.log.Write(LogMessageType.Information, "WAIT BILL: Событие: " + e.Message.Content + ".");
+                data.log.Write(LogMessageType.Debug, "WAIT BILL: Событие: " + e.Message.Content + ".");
             }
 
             switch (e.Message.Event)
@@ -107,7 +107,7 @@ namespace ServiceSaleMachine.Client
                 case DeviceEvent.DropCassetteBillAcceptor:
                     {
                         data.stage = WorkerStateStage.DropCassettteBill;
-                        data.log.Write(LogMessageType.Information, "WAIT BILL: Вытащили купюроприемник.");
+                        data.log.Write(LogMessageType.Debug, "WAIT BILL: Вытащили купюроприемник.");
 
                         this.Close();
                     }

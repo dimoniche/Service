@@ -78,7 +78,7 @@ namespace ServiceSaleMachine.Client
 
             if (data.log != null)
             {
-                data.log.Write(LogMessageType.Information, "WAIT CHECK: Событие: " + e.Message.Content + ".");
+                data.log.Write(LogMessageType.Debug, "WAIT CHECK: Событие: " + e.Message.Content + ".");
             }
 
             switch (e.Message.Event)
@@ -89,7 +89,7 @@ namespace ServiceSaleMachine.Client
                 case DeviceEvent.DropCassetteBillAcceptor:
                     {
                         data.stage = WorkerStateStage.DropCassettteBill;
-                        data.log.Write(LogMessageType.Information, "WAIT CHECK: Вытащили купюроприемник.");
+                        data.log.Write(LogMessageType.Debug, "WAIT CHECK: Вытащили купюроприемник.");
 
                         this.Close();
                     }

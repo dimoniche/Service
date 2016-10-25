@@ -39,7 +39,7 @@ namespace ServiceSaleMachine.Client
                 data.drivers.printer.PrintCheckСollection(data.statistic);
             }
 
-            //data.log.Write(LogMessageType.Information, "INCASS: сдача на аккаунт. Сумма сдачи " + diff);
+            data.log.Write(LogMessageType.Information, "INCASS: Сумма денег в кассете: " + data.statistic.AllMoneySumm + " руб");
         }
 
         private void reciveResponse(object sender, ServiceClientResponseEventArgs e)
@@ -113,6 +113,7 @@ namespace ServiceSaleMachine.Client
             if (e.Alt & e.KeyCode == Keys.F4)
             {
                 data.stage = WorkerStateStage.ExitProgram;
+                Close();
             }
             else if (e.Alt & e.KeyCode == Keys.F5)
             {

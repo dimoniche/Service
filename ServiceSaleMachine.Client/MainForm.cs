@@ -59,8 +59,12 @@ namespace ServiceSaleMachine.Client
         {
             if (Globals.admin)
             {
+                Program.Log.Write(LogMessageType.Information, "MAIN WORK: Входим в режим настройки приложения.");
+
                 result.drivers.InitAllDevice();
                 result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выходим из режима настройки приложения.");
 
                 // на выход сразу - не надо в настроечном режиме продолжать работать
                 Close();
@@ -77,10 +81,13 @@ namespace ServiceSaleMachine.Client
                     case WorkerStateStage.None:
                         break;
                     case WorkerStateStage.NoCOMPort:
-                        result = (FormResultData)FormManager.OpenForm<FormWelcomeUser>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+                        //result = (FormResultData)FormManager.OpenForm<FormWelcomeUser>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+                        Program.Log.Write(LogMessageType.Information, "MAIN WORK: Нет оборудования.");
                         break;
                     case WorkerStateStage.NeedSettingProgram:
                         {
+                            Program.Log.Write(LogMessageType.Information, "MAIN WORK: Не все оборудование настроено верно.");
+
                             result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
                             if (Globals.ClientConfiguration.Settings.offHardware == 0)
                             {
@@ -118,6 +125,8 @@ namespace ServiceSaleMachine.Client
 
                     if (result.stage != WorkerStateStage.None)
                     {
+                        Program.Log.Write(LogMessageType.Information, "MAIN WORK: Аппарат не работает.");
+
                         // аппарат не работает
                         result = (FormResultData)FormManager.OpenForm<FormTemporallyNoWork>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
@@ -142,13 +151,24 @@ namespace ServiceSaleMachine.Client
                     }
                     else if (result.stage == WorkerStateStage.ErrorControl)
                     {
+                        Program.Log.Write(LogMessageType.Information, "MAIN WORK: Аппарат не работает.");
+
                         // аппарат временно не работает
                         result = (FormResultData)FormManager.OpenForm<FormTemporallyNoWork>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
                         if (result.stage == WorkerStateStage.DropCassettteBill)
                         {
+                            Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выемка денег.");
+
                             // выемка денег
                             result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                            if (result.stage == WorkerStateStage.ExitProgram)
+                            {
+                                // выход
+                                Close();
+                                return;
+                            }
                         }
                         else if (result.stage == WorkerStateStage.ExitProgram)
                         {
@@ -183,11 +203,19 @@ namespace ServiceSaleMachine.Client
                         else if (result.stage == WorkerStateStage.DropCassettteBill)
                         {
                             // выемка денег
+                            Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выемка денег.");
+
                             result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
                             if (result.stage == WorkerStateStage.EndDropCassette)
                             {
                                 continue;
+                            }
+                            else if (result.stage == WorkerStateStage.ExitProgram)
+                            {
+                                // выход
+                                Close();
+                                return;
                             }
                         }
                         else if (result.stage == WorkerStateStage.ChooseService)
@@ -198,12 +226,20 @@ namespace ServiceSaleMachine.Client
                     }
                     else if (result.stage == WorkerStateStage.DropCassettteBill)
                     {
+                        Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выемка денег.");
+
                         // выемка денег
                         result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
                         if (result.stage == WorkerStateStage.EndDropCassette)
                         {
                             continue;
+                        }
+                        else if (result.stage == WorkerStateStage.ExitProgram)
+                        {
+                            // выход
+                            Close();
+                            return;
                         }
                     }
                     else if (result.stage == WorkerStateStage.TimeOut)
@@ -215,6 +251,8 @@ namespace ServiceSaleMachine.Client
 
                         if (result.stage == WorkerStateStage.DropCassettteBill)
                         {
+                            Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выемка денег.");
+
                             // выемка денег
                             result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
@@ -231,6 +269,8 @@ namespace ServiceSaleMachine.Client
                         }
                         else if (result.stage == WorkerStateStage.ErrorControl)
                         {
+                            Program.Log.Write(LogMessageType.Information, "MAIN WORK: Аппарат временно не работает.");
+
                             // аппарат временно не работает
                             result = (FormResultData)FormManager.OpenForm<FormTemporallyNoWork>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
                             if (result.stage == WorkerStateStage.ErrorEndControl)
@@ -267,12 +307,20 @@ namespace ServiceSaleMachine.Client
                     }
                     else if (result.stage == WorkerStateStage.DropCassettteBill)
                     {
+                        Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выемка денег.");
+
                         // выемка денег
                         result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
                         if (result.stage == WorkerStateStage.EndDropCassette)
                         {
                             continue;
+                        }
+                        else if (result.stage == WorkerStateStage.ExitProgram)
+                        {
+                            // выход
+                            Close();
+                            return;
                         }
                     }
                     else if (result.stage == WorkerStateStage.UserRequestService)
@@ -341,6 +389,8 @@ namespace ServiceSaleMachine.Client
                     Service serv = Globals.ClientConfiguration.ServiceByIndex(result.numberService);
                     result.serv = serv;
 
+                    Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выбрали услугу: " + serv.caption);
+
                     if (result.stage == WorkerStateStage.PayBillService)
                     {
                         // ожидание внесение денег
@@ -353,12 +403,20 @@ namespace ServiceSaleMachine.Client
                         }
                         else if (result.stage == WorkerStateStage.DropCassettteBill)
                         {
+                            Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выемка денег.");
+
                             // выемка денег
                             result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
                             if (result.stage == WorkerStateStage.EndDropCassette)
                             {
                                 continue;
+                            }
+                            else if (result.stage == WorkerStateStage.ExitProgram)
+                            {
+                                // выход
+                                Close();
+                                return;
                             }
                         }
                         else if (result.stage == WorkerStateStage.ExitProgram)
@@ -380,6 +438,8 @@ namespace ServiceSaleMachine.Client
 
                         if (result.stage == WorkerStateStage.Fail || result.stage == WorkerStateStage.EndDropCassette)
                         {
+                            Program.Log.Write(LogMessageType.Information, "MAIN WORK: Отказались от оплаты.");
+
                             // отказ - выход в начало
                             continue;
                         }
@@ -391,6 +451,8 @@ namespace ServiceSaleMachine.Client
                         }
                         else if (result.stage == WorkerStateStage.DropCassettteBill)
                         {
+                            Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выемка денег.");
+
                             // выемка денег
                             result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
@@ -398,9 +460,17 @@ namespace ServiceSaleMachine.Client
                             {
                                 continue;
                             }
+                            else if (result.stage == WorkerStateStage.ExitProgram)
+                            {
+                                // выход
+                                Close();
+                                return;
+                            }
                         }
                         else if (result.stage == WorkerStateStage.TimeOut)
                         {
+                            Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выход из оплаты по тайм ауту.");
+
                             check = false;
                             continue;
                         }
@@ -444,6 +514,8 @@ namespace ServiceSaleMachine.Client
                         result.timeRecognize = serv.timeRecognize;
                         result.ServName = serv.caption;
 
+                        Program.Log.Write(LogMessageType.Information, "MAIN WORK: Начали оказывать услугу: " + serv.caption + " Забор аксессуаров.");
+
                         // сначала включим подсветку и разрешим забрать аксессуары
                         result = (FormResultData)FormManager.OpenForm<FormProgress>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
@@ -455,12 +527,20 @@ namespace ServiceSaleMachine.Client
                         }
                         else if (result.stage == WorkerStateStage.DropCassettteBill)
                         {
+                            Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выемка денег.");
+
                             // выемка денег
                             result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
                             if (result.stage == WorkerStateStage.EndDropCassette)
                             {
                                 continue;
+                            }
+                            else if(result.stage == WorkerStateStage.ExitProgram)
+                            {
+                                // выход
+                                Close();
+                                return;
                             }
                         }
 
@@ -480,6 +560,8 @@ namespace ServiceSaleMachine.Client
                         }
                         else if (result.stage == WorkerStateStage.DropCassettteBill)
                         {
+                            Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выемка денег.");
+
                             // выемка денег
                             result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
@@ -487,11 +569,19 @@ namespace ServiceSaleMachine.Client
                             {
                                 continue;
                             }
+                            else if (result.stage == WorkerStateStage.ExitProgram)
+                            {
+                                // выход
+                                Close();
+                                return;
+                            }
                         }
                         else if (result.stage == WorkerStateStage.TimeOut)
                         {
                             continue;
                         }
+
+                        Program.Log.Write(LogMessageType.Information, "MAIN WORK: Начали оказывать услугу: " + serv.caption);
 
                         // Будем оказывать услугу
                         result = (FormResultData)FormManager.OpenForm<FormProvideService>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
@@ -507,6 +597,8 @@ namespace ServiceSaleMachine.Client
 
                         if (result.stage == WorkerStateStage.DropCassettteBill)
                         {
+                            Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выемка денег.");
+
                             // выемка денег
                             result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
@@ -514,7 +606,16 @@ namespace ServiceSaleMachine.Client
                             {
                                 continue;
                             }
+                            else if (result.stage == WorkerStateStage.ExitProgram)
+                            {
+                                // выход
+                                Close();
+                                return;
+                            }
                         }
+
+                        Program.Log.Write(LogMessageType.Information, "MAIN WORK: Закончили оказывать услугу: " + serv.caption);
+                        Program.Log.Write(LogMessageType.Information, "MAIN WORK: Проработали: " + result.timework);
 
                         // пишем в базу строку с временем работы
                         GlobalDb.GlobalBase.WriteWorkTime(serv.id, result.numberCurrentDevice, result.timework);
@@ -527,6 +628,7 @@ namespace ServiceSaleMachine.Client
                 catch (Exception exp)
                 {
                     // вернемся к исходной позиции - какая то ошибка
+                    Program.Log.Write(LogMessageType.Error, "MAIN WORK: Ошибка.");
                 }
             }
         }
@@ -590,6 +692,8 @@ namespace ServiceSaleMachine.Client
             {
                 if (res[0] == 0)
                 {
+                    result.drivers.modem.SendSMS("Отказ управляющего устройства", result.log);
+
                     result.stage = WorkerStateStage.ErrorControl;
 
                     Program.Log.Write(LogMessageType.Error, "CHECK_STAT: ошибка управляющего устройства.");
@@ -617,6 +721,8 @@ namespace ServiceSaleMachine.Client
                          | PrinterStatus.PRINTER_STATUS_PAPER_PROBLEM 
                          | PrinterStatus.PRINTER_STATUS_ERROR)) > 0)
             {
+                result.drivers.modem.SendSMS("Кончилась бумага", result.log);
+
                 // что то с бумагой
                 if (Globals.ClientConfiguration.Settings.NoPaperWork == 0)
                 {

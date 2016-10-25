@@ -325,7 +325,14 @@ namespace ServiceSaleMachine.Client
             //    data.drivers.printer.EndPrint();
             //}
 
-            data.log.Write(LogMessageType.Information, "WAIT CHECK: Выход на оказание услуги.");
+            if (amount >= data.serv.price)
+            {
+                data.log.Write(LogMessageType.Information, "WAIT CHECK: Выход на оказание услуги.");
+            }
+            else
+            {
+                data.log.Write(LogMessageType.Information, "WAIT CHECK: Услугу не оказываем.");
+            }
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -364,6 +371,20 @@ namespace ServiceSaleMachine.Client
                     Drivers.Message message = new Drivers.Message();
 
                     message.Content = "047759717704";
+
+                    ServiceClientResponseEventArgs e1 = new ServiceClientResponseEventArgs(message);
+
+                    CreditMoney(e1);
+                }
+            }
+            else if (e.Alt & e.KeyCode == Keys.F7)
+            {
+                if (Globals.IsDebug)
+                {
+                    // в дебаге - вносим деньги руками
+                    Drivers.Message message = new Drivers.Message();
+
+                    message.Content = "0000000000";
 
                     ServiceClientResponseEventArgs e1 = new ServiceClientResponseEventArgs(message);
 

@@ -370,7 +370,14 @@ namespace ServiceSaleMachine.Client
 
             Params.Result = data;
 
-            data.log.Write(LogMessageType.Information, "WAIT BILL: Выход на оказание услуги.");
+            if (amount >= data.serv.price)
+            {
+                data.log.Write(LogMessageType.Information, "WAIT BILL: Выход на оказание услуги.");
+            }
+            else
+            {
+                data.log.Write(LogMessageType.Information, "WAIT BILL: Услугу не оказываем.");
+            }
         }
 
         int Timeout = 0;

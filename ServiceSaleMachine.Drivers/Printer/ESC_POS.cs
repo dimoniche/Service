@@ -245,6 +245,27 @@ namespace ServiceSaleMachine.Drivers
             Print(" ".PadRight(42 - 8 - 1, ' ') + "0,00");
         }
 
+        public void PrintBody(Service serv, int amount)
+        {
+            Print(TransformCode(Globals.CheckConfiguration.Settings.PreviouslyService) + " " + TransformCode(serv.caption), true);
+            Print(eLeft);
+            Print(" ".PadRight(42 - 3 - amount.ToString().Length, ' ') + amount.ToString("#.00"));
+
+            PrintDashes();
+
+            Print(eLeft, false, false);
+            Print(TransformCode("ИТОГ"), true);
+            Print(" ".PadRight(42 - 7 - amount.ToString().Length, ' ') + amount.ToString("#.00"));
+
+            Print(eLeft, false, false);
+            Print(TransformCode("Налич"), true);
+            Print(" ".PadRight(42 - 8 - amount.ToString().Length, ' ') + amount.ToString("#.00"));
+
+            Print(eLeft, false, false);
+            Print(TransformCode("Сдача"), true);
+            Print(" ".PadRight(42 - 8 - 1, ' ') + "0,00");
+        }
+
         public void PrintFooter()
         {
             Print(eCentre,false,false);

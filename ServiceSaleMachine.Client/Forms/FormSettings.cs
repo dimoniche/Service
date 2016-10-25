@@ -1702,24 +1702,27 @@ namespace ServiceSaleMachine.Client
 
         private void butStatus_Click(object sender, EventArgs e)
         {
-            //data.drivers.printer.GetStatus();
+            PrinterStatus status = data.drivers.printer.GetStatus();
 
-            data.drivers.printer.ClosePrint();
-
-            switch (data.drivers.printer.status.CheckPaper(Program.Log))
+            if ((status & PrinterStatus.PRINTER_STATUS_PAPER_JAM) > 0)
             {
-                case PaperEnableEnum.PaperEnd:
-                    labelStatusPaper.Text = "Бумага кончилась";
-                    break;
-                case PaperEnableEnum.PaperError:
-                    labelStatusPaper.Text = "Ошибка принтера";
-                    break;
-                case PaperEnableEnum.PaperNearEnd:
-                    labelStatusPaper.Text = "Бумага заканчивается";
-                    break;
-                case PaperEnableEnum.PaperOk:
-                    labelStatusPaper.Text = "Бумага есть";
-                    break;
+                labelStatusPaper.Text = "Проблемы с бумагой";
+            }
+            else if ((status & PrinterStatus.PRINTER_STATUS_PAPER_OUT) > 0)
+            {
+                labelStatusPaper.Text = "Бумага кончилась";
+            }
+            else if ((status & PrinterStatus.PRINTER_STATUS_PAPER_PROBLEM) > 0)
+            {
+                labelStatusPaper.Text = "Проблемы с бумагой";
+            }
+            else if ((status & PrinterStatus.PRINTER_STATUS_ERROR) > 0)
+            {
+                labelStatusPaper.Text = "Ошибка принтера";
+            }
+            else
+            {
+                labelStatusPaper.Text = "Бумага есть";
             }
         }
 

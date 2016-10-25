@@ -119,6 +119,8 @@ namespace ServiceSaleMachine.Client
                     // поищем такой чек
                     CheckInfo info = GlobalDb.GlobalBase.GetCheckByStr((string)e.Message.Content);
 
+                    data.log.Write(LogMessageType.Information, "WAIT CHECK: Внесли чек номер " + (string)e.Message.Content);
+
                     if (info == null)
                     {
                         // нет такого чека
@@ -128,6 +130,8 @@ namespace ServiceSaleMachine.Client
                         {
                             pBxReturnBack.Enabled = true;
                         }
+
+                        data.log.Write(LogMessageType.Information, "WAIT CHECK: Чек не существует.");
 
                         return;
                     }
@@ -142,6 +146,8 @@ namespace ServiceSaleMachine.Client
                             pBxReturnBack.Enabled = true;
                         }
 
+                        data.log.Write(LogMessageType.Information, "WAIT CHECK: Чек уже был использован ранее.");
+
                         return;
                     }
 
@@ -153,6 +159,9 @@ namespace ServiceSaleMachine.Client
                         AmountServiceText.Text = "Недостаточно денег";
                         SecondMessageText.Text = "Остаток на чеке: " + count + " руб.";
 
+                        data.log.Write(LogMessageType.Information, "WAIT CHECK: Недостаточно денег.");
+                        data.log.Write(LogMessageType.Information, "WAIT CHECK: Остаток на чеке: " + count + " руб.");
+
                         return;
                     }
 
@@ -162,6 +171,7 @@ namespace ServiceSaleMachine.Client
                     GlobalDb.GlobalBase.FixedCheck(info.Id);
 
                     // внесли достаточную для услуги сумму
+                    data.log.Write(LogMessageType.Information, "WAIT CHECK: Внесли достаточную для оказания услуги сумму.");
 
                     // сдача
                     int diff = 0;
@@ -195,6 +205,8 @@ namespace ServiceSaleMachine.Client
 
                             if (ch == ChooseChangeEnum.ChangeToAccount)
                             {
+                                data.log.Write(LogMessageType.Information, "WAIT CHECK: сдача на аккаунт. Сумма сдачи " + diff);
+
                                 // заносим в аккаунт - если не авторизовались - нужна авторизация в аккаунт
                                 if (data.CurrentUserId == 0)
                                 {
@@ -213,6 +225,7 @@ namespace ServiceSaleMachine.Client
                             else
                             {
                                 // выдаем чек
+                                data.log.Write(LogMessageType.Information, "WAIT CHECK: сдача на чек. Сумма сдачи " + diff);
 
                                 // запомним сколько выдали на чеке - печатаем новый чек - часть денег отоварили
                                 data.statistic.BarCodeMoneySumm -= data.serv.price;
@@ -253,6 +266,8 @@ namespace ServiceSaleMachine.Client
                         AmountServiceText.Text = "ПРИНЯТО: " + amount + " руб.";
                         SecondMessageText.Text = "Недостаточно денег для оказания услуги.";
                     }
+
+                    data.log.Write(LogMessageType.Information, "WAIT CHECK: Внесено " + amount + " руб.");
 
                     // деньги внесли - нет пути назад
                     TimeOutTimer.Enabled = false;
@@ -393,6 +408,8 @@ namespace ServiceSaleMachine.Client
             // Запомним в базе
             GlobalDb.GlobalBase.SetMoneyStatistic(data.statistic);
 
+            data.log.Write(LogMessageType.Information, "WAIT CHECK: Приняли " + amount + " руб.");
+            data.log.Write(LogMessageType.Information, "WAIT CHECK: Окажем услугу на сумму " + data.serv.price + " руб.");
             data.log.Write(LogMessageType.Information, "WAIT CHECK: Оказываем услугу.");
 
             this.Close();

@@ -137,6 +137,8 @@ namespace ServiceSaleMachine.Client
 
                     int numberNominal = ((BillNominal)e.Message.Content).nominalNumber;
 
+                    data.log.Write(LogMessageType.Information, "WAIT BILL: Внесли купюру номиналом " + numberNominal + " руб.");
+
                     if (Globals.ClientConfiguration.Settings.nominals[numberNominal] > 0)
                     {
                         // такую купюру мы обрабатываем
@@ -191,6 +193,9 @@ namespace ServiceSaleMachine.Client
 
                             // сообщим о том что купюра великовата
                             SecondMessageText.Text = "Внесите купюру меньшего номинала.";
+
+                            data.log.Write(LogMessageType.Information, "WAIT BILL: Внесите купюру меньшего номинала. Нет сдачи.");
+
                             return;
                         }
                     }
@@ -235,6 +240,7 @@ namespace ServiceSaleMachine.Client
                     }
 
                     // внесли достаточную для услуги сумму
+                    data.log.Write(LogMessageType.Information, "WAIT BILL: Внесли достаточную для оказания услуги сумму.");
 
                     if (Globals.ClientConfiguration.Settings.changeOn > 0)
                     {
@@ -247,7 +253,7 @@ namespace ServiceSaleMachine.Client
                         // сдача на чек
                         if (amount > data.serv.price)
                         {
-                            data.log.Write(LogMessageType.Information, "WAIT BILL: Сумма сдачи " + diff);
+                            data.log.Write(LogMessageType.Information, "WAIT BILL: Сумма сдачи " + diff + " руб.");
 
                             ChooseChangeEnum ch = ChooseChangeEnum.None;
 
@@ -311,6 +317,8 @@ namespace ServiceSaleMachine.Client
 
                     // напишем на экране
                     AmountServiceText.Text = "Внесено: " + amount + " руб.";
+
+                    data.log.Write(LogMessageType.Information, "WAIT BILL: Внесено " + amount + " руб.");
 
                     // деньги внесли - нет пути назад
                     TimeOutTimer.Enabled = false;
@@ -397,12 +405,16 @@ namespace ServiceSaleMachine.Client
                 if (data.drivers.printer.prn.PrinterIsOpen)
                 {
                     data.drivers.printer.PrintHeader();
-                    data.drivers.printer.PrintBody(data.serv);
+                    data.drivers.printer.PrintBody(data.serv, amount);
                     data.drivers.printer.PrintFooter();
                     data.drivers.printer.EndPrint();
 
+                    int numbercheck = GlobalDb.GlobalBase.GetCurrentNumberCheck();
+
                     // увеличим номер фискального чека
-                    GlobalDb.GlobalBase.SetNumberCheck(GlobalDb.GlobalBase.GetCurrentNumberCheck() + 1);
+                    GlobalDb.GlobalBase.SetNumberCheck(numbercheck + 1);
+
+                    data.log.Write(LogMessageType.Information, "WAIT BILL: Печатаем чек с номером " + numbercheck + ". На сумму " + amount + " руб.");
                 }
             }
 
@@ -418,6 +430,8 @@ namespace ServiceSaleMachine.Client
             // запоминаем оказанную услугу этому пользователю
             GlobalDb.GlobalBase.InsertService(data.CurrentUserId, (data.serv.price));
 
+            data.log.Write(LogMessageType.Information, "WAIT BILL: Приняли " + amount + " руб.");
+            data.log.Write(LogMessageType.Information, "WAIT BILL: Окажем услугу на сумму " + data.serv.price + " руб.");
             data.log.Write(LogMessageType.Information, "WAIT BILL: Оказываем услугу.");
 
             this.Close();

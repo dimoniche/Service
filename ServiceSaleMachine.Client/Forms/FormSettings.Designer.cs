@@ -207,7 +207,6 @@
             this.secondfirmsname = new System.Windows.Forms.TextBox();
             this.firmsname = new System.Windows.Forms.TextBox();
             this.checkPic = new System.Windows.Forms.PictureBox();
-            this.tabPageStatistic = new System.Windows.Forms.TabPage();
             this.tabPageChecking = new System.Windows.Forms.TabPage();
             this.tabControl4 = new System.Windows.Forms.TabControl();
             this.tabPageReacess = new System.Windows.Forms.TabPage();
@@ -269,7 +268,6 @@
             // 
             this.tabControl1.Controls.Add(this.DeviceSettings);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPageStatistic);
             this.tabControl1.Controls.Add(this.tabPageChecking);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
@@ -2164,16 +2162,6 @@
             this.checkPic.TabIndex = 0;
             this.checkPic.TabStop = false;
             // 
-            // tabPageStatistic
-            // 
-            this.tabPageStatistic.Location = new System.Drawing.Point(4, 22);
-            this.tabPageStatistic.Name = "tabPageStatistic";
-            this.tabPageStatistic.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageStatistic.Size = new System.Drawing.Size(833, 608);
-            this.tabPageStatistic.TabIndex = 2;
-            this.tabPageStatistic.Text = "Статистика";
-            this.tabPageStatistic.UseVisualStyleBackColor = true;
-            // 
             // tabPageChecking
             // 
             this.tabPageChecking.Controls.Add(this.tabControl4);
@@ -2527,7 +2515,6 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label labelCurrNumberCheck;
         private System.Windows.Forms.Button resetCheckNumeration;
-        private System.Windows.Forms.TabPage tabPageStatistic;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Button LightOff2;
         private System.Windows.Forms.Button LightOn2;

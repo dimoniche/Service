@@ -45,7 +45,7 @@ namespace ServiceSaleMachine.Client
             // В случае отладки будем сохранять максимум информации
             if (Globals.IsDebug)
             {
-                Log.MinMessageType = LogMessageTypeEnum.Debug;
+                Log.MinMessageType = LogMessageTypeEnum.Information;
                 Log.AllowWriteThreadId = true;
                 Log.AllowWriteThread = true;
             }

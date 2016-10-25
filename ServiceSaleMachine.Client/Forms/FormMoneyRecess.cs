@@ -38,6 +38,8 @@ namespace ServiceSaleMachine.Client
             {
                 data.drivers.printer.PrintCheckСollection(data.statistic);
             }
+
+            //data.log.Write(LogMessageType.Information, "INCASS: сдача на аккаунт. Сумма сдачи " + diff);
         }
 
         private void reciveResponse(object sender, ServiceClientResponseEventArgs e)

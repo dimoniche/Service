@@ -190,28 +190,31 @@ namespace ServiceSaleMachine
             return true;
         }
 
-        private String GetSystemValue(string name)
+        private string GetSystemValue(string name)
         {
             MySqlDataReader dr = Execute("select namevalue, ownvalue from systemvalues where namevalue='" + name+"'");
             if (dr != null)
             {
+                string str = "";
+
                 if (dr.HasRows)
                 {
                     dr.Read();
-                    String str = "";
 
                     try
                     {
                         if (dr.IsDBNull(0) != true)
+                        {
                             str = dr[1].ToString();
+                        }
                     }
                     catch
                     {
                     }
-
-                    dr.Close();
-                    return str;
                 }
+
+                dr.Close();
+                return str;
             }
             return "";
         }
@@ -334,6 +337,7 @@ namespace ServiceSaleMachine
                     {
                     }
                 }
+
                 dr.Close();
             }
 
@@ -346,6 +350,7 @@ namespace ServiceSaleMachine
                 return 0;
             }
         }
+
         private DateTime GetDTFromReq(MySqlDataReader dr)
         {
             DateTime dt = new DateTime(2016, 07, 01); ;
@@ -366,6 +371,7 @@ namespace ServiceSaleMachine
                     {
                     }
                 }
+
                 dr.Close();
             }
             return dt;
@@ -467,15 +473,14 @@ namespace ServiceSaleMachine
                         {
 
                         }
-
-                        dr.Close();
-
-                        return ui;
                     }
+
+                    dr.Close();
+                    return ui;
                 }
             }
 
-            return ui;//null
+            return ui;
         }
 
         private DataTable getDataTable(string query)
@@ -917,12 +922,9 @@ namespace ServiceSaleMachine
                 catch
                 {
                 }
-
-                dr.Close();
-
-                return ch;
             }
 
+            dr.Close();
             return ch;
         }
         /// <summary>

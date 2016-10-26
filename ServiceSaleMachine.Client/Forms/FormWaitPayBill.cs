@@ -13,6 +13,11 @@ namespace ServiceSaleMachine.Client
         // количество внесенных денег
         int amount;
 
+        // количество денег на купюрах
+        int amountMoney;
+        // количество денег на чеках
+        int amountCheck;
+
         // положили на чек
         int difftoCheck = 0;
         // положили на аккаунт
@@ -21,6 +26,9 @@ namespace ServiceSaleMachine.Client
         // зафиксировали купюру
         bool moneyFixed = false;
 
+        // остановка оборудования - больше денег не надо
+        bool StopHardware = false;
+
         public FormWaitPayBill()
         {
             InitializeComponent();
@@ -28,6 +36,8 @@ namespace ServiceSaleMachine.Client
             TimeOutTimer.Enabled = true;
             Timeout = 0;
             amount = 0;
+            amountMoney = 0;
+            amountCheck = 0;
 
             if (Globals.ClientConfiguration.Settings.offHardware == 0 && Globals.ClientConfiguration.Settings.offBill == 0)
             {
@@ -64,6 +74,8 @@ namespace ServiceSaleMachine.Client
             // заменим обработчик событий
             data.drivers.ReceivedResponse += reciveResponse;
 
+            data.log.Write(LogMessageType.Information, "========================НАЧАЛО ОБСЛУЖИВАНИЯ==========================");
+
             if (data.serv.price == 0)
             {
                 // может быть цена нулевая - и это демо режим - можно сразу без денег работать
@@ -77,6 +89,10 @@ namespace ServiceSaleMachine.Client
                 // перейдем в режим ожидания купюр
                 data.drivers.CCNETDriver.WaitBillEscrow();
                 data.log.Write(LogMessageType.Information, "WAIT BILL: запускаем режим ожидания купюр.");
+
+                // при старте сканер разбудим
+                data.drivers.scaner.Request(ZebexCommandEnum.wakeUp);
+                data.log.Write(LogMessageType.Information, "WAIT CHECK: запускаем режим ожидания чеков.");
             }
         }
 
@@ -101,6 +117,9 @@ namespace ServiceSaleMachine.Client
                 case DeviceEvent.BillAcceptorEscrow:
                     CreditMoney(e);
                     break;
+                case DeviceEvent.Scaner:
+                    CreditCheck(e);
+                    break;
                 case DeviceEvent.BillAcceptorCredit:
                     //CreditMoney(e);
                     break;
@@ -120,6 +139,8 @@ namespace ServiceSaleMachine.Client
 
         private void CreditMoney(ServiceClientResponseEventArgs e)
         {
+            if (StopHardware) return;
+
             pBxReturnBack.Enabled = false;
             SecondMessageText.Text = "";
 
@@ -137,8 +158,6 @@ namespace ServiceSaleMachine.Client
 
                     int numberNominal = ((BillNominal)e.Message.Content).nominalNumber;
 
-                    data.log.Write(LogMessageType.Information, "WAIT BILL: Внесли купюру номиналом " + numberNominal + " руб.");
-
                     if (Globals.ClientConfiguration.Settings.nominals[numberNominal] > 0)
                     {
                         // такую купюру мы обрабатываем
@@ -153,7 +172,7 @@ namespace ServiceSaleMachine.Client
                             data.drivers.CCNETDriver.ReturnBill();
                         }
 
-                        data.log.Write(LogMessageType.Information, "WAIT BILL: Купюру " + numberNominal + " не принимаем");
+                        data.log.Write(LogMessageType.Information, "WAIT BILL: Купюру c номером номинала равным " + numberNominal + " не принимаем");
 
                         SecondMessageText.Text = "Внесите купюру другого номинала.";
                         return;
@@ -165,7 +184,10 @@ namespace ServiceSaleMachine.Client
                     int count = 0;
                     int.TryParse(((BillNominal)e.Message.Content).Denomination, out count);
 
+                    data.log.Write(LogMessageType.Information, "WAIT BILL: Внесли купюру номиналом " + count + " руб.");
+
                     amount += count;
+                    amountMoney += count;
 
                     // сдача
                     int diff = 0;
@@ -217,12 +239,20 @@ namespace ServiceSaleMachine.Client
                         {
                             moneyFixed = false;
                             data.drivers.CCNETDriver.StackBill();
+
+                            data.log.Write(LogMessageType.Information, "WAIT BILL: Забираем купюру в приемник.");
+                        }
+                        else
+                        {
+                            moneyFixed = false;
                         }
                     }
                     else
                     {
                         // возвращаем ее обратно
                         amount -= count;
+
+                        data.log.Write(LogMessageType.Information, "WAIT BILL: Возвращаем купюру обратно покупателю.");
 
                         moneyFixed = false;
 
@@ -238,9 +268,6 @@ namespace ServiceSaleMachine.Client
 
                         return;
                     }
-
-                    // внесли достаточную для услуги сумму
-                    data.log.Write(LogMessageType.Information, "WAIT BILL: Внесли достаточную для оказания услуги сумму.");
 
                     if (Globals.ClientConfiguration.Settings.changeOn > 0)
                     {
@@ -316,7 +343,24 @@ namespace ServiceSaleMachine.Client
                     }
 
                     // напишем на экране
-                    AmountServiceText.Text = "Внесено: " + amount + " руб.";
+                    if (amount >= data.serv.price)
+                    {
+                        if (diff > 0)
+                        {
+                            AmountServiceText.Text = "ПРИНЯТО: " + data.serv.price + " руб.";
+                            SecondMessageText.Text = "Остаток на чеке: " + diff + " руб.";
+                        }
+                        else
+                        {
+                            AmountServiceText.Text = "Внесено: " + amount + " руб.";
+                            SecondMessageText.Text = "";
+                        }
+                    }
+                    else
+                    {
+                        AmountServiceText.Text = "Внесено: " + amount + " руб.";
+                        SecondMessageText.Text = "Недостаточно денег для оказания услуги.";
+                    }
 
                     data.log.Write(LogMessageType.Information, "WAIT BILL: Внесено " + amount + " руб.");
 
@@ -330,13 +374,21 @@ namespace ServiceSaleMachine.Client
 
                     if (amount >= data.serv.price)
                     {
+                        // внесли достаточную для услуги сумму
+                        data.log.Write(LogMessageType.Information, "WAIT BILL: Внесли достаточную для оказания услуги сумму.");
+
                         AmountServiceText.ForeColor = System.Drawing.Color.Green;
                         pBxGiveOxigen.Enabled = true;
 
+                        moneyFixed = false;
+                        StopHardware = true;
+
                         if (Globals.ClientConfiguration.Settings.offHardware == 0)
                         {
-                            data.drivers.CCNETDriver.StopWaitBill();
-                            moneyFixed = false;
+                            data.drivers.CCNETDriver.ReturnBill();
+                            data.drivers.scaner.Request(ZebexCommandEnum.sleep);
+
+                            data.log.Write(LogMessageType.Information, "WAIT BILL: Остановим работу оборудования для приема средств.");
                         }
                     }
                 }
@@ -349,6 +401,216 @@ namespace ServiceSaleMachine.Client
                     data.drivers.CCNETDriver.ReturnBill();
 
                     moneyFixed = false;
+                }
+            }
+        }
+
+        private void CreditCheck(ServiceClientResponseEventArgs e)
+        {
+            if (StopHardware) return;
+
+            pBxReturnBack.Enabled = false;   // блокировать возврат не будем - можем ведь чеком сдачу давать
+            SecondMessageText.Text = "";
+
+            lock (Params)
+            {
+                try
+                {
+                    data.log.Write(LogMessageType.Information, "SCANER: Обработаем получение чека");
+
+                    // сбросим таймаут
+                    Timeout = 0;
+
+                    // прочли чек
+
+                    // поищем такой чек
+                    CheckInfo info;
+
+                    if (((string)e.Message.Content).Contains("0000000000"))
+                    {
+                        info = new CheckInfo();
+                        info.active = false;
+                        info.Amount = 50;
+                    }
+                    else
+                    {
+                        info = GlobalDb.GlobalBase.GetCheckByStr((string)e.Message.Content);
+                    }
+
+                    data.log.Write(LogMessageType.Information, "WAIT CHECK: Внесли чек номер " + (string)e.Message.Content);
+
+                    if (info == null)
+                    {
+                        // нет такого чека
+                        SecondMessageText.Text = "Чек не существует.";
+
+                        if (amount == 0)
+                        {
+                            pBxReturnBack.Enabled = true;
+                        }
+
+                        data.log.Write(LogMessageType.Information, "WAIT CHECK: Чек не существует.");
+
+                        return;
+                    }
+
+                    if (info.active == true)
+                    {
+                        // чек погашен - отклоним его
+                        SecondMessageText.Text = "Чек уже был использован ранее.";
+
+                        if (amount == 0)
+                        {
+                            pBxReturnBack.Enabled = true;
+                        }
+
+                        data.log.Write(LogMessageType.Information, "WAIT CHECK: Чек уже был использован ранее.");
+
+                        return;
+                    }
+
+                    int count = info.Amount;
+
+                    amount += count;
+                    amountCheck += count;
+
+                    // всегда со сдачей - сразу забираем деньгу c чека - никого не спрашиваем - гасим текущий чек - распечатаем новый
+                    GlobalDb.GlobalBase.FixedCheck(info.Id);
+
+                    // сдача
+                    int diff = 0;
+
+                    if (Globals.ClientConfiguration.Settings.changeOn > 0)
+                    {
+                        // посчитаем размер сдачи
+                        diff = amount - data.serv.price;
+
+                        // денег не достаточно - сдачи нет
+                        if (diff < 0) diff = 0;
+
+                        // сдача на чек
+                        if (amount > data.serv.price)
+                        {
+                            ChooseChangeEnum ch = ChooseChangeEnum.None;
+
+                            if (Globals.ClientConfiguration.Settings.changeToAccount == 1 && Globals.ClientConfiguration.Settings.changeToCheck == 1)
+                            {
+                                // тут надо решить как выдать сдачу - спросим пользователя
+                                ch = (ChooseChangeEnum)FormManager.OpenForm<FormChooseChange>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, diff.ToString());
+                            }
+                            else if (Globals.ClientConfiguration.Settings.changeToAccount == 1)
+                            {
+                                ch = ChooseChangeEnum.ChangeToAccount;
+                            }
+                            else if (Globals.ClientConfiguration.Settings.changeToCheck == 1)
+                            {
+                                ch = ChooseChangeEnum.ChangeToCheck;
+                            }
+
+                            if (ch == ChooseChangeEnum.ChangeToAccount)
+                            {
+                                data.log.Write(LogMessageType.Information, "WAIT CHECK: сдача на аккаунт. Сумма сдачи " + diff);
+
+                                // заносим в аккаунт - если не авторизовались - нужна авторизация в аккаунт
+                                if (data.CurrentUserId == 0)
+                                {
+                                    // форма регистрации
+                                    data = (FormResultData)FormManager.OpenForm<UserRequest>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, data);
+                                }
+
+                                // запомним сколько внесли на аккаунт
+                                data.statistic.AccountMoneySumm += diff;
+
+                                difftoAccount += diff;
+
+                                // внесем на счет
+                                GlobalDb.GlobalBase.AddToAmount(data.CurrentUserId, diff);
+                            }
+                            else
+                            {
+                                // выдаем чек
+                                data.log.Write(LogMessageType.Information, "WAIT CHECK: сдача на чек. Сумма сдачи " + diff);
+
+                                // запомним сколько выдали на чеке - печатаем новый чек - часть денег отоварили
+                                data.statistic.BarCodeMoneySumm -= data.serv.price;
+
+                                difftoCheck += diff;
+
+                                // запомним такой чек
+                                string check = CheckHelper.GetUniqueNumberCheck(12);
+                                GlobalDb.GlobalBase.AddToCheck(data.CurrentUserId, diff, check);
+
+                                data.drivers.printer.StartPrint(data.drivers.printer.getNamePrinter());
+
+                                int numberCheck = GlobalDb.GlobalBase.GetCurrentNumberDeliveryCheck();
+
+                                // и напечатем его
+                                data.drivers.printer.PrintHeader(true);
+                                data.drivers.printer.PrintBarCode(check, diff);
+                                data.drivers.printer.PrintFooter();
+                                data.drivers.printer.EndPrint();
+
+                                data.log.Write(LogMessageType.Information, "WAIT CHECK: Печатаем чек со сдачей под номером " + numberCheck + ". На сумму " + diff + " руб.");
+                                data.log.Write(LogMessageType.Information, "WAIT CHECK: BarCode " + check);
+                                data.log.Write(LogMessageType.Information, "WAIT CHECK: Выход на оказание услуги.");
+
+                                // нарастим номер чека с баркодом
+                                GlobalDb.GlobalBase.SetNumberDeliveryCheck(numberCheck + 1);
+                            }
+                        }
+                    }
+
+                    // напишем на экране
+                    if (amount >= data.serv.price)
+                    {
+                        if (diff > 0)
+                        {
+                            AmountServiceText.Text = "ПРИНЯТО: " + data.serv.price + " руб.";
+                            SecondMessageText.Text = "Остаток на чеке: " + diff + " руб.";
+                        }
+                        else
+                        {
+                            AmountServiceText.Text = "Внесено: " + amount + " руб.";
+                            SecondMessageText.Text = "";
+                        }
+                    }
+                    else
+                    {
+                        AmountServiceText.Text = "Внесено: " + amount + " руб.";
+                        SecondMessageText.Text = "Недостаточно денег для оказания услуги.";
+                    }
+
+                    data.log.Write(LogMessageType.Information, "WAIT CHECK: Внесено " + amount + " руб.");
+
+                    // деньги внесли - нет пути назад
+                    TimeOutTimer.Enabled = false;
+
+                    if (amount >= data.serv.price)
+                    {
+                        // внесли достаточную для услуги сумму
+                        data.log.Write(LogMessageType.Information, "WAIT CHECK: Внесли достаточную для оказания услуги сумму.");
+
+                        AmountServiceText.ForeColor = System.Drawing.Color.Green;
+                        pBxGiveOxigen.Enabled = true;
+
+                        StopHardware = true;
+
+                        if (Globals.ClientConfiguration.Settings.offHardware == 0)
+                        {
+                            data.drivers.CCNETDriver.ReturnBill();
+                            data.drivers.scaner.Request(ZebexCommandEnum.sleep);
+
+                            data.log.Write(LogMessageType.Information, "WAIT BILL: Остановим работу оборудования для приема средств.");
+                        }
+                    }
+                }
+                catch (Exception exp)
+                {
+                    data.log.Write(LogMessageType.Error, "WAIT CHECK: ошибка управляющего устройства.");
+                    data.log.Write(LogMessageType.Error, "WAIT CHECK: " + exp.ToString());
+
+                    // при ошибке сканер усыпим
+                    data.drivers.scaner.Request(ZebexCommandEnum.sleep);
                 }
             }
         }
@@ -366,6 +628,9 @@ namespace ServiceSaleMachine.Client
 
                 data.drivers.CCNETDriver.ReturnBill();
                 data.drivers.CCNETDriver.StopWaitBill();
+
+                // при завершении сканер усыпим
+                data.drivers.scaner.Request(ZebexCommandEnum.sleep);
             }
 
             Params.Result = data;
@@ -412,7 +677,7 @@ namespace ServiceSaleMachine.Client
                 if (data.drivers.printer.prn.PrinterIsOpen)
                 {
                     data.drivers.printer.PrintHeader();
-                    data.drivers.printer.PrintBody(data.serv, amount);
+                    data.drivers.printer.PrintBody(data.serv, amountMoney);
                     data.drivers.printer.PrintFooter();
                     data.drivers.printer.EndPrint();
 
@@ -421,25 +686,30 @@ namespace ServiceSaleMachine.Client
                     // увеличим номер фискального чека
                     GlobalDb.GlobalBase.SetNumberCheck(numbercheck + 1);
 
-                    data.log.Write(LogMessageType.Information, "WAIT BILL: Печатаем чек с номером " + numbercheck + ". На сумму " + amount + " руб.");
+                    data.log.Write(LogMessageType.Information, "WAIT BILL: Печатаем фискальный чек с номером " + numbercheck + ". На сумму " + amountMoney + " руб.");
                 }
             }
 
             // запомним принятую купюру
-            data.statistic.AllMoneySumm += (amount);
+            data.statistic.AllMoneySumm += (amountMoney);
             // запомним на сколько оказали услуг
             data.statistic.ServiceMoneySumm += data.serv.price;
 
             // Запомним в базе принятую купюру
             GlobalDb.GlobalBase.SetMoneyStatistic(data.statistic);
             // заносим в базу платеж
-            GlobalDb.GlobalBase.InsertMoney(data.CurrentUserId, (amount));
+            GlobalDb.GlobalBase.InsertMoney(data.CurrentUserId, (amountMoney));
             // запоминаем оказанную услугу этому пользователю
             GlobalDb.GlobalBase.InsertService(data.CurrentUserId, (data.serv.price));
 
+            data.log.Write(LogMessageType.Information, "==============================================================================");
             data.log.Write(LogMessageType.Information, "WAIT BILL: Приняли " + amount + " руб.");
+            data.log.Write(LogMessageType.Information, "WAIT BILL: Купюрами " + amountMoney + " руб.");
+            data.log.Write(LogMessageType.Information, "WAIT BILL: Чеками " + amountCheck + " руб.");
+            data.log.Write(LogMessageType.Information, "WAIT BILL: Дали сдачу чеком на сумму " + difftoCheck + " руб.");
             data.log.Write(LogMessageType.Information, "WAIT BILL: Окажем услугу на сумму " + data.serv.price + " руб.");
             data.log.Write(LogMessageType.Information, "WAIT BILL: Оказываем услугу.");
+            data.log.Write(LogMessageType.Information, "==============================================================================");
 
             this.Close();
         }
@@ -476,6 +746,37 @@ namespace ServiceSaleMachine.Client
                     ServiceClientResponseEventArgs e1 = new ServiceClientResponseEventArgs(message);
 
                     CreditMoney(e1);
+                }
+            }
+            else if (e.Alt & e.KeyCode == Keys.F6)
+            {
+                if (Globals.IsDebug)
+                {
+                    // в дебаге - вносим деньги руками
+                    Drivers.Message message = new Drivers.Message();
+
+                    message.Content = new BillNominal();
+
+                    ((BillNominal)message.Content).nominalNumber = 3;
+                    ((BillNominal)message.Content).Denomination = "50";
+
+                    ServiceClientResponseEventArgs e1 = new ServiceClientResponseEventArgs(message);
+
+                    CreditMoney(e1);
+                }
+            }
+            else if (e.Alt & e.KeyCode == Keys.F7)
+            {
+                if (Globals.IsDebug)
+                {
+                    // в дебаге - вносим деньги руками
+                    Drivers.Message message = new Drivers.Message();
+
+                    message.Content = "0000000000";
+
+                    ServiceClientResponseEventArgs e1 = new ServiceClientResponseEventArgs(message);
+
+                    CreditCheck(e1);
                 }
             }
         }

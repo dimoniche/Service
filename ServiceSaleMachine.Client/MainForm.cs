@@ -374,14 +374,14 @@ namespace ServiceSaleMachine.Client
                         continue;
                     }
 
-                    if (Globals.ClientConfiguration.Settings.offCheck != 1)
+                    //if (Globals.ClientConfiguration.Settings.offCheck != 1)
+                    //{
+                    //    // выбор формы оплаты - если есть оплата чеком
+                    //    result = (FormResultData)FormManager.OpenForm<FormChoosePay>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+                    //}
+                    //else
                     {
-                        // выбор формы оплаты - если есть оплата чеком
-                        result = (FormResultData)FormManager.OpenForm<FormChoosePay>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-                    }
-                    else
-                    {
-                        // платим только деньгами
+                        // платим только деньгами и чеками
                         result.stage = WorkerStateStage.PayBillService;
                     }
 
@@ -433,7 +433,7 @@ namespace ServiceSaleMachine.Client
                     }
                     else if (result.stage == WorkerStateStage.PayCheckService)
                     {
-                        // ожидание считывания чека
+                        // ожидание считывания чека - сюда не попадаем - отказались от оплаты только чеками
                         result = (FormResultData)FormManager.OpenForm<FormWaitPayCheck>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
                         if (result.stage == WorkerStateStage.Fail || result.stage == WorkerStateStage.EndDropCassette)
@@ -616,6 +616,7 @@ namespace ServiceSaleMachine.Client
 
                         Program.Log.Write(LogMessageType.Information, "MAIN WORK: Закончили оказывать услугу: " + serv.caption);
                         Program.Log.Write(LogMessageType.Information, "MAIN WORK: Проработали: " + result.timework);
+                        Program.Log.Write(LogMessageType.Information, "========================КОНЕЦ ОБСЛУЖИВАНИЯ===========================");
 
                         // пишем в базу строку с временем работы
                         GlobalDb.GlobalBase.WriteWorkTime(serv.id, result.numberCurrentDevice, result.timework);

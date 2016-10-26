@@ -238,11 +238,15 @@ namespace ServiceSaleMachine.Client
 
                                 data.drivers.printer.StartPrint(data.drivers.printer.getNamePrinter());
 
+                                int numberCheck = GlobalDb.GlobalBase.GetCurrentNumberDeliveryCheck();
+
                                 // и напечатем его
                                 data.drivers.printer.PrintHeader(true);
                                 data.drivers.printer.PrintBarCode(check, diff);
                                 data.drivers.printer.PrintFooter();
                                 data.drivers.printer.EndPrint();
+
+                                GlobalDb.GlobalBase.SetNumberDeliveryCheck(numberCheck + 1);
                             }
                         }
                     }

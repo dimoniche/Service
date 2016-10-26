@@ -90,9 +90,12 @@ namespace ServiceSaleMachine.Client
                 data.drivers.CCNETDriver.WaitBillEscrow();
                 data.log.Write(LogMessageType.Information, "WAIT BILL: запускаем режим ожидания купюр.");
 
-                // при старте сканер разбудим
-                data.drivers.scaner.Request(ZebexCommandEnum.wakeUp);
-                data.log.Write(LogMessageType.Information, "WAIT CHECK: запускаем режим ожидания чеков.");
+                // при старте сканер разбудим, если не отключена возможность оплаты чеком
+                if (Globals.ClientConfiguration.Settings.offCheck != 1)
+                {
+                    data.drivers.scaner.Request(ZebexCommandEnum.wakeUp);
+                    data.log.Write(LogMessageType.Information, "WAIT CHECK: запускаем режим ожидания чеков.");
+                }
             }
         }
 

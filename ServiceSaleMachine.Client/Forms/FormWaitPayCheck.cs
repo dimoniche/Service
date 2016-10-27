@@ -437,6 +437,9 @@ namespace ServiceSaleMachine.Client
             data.log.Write(LogMessageType.Information, "WAIT CHECK: Окажем услугу на сумму " + data.serv.price + " руб.");
             data.log.Write(LogMessageType.Information, "WAIT CHECK: Оказываем услугу.");
 
+            // обновим из базы статистические данные
+            data.statistic = GlobalDb.GlobalBase.GetMoneyStatistic();
+
             this.Close();
         }
 

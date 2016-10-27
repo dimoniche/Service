@@ -445,7 +445,7 @@ namespace ServiceSaleMachine.Client
                     if (info == null)
                     {
                         // нет такого чека
-                        SecondMessageText.Text = "Чек не существует.";
+                        SecondMessageText.Text = "   Чек не существует.         ";
 
                         if (amount == 0)
                         {
@@ -674,22 +674,25 @@ namespace ServiceSaleMachine.Client
 
             if (Globals.ClientConfiguration.Settings.offHardware != 1)
             {
-                // Распечатать чек за услугу
-                data.drivers.printer.StartPrint(data.drivers.printer.getNamePrinter());
-
-                if (data.drivers.printer.prn.PrinterIsOpen)
+                if (amountMoney > 0)
                 {
-                    data.drivers.printer.PrintHeader();
-                    data.drivers.printer.PrintBody(data.serv, amountMoney);
-                    data.drivers.printer.PrintFooter();
-                    data.drivers.printer.EndPrint();
+                    // Распечатать чек за услугу - если были потрачены деньги
+                    data.drivers.printer.StartPrint(data.drivers.printer.getNamePrinter());
 
-                    int numbercheck = GlobalDb.GlobalBase.GetCurrentNumberCheck();
+                    if (data.drivers.printer.prn.PrinterIsOpen)
+                    {
+                        data.drivers.printer.PrintHeader();
+                        data.drivers.printer.PrintBody(data.serv, amountMoney);
+                        data.drivers.printer.PrintFooter();
+                        data.drivers.printer.EndPrint();
 
-                    // увеличим номер фискального чека
-                    GlobalDb.GlobalBase.SetNumberCheck(numbercheck + 1);
+                        int numbercheck = GlobalDb.GlobalBase.GetCurrentNumberCheck();
 
-                    data.log.Write(LogMessageType.Information, "WAIT BILL: Печатаем фискальный чек с номером " + numbercheck + ". На сумму " + amountMoney + " руб.");
+                        // увеличим номер фискального чека
+                        GlobalDb.GlobalBase.SetNumberCheck(numbercheck + 1);
+
+                        data.log.Write(LogMessageType.Information, "WAIT BILL: Печатаем фискальный чек с номером " + numbercheck + ". На сумму " + amountMoney + " руб.");
+                    }
                 }
             }
 
@@ -700,8 +703,13 @@ namespace ServiceSaleMachine.Client
 
             // Запомним в базе принятую купюру
             GlobalDb.GlobalBase.SetMoneyStatistic(data.statistic);
-            // заносим в базу платеж
-            GlobalDb.GlobalBase.InsertMoney(data.CurrentUserId, (amountMoney));
+
+            if (amountMoney > 0)
+            {
+                // заносим в базу платеж - если платили купюрами
+                GlobalDb.GlobalBase.InsertMoney(data.CurrentUserId, (amountMoney));
+            }
+
             // запоминаем оказанную услугу этому пользователю
             GlobalDb.GlobalBase.InsertService(data.CurrentUserId, (data.serv.price));
 
@@ -713,6 +721,9 @@ namespace ServiceSaleMachine.Client
             data.log.Write(LogMessageType.Information, "WAIT BILL: Окажем услугу на сумму " + data.serv.price + " руб.");
             data.log.Write(LogMessageType.Information, "WAIT BILL: Оказываем услугу.");
             data.log.Write(LogMessageType.Information, "==============================================================================");
+
+            // обновим из базы статистические данные
+            data.statistic = GlobalDb.GlobalBase.GetMoneyStatistic();
 
             this.Close();
         }

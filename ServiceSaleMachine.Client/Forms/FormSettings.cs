@@ -687,10 +687,16 @@ namespace ServiceSaleMachine.Client
             cBxCommand.Items.Add("Проснуться");
 
             init = false;
+
+            // вставим дату последней инкассации
+            dateTimeStatistic.Value = GlobalDb.GlobalBase.GetLastEncashment();
         }
 
         void MoneyStatistic()
         {
+            // обновим из базы статистические данные
+            data.statistic = GlobalDb.GlobalBase.GetMoneyStatistic();
+
             labelAllMoneySumm.Text = "Сумма принятых денег " + data.statistic.AllMoneySumm.ToString() + " руб.";
             labelAccountMoneySumm.Text = "Cумма денег на аккаунтах " + data.statistic.AccountMoneySumm.ToString() + " руб.";
             labelBarCodeMoneySumm.Text = "Cумма денег на штрихкод-чеках " + data.statistic.BarCodeMoneySumm.ToString() + " руб.";
@@ -1573,7 +1579,7 @@ namespace ServiceSaleMachine.Client
         private void resetCheckNumeration_Click(object sender, EventArgs e)
         {
             // сброс чека
-            int NumberCheck = 0;
+            int NumberCheck = 1;
 
             GlobalDb.GlobalBase.SetNumberCheck(NumberCheck);
 
@@ -1720,6 +1726,14 @@ namespace ServiceSaleMachine.Client
             {
                 labelStatusPaper.Text = "Ошибка принтера";
             }
+            else if ((status & PrinterStatus.PRINTER_STATUS_OFFLINE) > 0)
+            {
+                labelStatusPaper.Text = "Ошибка связи с принтером";
+            }
+            else if (status > 0)
+            {
+                labelStatusPaper.Text = "Ошибка принтера: " + status.ToString();
+            }
             else
             {
                 labelStatusPaper.Text = "Бумага есть";
@@ -1788,7 +1802,7 @@ namespace ServiceSaleMachine.Client
         private void buttonDelivery_Click(object sender, EventArgs e)
         {
             // сброс чека
-            int NumberCheck = 0;
+            int NumberCheck = 1;
 
             GlobalDb.GlobalBase.SetNumberDeliveryCheck(NumberCheck);
 
@@ -1813,6 +1827,17 @@ namespace ServiceSaleMachine.Client
         private void button15_Click(object sender, EventArgs e)
         {
             button14_Click(sender, e);
+        }
+
+        private void dateTimeStatistic_ValueChanged(object sender, EventArgs e)
+        {
+            data.statistic = GlobalDb.GlobalBase.GetMoneyStatistic(dateTimeStatistic.Value);
+
+            labelAllMoneySumm.Text = "Сумма принятых денег " + data.statistic.AllMoneySumm.ToString() + " руб.";
+            labelAccountMoneySumm.Text = "Cумма денег на аккаунтах " + data.statistic.AccountMoneySumm.ToString() + " руб.";
+            labelBarCodeMoneySumm.Text = "Cумма денег на штрихкод-чеках " + data.statistic.BarCodeMoneySumm.ToString() + " руб.";
+            labelServiceMoneySumm.Text = "Oказано услуг на сумму " + data.statistic.ServiceMoneySumm.ToString() + " руб.";
+            labelCountBankNote.Text = "Количество принятых банкнот " + data.statistic.CountBankNote.ToString() + " шт.";
         }
     }
 }

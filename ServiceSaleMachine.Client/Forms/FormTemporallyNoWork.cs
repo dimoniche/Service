@@ -118,31 +118,37 @@ namespace ServiceSaleMachine.Client
                 timer1.Interval = Globals.IntervalCheckControl;
             }
 
-            // читаем состояние устройства
-            byte[] res;
-            res = data.drivers.control.GetStatusControl(data.log);
-
-            if (res != null)
+            if (data.stage == WorkerStateStage.ErrorControl)
             {
-                if (res[0] > 0)
+                // читаем состояние устройства
+                byte[] res;
+                res = data.drivers.control.GetStatusControl(data.log);
+
+                if (res != null)
                 {
-                    data.stage = WorkerStateStage.ErrorEndControl;
-                    this.Close();
+                    if (res[0] > 0)
+                    {
+                        data.stage = WorkerStateStage.ErrorEndControl;
+                        this.Close();
+                    }
                 }
             }
 
-            PrinterStatus status = data.drivers.printer.GetStatus();
-
-            if ((status & (PrinterStatus.PRINTER_STATUS_PAPER_OUT 
-                         | PrinterStatus.PRINTER_STATUS_PAPER_JAM 
-                         | PrinterStatus.PRINTER_STATUS_PAPER_PROBLEM 
-                         | PrinterStatus.PRINTER_STATUS_ERROR)) == 0)
+            if (data.stage == WorkerStateStage.PaperEnd || data.stage == WorkerStateStage.ErrorPrinter)
             {
-                // с бумагой стало OK
-                data.stage = WorkerStateStage.ErrorEndControl;
-                this.Close();
+                PrinterStatus status = data.drivers.printer.GetStatus();
 
-                Program.Log.Write(LogMessageType.Error, "CHECK_STAT: бумага появилась.");
+                if ((status & (PrinterStatus.PRINTER_STATUS_PAPER_OUT
+                             | PrinterStatus.PRINTER_STATUS_PAPER_JAM
+                             | PrinterStatus.PRINTER_STATUS_PAPER_PROBLEM
+                             | PrinterStatus.PRINTER_STATUS_ERROR)) == 0)
+                {
+                    // с бумагой стало OK
+                    data.stage = WorkerStateStage.ErrorEndControl;
+                    this.Close();
+
+                    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: бумага появилась.");
+                }
             }
         }
 

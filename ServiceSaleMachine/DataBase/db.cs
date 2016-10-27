@@ -275,6 +275,24 @@ namespace ServiceSaleMachine
         }
 
         /// <summary>
+        /// Сумма с указанной даты
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public MoneyStatistic GetMoneyStatistic(DateTime dt)
+        {
+            MoneyStatistic statistic = new MoneyStatistic();
+
+            statistic.AllMoneySumm = GlobalDb.GlobalBase.GetCountMoney(dt);             // платежи с даты последней инкассации
+            statistic.ServiceMoneySumm = GlobalDb.GlobalBase.GetCountMoneyService(dt);  // сумма оказанных услуг
+            statistic.AccountMoneySumm = GlobalDb.GlobalBase.GetSummFromAccount();
+            statistic.CountBankNote = GlobalDb.GlobalBase.GetCountBankNote();
+            statistic.BarCodeMoneySumm = GlobalDb.GlobalBase.GetSummFromBarCode();
+
+            return statistic;
+        }
+
+        /// <summary>
         /// исполнить запрос и вернуть набор данных
         /// </summary>
         /// <param name="cmd"></param>

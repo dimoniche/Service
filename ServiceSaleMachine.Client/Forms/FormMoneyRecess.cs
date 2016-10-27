@@ -28,6 +28,9 @@ namespace ServiceSaleMachine.Client
 
             data.drivers.ReceivedResponse += reciveResponse;
 
+            // обновим из базы статистические данные
+            data.statistic = GlobalDb.GlobalBase.GetMoneyStatistic();
+
             // 
             moneySumm.Text = "Сумма денег в кассете: " + data.statistic.AllMoneySumm + " руб";
 

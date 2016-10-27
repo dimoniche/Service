@@ -733,6 +733,13 @@ namespace ServiceSaleMachine.Client
 
                 Program.Log.Write(LogMessageType.Error, "CHECK_STAT: кончилась бумага.");
             }
+            else if ((status & PrinterStatus.PRINTER_STATUS_OFFLINE) > 0)
+            {
+                // нет связи с принтером
+                result.stage = WorkerStateStage.ErrorPrinter;
+
+                Program.Log.Write(LogMessageType.Error, "CHECK_STAT: нет связи с принтером.");
+            }
 
             return result;
         }

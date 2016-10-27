@@ -221,6 +221,7 @@
             this.labelTimeLastRefresh = new System.Windows.Forms.Label();
             this.labelWorkFromLastRefresh = new System.Windows.Forms.Label();
             this.buttonResetTimeRefresh = new System.Windows.Forms.Button();
+            this.dateTimeStatistic = new System.Windows.Forms.DateTimePicker();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -2186,6 +2187,7 @@
             // 
             // tabPageReacess
             // 
+            this.tabPageReacess.Controls.Add(this.dateTimeStatistic);
             this.tabPageReacess.Controls.Add(this.button15);
             this.tabPageReacess.Controls.Add(this.labelCountBankNote);
             this.tabPageReacess.Controls.Add(this.labelServiceMoneySumm);
@@ -2203,7 +2205,7 @@
             // 
             // button15
             // 
-            this.button15.Location = new System.Drawing.Point(35, 220);
+            this.button15.Location = new System.Drawing.Point(35, 259);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(201, 23);
             this.button15.TabIndex = 8;
@@ -2214,7 +2216,7 @@
             // labelCountBankNote
             // 
             this.labelCountBankNote.AutoSize = true;
-            this.labelCountBankNote.Location = new System.Drawing.Point(32, 124);
+            this.labelCountBankNote.Location = new System.Drawing.Point(32, 163);
             this.labelCountBankNote.Name = "labelCountBankNote";
             this.labelCountBankNote.Size = new System.Drawing.Size(161, 13);
             this.labelCountBankNote.TabIndex = 2;
@@ -2223,7 +2225,7 @@
             // labelServiceMoneySumm
             // 
             this.labelServiceMoneySumm.AutoSize = true;
-            this.labelServiceMoneySumm.Location = new System.Drawing.Point(32, 101);
+            this.labelServiceMoneySumm.Location = new System.Drawing.Point(32, 140);
             this.labelServiceMoneySumm.Name = "labelServiceMoneySumm";
             this.labelServiceMoneySumm.Size = new System.Drawing.Size(131, 13);
             this.labelServiceMoneySumm.TabIndex = 2;
@@ -2232,7 +2234,7 @@
             // labelBarCodeMoneySumm
             // 
             this.labelBarCodeMoneySumm.AutoSize = true;
-            this.labelBarCodeMoneySumm.Location = new System.Drawing.Point(32, 79);
+            this.labelBarCodeMoneySumm.Location = new System.Drawing.Point(32, 118);
             this.labelBarCodeMoneySumm.Name = "labelBarCodeMoneySumm";
             this.labelBarCodeMoneySumm.Size = new System.Drawing.Size(170, 13);
             this.labelBarCodeMoneySumm.TabIndex = 2;
@@ -2241,7 +2243,7 @@
             // labelAccountMoneySumm
             // 
             this.labelAccountMoneySumm.AutoSize = true;
-            this.labelAccountMoneySumm.Location = new System.Drawing.Point(32, 56);
+            this.labelAccountMoneySumm.Location = new System.Drawing.Point(32, 95);
             this.labelAccountMoneySumm.Name = "labelAccountMoneySumm";
             this.labelAccountMoneySumm.Size = new System.Drawing.Size(142, 13);
             this.labelAccountMoneySumm.TabIndex = 2;
@@ -2250,7 +2252,7 @@
             // labelAllMoneySumm
             // 
             this.labelAllMoneySumm.AutoSize = true;
-            this.labelAllMoneySumm.Location = new System.Drawing.Point(32, 34);
+            this.labelAllMoneySumm.Location = new System.Drawing.Point(32, 73);
             this.labelAllMoneySumm.Name = "labelAllMoneySumm";
             this.labelAllMoneySumm.Size = new System.Drawing.Size(124, 13);
             this.labelAllMoneySumm.TabIndex = 2;
@@ -2259,7 +2261,7 @@
             // buttonEncashment
             // 
             this.buttonEncashment.Enabled = false;
-            this.buttonEncashment.Location = new System.Drawing.Point(35, 177);
+            this.buttonEncashment.Location = new System.Drawing.Point(35, 216);
             this.buttonEncashment.Name = "buttonEncashment";
             this.buttonEncashment.Size = new System.Drawing.Size(201, 23);
             this.buttonEncashment.TabIndex = 1;
@@ -2307,6 +2309,14 @@
             this.buttonResetTimeRefresh.Text = "Обновить время обслуживания";
             this.buttonResetTimeRefresh.UseVisualStyleBackColor = true;
             this.buttonResetTimeRefresh.Click += new System.EventHandler(this.buttonResetTimeRefresh_Click);
+            // 
+            // dateTimeStatistic
+            // 
+            this.dateTimeStatistic.Location = new System.Drawing.Point(36, 30);
+            this.dateTimeStatistic.Name = "dateTimeStatistic";
+            this.dateTimeStatistic.Size = new System.Drawing.Size(200, 20);
+            this.dateTimeStatistic.TabIndex = 9;
+            this.dateTimeStatistic.ValueChanged += new System.EventHandler(this.dateTimeStatistic_ValueChanged);
             // 
             // FormSettings
             // 
@@ -2575,5 +2585,6 @@
         private System.Windows.Forms.Button buttonDelivery;
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Button button15;
+        private System.Windows.Forms.DateTimePicker dateTimeStatistic;
     }
 }

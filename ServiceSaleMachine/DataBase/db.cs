@@ -11,6 +11,8 @@ namespace ServiceSaleMachine
         MySqlConnection con;
         Log log;
 
+        public MySqlConnection Connection { get { return con; } private set {;} }
+
         public db(Log log)
         {
             mysqlCSB = new MySqlConnectionStringBuilder();
@@ -62,6 +64,7 @@ namespace ServiceSaleMachine
             try
             {
                 con.Open();
+                con.StateChange += Con_StateChange;
 
                 return true;
             }
@@ -71,6 +74,27 @@ namespace ServiceSaleMachine
                 return false;
             }
         }
+
+        /// <summary>
+        /// Что нужно сделать при закрытии приложения
+        /// </summary>
+        public void CloseForm()
+        {
+            con.StateChange -= Con_StateChange;
+        }
+
+        private void Con_StateChange(object sender, StateChangeEventArgs e)
+        {
+            if(e.CurrentState == ConnectionState.Closed)
+            {
+                // конект закрылся - сделаем реконнект
+                con.StateChange -= Con_StateChange;
+                con = null;
+
+                Connect();
+            }
+        }
+
         public bool CreateTables()
         {
             if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;

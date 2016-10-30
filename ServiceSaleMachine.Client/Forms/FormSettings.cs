@@ -1064,6 +1064,7 @@ namespace ServiceSaleMachine.Client
             {
                 Globals.ClientConfiguration.Settings.offDataBase = 0;
                 tabDataBaseSetting.Enabled = true;
+                GlobalDb.GlobalBase.Connect();
             }
 
             Globals.ClientConfiguration.Save();

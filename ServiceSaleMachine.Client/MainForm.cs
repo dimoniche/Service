@@ -57,7 +57,7 @@ namespace ServiceSaleMachine.Client
         /// </summary>
         private void MainWorker()
         {
-            if (Globals.admin)
+            //if (Globals.admin)
             {
                 Program.Log.Write(LogMessageType.Information, "MAIN WORK: Входим в режим настройки приложения.");
 
@@ -752,6 +752,10 @@ namespace ServiceSaleMachine.Client
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
+            Program.Log.Write(LogMessageType.Information, "Выход из приложения.");
+
+            GlobalDb.GlobalBase.CloseForm();
+
             try
             {
                 //drivers.StopAllDevice();

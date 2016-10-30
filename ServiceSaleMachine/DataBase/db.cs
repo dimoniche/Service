@@ -346,7 +346,7 @@ namespace ServiceSaleMachine
 
         private bool ExecuteNonQuery(string query)
         {
-            if(con.State == ConnectionState.Closed)
+            if(con.State == ConnectionState.Closed || con.State == ConnectionState.Broken)
             {
                 con.Close();
                 Connect();

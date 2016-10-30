@@ -42,7 +42,13 @@ namespace ServiceSaleMachine.Client
                 data.drivers.printer.PrintCheckСollection(data.statistic);
             }
 
+            data.log.Write(LogMessageType.Information, "==============================================================================");
             data.log.Write(LogMessageType.Information, "INCASS: Сумма денег в кассете: " + data.statistic.AllMoneySumm + " руб");
+            data.log.Write(LogMessageType.Information, "INCASS: Сумма денег на чеках: " + data.statistic.BarCodeMoneySumm + " руб");
+            data.log.Write(LogMessageType.Information, "INCASS: Сумма денег на аккаунтах: " + data.statistic.AccountMoneySumm + " руб");
+            data.log.Write(LogMessageType.Information, "INCASS: Количество банкнот: " + data.statistic.CountBankNote + " руб");
+            data.log.Write(LogMessageType.Information, "INCASS: Оказано услуг: " + data.statistic.ServiceMoneySumm + " руб");
+            data.log.Write(LogMessageType.Information, "==============================================================================");
         }
 
         private void reciveResponse(object sender, ServiceClientResponseEventArgs e)

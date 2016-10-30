@@ -332,6 +332,8 @@ namespace ServiceSaleMachine.Client
 
                                 // запомним такой чек
                                 string check = CheckHelper.GetUniqueNumberCheck(12);
+
+                                // Здесь также наращивается номер чека
                                 GlobalDb.GlobalBase.AddToCheck(data.CurrentUserId, diff, check);
 
                                 data.drivers.printer.StartPrint(data.drivers.printer.getNamePrinter());
@@ -541,6 +543,8 @@ namespace ServiceSaleMachine.Client
 
                                 // запомним такой чек
                                 string check = CheckHelper.GetUniqueNumberCheck(12);
+
+                                // Здесь также наращивается номер чека
                                 GlobalDb.GlobalBase.AddToCheck(data.CurrentUserId, diff, check);
 
                                 data.drivers.printer.StartPrint(data.drivers.printer.getNamePrinter());
@@ -556,9 +560,6 @@ namespace ServiceSaleMachine.Client
                                 data.log.Write(LogMessageType.Information, "WAIT CHECK: Печатаем чек со сдачей под номером " + numberCheck + ". На сумму " + diff + " руб.");
                                 data.log.Write(LogMessageType.Information, "WAIT CHECK: BarCode " + check);
                                 data.log.Write(LogMessageType.Information, "WAIT CHECK: Выход на оказание услуги.");
-
-                                // нарастим номер чека с баркодом
-                                GlobalDb.GlobalBase.SetNumberDeliveryCheck(numberCheck + 1);
                             }
                         }
                     }

@@ -143,11 +143,24 @@ namespace ServiceSaleMachine.Client
                              | PrinterStatus.PRINTER_STATUS_PAPER_PROBLEM
                              | PrinterStatus.PRINTER_STATUS_ERROR)) == 0)
                 {
-                    // с бумагой стало OK
-                    data.stage = WorkerStateStage.ErrorEndControl;
-                    this.Close();
+                    if (data.stage == WorkerStateStage.PaperEnd)
+                    {
+                        // с бумагой стало OK
+                        data.stage = WorkerStateStage.ErrorEndControl;
+                        this.Close();
 
-                    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: бумага появилась.");
+                        Program.Log.Write(LogMessageType.Error, "CHECK_STAT: бумага появилась.");
+                    }
+                }
+                else if ((status & PrinterStatus.PRINTER_STATUS_OFFLINE) > 0)
+                {
+                    if (data.stage == WorkerStateStage.ErrorPrinter)
+                    {
+                        data.stage = WorkerStateStage.ErrorEndControl;
+                        this.Close();
+
+                        Program.Log.Write(LogMessageType.Error, "CHECK_STAT: ошибка принтера снялась.");
+                    }
                 }
             }
         }

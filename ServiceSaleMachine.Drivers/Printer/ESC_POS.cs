@@ -188,7 +188,7 @@ namespace ServiceSaleMachine.Drivers
 
             Print(eLeft, false, false);
             Print(TransformCode("Оказано услуг "), true);
-            Print(" ".PadRight(42 - 20 - statistic.ServiceMoneySumm.ToString().Length, ' ') + (statistic.AllMoneySumm - statistic.BarCodeMoneySumm - statistic.BarCodeMoneySumm).ToString("00000.00") + TransformCode(" руб"), true);
+            Print(" ".PadRight(42 - 20 - statistic.ServiceMoneySumm.ToString().Length, ' ') + statistic.ServiceMoneySumm.ToString("00000.00") + TransformCode(" руб"), true);
             Print(eLeft);
 
             Print("");

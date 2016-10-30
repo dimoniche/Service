@@ -85,9 +85,10 @@ namespace ServiceSaleMachine
 
         private void Con_StateChange(object sender, StateChangeEventArgs e)
         {
-            if(e.CurrentState == ConnectionState.Closed)
+            if(e.CurrentState == ConnectionState.Closed || e.CurrentState == ConnectionState.Broken)
             {
                 // конект закрылся - сделаем реконнект
+                con.Close();
                 con.StateChange -= Con_StateChange;
                 con = null;
 
@@ -323,6 +324,12 @@ namespace ServiceSaleMachine
         /// <returns></returns>
         private MySqlDataReader Execute(string cmd)
         {
+            if (con.State == ConnectionState.Closed || con.State == ConnectionState.Broken)
+            {
+                con.Close();
+                Connect();
+            }
+
             MySqlCommand com = new MySqlCommand(cmd, con);
 
             try
@@ -339,6 +346,11 @@ namespace ServiceSaleMachine
 
         private bool ExecuteNonQuery(string query)
         {
+            if(con.State == ConnectionState.Closed)
+            {
+                con.Close();
+                Connect();
+            }
 
             MySqlCommand cmd2 = new MySqlCommand(query, con);
             try
@@ -492,6 +504,12 @@ namespace ServiceSaleMachine
         {
             string queryString = "select id, login, password, role from users where (login = '" + User + "') and (password='"+Password+"')";
 
+            if (con.State == ConnectionState.Closed || con.State == ConnectionState.Broken)
+            {
+                con.Close();
+                Connect();
+            }
+
             MySqlCommand com = new MySqlCommand(queryString, con);
 
             UserInfo ui = null;
@@ -527,6 +545,12 @@ namespace ServiceSaleMachine
 
         private DataTable getDataTable(string query)
         {
+            if (con.State == ConnectionState.Closed || con.State == ConnectionState.Broken)
+            {
+                con.Close();
+                Connect();
+            }
+
             MySqlCommand com = new MySqlCommand(query, con);
 
             DataTable dt = new DataTable();

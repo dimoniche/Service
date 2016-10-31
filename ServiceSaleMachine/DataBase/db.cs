@@ -2,16 +2,18 @@
 using System.Data;
 using MySql.Data.MySqlClient;
 using System.Diagnostics;
+using System.Timers;
 
 namespace ServiceSaleMachine
 {
     public class db
     {
         MySqlConnectionStringBuilder mysqlCSB;
-        MySqlConnection con;
+        MySqlConnection connection;
         Log log;
+        Timer timer;
 
-        public MySqlConnection Connection { get { return con; } private set {;} }
+        public MySqlConnection Connection { get { return connection; } private set {;} }
 
         public db(Log log)
         {
@@ -21,7 +23,14 @@ namespace ServiceSaleMachine
             mysqlCSB.UserID = Globals.DbConfiguration.UserID;
             mysqlCSB.Password = Globals.DbConfiguration.Password;
 
+            connection = new MySqlConnection();
+            connection.ConnectionString = mysqlCSB.ConnectionString;
+
             this.log = log;
+
+            timer = new Timer(3600000);
+            timer.Elapsed += Timer_Elapsed;
+            timer.Start();
         }
 
         public db()
@@ -32,25 +41,45 @@ namespace ServiceSaleMachine
             mysqlCSB.UserID = Globals.DbConfiguration.UserID;
             mysqlCSB.Password = Globals.DbConfiguration.Password;
 
+            connection = new MySqlConnection();
+            connection.ConnectionString = mysqlCSB.ConnectionString;
+
             this.log = null;
+
+            timer = new Timer(3600000);
+            timer.Elapsed += Timer_Elapsed;
+            timer.Start();
+        }
+
+        private void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            lock(connection)
+            {
+                // реконнектимся
+                connection.StateChange -= Con_StateChange;
+                connection.Close();
+
+                Connect();
+            }
         }
 
         public bool CreateDB()
         {
-            con = new MySqlConnection();
-            con.ConnectionString = mysqlCSB.ConnectionString;
-            try
+            lock (connection)
             {
-                con.Open();
-                MySqlCommand cmd = new MySqlCommand("CREATE DATABASE IF NOT EXISTS `servterminal`;", con);
-                cmd.ExecuteNonQuery();
-                con.Close();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Debug.Print(ex.Message);
-                return false;
+                try
+                {
+                    connection.Open();
+                    MySqlCommand cmd = new MySqlCommand("CREATE DATABASE IF NOT EXISTS `servterminal`;", connection);
+                    cmd.ExecuteNonQuery();
+                    connection.Close();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    Debug.Print(ex.Message);
+                    return false;
+                }
             }
         }
 
@@ -58,13 +87,10 @@ namespace ServiceSaleMachine
         {
             if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
 
-            con = new MySqlConnection();
-            con.ConnectionString = mysqlCSB.ConnectionString;
-
             try
             {
-                con.Open();
-                con.StateChange += Con_StateChange;
+                connection.Open();
+                connection.StateChange += Con_StateChange;
 
                 return true;
             }
@@ -80,19 +106,22 @@ namespace ServiceSaleMachine
         /// </summary>
         public void CloseForm()
         {
-            con.StateChange -= Con_StateChange;
+            if(connection != null) connection.StateChange -= Con_StateChange;
+            if(timer != null) timer.Stop();
         }
 
         private void Con_StateChange(object sender, StateChangeEventArgs e)
         {
             if(e.CurrentState == ConnectionState.Closed || e.CurrentState == ConnectionState.Broken)
             {
-                // конект закрылся - сделаем реконнект
-                con.Close();
-                con.StateChange -= Con_StateChange;
-                con = null;
+                lock (connection)
+                {
+                    // конект закрылся - сделаем реконнект
+                    connection.StateChange -= Con_StateChange;
+                    connection.Close();
 
-                Connect();
+                    Connect();
+                }
             }
         }
 
@@ -131,7 +160,7 @@ namespace ServiceSaleMachine
 
             // создадим таблицу пользователей IF  NOT EXISTS
             query = "Show tables from servterminal like 'users'";
-            MySqlCommand cmd = new MySqlCommand(query, con);
+            MySqlCommand cmd = new MySqlCommand(query, connection);
             bool needCreate = true;
             try
             {
@@ -324,45 +353,53 @@ namespace ServiceSaleMachine
         /// <returns></returns>
         private MySqlDataReader Execute(string cmd)
         {
-            if (con.State == ConnectionState.Closed || con.State == ConnectionState.Broken)
+            lock (connection)
             {
-                con.Close();
-                Connect();
-            }
+                if (connection.State == ConnectionState.Closed || connection.State == ConnectionState.Broken)
+                {
+                    connection.StateChange -= Con_StateChange;
+                    connection.Close();
+                    Connect();
+                }
 
-            MySqlCommand com = new MySqlCommand(cmd, con);
+                MySqlCommand com = new MySqlCommand(cmd, connection);
 
-            try
-            {
-                MySqlDataReader dr = com.ExecuteReader();
-                return dr;
-            }
-            catch (Exception ex)
-            {
-                Debug.Print(ex.Message);
-                return null;
+                try
+                {
+                    MySqlDataReader dr = com.ExecuteReader();
+                    return dr;
+                }
+                catch (Exception ex)
+                {
+                    Debug.Print(ex.Message);
+                    return null;
+                }
             }
         }
 
         private bool ExecuteNonQuery(string query)
         {
-            if(con.State == ConnectionState.Closed || con.State == ConnectionState.Broken)
+            lock (connection)
             {
-                con.Close();
-                Connect();
-            }
+                if (connection.State == ConnectionState.Closed || connection.State == ConnectionState.Broken)
+                {
+                    connection.StateChange -= Con_StateChange;
+                    connection.Close();
+                    Connect();
+                }
 
-            MySqlCommand cmd2 = new MySqlCommand(query, con);
-            try
-            {
-                cmd2.ExecuteNonQuery();
-                return true;
+                MySqlCommand cmd2 = new MySqlCommand(query, connection);
+                try
+                {
+                    cmd2.ExecuteNonQuery();
+                    return true;
 
-            }
-            catch (Exception ex)
-            {
-                Debug.Print(ex.Message);
-                return false;
+                }
+                catch (Exception ex)
+                {
+                    Debug.Print(ex.Message);
+                    return false;
+                }
             }
         }
 
@@ -477,7 +514,7 @@ namespace ServiceSaleMachine
 
             string queryString = "delete from banknotes";
 
-            MySqlCommand com = new MySqlCommand(queryString, con);
+            MySqlCommand com = new MySqlCommand(queryString, connection);
 
             return ExecuteNonQuery(queryString);
         }
@@ -504,71 +541,86 @@ namespace ServiceSaleMachine
         {
             string queryString = "select id, login, password, role from users where (login = '" + User + "') and (password='"+Password+"')";
 
-            if (con.State == ConnectionState.Closed || con.State == ConnectionState.Broken)
+            lock (connection)
             {
-                con.Close();
-                Connect();
-            }
-
-            MySqlCommand com = new MySqlCommand(queryString, con);
-
-            UserInfo ui = null;
-
-            using (MySqlDataReader dr = com.ExecuteReader())
-            {
-                if (dr != null)
+                if (connection.State == ConnectionState.Closed || connection.State == ConnectionState.Broken)
                 {
-                    if (dr.HasRows)
-                    {
-                        dr.Read();
-
-                        try
-                        {
-                            ui = new UserInfo();
-                            ui.Id = (int)dr[0];
-                            ui.Login = (string)dr[1];
-                            ui.Role = (UserRole)dr[3];
-                        }
-                        catch
-                        {
-
-                        }
-                    }
-
-                    dr.Close();
-                    return ui;
+                    connection.StateChange -= Con_StateChange;
+                    connection.Close();
+                    Connect();
                 }
-            }
 
-            return ui;
+                MySqlCommand com = new MySqlCommand(queryString, connection);
+
+                UserInfo ui = null;
+
+                using (MySqlDataReader dr = com.ExecuteReader())
+                {
+                    if (dr != null)
+                    {
+                        if (dr.HasRows)
+                        {
+                            dr.Read();
+
+                            try
+                            {
+                                ui = new UserInfo();
+                                ui.Id = (int)dr[0];
+                                ui.Login = (string)dr[1];
+                                ui.Role = (UserRole)dr[3];
+                            }
+                            catch
+                            {
+
+                            }
+                        }
+
+                        dr.Close();
+                        return ui;
+                    }
+                }
+
+                return ui;
+            }
         }
 
         private DataTable getDataTable(string query)
         {
-            if (con.State == ConnectionState.Closed || con.State == ConnectionState.Broken)
+            lock (connection)
             {
-                con.Close();
-                Connect();
-            }
-
-            MySqlCommand com = new MySqlCommand(query, con);
-
-            DataTable dt = new DataTable();
-
-            using (MySqlDataReader dr = com.ExecuteReader())
-            {
-                if (dr != null)
+                if (connection.State == ConnectionState.Closed || connection.State == ConnectionState.Broken)
                 {
-                    if (dr.HasRows)
-                    {
-                        dt.Load(dr);
-                    }
-
-                    dr.Close();
+                    connection.StateChange -= Con_StateChange;
+                    connection.Close();
+                    Connect();
                 }
-            }
 
-            return dt;            
+                MySqlCommand com = new MySqlCommand(query, connection);
+
+                DataTable dt = new DataTable();
+
+                try
+                {
+                    using (MySqlDataReader dr = com.ExecuteReader())
+                    {
+                        if (dr != null)
+                        {
+                            if (dr.HasRows)
+                            {
+                                dt.Load(dr);
+                            }
+
+                            dr.Close();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+
+                return dt;
+            }          
         }
 
         /// <summary>
@@ -940,8 +992,6 @@ namespace ServiceSaleMachine
 
             string queryString = "select id, dt_create, dt_fixed, active, iduser, checkstr," +
                   " number, amount from checks where (checkstr='" + check + "')";
-
-            MySqlCommand com = new MySqlCommand(queryString, con);
 
             CheckInfo ch = null;
 

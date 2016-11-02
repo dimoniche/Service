@@ -702,6 +702,9 @@ namespace ServiceSaleMachine.Client
             labelBarCodeMoneySumm.Text = "Cумма денег на штрихкод-чеках " + data.statistic.BarCodeMoneySumm.ToString() + " руб.";
             labelServiceMoneySumm.Text = "Oказано услуг на сумму " + data.statistic.ServiceMoneySumm.ToString() + " руб.";
             labelCountBankNote.Text = "Количество принятых банкнот " + data.statistic.CountBankNote.ToString() + " шт.";
+
+            labelAllAmountMoney.Text = "Сумма принятых денег " + GlobalDb.GlobalBase.GetAmountMoney().ToString() + " руб.";
+            labelAllAmountService.Text = "Oказано услуг на сумму " + GlobalDb.GlobalBase.GetAmountService().ToString() + " руб.";
         }
 
         public FormSettings()
@@ -1839,6 +1842,15 @@ namespace ServiceSaleMachine.Client
             labelBarCodeMoneySumm.Text = "Cумма денег на штрихкод-чеках " + data.statistic.BarCodeMoneySumm.ToString() + " руб.";
             labelServiceMoneySumm.Text = "Oказано услуг на сумму " + data.statistic.ServiceMoneySumm.ToString() + " руб.";
             labelCountBankNote.Text = "Количество принятых банкнот " + data.statistic.CountBankNote.ToString() + " шт.";
+        }
+
+        private void buttonResetAllAmount_Click(object sender, EventArgs e)
+        {
+            // сбросим глобальные счетчики
+            GlobalDb.GlobalBase.SetAmountMoney(0);
+            GlobalDb.GlobalBase.SetAmountService(0);
+
+            MoneyStatistic();
         }
     }
 }

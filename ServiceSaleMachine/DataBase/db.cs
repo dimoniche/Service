@@ -28,9 +28,12 @@ namespace ServiceSaleMachine
 
             this.log = log;
 
-            timer = new Timer(3600000);
-            timer.Elapsed += Timer_Elapsed;
-            timer.Start();
+            if (Globals.ClientConfiguration.Settings.offDataBase == 0)
+            {
+                timer = new Timer(3600000);
+                timer.Elapsed += Timer_Elapsed;
+                timer.Start();
+            }
         }
 
         public db()
@@ -46,9 +49,12 @@ namespace ServiceSaleMachine
 
             this.log = null;
 
-            timer = new Timer(3600000);
-            timer.Elapsed += Timer_Elapsed;
-            timer.Start();
+            if (Globals.ClientConfiguration.Settings.offDataBase == 0)
+            {
+                timer = new Timer(3600000);
+                timer.Elapsed += Timer_Elapsed;
+                timer.Start();
+            }
         }
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
@@ -65,6 +71,8 @@ namespace ServiceSaleMachine
 
         public bool CreateDB()
         {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
+
             lock (connection)
             {
                 try
@@ -277,7 +285,9 @@ namespace ServiceSaleMachine
         /// </summary>
         public void FillSystemValues()
         {
-           // String str = GetSystemValue("nextnumbercheck");
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return;
+
+            // String str = GetSystemValue("nextnumbercheck");
             MySqlDataReader dsv = Execute("select * from systemvalues where namevalue='nextnumbercheck'");
             if (dsv != null)
             {
@@ -300,6 +310,38 @@ namespace ServiceSaleMachine
                 {
                     dsv.Close();//обязательно!
                     string query = "insert into systemvalues (namevalue, ownvalue) values ('nextnumberdeliverycheck', '0')";
+                    ExecuteNonQuery(query);
+                }
+                else
+                {
+                    dsv.Close();//обязательно!
+                }
+            }
+
+            // количество внесенных денег
+            dsv = Execute("select * from systemvalues where namevalue='amountmoney'");
+            if (dsv != null)
+            {
+                if (!dsv.HasRows)
+                {
+                    dsv.Close();//обязательно!
+                    string query = "insert into systemvalues (namevalue, ownvalue) values ('amountmoney', '0')";
+                    ExecuteNonQuery(query);
+                }
+                else
+                {
+                    dsv.Close();//обязательно!
+                }
+            }
+
+            // количество оказанных услуг
+            dsv = Execute("select * from systemvalues where namevalue='amountservice'");
+            if (dsv != null)
+            {
+                if (!dsv.HasRows)
+                {
+                    dsv.Close();//обязательно!
+                    string query = "insert into systemvalues (namevalue, ownvalue) values ('amountservice', '0')";
                     ExecuteNonQuery(query);
                 }
                 else
@@ -467,6 +509,7 @@ namespace ServiceSaleMachine
             }
             return dt;
         }
+
         /// <summary>
         /// подсчитать деньги на незакрытых штрихкодах
         /// </summary>
@@ -539,6 +582,8 @@ namespace ServiceSaleMachine
         /// <returns></returns>
         public UserInfo GetUserByName(string User, string Password)
         {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return null;
+
             string queryString = "select id, login, password, role from users where (login = '" + User + "') and (password='"+Password+"')";
 
             lock (connection)
@@ -586,6 +631,8 @@ namespace ServiceSaleMachine
 
         private DataTable getDataTable(string query)
         {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return null;
+
             lock (connection)
             {
                 if (connection.State == ConnectionState.Closed || connection.State == ConnectionState.Broken)
@@ -629,18 +676,21 @@ namespace ServiceSaleMachine
         /// <returns></returns>
         public DataTable GetDevices()
         {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return null;
+
             string queryString = "select * from devices";
 
             return getDataTable(queryString);
-
-            
         }
+
         /// <summary>
         /// прочитать логи из БД
         /// </summary>
         /// <returns></returns>
         public DataTable GetLogWork()
         {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return null;
+
             string queryString = @"select * from logwork";
             return getDataTable(queryString);
 
@@ -652,6 +702,8 @@ namespace ServiceSaleMachine
         /// <returns></returns>
         public DataTable GetUsers()
         {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return null;
+
             DataTable dt = new DataTable();
             string queryString = @"select * from users";
             return getDataTable(queryString);
@@ -664,6 +716,8 @@ namespace ServiceSaleMachine
         /// <returns></returns>
         public DataTable GetAmount()
         {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return null;
+
             DataTable dt = new DataTable();
             string queryString = @"select * from usermoney";
             return getDataTable(queryString);
@@ -672,6 +726,8 @@ namespace ServiceSaleMachine
 
         public DataTable GetAmount(int id)
         {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return null;
+
             DataTable dt = new DataTable();
 
             string queryString = @"select * from usermoney where iduser='" + id.ToString() + "'";
@@ -797,6 +853,8 @@ namespace ServiceSaleMachine
         /// <returns></returns>
         public bool InsertUser(string login, string Psw)
         {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
+
             string query = "insert into users (login, password, role, datetime) values ('"+login+"', '"+Psw+"', 2, '" +
               DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
 
@@ -814,7 +872,6 @@ namespace ServiceSaleMachine
 
             string queryString = "select namevalue, ownvalue from  systemvalues where " +
                  "namevalue= 'nextnumbercheck'";
-
 
             MySqlDataReader dr = Execute(queryString);
             if (dr != null)
@@ -853,6 +910,8 @@ namespace ServiceSaleMachine
         /// <returns></returns>
         public bool SetNumberCheck(int CurrentN)
         {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
+
             string query = "update systemvalues set ownvalue=" + CurrentN.ToString() + " where namevalue = 'nextnumbercheck'";
             return ExecuteNonQuery(query);
         }
@@ -867,7 +926,6 @@ namespace ServiceSaleMachine
 
             string queryString = "select namevalue, ownvalue from  systemvalues where " +
                  "namevalue= 'nextnumberdeliverycheck'";
-
 
             MySqlDataReader dr = Execute(queryString);
             if (dr != null)
@@ -906,10 +964,120 @@ namespace ServiceSaleMachine
         /// <returns></returns>
         public bool SetNumberDeliveryCheck(int CurrentN)
         {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
+
             string query = "update systemvalues set ownvalue=" + CurrentN.ToString() + " where namevalue = 'nextnumberdeliverycheck'";
             return ExecuteNonQuery(query);
         }
 
+        /// <summary>
+        /// Получить количество внесенных денег
+        /// </summary>
+        /// <returns></returns>
+        public int GetAmountMoney() //
+        {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return 0;
+
+            string queryString = "select namevalue, ownvalue from  systemvalues where " +
+                 "namevalue= 'amountmoney'";
+
+            MySqlDataReader dr = Execute(queryString);
+            if (dr != null)
+            {
+                int i = 0;
+
+                if (dr.HasRows)
+                {
+                    dr.Read();
+                    string s = "0";
+
+                    try
+                    {
+                        if (dr.IsDBNull(0) != true)
+                            s = (string)dr[1];
+
+                        int.TryParse(s, out i);
+                    }
+                    catch
+                    {
+                        i = 0;
+                    }
+                }
+
+                dr.Close();
+                return i;
+            }
+
+            return 0;
+        }
+
+        /// <summary>
+        /// записать количество внесенных денег
+        /// </summary>
+        /// <param name="Amount"></param>
+        /// <returns></returns>
+        public bool SetAmountMoney(int Amount)
+        {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
+
+            string query = "update systemvalues set ownvalue=" + Amount.ToString() + " where namevalue = 'amountmoney'";
+            return ExecuteNonQuery(query);
+        }
+
+        /// <summary>
+        /// Получить количество потраченных денег на услуги
+        /// </summary>
+        /// <returns></returns>
+        public int GetAmountService() //
+        {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return 0;
+
+            string queryString = "select namevalue, ownvalue from  systemvalues where " +
+                 "namevalue= 'amountservice'";
+
+            MySqlDataReader dr = Execute(queryString);
+            if (dr != null)
+            {
+                int i = 0;
+
+                if (dr.HasRows)
+                {
+                    dr.Read();
+                    string s = "0";
+
+                    try
+                    {
+                        if (dr.IsDBNull(0) != true)
+                            s = (string)dr[1];
+
+                        int.TryParse(s, out i);
+                    }
+                    catch
+                    {
+                        i = 0;
+                    }
+                }
+
+                dr.Close();
+                return i;
+            }
+
+            return 0;
+        }
+
+        /// <summary>
+        /// записать количество потраченных денег на услуги
+        /// </summary>
+        /// <param name="Amount"></param>
+        /// <returns></returns>
+        public bool SetAmountService(int Amount)
+        {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
+
+            string query = "update systemvalues set ownvalue=" + Amount.ToString() + " where namevalue = 'amountservice'";
+            return ExecuteNonQuery(query);
+        }
+    
         /// <summary>
         /// добавление в таблицу check записи 
         /// </summary>

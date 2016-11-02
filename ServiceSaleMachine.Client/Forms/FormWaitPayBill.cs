@@ -203,6 +203,7 @@ namespace ServiceSaleMachine.Client
                         {
                             // купюра великовата - вернем ее
                             amount -= count;
+                            amountMoney -= count;
 
                             moneyFixed = false;
 
@@ -254,6 +255,7 @@ namespace ServiceSaleMachine.Client
                     {
                         // возвращаем ее обратно
                         amount -= count;
+                        amountMoney -= count;
 
                         data.log.Write(LogMessageType.Information, "WAIT BILL: Возвращаем купюру обратно покупателю.");
 
@@ -710,6 +712,13 @@ namespace ServiceSaleMachine.Client
                 // заносим в базу платеж - если платили купюрами
                 GlobalDb.GlobalBase.InsertMoney(data.CurrentUserId, (amountMoney));
             }
+
+            // нарастим глобальные счетчики
+            int count = GlobalDb.GlobalBase.GetAmountMoney();
+            GlobalDb.GlobalBase.SetAmountMoney(count + amountMoney);
+
+            count = GlobalDb.GlobalBase.GetAmountService();
+            GlobalDb.GlobalBase.SetAmountService(count + data.serv.price);
 
             // запоминаем оказанную услугу этому пользователю
             GlobalDb.GlobalBase.InsertService(data.CurrentUserId, (data.serv.price));

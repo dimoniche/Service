@@ -210,6 +210,10 @@
             this.tabPageChecking = new System.Windows.Forms.TabPage();
             this.tabControl4 = new System.Windows.Forms.TabControl();
             this.tabPageReacess = new System.Windows.Forms.TabPage();
+            this.buttonResetAllAmount = new System.Windows.Forms.Button();
+            this.labelAllAmountService = new System.Windows.Forms.Label();
+            this.labelAllAmountMoney = new System.Windows.Forms.Label();
+            this.dateTimeStatistic = new System.Windows.Forms.DateTimePicker();
             this.button15 = new System.Windows.Forms.Button();
             this.labelCountBankNote = new System.Windows.Forms.Label();
             this.labelServiceMoneySumm = new System.Windows.Forms.Label();
@@ -221,7 +225,6 @@
             this.labelTimeLastRefresh = new System.Windows.Forms.Label();
             this.labelWorkFromLastRefresh = new System.Windows.Forms.Label();
             this.buttonResetTimeRefresh = new System.Windows.Forms.Button();
-            this.dateTimeStatistic = new System.Windows.Forms.DateTimePicker();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -2187,6 +2190,9 @@
             // 
             // tabPageReacess
             // 
+            this.tabPageReacess.Controls.Add(this.buttonResetAllAmount);
+            this.tabPageReacess.Controls.Add(this.labelAllAmountService);
+            this.tabPageReacess.Controls.Add(this.labelAllAmountMoney);
             this.tabPageReacess.Controls.Add(this.dateTimeStatistic);
             this.tabPageReacess.Controls.Add(this.button15);
             this.tabPageReacess.Controls.Add(this.labelCountBankNote);
@@ -2202,6 +2208,42 @@
             this.tabPageReacess.TabIndex = 0;
             this.tabPageReacess.Text = "Инкассация";
             this.tabPageReacess.UseVisualStyleBackColor = true;
+            // 
+            // buttonResetAllAmount
+            // 
+            this.buttonResetAllAmount.Location = new System.Drawing.Point(450, 118);
+            this.buttonResetAllAmount.Name = "buttonResetAllAmount";
+            this.buttonResetAllAmount.Size = new System.Drawing.Size(201, 23);
+            this.buttonResetAllAmount.TabIndex = 12;
+            this.buttonResetAllAmount.Text = "Сбросить счетчики";
+            this.buttonResetAllAmount.UseVisualStyleBackColor = true;
+            this.buttonResetAllAmount.Click += new System.EventHandler(this.buttonResetAllAmount_Click);
+            // 
+            // labelAllAmountService
+            // 
+            this.labelAllAmountService.AutoSize = true;
+            this.labelAllAmountService.Location = new System.Drawing.Point(447, 95);
+            this.labelAllAmountService.Name = "labelAllAmountService";
+            this.labelAllAmountService.Size = new System.Drawing.Size(131, 13);
+            this.labelAllAmountService.TabIndex = 11;
+            this.labelAllAmountService.Text = "Oказано услуг на сумму";
+            // 
+            // labelAllAmountMoney
+            // 
+            this.labelAllAmountMoney.AutoSize = true;
+            this.labelAllAmountMoney.Location = new System.Drawing.Point(447, 73);
+            this.labelAllAmountMoney.Name = "labelAllAmountMoney";
+            this.labelAllAmountMoney.Size = new System.Drawing.Size(124, 13);
+            this.labelAllAmountMoney.TabIndex = 10;
+            this.labelAllAmountMoney.Text = "Сумма принятых денег";
+            // 
+            // dateTimeStatistic
+            // 
+            this.dateTimeStatistic.Location = new System.Drawing.Point(36, 30);
+            this.dateTimeStatistic.Name = "dateTimeStatistic";
+            this.dateTimeStatistic.Size = new System.Drawing.Size(200, 20);
+            this.dateTimeStatistic.TabIndex = 9;
+            this.dateTimeStatistic.ValueChanged += new System.EventHandler(this.dateTimeStatistic_ValueChanged);
             // 
             // button15
             // 
@@ -2309,14 +2351,6 @@
             this.buttonResetTimeRefresh.Text = "Обновить время обслуживания";
             this.buttonResetTimeRefresh.UseVisualStyleBackColor = true;
             this.buttonResetTimeRefresh.Click += new System.EventHandler(this.buttonResetTimeRefresh_Click);
-            // 
-            // dateTimeStatistic
-            // 
-            this.dateTimeStatistic.Location = new System.Drawing.Point(36, 30);
-            this.dateTimeStatistic.Name = "dateTimeStatistic";
-            this.dateTimeStatistic.Size = new System.Drawing.Size(200, 20);
-            this.dateTimeStatistic.TabIndex = 9;
-            this.dateTimeStatistic.ValueChanged += new System.EventHandler(this.dateTimeStatistic_ValueChanged);
             // 
             // FormSettings
             // 
@@ -2586,5 +2620,8 @@
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Button button15;
         private System.Windows.Forms.DateTimePicker dateTimeStatistic;
+        private System.Windows.Forms.Label labelAllAmountService;
+        private System.Windows.Forms.Label labelAllAmountMoney;
+        private System.Windows.Forms.Button buttonResetAllAmount;
     }
 }

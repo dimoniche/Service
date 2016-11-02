@@ -186,7 +186,7 @@ namespace ServiceSaleMachine.Drivers
 
                 if (log != null)
                 {
-                    log.Write(LogMessageType.Information, "CONTROL: Transmit: " + buf[0].ToString("X") + " " + buf[1].ToString("X"));
+                    log.Write(LogMessageType.Debug, "CONTROL: Transmit: " + buf[0].ToString("X") + " " + buf[1].ToString("X"));
                 }
 
                 int val = 0;
@@ -197,7 +197,7 @@ namespace ServiceSaleMachine.Drivers
 
                 if (log != null)
                 {
-                    log.Write(LogMessageType.Information, "CONTROL: Data: " + BufIn[0].ToString("X") + " " + BufIn[1].ToString("X") + " " + BufIn[2].ToString("X") + " ");
+                    log.Write(LogMessageType.Debug, "CONTROL: Data: " + BufIn[0].ToString("X") + " " + BufIn[1].ToString("X") + " " + BufIn[2].ToString("X") + " ");
                 }
 
                 Count++;

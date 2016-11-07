@@ -16,6 +16,7 @@ namespace ServiceSaleMachine
         public string ButtonStartServices = defpicture;
         public string ButtonHelp = defpicture;
         public string ButtonPhilosof = defpicture;
+        public string ButtonInter = defpicture;
         public string ButtonService = defpicture;
         public string ButtonService1 = defpicture;
         public string ButtonService2 = defpicture;
@@ -44,6 +45,8 @@ namespace ServiceSaleMachine
         public string ButtonNoForward = defpicture;
         public string ButtonEnterUserName = defpicture;
         public string ButtonEnterUserPasw = defpicture;
+        public string ButtonRegister = defpicture;
+        public string ButtonRemember = defpicture;
 
         internal DesignConfigurationProperties()
         {

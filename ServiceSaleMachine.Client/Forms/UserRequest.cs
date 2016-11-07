@@ -14,30 +14,11 @@ namespace ServiceSaleMachine.Client
         {
             InitializeComponent();
 
-            pbxOk.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonYes);
-            pbxCancel.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonFail);
-            pbxEnterName.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonEnterUserName);
-            pbxEnterPsw.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonEnterUserPasw);
+            pBxRegister.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonRegister);
+            pBxRemember.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonRemember);
+
             LoadFullKeyBoard();
             tbx = tbxLogin;
-
-       /*     string[,] str = new string[NumberBoard.CountRow, NumberBoard.CountCol ];
-
-            str[0, 0] = Globals.GetPath(PathEnum.Image) + "\\0.png";
-            str[0, 1] = Globals.GetPath(PathEnum.Image) + "\\1.png";
-            str[1, 0] = Globals.GetPath(PathEnum.Image) + "\\2.png";
-            str[1, 1] = Globals.GetPath(PathEnum.Image) + "\\3.png";
-            str[2, 0] = Globals.GetPath(PathEnum.Image) + "\\4.png";
-            str[2, 1] = Globals.GetPath(PathEnum.Image) + "\\5.png";
-            str[3, 0] = Globals.GetPath(PathEnum.Image) + "\\6.png";
-            str[3, 1] = Globals.GetPath(PathEnum.Image) + "\\7.png";
-            str[4, 0] = Globals.GetPath(PathEnum.Image) + "\\8.png";
-            str[4, 1] = Globals.GetPath(PathEnum.Image) + "\\9.png";
-            str[5, 0] = Globals.GetPath(PathEnum.Image) + "\\fail.png";
-            str[5, 1] = Globals.GetPath(PathEnum.Image) + "\\Yes.jpg";
-
-            NumberBoard.LoadPicture(str);*/
-
         }
 
         public void LoadNumberKeyBoard()
@@ -47,50 +28,21 @@ namespace ServiceSaleMachine.Client
 
         public void LoadFullKeyBoard()
         {
-           // NumberBoard.CountRow = 4;
-           // NumberBoard.CountCol = 10;
             string[,] str = new string[NumberBoard.CountRow, NumberBoard.CountCol];
 
             str[0, 0] = Globals.GetPath(PathEnum.Image) + "\\1.png";
             str[0, 1] = Globals.GetPath(PathEnum.Image) + "\\2.png";
             str[0, 2] = Globals.GetPath(PathEnum.Image) + "\\3.png";
-            str[0, 3] = Globals.GetPath(PathEnum.Image) + "\\4.png";
-            str[0, 4] = Globals.GetPath(PathEnum.Image) + "\\5.png";
-            str[0, 5] = Globals.GetPath(PathEnum.Image) + "\\6.png";
-            str[0, 6] = Globals.GetPath(PathEnum.Image) + "\\7.png";
-            str[0, 7] = Globals.GetPath(PathEnum.Image) + "\\8.png";
-            str[0, 8] = Globals.GetPath(PathEnum.Image) + "\\9.png";
-            str[0, 9] = Globals.GetPath(PathEnum.Image) + "\\0.png";
-            str[1, 0] = Globals.GetPath(PathEnum.Image) + "\\q.png";
-            str[1, 1] = Globals.GetPath(PathEnum.Image) + "\\w.png";
-            str[1, 2] = Globals.GetPath(PathEnum.Image) + "\\e.png";
-            str[1, 3] = Globals.GetPath(PathEnum.Image) + "\\r.png";
-            str[1, 4] = Globals.GetPath(PathEnum.Image) + "\\t.png";
-            str[1, 5] = Globals.GetPath(PathEnum.Image) + "\\y.png";
-            str[1, 6] = Globals.GetPath(PathEnum.Image) + "\\u.png";
-            str[1, 7] = Globals.GetPath(PathEnum.Image) + "\\i.png";
-            str[1, 8] = Globals.GetPath(PathEnum.Image) + "\\o.png";
-            str[1, 9] = Globals.GetPath(PathEnum.Image) + "\\p.png";
-            str[2, 0] = Globals.GetPath(PathEnum.Image) + "\\a.png";
-            str[2, 1] = Globals.GetPath(PathEnum.Image) + "\\s.png";
-            str[2, 2] = Globals.GetPath(PathEnum.Image) + "\\d.png";
-            str[2, 3] = Globals.GetPath(PathEnum.Image) + "\\f.png";
-            str[2, 4] = Globals.GetPath(PathEnum.Image) + "\\g.png";
-            str[2, 5] = Globals.GetPath(PathEnum.Image) + "\\h.png";
-            str[2, 6] = Globals.GetPath(PathEnum.Image) + "\\j.png";
-            str[2, 7] = Globals.GetPath(PathEnum.Image) + "\\k.png";
-            str[2, 8] = Globals.GetPath(PathEnum.Image) + "\\l.png";
-            str[2, 9] = Globals.GetPath(PathEnum.Image) + "\\delete.png";
-            str[3, 1] = Globals.GetPath(PathEnum.Image) + "\\z.png";
-            str[3, 2] = Globals.GetPath(PathEnum.Image) + "\\x.png";
-            str[3, 3] = Globals.GetPath(PathEnum.Image) + "\\c.png";
-            str[3, 4] = Globals.GetPath(PathEnum.Image) + "\\v.png";
-            str[3, 5] = Globals.GetPath(PathEnum.Image) + "\\b.png";
-            str[3, 6] = Globals.GetPath(PathEnum.Image) + "\\n.png";
-            str[3, 7] = Globals.GetPath(PathEnum.Image) + "\\m.png";
-
+            str[1, 0] = Globals.GetPath(PathEnum.Image) + "\\4.png";
+            str[1, 1] = Globals.GetPath(PathEnum.Image) + "\\5.png";
+            str[1, 2] = Globals.GetPath(PathEnum.Image) + "\\6.png";
+            str[2, 0] = Globals.GetPath(PathEnum.Image) + "\\7.png";
+            str[2, 1] = Globals.GetPath(PathEnum.Image) + "\\8.png";
+            str[2, 2] = Globals.GetPath(PathEnum.Image) + "\\9.png";
+           
             str[3, 0] = Globals.GetPath(PathEnum.Image) + "\\fail.png";
-            str[3, 8] = Globals.GetPath(PathEnum.Image) + "\\Yes.jpg";
+            str[3, 1] = Globals.GetPath(PathEnum.Image) + "\\0.png";
+            str[3, 2] = Globals.GetPath(PathEnum.Image) + "\\Yes.jpg";
 
             NumberBoard.LoadPicture(str);
         }
@@ -113,8 +65,19 @@ namespace ServiceSaleMachine.Client
             {
                 // вернем вниз ID пользователя
                 UserInfo ui = GlobalDb.GlobalBase.GetUserByName(Globals.UserConfiguration.UserLogin, Globals.UserConfiguration.UserPassword);
+
                 if ( ui != null)
-                { data.CurrentUserId = ui.Id; }
+                {
+                    data.CurrentUserId = ui.Id;
+
+                    data.retLogin = Globals.UserConfiguration.UserLogin;
+                    data.retPassword = Globals.UserConfiguration.UserPassword;
+                }
+                else
+                {
+                    data.CurrentUserId = 0;
+                    data.retLogin = "";
+                }
 
                 Params.Result = data;
             }
@@ -145,39 +108,61 @@ namespace ServiceSaleMachine.Client
 
         private void NumberBoard_KeyboardEvent(object sender, KeyBoardEventArgs e)
         {
-            string row0 = "1234567890";
-            string row1 = "QWERTYUIOP";
-            string row2 = "ASDFGHJKL";
-            string row3 = "ZXCVBNM";
-             
-            if (e.Message.Y == 0)//первая строка
-            { tbx.Text += row0[e.Message.X]; }
-            else
-            if (e.Message.Y == 1)//первая строка
-            { tbx.Text += row1[e.Message.X]; }
-            else
-            if (e.Message.Y == 2)//вторая строка
+            string row0 = "123";
+            string row1 = "456";
+            string row2 = "789";
+            string row3 = " 0 ";
+
+            if (e.Message.Y == 0)
             {
-                if (e.Message.X < 9)
-                { tbx.Text += row2[e.Message.X]; }
-                else
-                { //стереть символ последний
-                    string ss = tbxLogin.Text;
-                    if (ss.Length > 0)
-                    { tbx.Text = ss.Remove(ss.Length - 1); }
+                if (tbx.Text.Length < 10 && tbx == tbxLogin
+                 || tbx.Text.Length < 4 && tbx == tbxPassword)
+                {
+                    tbx.Text += row0[e.Message.X];
                 }
             }
-            else
-            if (e.Message.Y == 3)//третья строка
+            else if (e.Message.Y == 1)
             {
-                if ((e.Message.X < 8) && (e.Message.X > 0))
+                if (tbx.Text.Length < 10 && tbx == tbxLogin
+                 || tbx.Text.Length < 4 && tbx == tbxPassword)
                 {
-                    tbx.Text += row3[e.Message.X-1];
-                }else
+                    tbx.Text += row1[e.Message.X];
+                }
+            }
+            else if (e.Message.Y == 2)
+            {
+                if (tbx.Text.Length < 10 && tbx == tbxLogin
+                 || tbx.Text.Length < 4 && tbx == tbxPassword)
+                {
+                    tbx.Text += row2[e.Message.X];
+                }
+            }
+            else if (e.Message.Y == 3)
+            {
                 if (e.Message.X == 0)
-                { this.Close(); }
-                else
-                if (e.Message.X == 8) //типа Enter
+                {
+                    // стереть символ последний
+                    string ss = tbxLogin.Text;
+                    if (ss.Length > 0)
+                    {
+                        tbx.Text = ss.Remove(ss.Length - 1);
+                    }
+                    else
+                    {
+                        // выйти в главное меню
+                        data.stage = WorkerStateStage.MainScreen;
+                        Close();
+                    }
+                }
+                else if (e.Message.X == 1)
+                {
+                    if (tbx.Text.Length < 10 && tbx == tbxLogin
+                     || tbx.Text.Length < 4 && tbx == tbxPassword)
+                    {
+                        tbx.Text += row3[e.Message.X];
+                    }
+                }
+                else if (e.Message.X == 2)
                 {
                     if (tbx == tbxLogin)
                     {
@@ -186,39 +171,41 @@ namespace ServiceSaleMachine.Client
                         tbxPassword.BackColor = System.Drawing.Color.Lime;
                         return;
                     }
+
                     Globals.UserConfiguration.UserLogin = tbxLogin.Text;
                     Globals.UserConfiguration.UserPassword = tbxPassword.Text;
+
                     if (chbNew.Checked)
                     {
                         if (AddInDB())
                         {
-                            //успешно занеслось в БД
+                            // успешно занеслось в БД
                             UserInfo ui = GlobalDb.GlobalBase.GetUserByName(tbxLogin.Text, tbxPassword.Text);
                             if (ui != null)
                             {
                                 Globals.UserConfiguration.ID = ui.Id;
-                                //получили ID из БД
+                                // получили ID из БД
                             }
                         }
                         else
                         {
                             Globals.UserConfiguration.Clear();
                         }
-
                     }
                     else
                     {
                         //проверить - есть такой в БД?
                         UserInfo ui = GlobalDb.GlobalBase.GetUserByName(tbxLogin.Text, tbxPassword.Text);
+
                         if (ui == null) return;
                         int sum = GlobalDb.GlobalBase.GetUserMoney(ui.Id);
+
                         Globals.UserConfiguration.Amount = sum;
 
                     }
                     this.Close();
                 }
             }
-
         }
 
         private void pbxOk_Click(object sender, EventArgs e)
@@ -229,6 +216,28 @@ namespace ServiceSaleMachine.Client
         private void pbxCancel_Click_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void UserRequest_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Alt & e.KeyCode == Keys.F4)
+            {
+                data.stage = WorkerStateStage.ExitProgram;
+            }
+        }
+
+        private void pBxRegister_Click(object sender, EventArgs e)
+        {
+            chbNew.Checked = true;
+            pBxRegister.Visible = false;
+            pBxRemember.Visible = false;
+
+            tbxLogin.Text = "";
+            tbxPassword.Text = "";
+            tbx = tbxLogin;
+
+            tbxPassword.BackColor = System.Drawing.Color.Gray;
+            tbxLogin.BackColor = System.Drawing.Color.Lime;
         }
     }
 }

@@ -41,6 +41,7 @@ namespace ServiceSaleMachine
                         if ((xElement = xSettings.Element("ButtonStartServices")) != null) Settings.ButtonStartServices = xElement.Value;
                         if ((xElement = xSettings.Element("ButtonHelp")) != null) Settings.ButtonHelp = xElement.Value;
                         if ((xElement = xSettings.Element("ButtonPhilosof")) != null) Settings.ButtonPhilosof = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonInter")) != null) Settings.ButtonInter = xElement.Value;
 
                         if ((xElement = xSettings.Element("ButtonService")) != null) Settings.ButtonService = xElement.Value;
                         if ((xElement = xSettings.Element("ButtonService1")) != null) Settings.ButtonService1 = xElement.Value;
@@ -71,6 +72,9 @@ namespace ServiceSaleMachine
                         if ((xElement = xSettings.Element("ButtonNoForward")) != null) Settings.ButtonNoForward = xElement.Value;
                         if ((xElement = xSettings.Element("ButtonEnterUserName")) != null) Settings.ButtonEnterUserName = xElement.Value;
                         if ((xElement = xSettings.Element("ButtonEnterUserPasw")) != null) Settings.ButtonEnterUserPasw = xElement.Value;
+
+                        if ((xElement = xSettings.Element("ButtonRegister")) != null) Settings.ButtonRegister = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonRemember")) != null) Settings.ButtonRemember = xElement.Value;
 
                         if ((xElement = xSettings.Element("ScreenSaver")) != null) Settings.ScreenSaver = xElement.Value;
                     }

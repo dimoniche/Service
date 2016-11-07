@@ -22,10 +22,10 @@ namespace ServiceSaleMachine.Client
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxBegin, Globals.DesignConfiguration.Settings.ButtonStartServices);
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxPhilosof, Globals.DesignConfiguration.Settings.ButtonPhilosof);
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxInstruction, Globals.DesignConfiguration.Settings.ButtonHelp);
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pictureBoxInter, Globals.DesignConfiguration.Settings.ButtonInter);
 
             TimeOutTimer.Enabled = true;
             Timeout = 0;
-
         }
 
         public override void LoadData()
@@ -164,6 +164,12 @@ namespace ServiceSaleMachine.Client
         {
             Globals.HelpFileName = Globals.GetPath(PathEnum.Text) + "\\Philosof.rtf";
             data.stage = WorkerStateStage.Philosof;
+            this.Close();
+        }
+
+        private void pictureBoxInter_Click(object sender, EventArgs e)
+        {
+            data.stage = WorkerStateStage.InterUser;
             this.Close();
         }
     }

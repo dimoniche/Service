@@ -35,6 +35,11 @@ namespace ServiceSaleMachine
         Rules,                      //
 
         /// <summary>
+        /// Вход пользователя
+        /// </summary>
+        InterUser,                  //
+
+        /// <summary>
         /// Выбор услуги
         /// </summary>
         ChooseService,              //

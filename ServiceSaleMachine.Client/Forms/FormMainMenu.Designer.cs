@@ -36,11 +36,15 @@
             this.pBxBegin = new System.Windows.Forms.PictureBox();
             this.pBxPhilosof = new System.Windows.Forms.PictureBox();
             this.pBxInstruction = new System.Windows.Forms.PictureBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBoxInter = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBxBegin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBxPhilosof)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBxInstruction)).BeginInit();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInter)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,24 +74,27 @@
             this.tableLayoutPanel2.Controls.Add(this.pBxBegin, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.pBxPhilosof, 0, 3);
             this.tableLayoutPanel2.Controls.Add(this.pBxInstruction, 0, 5);
+            this.tableLayoutPanel2.Controls.Add(this.panel1, 0, 7);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(163, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 7;
+            this.tableLayoutPanel2.RowCount = 9;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.5F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.5F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(474, 569);
             this.tableLayoutPanel2.TabIndex = 4;
             // 
             // pBxBegin
             // 
             this.pBxBegin.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pBxBegin.Location = new System.Drawing.Point(3, 88);
+            this.pBxBegin.Location = new System.Drawing.Point(3, 59);
             this.pBxBegin.Name = "pBxBegin";
             this.pBxBegin.Size = new System.Drawing.Size(468, 79);
             this.pBxBegin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -98,7 +105,7 @@
             // pBxPhilosof
             // 
             this.pBxPhilosof.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pBxPhilosof.Location = new System.Drawing.Point(3, 244);
+            this.pBxPhilosof.Location = new System.Drawing.Point(3, 180);
             this.pBxPhilosof.Name = "pBxPhilosof";
             this.pBxPhilosof.Size = new System.Drawing.Size(468, 79);
             this.pBxPhilosof.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -109,13 +116,33 @@
             // pBxInstruction
             // 
             this.pBxInstruction.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pBxInstruction.Location = new System.Drawing.Point(3, 400);
+            this.pBxInstruction.Location = new System.Drawing.Point(3, 301);
             this.pBxInstruction.Name = "pBxInstruction";
             this.pBxInstruction.Size = new System.Drawing.Size(468, 79);
             this.pBxInstruction.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pBxInstruction.TabIndex = 2;
             this.pBxInstruction.TabStop = false;
             this.pBxInstruction.Click += new System.EventHandler(this.pbxHelp_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.pictureBoxInter);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 425);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(468, 79);
+            this.panel1.TabIndex = 3;
+            // 
+            // pictureBoxInter
+            // 
+            this.pictureBoxInter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBoxInter.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxInter.Name = "pictureBoxInter";
+            this.pictureBoxInter.Size = new System.Drawing.Size(468, 79);
+            this.pictureBoxInter.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxInter.TabIndex = 0;
+            this.pictureBoxInter.TabStop = false;
+            this.pictureBoxInter.Click += new System.EventHandler(this.pictureBoxInter_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -149,6 +176,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pBxBegin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBxPhilosof)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBxInstruction)).EndInit();
+            this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInter)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -164,5 +193,7 @@
         private System.Windows.Forms.PictureBox pBxBegin;
         private System.Windows.Forms.PictureBox pBxPhilosof;
         private System.Windows.Forms.PictureBox pBxInstruction;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.PictureBox pictureBoxInter;
     }
 }

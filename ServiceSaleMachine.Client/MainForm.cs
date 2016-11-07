@@ -140,6 +140,7 @@ namespace ServiceSaleMachine.Client
                         continue;
                     }
 
+                    WaitClient:
                     // ожидание клиента
                     result = (FormResultData)FormManager.OpenForm<FormMainMenu>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
@@ -148,6 +149,48 @@ namespace ServiceSaleMachine.Client
                         // выход
                         Close();
                         return;
+                    }
+                    else if (result.stage == WorkerStateStage.InterUser)
+                    {
+                        // авторизация пользователя
+                        result = (FormResultData)FormManager.OpenForm<UserRequest>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                        // проверим результат
+                        if (result.retLogin == "admin")
+                        {
+                            // вход админа
+                            result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                            // проинициализируем железо после настроек
+                            if (Globals.ClientConfiguration.Settings.offHardware == 0)
+                            {
+                                result.drivers.InitAllDevice();
+                            }
+
+                            continue;
+                        }
+                        else if (result.retLogin != "")
+                        {
+                            UserInfo ui = GlobalDb.GlobalBase.GetUserByName(result.retLogin, result.retPassword);
+                            if (ui != null)
+                            {
+                                // здесь покажем какого пользователя авторизовали
+                                //MessageBox.Show(ui.Role.ToString());
+                            }
+                        }
+                        else if (result.stage == WorkerStateStage.ExitProgram)
+                        {
+                            // выход
+                            Close();
+                            return;
+                        }
+                        else if (result.stage == WorkerStateStage.MainScreen)
+                        {
+                            // сброс авторизации
+                            continue;
+                        }
+
+                        goto WaitClient;
                     }
                     else if (result.stage == WorkerStateStage.ErrorControl)
                     {

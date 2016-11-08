@@ -294,7 +294,7 @@ namespace ServiceSaleMachine
                 if (!dsv.HasRows)
                 {
                     dsv.Close();//обязательно!
-                    string query = "insert into systemvalues (namevalue, ownvalue) values ('nextnumbercheck', '0')";
+                    string query = "insert into systemvalues (namevalue, ownvalue) values ('nextnumbercheck', '1')";
                     ExecuteNonQuery(query);
                 }
                 else
@@ -309,7 +309,22 @@ namespace ServiceSaleMachine
                 if (!dsv.HasRows)
                 {
                     dsv.Close();//обязательно!
-                    string query = "insert into systemvalues (namevalue, ownvalue) values ('nextnumberdeliverycheck', '0')";
+                    string query = "insert into systemvalues (namevalue, ownvalue) values ('nextnumberdeliverycheck', '1')";
+                    ExecuteNonQuery(query);
+                }
+                else
+                {
+                    dsv.Close();//обязательно!
+                }
+            }
+
+            dsv = Execute("select * from systemvalues where namevalue='nextnumbercheckAccount'");
+            if (dsv != null)
+            {
+                if (!dsv.HasRows)
+                {
+                    dsv.Close();//обязательно!
+                    string query = "insert into systemvalues (namevalue, ownvalue) values ('nextnumbercheckAccount', '1')";
                     ExecuteNonQuery(query);
                 }
                 else
@@ -629,6 +644,56 @@ namespace ServiceSaleMachine
             }
         }
 
+        public UserInfo GetUserByName(string User)
+        {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return null;
+
+            string queryString = "select id, login, password, role from users where (login = '" + User + "')";
+
+            lock (connection)
+            {
+                if (connection.State == ConnectionState.Closed || connection.State == ConnectionState.Broken)
+                {
+                    connection.StateChange -= Con_StateChange;
+                    connection.Close();
+                    Connect();
+                }
+
+                MySqlCommand com = new MySqlCommand(queryString, connection);
+
+                UserInfo ui = null;
+
+                using (MySqlDataReader dr = com.ExecuteReader())
+                {
+                    if (dr != null)
+                    {
+                        if (dr.HasRows)
+                        {
+                            dr.Read();
+
+                            try
+                            {
+                                ui = new UserInfo();
+                                ui.Id = (int)dr[0];
+                                ui.Login = (string)dr[1];
+                                ui.Password = (string)dr[2];
+                                ui.Role = (UserRole)dr[3];
+                            }
+                            catch
+                            {
+
+                            }
+                        }
+
+                        dr.Close();
+                        return ui;
+                    }
+                }
+
+                return ui;
+            }
+        }
+
         private DataTable getDataTable(string query)
         {
             if (Globals.ClientConfiguration.Settings.offDataBase == 1) return null;
@@ -913,6 +978,56 @@ namespace ServiceSaleMachine
             if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
 
             string query = "update systemvalues set ownvalue=" + CurrentN.ToString() + " where namevalue = 'nextnumbercheck'";
+            return ExecuteNonQuery(query);
+        }
+
+        public int GetCurrentAccountNumberCheck()
+        {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return 0;
+
+            string queryString = "select namevalue, ownvalue from  systemvalues where " +
+                 "namevalue= 'nextnumbercheckAccount'";
+
+            MySqlDataReader dr = Execute(queryString);
+            if (dr != null)
+            {
+                int i = 0;
+
+                if (dr.HasRows)
+                {
+                    dr.Read();
+                    string s = "0";
+
+                    try
+                    {
+                        if (dr.IsDBNull(0) != true)
+                            s = (string)dr[1];
+
+                        int.TryParse(s, out i);
+                    }
+                    catch
+                    {
+                        i = 0;
+                    }
+                }
+
+                dr.Close();
+                return i;
+            }
+
+            return 0;
+        }
+
+        /// <summary>
+        /// записать значение в текущий номер фискальных чеков (увеличенный или обнулить по команде)
+        /// </summary>
+        /// <param name="CurrentN"></param>
+        /// <returns></returns>
+        public bool SetNumberAccountCheck(int CurrentN)
+        {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
+
+            string query = "update systemvalues set ownvalue=" + CurrentN.ToString() + " where namevalue = 'nextnumbercheckAccount'";
             return ExecuteNonQuery(query);
         }
 

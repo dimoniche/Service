@@ -197,7 +197,7 @@ namespace ServiceSaleMachine.Drivers
             prn.ClosePrint();
         }
 
-        public void PrintHeader(bool barcode = false)
+        public void PrintHeader(int barcode = 0)
         {
             Print(eInit + "" + eSelectRusCodePage + "" + eCentre,false,false);
             Print(TransformCode(Globals.CheckConfiguration.Settings.firmsname),true);
@@ -207,10 +207,14 @@ namespace ServiceSaleMachine.Drivers
             Print(eLeft);
 
             // номер чека
-            if (barcode)
+            if (barcode == 1)
             {   
                 // если печатаем чек со сдачей - своя нумерация
                 Print(TransformCode("Чек N: ") + GlobalDb.GlobalBase.GetCurrentNumberDeliveryCheck().ToString("00000"), true);
+            }
+            else if (barcode == 2)
+            {
+                Print(TransformCode("Чек N: ") + GlobalDb.GlobalBase.GetCurrentAccountNumberCheck().ToString("00000"), true);
             }
             else
             {
@@ -264,6 +268,18 @@ namespace ServiceSaleMachine.Drivers
             Print(eLeft, false, false);
             Print(TransformCode("Сдача"), true);
             Print(" ".PadRight(42 - 8 - 1, ' ') + "0,00");
+        }
+
+        public void PrintAccountBody(Service serv, int amount, string account)
+        {
+            Print(eLeft, false, false);
+            Print(TransformCode("Счет") + " " + account, true);
+
+            PrintDashes();
+
+            Print(eLeft, false, false);
+            Print(TransformCode("На счете"), true);
+            Print(" ".PadRight(42 - 10 - amount.ToString().Length, ' ') + amount.ToString("#.00"));
         }
 
         public void PrintFooter()

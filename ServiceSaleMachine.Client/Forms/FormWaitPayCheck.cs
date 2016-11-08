@@ -241,7 +241,7 @@ namespace ServiceSaleMachine.Client
                                 int numberCheck = GlobalDb.GlobalBase.GetCurrentNumberDeliveryCheck();
 
                                 // и напечатем его
-                                data.drivers.printer.PrintHeader(true);
+                                data.drivers.printer.PrintHeader(1);
                                 data.drivers.printer.PrintBarCode(check, diff);
                                 data.drivers.printer.PrintFooter();
                                 data.drivers.printer.EndPrint();

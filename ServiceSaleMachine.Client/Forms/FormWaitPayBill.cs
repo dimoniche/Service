@@ -47,6 +47,7 @@ namespace ServiceSaleMachine.Client
         }
 
         private GifImage gifImage = null;
+
         public override void LoadData()
         {
             foreach (object obj in Params.Objects.Where(obj => obj != null))
@@ -56,6 +57,8 @@ namespace ServiceSaleMachine.Client
                     data = (FormResultData)obj;
                 }
             }
+
+            data.log.Write(LogMessageType.Information, "========================НАЧАЛО ОБСЛУЖИВАНИЯ==========================");
 
             gifImage = new GifImage(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonGetOxigen);
             gifImage.ReverseAtEnd = false; //dont reverse at end
@@ -71,10 +74,57 @@ namespace ServiceSaleMachine.Client
 
             TextPayBill.LoadFile(Globals.GetPath(PathEnum.Text) + "\\WaitPayBill.rtf");
 
+            // сразу проверим - если авторизовались и достаточно денег на счете - сразу списываем деньги со счета
+            if (data.retLogin != "")
+            {
+                int sum = GlobalDb.GlobalBase.GetUserMoney(data.CurrentUserId);
+
+                data.log.Write(LogMessageType.Information, "ACCOUNT: Оказываем услугу с денег со счета...");
+                data.log.Write(LogMessageType.Information, "ACCOUNT: На счету у пользователя " + data.retLogin + " " + sum + " руб.");
+
+                if (sum >= data.serv.price)
+                {
+                    // денег на счете достаточно
+
+                    amount += data.serv.price;
+
+                    AmountServiceText.Text = "Внесено: " + data.serv.price + " руб.";
+                    AmountServiceText.ForeColor = System.Drawing.Color.Green;
+                    SecondMessageText.Text = "Остаток на счете: " + (sum - data.serv.price) + " руб.";
+
+                    data.log.Write(LogMessageType.Information, "ACCOUNT: Внесли достаточную для оказания услуги сумму со счета.");
+
+                    // все можно уже пользоваться
+                    pBxGiveOxigen.Enabled = true;
+
+                    moneyFixed = false;
+                    StopHardware = true;
+
+                    // обновим счет
+                    GlobalDb.GlobalBase.AddToAmount(data.CurrentUserId, 0 - data.serv.price);
+
+                    pBxReturnBack.Enabled = false;
+
+                    return;
+                }
+                else if (sum > 0)
+                {
+                    // денег не достаточно - все равно списываем все подчистую
+                    amount += sum;
+
+                    AmountServiceText.Text = "Внесено: " + sum + " руб.";
+                    SecondMessageText.Text = "Недостаточно денег для оказания услуги.";
+
+                    // обновим счет
+                    GlobalDb.GlobalBase.AddToAmount(data.CurrentUserId, 0 - sum);
+
+                    pBxReturnBack.Enabled = false;
+                }
+            }
+            //
+
             // заменим обработчик событий
             data.drivers.ReceivedResponse += reciveResponse;
-
-            data.log.Write(LogMessageType.Information, "========================НАЧАЛО ОБСЛУЖИВАНИЯ==========================");
 
             if (data.serv.price == 0)
             {
@@ -274,6 +324,8 @@ namespace ServiceSaleMachine.Client
                         return;
                     }
 
+                    ChooseChangeEnum ch = ChooseChangeEnum.None;
+
                     if (Globals.ClientConfiguration.Settings.changeOn > 0)
                     {
                         // посчитаем размер сдачи
@@ -287,14 +339,13 @@ namespace ServiceSaleMachine.Client
                         {
                             data.log.Write(LogMessageType.Information, "WAIT BILL: Сумма сдачи " + diff + " руб.");
 
-                            ChooseChangeEnum ch = ChooseChangeEnum.None;
-
-                            if (Globals.ClientConfiguration.Settings.changeToAccount == 1 && Globals.ClientConfiguration.Settings.changeToCheck == 1)
-                            {
-                                // тут надо решить как выдать сдачу - спросим пользователя
-                                ch = (ChooseChangeEnum)FormManager.OpenForm<FormChooseChange>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, diff.ToString());
-                            }
-                            else if (Globals.ClientConfiguration.Settings.changeToAccount == 1)
+                            //if (data.retLogin != "" && Globals.ClientConfiguration.Settings.changeToAccount == 1 && Globals.ClientConfiguration.Settings.changeToCheck == 1)
+                            //{
+                            //    // тут надо решить как выдать сдачу - спросим пользователя
+                            //    ch = (ChooseChangeEnum)FormManager.OpenForm<FormChooseChange>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, diff.ToString());
+                            //}
+                            //else 
+                            if (data.retLogin != "" && Globals.ClientConfiguration.Settings.changeToAccount == 1)
                             {
                                 ch = ChooseChangeEnum.ChangeToAccount;
                             }
@@ -306,13 +357,6 @@ namespace ServiceSaleMachine.Client
                             if (ch == ChooseChangeEnum.ChangeToAccount)
                             {
                                 data.log.Write(LogMessageType.Information, "WAIT BILL: сдача на аккаунт. Сумма сдачи " + diff);
-
-                                // заносим в аккаунт - если не авторизовались - нужна авторизация в аккаунт
-                                if (data.CurrentUserId == 0)
-                                {
-                                    // форма регистрации
-                                    data = (FormResultData)FormManager.OpenForm<UserRequest>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, data);
-                                }
 
                                 // запомним сколько внесли на аккаунт
                                 data.statistic.AccountMoneySumm += diff;
@@ -341,7 +385,7 @@ namespace ServiceSaleMachine.Client
                                 data.drivers.printer.StartPrint(data.drivers.printer.getNamePrinter());
 
                                 // и напечатем его
-                                data.drivers.printer.PrintHeader(true);
+                                data.drivers.printer.PrintHeader(1);
                                 data.drivers.printer.PrintBarCode(check,diff);
                                 data.drivers.printer.PrintFooter();
                                 data.drivers.printer.EndPrint();
@@ -355,7 +399,15 @@ namespace ServiceSaleMachine.Client
                         if (diff > 0)
                         {
                             AmountServiceText.Text = "ПРИНЯТО: " + data.serv.price + " руб.";
-                            SecondMessageText.Text = "Остаток на чеке: " + diff + " руб.";
+
+                            if (ch == ChooseChangeEnum.ChangeToAccount)
+                            {
+                                SecondMessageText.Text = "Остаток на счете: " + diff + " руб.";
+                            }
+                            else
+                            {
+                                SecondMessageText.Text = "Остаток на чеке: " + diff + " руб.";
+                            }
                         }
                         else
                         {
@@ -486,9 +538,11 @@ namespace ServiceSaleMachine.Client
 
                     // сдача
                     int diff = 0;
+                    ChooseChangeEnum ch = ChooseChangeEnum.None;
 
                     if (Globals.ClientConfiguration.Settings.changeOn > 0)
                     {
+
                         // посчитаем размер сдачи
                         diff = amount - data.serv.price;
 
@@ -498,14 +552,13 @@ namespace ServiceSaleMachine.Client
                         // сдача на чек
                         if (amount > data.serv.price)
                         {
-                            ChooseChangeEnum ch = ChooseChangeEnum.None;
-
-                            if (Globals.ClientConfiguration.Settings.changeToAccount == 1 && Globals.ClientConfiguration.Settings.changeToCheck == 1)
-                            {
-                                // тут надо решить как выдать сдачу - спросим пользователя
-                                ch = (ChooseChangeEnum)FormManager.OpenForm<FormChooseChange>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, diff.ToString());
-                            }
-                            else if (Globals.ClientConfiguration.Settings.changeToAccount == 1)
+                            //if (data.retLogin != "" && Globals.ClientConfiguration.Settings.changeToAccount == 1 && Globals.ClientConfiguration.Settings.changeToCheck == 1)
+                            //{
+                            //    // тут надо решить как выдать сдачу - спросим пользователя
+                            //    ch = (ChooseChangeEnum)FormManager.OpenForm<FormChooseChange>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, diff.ToString());
+                            //}
+                            //else 
+                            if (data.retLogin != "" && Globals.ClientConfiguration.Settings.changeToAccount == 1)
                             {
                                 ch = ChooseChangeEnum.ChangeToAccount;
                             }
@@ -517,13 +570,6 @@ namespace ServiceSaleMachine.Client
                             if (ch == ChooseChangeEnum.ChangeToAccount)
                             {
                                 data.log.Write(LogMessageType.Information, "WAIT CHECK: сдача на аккаунт. Сумма сдачи " + diff);
-
-                                // заносим в аккаунт - если не авторизовались - нужна авторизация в аккаунт
-                                if (data.CurrentUserId == 0)
-                                {
-                                    // форма регистрации
-                                    data = (FormResultData)FormManager.OpenForm<UserRequest>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, data);
-                                }
 
                                 // запомним сколько внесли на аккаунт
                                 data.statistic.AccountMoneySumm += diff;
@@ -554,7 +600,7 @@ namespace ServiceSaleMachine.Client
                                 int numberCheck = GlobalDb.GlobalBase.GetCurrentNumberDeliveryCheck();
 
                                 // и напечатем его
-                                data.drivers.printer.PrintHeader(true);
+                                data.drivers.printer.PrintHeader(1);
                                 data.drivers.printer.PrintBarCode(check, diff);
                                 data.drivers.printer.PrintFooter();
                                 data.drivers.printer.EndPrint();
@@ -572,7 +618,15 @@ namespace ServiceSaleMachine.Client
                         if (diff > 0)
                         {
                             AmountServiceText.Text = "ПРИНЯТО: " + data.serv.price + " руб.";
-                            SecondMessageText.Text = "Остаток на чеке: " + diff + " руб.";
+
+                            if (ch == ChooseChangeEnum.ChangeToAccount)
+                            {
+                                SecondMessageText.Text = "Остаток на счете: " + diff + " руб.";
+                            }
+                            else
+                            {
+                                SecondMessageText.Text = "Остаток на чеке: " + diff + " руб.";
+                            }
                         }
                         else
                         {
@@ -695,6 +749,24 @@ namespace ServiceSaleMachine.Client
                         GlobalDb.GlobalBase.SetNumberCheck(numbercheck + 1);
 
                         data.log.Write(LogMessageType.Information, "WAIT BILL: Печатаем фискальный чек с номером " + numbercheck + ". На сумму " + amountMoney + " руб.");
+                    }
+                }
+                else if (data.retLogin != "")
+                {
+                    // Распечатать чек c информацией по аккаунту - платили с аккаунта
+                    data.drivers.printer.StartPrint(data.drivers.printer.getNamePrinter());
+
+                    if (data.drivers.printer.prn.PrinterIsOpen)
+                    {
+                        data.drivers.printer.PrintHeader();
+                        data.drivers.printer.PrintAccountBody(data.serv, GlobalDb.GlobalBase.GetUserMoney(data.CurrentUserId), data.retLogin);
+                        data.drivers.printer.PrintFooter();
+                        data.drivers.printer.EndPrint();
+
+                        int numbercheck = GlobalDb.GlobalBase.GetCurrentAccountNumberCheck();
+
+                        // увеличим номер отчетного
+                        GlobalDb.GlobalBase.SetNumberAccountCheck(numbercheck + 1);
                     }
                 }
             }

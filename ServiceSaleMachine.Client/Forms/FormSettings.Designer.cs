@@ -194,6 +194,8 @@
             this.checkBox50 = new System.Windows.Forms.CheckBox();
             this.checkBox10 = new System.Windows.Forms.CheckBox();
             this.tabPage11 = new System.Windows.Forms.TabPage();
+            this.labelAccount = new System.Windows.Forms.Label();
+            this.button16 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
             this.labeldelivery = new System.Windows.Forms.Label();
             this.buttonDelivery = new System.Windows.Forms.Button();
@@ -2025,6 +2027,8 @@
             // 
             // tabPage11
             // 
+            this.tabPage11.Controls.Add(this.labelAccount);
+            this.tabPage11.Controls.Add(this.button16);
             this.tabPage11.Controls.Add(this.button14);
             this.tabPage11.Controls.Add(this.labeldelivery);
             this.tabPage11.Controls.Add(this.buttonDelivery);
@@ -2046,9 +2050,28 @@
             this.tabPage11.Text = "Содержание чека";
             this.tabPage11.UseVisualStyleBackColor = true;
             // 
+            // labelAccount
+            // 
+            this.labelAccount.AutoSize = true;
+            this.labelAccount.Location = new System.Drawing.Point(611, 161);
+            this.labelAccount.Name = "labelAccount";
+            this.labelAccount.Size = new System.Drawing.Size(137, 13);
+            this.labelAccount.TabIndex = 9;
+            this.labelAccount.Text = "Текущий номер чека: 123";
+            // 
+            // button16
+            // 
+            this.button16.Location = new System.Drawing.Point(600, 179);
+            this.button16.Name = "button16";
+            this.button16.Size = new System.Drawing.Size(213, 23);
+            this.button16.TabIndex = 8;
+            this.button16.Text = "Сброс нумерации чеков со сдачей";
+            this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.button16_Click_1);
+            // 
             // button14
             // 
-            this.button14.Location = new System.Drawing.Point(600, 192);
+            this.button14.Location = new System.Drawing.Point(600, 229);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(213, 23);
             this.button14.TabIndex = 7;
@@ -2623,5 +2646,7 @@
         private System.Windows.Forms.Label labelAllAmountService;
         private System.Windows.Forms.Label labelAllAmountMoney;
         private System.Windows.Forms.Button buttonResetAllAmount;
+        private System.Windows.Forms.Label labelAccount;
+        private System.Windows.Forms.Button button16;
     }
 }

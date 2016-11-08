@@ -40,7 +40,6 @@
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.chbNew = new System.Windows.Forms.CheckBox();
             this.panel7 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.panel8 = new System.Windows.Forms.Panel();
@@ -63,8 +62,10 @@
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
             this.panel16 = new System.Windows.Forms.Panel();
             this.pBxRemember = new System.Windows.Forms.PictureBox();
-            this.pbxOk = new System.Windows.Forms.PictureBox();
+            this.chbNew = new System.Windows.Forms.CheckBox();
+            this.rememberBox = new System.Windows.Forms.CheckBox();
             this.pbxCancel = new System.Windows.Forms.PictureBox();
+            this.pbxOk = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -94,8 +95,8 @@
             this.tableLayoutPanel11.SuspendLayout();
             this.panel16.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBxRemember)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxOk)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxCancel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxOk)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -232,11 +233,12 @@
             this.tableLayoutPanel2.AutoSize = true;
             this.tableLayoutPanel2.ColumnCount = 1;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Controls.Add(this.chbNew, 0, 3);
             this.tableLayoutPanel2.Controls.Add(this.panel7, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.panel9, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.panel13, 0, 4);
             this.tableLayoutPanel2.Controls.Add(this.panel14, 0, 6);
+            this.tableLayoutPanel2.Controls.Add(this.chbNew, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.rememberBox, 0, 5);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -251,18 +253,6 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(549, 288);
             this.tableLayoutPanel2.TabIndex = 3;
-            // 
-            // chbNew
-            // 
-            this.chbNew.AutoSize = true;
-            this.chbNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.chbNew.Location = new System.Drawing.Point(3, 103);
-            this.chbNew.Name = "chbNew";
-            this.chbNew.Size = new System.Drawing.Size(134, 17);
-            this.chbNew.TabIndex = 9;
-            this.chbNew.Text = "Новый пользователь";
-            this.chbNew.UseVisualStyleBackColor = true;
-            this.chbNew.Visible = false;
             // 
             // panel7
             // 
@@ -511,16 +501,30 @@
             this.pBxRemember.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pBxRemember.TabIndex = 0;
             this.pBxRemember.TabStop = false;
+            this.pBxRemember.Click += new System.EventHandler(this.pBxRemember_Click);
             // 
-            // pbxOk
+            // chbNew
             // 
-            this.pbxOk.Location = new System.Drawing.Point(3, 3);
-            this.pbxOk.Name = "pbxOk";
-            this.pbxOk.Size = new System.Drawing.Size(72, 54);
-            this.pbxOk.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbxOk.TabIndex = 5;
-            this.pbxOk.TabStop = false;
-            this.pbxOk.Visible = false;
+            this.chbNew.AutoSize = true;
+            this.chbNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.chbNew.Location = new System.Drawing.Point(3, 103);
+            this.chbNew.Name = "chbNew";
+            this.chbNew.Size = new System.Drawing.Size(134, 17);
+            this.chbNew.TabIndex = 14;
+            this.chbNew.Text = "Новый пользователь";
+            this.chbNew.UseVisualStyleBackColor = true;
+            this.chbNew.Visible = false;
+            // 
+            // rememberBox
+            // 
+            this.rememberBox.AutoSize = true;
+            this.rememberBox.Location = new System.Drawing.Point(3, 188);
+            this.rememberBox.Name = "rememberBox";
+            this.rememberBox.Size = new System.Drawing.Size(90, 17);
+            this.rememberBox.TabIndex = 15;
+            this.rememberBox.Text = "rememberBox";
+            this.rememberBox.UseVisualStyleBackColor = true;
+            this.rememberBox.Visible = false;
             // 
             // pbxCancel
             // 
@@ -531,6 +535,16 @@
             this.pbxCancel.TabIndex = 6;
             this.pbxCancel.TabStop = false;
             this.pbxCancel.Visible = false;
+            // 
+            // pbxOk
+            // 
+            this.pbxOk.Location = new System.Drawing.Point(3, 3);
+            this.pbxOk.Name = "pbxOk";
+            this.pbxOk.Size = new System.Drawing.Size(72, 54);
+            this.pbxOk.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbxOk.TabIndex = 5;
+            this.pbxOk.TabStop = false;
+            this.pbxOk.Visible = false;
             // 
             // UserRequest
             // 
@@ -579,8 +593,8 @@
             this.tableLayoutPanel11.ResumeLayout(false);
             this.panel16.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pBxRemember)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxOk)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxCancel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxOk)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -601,7 +615,6 @@
         private System.Windows.Forms.PictureBox pbxOk;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.CheckBox chbNew;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Panel panel8;
@@ -624,5 +637,7 @@
         private System.Windows.Forms.Panel panel16;
         private System.Windows.Forms.PictureBox pBxRegister;
         private System.Windows.Forms.PictureBox pBxRemember;
+        private System.Windows.Forms.CheckBox chbNew;
+        private System.Windows.Forms.CheckBox rememberBox;
     }
 }

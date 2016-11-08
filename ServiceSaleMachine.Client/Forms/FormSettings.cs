@@ -679,6 +679,9 @@ namespace ServiceSaleMachine.Client
             NumberCheck = GlobalDb.GlobalBase.GetCurrentNumberDeliveryCheck();
             labeldelivery.Text = "Текущий номер чека: " + NumberCheck;
 
+            NumberCheck = GlobalDb.GlobalBase.GetCurrentAccountNumberCheck();
+            labelAccount.Text = "Текущий номер чека: " + NumberCheck;
+
             cBxCommand.Items.Clear();
             cBxCommand.Items.Add("Включить");
             cBxCommand.Items.Add("Выключить");
@@ -914,7 +917,7 @@ namespace ServiceSaleMachine.Client
 
             if (data.drivers.printer.prn.PrinterIsOpen)
             {
-               data.drivers.printer.PrintHeader(true);
+               data.drivers.printer.PrintHeader(1);
 
                int summ = 0;
                int.TryParse(tBxsumm.Text, out summ);
@@ -1851,6 +1854,16 @@ namespace ServiceSaleMachine.Client
             GlobalDb.GlobalBase.SetAmountService(0);
 
             MoneyStatistic();
+        }
+
+        private void button16_Click_1(object sender, EventArgs e)
+        {
+            // сброс чека
+            int NumberCheck = 1;
+
+            GlobalDb.GlobalBase.SetNumberAccountCheck(NumberCheck);
+
+            labelAccount.Text = "Текущий номер чека: " + NumberCheck;
         }
     }
 }

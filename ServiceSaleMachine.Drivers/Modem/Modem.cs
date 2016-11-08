@@ -294,7 +294,7 @@ namespace ServiceSaleMachine.Drivers
             return str;
         }
 
-        public bool SendSMS(string sms, Log log = null)
+        public bool SendSMS(string sms, Log log = null, string number = "")
         {
             if (Globals.ClientConfiguration.Settings.offModem == 1) return false;
             if (Globals.ClientConfiguration.Settings.numberTelephoneSMS.Length < 7) return false;
@@ -324,7 +324,15 @@ namespace ServiceSaleMachine.Drivers
                 return false;
             }
 
-            buf = System.Text.Encoding.ASCII.GetBytes("AT+CMGS=\"" + Globals.ClientConfiguration.Settings.numberTelephoneSMS + "\"\x0d\x0a");
+            if (number != "")
+            {
+                buf = System.Text.Encoding.ASCII.GetBytes("AT+CMGS=\"" + number + "\"\x0d\x0a");
+            }
+            else
+            {
+                buf = System.Text.Encoding.ASCII.GetBytes("AT+CMGS=\"" + Globals.ClientConfiguration.Settings.numberTelephoneSMS + "\"\x0d\x0a");
+            }
+
             Send(buf);
 
             Thread.Sleep(500);

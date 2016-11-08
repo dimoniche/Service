@@ -53,6 +53,15 @@ namespace ServiceSaleMachine.Client
             {
                 label1.Text = "Вы внесли купюру " + Nominal + " руб";
             }
+
+            if(data.retLogin != "")
+            {
+                scalableLabel1.Text = "Ваша сдача будет на счете";
+            }
+            else
+            {
+                scalableLabel1.Text = "Ваша сдача будет на чеке";
+            }
         }
 
         private void FormInsertBill1_FormClosed(object sender, FormClosedEventArgs e)

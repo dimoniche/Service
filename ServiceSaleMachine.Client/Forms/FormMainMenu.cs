@@ -42,6 +42,17 @@ namespace ServiceSaleMachine.Client
             this.WindowState = FormWindowState.Maximized;
 
             data.drivers.ReceivedResponse += reciveResponse;
+
+            numberTelefon.Text = data.retLogin;
+
+            if (data.retLogin != "")
+            {
+                AmountText.Text = "Сумма: " + Globals.UserConfiguration.Amount + " руб.";
+            }
+            else
+            {
+                AmountText.Text = "";
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -148,6 +159,13 @@ namespace ServiceSaleMachine.Client
             if (Timeout > Globals.ClientConfiguration.Settings.timeout * 60)
             {
                 data.stage = WorkerStateStage.TimeOut;
+
+                numberTelefon.Text = "";
+
+                data.retLogin = "";
+                data.retPassword = "";
+                data.CurrentUserId = 0;
+
                 this.Close();
             }
         }

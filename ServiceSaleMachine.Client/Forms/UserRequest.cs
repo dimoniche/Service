@@ -63,20 +63,30 @@ namespace ServiceSaleMachine.Client
         {
             if (data != null)
             {
-                // вернем вниз ID пользователя
-                UserInfo ui = GlobalDb.GlobalBase.GetUserByName(Globals.UserConfiguration.UserLogin, Globals.UserConfiguration.UserPassword);
-
-                if ( ui != null)
+                if (data.stage == WorkerStateStage.FindPhone)
                 {
-                    data.CurrentUserId = ui.Id;
-
-                    data.retLogin = Globals.UserConfiguration.UserLogin;
-                    data.retPassword = Globals.UserConfiguration.UserPassword;
+                    data.CurrentUserId = 0;
+                    data.retPassword = "";
                 }
                 else
                 {
-                    data.CurrentUserId = 0;
-                    data.retLogin = "";
+                    // вернем вниз ID пользователя
+                    UserInfo ui = GlobalDb.GlobalBase.GetUserByName(Globals.UserConfiguration.UserLogin, Globals.UserConfiguration.UserPassword);
+
+                    if (ui != null)
+                    {
+                        data.CurrentUserId = ui.Id;
+
+                        data.retLogin = Globals.UserConfiguration.UserLogin;
+                        data.retPassword = Globals.UserConfiguration.UserPassword;
+                    }
+                    else
+                    {
+                        data.CurrentUserId = 0;
+
+                        data.retLogin = "";
+                        data.retPassword = "";
+                    }
                 }
 
                 Params.Result = data;
@@ -164,6 +174,20 @@ namespace ServiceSaleMachine.Client
                 }
                 else if (e.Message.X == 2)
                 {
+                    if (rememberBox.Checked)
+                    {
+                        // восстанавливаем пароль
+                        data.stage = RestorePassword(tbxLogin.Text);
+
+                        if (data.stage == WorkerStateStage.FindPhone)
+                        {
+                            data.retLogin = tbxLogin.Text;
+                        }
+
+                        Close();
+                        return;
+                    }
+
                     if (tbx == tbxLogin)
                     {
                         tbx = tbxPassword;
@@ -177,34 +201,99 @@ namespace ServiceSaleMachine.Client
 
                     if (chbNew.Checked)
                     {
-                        if (AddInDB())
+                        UserInfo ui = GlobalDb.GlobalBase.GetUserByName(tbxLogin.Text);
+
+                        if (ui != null)
                         {
-                            // успешно занеслось в БД
-                            UserInfo ui = GlobalDb.GlobalBase.GetUserByName(tbxLogin.Text, tbxPassword.Text);
-                            if (ui != null)
+                            // есть такой пользователь - а пароль совпадает?
+                            ui = GlobalDb.GlobalBase.GetUserByName(tbxLogin.Text, tbxPassword.Text);
+
+                            if (ui == null)
                             {
-                                Globals.UserConfiguration.ID = ui.Id;
-                                // получили ID из БД
+                                // такой пользователь есть - но пароль не совпадает
+                                Globals.UserConfiguration.Clear();
+
+                                data.stage = WorkerStateStage.ErrorRegisterNewUser;
+                                Close();
+                            }
+                            else
+                            {
+                                // и пользователь такой есть и пароль совпадает
+                                data.stage = WorkerStateStage.AuthorizeUser;
+                                Close();
                             }
                         }
                         else
                         {
-                            Globals.UserConfiguration.Clear();
+                            // новый пользователь - добавим его
+                            if (AddInDB())
+                            {
+                                // успешно занеслось в БД
+                                ui = GlobalDb.GlobalBase.GetUserByName(tbxLogin.Text, tbxPassword.Text);
+                                if (ui != null)
+                                {
+                                    Globals.UserConfiguration.ID = ui.Id;
+                                    // получили ID из БД
+                                }
+
+                                // зарегистрировали нового пользователя
+                                data.stage = WorkerStateStage.RegisterNewUser;
+                                Close();
+                            }
+                            else
+                            {
+                                Globals.UserConfiguration.Clear();
+
+                                data.stage = WorkerStateStage.NotAuthorizeUser;
+                                Close();
+                            }
                         }
                     }
                     else
                     {
-                        //проверить - есть такой в БД?
+                        // проверить - есть такой в БД?
                         UserInfo ui = GlobalDb.GlobalBase.GetUserByName(tbxLogin.Text, tbxPassword.Text);
 
-                        if (ui == null) return;
-                        int sum = GlobalDb.GlobalBase.GetUserMoney(ui.Id);
+                        if (ui == null)
+                        {
+                            // нет такого пользователя
+                            Globals.UserConfiguration.Clear();
 
-                        Globals.UserConfiguration.Amount = sum;
+                            data.stage = WorkerStateStage.NotAuthorizeUser;
+                            Close();
+                        }
+                        else
+                        {
+                            // авторизовались
+                            Globals.UserConfiguration.ID = ui.Id;
 
+                            int sum = GlobalDb.GlobalBase.GetUserMoney(ui.Id);
+                            Globals.UserConfiguration.Amount = sum;
+
+                            // вошли
+                            data.stage = WorkerStateStage.AuthorizeUser;
+                            Close();
+                        }
                     }
-                    this.Close();
                 }
+            }
+        }
+
+        private WorkerStateStage RestorePassword(string phone)
+        {
+            string number = "+7" + phone;
+
+            UserInfo ui = GlobalDb.GlobalBase.GetUserByName(phone);
+
+            if (ui != null)
+            {
+                data.drivers.modem.SendSMS(ui.Password, null, number);
+
+                return WorkerStateStage.FindPhone;
+            }
+            else
+            {
+                return WorkerStateStage.NotFindPhone;
             }
         }
 
@@ -237,6 +326,21 @@ namespace ServiceSaleMachine.Client
             tbx = tbxLogin;
 
             tbxPassword.BackColor = System.Drawing.Color.Gray;
+            tbxLogin.BackColor = System.Drawing.Color.Lime;
+        }
+
+        private void pBxRemember_Click(object sender, EventArgs e)
+        {
+            rememberBox.Checked = true;
+            pBxRegister.Visible = false;
+            pBxRemember.Visible = false;
+            tbxPassword.Visible = false;
+            scalableLabel2.Visible = false;
+
+            tbxLogin.Text = "";
+            tbxPassword.Text = "";
+            tbx = tbxLogin;
+
             tbxLogin.BackColor = System.Drawing.Color.Lime;
         }
     }

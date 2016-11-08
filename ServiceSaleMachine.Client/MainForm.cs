@@ -114,6 +114,8 @@ namespace ServiceSaleMachine.Client
                     // забудем пользователя
                     result.CurrentUserId = 0;
                     result.stage = WorkerStateStage.None;
+                    result.retLogin = "";
+                    result.retPassword = "";
 
                     // Проверка статистических данных - может пора заканчивать работать
                     if (check)
@@ -156,27 +158,52 @@ namespace ServiceSaleMachine.Client
                         result = (FormResultData)FormManager.OpenForm<UserRequest>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
                         // проверим результат
-                        if (result.retLogin == "admin")
+                        if ((result.stage == WorkerStateStage.AuthorizeUser || result.stage == WorkerStateStage.RegisterNewUser) && result.retLogin != "")
                         {
-                            // вход админа
-                            result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+                            // авторизовались или внесли нового пользователя
+                            UserInfo ui = GlobalDb.GlobalBase.GetUserByName(result.retLogin, result.retPassword);
 
-                            // проинициализируем железо после настроек
-                            if (Globals.ClientConfiguration.Settings.offHardware == 0)
+                            if(ui != null && result.stage == WorkerStateStage.RegisterNewUser)
                             {
-                                result.drivers.InitAllDevice();
+                                // Новый пользователь - сообщим об этом
+                                result = (FormResultData)FormManager.OpenForm<FormRegisterNewUser>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result, "Зарегистрировали нового пользователя: " + result.retLogin);
+
+                                if (result.stage == WorkerStateStage.ExitProgram)
+                                {
+                                    // выход
+                                    Close();
+                                    return;
+                                }
+                            }
+                            else if (ui != null)
+                            {
+                                // здесь покажем какого пользователя авторизовали
+                            }
+                        }
+                        else if (result.stage == WorkerStateStage.FindPhone)
+                        {
+                            result = (FormResultData)FormManager.OpenForm<FormRegisterNewUser>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result, "На Ваш телефон " + result.retLogin + " отправлен пароль");
+
+                            if (result.stage == WorkerStateStage.ExitProgram)
+                            {
+                                // выход
+                                Close();
+                                return;
                             }
 
                             continue;
                         }
-                        else if (result.retLogin != "")
+                        else if (result.stage == WorkerStateStage.NotFindPhone)
                         {
-                            UserInfo ui = GlobalDb.GlobalBase.GetUserByName(result.retLogin, result.retPassword);
-                            if (ui != null)
-                            {
-                                // здесь покажем какого пользователя авторизовали
-                                //MessageBox.Show(ui.Role.ToString());
-                            }
+                            continue;
+                        }
+                        else if (result.stage == WorkerStateStage.ErrorRegisterNewUser)
+                        {
+                            continue;
+                        }
+                        else if (result.stage == WorkerStateStage.NotAuthorizeUser)
+                        {
+                            continue;
                         }
                         else if (result.stage == WorkerStateStage.ExitProgram)
                         {
@@ -190,6 +217,7 @@ namespace ServiceSaleMachine.Client
                             continue;
                         }
 
+                        // нормально зарегистрировались
                         goto WaitClient;
                     }
                     else if (result.stage == WorkerStateStage.ErrorControl)
@@ -365,37 +393,6 @@ namespace ServiceSaleMachine.Client
                             Close();
                             return;
                         }
-                    }
-                    else if (result.stage == WorkerStateStage.UserRequestService)
-                    {
-                        // авторизация пользователя
-                        result = (FormResultData)FormManager.OpenForm<UserRequest>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-
-                        // проверим результат
-                        if (result.retLogin == "admin")
-                        {
-                            // вход админа
-                            result = (FormResultData)FormManager.OpenForm<FormSettings>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-
-                            // проинициализируем железо после настроек
-                            if (Globals.ClientConfiguration.Settings.offHardware == 0)
-                            {
-                                result.drivers.InitAllDevice();
-                            }
-
-                            continue;
-                        }
-                        else if (result.retLogin != "")
-                        {
-                            UserInfo ui = GlobalDb.GlobalBase.GetUserByName(result.retLogin, result.retPassword);
-                            if (ui != null)
-                            {
-                                MessageBox.Show(ui.Role.ToString());
-                            }
-                        }
-
-                        // вернемся в выбор услуги (уж не думал что goto буду использовать)
-                        goto ChooseService;
                     }
                     else if (result.stage == WorkerStateStage.WhatsDiff)
                     {

@@ -4,6 +4,7 @@
     {
         public int Id;
         public string Login;
+        public string Password;
         public UserRole Role;
 
     }

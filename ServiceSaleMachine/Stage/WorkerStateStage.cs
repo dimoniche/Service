@@ -183,5 +183,27 @@ namespace ServiceSaleMachine
         /// ошибка принтера
         /// </summary>
         ErrorPrinter,
+
+        /// <summary>
+        /// ошибка при регистрации нового пользователя
+        /// </summary>
+        ErrorRegisterNewUser,
+
+        /// <summary>
+        /// Авторизовали пользователя
+        /// </summary>
+        AuthorizeUser,
+
+        /// <summary>
+        /// Зарегистрировали нового пользователя
+        /// </summary>
+        RegisterNewUser,
+
+        /// <summary>
+        /// Не авторизовали пользователя
+        /// </summary>
+        NotAuthorizeUser,
+        FindPhone,
+        NotFindPhone,
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -66,6 +67,9 @@
             this.rememberBox = new System.Windows.Forms.CheckBox();
             this.pbxCancel = new System.Windows.Forms.PictureBox();
             this.pbxOk = new System.Windows.Forms.PictureBox();
+            this.panel17 = new System.Windows.Forms.Panel();
+            this.rTBxHelp = new ServiceSaleMachine.RichTextBoxEx();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -97,6 +101,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pBxRemember)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxCancel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxOk)).BeginInit();
+            this.panel17.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -154,6 +159,7 @@
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel7.Controls.Add(this.panel6, 1, 0);
+            this.tableLayoutPanel7.Controls.Add(this.panel17, 0, 0);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
@@ -546,6 +552,31 @@
             this.pbxOk.TabStop = false;
             this.pbxOk.Visible = false;
             // 
+            // panel17
+            // 
+            this.panel17.Controls.Add(this.rTBxHelp);
+            this.panel17.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel17.Location = new System.Drawing.Point(3, 3);
+            this.panel17.Name = "panel17";
+            this.panel17.Size = new System.Drawing.Size(230, 253);
+            this.panel17.TabIndex = 1;
+            // 
+            // rTBxHelp
+            // 
+            this.rTBxHelp.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rTBxHelp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rTBxHelp.Location = new System.Drawing.Point(0, 0);
+            this.rTBxHelp.Name = "rTBxHelp";
+            this.rTBxHelp.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.rTBxHelp.Size = new System.Drawing.Size(230, 253);
+            this.rTBxHelp.TabIndex = 0;
+            this.rTBxHelp.Text = "";
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // UserRequest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -595,6 +626,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pBxRemember)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxCancel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxOk)).EndInit();
+            this.panel17.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -639,5 +671,8 @@
         private System.Windows.Forms.PictureBox pBxRemember;
         private System.Windows.Forms.CheckBox chbNew;
         private System.Windows.Forms.CheckBox rememberBox;
+        private System.Windows.Forms.Panel panel17;
+        private RichTextBoxEx rTBxHelp;
+        private System.Windows.Forms.Timer timer1;
     }
 }

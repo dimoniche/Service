@@ -86,7 +86,7 @@ namespace ServiceSaleMachine
 			{
 				try
 				{
-					DeleteOldFiles(Globals.GetPath(PathEnum.Logs), "*." + Globals.LogExtention, 10, SearchOption.TopDirectoryOnly);
+					DeleteOldFiles(Globals.GetPath(PathEnum.Logs), "*." + Globals.LogExtention, 30, SearchOption.TopDirectoryOnly);
 				}
 				catch
 				{

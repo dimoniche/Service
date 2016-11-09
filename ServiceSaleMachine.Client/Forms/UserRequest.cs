@@ -10,6 +10,8 @@ namespace ServiceSaleMachine.Client
         FormResultData data;
         TextBox tbx;
 
+        bool fileLoaded = false;
+
         public UserRequest()
         {
             InitializeComponent();
@@ -19,6 +21,9 @@ namespace ServiceSaleMachine.Client
 
             LoadFullKeyBoard();
             tbx = tbxLogin;
+
+            timer1.Enabled = true;
+            timer1.Interval = 50;
         }
 
         public void LoadNumberKeyBoard()
@@ -57,6 +62,8 @@ namespace ServiceSaleMachine.Client
                     data = (FormResultData)obj;
                 }
             }
+
+            rTBxHelp.LoadFile(Globals.GetPath(PathEnum.Text) + "\\HelpAccount.rtf");
         }
 
         private void UserRequest_FormClosed(object sender, FormClosedEventArgs e)
@@ -342,6 +349,18 @@ namespace ServiceSaleMachine.Client
             tbx = tbxLogin;
 
             tbxLogin.BackColor = System.Drawing.Color.Lime;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (!fileLoaded)
+            {
+                rTBxHelp.LoadFile(Globals.GetPath(PathEnum.Text) + "\\HelpAccount.rtf");
+
+                fileLoaded = true;
+                timer1.Interval = 1000;
+                timer1.Enabled = false;
+            }
         }
     }
 }

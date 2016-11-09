@@ -54,13 +54,13 @@ namespace ServiceSaleMachine.Client
                 label1.Text = "Вы внесли купюру " + Nominal + " руб";
             }
 
-            if(data.retLogin != "")
+            if(data.retLogin != "" && Globals.ClientConfiguration.Settings.changeToAccount == 1)
             {
-                scalableLabel1.Text = "Ваша сдача будет на счете";
+                scalableLabel1.Text = "Сдача будет переведена на аккаунт.";
             }
             else
             {
-                scalableLabel1.Text = "Ваша сдача будет на чеке";
+                scalableLabel1.Text = "Ваша сдача будет на чеке.";
             }
         }
 

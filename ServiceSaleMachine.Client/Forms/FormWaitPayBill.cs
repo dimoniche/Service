@@ -79,12 +79,12 @@ namespace ServiceSaleMachine.Client
             {
                 int sum = GlobalDb.GlobalBase.GetUserMoney(data.CurrentUserId);
 
-                data.log.Write(LogMessageType.Information, "ACCOUNT: Оказываем услугу с денег со счета...");
                 data.log.Write(LogMessageType.Information, "ACCOUNT: На счету у пользователя " + data.retLogin + " " + sum + " руб.");
 
                 if (sum >= data.serv.price)
                 {
                     // денег на счете достаточно
+                    data.log.Write(LogMessageType.Information, "ACCOUNT: Оказываем услугу с денег со счета...");
 
                     amount += data.serv.price;
 
@@ -110,6 +110,8 @@ namespace ServiceSaleMachine.Client
                 else if (sum > 0)
                 {
                     // денег не достаточно - все равно списываем все подчистую
+                    data.log.Write(LogMessageType.Information, "ACCOUNT: Оказываем услугу с денег со счета...");
+
                     amount += sum;
 
                     AmountServiceText.Text = "Внесено: " + sum + " руб.";
@@ -402,7 +404,7 @@ namespace ServiceSaleMachine.Client
 
                             if (ch == ChooseChangeEnum.ChangeToAccount)
                             {
-                                SecondMessageText.Text = "Остаток на счете: " + diff + " руб.";
+                                SecondMessageText.Text = "Сдача в размере " + diff + " руб. будет переведена на аккаунт.";
                             }
                             else
                             {
@@ -621,7 +623,7 @@ namespace ServiceSaleMachine.Client
 
                             if (ch == ChooseChangeEnum.ChangeToAccount)
                             {
-                                SecondMessageText.Text = "Остаток на счете: " + diff + " руб.";
+                                SecondMessageText.Text = "Сдача в размере " + diff + " руб. будет переведена на аккаунт.";
                             }
                             else
                             {

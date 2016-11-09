@@ -37,9 +37,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.numberTelefon = new ServiceSaleMachine.ScalableLabel();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.AmountText = new ServiceSaleMachine.ScalableLabel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -48,12 +46,16 @@
             this.pBxInstruction = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBoxInter = new System.Windows.Forms.PictureBox();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.numberTelefon = new ServiceSaleMachine.ScalableLabel();
+            this.AmountText = new ServiceSaleMachine.ScalableLabel();
             this.tableLayoutPanel4.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel7.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -63,6 +65,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pBxInstruction)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInter)).BeginInit();
+            this.tableLayoutPanel5.SuspendLayout();
+            this.panel8.SuspendLayout();
+            this.panel9.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -131,48 +136,26 @@
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(794, 42);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.numberTelefon);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(3, 3);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(258, 36);
             this.panel4.TabIndex = 0;
             // 
-            // numberTelefon
-            // 
-            this.numberTelefon.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numberTelefon.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.numberTelefon.Location = new System.Drawing.Point(0, 0);
-            this.numberTelefon.Name = "numberTelefon";
-            this.numberTelefon.Size = new System.Drawing.Size(258, 36);
-            this.numberTelefon.TabIndex = 0;
-            this.numberTelefon.Text = "9216578997";
-            this.numberTelefon.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormMainMenu_KeyDown);
-            // 
             // panel5
             // 
-            this.panel5.Controls.Add(this.AmountText);
+            this.panel5.Controls.Add(this.tableLayoutPanel5);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(531, 3);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(260, 36);
             this.panel5.TabIndex = 1;
-            // 
-            // AmountText
-            // 
-            this.AmountText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.AmountText.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.AmountText.Location = new System.Drawing.Point(0, 0);
-            this.AmountText.Name = "AmountText";
-            this.AmountText.Size = new System.Drawing.Size(260, 36);
-            this.AmountText.TabIndex = 0;
-            this.AmountText.Text = "Сумма: 0 руб.";
             // 
             // panel7
             // 
@@ -275,6 +258,62 @@
             this.pictureBoxInter.TabStop = false;
             this.pictureBoxInter.Click += new System.EventHandler(this.pictureBoxInter_Click);
             // 
+            // tableLayoutPanel5
+            // 
+            this.tableLayoutPanel5.ColumnCount = 1;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel5.Controls.Add(this.panel8, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.panel9, 0, 1);
+            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 2;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(260, 36);
+            this.tableLayoutPanel5.TabIndex = 0;
+            // 
+            // panel8
+            // 
+            this.panel8.Controls.Add(this.numberTelefon);
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel8.Location = new System.Drawing.Point(3, 3);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(254, 12);
+            this.panel8.TabIndex = 0;
+            // 
+            // panel9
+            // 
+            this.panel9.Controls.Add(this.AmountText);
+            this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel9.Location = new System.Drawing.Point(3, 21);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(254, 12);
+            this.panel9.TabIndex = 1;
+            // 
+            // numberTelefon
+            // 
+            this.numberTelefon.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numberTelefon.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.numberTelefon.Location = new System.Drawing.Point(0, 0);
+            this.numberTelefon.Name = "numberTelefon";
+            this.numberTelefon.Size = new System.Drawing.Size(254, 12);
+            this.numberTelefon.TabIndex = 2;
+            this.numberTelefon.Text = "9216578997";
+            this.numberTelefon.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormMainMenu_KeyDown);
+            // 
+            // AmountText
+            // 
+            this.AmountText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.AmountText.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.AmountText.Location = new System.Drawing.Point(0, 0);
+            this.AmountText.Name = "AmountText";
+            this.AmountText.Size = new System.Drawing.Size(254, 12);
+            this.AmountText.TabIndex = 3;
+            this.AmountText.Text = "Сумма: 0 руб.";
+            this.AmountText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormMainMenu_KeyDown);
+            // 
             // FormMainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -292,7 +331,6 @@
             this.panel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -302,6 +340,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pBxInstruction)).EndInit();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInter)).EndInit();
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.panel8.ResumeLayout(false);
+            this.panel9.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -315,9 +356,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Panel panel4;
-        private ScalableLabel numberTelefon;
         private System.Windows.Forms.Panel panel5;
-        private ScalableLabel AmountText;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
@@ -326,5 +365,10 @@
         private System.Windows.Forms.PictureBox pBxInstruction;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pictureBoxInter;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
+        private System.Windows.Forms.Panel panel8;
+        private ScalableLabel numberTelefon;
+        private System.Windows.Forms.Panel panel9;
+        private ScalableLabel AmountText;
     }
 }

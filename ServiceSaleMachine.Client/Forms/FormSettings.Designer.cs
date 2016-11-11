@@ -227,6 +227,7 @@
             this.labelTimeLastRefresh = new System.Windows.Forms.Label();
             this.labelWorkFromLastRefresh = new System.Windows.Forms.Label();
             this.buttonResetTimeRefresh = new System.Windows.Forms.Button();
+            this.button17 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -2213,6 +2214,7 @@
             // 
             // tabPageReacess
             // 
+            this.tabPageReacess.Controls.Add(this.button17);
             this.tabPageReacess.Controls.Add(this.buttonResetAllAmount);
             this.tabPageReacess.Controls.Add(this.labelAllAmountService);
             this.tabPageReacess.Controls.Add(this.labelAllAmountMoney);
@@ -2374,6 +2376,16 @@
             this.buttonResetTimeRefresh.Text = "Обновить время обслуживания";
             this.buttonResetTimeRefresh.UseVisualStyleBackColor = true;
             this.buttonResetTimeRefresh.Click += new System.EventHandler(this.buttonResetTimeRefresh_Click);
+            // 
+            // button17
+            // 
+            this.button17.Location = new System.Drawing.Point(36, 301);
+            this.button17.Name = "button17";
+            this.button17.Size = new System.Drawing.Size(201, 23);
+            this.button17.TabIndex = 13;
+            this.button17.Text = "Сброс всех денег на аккаунтах";
+            this.button17.UseVisualStyleBackColor = true;
+            this.button17.Click += new System.EventHandler(this.button17_Click_1);
             // 
             // FormSettings
             // 
@@ -2648,5 +2660,6 @@
         private System.Windows.Forms.Button buttonResetAllAmount;
         private System.Windows.Forms.Label labelAccount;
         private System.Windows.Forms.Button button16;
+        private System.Windows.Forms.Button button17;
     }
 }

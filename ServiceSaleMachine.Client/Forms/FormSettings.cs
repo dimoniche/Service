@@ -1865,5 +1865,18 @@ namespace ServiceSaleMachine.Client
 
             labelAccount.Text = "Текущий номер чека: " + NumberCheck;
         }
+
+        private void button17_Click_1(object sender, EventArgs e)
+        {
+            // Сбросим все деньги с аккаунтов
+            if (MessageBox.Show(this, "Вы уверены что хотите сбросить все деньги с аккаунтов?", FormManager.AppCaptionName, MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                // сбрасываем деньги
+                GlobalDb.GlobalBase.ClearAllAccount();
+            }
+
+            // обновляем статистику
+            MoneyStatistic();
+        }
     }
 }

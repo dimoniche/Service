@@ -404,7 +404,7 @@ namespace ServiceSaleMachine.Client
 
                             if (ch == ChooseChangeEnum.ChangeToAccount)
                             {
-                                SecondMessageText.Text = "Сдача в размере " + diff + " руб. будет переведена на аккаунт.";
+                                SecondMessageText.Text = "Сдача в размере " + diff + " руб. будет зачислена на Ваш аккаунт.";
                             }
                             else
                             {
@@ -623,7 +623,7 @@ namespace ServiceSaleMachine.Client
 
                             if (ch == ChooseChangeEnum.ChangeToAccount)
                             {
-                                SecondMessageText.Text = "Сдача в размере " + diff + " руб. будет переведена на аккаунт.";
+                                SecondMessageText.Text = "Сдача в размере " + diff + " руб. будет зачислена на Ваш аккаунт.";
                             }
                             else
                             {

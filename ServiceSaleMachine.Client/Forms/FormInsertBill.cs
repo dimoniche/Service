@@ -56,7 +56,7 @@ namespace ServiceSaleMachine.Client
 
             if(data.retLogin != "" && Globals.ClientConfiguration.Settings.changeToAccount == 1)
             {
-                scalableLabel1.Text = "Сдача будет переведена на аккаунт.";
+                scalableLabel1.Text = "Сдача будет зачислена на Ваш аккаунт.";
             }
             else
             {

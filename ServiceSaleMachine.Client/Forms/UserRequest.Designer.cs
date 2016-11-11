@@ -36,6 +36,8 @@
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.NumberBoard = new ServiceSaleMachine.Keyboard();
+            this.panel17 = new System.Windows.Forms.Panel();
+            this.rTBxHelp = new ServiceSaleMachine.RichTextBoxEx();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
@@ -47,14 +49,12 @@
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.tbxLogin = new System.Windows.Forms.TextBox();
             this.panel11 = new System.Windows.Forms.Panel();
-            this.scalableLabel1 = new ServiceSaleMachine.ScalableLabel();
             this.panel9 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.panel10 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.tbxPassword = new System.Windows.Forms.TextBox();
             this.panel12 = new System.Windows.Forms.Panel();
-            this.scalableLabel2 = new ServiceSaleMachine.ScalableLabel();
             this.panel13 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
             this.panel15 = new System.Windows.Forms.Panel();
@@ -67,15 +67,22 @@
             this.rememberBox = new System.Windows.Forms.CheckBox();
             this.pbxCancel = new System.Windows.Forms.PictureBox();
             this.pbxOk = new System.Windows.Forms.PictureBox();
-            this.panel17 = new System.Windows.Forms.Panel();
-            this.rTBxHelp = new ServiceSaleMachine.RichTextBoxEx();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel19 = new System.Windows.Forms.Panel();
+            this.panel18 = new System.Windows.Forms.Panel();
+            this.scalableLabel3 = new ServiceSaleMachine.ScalableLabel();
+            this.scalableLabel1 = new ServiceSaleMachine.ScalableLabel();
+            this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel20 = new System.Windows.Forms.Panel();
+            this.scalableLabel2 = new ServiceSaleMachine.ScalableLabel();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
             this.panel6.SuspendLayout();
+            this.panel17.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
@@ -101,7 +108,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pBxRemember)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxCancel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxOk)).BeginInit();
-            this.panel17.SuspendLayout();
+            this.tableLayoutPanel12.SuspendLayout();
+            this.panel19.SuspendLayout();
+            this.panel18.SuspendLayout();
+            this.tableLayoutPanel13.SuspendLayout();
+            this.panel20.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -189,6 +200,26 @@
             this.NumberBoard.TabIndex = 10;
             this.NumberBoard.KeyboardEvent += new ServiceSaleMachine.Keyboard.KeyboardEventHandler(this.NumberBoard_KeyboardEvent);
             this.NumberBoard.KeyDown += new System.Windows.Forms.KeyEventHandler(this.UserRequest_KeyDown);
+            // 
+            // panel17
+            // 
+            this.panel17.Controls.Add(this.rTBxHelp);
+            this.panel17.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel17.Location = new System.Drawing.Point(3, 3);
+            this.panel17.Name = "panel17";
+            this.panel17.Size = new System.Drawing.Size(230, 253);
+            this.panel17.TabIndex = 1;
+            // 
+            // rTBxHelp
+            // 
+            this.rTBxHelp.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rTBxHelp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rTBxHelp.Location = new System.Drawing.Point(0, 0);
+            this.rTBxHelp.Name = "rTBxHelp";
+            this.rTBxHelp.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.rTBxHelp.Size = new System.Drawing.Size(230, 253);
+            this.rTBxHelp.TabIndex = 0;
+            this.rTBxHelp.Text = "";
             // 
             // panel2
             // 
@@ -314,32 +345,22 @@
             this.tbxLogin.BackColor = System.Drawing.Color.Lime;
             this.tbxLogin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbxLogin.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbxLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbxLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbxLogin.Location = new System.Drawing.Point(3, 6);
             this.tbxLogin.Name = "tbxLogin";
             this.tbxLogin.ReadOnly = true;
-            this.tbxLogin.Size = new System.Drawing.Size(260, 40);
+            this.tbxLogin.Size = new System.Drawing.Size(260, 31);
             this.tbxLogin.TabIndex = 0;
             this.tbxLogin.KeyDown += new System.Windows.Forms.KeyEventHandler(this.UserRequest_KeyDown);
             // 
             // panel11
             // 
-            this.panel11.Controls.Add(this.scalableLabel1);
+            this.panel11.Controls.Add(this.tableLayoutPanel12);
             this.panel11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel11.Location = new System.Drawing.Point(3, 3);
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(265, 31);
             this.panel11.TabIndex = 1;
-            // 
-            // scalableLabel1
-            // 
-            this.scalableLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scalableLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.scalableLabel1.Location = new System.Drawing.Point(0, 0);
-            this.scalableLabel1.Name = "scalableLabel1";
-            this.scalableLabel1.Size = new System.Drawing.Size(265, 31);
-            this.scalableLabel1.TabIndex = 0;
-            this.scalableLabel1.Text = "Телефон";
             // 
             // panel9
             // 
@@ -404,22 +425,12 @@
             // 
             // panel12
             // 
-            this.panel12.Controls.Add(this.scalableLabel2);
+            this.panel12.Controls.Add(this.tableLayoutPanel13);
             this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel12.Location = new System.Drawing.Point(3, 3);
             this.panel12.Name = "panel12";
             this.panel12.Size = new System.Drawing.Size(265, 31);
             this.panel12.TabIndex = 1;
-            // 
-            // scalableLabel2
-            // 
-            this.scalableLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scalableLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.scalableLabel2.Location = new System.Drawing.Point(0, 0);
-            this.scalableLabel2.Name = "scalableLabel2";
-            this.scalableLabel2.Size = new System.Drawing.Size(265, 31);
-            this.scalableLabel2.TabIndex = 0;
-            this.scalableLabel2.Text = "Пароль ";
             // 
             // panel13
             // 
@@ -552,30 +563,99 @@
             this.pbxOk.TabStop = false;
             this.pbxOk.Visible = false;
             // 
-            // panel17
-            // 
-            this.panel17.Controls.Add(this.rTBxHelp);
-            this.panel17.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel17.Location = new System.Drawing.Point(3, 3);
-            this.panel17.Name = "panel17";
-            this.panel17.Size = new System.Drawing.Size(230, 253);
-            this.panel17.TabIndex = 1;
-            // 
-            // rTBxHelp
-            // 
-            this.rTBxHelp.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.rTBxHelp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rTBxHelp.Location = new System.Drawing.Point(0, 0);
-            this.rTBxHelp.Name = "rTBxHelp";
-            this.rTBxHelp.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.rTBxHelp.Size = new System.Drawing.Size(230, 253);
-            this.rTBxHelp.TabIndex = 0;
-            this.rTBxHelp.Text = "";
-            // 
             // timer1
             // 
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // tableLayoutPanel12
+            // 
+            this.tableLayoutPanel12.ColumnCount = 3;
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel12.Controls.Add(this.panel19, 1, 0);
+            this.tableLayoutPanel12.Controls.Add(this.panel18, 2, 0);
+            this.tableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel12.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel12.Name = "tableLayoutPanel12";
+            this.tableLayoutPanel12.RowCount = 1;
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel12.Size = new System.Drawing.Size(265, 31);
+            this.tableLayoutPanel12.TabIndex = 0;
+            // 
+            // panel19
+            // 
+            this.panel19.Controls.Add(this.scalableLabel1);
+            this.panel19.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel19.Location = new System.Drawing.Point(109, 3);
+            this.panel19.Name = "panel19";
+            this.panel19.Size = new System.Drawing.Size(126, 25);
+            this.panel19.TabIndex = 1;
+            // 
+            // panel18
+            // 
+            this.panel18.Controls.Add(this.scalableLabel3);
+            this.panel18.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel18.Location = new System.Drawing.Point(241, 3);
+            this.panel18.Name = "panel18";
+            this.panel18.Size = new System.Drawing.Size(21, 25);
+            this.panel18.TabIndex = 2;
+            // 
+            // scalableLabel3
+            // 
+            this.scalableLabel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scalableLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.scalableLabel3.Location = new System.Drawing.Point(0, 0);
+            this.scalableLabel3.Name = "scalableLabel3";
+            this.scalableLabel3.Size = new System.Drawing.Size(21, 25);
+            this.scalableLabel3.TabIndex = 1;
+            this.scalableLabel3.Text = "+7";
+            // 
+            // scalableLabel1
+            // 
+            this.scalableLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scalableLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.scalableLabel1.Location = new System.Drawing.Point(0, 0);
+            this.scalableLabel1.Name = "scalableLabel1";
+            this.scalableLabel1.Size = new System.Drawing.Size(126, 25);
+            this.scalableLabel1.TabIndex = 3;
+            this.scalableLabel1.Text = "Телефон";
+            // 
+            // tableLayoutPanel13
+            // 
+            this.tableLayoutPanel13.ColumnCount = 3;
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel13.Controls.Add(this.panel20, 1, 0);
+            this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel13.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel13.Name = "tableLayoutPanel13";
+            this.tableLayoutPanel13.RowCount = 1;
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel13.Size = new System.Drawing.Size(265, 31);
+            this.tableLayoutPanel13.TabIndex = 0;
+            // 
+            // panel20
+            // 
+            this.panel20.Controls.Add(this.scalableLabel2);
+            this.panel20.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel20.Location = new System.Drawing.Point(109, 3);
+            this.panel20.Name = "panel20";
+            this.panel20.Size = new System.Drawing.Size(126, 25);
+            this.panel20.TabIndex = 0;
+            // 
+            // scalableLabel2
+            // 
+            this.scalableLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scalableLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.scalableLabel2.Location = new System.Drawing.Point(0, 0);
+            this.scalableLabel2.Name = "scalableLabel2";
+            this.scalableLabel2.Size = new System.Drawing.Size(126, 25);
+            this.scalableLabel2.TabIndex = 1;
+            this.scalableLabel2.Text = "Пароль ";
             // 
             // UserRequest
             // 
@@ -597,6 +677,7 @@
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel7.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
+            this.panel17.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
@@ -626,7 +707,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pBxRemember)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxCancel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxOk)).EndInit();
-            this.panel17.ResumeLayout(false);
+            this.tableLayoutPanel12.ResumeLayout(false);
+            this.panel19.ResumeLayout(false);
+            this.panel18.ResumeLayout(false);
+            this.tableLayoutPanel13.ResumeLayout(false);
+            this.panel20.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -658,9 +743,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
         private System.Windows.Forms.TextBox tbxPassword;
         private System.Windows.Forms.Panel panel11;
-        private ScalableLabel scalableLabel1;
         private System.Windows.Forms.Panel panel12;
-        private ScalableLabel scalableLabel2;
         private System.Windows.Forms.Panel panel13;
         private System.Windows.Forms.Panel panel14;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel10;
@@ -674,5 +757,13 @@
         private System.Windows.Forms.Panel panel17;
         private RichTextBoxEx rTBxHelp;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel12;
+        private System.Windows.Forms.Panel panel19;
+        private ScalableLabel scalableLabel1;
+        private System.Windows.Forms.Panel panel18;
+        private ScalableLabel scalableLabel3;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel13;
+        private System.Windows.Forms.Panel panel20;
+        private ScalableLabel scalableLabel2;
     }
 }

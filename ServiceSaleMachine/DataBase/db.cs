@@ -833,6 +833,10 @@ namespace ServiceSaleMachine
 
         }
 
+        /// <summary>
+        /// Полное количество денег на аккаунтах
+        /// </summary>
+        /// <returns></returns>
         public int GetSummFromAccount()
         {
             if (Globals.ClientConfiguration.Settings.offDataBase == 1) return 0;
@@ -908,6 +912,36 @@ namespace ServiceSaleMachine
 
             return ExecuteNonQuery(query);
 
+        }
+
+        /// <summary>
+        /// Очистить все аккаунты
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="sum"></param>
+        /// <returns></returns>
+        public bool ClearAllAccount()
+        {
+            if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
+
+            DataTable table = GetUsers();
+
+            int countUser = table.Rows.Count;
+            string query = "";
+
+            for (int i = 0; i < countUser; i++)
+            {
+                DataRow row = table.Rows[i];
+                int id = (int)row[0];
+
+                int sum = GlobalDb.GlobalBase.GetUserMoney(id);
+                sum = 0 - sum;
+
+                query = "INSERT INTO usermoney (iduser, amount, datetime) VALUES (" + id + "," + sum.ToString() + ",'" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
+                ExecuteNonQuery(query);
+            }
+
+            return true;
         }
 
         /// <summary>

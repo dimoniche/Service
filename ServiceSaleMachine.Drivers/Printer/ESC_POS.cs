@@ -275,6 +275,7 @@ namespace ServiceSaleMachine.Drivers
             Print(eLeft, false, false);
             Print(TransformCode("Счет") + " " + account, true);
 
+            Print(eLeft);
             PrintDashes();
 
             Print(eLeft, false, false);

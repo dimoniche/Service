@@ -26,6 +26,11 @@ namespace ServiceSaleMachine.Client
 
             TimeOutTimer.Enabled = true;
             Timeout = 0;
+
+            if(Globals.ClientConfiguration.Settings.changeToAccount == 0)
+            {
+                pictureBoxInter.Visible = false;
+            }
         }
 
         public override void LoadData()

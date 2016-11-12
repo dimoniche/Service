@@ -924,24 +924,9 @@ namespace ServiceSaleMachine
         {
             if (Globals.ClientConfiguration.Settings.offDataBase == 1) return false;
 
-            DataTable table = GetUsers();
+            string query = "TRUNCATE TABLE usermoney";
 
-            int countUser = table.Rows.Count;
-            string query = "";
-
-            for (int i = 0; i < countUser; i++)
-            {
-                DataRow row = table.Rows[i];
-                int id = (int)row[0];
-
-                int sum = GlobalDb.GlobalBase.GetUserMoney(id);
-                sum = 0 - sum;
-
-                query = "INSERT INTO usermoney (iduser, amount, datetime) VALUES (" + id + "," + sum.ToString() + ",'" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
-                ExecuteNonQuery(query);
-            }
-
-            return true;
+            return ExecuteNonQuery(query);
         }
 
         /// <summary>

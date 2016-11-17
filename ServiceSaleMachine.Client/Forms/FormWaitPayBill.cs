@@ -753,7 +753,9 @@ namespace ServiceSaleMachine.Client
                         data.log.Write(LogMessageType.Information, "WAIT BILL: Печатаем фискальный чек с номером " + numbercheck + ". На сумму " + amountMoney + " руб.");
                     }
                 }
-                else if (data.retLogin != "")
+
+                // если зарегистрированы - чек с остатком на аккаунте тоже даем
+                if (data.retLogin != "")
                 {
                     // Распечатать чек c информацией по аккаунту - платили с аккаунта
                     data.drivers.printer.StartPrint(data.drivers.printer.getNamePrinter());

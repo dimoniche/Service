@@ -61,6 +61,9 @@ namespace ServiceSaleMachine
         public int changeToAccount = 0;
         public int changeToCheck = 0;
 
+        // стиль оформления
+        public int style = 0;
+
         // Максимальное количество банкнот для вызова инкассации
         public int MaxCountBankNote = 500;
 

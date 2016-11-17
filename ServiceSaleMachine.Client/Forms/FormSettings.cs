@@ -689,6 +689,19 @@ namespace ServiceSaleMachine.Client
             cBxCommand.Items.Add("Уснуть");
             cBxCommand.Items.Add("Проснуться");
 
+            checkBox3.Enabled = checkchangeOn.Checked;
+
+            if(Globals.ClientConfiguration.Settings.style == 0)
+            {
+                Style1.Checked = true;
+                Style2.Checked = false;
+            }
+            else if(Globals.ClientConfiguration.Settings.style == 1)
+            {
+                Style1.Checked = false;
+                Style2.Checked = true;
+            }
+
             init = false;
 
             // вставим дату последней инкассации
@@ -1175,7 +1188,19 @@ namespace ServiceSaleMachine.Client
 
         private void button9_Click(object sender, EventArgs e)
         {
+            if (init) return;
+
             Globals.ClientConfiguration.Settings.changeOn = checkchangeOn.Checked ? 1 : 0;
+            Globals.ClientConfiguration.Settings.changeToCheck = checkchangeOn.Checked ? 1 : 0;
+
+            checkBox4.Checked = checkchangeOn.Checked;
+            checkBox3.Enabled = checkchangeOn.Checked;
+
+            if (checkchangeOn.Checked == false)
+            {
+                checkBox3.Checked = checkchangeOn.Checked;
+            }
+
             Globals.ClientConfiguration.Save();
         }
 
@@ -1196,6 +1221,8 @@ namespace ServiceSaleMachine.Client
 
         private void ChangeWrite_Click(object sender, EventArgs e)
         {
+            if (init) return;
+
             Globals.ClientConfiguration.Settings.changeToAccount = checkBox3.Checked ? 1 : 0;
             Globals.ClientConfiguration.Settings.changeToCheck = checkBox4.Checked ? 1 : 0;
 
@@ -1877,6 +1904,20 @@ namespace ServiceSaleMachine.Client
 
             // обновляем статистику
             MoneyStatistic();
+        }
+
+        private void Style1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Style1.Checked == true && Style2.Checked == false)
+            {
+                Globals.ClientConfiguration.Settings.style = 0;
+            }
+            else if (Style1.Checked == false && Style2.Checked == true)
+            {
+                Globals.ClientConfiguration.Settings.style = 1;
+            }
+
+            Globals.CheckConfiguration.Save();
         }
     }
 }

@@ -17,8 +17,17 @@ namespace ServiceSaleMachine.Client
         {
             InitializeComponent();
 
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxService1, Globals.DesignConfiguration.Settings.ButtonService1);
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxService2, Globals.DesignConfiguration.Settings.ButtonService2);
+            if (Globals.ClientConfiguration.Settings.style == 1)
+            {
+                Globals.DesignConfiguration.Settings.LoadPictureBox(pBxService1, Globals.DesignConfiguration.Settings.ButtonService1);
+                Globals.DesignConfiguration.Settings.LoadPictureBox(pBxService2, Globals.DesignConfiguration.Settings.ButtonService2);
+            }
+            else
+            {
+                Globals.DesignConfiguration.Settings.LoadPictureBox(pBxService1, Globals.DesignConfiguration.Settings.ButtonService1_style1);
+                Globals.DesignConfiguration.Settings.LoadPictureBox(pBxService2, Globals.DesignConfiguration.Settings.ButtonService2_style1);
+            }
+
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxreturntoMain, Globals.DesignConfiguration.Settings.ButtonRetToMain);
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxWhatsDiff, Globals.DesignConfiguration.Settings.ButtonWhatsDiff);
 

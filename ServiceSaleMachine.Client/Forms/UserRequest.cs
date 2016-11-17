@@ -12,6 +12,8 @@ namespace ServiceSaleMachine.Client
 
         bool fileLoaded = false;
 
+        int countRetry = 0;
+
         public UserRequest()
         {
             InitializeComponent();
@@ -129,6 +131,8 @@ namespace ServiceSaleMachine.Client
             string row1 = "456";
             string row2 = "789";
             string row3 = " 0 ";
+
+            ErrorText.Text = "";
 
             if (e.Message.Y == 0)
             {
@@ -266,8 +270,28 @@ namespace ServiceSaleMachine.Client
                             // нет такого пользователя
                             Globals.UserConfiguration.Clear();
 
-                            data.stage = WorkerStateStage.NotAuthorizeUser;
-                            Close();
+                            // очередная попытка ввода пароля
+                            countRetry++;
+
+                            if (countRetry >= 5)
+                            {
+                                data.stage = WorkerStateStage.NotAuthorizeUser;
+                                Close();
+                            }
+                            else
+                            {
+                                tbxLogin.Text = "";
+                                tbxPassword.Text = "";
+                                ErrorText.Text = "Вы ввели неправильный номер или пароль. Попробуйте еще раз.";
+
+                                tbx = tbxLogin;
+                                tbxLogin.BackColor = System.Drawing.Color.Lime;
+                                tbxPassword.BackColor = System.Drawing.Color.Gray;
+
+                                data.log.Write(LogMessageType.Information, "Ввели неправильный пароль");
+                                data.log.Write(LogMessageType.Information, tbxLogin.Text);
+                                data.log.Write(LogMessageType.Information, tbxPassword.Text);
+                            }
                         }
                         else
                         {

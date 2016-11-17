@@ -181,7 +181,6 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.textMaxCountBanknote = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -212,6 +211,7 @@
             this.tabPageChecking = new System.Windows.Forms.TabPage();
             this.tabControl4 = new System.Windows.Forms.TabControl();
             this.tabPageReacess = new System.Windows.Forms.TabPage();
+            this.button17 = new System.Windows.Forms.Button();
             this.buttonResetAllAmount = new System.Windows.Forms.Button();
             this.labelAllAmountService = new System.Windows.Forms.Label();
             this.labelAllAmountMoney = new System.Windows.Forms.Label();
@@ -227,7 +227,9 @@
             this.labelTimeLastRefresh = new System.Windows.Forms.Label();
             this.labelWorkFromLastRefresh = new System.Windows.Forms.Label();
             this.buttonResetTimeRefresh = new System.Windows.Forms.Button();
-            this.button17 = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.Style1 = new System.Windows.Forms.RadioButton();
+            this.Style2 = new System.Windows.Forms.RadioButton();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -260,7 +262,6 @@
             this.groupBox4.SuspendLayout();
             this.tabPage9.SuspendLayout();
             this.groupBox6.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage11.SuspendLayout();
@@ -269,6 +270,7 @@
             this.tabControl4.SuspendLayout();
             this.tabPageReacess.SuspendLayout();
             this.tabPage14.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -1622,6 +1624,7 @@
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.groupBox3);
             this.tabPage6.Controls.Add(this.groupBoxTimeLimit);
             this.tabPage6.Controls.Add(this.groupBox5);
             this.tabPage6.Controls.Add(this.groupBox4);
@@ -1643,7 +1646,7 @@
             this.groupBoxTimeLimit.Controls.Add(this.label11);
             this.groupBoxTimeLimit.Location = new System.Drawing.Point(15, 241);
             this.groupBoxTimeLimit.Name = "groupBoxTimeLimit";
-            this.groupBoxTimeLimit.Size = new System.Drawing.Size(292, 314);
+            this.groupBoxTimeLimit.Size = new System.Drawing.Size(292, 124);
             this.groupBoxTimeLimit.TabIndex = 15;
             this.groupBoxTimeLimit.TabStop = false;
             this.groupBoxTimeLimit.Text = "Времена";
@@ -1851,7 +1854,6 @@
             // tabPage9
             // 
             this.tabPage9.Controls.Add(this.groupBox6);
-            this.tabPage9.Controls.Add(this.groupBox3);
             this.tabPage9.Controls.Add(this.groupBox2);
             this.tabPage9.Controls.Add(this.groupBox1);
             this.tabPage9.Location = new System.Drawing.Point(4, 22);
@@ -1866,7 +1868,7 @@
             // 
             this.groupBox6.Controls.Add(this.textMaxCountBanknote);
             this.groupBox6.Controls.Add(this.label23);
-            this.groupBox6.Location = new System.Drawing.Point(282, 20);
+            this.groupBox6.Location = new System.Drawing.Point(345, 20);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(351, 161);
             this.groupBox6.TabIndex = 3;
@@ -1891,21 +1893,11 @@
             this.label23.TabIndex = 0;
             this.label23.Text = "Количество банкнот в приемнике";
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.checkBox4);
-            this.groupBox3.Controls.Add(this.checkBox3);
-            this.groupBox3.Location = new System.Drawing.Point(17, 197);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(259, 76);
-            this.groupBox3.TabIndex = 2;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Сдача";
-            // 
             // checkBox4
             // 
             this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(6, 42);
+            this.checkBox4.Enabled = false;
+            this.checkBox4.Location = new System.Drawing.Point(15, 42);
             this.checkBox4.Name = "checkBox4";
             this.checkBox4.Size = new System.Drawing.Size(130, 17);
             this.checkBox4.TabIndex = 1;
@@ -1916,7 +1908,7 @@
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(6, 19);
+            this.checkBox3.Location = new System.Drawing.Point(15, 65);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(153, 17);
             this.checkBox3.TabIndex = 1;
@@ -1926,10 +1918,12 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.checkBox4);
             this.groupBox2.Controls.Add(this.checkchangeOn);
+            this.groupBox2.Controls.Add(this.checkBox3);
             this.groupBox2.Location = new System.Drawing.Point(155, 20);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(121, 161);
+            this.groupBox2.Size = new System.Drawing.Size(184, 161);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Режим работы";
@@ -2234,6 +2228,16 @@
             this.tabPageReacess.Text = "Инкассация";
             this.tabPageReacess.UseVisualStyleBackColor = true;
             // 
+            // button17
+            // 
+            this.button17.Location = new System.Drawing.Point(36, 301);
+            this.button17.Name = "button17";
+            this.button17.Size = new System.Drawing.Size(201, 23);
+            this.button17.TabIndex = 13;
+            this.button17.Text = "Сброс всех денег на аккаунтах";
+            this.button17.UseVisualStyleBackColor = true;
+            this.button17.Click += new System.EventHandler(this.button17_Click_1);
+            // 
             // buttonResetAllAmount
             // 
             this.buttonResetAllAmount.Location = new System.Drawing.Point(450, 118);
@@ -2377,15 +2381,40 @@
             this.buttonResetTimeRefresh.UseVisualStyleBackColor = true;
             this.buttonResetTimeRefresh.Click += new System.EventHandler(this.buttonResetTimeRefresh_Click);
             // 
-            // button17
+            // groupBox3
             // 
-            this.button17.Location = new System.Drawing.Point(36, 301);
-            this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(201, 23);
-            this.button17.TabIndex = 13;
-            this.button17.Text = "Сброс всех денег на аккаунтах";
-            this.button17.UseVisualStyleBackColor = true;
-            this.button17.Click += new System.EventHandler(this.button17_Click_1);
+            this.groupBox3.Controls.Add(this.Style2);
+            this.groupBox3.Controls.Add(this.Style1);
+            this.groupBox3.Location = new System.Drawing.Point(15, 371);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(292, 118);
+            this.groupBox3.TabIndex = 16;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Оформление";
+            // 
+            // Style1
+            // 
+            this.Style1.AutoSize = true;
+            this.Style1.Location = new System.Drawing.Point(16, 30);
+            this.Style1.Name = "Style1";
+            this.Style1.Size = new System.Drawing.Size(100, 17);
+            this.Style1.TabIndex = 0;
+            this.Style1.TabStop = true;
+            this.Style1.Text = "Оформление 1";
+            this.Style1.UseVisualStyleBackColor = true;
+            this.Style1.CheckedChanged += new System.EventHandler(this.Style1_CheckedChanged);
+            // 
+            // Style2
+            // 
+            this.Style2.AutoSize = true;
+            this.Style2.Location = new System.Drawing.Point(16, 53);
+            this.Style2.Name = "Style2";
+            this.Style2.Size = new System.Drawing.Size(100, 17);
+            this.Style2.TabIndex = 0;
+            this.Style2.TabStop = true;
+            this.Style2.Text = "Оформление 2";
+            this.Style2.UseVisualStyleBackColor = true;
+            this.Style2.CheckedChanged += new System.EventHandler(this.Style1_CheckedChanged);
             // 
             // FormSettings
             // 
@@ -2440,8 +2469,6 @@
             this.tabPage9.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -2455,6 +2482,8 @@
             this.tabPageReacess.PerformLayout();
             this.tabPage14.ResumeLayout(false);
             this.tabPage14.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2536,7 +2565,6 @@
         private System.Windows.Forms.Button Close1;
         private System.Windows.Forms.Button Open2;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.Button button4;
@@ -2661,5 +2689,8 @@
         private System.Windows.Forms.Label labelAccount;
         private System.Windows.Forms.Button button16;
         private System.Windows.Forms.Button button17;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.RadioButton Style2;
+        private System.Windows.Forms.RadioButton Style1;
     }
 }

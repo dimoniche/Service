@@ -20,6 +20,8 @@ namespace ServiceSaleMachine
         public string ButtonService = defpicture;
         public string ButtonService1 = defpicture;
         public string ButtonService2 = defpicture;
+        public string ButtonService1_style1 = defpicture;
+        public string ButtonService2_style1 = defpicture;
         public string ButtonRetToMain = defpicture;
         public string ButtonWhatsDiff = defpicture;
         public string LogoService1 = defpicture;

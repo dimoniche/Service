@@ -44,31 +44,10 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableUser = new System.Windows.Forms.TableLayoutPanel();
             this.panel8 = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
-            this.tbxLogin = new System.Windows.Forms.TextBox();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel19 = new System.Windows.Forms.Panel();
-            this.scalableLabel1 = new ServiceSaleMachine.ScalableLabel();
-            this.panel18 = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel14 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel21 = new System.Windows.Forms.Panel();
-            this.scalableLabel3 = new ServiceSaleMachine.ScalableLabel();
-            this.panel22 = new System.Windows.Forms.Panel();
-            this.scalableLabel4 = new ServiceSaleMachine.ScalableLabel();
             this.panel9 = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
-            this.tbxPassword = new System.Windows.Forms.TextBox();
-            this.panel12 = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel20 = new System.Windows.Forms.Panel();
-            this.scalableLabel2 = new ServiceSaleMachine.ScalableLabel();
-            this.panel23 = new System.Windows.Forms.Panel();
-            this.scalableLabel5 = new ServiceSaleMachine.ScalableLabel();
+            this.tablePassword = new System.Windows.Forms.TableLayoutPanel();
             this.panel13 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
             this.panel15 = new System.Windows.Forms.Panel();
@@ -84,6 +63,36 @@
             this.chbNew = new System.Windows.Forms.CheckBox();
             this.rememberBox = new System.Windows.Forms.CheckBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.panel18 = new System.Windows.Forms.Panel();
+            this.panel19 = new System.Windows.Forms.Panel();
+            this.scalableLabel1 = new ServiceSaleMachine.ScalableLabel();
+            this.panel20 = new System.Windows.Forms.Panel();
+            this.panel21 = new System.Windows.Forms.Panel();
+            this.tbxLogin = new ServiceSaleMachine.ScalableLabel();
+            this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel22 = new System.Windows.Forms.Panel();
+            this.scalableLabel2 = new ServiceSaleMachine.ScalableLabel();
+            this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel23 = new System.Windows.Forms.Panel();
+            this.panel26 = new System.Windows.Forms.Panel();
+            this.panel27 = new System.Windows.Forms.Panel();
+            this.scalableLabel4 = new ServiceSaleMachine.ScalableLabel();
+            this.scalableLabel5 = new ServiceSaleMachine.ScalableLabel();
+            this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel28 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel14 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel29 = new System.Windows.Forms.Panel();
+            this.panel30 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel16 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel31 = new System.Windows.Forms.Panel();
+            this.panel32 = new System.Windows.Forms.Panel();
+            this.tbxPassword = new ServiceSaleMachine.ScalableLabel();
+            this.scalableLabel3 = new ServiceSaleMachine.ScalableLabel();
+            this.scalableLabel6 = new ServiceSaleMachine.ScalableLabel();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -97,24 +106,10 @@
             this.panel4.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel7.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
+            this.tableUser.SuspendLayout();
             this.panel8.SuspendLayout();
-            this.tableLayoutPanel8.SuspendLayout();
-            this.panel11.SuspendLayout();
-            this.tableLayoutPanel12.SuspendLayout();
-            this.panel19.SuspendLayout();
-            this.panel18.SuspendLayout();
-            this.tableLayoutPanel14.SuspendLayout();
-            this.panel21.SuspendLayout();
-            this.panel22.SuspendLayout();
             this.panel9.SuspendLayout();
-            this.tableLayoutPanel6.SuspendLayout();
-            this.panel10.SuspendLayout();
-            this.tableLayoutPanel9.SuspendLayout();
-            this.panel12.SuspendLayout();
-            this.tableLayoutPanel13.SuspendLayout();
-            this.panel20.SuspendLayout();
-            this.panel23.SuspendLayout();
+            this.tablePassword.SuspendLayout();
             this.panel13.SuspendLayout();
             this.tableLayoutPanel10.SuspendLayout();
             this.panel15.SuspendLayout();
@@ -126,6 +121,28 @@
             this.panel24.SuspendLayout();
             this.tableLayoutPanel15.SuspendLayout();
             this.panel25.SuspendLayout();
+            this.panel10.SuspendLayout();
+            this.panel11.SuspendLayout();
+            this.tableLayoutPanel8.SuspendLayout();
+            this.panel12.SuspendLayout();
+            this.panel18.SuspendLayout();
+            this.panel19.SuspendLayout();
+            this.panel20.SuspendLayout();
+            this.panel21.SuspendLayout();
+            this.tableLayoutPanel9.SuspendLayout();
+            this.panel22.SuspendLayout();
+            this.tableLayoutPanel12.SuspendLayout();
+            this.panel23.SuspendLayout();
+            this.panel26.SuspendLayout();
+            this.panel27.SuspendLayout();
+            this.tableLayoutPanel13.SuspendLayout();
+            this.panel28.SuspendLayout();
+            this.tableLayoutPanel14.SuspendLayout();
+            this.panel29.SuspendLayout();
+            this.panel30.SuspendLayout();
+            this.tableLayoutPanel16.SuspendLayout();
+            this.panel31.SuspendLayout();
+            this.panel32.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -305,297 +322,60 @@
             // 
             // panel7
             // 
-            this.panel7.Controls.Add(this.tableLayoutPanel3);
+            this.panel7.Controls.Add(this.tableUser);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel7.Location = new System.Drawing.Point(3, 17);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(543, 37);
             this.panel7.TabIndex = 10;
             // 
-            // tableLayoutPanel3
+            // tableUser
             // 
-            this.tableLayoutPanel3.ColumnCount = 3;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel3.Controls.Add(this.panel8, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.panel11, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.panel22, 2, 0);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 1;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(543, 37);
-            this.tableLayoutPanel3.TabIndex = 0;
+            this.tableUser.ColumnCount = 3;
+            this.tableUser.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2.5F));
+            this.tableUser.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 95F));
+            this.tableUser.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2.5F));
+            this.tableUser.Controls.Add(this.panel8, 1, 0);
+            this.tableUser.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableUser.Location = new System.Drawing.Point(0, 0);
+            this.tableUser.Name = "tableUser";
+            this.tableUser.RowCount = 1;
+            this.tableUser.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableUser.Size = new System.Drawing.Size(543, 37);
+            this.tableUser.TabIndex = 0;
             // 
             // panel8
             // 
-            this.panel8.Controls.Add(this.tableLayoutPanel8);
+            this.panel8.Controls.Add(this.panel11);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel8.Location = new System.Drawing.Point(274, 3);
+            this.panel8.Location = new System.Drawing.Point(16, 3);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(156, 31);
+            this.panel8.Size = new System.Drawing.Size(509, 31);
             this.panel8.TabIndex = 0;
-            // 
-            // tableLayoutPanel8
-            // 
-            this.tableLayoutPanel8.ColumnCount = 1;
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel8.Controls.Add(this.tbxLogin, 0, 1);
-            this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel8.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel8.Name = "tableLayoutPanel8";
-            this.tableLayoutPanel8.RowCount = 3;
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35.86956F));
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 64.13043F));
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(156, 31);
-            this.tableLayoutPanel8.TabIndex = 2;
-            // 
-            // tbxLogin
-            // 
-            this.tbxLogin.BackColor = System.Drawing.Color.Lime;
-            this.tbxLogin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbxLogin.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbxLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbxLogin.Location = new System.Drawing.Point(3, 6);
-            this.tbxLogin.Name = "tbxLogin";
-            this.tbxLogin.ReadOnly = true;
-            this.tbxLogin.Size = new System.Drawing.Size(150, 31);
-            this.tbxLogin.TabIndex = 0;
-            this.tbxLogin.KeyDown += new System.Windows.Forms.KeyEventHandler(this.UserRequest_KeyDown);
-            // 
-            // panel11
-            // 
-            this.panel11.Controls.Add(this.tableLayoutPanel12);
-            this.panel11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel11.Location = new System.Drawing.Point(3, 3);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(265, 31);
-            this.panel11.TabIndex = 1;
-            // 
-            // tableLayoutPanel12
-            // 
-            this.tableLayoutPanel12.ColumnCount = 3;
-            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel12.Controls.Add(this.panel19, 1, 0);
-            this.tableLayoutPanel12.Controls.Add(this.panel18, 2, 0);
-            this.tableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel12.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel12.Name = "tableLayoutPanel12";
-            this.tableLayoutPanel12.RowCount = 1;
-            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel12.Size = new System.Drawing.Size(265, 31);
-            this.tableLayoutPanel12.TabIndex = 0;
-            // 
-            // panel19
-            // 
-            this.panel19.Controls.Add(this.scalableLabel1);
-            this.panel19.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel19.Location = new System.Drawing.Point(109, 3);
-            this.panel19.Name = "panel19";
-            this.panel19.Size = new System.Drawing.Size(126, 25);
-            this.panel19.TabIndex = 1;
-            // 
-            // scalableLabel1
-            // 
-            this.scalableLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scalableLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.scalableLabel1.Location = new System.Drawing.Point(0, 0);
-            this.scalableLabel1.Name = "scalableLabel1";
-            this.scalableLabel1.Size = new System.Drawing.Size(126, 25);
-            this.scalableLabel1.TabIndex = 3;
-            this.scalableLabel1.Text = "Телефон";
-            // 
-            // panel18
-            // 
-            this.panel18.Controls.Add(this.tableLayoutPanel14);
-            this.panel18.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel18.Location = new System.Drawing.Point(241, 3);
-            this.panel18.Name = "panel18";
-            this.panel18.Size = new System.Drawing.Size(21, 25);
-            this.panel18.TabIndex = 2;
-            // 
-            // tableLayoutPanel14
-            // 
-            this.tableLayoutPanel14.ColumnCount = 1;
-            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel14.Controls.Add(this.panel21, 0, 1);
-            this.tableLayoutPanel14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel14.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel14.Name = "tableLayoutPanel14";
-            this.tableLayoutPanel14.RowCount = 2;
-            this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
-            this.tableLayoutPanel14.Size = new System.Drawing.Size(21, 25);
-            this.tableLayoutPanel14.TabIndex = 0;
-            // 
-            // panel21
-            // 
-            this.panel21.Controls.Add(this.scalableLabel3);
-            this.panel21.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel21.Location = new System.Drawing.Point(3, 8);
-            this.panel21.Name = "panel21";
-            this.panel21.Size = new System.Drawing.Size(15, 14);
-            this.panel21.TabIndex = 0;
-            // 
-            // scalableLabel3
-            // 
-            this.scalableLabel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scalableLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.scalableLabel3.Location = new System.Drawing.Point(0, 0);
-            this.scalableLabel3.Name = "scalableLabel3";
-            this.scalableLabel3.Size = new System.Drawing.Size(15, 14);
-            this.scalableLabel3.TabIndex = 2;
-            this.scalableLabel3.Text = "+7";
-            // 
-            // panel22
-            // 
-            this.panel22.Controls.Add(this.scalableLabel4);
-            this.panel22.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel22.Location = new System.Drawing.Point(436, 3);
-            this.panel22.Name = "panel22";
-            this.panel22.Size = new System.Drawing.Size(104, 31);
-            this.panel22.TabIndex = 2;
-            // 
-            // scalableLabel4
-            // 
-            this.scalableLabel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scalableLabel4.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.scalableLabel4.Location = new System.Drawing.Point(0, 0);
-            this.scalableLabel4.Name = "scalableLabel4";
-            this.scalableLabel4.Size = new System.Drawing.Size(104, 31);
-            this.scalableLabel4.TabIndex = 0;
-            this.scalableLabel4.Text = "10 цифр";
             // 
             // panel9
             // 
-            this.panel9.Controls.Add(this.tableLayoutPanel6);
+            this.panel9.Controls.Add(this.tablePassword);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel9.Location = new System.Drawing.Point(3, 60);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(543, 37);
             this.panel9.TabIndex = 11;
             // 
-            // tableLayoutPanel6
+            // tablePassword
             // 
-            this.tableLayoutPanel6.ColumnCount = 3;
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel6.Controls.Add(this.panel10, 1, 0);
-            this.tableLayoutPanel6.Controls.Add(this.panel12, 0, 0);
-            this.tableLayoutPanel6.Controls.Add(this.panel23, 2, 0);
-            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            this.tableLayoutPanel6.RowCount = 1;
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(543, 37);
-            this.tableLayoutPanel6.TabIndex = 0;
-            // 
-            // panel10
-            // 
-            this.panel10.Controls.Add(this.tableLayoutPanel9);
-            this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel10.Location = new System.Drawing.Point(274, 3);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(156, 31);
-            this.panel10.TabIndex = 0;
-            // 
-            // tableLayoutPanel9
-            // 
-            this.tableLayoutPanel9.ColumnCount = 1;
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel9.Controls.Add(this.tbxPassword, 0, 1);
-            this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel9.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel9.Name = "tableLayoutPanel9";
-            this.tableLayoutPanel9.RowCount = 3;
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 38.04348F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 61.95652F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(156, 31);
-            this.tableLayoutPanel9.TabIndex = 4;
-            // 
-            // tbxPassword
-            // 
-            this.tbxPassword.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbxPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbxPassword.Location = new System.Drawing.Point(3, 7);
-            this.tbxPassword.Name = "tbxPassword";
-            this.tbxPassword.PasswordChar = '*';
-            this.tbxPassword.ReadOnly = true;
-            this.tbxPassword.Size = new System.Drawing.Size(150, 40);
-            this.tbxPassword.TabIndex = 0;
-            this.tbxPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.UserRequest_KeyDown);
-            // 
-            // panel12
-            // 
-            this.panel12.Controls.Add(this.tableLayoutPanel13);
-            this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel12.Location = new System.Drawing.Point(3, 3);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(265, 31);
-            this.panel12.TabIndex = 1;
-            // 
-            // tableLayoutPanel13
-            // 
-            this.tableLayoutPanel13.ColumnCount = 3;
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel13.Controls.Add(this.panel20, 1, 0);
-            this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel13.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel13.Name = "tableLayoutPanel13";
-            this.tableLayoutPanel13.RowCount = 1;
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-            this.tableLayoutPanel13.Size = new System.Drawing.Size(265, 31);
-            this.tableLayoutPanel13.TabIndex = 0;
-            // 
-            // panel20
-            // 
-            this.panel20.Controls.Add(this.scalableLabel2);
-            this.panel20.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel20.Location = new System.Drawing.Point(109, 3);
-            this.panel20.Name = "panel20";
-            this.panel20.Size = new System.Drawing.Size(126, 25);
-            this.panel20.TabIndex = 0;
-            // 
-            // scalableLabel2
-            // 
-            this.scalableLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scalableLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.scalableLabel2.Location = new System.Drawing.Point(0, 0);
-            this.scalableLabel2.Name = "scalableLabel2";
-            this.scalableLabel2.Size = new System.Drawing.Size(126, 25);
-            this.scalableLabel2.TabIndex = 1;
-            this.scalableLabel2.Text = "Пароль ";
-            // 
-            // panel23
-            // 
-            this.panel23.Controls.Add(this.scalableLabel5);
-            this.panel23.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel23.Location = new System.Drawing.Point(436, 3);
-            this.panel23.Name = "panel23";
-            this.panel23.Size = new System.Drawing.Size(104, 31);
-            this.panel23.TabIndex = 2;
-            // 
-            // scalableLabel5
-            // 
-            this.scalableLabel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scalableLabel5.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.scalableLabel5.Location = new System.Drawing.Point(0, 0);
-            this.scalableLabel5.Name = "scalableLabel5";
-            this.scalableLabel5.Size = new System.Drawing.Size(104, 31);
-            this.scalableLabel5.TabIndex = 0;
-            this.scalableLabel5.Text = "4 цифры";
+            this.tablePassword.ColumnCount = 3;
+            this.tablePassword.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2.5F));
+            this.tablePassword.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 95F));
+            this.tablePassword.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2.5F));
+            this.tablePassword.Controls.Add(this.panel10, 1, 0);
+            this.tablePassword.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tablePassword.Location = new System.Drawing.Point(0, 0);
+            this.tablePassword.Name = "tablePassword";
+            this.tablePassword.RowCount = 1;
+            this.tablePassword.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tablePassword.Size = new System.Drawing.Size(543, 37);
+            this.tablePassword.TabIndex = 0;
             // 
             // panel13
             // 
@@ -755,6 +535,332 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // panel10
+            // 
+            this.panel10.Controls.Add(this.tableLayoutPanel12);
+            this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel10.Location = new System.Drawing.Point(16, 3);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(509, 31);
+            this.panel10.TabIndex = 0;
+            // 
+            // panel11
+            // 
+            this.panel11.Controls.Add(this.tableLayoutPanel8);
+            this.panel11.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel11.Location = new System.Drawing.Point(0, 0);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(509, 31);
+            this.panel11.TabIndex = 0;
+            // 
+            // tableLayoutPanel8
+            // 
+            this.tableLayoutPanel8.ColumnCount = 3;
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel8.Controls.Add(this.panel12, 0, 0);
+            this.tableLayoutPanel8.Controls.Add(this.panel18, 1, 0);
+            this.tableLayoutPanel8.Controls.Add(this.panel19, 2, 0);
+            this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel8.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel8.Name = "tableLayoutPanel8";
+            this.tableLayoutPanel8.RowCount = 1;
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(509, 31);
+            this.tableLayoutPanel8.TabIndex = 0;
+            // 
+            // panel12
+            // 
+            this.panel12.Controls.Add(this.scalableLabel1);
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel12.Location = new System.Drawing.Point(3, 3);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(163, 25);
+            this.panel12.TabIndex = 0;
+            // 
+            // panel18
+            // 
+            this.panel18.Controls.Add(this.panel20);
+            this.panel18.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel18.Location = new System.Drawing.Point(172, 3);
+            this.panel18.Name = "panel18";
+            this.panel18.Size = new System.Drawing.Size(163, 25);
+            this.panel18.TabIndex = 1;
+            // 
+            // panel19
+            // 
+            this.panel19.Controls.Add(this.panel21);
+            this.panel19.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel19.Location = new System.Drawing.Point(341, 3);
+            this.panel19.Name = "panel19";
+            this.panel19.Size = new System.Drawing.Size(165, 25);
+            this.panel19.TabIndex = 2;
+            // 
+            // scalableLabel1
+            // 
+            this.scalableLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scalableLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.scalableLabel1.Location = new System.Drawing.Point(0, 0);
+            this.scalableLabel1.Name = "scalableLabel1";
+            this.scalableLabel1.Size = new System.Drawing.Size(163, 25);
+            this.scalableLabel1.TabIndex = 0;
+            this.scalableLabel1.Text = "Телефон +7";
+            this.scalableLabel1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.UserRequest_KeyDown);
+            // 
+            // panel20
+            // 
+            this.panel20.Controls.Add(this.tbxLogin);
+            this.panel20.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel20.Location = new System.Drawing.Point(0, 0);
+            this.panel20.Name = "panel20";
+            this.panel20.Size = new System.Drawing.Size(163, 25);
+            this.panel20.TabIndex = 0;
+            // 
+            // panel21
+            // 
+            this.panel21.Controls.Add(this.tableLayoutPanel9);
+            this.panel21.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel21.Location = new System.Drawing.Point(0, 0);
+            this.panel21.Name = "panel21";
+            this.panel21.Size = new System.Drawing.Size(165, 25);
+            this.panel21.TabIndex = 0;
+            // 
+            // tbxLogin
+            // 
+            this.tbxLogin.BackColor = System.Drawing.Color.Lime;
+            this.tbxLogin.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbxLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbxLogin.Location = new System.Drawing.Point(0, 0);
+            this.tbxLogin.Name = "tbxLogin";
+            this.tbxLogin.Size = new System.Drawing.Size(163, 25);
+            this.tbxLogin.TabIndex = 0;
+            this.tbxLogin.KeyDown += new System.Windows.Forms.KeyEventHandler(this.UserRequest_KeyDown);
+            // 
+            // tableLayoutPanel9
+            // 
+            this.tableLayoutPanel9.ColumnCount = 3;
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel9.Controls.Add(this.panel22, 1, 0);
+            this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel9.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel9.Name = "tableLayoutPanel9";
+            this.tableLayoutPanel9.RowCount = 1;
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(165, 25);
+            this.tableLayoutPanel9.TabIndex = 0;
+            // 
+            // panel22
+            // 
+            this.panel22.Controls.Add(this.scalableLabel2);
+            this.panel22.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel22.Location = new System.Drawing.Point(36, 3);
+            this.panel22.Name = "panel22";
+            this.panel22.Size = new System.Drawing.Size(93, 19);
+            this.panel22.TabIndex = 0;
+            // 
+            // scalableLabel2
+            // 
+            this.scalableLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scalableLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.scalableLabel2.Location = new System.Drawing.Point(0, 0);
+            this.scalableLabel2.Name = "scalableLabel2";
+            this.scalableLabel2.Size = new System.Drawing.Size(93, 19);
+            this.scalableLabel2.TabIndex = 0;
+            this.scalableLabel2.Text = "10 цифр";
+            this.scalableLabel2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.UserRequest_KeyDown);
+            // 
+            // tableLayoutPanel12
+            // 
+            this.tableLayoutPanel12.ColumnCount = 3;
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel12.Controls.Add(this.panel23, 0, 0);
+            this.tableLayoutPanel12.Controls.Add(this.panel26, 1, 0);
+            this.tableLayoutPanel12.Controls.Add(this.panel27, 2, 0);
+            this.tableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel12.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel12.Name = "tableLayoutPanel12";
+            this.tableLayoutPanel12.RowCount = 1;
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel12.Size = new System.Drawing.Size(509, 31);
+            this.tableLayoutPanel12.TabIndex = 0;
+            // 
+            // panel23
+            // 
+            this.panel23.Controls.Add(this.tableLayoutPanel13);
+            this.panel23.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel23.Location = new System.Drawing.Point(3, 3);
+            this.panel23.Name = "panel23";
+            this.panel23.Size = new System.Drawing.Size(163, 25);
+            this.panel23.TabIndex = 0;
+            // 
+            // panel26
+            // 
+            this.panel26.Controls.Add(this.panel30);
+            this.panel26.Controls.Add(this.scalableLabel4);
+            this.panel26.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel26.Location = new System.Drawing.Point(172, 3);
+            this.panel26.Name = "panel26";
+            this.panel26.Size = new System.Drawing.Size(163, 25);
+            this.panel26.TabIndex = 1;
+            // 
+            // panel27
+            // 
+            this.panel27.Controls.Add(this.panel28);
+            this.panel27.Controls.Add(this.scalableLabel5);
+            this.panel27.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel27.Location = new System.Drawing.Point(341, 3);
+            this.panel27.Name = "panel27";
+            this.panel27.Size = new System.Drawing.Size(165, 25);
+            this.panel27.TabIndex = 2;
+            // 
+            // scalableLabel4
+            // 
+            this.scalableLabel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scalableLabel4.Location = new System.Drawing.Point(0, 0);
+            this.scalableLabel4.Name = "scalableLabel4";
+            this.scalableLabel4.Size = new System.Drawing.Size(163, 25);
+            this.scalableLabel4.TabIndex = 0;
+            this.scalableLabel4.Text = "scalableLabel4";
+            // 
+            // scalableLabel5
+            // 
+            this.scalableLabel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scalableLabel5.Location = new System.Drawing.Point(0, 0);
+            this.scalableLabel5.Name = "scalableLabel5";
+            this.scalableLabel5.Size = new System.Drawing.Size(165, 25);
+            this.scalableLabel5.TabIndex = 0;
+            this.scalableLabel5.Text = "scalableLabel5";
+            // 
+            // tableLayoutPanel13
+            // 
+            this.tableLayoutPanel13.ColumnCount = 2;
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65F));
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
+            this.tableLayoutPanel13.Controls.Add(this.panel32, 0, 0);
+            this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel13.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel13.Name = "tableLayoutPanel13";
+            this.tableLayoutPanel13.RowCount = 1;
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel13.Size = new System.Drawing.Size(163, 25);
+            this.tableLayoutPanel13.TabIndex = 0;
+            // 
+            // panel28
+            // 
+            this.panel28.Controls.Add(this.tableLayoutPanel14);
+            this.panel28.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel28.Location = new System.Drawing.Point(0, 0);
+            this.panel28.Name = "panel28";
+            this.panel28.Size = new System.Drawing.Size(165, 25);
+            this.panel28.TabIndex = 1;
+            // 
+            // tableLayoutPanel14
+            // 
+            this.tableLayoutPanel14.ColumnCount = 3;
+            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel14.Controls.Add(this.panel29, 1, 0);
+            this.tableLayoutPanel14.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel14.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel14.Name = "tableLayoutPanel14";
+            this.tableLayoutPanel14.RowCount = 1;
+            this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel14.Size = new System.Drawing.Size(165, 25);
+            this.tableLayoutPanel14.TabIndex = 0;
+            // 
+            // panel29
+            // 
+            this.panel29.Controls.Add(this.scalableLabel6);
+            this.panel29.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel29.Location = new System.Drawing.Point(36, 3);
+            this.panel29.Name = "panel29";
+            this.panel29.Size = new System.Drawing.Size(93, 19);
+            this.panel29.TabIndex = 0;
+            // 
+            // panel30
+            // 
+            this.panel30.Controls.Add(this.tableLayoutPanel16);
+            this.panel30.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel30.Location = new System.Drawing.Point(0, 0);
+            this.panel30.Name = "panel30";
+            this.panel30.Size = new System.Drawing.Size(163, 25);
+            this.panel30.TabIndex = 1;
+            // 
+            // tableLayoutPanel16
+            // 
+            this.tableLayoutPanel16.ColumnCount = 3;
+            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel16.Controls.Add(this.panel31, 1, 0);
+            this.tableLayoutPanel16.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel16.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel16.Name = "tableLayoutPanel16";
+            this.tableLayoutPanel16.RowCount = 1;
+            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel16.Size = new System.Drawing.Size(163, 25);
+            this.tableLayoutPanel16.TabIndex = 0;
+            // 
+            // panel31
+            // 
+            this.panel31.Controls.Add(this.tbxPassword);
+            this.panel31.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel31.Location = new System.Drawing.Point(57, 3);
+            this.panel31.Name = "panel31";
+            this.panel31.Size = new System.Drawing.Size(48, 19);
+            this.panel31.TabIndex = 0;
+            // 
+            // panel32
+            // 
+            this.panel32.Controls.Add(this.scalableLabel3);
+            this.panel32.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel32.Location = new System.Drawing.Point(3, 3);
+            this.panel32.Name = "panel32";
+            this.panel32.Size = new System.Drawing.Size(99, 19);
+            this.panel32.TabIndex = 0;
+            // 
+            // tbxPassword
+            // 
+            this.tbxPassword.BackColor = System.Drawing.Color.Gray;
+            this.tbxPassword.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbxPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbxPassword.Location = new System.Drawing.Point(0, 0);
+            this.tbxPassword.Name = "tbxPassword";
+            this.tbxPassword.Size = new System.Drawing.Size(48, 19);
+            this.tbxPassword.TabIndex = 0;
+            this.tbxPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.UserRequest_KeyDown);
+            // 
+            // scalableLabel3
+            // 
+            this.scalableLabel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scalableLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.scalableLabel3.Location = new System.Drawing.Point(0, 0);
+            this.scalableLabel3.Name = "scalableLabel3";
+            this.scalableLabel3.Size = new System.Drawing.Size(99, 19);
+            this.scalableLabel3.TabIndex = 0;
+            this.scalableLabel3.Text = "Пароль";
+            this.scalableLabel3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.UserRequest_KeyDown);
+            // 
+            // scalableLabel6
+            // 
+            this.scalableLabel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scalableLabel6.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.scalableLabel6.Location = new System.Drawing.Point(0, 0);
+            this.scalableLabel6.Name = "scalableLabel6";
+            this.scalableLabel6.Size = new System.Drawing.Size(93, 19);
+            this.scalableLabel6.TabIndex = 0;
+            this.scalableLabel6.Text = "4 цифры";
+            this.scalableLabel6.KeyDown += new System.Windows.Forms.KeyEventHandler(this.UserRequest_KeyDown);
+            // 
             // UserRequest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -784,26 +890,10 @@
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.panel7.ResumeLayout(false);
-            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableUser.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
-            this.tableLayoutPanel8.ResumeLayout(false);
-            this.tableLayoutPanel8.PerformLayout();
-            this.panel11.ResumeLayout(false);
-            this.tableLayoutPanel12.ResumeLayout(false);
-            this.panel19.ResumeLayout(false);
-            this.panel18.ResumeLayout(false);
-            this.tableLayoutPanel14.ResumeLayout(false);
-            this.panel21.ResumeLayout(false);
-            this.panel22.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
-            this.tableLayoutPanel6.ResumeLayout(false);
-            this.panel10.ResumeLayout(false);
-            this.tableLayoutPanel9.ResumeLayout(false);
-            this.tableLayoutPanel9.PerformLayout();
-            this.panel12.ResumeLayout(false);
-            this.tableLayoutPanel13.ResumeLayout(false);
-            this.panel20.ResumeLayout(false);
-            this.panel23.ResumeLayout(false);
+            this.tablePassword.ResumeLayout(false);
             this.panel13.ResumeLayout(false);
             this.tableLayoutPanel10.ResumeLayout(false);
             this.panel15.ResumeLayout(false);
@@ -815,6 +905,28 @@
             this.panel24.ResumeLayout(false);
             this.tableLayoutPanel15.ResumeLayout(false);
             this.panel25.ResumeLayout(false);
+            this.panel10.ResumeLayout(false);
+            this.panel11.ResumeLayout(false);
+            this.tableLayoutPanel8.ResumeLayout(false);
+            this.panel12.ResumeLayout(false);
+            this.panel18.ResumeLayout(false);
+            this.panel19.ResumeLayout(false);
+            this.panel20.ResumeLayout(false);
+            this.panel21.ResumeLayout(false);
+            this.tableLayoutPanel9.ResumeLayout(false);
+            this.panel22.ResumeLayout(false);
+            this.tableLayoutPanel12.ResumeLayout(false);
+            this.panel23.ResumeLayout(false);
+            this.panel26.ResumeLayout(false);
+            this.panel27.ResumeLayout(false);
+            this.tableLayoutPanel13.ResumeLayout(false);
+            this.panel28.ResumeLayout(false);
+            this.tableLayoutPanel14.ResumeLayout(false);
+            this.panel29.ResumeLayout(false);
+            this.panel30.ResumeLayout(false);
+            this.tableLayoutPanel16.ResumeLayout(false);
+            this.panel31.ResumeLayout(false);
+            this.panel32.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -834,17 +946,9 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
-        private System.Windows.Forms.TextBox tbxLogin;
+        private System.Windows.Forms.TableLayoutPanel tableUser;
         private System.Windows.Forms.Panel panel9;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
-        private System.Windows.Forms.Panel panel10;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
-        private System.Windows.Forms.TextBox tbxPassword;
-        private System.Windows.Forms.Panel panel11;
-        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.TableLayoutPanel tablePassword;
         private System.Windows.Forms.Panel panel13;
         private System.Windows.Forms.Panel panel14;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel10;
@@ -857,24 +961,41 @@
         private System.Windows.Forms.Panel panel17;
         private RichTextBoxEx rTBxHelp;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel12;
-        private System.Windows.Forms.Panel panel19;
-        private ScalableLabel scalableLabel1;
-        private System.Windows.Forms.Panel panel18;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel13;
-        private System.Windows.Forms.Panel panel20;
-        private ScalableLabel scalableLabel2;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel14;
-        private System.Windows.Forms.Panel panel21;
-        private ScalableLabel scalableLabel3;
-        private System.Windows.Forms.Panel panel22;
-        private ScalableLabel scalableLabel4;
-        private System.Windows.Forms.Panel panel23;
-        private ScalableLabel scalableLabel5;
         private System.Windows.Forms.Panel panel24;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel15;
         private System.Windows.Forms.CheckBox chbNew;
         private System.Windows.Forms.Panel panel25;
         private ScalableLabel ErrorText;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.Panel panel11;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
+        private System.Windows.Forms.Panel panel12;
+        private ScalableLabel scalableLabel1;
+        private System.Windows.Forms.Panel panel18;
+        private System.Windows.Forms.Panel panel20;
+        private System.Windows.Forms.Panel panel19;
+        private System.Windows.Forms.Panel panel21;
+        private ScalableLabel tbxLogin;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
+        private System.Windows.Forms.Panel panel22;
+        private ScalableLabel scalableLabel2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel12;
+        private System.Windows.Forms.Panel panel23;
+        private System.Windows.Forms.Panel panel26;
+        private System.Windows.Forms.Panel panel27;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel13;
+        private System.Windows.Forms.Panel panel32;
+        private ScalableLabel scalableLabel3;
+        private System.Windows.Forms.Panel panel30;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel16;
+        private System.Windows.Forms.Panel panel31;
+        private ScalableLabel tbxPassword;
+        private ScalableLabel scalableLabel4;
+        private System.Windows.Forms.Panel panel28;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel14;
+        private System.Windows.Forms.Panel panel29;
+        private ScalableLabel scalableLabel5;
+        private ScalableLabel scalableLabel6;
     }
 }

@@ -8,7 +8,10 @@ namespace ServiceSaleMachine.Client
     public partial class UserRequest : MyForm
     {
         FormResultData data;
-        TextBox tbx;
+        ScalableLabel tbx;
+
+        string User = "";
+        string Password = "";
 
         bool fileLoaded = false;
 
@@ -117,7 +120,7 @@ namespace ServiceSaleMachine.Client
 
         private bool AddInDB()
         {
-            if (GlobalDb.GlobalBase.InsertUser(tbxLogin.Text, tbxPassword.Text))
+            if (GlobalDb.GlobalBase.InsertUser(User, Password))
             {
                 return true; 
                 
@@ -136,26 +139,53 @@ namespace ServiceSaleMachine.Client
 
             if (e.Message.Y == 0)
             {
-                if (tbx.Text.Length < 10 && tbx == tbxLogin
-                 || tbx.Text.Length < 4 && tbx == tbxPassword)
+                if (User.Length < 10 && tbx == tbxLogin
+                 || Password.Length < 4 && tbx == tbxPassword)
                 {
-                    tbx.Text += row0[e.Message.X];
+                    if (tbx == tbxLogin)
+                    {
+                        tbx.Text += row0[e.Message.X];
+                        User += row0[e.Message.X];
+                    }
+                    else
+                    {
+                        tbx.Text += "*";
+                        Password += row0[e.Message.X];
+                    }
                 }
             }
             else if (e.Message.Y == 1)
             {
-                if (tbx.Text.Length < 10 && tbx == tbxLogin
-                 || tbx.Text.Length < 4 && tbx == tbxPassword)
+                if (User.Length < 10 && tbx == tbxLogin
+                 || Password.Length < 4 && tbx == tbxPassword)
                 {
-                    tbx.Text += row1[e.Message.X];
+                    if (tbx == tbxLogin)
+                    {
+                        tbx.Text += row1[e.Message.X];
+                        User += row1[e.Message.X];
+                    }
+                    else
+                    {
+                        tbx.Text += "*";
+                        Password += row1[e.Message.X];
+                    }
                 }
             }
             else if (e.Message.Y == 2)
             {
-                if (tbx.Text.Length < 10 && tbx == tbxLogin
-                 || tbx.Text.Length < 4 && tbx == tbxPassword)
+                if (User.Length < 10 && tbx == tbxLogin
+                 || Password.Length < 4 && tbx == tbxPassword)
                 {
-                    tbx.Text += row2[e.Message.X];
+                    if (tbx == tbxLogin)
+                    {
+                        tbx.Text += row2[e.Message.X];
+                        User += row2[e.Message.X];
+                    }
+                    else
+                    {
+                        tbx.Text += "*";
+                        Password += row2[e.Message.X];
+                    }
                 }
             }
             else if (e.Message.Y == 3)
@@ -163,10 +193,18 @@ namespace ServiceSaleMachine.Client
                 if (e.Message.X == 0)
                 {
                     // стереть символ последний
-                    string ss = tbxLogin.Text;
-                    if (ss.Length > 0)
+                    if (tbx.Text.Length > 0)
                     {
-                        tbx.Text = ss.Remove(ss.Length - 1);
+                        if (tbx == tbxLogin)
+                        {
+                            tbxLogin.Text = tbxLogin.Text.Remove(tbxLogin.Text.Length - 1);
+                            User = User.Remove(User.Length - 1);
+                        }
+                        else
+                        {
+                            tbxPassword.Text = tbxPassword.Text.Remove(tbxPassword.Text.Length - 1);
+                            Password = Password.Remove(Password.Length - 1);
+                        }
                     }
                     else
                     {
@@ -177,22 +215,54 @@ namespace ServiceSaleMachine.Client
                 }
                 else if (e.Message.X == 1)
                 {
-                    if (tbx.Text.Length < 10 && tbx == tbxLogin
-                     || tbx.Text.Length < 4 && tbx == tbxPassword)
+                    if (User.Length < 10 && tbx == tbxLogin
+                     || Password.Length < 4 && tbx == tbxPassword)
                     {
-                        tbx.Text += row3[e.Message.X];
+                        if (tbx == tbxLogin)
+                        {
+                            tbx.Text += row3[e.Message.X];
+                            User += row3[e.Message.X];
+                        }
+                        else
+                        {
+                            tbx.Text += "*";
+                            Password += row3[e.Message.X];
+                        }
                     }
                 }
                 else if (e.Message.X == 2)
                 {
+                    if (tbx == tbxLogin)
+                    {
+                        if (User.Length < 10)
+                        {
+                            ErrorText.Text = "Длина номера телефона не может быть меньше 10 символов";
+                            data.log.Write(LogMessageType.Information, "Длина номера телефона не может быть меньше 10 символов");
+                            data.log.Write(LogMessageType.Information, User);
+
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        if(Password.Length < 4)
+                        {
+                            ErrorText.Text = "Длина пароля к аккаунту не может быть меньше 4 символов";
+                            data.log.Write(LogMessageType.Information, "Длина пароля к аккаунту не может быть меньше 4 символов");
+                            data.log.Write(LogMessageType.Information, Password);
+
+                            return;
+                        }
+                    }
+
                     if (rememberBox.Checked)
                     {
                         // восстанавливаем пароль
-                        data.stage = RestorePassword(tbxLogin.Text);
+                        data.stage = RestorePassword(User);
 
                         if (data.stage == WorkerStateStage.FindPhone)
                         {
-                            data.retLogin = tbxLogin.Text;
+                            data.retLogin = User;
                         }
 
                         Close();
@@ -207,17 +277,17 @@ namespace ServiceSaleMachine.Client
                         return;
                     }
 
-                    Globals.UserConfiguration.UserLogin = tbxLogin.Text;
-                    Globals.UserConfiguration.UserPassword = tbxPassword.Text;
+                    Globals.UserConfiguration.UserLogin = User;
+                    Globals.UserConfiguration.UserPassword = Password;
 
                     if (chbNew.Checked)
                     {
-                        UserInfo ui = GlobalDb.GlobalBase.GetUserByName(tbxLogin.Text);
+                        UserInfo ui = GlobalDb.GlobalBase.GetUserByName(User);
 
                         if (ui != null)
                         {
                             // есть такой пользователь - а пароль совпадает?
-                            ui = GlobalDb.GlobalBase.GetUserByName(tbxLogin.Text, tbxPassword.Text);
+                            ui = GlobalDb.GlobalBase.GetUserByName(User, Password);
 
                             if (ui == null)
                             {
@@ -240,7 +310,7 @@ namespace ServiceSaleMachine.Client
                             if (AddInDB())
                             {
                                 // успешно занеслось в БД
-                                ui = GlobalDb.GlobalBase.GetUserByName(tbxLogin.Text, tbxPassword.Text);
+                                ui = GlobalDb.GlobalBase.GetUserByName(User, Password);
                                 if (ui != null)
                                 {
                                     Globals.UserConfiguration.ID = ui.Id;
@@ -263,7 +333,7 @@ namespace ServiceSaleMachine.Client
                     else
                     {
                         // проверить - есть такой в БД?
-                        UserInfo ui = GlobalDb.GlobalBase.GetUserByName(tbxLogin.Text, tbxPassword.Text);
+                        UserInfo ui = GlobalDb.GlobalBase.GetUserByName(User, Password);
 
                         if (ui == null)
                         {
@@ -282,6 +352,8 @@ namespace ServiceSaleMachine.Client
                             {
                                 tbxLogin.Text = "";
                                 tbxPassword.Text = "";
+                                User = "";
+                                Password = "";
                                 ErrorText.Text = "Вы ввели неправильный номер или пароль. Попробуйте еще раз.";
 
                                 tbx = tbxLogin;
@@ -289,8 +361,8 @@ namespace ServiceSaleMachine.Client
                                 tbxPassword.BackColor = System.Drawing.Color.Gray;
 
                                 data.log.Write(LogMessageType.Information, "Ввели неправильный пароль");
-                                data.log.Write(LogMessageType.Information, tbxLogin.Text);
-                                data.log.Write(LogMessageType.Information, tbxPassword.Text);
+                                data.log.Write(LogMessageType.Information, User);
+                                data.log.Write(LogMessageType.Information, Password);
                             }
                         }
                         else
@@ -352,6 +424,7 @@ namespace ServiceSaleMachine.Client
             pBxRegister.Visible = false;
             pBxRemember.Visible = false;
 
+            ErrorText.Text = "";
             tbxLogin.Text = "";
             tbxPassword.Text = "";
             tbx = tbxLogin;
@@ -366,8 +439,10 @@ namespace ServiceSaleMachine.Client
             pBxRegister.Visible = false;
             pBxRemember.Visible = false;
             tbxPassword.Visible = false;
-            scalableLabel2.Visible = false;
 
+            tablePassword.Visible = false;
+
+            ErrorText.Text = "";
             tbxLogin.Text = "";
             tbxPassword.Text = "";
             tbx = tbxLogin;

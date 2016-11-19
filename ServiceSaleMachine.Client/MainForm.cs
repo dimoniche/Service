@@ -166,7 +166,7 @@ namespace ServiceSaleMachine.Client
                             if(ui != null && result.stage == WorkerStateStage.RegisterNewUser)
                             {
                                 // Новый пользователь - сообщим об этом
-                                result = (FormResultData)FormManager.OpenForm<FormRegisterNewUser>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result, "Зарегистрировали нового пользователя: " + result.retLogin);
+                                result = (FormResultData)FormManager.OpenForm<FormRegisterNewUser>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result, "Зарегистрировали нового пользователя: +7" + result.retLogin);
 
                                 if (result.stage == WorkerStateStage.ExitProgram)
                                 {

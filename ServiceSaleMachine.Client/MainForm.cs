@@ -216,6 +216,11 @@ namespace ServiceSaleMachine.Client
                             // сброс авторизации
                             continue;
                         }
+                        else if (result.stage == WorkerStateStage.TimeOut)
+                        {
+                            // тайм аут
+                            continue;
+                        }
 
                         // нормально зарегистрировались
                         goto WaitClient;

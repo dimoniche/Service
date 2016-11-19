@@ -69,6 +69,11 @@ namespace ServiceSaleMachine.Client
             }
 
             rTBxHelp.LoadFile(Globals.GetPath(PathEnum.Text) + "\\HelpAccount.rtf");
+
+            if (Globals.ClientConfiguration.Settings.offModem == 1)
+            {
+                tableLayoutPanel11.Visible = false;
+            }
         }
 
         private void UserRequest_FormClosed(object sender, FormClosedEventArgs e)
@@ -136,6 +141,9 @@ namespace ServiceSaleMachine.Client
             string row3 = " 0 ";
 
             ErrorText.Text = "";
+
+            // кнопку нажали - сбросили тайм аут
+            Timeout = 0;
 
             if (e.Message.Y == 0)
             {
@@ -459,6 +467,25 @@ namespace ServiceSaleMachine.Client
                 fileLoaded = true;
                 timer1.Interval = 1000;
                 timer1.Enabled = false;
+            }
+        }
+
+        int Timeout = 0;
+
+        private void TimeOutTimer_Tick(object sender, EventArgs e)
+        {
+            Timeout++;
+
+            if (Globals.ClientConfiguration.Settings.timeout == 0)
+            {
+                Timeout = 0;
+                return;
+            }
+
+            if (Timeout > Globals.ClientConfiguration.Settings.timeout * 60)
+            {
+                data.stage = WorkerStateStage.TimeOut;
+                this.Close();
             }
         }
     }

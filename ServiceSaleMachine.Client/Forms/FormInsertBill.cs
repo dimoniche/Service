@@ -47,20 +47,20 @@ namespace ServiceSaleMachine.Client
 
             if (check)
             {
-                label1.Text = "Вы внесли чек на сумму " + Amount + " руб";
+                label1.Text = "Вы внесли чек на сумму " + Amount + " руб.";
             }
             else
             {
-                label1.Text = "Вы внесли купюру " + Nominal + " руб";
+                label1.Text = "Вы внесли купюру " + Nominal + " руб.";
             }
 
             if(data.retLogin != "" && Globals.ClientConfiguration.Settings.changeToAccount == 1)
             {
-                scalableLabel1.Text = "Сдача будет зачислена на Ваш аккаунт.";
+                scalableLabel1.Text = "Сдача будет зачислена на Ваш аккаунт";
             }
             else
             {
-                scalableLabel1.Text = "Ваша сдача будет на чеке.";
+                scalableLabel1.Text = "Ваша сдача будет на чеке";
             }
         }
 

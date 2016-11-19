@@ -167,14 +167,14 @@ namespace ServiceSaleMachine.Drivers
 
             Print(eLeft, false, false);
                 Print(TransformCode("Наличные          "), true);
-                Print(" ".PadRight(42 - 24 - statistic.AllMoneySumm.ToString().Length, ' ')    + statistic.AllMoneySumm.ToString("00000.00") + TransformCode(" руб"), true);
+                Print(" ".PadRight(42 - 24 - statistic.AllMoneySumm.ToString("000000.00").Length, ' ')    + statistic.AllMoneySumm.ToString("000000.00") + TransformCode(" руб"), true);
             Print(eLeft);
 
             if (Globals.ClientConfiguration.Settings.changeOn > 0)  // со сдачей
             {
                 Print(eLeft, false, false);
                 Print(TransformCode("Сумма на аккаунтах"), true);
-                Print(" ".PadRight(42 - 24 - statistic.AccountMoneySumm.ToString().Length, ' ') + statistic.AccountMoneySumm.ToString("00000.00") + TransformCode(" руб"), true);
+                Print(" ".PadRight(42 - 24 - statistic.AccountMoneySumm.ToString("000000.00").Length, ' ') + statistic.AccountMoneySumm.ToString("000000.00") + TransformCode(" руб"), true);
                 Print(eLeft);
             }
 
@@ -182,13 +182,13 @@ namespace ServiceSaleMachine.Drivers
             {
                 Print(eLeft, false, false);
                 Print(TransformCode("Сумма на чеках    "), true);
-                Print(" ".PadRight(42 - 24 - statistic.BarCodeMoneySumm.ToString().Length, ' ')  + statistic.BarCodeMoneySumm.ToString("00000.00") + TransformCode(" руб"), true);
+                Print(" ".PadRight(42 - 24 - statistic.BarCodeMoneySumm.ToString("000000.00").Length, ' ')  + statistic.BarCodeMoneySumm.ToString("000000.00") + TransformCode(" руб"), true);
                 Print(eLeft);
             }
 
             Print(eLeft, false, false);
                 Print(TransformCode("Оказано услуг     "), true);
-                Print(" ".PadRight(42 - 24 - statistic.ServiceMoneySumm.ToString().Length, ' ')  + statistic.ServiceMoneySumm.ToString("00000.00") + TransformCode(" руб"), true);
+                Print(" ".PadRight(42 - 24 - statistic.ServiceMoneySumm.ToString("000000.00").Length, ' ')  + statistic.ServiceMoneySumm.ToString("000000.00") + TransformCode(" руб"), true);
             Print(eLeft);
 
             Print("");
@@ -232,17 +232,17 @@ namespace ServiceSaleMachine.Drivers
         {
             Print(TransformCode(Globals.CheckConfiguration.Settings.PreviouslyService) + " " + TransformCode(serv.caption),true);
             Print(eLeft);
-            Print(" ".PadRight(42 - 3 - serv.price.ToString().Length, ' ') + serv.price.ToString("#.00"));
+            Print(" ".PadRight(42 - 3 - serv.price.ToString("#.00").Length, ' ') + serv.price.ToString("#.00"));
 
             PrintDashes();
 
             Print(eLeft,false,false);
             Print(TransformCode("ИТОГ"),true);
-            Print(" ".PadRight(42 - 7 - serv.price.ToString().Length, ' ') + serv.price.ToString("#.00"));
+            Print(" ".PadRight(42 - 7 - serv.price.ToString("#.00").Length, ' ') + serv.price.ToString("#.00"));
 
             Print(eLeft, false, false);
             Print(TransformCode("Налич"),true);
-            Print(" ".PadRight(42 - 8 - serv.price.ToString().Length, ' ') + serv.price.ToString("#.00"));
+            Print(" ".PadRight(42 - 8 - serv.price.ToString("#.00").Length, ' ') + serv.price.ToString("#.00"));
 
             Print(eLeft, false, false);
             Print(TransformCode("Сдача"),true);
@@ -253,17 +253,17 @@ namespace ServiceSaleMachine.Drivers
         {
             Print(TransformCode(Globals.CheckConfiguration.Settings.PreviouslyService) + " " + TransformCode(serv.caption), true);
             Print(eLeft);
-            Print(" ".PadRight(42 - 3 - amount.ToString().Length, ' ') + amount.ToString("#.00"));
+            Print(" ".PadRight(42 - 3 - amount.ToString("#.00").Length, ' ') + amount.ToString("#.00"));
 
             PrintDashes();
 
             Print(eLeft, false, false);
             Print(TransformCode("ИТОГ"), true);
-            Print(" ".PadRight(42 - 7 - amount.ToString().Length, ' ') + amount.ToString("#.00"));
+            Print(" ".PadRight(42 - 7 - amount.ToString("#.00").Length, ' ') + amount.ToString("#.00"));
 
             Print(eLeft, false, false);
             Print(TransformCode("Налич"), true);
-            Print(" ".PadRight(42 - 8 - amount.ToString().Length, ' ') + amount.ToString("#.00"));
+            Print(" ".PadRight(42 - 8 - amount.ToString("#.00").Length, ' ') + amount.ToString("#.00"));
 
             Print(eLeft, false, false);
             Print(TransformCode("Сдача"), true);
@@ -280,7 +280,7 @@ namespace ServiceSaleMachine.Drivers
 
             Print(eLeft, false, false);
             Print(TransformCode("На счете"), true);
-            Print(" ".PadRight(42 - 10 - amount.ToString().Length, ' ') + amount.ToString("#.00"));
+            Print(" ".PadRight(42 - 10 - amount.ToString("#.00").Length, ' ') + amount.ToString("#.00"));
         }
 
         public void PrintFooter()
@@ -347,7 +347,7 @@ namespace ServiceSaleMachine.Drivers
         {
             Print(eLeft, false, false);
             Print(TransformCode("СУММА"), true);
-            Print(" ".PadRight(42 - 8 - summ.ToString().Length, ' ') + summ.ToString("#.00"));
+            Print(" ".PadRight(42 - 8 - summ.ToString("#.00").Length, ' ') + summ.ToString("#.00"));
 
             PrintDashes();
 

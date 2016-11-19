@@ -122,7 +122,7 @@ namespace ServiceSaleMachine.Client
                     amount += sum;
 
                     AmountServiceText.Text = "Внесено: " + sum + " руб.";
-                    SecondMessageText.Text = "Недостаточно денег для оказания услуги.";
+                    SecondMessageText.Text = "Недостаточно денег для оказания услуги";
 
                     // обновим счет
                     GlobalDb.GlobalBase.AddToAmount(data.CurrentUserId, 0 - sum);
@@ -411,7 +411,7 @@ namespace ServiceSaleMachine.Client
 
                             if (ch == ChooseChangeEnum.ChangeToAccount)
                             {
-                                SecondMessageText.Text = "Сдача в размере " + diff + " руб. будет зачислена на Ваш аккаунт.";
+                                SecondMessageText.Text = "Сдача в размере " + diff + " руб. будет зачислена на Ваш аккаунт";
                             }
                             else
                             {
@@ -427,7 +427,7 @@ namespace ServiceSaleMachine.Client
                     else
                     {
                         AmountServiceText.Text = "Внесено: " + amount + " руб.";
-                        SecondMessageText.Text = "Недостаточно денег для оказания услуги.";
+                        SecondMessageText.Text = "Недостаточно денег для оказания услуги";
                     }
 
                     data.log.Write(LogMessageType.Information, "WAIT BILL: Внесено " + amount + " руб.");
@@ -525,7 +525,7 @@ namespace ServiceSaleMachine.Client
                     if (info.active == true)
                     {
                         // чек погашен - отклоним его
-                        SecondMessageText.Text = "Чек уже был использован ранее.";
+                        SecondMessageText.Text = "Чек уже был использован ранее";
 
                         if (amount == 0)
                         {
@@ -630,7 +630,7 @@ namespace ServiceSaleMachine.Client
 
                             if (ch == ChooseChangeEnum.ChangeToAccount)
                             {
-                                SecondMessageText.Text = "Сдача в размере " + diff + " руб. будет зачислена на Ваш аккаунт.";
+                                SecondMessageText.Text = "Сдача в размере " + diff + " руб. будет зачислена на Ваш аккаунт";
                             }
                             else
                             {
@@ -646,7 +646,7 @@ namespace ServiceSaleMachine.Client
                     else
                     {
                         AmountServiceText.Text = "Внесено: " + amount + " руб.";
-                        SecondMessageText.Text = "Недостаточно денег для оказания услуги.";
+                        SecondMessageText.Text = "Недостаточно денег для оказания услуги";
                     }
 
                     data.log.Write(LogMessageType.Information, "WAIT CHECK: Внесено " + amount + " руб.");
@@ -761,8 +761,10 @@ namespace ServiceSaleMachine.Client
                     }
                 }
 
-                // если зарегистрированы - чек с остатком на аккаунте тоже даем
-                if (data.retLogin != "")
+                int sum = GlobalDb.GlobalBase.GetUserMoney(data.CurrentUserId);
+
+                // если зарегистрированы - чек с остатком на аккаунте тоже даем, если есть остаток
+                if (data.retLogin != "" && sum > 0)
                 {
                     // Распечатать чек c информацией по аккаунту - платили с аккаунта
                     data.drivers.printer.StartPrint(data.drivers.printer.getNamePrinter());
@@ -770,7 +772,7 @@ namespace ServiceSaleMachine.Client
                     if (data.drivers.printer.prn.PrinterIsOpen)
                     {
                         data.drivers.printer.PrintHeader();
-                        data.drivers.printer.PrintAccountBody(data.serv, GlobalDb.GlobalBase.GetUserMoney(data.CurrentUserId), data.retLogin);
+                        data.drivers.printer.PrintAccountBody(data.serv, sum, data.retLogin);
                         data.drivers.printer.PrintFooter();
                         data.drivers.printer.EndPrint();
 

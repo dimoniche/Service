@@ -244,8 +244,8 @@ namespace ServiceSaleMachine.Client
                     {
                         if (User.Length < 10)
                         {
-                            ErrorText.Text = "Длина номера телефона не может быть меньше 10 символов";
-                            data.log.Write(LogMessageType.Information, "Длина номера телефона не может быть меньше 10 символов");
+                            ErrorText.Text = "Номер телефона должен состоять из 10 цифр";
+                            data.log.Write(LogMessageType.Information, "Номер телефона должен состоять из 10 цифр");
                             data.log.Write(LogMessageType.Information, User);
 
                             return;
@@ -255,8 +255,8 @@ namespace ServiceSaleMachine.Client
                     {
                         if(Password.Length < 4)
                         {
-                            ErrorText.Text = "Длина пароля к аккаунту не может быть меньше 4 символов";
-                            data.log.Write(LogMessageType.Information, "Длина пароля к аккаунту не может быть меньше 4 символов");
+                            ErrorText.Text = "Пароль должен состоять из 4 цифр";
+                            data.log.Write(LogMessageType.Information, "Пароль должен состоять из 4 цифр");
                             data.log.Write(LogMessageType.Information, Password);
 
                             return;
@@ -353,6 +353,13 @@ namespace ServiceSaleMachine.Client
 
                             if (countRetry >= 5)
                             {
+                                data.log.Write(LogMessageType.Information, "Превысили количество попыток воода пароля");
+                                data.log.Write(LogMessageType.Information, User);
+                                data.log.Write(LogMessageType.Information, Password);
+
+                                User = "";
+                                Password = "";
+
                                 data.stage = WorkerStateStage.NotAuthorizeUser;
                                 Close();
                             }
@@ -360,8 +367,6 @@ namespace ServiceSaleMachine.Client
                             {
                                 tbxLogin.Text = "";
                                 tbxPassword.Text = "";
-                                User = "";
-                                Password = "";
                                 ErrorText.Text = "Вы ввели неправильный номер или пароль. Попробуйте еще раз.";
 
                                 tbx = tbxLogin;
@@ -371,6 +376,9 @@ namespace ServiceSaleMachine.Client
                                 data.log.Write(LogMessageType.Information, "Ввели неправильный пароль");
                                 data.log.Write(LogMessageType.Information, User);
                                 data.log.Write(LogMessageType.Information, Password);
+
+                                User = "";
+                                Password = "";
                             }
                         }
                         else

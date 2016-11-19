@@ -52,11 +52,11 @@ namespace ServiceSaleMachine.Client
 
             if (!string.IsNullOrEmpty(Nominal))
             {
-                label1.Text = "Остается сдача в размере " + Nominal + " руб";
+                label1.Text = "Остается сдача в размере " + Nominal + " руб.";
             }
             if (Amount != 0)
             {
-                label1.Text = "Остается сдача в размере " + Amount + " руб";
+                label1.Text = "Остается сдача в размере " + Amount + " руб.";
             }
         }
 

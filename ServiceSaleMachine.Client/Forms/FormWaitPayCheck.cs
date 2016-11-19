@@ -139,7 +139,7 @@ namespace ServiceSaleMachine.Client
                     if(info.active == true)
                     {
                         // чек погашен - отклоним его
-                        SecondMessageText.Text = "Чек уже был использован ранее.";
+                        SecondMessageText.Text = "Чек уже был использован ранее";
 
                         if (amount == 0)
                         {

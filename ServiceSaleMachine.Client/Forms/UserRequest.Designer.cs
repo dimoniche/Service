@@ -251,6 +251,7 @@
             this.rTBxHelp.Size = new System.Drawing.Size(230, 253);
             this.rTBxHelp.TabIndex = 0;
             this.rTBxHelp.Text = "";
+            this.rTBxHelp.Visible = false;
             // 
             // panel2
             // 
@@ -804,9 +805,9 @@
             // tableLayoutPanel15
             // 
             this.tableLayoutPanel15.ColumnCount = 3;
-            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
-            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90F));
-            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel15.Controls.Add(this.panel25, 1, 0);
             this.tableLayoutPanel15.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel15.Location = new System.Drawing.Point(0, 0);
@@ -820,9 +821,9 @@
             // 
             this.panel25.Controls.Add(this.ErrorText);
             this.panel25.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel25.Location = new System.Drawing.Point(30, 3);
+            this.panel25.Location = new System.Drawing.Point(84, 3);
             this.panel25.Name = "panel25";
-            this.panel25.Size = new System.Drawing.Size(482, 16);
+            this.panel25.Size = new System.Drawing.Size(374, 16);
             this.panel25.TabIndex = 2;
             // 
             // ErrorText
@@ -831,7 +832,7 @@
             this.ErrorText.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ErrorText.Location = new System.Drawing.Point(0, 0);
             this.ErrorText.Name = "ErrorText";
-            this.ErrorText.Size = new System.Drawing.Size(482, 16);
+            this.ErrorText.Size = new System.Drawing.Size(374, 16);
             this.ErrorText.TabIndex = 0;
             // 
             // chbNew

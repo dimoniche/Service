@@ -118,7 +118,7 @@ namespace ServiceSaleMachine.Client
             toolTip1.SetToolTip(this.richTextBox1,          "Лог действий купюроприемника.");
             toolTip1.SetToolTip(this.butStartPoll,          "Запуск лога купюропримника.");
             toolTip1.SetToolTip(this.butResetBill,          "Перезагрузка купюроприемника.");
-            toolTip1.SetToolTip(this.button4,               "Вывод всех аккаунтов пользователей.");
+            toolTip1.SetToolTip(this.button4,               "Вывод всех аккаунтов пользователей. И выбор аккаунта для просмотра подробностей.");
             toolTip1.SetToolTip(this.button12,              "Вывод истории платежей выбранного пользователя. Необходимо выбрать аккаунт нужного пользователя и нажать эту кнопку.");
             toolTip1.SetToolTip(this.button10,              "Внесение средств на счет выбранного пользователя.");
             toolTip1.SetToolTip(this.button11,              "История поступления и расходования средств с аккаунта выбранного пользователя.");
@@ -673,6 +673,11 @@ namespace ServiceSaleMachine.Client
                 cbxOffHardware.Checked = false;
             }
 
+            cbxCheckOff.Enabled = !cbxOffHardware.Checked;
+            cBxBillOff.Enabled = !cbxOffHardware.Checked;
+            offControl.Enabled = !cbxOffHardware.Checked;
+            cBxoffModem.Enabled = !cbxOffHardware.Checked;
+
             if (Globals.ClientConfiguration.Settings.offBill == 1)
             {
                 cBxBillOff.Checked = true;
@@ -733,13 +738,13 @@ namespace ServiceSaleMachine.Client
             MoneyStatistic();
 
             int NumberCheck = GlobalDb.GlobalBase.GetCurrentNumberCheck();
-            labelCurrNumberCheck.Text = "Текущий номер чека: " + NumberCheck;
+            labelCurrNumberCheck.Text = "Текущий номер фискального чека: " + NumberCheck;
 
             NumberCheck = GlobalDb.GlobalBase.GetCurrentNumberDeliveryCheck();
-            labeldelivery.Text = "Текущий номер чека: " + NumberCheck;
+            labeldelivery.Text = "Текущий номер чека со сдачей: " + NumberCheck;
 
             NumberCheck = GlobalDb.GlobalBase.GetCurrentAccountNumberCheck();
-            labelAccount.Text = "Текущий номер чека: " + NumberCheck;
+            labelAccount.Text = "Текущий номер чека с балансом счета: " + NumberCheck;
 
             cBxCommand.Items.Clear();
             cBxCommand.Items.Add("Включить");
@@ -1087,6 +1092,11 @@ namespace ServiceSaleMachine.Client
                 changeStateHardWare(true);
             }
 
+            cbxCheckOff.Enabled = !cbxOffHardware.Checked;
+            cBxBillOff.Enabled = !cbxOffHardware.Checked;
+            offControl.Enabled = !cbxOffHardware.Checked;
+            cBxoffModem.Enabled = !cbxOffHardware.Checked;
+
             Globals.ClientConfiguration.Save();
 
             if (!init)
@@ -1382,6 +1392,15 @@ namespace ServiceSaleMachine.Client
         {
             dataGridView1.DataSource = GlobalDb.GlobalBase.GetUsers();
 
+            if (dataGridView1.Columns.Count > 0)
+            {
+                dataGridView1.Columns[0].HeaderText = "Индекс";
+                dataGridView1.Columns[1].HeaderText = "Пользователь";
+                dataGridView1.Columns[2].HeaderText = "Пароль";
+                dataGridView1.Columns[3].HeaderText = "Тип";
+                dataGridView1.Columns[4].HeaderText = "Дата регистрации";
+            }
+
             login = true;
 
             button12.Enabled = true;
@@ -1555,6 +1574,14 @@ namespace ServiceSaleMachine.Client
 
             dataGridView1.DataSource = GlobalDb.GlobalBase.GetAmount(id);
 
+            if (dataGridView1.Columns.Count > 0)
+            {
+                dataGridView1.Columns[0].HeaderText = "Индекс";
+                dataGridView1.Columns[1].HeaderText = "Пользователь";
+                dataGridView1.Columns[2].HeaderText = "Внесено";
+                dataGridView1.Columns[3].HeaderText = "Дата внесения";
+            }
+
             button12.Enabled = false;
             button10.Enabled = false;
             button11.Enabled = false;
@@ -1622,9 +1649,18 @@ namespace ServiceSaleMachine.Client
             
 
             DataTable dt = GlobalDb.GlobalBase.GetPaymentFromUser(id);
+
             if (dt != null)
             {
                 dataGridView1.DataSource = dt;
+
+                if (dataGridView1.Columns.Count > 0)
+                {
+                    dataGridView1.Columns[0].HeaderText = "Индекс";
+                    dataGridView1.Columns[1].HeaderText = "Пользователь";
+                    dataGridView1.Columns[2].HeaderText = "Внесено";
+                    dataGridView1.Columns[3].HeaderText = "Дата внесения";
+                }
 
                 button12.Enabled = false;
                 button10.Enabled = false;
@@ -1676,7 +1712,7 @@ namespace ServiceSaleMachine.Client
 
             GlobalDb.GlobalBase.SetNumberCheck(NumberCheck);
 
-            labelCurrNumberCheck.Text = "Текущий номер чека: " + NumberCheck;
+            labelCurrNumberCheck.Text = "Текущий номер фискального чека: " + NumberCheck;
         }
 
         private void LightOn1_Click(object sender, EventArgs e)
@@ -1866,11 +1902,32 @@ namespace ServiceSaleMachine.Client
         private void butCheck_Click(object sender, EventArgs e)
         {
             CheckView.DataSource = GlobalDb.GlobalBase.GetChecks();
+
+            if (CheckView.Columns.Count > 0)
+            {
+                CheckView.Columns[0].HeaderText = "Индекс";
+                CheckView.Columns[1].HeaderText = "Создан";
+                CheckView.Columns[2].HeaderText = "Использован";
+                CheckView.Columns[3].HeaderText = "штрих-код";
+                CheckView.Columns[4].HeaderText = "Пользователь";
+                CheckView.Columns[5].HeaderText = "Номер чека";
+                CheckView.Columns[6].HeaderText = "Статус";
+                CheckView.Columns[7].HeaderText = "Сумма";
+            }
         }
 
         private void button13_Click_2(object sender, EventArgs e)
         {
             LogView.DataSource = GlobalDb.GlobalBase.GetLogWork();
+
+            if (LogView.Columns.Count > 0)
+            {
+                LogView.Columns[0].HeaderText = "Индекс";
+                LogView.Columns[1].HeaderText = "№ устройства";
+                LogView.Columns[2].HeaderText = "Время работы";
+                LogView.Columns[3].HeaderText = "Услуга";
+                LogView.Columns[4].HeaderText = "Начало";
+            }
         }
 
         private void cbxAllUser_CheckedChanged(object sender, EventArgs e)
@@ -1899,7 +1956,7 @@ namespace ServiceSaleMachine.Client
 
             GlobalDb.GlobalBase.SetNumberDeliveryCheck(NumberCheck);
 
-            labeldelivery.Text = "Текущий номер чека: " + NumberCheck;
+            labeldelivery.Text = "Текущий номер чека со сдачей: " + NumberCheck;
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -1949,7 +2006,7 @@ namespace ServiceSaleMachine.Client
 
             GlobalDb.GlobalBase.SetNumberAccountCheck(NumberCheck);
 
-            labelAccount.Text = "Текущий номер чека: " + NumberCheck;
+            labelAccount.Text = "Текущий номер чека с балансом счета: " + NumberCheck;
         }
 
         private void button17_Click_1(object sender, EventArgs e)

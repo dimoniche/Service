@@ -353,7 +353,7 @@
             // 
             // butSendCode
             // 
-            this.butSendCode.Location = new System.Drawing.Point(224, 193);
+            this.butSendCode.Location = new System.Drawing.Point(157, 146);
             this.butSendCode.Name = "butSendCode";
             this.butSendCode.Size = new System.Drawing.Size(75, 23);
             this.butSendCode.TabIndex = 12;
@@ -364,7 +364,7 @@
             // cBxCommand
             // 
             this.cBxCommand.FormattingEnabled = true;
-            this.cBxCommand.Location = new System.Drawing.Point(76, 195);
+            this.cBxCommand.Location = new System.Drawing.Point(20, 146);
             this.cBxCommand.Name = "cBxCommand";
             this.cBxCommand.Size = new System.Drawing.Size(121, 21);
             this.cBxCommand.TabIndex = 11;
@@ -378,6 +378,7 @@
             this.buttonStopScanerPoll.TabIndex = 10;
             this.buttonStopScanerPoll.Text = "Стоп";
             this.buttonStopScanerPoll.UseVisualStyleBackColor = true;
+            this.buttonStopScanerPoll.Visible = false;
             this.buttonStopScanerPoll.Click += new System.EventHandler(this.button3_Click);
             // 
             // buttonStartScanerPoll
@@ -388,6 +389,7 @@
             this.buttonStartScanerPoll.TabIndex = 9;
             this.buttonStartScanerPoll.Text = "Пуск опроса";
             this.buttonStartScanerPoll.UseVisualStyleBackColor = true;
+            this.buttonStartScanerPoll.Visible = false;
             this.buttonStartScanerPoll.Click += new System.EventHandler(this.button1_Click);
             // 
             // LabelCode
@@ -528,6 +530,7 @@
             this.button5.TabIndex = 44;
             this.button5.Text = "Количество купюр";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Visible = false;
             this.button5.Click += new System.EventHandler(this.button5_Click_1);
             // 
             // button6
@@ -600,6 +603,7 @@
             this.CountBill.Size = new System.Drawing.Size(13, 13);
             this.CountBill.TabIndex = 43;
             this.CountBill.Text = "0";
+            this.CountBill.Visible = false;
             // 
             // label9
             // 
@@ -647,6 +651,7 @@
             this.butStopPoll.TabIndex = 40;
             this.butStopPoll.Text = "Стоп POLL";
             this.butStopPoll.UseVisualStyleBackColor = true;
+            this.butStopPoll.Visible = false;
             this.butStopPoll.Click += new System.EventHandler(this.button7_Click);
             // 
             // butStartPoll
@@ -657,6 +662,7 @@
             this.butStartPoll.TabIndex = 38;
             this.butStartPoll.Text = "Старт POLL";
             this.butStartPoll.UseVisualStyleBackColor = true;
+            this.butStartPoll.Visible = false;
             this.butStartPoll.Click += new System.EventHandler(this.button6_Click);
             // 
             // tBxAdress
@@ -734,7 +740,7 @@
             // 
             // tBxsumm
             // 
-            this.tBxsumm.Location = new System.Drawing.Point(601, 119);
+            this.tBxsumm.Location = new System.Drawing.Point(457, 219);
             this.tBxsumm.Name = "tBxsumm";
             this.tBxsumm.Size = new System.Drawing.Size(121, 20);
             this.tBxsumm.TabIndex = 49;
@@ -743,7 +749,7 @@
             // label33
             // 
             this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(538, 124);
+            this.label33.Location = new System.Drawing.Point(394, 224);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(57, 13);
             this.label33.TabIndex = 48;
@@ -751,7 +757,7 @@
             // 
             // buttoninsertcheck
             // 
-            this.buttoninsertcheck.Location = new System.Drawing.Point(394, 119);
+            this.buttoninsertcheck.Location = new System.Drawing.Point(250, 219);
             this.buttoninsertcheck.Name = "buttoninsertcheck";
             this.buttoninsertcheck.Size = new System.Drawing.Size(138, 23);
             this.buttoninsertcheck.TabIndex = 47;
@@ -869,6 +875,7 @@
             this.textBox2.Size = new System.Drawing.Size(121, 20);
             this.textBox2.TabIndex = 39;
             this.textBox2.Text = "123456789012";
+            this.textBox2.Visible = false;
             // 
             // label3
             // 
@@ -1268,14 +1275,14 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(128, 23);
             this.button12.TabIndex = 9;
-            this.button12.Text = "Количество платежей";
+            this.button12.Text = "Внесение денег";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // button11
             // 
             this.button11.Enabled = false;
-            this.button11.Location = new System.Drawing.Point(442, 53);
+            this.button11.Location = new System.Drawing.Point(212, 54);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(60, 23);
             this.button11.TabIndex = 8;
@@ -1285,7 +1292,7 @@
             // 
             // edtMoney
             // 
-            this.edtMoney.Location = new System.Drawing.Point(387, 56);
+            this.edtMoney.Location = new System.Drawing.Point(453, 54);
             this.edtMoney.Name = "edtMoney";
             this.edtMoney.Size = new System.Drawing.Size(49, 20);
             this.edtMoney.TabIndex = 7;
@@ -1294,7 +1301,7 @@
             // button10
             // 
             this.button10.Enabled = false;
-            this.button10.Location = new System.Drawing.Point(212, 54);
+            this.button10.Location = new System.Drawing.Point(278, 54);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(169, 23);
             this.button10.TabIndex = 6;
@@ -1657,10 +1664,10 @@
             this.Style2.AutoSize = true;
             this.Style2.Location = new System.Drawing.Point(16, 53);
             this.Style2.Name = "Style2";
-            this.Style2.Size = new System.Drawing.Size(100, 17);
+            this.Style2.Size = new System.Drawing.Size(76, 17);
             this.Style2.TabIndex = 0;
             this.Style2.TabStop = true;
-            this.Style2.Text = "Оформление 2";
+            this.Style2.Text = "Вариант 2";
             this.Style2.UseVisualStyleBackColor = true;
             this.Style2.CheckedChanged += new System.EventHandler(this.Style1_CheckedChanged);
             // 
@@ -1669,10 +1676,10 @@
             this.Style1.AutoSize = true;
             this.Style1.Location = new System.Drawing.Point(16, 30);
             this.Style1.Name = "Style1";
-            this.Style1.Size = new System.Drawing.Size(100, 17);
+            this.Style1.Size = new System.Drawing.Size(76, 17);
             this.Style1.TabIndex = 0;
             this.Style1.TabStop = true;
-            this.Style1.Text = "Оформление 1";
+            this.Style1.Text = "Вариант 1";
             this.Style1.UseVisualStyleBackColor = true;
             this.Style1.CheckedChanged += new System.EventHandler(this.Style1_CheckedChanged);
             // 
@@ -1694,7 +1701,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(242, 71);
+            this.label15.Location = new System.Drawing.Point(242, 88);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(27, 13);
             this.label15.TabIndex = 21;
@@ -1702,7 +1709,7 @@
             // 
             // textBoxMaxTimeService
             // 
-            this.textBoxMaxTimeService.Location = new System.Drawing.Point(127, 68);
+            this.textBoxMaxTimeService.Location = new System.Drawing.Point(127, 81);
             this.textBoxMaxTimeService.Name = "textBoxMaxTimeService";
             this.textBoxMaxTimeService.Size = new System.Drawing.Size(100, 20);
             this.textBoxMaxTimeService.TabIndex = 20;
@@ -1713,16 +1720,16 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(13, 51);
+            this.label17.Location = new System.Drawing.Point(13, 65);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(191, 13);
+            this.label17.Size = new System.Drawing.Size(121, 13);
             this.label17.TabIndex = 19;
-            this.label17.Text = "Предельное время оказания услуги";
+            this.label17.Text = "Период обслуживания";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(242, 23);
+            this.label12.Location = new System.Drawing.Point(242, 49);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(27, 13);
             this.label12.TabIndex = 18;
@@ -1730,7 +1737,7 @@
             // 
             // textBoxTimeOut
             // 
-            this.textBoxTimeOut.Location = new System.Drawing.Point(127, 20);
+            this.textBoxTimeOut.Location = new System.Drawing.Point(127, 42);
             this.textBoxTimeOut.Name = "textBoxTimeOut";
             this.textBoxTimeOut.Size = new System.Drawing.Size(100, 20);
             this.textBoxTimeOut.TabIndex = 17;
@@ -1743,9 +1750,9 @@
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(13, 27);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(108, 13);
+            this.label11.Size = new System.Drawing.Size(162, 13);
             this.label11.TabIndex = 16;
-            this.label11.Text = "Время бездействия";
+            this.label11.Text = "Пауза до рекламной заставки";
             // 
             // groupBox5
             // 
@@ -1818,7 +1825,7 @@
             // offControl
             // 
             this.offControl.AutoSize = true;
-            this.offControl.Location = new System.Drawing.Point(16, 134);
+            this.offControl.Location = new System.Drawing.Point(16, 87);
             this.offControl.Name = "offControl";
             this.offControl.Size = new System.Drawing.Size(214, 17);
             this.offControl.TabIndex = 14;
@@ -1829,7 +1836,7 @@
             // cBxBillOff
             // 
             this.cBxBillOff.AutoSize = true;
-            this.cBxBillOff.Location = new System.Drawing.Point(16, 111);
+            this.cBxBillOff.Location = new System.Drawing.Point(16, 65);
             this.cBxBillOff.Name = "cBxBillOff";
             this.cBxBillOff.Size = new System.Drawing.Size(171, 17);
             this.cBxBillOff.TabIndex = 15;
@@ -1840,7 +1847,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(16, 88);
+            this.checkBox1.Location = new System.Drawing.Point(16, 157);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(230, 17);
             this.checkBox1.TabIndex = 16;
@@ -1850,7 +1857,7 @@
             // cbxOffDataBase
             // 
             this.cbxOffDataBase.AutoSize = true;
-            this.cbxOffDataBase.Location = new System.Drawing.Point(16, 65);
+            this.cbxOffDataBase.Location = new System.Drawing.Point(16, 180);
             this.cbxOffDataBase.Name = "cbxOffDataBase";
             this.cbxOffDataBase.Size = new System.Drawing.Size(147, 17);
             this.cbxOffDataBase.TabIndex = 13;
@@ -1863,16 +1870,16 @@
             this.cbxCheckOff.AutoSize = true;
             this.cbxCheckOff.Location = new System.Drawing.Point(16, 42);
             this.cbxCheckOff.Name = "cbxCheckOff";
-            this.cbxCheckOff.Size = new System.Drawing.Size(152, 17);
+            this.cbxCheckOff.Size = new System.Drawing.Size(120, 17);
             this.cbxCheckOff.TabIndex = 12;
-            this.cbxCheckOff.Text = "Отключить оплату чеком";
+            this.cbxCheckOff.Text = "Отключить сканер";
             this.cbxCheckOff.UseVisualStyleBackColor = true;
             this.cbxCheckOff.CheckedChanged += new System.EventHandler(this.cbxCheckOff_CheckedChanged);
             // 
             // cBxoffModem
             // 
             this.cBxoffModem.AutoSize = true;
-            this.cBxoffModem.Location = new System.Drawing.Point(16, 157);
+            this.cBxoffModem.Location = new System.Drawing.Point(16, 110);
             this.cBxoffModem.Name = "cBxoffModem";
             this.cBxoffModem.Size = new System.Drawing.Size(118, 17);
             this.cBxoffModem.TabIndex = 10;
@@ -2088,128 +2095,135 @@
             // labelAccount
             // 
             this.labelAccount.AutoSize = true;
-            this.labelAccount.Location = new System.Drawing.Point(611, 161);
+            this.labelAccount.Location = new System.Drawing.Point(583, 163);
             this.labelAccount.Name = "labelAccount";
-            this.labelAccount.Size = new System.Drawing.Size(137, 13);
+            this.labelAccount.Size = new System.Drawing.Size(230, 13);
             this.labelAccount.TabIndex = 9;
-            this.labelAccount.Text = "Текущий номер чека: 123";
+            this.labelAccount.Text = "Текущий номер чека с балансом счета: 123";
             // 
             // button16
             // 
-            this.button16.Location = new System.Drawing.Point(600, 179);
+            this.button16.Location = new System.Drawing.Point(586, 179);
             this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(213, 23);
+            this.button16.Size = new System.Drawing.Size(227, 23);
             this.button16.TabIndex = 8;
-            this.button16.Text = "Сброс нумерации чеков со сдачей";
+            this.button16.Text = "Сброс нумерации";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click_1);
             // 
             // button14
             // 
-            this.button14.Location = new System.Drawing.Point(600, 229);
+            this.button14.Location = new System.Drawing.Point(586, 229);
             this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(213, 23);
+            this.button14.Size = new System.Drawing.Size(227, 23);
             this.button14.TabIndex = 7;
-            this.button14.Text = "Сброс всех чеков со сдачей";
+            this.button14.Text = "Обнуление всех чеков со сдачей";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
             // labeldelivery
             // 
             this.labeldelivery.AutoSize = true;
-            this.labeldelivery.Location = new System.Drawing.Point(611, 97);
+            this.labeldelivery.Location = new System.Drawing.Point(583, 99);
             this.labeldelivery.Name = "labeldelivery";
-            this.labeldelivery.Size = new System.Drawing.Size(137, 13);
+            this.labeldelivery.Size = new System.Drawing.Size(190, 13);
             this.labeldelivery.TabIndex = 6;
-            this.labeldelivery.Text = "Текущий номер чека: 123";
+            this.labeldelivery.Text = "Текущий номер чека со сдачей: 123";
             // 
             // buttonDelivery
             // 
-            this.buttonDelivery.Location = new System.Drawing.Point(600, 115);
+            this.buttonDelivery.Location = new System.Drawing.Point(586, 115);
             this.buttonDelivery.Name = "buttonDelivery";
-            this.buttonDelivery.Size = new System.Drawing.Size(213, 23);
+            this.buttonDelivery.Size = new System.Drawing.Size(227, 23);
             this.buttonDelivery.TabIndex = 5;
-            this.buttonDelivery.Text = "Сброс нумерации чеков со сдачей";
+            this.buttonDelivery.Text = "Сброс нумерации";
             this.buttonDelivery.UseVisualStyleBackColor = true;
             this.buttonDelivery.Click += new System.EventHandler(this.buttonDelivery_Click);
             // 
             // PreviouslyName
             // 
-            this.PreviouslyName.Location = new System.Drawing.Point(76, 182);
+            this.PreviouslyName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.PreviouslyName.Location = new System.Drawing.Point(76, 205);
             this.PreviouslyName.Name = "PreviouslyName";
-            this.PreviouslyName.Size = new System.Drawing.Size(157, 20);
+            this.PreviouslyName.Size = new System.Drawing.Size(247, 26);
             this.PreviouslyName.TabIndex = 4;
             this.PreviouslyName.Leave += new System.EventHandler(this.PreviouslyName_Leave);
             // 
             // labelCurrNumberCheck
             // 
             this.labelCurrNumberCheck.AutoSize = true;
-            this.labelCurrNumberCheck.Location = new System.Drawing.Point(611, 37);
+            this.labelCurrNumberCheck.Location = new System.Drawing.Point(583, 37);
             this.labelCurrNumberCheck.Name = "labelCurrNumberCheck";
-            this.labelCurrNumberCheck.Size = new System.Drawing.Size(137, 13);
+            this.labelCurrNumberCheck.Size = new System.Drawing.Size(207, 13);
             this.labelCurrNumberCheck.TabIndex = 3;
-            this.labelCurrNumberCheck.Text = "Текущий номер чека: 123";
+            this.labelCurrNumberCheck.Text = "Текущий номер фискального чека: 123";
             // 
             // resetCheckNumeration
             // 
-            this.resetCheckNumeration.Location = new System.Drawing.Point(600, 55);
+            this.resetCheckNumeration.Location = new System.Drawing.Point(586, 55);
             this.resetCheckNumeration.Name = "resetCheckNumeration";
-            this.resetCheckNumeration.Size = new System.Drawing.Size(213, 23);
+            this.resetCheckNumeration.Size = new System.Drawing.Size(227, 23);
             this.resetCheckNumeration.TabIndex = 2;
-            this.resetCheckNumeration.Text = "Сброс нумерации фискальных чеков";
+            this.resetCheckNumeration.Text = "Сброс нумерации";
             this.resetCheckNumeration.UseVisualStyleBackColor = true;
             this.resetCheckNumeration.Click += new System.EventHandler(this.resetCheckNumeration_Click);
             // 
             // advert4
             // 
-            this.advert4.Location = new System.Drawing.Point(76, 470);
+            this.advert4.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.advert4.Location = new System.Drawing.Point(74, 498);
             this.advert4.Name = "advert4";
-            this.advert4.Size = new System.Drawing.Size(482, 20);
+            this.advert4.Size = new System.Drawing.Size(482, 17);
             this.advert4.TabIndex = 1;
             this.advert4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.advert4.Leave += new System.EventHandler(this.advert4_Leave);
             // 
             // advert3
             // 
-            this.advert3.Location = new System.Drawing.Point(76, 444);
+            this.advert3.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.advert3.Location = new System.Drawing.Point(74, 478);
             this.advert3.Name = "advert3";
-            this.advert3.Size = new System.Drawing.Size(482, 20);
+            this.advert3.Size = new System.Drawing.Size(482, 17);
             this.advert3.TabIndex = 1;
             this.advert3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.advert3.Leave += new System.EventHandler(this.advert3_Leave);
             // 
             // advert2
             // 
-            this.advert2.Location = new System.Drawing.Point(76, 418);
+            this.advert2.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.advert2.Location = new System.Drawing.Point(74, 460);
             this.advert2.Name = "advert2";
-            this.advert2.Size = new System.Drawing.Size(482, 20);
+            this.advert2.Size = new System.Drawing.Size(482, 17);
             this.advert2.TabIndex = 1;
             this.advert2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.advert2.Leave += new System.EventHandler(this.advert2_Leave);
             // 
             // advert1
             // 
-            this.advert1.Location = new System.Drawing.Point(76, 392);
+            this.advert1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.advert1.Location = new System.Drawing.Point(74, 442);
             this.advert1.Name = "advert1";
-            this.advert1.Size = new System.Drawing.Size(482, 20);
+            this.advert1.Size = new System.Drawing.Size(482, 17);
             this.advert1.TabIndex = 1;
             this.advert1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.advert1.Leave += new System.EventHandler(this.advert1_Leave);
             // 
             // secondfirmsname
             // 
-            this.secondfirmsname.Location = new System.Drawing.Point(76, 84);
+            this.secondfirmsname.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.secondfirmsname.Location = new System.Drawing.Point(76, 92);
             this.secondfirmsname.Name = "secondfirmsname";
-            this.secondfirmsname.Size = new System.Drawing.Size(482, 20);
+            this.secondfirmsname.Size = new System.Drawing.Size(482, 26);
             this.secondfirmsname.TabIndex = 1;
             this.secondfirmsname.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.secondfirmsname.Leave += new System.EventHandler(this.secondfirmsname_Leave);
             // 
             // firmsname
             // 
+            this.firmsname.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.firmsname.Location = new System.Drawing.Point(76, 60);
             this.firmsname.Name = "firmsname";
-            this.firmsname.Size = new System.Drawing.Size(482, 20);
+            this.firmsname.Size = new System.Drawing.Size(482, 26);
             this.firmsname.TabIndex = 1;
             this.firmsname.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.firmsname.Leave += new System.EventHandler(this.firmsname_Leave);
@@ -2219,7 +2233,7 @@
             this.checkPic.Image = global::ServiceSaleMachine.Client.Properties.Resources.bitmap;
             this.checkPic.Location = new System.Drawing.Point(58, 37);
             this.checkPic.Name = "checkPic";
-            this.checkPic.Size = new System.Drawing.Size(515, 431);
+            this.checkPic.Size = new System.Drawing.Size(515, 502);
             this.checkPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.checkPic.TabIndex = 0;
             this.checkPic.TabStop = false;
@@ -2265,12 +2279,12 @@
             this.tabPageReacess.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageReacess.Size = new System.Drawing.Size(819, 576);
             this.tabPageReacess.TabIndex = 0;
-            this.tabPageReacess.Text = "Инкассация";
+            this.tabPageReacess.Text = "Статистика";
             this.tabPageReacess.UseVisualStyleBackColor = true;
             // 
             // button17
             // 
-            this.button17.Location = new System.Drawing.Point(36, 301);
+            this.button17.Location = new System.Drawing.Point(35, 217);
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(201, 23);
             this.button17.TabIndex = 13;
@@ -2280,18 +2294,18 @@
             // 
             // buttonResetAllAmount
             // 
-            this.buttonResetAllAmount.Location = new System.Drawing.Point(450, 118);
+            this.buttonResetAllAmount.Location = new System.Drawing.Point(439, 217);
             this.buttonResetAllAmount.Name = "buttonResetAllAmount";
             this.buttonResetAllAmount.Size = new System.Drawing.Size(201, 23);
             this.buttonResetAllAmount.TabIndex = 12;
-            this.buttonResetAllAmount.Text = "Сбросить счетчики";
+            this.buttonResetAllAmount.Text = "Обнулить счетчики";
             this.buttonResetAllAmount.UseVisualStyleBackColor = true;
             this.buttonResetAllAmount.Click += new System.EventHandler(this.buttonResetAllAmount_Click);
             // 
             // labelAllAmountService
             // 
             this.labelAllAmountService.AutoSize = true;
-            this.labelAllAmountService.Location = new System.Drawing.Point(447, 95);
+            this.labelAllAmountService.Location = new System.Drawing.Point(447, 118);
             this.labelAllAmountService.Name = "labelAllAmountService";
             this.labelAllAmountService.Size = new System.Drawing.Size(131, 13);
             this.labelAllAmountService.TabIndex = 11;
@@ -2300,7 +2314,7 @@
             // labelAllAmountMoney
             // 
             this.labelAllAmountMoney.AutoSize = true;
-            this.labelAllAmountMoney.Location = new System.Drawing.Point(447, 73);
+            this.labelAllAmountMoney.Location = new System.Drawing.Point(447, 95);
             this.labelAllAmountMoney.Name = "labelAllAmountMoney";
             this.labelAllAmountMoney.Size = new System.Drawing.Size(124, 13);
             this.labelAllAmountMoney.TabIndex = 10;
@@ -2312,16 +2326,18 @@
             this.dateTimeStatistic.Name = "dateTimeStatistic";
             this.dateTimeStatistic.Size = new System.Drawing.Size(200, 20);
             this.dateTimeStatistic.TabIndex = 9;
+            this.dateTimeStatistic.Visible = false;
             this.dateTimeStatistic.ValueChanged += new System.EventHandler(this.dateTimeStatistic_ValueChanged);
             // 
             // button15
             // 
-            this.button15.Location = new System.Drawing.Point(35, 259);
+            this.button15.Location = new System.Drawing.Point(35, 246);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(201, 23);
             this.button15.TabIndex = 8;
             this.button15.Text = "Сброс всех чеков со сдачей";
             this.button15.UseVisualStyleBackColor = true;
+            this.button15.Visible = false;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
             // labelCountBankNote
@@ -2332,6 +2348,7 @@
             this.labelCountBankNote.Size = new System.Drawing.Size(161, 13);
             this.labelCountBankNote.TabIndex = 2;
             this.labelCountBankNote.Text = "Количество принятых банкнот";
+            this.labelCountBankNote.Visible = false;
             // 
             // labelServiceMoneySumm
             // 
@@ -2341,6 +2358,7 @@
             this.labelServiceMoneySumm.Size = new System.Drawing.Size(131, 13);
             this.labelServiceMoneySumm.TabIndex = 2;
             this.labelServiceMoneySumm.Text = "Oказано услуг на сумму";
+            this.labelServiceMoneySumm.Visible = false;
             // 
             // labelBarCodeMoneySumm
             // 
@@ -2368,16 +2386,18 @@
             this.labelAllMoneySumm.Size = new System.Drawing.Size(124, 13);
             this.labelAllMoneySumm.TabIndex = 2;
             this.labelAllMoneySumm.Text = "Сумма принятых денег";
+            this.labelAllMoneySumm.Visible = false;
             // 
             // buttonEncashment
             // 
             this.buttonEncashment.Enabled = false;
-            this.buttonEncashment.Location = new System.Drawing.Point(35, 216);
+            this.buttonEncashment.Location = new System.Drawing.Point(36, 188);
             this.buttonEncashment.Name = "buttonEncashment";
             this.buttonEncashment.Size = new System.Drawing.Size(201, 23);
             this.buttonEncashment.TabIndex = 1;
             this.buttonEncashment.Text = "Обновить время инкассации";
             this.buttonEncashment.UseVisualStyleBackColor = true;
+            this.buttonEncashment.Visible = false;
             this.buttonEncashment.Click += new System.EventHandler(this.button13_Click_1);
             // 
             // tabPage14

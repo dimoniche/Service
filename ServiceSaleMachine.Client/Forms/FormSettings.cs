@@ -100,6 +100,41 @@ namespace ServiceSaleMachine.Client
             toolTip1.SetToolTip(this.checkBox1,      "Отключение регистрации пользователей.");
             toolTip1.SetToolTip(this.cBxBillOff,     "Отключение купюроприемника. Приведет к невозможности работы с наличностью.");
 
+            toolTip1.SetToolTip(this.textBoxTimeOut,        "Время через которое включается заставка, либо происходит выход на начальный экран.");
+            toolTip1.SetToolTip(this.textBoxMaxTimeService, "Максимальное время оказания услуг, на которое рассчитан ресурс оборудования до его заправки.");
+            toolTip1.SetToolTip(this.offControl,            "Отключение устройства для управления услугами (клапанами).");
+            toolTip1.SetToolTip(this.cBxoffModem,           "Отключение модема. Не будет возможности оповещений о нештатных ситауциях и восстановления паролей пользователей.");
+            toolTip1.SetToolTip(this.groupBox1,             "Возможные номиналы купюр с которыми может работать устройство.");
+            toolTip1.SetToolTip(this.checkchangeOn,         "Работа устройства с выдачей сдачи чеком или заносом ее на счет пользвателя, если он зарегистрирован.");
+            toolTip1.SetToolTip(this.checkBox3,             "Включение возможности переноса сдачи на счет пользователя.");
+            toolTip1.SetToolTip(this.textMaxCountBanknote,  "Максимальное значение банкнот в купюроприемнике после которого работа устройства невозможна и выдается предупреждение об этом.");
+            toolTip1.SetToolTip(this.labelCurrNumberCheck,  "Номера чеков содержащих стоимость услуг за наличные.");
+            toolTip1.SetToolTip(this.labeldelivery,         "Номера чеков содержащих сдачу в виде штрих кода.");
+            toolTip1.SetToolTip(this.labelAccount,          "Номера чеков содержащих отчет о остатках денег на аккаунте пользователя.");
+            toolTip1.SetToolTip(this.cBxComPortScaner,      "Порт, к оторому подключен сканер штрих кодов.");
+            toolTip1.SetToolTip(this.cBxCommand,            "Комманды управления сканером штрих кодов.");
+            toolTip1.SetToolTip(this.cBxComPortBill,        "Порт к котрому подключен купюроприемник.");
+            toolTip1.SetToolTip(this.button8,               "Получение серийного номера купюроприемника.");
+            toolTip1.SetToolTip(this.richTextBox1,          "Лог действий купюроприемника.");
+            toolTip1.SetToolTip(this.butStartPoll,          "Запуск лога купюропримника.");
+            toolTip1.SetToolTip(this.butResetBill,          "Перезагрузка купюроприемника.");
+            toolTip1.SetToolTip(this.button4,               "Вывод всех аккаунтов пользователей.");
+            toolTip1.SetToolTip(this.button12,              "Вывод истории платежей выбранного пользователя. Необходимо выбрать аккаунт нужного пользователя и нажать эту кнопку.");
+            toolTip1.SetToolTip(this.button10,              "Внесение средств на счет выбранного пользователя.");
+            toolTip1.SetToolTip(this.button11,              "История поступления и расходования средств с аккаунта выбранного пользователя.");
+            toolTip1.SetToolTip(this.cbxAllUser,            "Флаг вывода логов и истории для всех пользователей.");
+            toolTip1.SetToolTip(this.butCheck,              "Просмотр всех выданных чеков со сдачей.");
+            toolTip1.SetToolTip(this.button13,              "Просмотр логов работы устройства.");
+
+            toolTip1.SetToolTip(this.cbxOffHardware, "Отключение всего оборудования.");
+            toolTip1.SetToolTip(this.cbxOffHardware, "Отключение всего оборудования.");
+            toolTip1.SetToolTip(this.cbxOffHardware, "Отключение всего оборудования.");
+            toolTip1.SetToolTip(this.cbxOffHardware, "Отключение всего оборудования.");
+            toolTip1.SetToolTip(this.cbxOffHardware, "Отключение всего оборудования.");
+            toolTip1.SetToolTip(this.cbxOffHardware, "Отключение всего оборудования.");
+            toolTip1.SetToolTip(this.cbxOffHardware, "Отключение всего оборудования.");
+            toolTip1.SetToolTip(this.cbxOffHardware, "Отключение всего оборудования.");
+            toolTip1.SetToolTip(this.cbxOffHardware, "Отключение всего оборудования.");
         }
 
         private void MaxTimeServiceLeave(object sender)

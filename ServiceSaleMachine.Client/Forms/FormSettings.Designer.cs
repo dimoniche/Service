@@ -157,6 +157,9 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.Style2 = new System.Windows.Forms.RadioButton();
+            this.Style1 = new System.Windows.Forms.RadioButton();
             this.groupBoxTimeLimit = new System.Windows.Forms.GroupBox();
             this.label15 = new System.Windows.Forms.Label();
             this.textBoxMaxTimeService = new System.Windows.Forms.TextBox();
@@ -181,10 +184,10 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.textMaxCountBanknote = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.checkchangeOn = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.checkBox5000 = new System.Windows.Forms.CheckBox();
             this.checkBox1000 = new System.Windows.Forms.CheckBox();
@@ -227,9 +230,6 @@
             this.labelTimeLastRefresh = new System.Windows.Forms.Label();
             this.labelWorkFromLastRefresh = new System.Windows.Forms.Label();
             this.buttonResetTimeRefresh = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.Style1 = new System.Windows.Forms.RadioButton();
-            this.Style2 = new System.Windows.Forms.RadioButton();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -256,6 +256,7 @@
             this.tabPage2.SuspendLayout();
             this.tabControl3.SuspendLayout();
             this.tabPage6.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.groupBoxTimeLimit.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.tabSettingService.SuspendLayout();
@@ -270,7 +271,6 @@
             this.tabControl4.SuspendLayout();
             this.tabPageReacess.SuspendLayout();
             this.tabPage14.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -661,8 +661,10 @@
             // 
             // tBxAdress
             // 
+            this.tBxAdress.Enabled = false;
             this.tBxAdress.Location = new System.Drawing.Point(266, 31);
             this.tBxAdress.Name = "tBxAdress";
+            this.tBxAdress.ReadOnly = true;
             this.tBxAdress.Size = new System.Drawing.Size(100, 20);
             this.tBxAdress.TabIndex = 37;
             this.tBxAdress.Text = "3";
@@ -1328,6 +1330,7 @@
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(128, 20);
             this.dateTimePicker1.TabIndex = 2;
+            this.dateTimePicker1.Visible = false;
             // 
             // label8
             // 
@@ -1337,6 +1340,7 @@
             this.label8.Size = new System.Drawing.Size(202, 13);
             this.label8.TabIndex = 1;
             this.label8.Text = "Дата от:                                    Дата до:";
+            this.label8.Visible = false;
             // 
             // dtDBFrom
             // 
@@ -1345,6 +1349,7 @@
             this.dtDBFrom.Name = "dtDBFrom";
             this.dtDBFrom.Size = new System.Drawing.Size(128, 20);
             this.dtDBFrom.TabIndex = 0;
+            this.dtDBFrom.Visible = false;
             // 
             // tabCheckView
             // 
@@ -1636,6 +1641,41 @@
             this.tabPage6.Text = "Основные";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.Style2);
+            this.groupBox3.Controls.Add(this.Style1);
+            this.groupBox3.Location = new System.Drawing.Point(15, 371);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(292, 118);
+            this.groupBox3.TabIndex = 16;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Оформление";
+            // 
+            // Style2
+            // 
+            this.Style2.AutoSize = true;
+            this.Style2.Location = new System.Drawing.Point(16, 53);
+            this.Style2.Name = "Style2";
+            this.Style2.Size = new System.Drawing.Size(100, 17);
+            this.Style2.TabIndex = 0;
+            this.Style2.TabStop = true;
+            this.Style2.Text = "Оформление 2";
+            this.Style2.UseVisualStyleBackColor = true;
+            this.Style2.CheckedChanged += new System.EventHandler(this.Style1_CheckedChanged);
+            // 
+            // Style1
+            // 
+            this.Style1.AutoSize = true;
+            this.Style1.Location = new System.Drawing.Point(16, 30);
+            this.Style1.Name = "Style1";
+            this.Style1.Size = new System.Drawing.Size(100, 17);
+            this.Style1.TabIndex = 0;
+            this.Style1.TabStop = true;
+            this.Style1.Text = "Оформление 1";
+            this.Style1.UseVisualStyleBackColor = true;
+            this.Style1.CheckedChanged += new System.EventHandler(this.Style1_CheckedChanged);
+            // 
             // groupBoxTimeLimit
             // 
             this.groupBoxTimeLimit.Controls.Add(this.label15);
@@ -1893,29 +1933,6 @@
             this.label23.TabIndex = 0;
             this.label23.Text = "Количество банкнот в приемнике";
             // 
-            // checkBox4
-            // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Enabled = false;
-            this.checkBox4.Location = new System.Drawing.Point(15, 42);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(130, 17);
-            this.checkBox4.TabIndex = 1;
-            this.checkBox4.Text = "Выдача сдачи чеком";
-            this.checkBox4.UseVisualStyleBackColor = true;
-            this.checkBox4.CheckedChanged += new System.EventHandler(this.ChangeWrite_Click);
-            // 
-            // checkBox3
-            // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(15, 65);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(153, 17);
-            this.checkBox3.TabIndex = 1;
-            this.checkBox3.Text = "Запись сдачи на аккаунт";
-            this.checkBox3.UseVisualStyleBackColor = true;
-            this.checkBox3.CheckedChanged += new System.EventHandler(this.ChangeWrite_Click);
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.checkBox4);
@@ -1928,6 +1945,18 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Режим работы";
             // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Enabled = false;
+            this.checkBox4.Location = new System.Drawing.Point(15, 42);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(130, 17);
+            this.checkBox4.TabIndex = 1;
+            this.checkBox4.Text = "Выдача сдачи чеком";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBox4.CheckedChanged += new System.EventHandler(this.ChangeWrite_Click);
+            // 
             // checkchangeOn
             // 
             this.checkchangeOn.AutoSize = true;
@@ -1938,6 +1967,17 @@
             this.checkchangeOn.Text = "Со сдачей";
             this.checkchangeOn.UseVisualStyleBackColor = true;
             this.checkchangeOn.CheckedChanged += new System.EventHandler(this.button9_Click);
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(15, 65);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(153, 17);
+            this.checkBox3.TabIndex = 1;
+            this.checkBox3.Text = "Запись сдачи на аккаунт";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.CheckedChanged += new System.EventHandler(this.ChangeWrite_Click);
             // 
             // groupBox1
             // 
@@ -2381,41 +2421,6 @@
             this.buttonResetTimeRefresh.UseVisualStyleBackColor = true;
             this.buttonResetTimeRefresh.Click += new System.EventHandler(this.buttonResetTimeRefresh_Click);
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.Style2);
-            this.groupBox3.Controls.Add(this.Style1);
-            this.groupBox3.Location = new System.Drawing.Point(15, 371);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(292, 118);
-            this.groupBox3.TabIndex = 16;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Оформление";
-            // 
-            // Style1
-            // 
-            this.Style1.AutoSize = true;
-            this.Style1.Location = new System.Drawing.Point(16, 30);
-            this.Style1.Name = "Style1";
-            this.Style1.Size = new System.Drawing.Size(100, 17);
-            this.Style1.TabIndex = 0;
-            this.Style1.TabStop = true;
-            this.Style1.Text = "Оформление 1";
-            this.Style1.UseVisualStyleBackColor = true;
-            this.Style1.CheckedChanged += new System.EventHandler(this.Style1_CheckedChanged);
-            // 
-            // Style2
-            // 
-            this.Style2.AutoSize = true;
-            this.Style2.Location = new System.Drawing.Point(16, 53);
-            this.Style2.Name = "Style2";
-            this.Style2.Size = new System.Drawing.Size(100, 17);
-            this.Style2.TabIndex = 0;
-            this.Style2.TabStop = true;
-            this.Style2.Text = "Оформление 2";
-            this.Style2.UseVisualStyleBackColor = true;
-            this.Style2.CheckedChanged += new System.EventHandler(this.Style1_CheckedChanged);
-            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2460,6 +2465,8 @@
             this.tabPage2.ResumeLayout(false);
             this.tabControl3.ResumeLayout(false);
             this.tabPage6.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.groupBoxTimeLimit.ResumeLayout(false);
             this.groupBoxTimeLimit.PerformLayout();
             this.groupBox5.ResumeLayout(false);
@@ -2482,8 +2489,6 @@
             this.tabPageReacess.PerformLayout();
             this.tabPage14.ResumeLayout(false);
             this.tabPage14.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }

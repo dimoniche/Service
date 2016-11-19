@@ -56,6 +56,8 @@
             this.tableLayoutPanel14 = new System.Windows.Forms.TableLayoutPanel();
             this.panel21 = new System.Windows.Forms.Panel();
             this.scalableLabel3 = new ServiceSaleMachine.ScalableLabel();
+            this.panel22 = new System.Windows.Forms.Panel();
+            this.scalableLabel4 = new ServiceSaleMachine.ScalableLabel();
             this.panel9 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.panel10 = new System.Windows.Forms.Panel();
@@ -65,6 +67,8 @@
             this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
             this.panel20 = new System.Windows.Forms.Panel();
             this.scalableLabel2 = new ServiceSaleMachine.ScalableLabel();
+            this.panel23 = new System.Windows.Forms.Panel();
+            this.scalableLabel5 = new ServiceSaleMachine.ScalableLabel();
             this.panel13 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
             this.panel15 = new System.Windows.Forms.Panel();
@@ -73,17 +77,13 @@
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
             this.panel16 = new System.Windows.Forms.Panel();
             this.pBxRemember = new System.Windows.Forms.PictureBox();
-            this.rememberBox = new System.Windows.Forms.CheckBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.panel22 = new System.Windows.Forms.Panel();
-            this.scalableLabel4 = new ServiceSaleMachine.ScalableLabel();
-            this.panel23 = new System.Windows.Forms.Panel();
-            this.scalableLabel5 = new ServiceSaleMachine.ScalableLabel();
             this.panel24 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel15 = new System.Windows.Forms.TableLayoutPanel();
-            this.chbNew = new System.Windows.Forms.CheckBox();
             this.panel25 = new System.Windows.Forms.Panel();
             this.ErrorText = new ServiceSaleMachine.ScalableLabel();
+            this.chbNew = new System.Windows.Forms.CheckBox();
+            this.rememberBox = new System.Windows.Forms.CheckBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -106,6 +106,7 @@
             this.panel18.SuspendLayout();
             this.tableLayoutPanel14.SuspendLayout();
             this.panel21.SuspendLayout();
+            this.panel22.SuspendLayout();
             this.panel9.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
             this.panel10.SuspendLayout();
@@ -113,6 +114,7 @@
             this.panel12.SuspendLayout();
             this.tableLayoutPanel13.SuspendLayout();
             this.panel20.SuspendLayout();
+            this.panel23.SuspendLayout();
             this.panel13.SuspendLayout();
             this.tableLayoutPanel10.SuspendLayout();
             this.panel15.SuspendLayout();
@@ -121,8 +123,6 @@
             this.tableLayoutPanel11.SuspendLayout();
             this.panel16.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBxRemember)).BeginInit();
-            this.panel22.SuspendLayout();
-            this.panel23.SuspendLayout();
             this.panel24.SuspendLayout();
             this.tableLayoutPanel15.SuspendLayout();
             this.panel25.SuspendLayout();
@@ -453,6 +453,25 @@
             this.scalableLabel3.TabIndex = 2;
             this.scalableLabel3.Text = "+7";
             // 
+            // panel22
+            // 
+            this.panel22.Controls.Add(this.scalableLabel4);
+            this.panel22.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel22.Location = new System.Drawing.Point(436, 3);
+            this.panel22.Name = "panel22";
+            this.panel22.Size = new System.Drawing.Size(104, 31);
+            this.panel22.TabIndex = 2;
+            // 
+            // scalableLabel4
+            // 
+            this.scalableLabel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scalableLabel4.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.scalableLabel4.Location = new System.Drawing.Point(0, 0);
+            this.scalableLabel4.Name = "scalableLabel4";
+            this.scalableLabel4.Size = new System.Drawing.Size(104, 31);
+            this.scalableLabel4.TabIndex = 0;
+            this.scalableLabel4.Text = "10 цифр";
+            // 
             // panel9
             // 
             this.panel9.Controls.Add(this.tableLayoutPanel6);
@@ -559,6 +578,25 @@
             this.scalableLabel2.TabIndex = 1;
             this.scalableLabel2.Text = "Пароль ";
             // 
+            // panel23
+            // 
+            this.panel23.Controls.Add(this.scalableLabel5);
+            this.panel23.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel23.Location = new System.Drawing.Point(436, 3);
+            this.panel23.Name = "panel23";
+            this.panel23.Size = new System.Drawing.Size(104, 31);
+            this.panel23.TabIndex = 2;
+            // 
+            // scalableLabel5
+            // 
+            this.scalableLabel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scalableLabel5.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.scalableLabel5.Location = new System.Drawing.Point(0, 0);
+            this.scalableLabel5.Name = "scalableLabel5";
+            this.scalableLabel5.Size = new System.Drawing.Size(104, 31);
+            this.scalableLabel5.TabIndex = 0;
+            this.scalableLabel5.Text = "4 цифры";
+            // 
             // panel13
             // 
             this.panel13.Controls.Add(this.tableLayoutPanel10);
@@ -647,60 +685,6 @@
             this.pBxRemember.TabStop = false;
             this.pBxRemember.Click += new System.EventHandler(this.pBxRemember_Click);
             // 
-            // rememberBox
-            // 
-            this.rememberBox.AutoSize = true;
-            this.rememberBox.Location = new System.Drawing.Point(3, 3);
-            this.rememberBox.Name = "rememberBox";
-            this.rememberBox.Size = new System.Drawing.Size(90, 8);
-            this.rememberBox.TabIndex = 15;
-            this.rememberBox.Text = "rememberBox";
-            this.rememberBox.UseVisualStyleBackColor = true;
-            this.rememberBox.Visible = false;
-            // 
-            // timer1
-            // 
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // panel22
-            // 
-            this.panel22.Controls.Add(this.scalableLabel4);
-            this.panel22.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel22.Location = new System.Drawing.Point(436, 3);
-            this.panel22.Name = "panel22";
-            this.panel22.Size = new System.Drawing.Size(104, 31);
-            this.panel22.TabIndex = 2;
-            // 
-            // scalableLabel4
-            // 
-            this.scalableLabel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scalableLabel4.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.scalableLabel4.Location = new System.Drawing.Point(0, 0);
-            this.scalableLabel4.Name = "scalableLabel4";
-            this.scalableLabel4.Size = new System.Drawing.Size(104, 31);
-            this.scalableLabel4.TabIndex = 0;
-            this.scalableLabel4.Text = "10 цифр";
-            // 
-            // panel23
-            // 
-            this.panel23.Controls.Add(this.scalableLabel5);
-            this.panel23.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel23.Location = new System.Drawing.Point(436, 3);
-            this.panel23.Name = "panel23";
-            this.panel23.Size = new System.Drawing.Size(104, 31);
-            this.panel23.TabIndex = 2;
-            // 
-            // scalableLabel5
-            // 
-            this.scalableLabel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scalableLabel5.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.scalableLabel5.Location = new System.Drawing.Point(0, 0);
-            this.scalableLabel5.Name = "scalableLabel5";
-            this.scalableLabel5.Size = new System.Drawing.Size(104, 31);
-            this.scalableLabel5.TabIndex = 0;
-            this.scalableLabel5.Text = "4 цифры";
-            // 
             // panel24
             // 
             this.panel24.Controls.Add(this.tableLayoutPanel15);
@@ -725,18 +709,6 @@
             this.tableLayoutPanel15.Size = new System.Drawing.Size(543, 22);
             this.tableLayoutPanel15.TabIndex = 0;
             // 
-            // chbNew
-            // 
-            this.chbNew.AutoSize = true;
-            this.chbNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.chbNew.Location = new System.Drawing.Point(3, 188);
-            this.chbNew.Name = "chbNew";
-            this.chbNew.Size = new System.Drawing.Size(134, 17);
-            this.chbNew.TabIndex = 16;
-            this.chbNew.Text = "Новый пользователь";
-            this.chbNew.UseVisualStyleBackColor = true;
-            this.chbNew.Visible = false;
-            // 
             // panel25
             // 
             this.panel25.Controls.Add(this.ErrorText);
@@ -754,6 +726,34 @@
             this.ErrorText.Name = "ErrorText";
             this.ErrorText.Size = new System.Drawing.Size(482, 16);
             this.ErrorText.TabIndex = 0;
+            // 
+            // chbNew
+            // 
+            this.chbNew.AutoSize = true;
+            this.chbNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.chbNew.Location = new System.Drawing.Point(3, 188);
+            this.chbNew.Name = "chbNew";
+            this.chbNew.Size = new System.Drawing.Size(134, 17);
+            this.chbNew.TabIndex = 16;
+            this.chbNew.Text = "Новый пользователь";
+            this.chbNew.UseVisualStyleBackColor = true;
+            this.chbNew.Visible = false;
+            // 
+            // rememberBox
+            // 
+            this.rememberBox.AutoSize = true;
+            this.rememberBox.Location = new System.Drawing.Point(3, 3);
+            this.rememberBox.Name = "rememberBox";
+            this.rememberBox.Size = new System.Drawing.Size(90, 8);
+            this.rememberBox.TabIndex = 15;
+            this.rememberBox.Text = "rememberBox";
+            this.rememberBox.UseVisualStyleBackColor = true;
+            this.rememberBox.Visible = false;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // UserRequest
             // 
@@ -794,6 +794,7 @@
             this.panel18.ResumeLayout(false);
             this.tableLayoutPanel14.ResumeLayout(false);
             this.panel21.ResumeLayout(false);
+            this.panel22.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
             this.panel10.ResumeLayout(false);
@@ -802,6 +803,7 @@
             this.panel12.ResumeLayout(false);
             this.tableLayoutPanel13.ResumeLayout(false);
             this.panel20.ResumeLayout(false);
+            this.panel23.ResumeLayout(false);
             this.panel13.ResumeLayout(false);
             this.tableLayoutPanel10.ResumeLayout(false);
             this.panel15.ResumeLayout(false);
@@ -810,8 +812,6 @@
             this.tableLayoutPanel11.ResumeLayout(false);
             this.panel16.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pBxRemember)).EndInit();
-            this.panel22.ResumeLayout(false);
-            this.panel23.ResumeLayout(false);
             this.panel24.ResumeLayout(false);
             this.tableLayoutPanel15.ResumeLayout(false);
             this.panel25.ResumeLayout(false);

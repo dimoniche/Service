@@ -167,14 +167,14 @@ namespace ServiceSaleMachine.Drivers
 
             Print(eLeft, false, false);
                 Print(TransformCode("Наличные          "), true);
-            Print(" ".PadRight(42 - 16 - statistic.AllMoneySumm.ToString().Length, ' ') + statistic.AllMoneySumm.ToString("00000.00") + TransformCode(" руб"), true);
+                Print(" ".PadRight(42 - 24 - statistic.AllMoneySumm.ToString().Length, ' ')    + statistic.AllMoneySumm.ToString("00000.00") + TransformCode(" руб"), true);
             Print(eLeft);
 
             if (Globals.ClientConfiguration.Settings.changeOn > 0)  // со сдачей
             {
                 Print(eLeft, false, false);
                 Print(TransformCode("Сумма на аккаунтах"), true);
-                Print(" ".PadRight(42 - 16 - statistic.AccountMoneySumm.ToString().Length, ' ') + statistic.AccountMoneySumm.ToString("00000.00") + TransformCode(" руб"), true);
+                Print(" ".PadRight(42 - 24 - statistic.AccountMoneySumm.ToString().Length, ' ') + statistic.AccountMoneySumm.ToString("00000.00") + TransformCode(" руб"), true);
                 Print(eLeft);
             }
 
@@ -182,13 +182,13 @@ namespace ServiceSaleMachine.Drivers
             {
                 Print(eLeft, false, false);
                 Print(TransformCode("Сумма на чеках    "), true);
-                Print(" ".PadRight(42 - 16 - statistic.BarCodeMoneySumm.ToString().Length, ' ') + statistic.BarCodeMoneySumm.ToString("00000.00") + TransformCode(" руб"), true);
+                Print(" ".PadRight(42 - 24 - statistic.BarCodeMoneySumm.ToString().Length, ' ')  + statistic.BarCodeMoneySumm.ToString("00000.00") + TransformCode(" руб"), true);
                 Print(eLeft);
             }
 
             Print(eLeft, false, false);
                 Print(TransformCode("Оказано услуг     "), true);
-            Print(" ".PadRight(42 - 16 - statistic.ServiceMoneySumm.ToString().Length, ' ') + statistic.ServiceMoneySumm.ToString("00000.00") + TransformCode(" руб"), true);
+                Print(" ".PadRight(42 - 24 - statistic.ServiceMoneySumm.ToString().Length, ' ')  + statistic.ServiceMoneySumm.ToString("00000.00") + TransformCode(" руб"), true);
             Print(eLeft);
 
             Print("");

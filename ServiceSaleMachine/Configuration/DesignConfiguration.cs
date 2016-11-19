@@ -54,8 +54,10 @@ namespace ServiceSaleMachine
                         if ((xElement = xSettings.Element("ButtonWhatsDiff")) != null) Settings.ButtonWhatsDiff = xElement.Value;
                         if ((xElement = xSettings.Element("LogoService1")) != null) Settings.LogoService1 = xElement.Value;
                         if ((xElement = xSettings.Element("LogoService2")) != null) Settings.LogoService2 = xElement.Value;
+                        if ((xElement = xSettings.Element("LogoService_style1")) != null) Settings.LogoService_style1 = xElement.Value;
 
                         if ((xElement = xSettings.Element("ButtonGetOxigen")) != null) Settings.ButtonGetOxigen = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonGetOxigen_style1")) != null) Settings.ButtonGetOxigen_style1 = xElement.Value;
                         if ((xElement = xSettings.Element("ButtonTakeAwayMoney")) != null) Settings.ButtonTakeAwayMoney = xElement.Value;
                         if ((xElement = xSettings.Element("ButtonreturnMoney")) != null) Settings.ButtonreturnMoney = xElement.Value;
                         if ((xElement = xSettings.Element("ButtonOK")) != null) Settings.ButtonOK = xElement.Value;

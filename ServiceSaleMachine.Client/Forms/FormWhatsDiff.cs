@@ -15,9 +15,18 @@ namespace ServiceSaleMachine.Client
         {
             InitializeComponent();
 
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxBegin, Globals.DesignConfiguration.Settings.ButtonStartServices);
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxLabelService1, Globals.DesignConfiguration.Settings.LogoService1);
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxLabelService2, Globals.DesignConfiguration.Settings.LogoService2);
+            if (Globals.ClientConfiguration.Settings.style == 1)
+            {
+                Globals.DesignConfiguration.Settings.LoadPictureBox(pBxBegin, Globals.DesignConfiguration.Settings.ButtonStartServices);
+                Globals.DesignConfiguration.Settings.LoadPictureBox(pBxLabelService1, Globals.DesignConfiguration.Settings.LogoService1);
+                Globals.DesignConfiguration.Settings.LoadPictureBox(pBxLabelService2, Globals.DesignConfiguration.Settings.LogoService2);
+            }
+            else
+            {
+                Globals.DesignConfiguration.Settings.LoadPictureBox(pBxBegin, Globals.DesignConfiguration.Settings.ButtonStartServices);
+                Globals.DesignConfiguration.Settings.LoadPictureBox(pBxLabelService1, Globals.DesignConfiguration.Settings.LogoService_style1);
+                Globals.DesignConfiguration.Settings.LoadPictureBox(pBxLabelService2, Globals.DesignConfiguration.Settings.LogoService_style1);
+            }
         }
 
         public override void LoadData()

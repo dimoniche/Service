@@ -187,6 +187,7 @@
             this.scalableLabel2.Size = new System.Drawing.Size(459, 21);
             this.scalableLabel2.TabIndex = 0;
             this.scalableLabel2.Text = "До тренировки";
+            this.scalableLabel2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.scalableLabel1_KeyDown);
             // 
             // TextService1
             // 
@@ -199,6 +200,7 @@
             this.TextService1.Size = new System.Drawing.Size(459, 103);
             this.TextService1.TabIndex = 1;
             this.TextService1.Text = "";
+            this.TextService1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.scalableLabel1_KeyDown);
             // 
             // panel8
             // 
@@ -294,6 +296,7 @@
             this.TextService2.Size = new System.Drawing.Size(459, 103);
             this.TextService2.TabIndex = 2;
             this.TextService2.Text = "";
+            this.TextService2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.scalableLabel1_KeyDown);
             // 
             // scalableLabel3
             // 
@@ -304,6 +307,7 @@
             this.scalableLabel3.Size = new System.Drawing.Size(459, 21);
             this.scalableLabel3.TabIndex = 0;
             this.scalableLabel3.Text = "После тренировки";
+            this.scalableLabel3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.scalableLabel1_KeyDown);
             // 
             // panel9
             // 

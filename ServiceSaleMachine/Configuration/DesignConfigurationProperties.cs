@@ -26,7 +26,9 @@ namespace ServiceSaleMachine
         public string ButtonWhatsDiff = defpicture;
         public string LogoService1 = defpicture;
         public string LogoService2 = defpicture;
+        public string LogoService_style1 = defpicture;
         public string ButtonGetOxigen = defpicture;
+        public string ButtonGetOxigen_style1 = defpicture;
         public string ScreenSaver = defpicture;
 
         public string ButtonTakeAwayMoney = defpicture;

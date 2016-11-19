@@ -48,7 +48,16 @@ namespace ServiceSaleMachine.Client
 
             data.drivers.ReceivedResponse += reciveResponse;
 
-            numberTelefon.Text = "+7" + data.retLogin;
+            if (data.retLogin != "")
+            {
+                numberTelefon.Text = "+7";
+            }
+            else
+            {
+                numberTelefon.Text = "";
+            }
+
+            numberTelefon.Text += data.retLogin;
 
             if (data.retLogin != "")
             {

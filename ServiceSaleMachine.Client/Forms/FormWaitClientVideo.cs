@@ -26,7 +26,7 @@ namespace ServiceSaleMachine.Client
             VideoPlayer.uiMode = "none";
             VideoPlayer.settings.setMode("loop", true);
 
-            VideoPlayer.URL = Globals.GetPath(PathEnum.Video) + "\\o2.avi";
+            VideoPlayer.URL = Globals.GetPath(PathEnum.Video) + "\\" + Globals.DesignConfiguration.Settings.ScreenSaverVideo;
             VideoPlayer.Ctlcontrols.play();
         }
 

@@ -64,6 +64,9 @@ namespace ServiceSaleMachine
         // стиль оформления
         public int style = 0;
 
+        // стиль оформления
+        public int ScreenServerType = 0;
+
         // Максимальное количество банкнот для вызова инкассации
         public int MaxCountBankNote = 500;
 

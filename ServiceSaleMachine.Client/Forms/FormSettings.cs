@@ -766,6 +766,25 @@ namespace ServiceSaleMachine.Client
                 Style2.Checked = true;
             }
 
+            if (Globals.ClientConfiguration.Settings.ScreenServerType == 0)
+            {
+                ButPicture.Checked = true;
+                ButGIF.Checked = false;
+                ButVideo.Checked = false;
+            }
+            else if (Globals.ClientConfiguration.Settings.ScreenServerType == 1)
+            {
+                ButPicture.Checked = false;
+                ButGIF.Checked = true;
+                ButVideo.Checked = false;
+            }
+            else if (Globals.ClientConfiguration.Settings.ScreenServerType == 2)
+            {
+                ButPicture.Checked = false;
+                ButGIF.Checked = false;
+                ButVideo.Checked = true;
+            }
+
             init = false;
 
             // вставим дату последней инкассации
@@ -2031,6 +2050,24 @@ namespace ServiceSaleMachine.Client
             else if (Style1.Checked == false && Style2.Checked == true)
             {
                 Globals.ClientConfiguration.Settings.style = 1;
+            }
+
+            Globals.CheckConfiguration.Save();
+        }
+
+        private void ButPicture_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ButPicture.Checked == true && ButGIF.Checked == false && ButVideo.Checked == false)
+            {
+                Globals.ClientConfiguration.Settings.ScreenServerType = 0;
+            }
+            else if (ButPicture.Checked == false && ButGIF.Checked == true && ButVideo.Checked == false)
+            {
+                Globals.ClientConfiguration.Settings.ScreenServerType = 1;
+            }
+            else if (ButPicture.Checked == false && ButGIF.Checked == false && ButVideo.Checked == true)
+            {
+                Globals.ClientConfiguration.Settings.ScreenServerType = 2;
             }
 
             Globals.CheckConfiguration.Save();

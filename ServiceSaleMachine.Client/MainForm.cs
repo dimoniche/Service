@@ -322,8 +322,14 @@ namespace ServiceSaleMachine.Client
                     {
                         // по тайм ауту вышли в рекламу
                         //result = (FormResultData)FormManager.OpenForm<FormWaitStage>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-                        //result = (FormResultData)FormManager.OpenForm<FormWaitClientVideo>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-                        result = (FormResultData)FormManager.OpenForm<FormWaitClientGif>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+                        if (Globals.ClientConfiguration.Settings.ScreenServerType == 0 || Globals.ClientConfiguration.Settings.ScreenServerType == 1)
+                        {
+                            result = (FormResultData)FormManager.OpenForm<FormWaitClientGif>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+                        }
+                        else
+                        {
+                            result = (FormResultData)FormManager.OpenForm<FormWaitClientVideo>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+                        }
 
                         if (result.stage == WorkerStateStage.DropCassettteBill)
                         {

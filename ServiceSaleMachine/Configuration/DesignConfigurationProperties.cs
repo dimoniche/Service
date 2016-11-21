@@ -30,6 +30,7 @@ namespace ServiceSaleMachine
         public string ButtonGetOxigen = defpicture;
         public string ButtonGetOxigen_style1 = defpicture;
         public string ScreenSaver = defpicture;
+        public string ScreenSaverVideo = defpicture;
 
         public string ButtonTakeAwayMoney = defpicture;
         public string ButtonreturnMoney = defpicture;

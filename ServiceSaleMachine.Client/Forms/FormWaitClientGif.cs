@@ -9,6 +9,7 @@ namespace ServiceSaleMachine.Client
     public partial class FormWaitClientGif : MyForm
     {
         FormResultData data;
+        private GifImage gifImage = null;
 
         public FormWaitClientGif()
         {
@@ -27,7 +28,15 @@ namespace ServiceSaleMachine.Client
 
             data.drivers.ReceivedResponse += reciveResponse;
 
-            Globals.DesignConfiguration.Settings.LoadPictureBox(ScreenSever, Globals.DesignConfiguration.Settings.ScreenSaver);
+            if (Globals.ClientConfiguration.Settings.ScreenServerType == 0)
+            {
+                Globals.DesignConfiguration.Settings.LoadPictureBox(ScreenSever, Globals.DesignConfiguration.Settings.ScreenSaver);
+            }
+            else
+            {
+                gifImage = new GifImage(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ScreenSaver);
+                gifImage.ReverseAtEnd = false; //dont reverse at end
+            }
         }
 
         private void reciveResponse(object sender, ServiceClientResponseEventArgs e)
@@ -90,6 +99,14 @@ namespace ServiceSaleMachine.Client
         {
             data.stage = WorkerStateStage.MainScreen;
             Close();
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            if (Globals.ClientConfiguration.Settings.ScreenServerType == 1)
+            {
+                ScreenSever.Image = gifImage.GetNextFrame();
+            }
         }
     }
 }

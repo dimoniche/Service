@@ -82,6 +82,7 @@ namespace ServiceSaleMachine
                         if ((xElement = xSettings.Element("ButtonRemember")) != null) Settings.ButtonRemember = xElement.Value;
 
                         if ((xElement = xSettings.Element("ScreenSaver")) != null) Settings.ScreenSaver = xElement.Value;
+                        if ((xElement = xSettings.Element("ScreenSaverVideo")) != null) Settings.ScreenSaverVideo = xElement.Value;
                     }
 
                     return true;

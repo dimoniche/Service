@@ -157,6 +157,10 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.ButGIF = new System.Windows.Forms.RadioButton();
+            this.ButVideo = new System.Windows.Forms.RadioButton();
+            this.ButPicture = new System.Windows.Forms.RadioButton();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.Style2 = new System.Windows.Forms.RadioButton();
             this.Style1 = new System.Windows.Forms.RadioButton();
@@ -256,6 +260,7 @@
             this.tabPage2.SuspendLayout();
             this.tabControl3.SuspendLayout();
             this.tabPage6.SuspendLayout();
+            this.groupBox7.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBoxTimeLimit.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -1636,6 +1641,7 @@
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.groupBox7);
             this.tabPage6.Controls.Add(this.groupBox3);
             this.tabPage6.Controls.Add(this.groupBoxTimeLimit);
             this.tabPage6.Controls.Add(this.groupBox5);
@@ -1648,13 +1654,60 @@
             this.tabPage6.Text = "Основные";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.ButGIF);
+            this.groupBox7.Controls.Add(this.ButVideo);
+            this.groupBox7.Controls.Add(this.ButPicture);
+            this.groupBox7.Location = new System.Drawing.Point(15, 455);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(163, 100);
+            this.groupBox7.TabIndex = 17;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Заставка";
+            // 
+            // ButGIF
+            // 
+            this.ButGIF.AutoSize = true;
+            this.ButGIF.Location = new System.Drawing.Point(16, 42);
+            this.ButGIF.Name = "ButGIF";
+            this.ButGIF.Size = new System.Drawing.Size(42, 17);
+            this.ButGIF.TabIndex = 3;
+            this.ButGIF.Text = "GIF";
+            this.ButGIF.UseVisualStyleBackColor = true;
+            this.ButGIF.CheckedChanged += new System.EventHandler(this.ButPicture_CheckedChanged);
+            // 
+            // ButVideo
+            // 
+            this.ButVideo.AutoSize = true;
+            this.ButVideo.Location = new System.Drawing.Point(16, 65);
+            this.ButVideo.Name = "ButVideo";
+            this.ButVideo.Size = new System.Drawing.Size(56, 17);
+            this.ButVideo.TabIndex = 2;
+            this.ButVideo.Text = "Видео";
+            this.ButVideo.UseVisualStyleBackColor = true;
+            this.ButVideo.CheckedChanged += new System.EventHandler(this.ButPicture_CheckedChanged);
+            // 
+            // ButPicture
+            // 
+            this.ButPicture.AutoSize = true;
+            this.ButPicture.Checked = true;
+            this.ButPicture.Location = new System.Drawing.Point(16, 19);
+            this.ButPicture.Name = "ButPicture";
+            this.ButPicture.Size = new System.Drawing.Size(127, 17);
+            this.ButPicture.TabIndex = 0;
+            this.ButPicture.TabStop = true;
+            this.ButPicture.Text = "Статичная картинка";
+            this.ButPicture.UseVisualStyleBackColor = true;
+            this.ButPicture.CheckedChanged += new System.EventHandler(this.ButPicture_CheckedChanged);
+            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.Style2);
             this.groupBox3.Controls.Add(this.Style1);
             this.groupBox3.Location = new System.Drawing.Point(15, 371);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(292, 118);
+            this.groupBox3.Size = new System.Drawing.Size(292, 78);
             this.groupBox3.TabIndex = 16;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Оформление";
@@ -1662,7 +1715,7 @@
             // Style2
             // 
             this.Style2.AutoSize = true;
-            this.Style2.Location = new System.Drawing.Point(16, 53);
+            this.Style2.Location = new System.Drawing.Point(16, 46);
             this.Style2.Name = "Style2";
             this.Style2.Size = new System.Drawing.Size(76, 17);
             this.Style2.TabIndex = 0;
@@ -1674,7 +1727,7 @@
             // Style1
             // 
             this.Style1.AutoSize = true;
-            this.Style1.Location = new System.Drawing.Point(16, 30);
+            this.Style1.Location = new System.Drawing.Point(16, 23);
             this.Style1.Name = "Style1";
             this.Style1.Size = new System.Drawing.Size(76, 17);
             this.Style1.TabIndex = 0;
@@ -2485,6 +2538,8 @@
             this.tabPage2.ResumeLayout(false);
             this.tabControl3.ResumeLayout(false);
             this.tabPage6.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBoxTimeLimit.ResumeLayout(false);
@@ -2717,5 +2772,9 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.RadioButton Style2;
         private System.Windows.Forms.RadioButton Style1;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.RadioButton ButVideo;
+        private System.Windows.Forms.RadioButton ButPicture;
+        private System.Windows.Forms.RadioButton ButGIF;
     }
 }

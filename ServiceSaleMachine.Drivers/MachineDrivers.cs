@@ -491,7 +491,7 @@ namespace ServiceSaleMachine.Drivers
                         }
                         else
                         {
-                            if (connectOff == true || errorBill == true)
+                            if (connectOff == true || (errorBill == true && CCNETDriver.PollResults.Z1 != 0x47))
                             {
                                 // была пропажа питания или отсутствие связи
                                 Message message = new Message();

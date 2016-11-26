@@ -38,6 +38,9 @@ namespace ServiceSaleMachine.Drivers
         [DllImport("winspool.Drv", EntryPoint = "WritePrinter", SetLastError = true, ExactSpelling = true,CallingConvention = CallingConvention.StdCall)]
         public static extern bool WritePrinter(IntPtr hPrinter, IntPtr pBytes, Int32 dwCount, out Int32 dwWritten);
 
+        [DllImport("winspool.Drv", EntryPoint = "AbortPrinter", SetLastError = true, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern bool AbortPrinter(IntPtr hPrinter);
+
         [DllImport("winspool.Drv", EntryPoint = "GetPrinterA", SetLastError = true, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         internal static extern bool GetPrinter(
            IntPtr hPrinter,
@@ -83,6 +86,11 @@ namespace ServiceSaleMachine.Drivers
                 ClosePrinter(hPrinter);
                 PrinterOpen = false;
             }
+        }
+
+        public void AbortPrint()
+        {
+            AbortPrinter(hPrinter);
         }
 
         [StructLayout(LayoutKind.Sequential)]

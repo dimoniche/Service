@@ -2436,10 +2436,9 @@
             this.labelAllMoneySumm.AutoSize = true;
             this.labelAllMoneySumm.Location = new System.Drawing.Point(32, 73);
             this.labelAllMoneySumm.Name = "labelAllMoneySumm";
-            this.labelAllMoneySumm.Size = new System.Drawing.Size(124, 13);
+            this.labelAllMoneySumm.Size = new System.Drawing.Size(126, 13);
             this.labelAllMoneySumm.TabIndex = 2;
-            this.labelAllMoneySumm.Text = "Сумма принятых денег";
-            this.labelAllMoneySumm.Visible = false;
+            this.labelAllMoneySumm.Text = "Сумма денег в кассете";
             // 
             // buttonEncashment
             // 

@@ -35,7 +35,7 @@ namespace ServiceSaleMachine.Drivers
                 COMPort.DtrEnable = false;
 
 
-                COMPort.ReadTimeout = 5000;
+                COMPort.ReadTimeout = 2000;
 
                 /*COMPort.DataReceived += SerialPortDataRecevied;
                 COMPort.ErrorReceived += SerialPortErrorRecived;

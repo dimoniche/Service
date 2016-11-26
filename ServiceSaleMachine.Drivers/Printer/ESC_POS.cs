@@ -136,6 +136,11 @@ namespace ServiceSaleMachine.Drivers
             prn.ClosePrint();
         }
 
+        public void AbortPrint()
+        {
+            prn.AbortPrint();
+        }
+
         public string getNamePrinter()
         {
             return Globals.ClientConfiguration.Settings.NamePrinter;

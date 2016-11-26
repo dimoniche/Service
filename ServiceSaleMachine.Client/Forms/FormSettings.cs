@@ -798,13 +798,13 @@ namespace ServiceSaleMachine.Client
             // обновим из базы статистические данные
             data.statistic = GlobalDb.GlobalBase.GetMoneyStatistic();
 
-            labelAllMoneySumm.Text = "Сумма принятых денег " + data.statistic.AllMoneySumm.ToString() + " руб.";
+            labelAllMoneySumm.Text = "Сумма денег в кассете " + data.statistic.AllMoneySumm.ToString() + " руб.";
             labelAccountMoneySumm.Text = "Cумма денег на аккаунтах " + data.statistic.AccountMoneySumm.ToString() + " руб.";
             labelBarCodeMoneySumm.Text = "Cумма денег на штрихкод-чеках " + data.statistic.BarCodeMoneySumm.ToString() + " руб.";
             labelServiceMoneySumm.Text = "Oказано услуг на сумму " + data.statistic.ServiceMoneySumm.ToString() + " руб.";
             labelCountBankNote.Text = "Количество принятых банкнот " + data.statistic.CountBankNote.ToString() + " шт.";
 
-            labelAllAmountMoney.Text = "Сумма принятых денег " + GlobalDb.GlobalBase.GetAmountMoney().ToString() + " руб.";
+            labelAllAmountMoney.Text = "Сумма денег в кассете " + GlobalDb.GlobalBase.GetAmountMoney().ToString() + " руб.";
             labelAllAmountService.Text = "Oказано услуг на сумму " + GlobalDb.GlobalBase.GetAmountService().ToString() + " руб.";
         }
 
@@ -2012,7 +2012,7 @@ namespace ServiceSaleMachine.Client
         {
             data.statistic = GlobalDb.GlobalBase.GetMoneyStatistic(dateTimeStatistic.Value);
 
-            labelAllMoneySumm.Text = "Сумма принятых денег " + data.statistic.AllMoneySumm.ToString() + " руб.";
+            labelAllMoneySumm.Text = "Сумма денег в кассете " + data.statistic.AllMoneySumm.ToString() + " руб.";
             labelAccountMoneySumm.Text = "Cумма денег на аккаунтах " + data.statistic.AccountMoneySumm.ToString() + " руб.";
             labelBarCodeMoneySumm.Text = "Cумма денег на штрихкод-чеках " + data.statistic.BarCodeMoneySumm.ToString() + " руб.";
             labelServiceMoneySumm.Text = "Oказано услуг на сумму " + data.statistic.ServiceMoneySumm.ToString() + " руб.";

@@ -423,6 +423,10 @@ namespace ServiceSaleMachine.Drivers
         private void WorkerBillPollDriver_Work(object sender, ThreadWorkEventArgs e)
         {
             int stepCount = 0;
+            int timeout = 100;
+            bool result = true;
+            bool connectOff = false;
+            bool errorBill = false;
 
             this.log.Write(LogMessageType.Information, "BILL TASK: Запускаем задачу приемника.");
 
@@ -432,12 +436,15 @@ namespace ServiceSaleMachine.Drivers
                 // сначала загрузим массив принимаемых купюр
                 while (CCNETDriver.bill_recordIsEmpty())
                 {
-                    CCNETDriver.GetBillTable();
+                    if (CCNETDriver.GetBillTable().Contains("СБОЙ"))
+                    {
+                        //result = false;
+                    }
                 }
 
                 CCNETDriver.Cmd(CCNETCommandEnum.Information, (byte)CCNETDriver.BillAdr);
             }
-            catch(Exception exp)
+            catch (Exception exp)
             {
                 this.log.Write(LogMessageType.Debug, "BILL TASK: Ошибка: " + exp.ToString());
             }
@@ -457,11 +464,52 @@ namespace ServiceSaleMachine.Drivers
                         CCNETDriver.send_bill_command = true;
                         if (CCNETDriver.hold_bill && (stepCount % 10) == 0)
                         {
-                            CCNETDriver.Cmd(CCNETCommandEnum.Hold, (byte)CCNETDriver.BillAdr);
+                            result = CCNETDriver.Cmd(CCNETCommandEnum.Hold, (byte)CCNETDriver.BillAdr);
                         }
 
-                        CCNETDriver.Cmd(CCNETCommandEnum.Poll, (byte)CCNETDriver.BillAdr);
+                        result = CCNETDriver.Cmd(CCNETCommandEnum.Poll, (byte)CCNETDriver.BillAdr);
                         CCNETDriver.send_bill_command = false;
+
+                        if(result == false)
+                        {
+                            Message message = new Message();
+
+                            message.Event = DeviceEvent.ConnectBillError;
+                            message.Content = "";
+
+                            log.Write(LogMessageType.Information, "BILL TASK: Нет связи с купюроприемником");
+
+                            ReceivedResponse(this, new ServiceClientResponseEventArgs(message));
+
+                            CCNETDriver.PollResults.Z1 = 0;
+                            CCNETDriver.PollResults.Z2 = 0;
+
+                            // если нет связи - опрашиваем реже
+                            timeout = 2000;
+
+                            connectOff = true;
+                        }
+                        else
+                        {
+                            if (connectOff == true || errorBill == true)
+                            {
+                                // была пропажа питания или отсутствие связи
+                                Message message = new Message();
+
+                                message.Event = DeviceEvent.ConnectBillErrorEnd;
+                                message.Content = "";
+
+                                log.Write(LogMessageType.Information, "BILL TASK: Cвязь с купюроприемником появилась");
+
+                                ReceivedResponse(this, new ServiceClientResponseEventArgs(message));
+
+                                connectOff = false;
+                                errorBill = false;
+                            }
+
+                            // со связью все ок
+                            timeout = 100;
+                        }
 
                         // все события купюроприемника
                         if (CCNETDriver.PollResults.Z1 != 0 && CCNETDriver.PollResults.Z2 != 0)
@@ -507,6 +555,8 @@ namespace ServiceSaleMachine.Drivers
                             message.Content = CCNETDriver.PollResults.Z2;
 
                             ReceivedResponse(this, new ServiceClientResponseEventArgs(message));
+
+                            errorBill = true;
                         }
 
                         // задержали купюру
@@ -586,7 +636,7 @@ namespace ServiceSaleMachine.Drivers
                     if (!e.Cancel)
                     {
                         // Нормальная работа
-                        BillAcceptorEvent.WaitOne(100);
+                        BillAcceptorEvent.WaitOne(timeout);
 
                         // Принудительный запуск сборки мусора, если возможно освободить больше установленного минимума
                         stepCount++;

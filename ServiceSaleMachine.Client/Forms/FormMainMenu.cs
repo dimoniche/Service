@@ -83,6 +83,31 @@ namespace ServiceSaleMachine.Client
                     this.Close();
                 }
             }
+
+            {
+                PrinterStatus status = data.drivers.printer.GetStatus();
+
+                if ((status & (PrinterStatus.PRINTER_STATUS_PAPER_OUT
+                             | PrinterStatus.PRINTER_STATUS_PAPER_JAM
+                             | PrinterStatus.PRINTER_STATUS_PAPER_PROBLEM
+                             | PrinterStatus.PRINTER_STATUS_ERROR)) > 0)
+                {
+                    if (Globals.ClientConfiguration.Settings.NoPaperWork == 0)
+                    {
+                        data.stage = WorkerStateStage.PaperEnd;
+                        this.Close();
+                    }
+
+                    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: кончилась бумага.");
+                }
+                else if ((status & PrinterStatus.PRINTER_STATUS_OFFLINE) > 0)
+                {
+                    data.stage = WorkerStateStage.ErrorPrinter;
+                    this.Close();
+
+                    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: нет связи с принтером.");
+                }
+            }
         }
 
         private void FormMainMenu_FormClosed(object sender, FormClosedEventArgs e)
@@ -114,10 +139,24 @@ namespace ServiceSaleMachine.Client
                     }
                     break;
                 case DeviceEvent.DropCassetteFullBillAcceptor:
-
+                    {
+                        data.stage = WorkerStateStage.BillFull;
+                        this.Close();
+                    }
                     break;
                 case DeviceEvent.BillAcceptorError:
-
+                    {
+                        // ошибка купюроприемника
+                        data.stage = WorkerStateStage.BillError;
+                        this.Close();
+                    }
+                    break;
+                case DeviceEvent.ConnectBillError:
+                    {
+                        // нет связи с купюроприемником
+                        data.stage = WorkerStateStage.BillError;
+                        this.Close();
+                    }
                     break;
             }
         }
@@ -145,7 +184,7 @@ namespace ServiceSaleMachine.Client
             {
                 if (Globals.IsDebug)
                 {
-                    // пошлем событие вставки обратно приемника
+                    // пошлем событие вынимания приемника
                     Drivers.Message message = new Drivers.Message();
 
                     message.Event = DeviceEvent.DropCassetteBillAcceptor;

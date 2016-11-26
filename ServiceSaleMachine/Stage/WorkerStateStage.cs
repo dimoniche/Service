@@ -205,5 +205,15 @@ namespace ServiceSaleMachine
         NotAuthorizeUser,
         FindPhone,
         NotFindPhone,
+
+        /// <summary>
+        /// Общая ошибка связи с приемником
+        /// </summary>
+        BillError,
+
+        /// <summary>
+        /// Ошибка приемника снялась
+        /// </summary>
+        BillErrorEnd,
     }
 }

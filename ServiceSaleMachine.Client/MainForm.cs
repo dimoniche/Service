@@ -125,6 +125,7 @@ namespace ServiceSaleMachine.Client
 
                     check = true;
 
+NoCheckStatistic:
                     if (result.stage != WorkerStateStage.None)
                     {
                         Program.Log.Write(LogMessageType.Information, "MAIN WORK: Аппарат не работает.");
@@ -137,6 +138,24 @@ namespace ServiceSaleMachine.Client
                             // выход
                             Close();
                             return;
+                        }
+                        else if (result.stage == WorkerStateStage.DropCassettteBill)
+                        {
+                            Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выемка денег.");
+
+                            // выемка денег
+                            result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                            if (result.stage == WorkerStateStage.ExitProgram)
+                            {
+                                // выход
+                                Close();
+                                return;
+                            }
+                        }
+                        else if (result.stage == WorkerStateStage.BillErrorEnd)
+                        {
+
                         }
 
                         continue;
@@ -151,6 +170,26 @@ namespace ServiceSaleMachine.Client
                         // выход
                         Close();
                         return;
+                    }
+                    else if (result.stage == WorkerStateStage.PaperEnd)
+                    {
+                        // ошибки принтера есть
+                        continue;
+                    }
+                    else if (result.stage == WorkerStateStage.ErrorPrinter)
+                    {
+                        // ошибки принтера есть
+                        continue;
+                    }
+                    else if (result.stage == WorkerStateStage.BillError)
+                    {
+                        // ошибки купюроприемника
+                        goto NoCheckStatistic;
+                    }
+                    else if (result.stage == WorkerStateStage.BillFull)
+                    {
+                        // купюроприемник полон
+                        goto NoCheckStatistic;
                     }
                     else if (result.stage == WorkerStateStage.InterUser)
                     {
@@ -331,7 +370,27 @@ namespace ServiceSaleMachine.Client
                             result = (FormResultData)FormManager.OpenForm<FormWaitClientVideo>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
                         }
 
-                        if (result.stage == WorkerStateStage.DropCassettteBill)
+                        if (result.stage == WorkerStateStage.BillError)
+                        {
+                            // ошибки купюроприемника
+                            goto NoCheckStatistic;
+                        }
+                        else if (result.stage == WorkerStateStage.BillFull)
+                        {
+                            // купюроприемник полон
+                            goto NoCheckStatistic;
+                        }
+                        else if (result.stage == WorkerStateStage.PaperEnd)
+                        {
+                            // ошибки принтера есть
+                            continue;
+                        }
+                        else if (result.stage == WorkerStateStage.ErrorPrinter)
+                        {
+                            // ошибки принтера есть
+                            continue;
+                        }
+                        else if (result.stage == WorkerStateStage.DropCassettteBill)
                         {
                             Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выемка денег.");
 
@@ -355,15 +414,30 @@ namespace ServiceSaleMachine.Client
 
                             // аппарат временно не работает
                             result = (FormResultData)FormManager.OpenForm<FormTemporallyNoWork>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-                            if (result.stage == WorkerStateStage.ErrorEndControl)
-                            {
-                                continue;
-                            }
-                            else if (result.stage == WorkerStateStage.ExitProgram)
+
+                            if (result.stage == WorkerStateStage.ExitProgram)
                             {
                                 // выход
                                 Close();
                                 return;
+                            }
+                            else if (result.stage == WorkerStateStage.DropCassettteBill)
+                            {
+                                Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выемка денег.");
+
+                                // выемка денег
+                                result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                                if (result.stage == WorkerStateStage.ExitProgram)
+                                {
+                                    // выход
+                                    Close();
+                                    return;
+                                }
+                            }
+                            else if (result.stage == WorkerStateStage.BillErrorEnd)
+                            {
+
                             }
 
                             continue;
@@ -786,6 +860,8 @@ namespace ServiceSaleMachine.Client
             }
             else if ((status & PrinterStatus.PRINTER_STATUS_OFFLINE) > 0)
             {
+                result.drivers.modem.SendSMS("Нет связи с принтером.", result.log);
+
                 // нет связи с принтером
                 result.stage = WorkerStateStage.ErrorPrinter;
 
@@ -806,6 +882,8 @@ namespace ServiceSaleMachine.Client
             Program.Log.Write(LogMessageType.Information, "Выход из приложения.");
 
             GlobalDb.GlobalBase.CloseForm();
+
+            result.drivers.printer.AbortPrint();
 
             try
             {

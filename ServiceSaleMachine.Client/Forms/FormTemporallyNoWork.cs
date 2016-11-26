@@ -56,6 +56,10 @@ namespace ServiceSaleMachine.Client
             {
                 error.Text = "Ошибка E060";
             }
+            else if (data.stage == WorkerStateStage.BillError)
+            {
+                error.Text = "Ошибка E070";
+            }
         }
 
         private void reciveResponse(object sender, ServiceClientResponseEventArgs e)
@@ -80,18 +84,25 @@ namespace ServiceSaleMachine.Client
                 case DeviceEvent.BillAcceptorError:
 
                     break;
+                case DeviceEvent.ConnectBillErrorEnd:
+                    // связь с приемником возобновилась
+                    {
+                        data.stage = WorkerStateStage.BillErrorEnd;
+                        this.Close();
+                    }
+                    break;
                 default:
                     // другие события
                     if (data.stage == WorkerStateStage.BillFull)
                     {
-                        // только если вошли сюда с полным баком денег
-                        if (!((string)e.Message.Content).Contains("Drop Cassette out of position")
-                        || !((string)e.Message.Content).Contains("Drop Cassette Full"))
-                        {
-                            // не выемка
-                            data.stage = WorkerStateStage.EndBillFull;
-                            this.Close();
-                        }
+                        //// только если вошли сюда с полным баком денег
+                        //if (!((string)e.Message.Content).Contains("Drop Cassette out of position")
+                        //|| !((string)e.Message.Content).Contains("Drop Cassette Full"))
+                        //{
+                        //    // не выемка
+                        //    data.stage = WorkerStateStage.EndBillFull;
+                        //    this.Close();
+                        //}
                     }
                     else if (data.stage == WorkerStateStage.ErrorBill)
                     {
@@ -152,7 +163,7 @@ namespace ServiceSaleMachine.Client
                         Program.Log.Write(LogMessageType.Error, "CHECK_STAT: бумага появилась.");
                     }
                 }
-                else if ((status & PrinterStatus.PRINTER_STATUS_OFFLINE) > 0)
+                else if ((status & PrinterStatus.PRINTER_STATUS_OFFLINE) == 0)
                 {
                     if (data.stage == WorkerStateStage.ErrorPrinter)
                     {
@@ -182,6 +193,36 @@ namespace ServiceSaleMachine.Client
             if (e.Alt & e.KeyCode == Keys.F4)
             {
                 data.stage = WorkerStateStage.ExitProgram;
+            }
+            else if (e.Alt & e.KeyCode == Keys.F5)
+            {
+                if (Globals.IsDebug)
+                {
+                    // пошлем событие вынимания приемника
+                    Drivers.Message message = new Drivers.Message();
+
+                    message.Event = DeviceEvent.DropCassetteBillAcceptor;
+                    message.Content = "Drop bill";
+
+                    ServiceClientResponseEventArgs e1 = new ServiceClientResponseEventArgs(message);
+
+                    reciveResponse(null, e1);
+                }
+            }
+            else if (e.Alt & e.KeyCode == Keys.F6)
+            {
+                if (Globals.IsDebug)
+                {
+                    // пошлем событие вынимания приемника
+                    Drivers.Message message = new Drivers.Message();
+
+                    message.Event = DeviceEvent.ConnectBillErrorEnd;
+                    message.Content = "";
+
+                    ServiceClientResponseEventArgs e1 = new ServiceClientResponseEventArgs(message);
+
+                    reciveResponse(null, e1);
+                }
             }
         }
     }

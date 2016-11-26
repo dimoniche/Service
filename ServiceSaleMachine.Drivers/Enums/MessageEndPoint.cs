@@ -17,5 +17,7 @@
         BadSetting = 11,                        // плохие настройки
         InitializationOK = 12,                  // инициализация прошла успешно
         BillAcceptorEscrow = 13,                // событие задержки денег
+        ConnectBillError = 14,                  // нет связи с приемником
+        ConnectBillErrorEnd = 15,               // связь с приемником возобновилась
     }
 }

@@ -785,6 +785,8 @@ namespace ServiceSaleMachine.Client
                 ButVideo.Checked = true;
             }
 
+            textMaxCountBanknote.Text = Globals.ClientConfiguration.Settings.MaxCountBankNote.ToString();
+
             init = false;
 
             // вставим дату последней инкассации
@@ -856,6 +858,14 @@ namespace ServiceSaleMachine.Client
             data.drivers.ReceivedResponse -= reciveResponse;
 
             Params.Result = data;
+
+            textMaxCountBanknote_Leave(sender,e);
+            textBoxTimeOut_Leave(sender, e);
+            textNumberPhone_Leave(sender, e);
+            textSMSTimeEnd_Leave(sender, e);
+            firmsname_Leave(sender, e);
+            textNeedCollect_Leave(sender, e);
+            textBoxMaxTimeService_Leave(sender, e);
 
             Globals.ClientConfiguration.Save();
 

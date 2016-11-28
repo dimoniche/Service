@@ -64,6 +64,7 @@ namespace ServiceSaleMachine.Drivers
                 serialPort.Handshake = Handshake.None;
                 serialPort.NewLine = "\r\n"; // Пусть пока будет "\r\n".
                 serialPort.DtrEnable = true;
+                serialPort.ReadTimeout = 3000;
 
                 serialPort.DataReceived += SerialPortDataRecevied;
                 serialPort.ErrorReceived += SerialPortErrorRecived;

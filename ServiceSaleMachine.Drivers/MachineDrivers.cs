@@ -674,11 +674,13 @@ namespace ServiceSaleMachine.Drivers
 
             message.Event = DeviceEvent.Scaner;
 
+            log.Write(LogMessageType.Information, "SCANNER: Raw data " + str);
+
             string result = Regex.Replace(str, "[^0-9]+", "");
 
             message.Content = result;
 
-            log.Write(LogMessageType.Information, "SCANNER: " + message.Content);
+            log.Write(LogMessageType.Information, "SCANNER: Barcode data " + message.Content);
 
             ReceivedResponse(this, new ServiceClientResponseEventArgs(message));
         }

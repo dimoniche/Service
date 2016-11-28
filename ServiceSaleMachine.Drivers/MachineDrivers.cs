@@ -678,7 +678,7 @@ namespace ServiceSaleMachine.Drivers
 
             message.Content = result;
 
-            log.Write(LogMessageType.Debug, "SCANNER: " + message.Content);
+            log.Write(LogMessageType.Information, "SCANNER: " + message.Content);
 
             ReceivedResponse(this, new ServiceClientResponseEventArgs(message));
         }

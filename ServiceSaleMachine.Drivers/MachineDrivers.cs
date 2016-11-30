@@ -472,26 +472,31 @@ namespace ServiceSaleMachine.Drivers
 
                         if(result == false)
                         {
-                            Message message = new Message();
+                            if (connectOff == false)    // первый раз - пошлем событие об этом
+                            {
+                                Message message = new Message();
 
-                            message.Event = DeviceEvent.ConnectBillError;
-                            message.Content = "";
+                                message.Event = DeviceEvent.ConnectBillError;
+                                message.Content = "";
 
-                            log.Write(LogMessageType.Information, "BILL TASK: Нет связи с купюроприемником");
+                                log.Write(LogMessageType.Information, "BILL TASK: Нет связи с купюроприемником");
 
-                            ReceivedResponse(this, new ServiceClientResponseEventArgs(message));
+                                ReceivedResponse(this, new ServiceClientResponseEventArgs(message));
 
-                            CCNETDriver.PollResults.Z1 = 0;
-                            CCNETDriver.PollResults.Z2 = 0;
+                                CCNETDriver.PollResults.Z1 = 0;
+                                CCNETDriver.PollResults.Z2 = 0;
 
-                            // если нет связи - опрашиваем реже
-                            timeout = 2000;
+                                // если нет связи - опрашиваем реже
+                                timeout = 2000;
+                            }
 
                             connectOff = true;
                         }
                         else
                         {
-                            if (connectOff == true || (errorBill == true && CCNETDriver.PollResults.Z1 != 0x47))
+                            if (connectOff == true || (errorBill == true && (CCNETDriver.PollResults.Z1 != 0x47 
+                                                                          || CCNETDriver.PollResults.Z1 != 0x44 
+                                                                          || CCNETDriver.PollResults.Z1 != 0x45)))
                             {
                                 // была пропажа питания или отсутствие связи
                                 Message message = new Message();
@@ -546,6 +551,34 @@ namespace ServiceSaleMachine.Drivers
                             ReceivedResponse(this, new ServiceClientResponseEventArgs(message));
                         }
 
+                        // Drop Cassette Jammed
+                        if (CCNETDriver.PollResults.Z1 == 0x44)
+                        {
+                            Message message = new Message();
+
+                            message.Event = DeviceEvent.DropCassetteJammed;
+                            message.Content = null;
+
+                            // один раз событие посылаем
+                            if (errorBill == false) ReceivedResponse(this, new ServiceClientResponseEventArgs(message));
+
+                            errorBill = true;
+                        }
+
+                        // Cheated
+                        if (CCNETDriver.PollResults.Z1 == 0x45)
+                        {
+                            Message message = new Message();
+
+                            message.Event = DeviceEvent.BillCheated;
+                            message.Content = null;
+
+                            // один раз событие посылаем
+                            if (errorBill == false) ReceivedResponse(this, new ServiceClientResponseEventArgs(message));
+
+                            errorBill = true;
+                        }
+
                         // ошибки приемника
                         if (CCNETDriver.PollResults.Z1 == 0x47)
                         {
@@ -554,7 +587,8 @@ namespace ServiceSaleMachine.Drivers
                             message.Event = DeviceEvent.BillAcceptorError;
                             message.Content = CCNETDriver.PollResults.Z2;
 
-                            ReceivedResponse(this, new ServiceClientResponseEventArgs(message));
+                            // один раз событие посылаем
+                            if (errorBill == false) ReceivedResponse(this, new ServiceClientResponseEventArgs(message));
 
                             errorBill = true;
                         }

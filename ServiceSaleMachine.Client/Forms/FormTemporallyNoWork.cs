@@ -56,10 +56,6 @@ namespace ServiceSaleMachine.Client
             {
                 error.Text = "Ошибка E060";
             }
-            else if (data.stage == WorkerStateStage.BillError)
-            {
-                error.Text = "Ошибка E070";
-            }
         }
 
         private void reciveResponse(object sender, ServiceClientResponseEventArgs e)
@@ -85,7 +81,7 @@ namespace ServiceSaleMachine.Client
 
                     break;
                 case DeviceEvent.ConnectBillErrorEnd:
-                    // связь с приемником возобновилась
+                    // связь с приемником возобновилась - ошибки ушли
                     {
                         data.stage = WorkerStateStage.BillErrorEnd;
                         this.Close();

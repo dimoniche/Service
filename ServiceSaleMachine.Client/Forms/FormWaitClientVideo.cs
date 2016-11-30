@@ -53,16 +53,18 @@ namespace ServiceSaleMachine.Client
                     }
                     break;
                 case DeviceEvent.BillAcceptorError:
+                case DeviceEvent.DropCassetteJammed:
+                case DeviceEvent.BillCheated:
                     {
                         // ошибка купюроприемника
-                        data.stage = WorkerStateStage.BillError;
+                        data.stage = WorkerStateStage.ErrorBill;
                         this.Close();
                     }
                     break;
                 case DeviceEvent.ConnectBillError:
                     {
                         // нет связи с купюроприемником
-                        data.stage = WorkerStateStage.BillError;
+                        data.stage = WorkerStateStage.ErrorBill;
                         this.Close();
                     }
                     break;
@@ -107,8 +109,11 @@ namespace ServiceSaleMachine.Client
                 }
                 else if ((status & PrinterStatus.PRINTER_STATUS_OFFLINE) > 0)
                 {
-                    data.stage = WorkerStateStage.ErrorPrinter;
-                    this.Close();
+                    if (Globals.ClientConfiguration.Settings.NoPaperWork == 0)
+                    {
+                        data.stage = WorkerStateStage.ErrorPrinter;
+                        this.Close();
+                    }
 
                     Program.Log.Write(LogMessageType.Error, "CHECK_STAT: нет связи с принтером.");
                 }

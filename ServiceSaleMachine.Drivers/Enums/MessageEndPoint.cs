@@ -19,5 +19,8 @@
         BillAcceptorEscrow = 13,                // событие задержки денег
         ConnectBillError = 14,                  // нет связи с приемником
         ConnectBillErrorEnd = 15,               // связь с приемником возобновилась
+
+        DropCassetteJammed = 16,
+        BillCheated = 17,
     }
 }

@@ -126,6 +126,27 @@ namespace ServiceSaleMachine.Client
                     check = true;
 
 NoCheckStatistic:
+                    if (result.stage == WorkerStateStage.ErrorBill)
+                    {
+                        result.drivers.modem.SendSMS("Bill acceptor неисправен.", result.log);
+
+                        if (Globals.ClientConfiguration.Settings.changeOn > 0)
+                        {
+                            // со сдачей - не будем показывать экран смерти - продолжим работать
+                            result.stage = WorkerStateStage.None;
+                        }
+                    }
+                    else if (result.stage == WorkerStateStage.BillFull)
+                    {
+                        result.drivers.modem.SendSMS("Bill acceptor полон.", result.log);
+
+                        if (Globals.ClientConfiguration.Settings.changeOn > 0)
+                        {
+                            // со сдачей - не будем показывать экран смерти
+                            result.stage = WorkerStateStage.None;
+                        }
+                    }
+
                     if (result.stage != WorkerStateStage.None)
                     {
                         Program.Log.Write(LogMessageType.Information, "MAIN WORK: Аппарат не работает.");
@@ -181,7 +202,7 @@ NoCheckStatistic:
                         // ошибки принтера есть
                         continue;
                     }
-                    else if (result.stage == WorkerStateStage.BillError)
+                    else if (result.stage == WorkerStateStage.ErrorBill)
                     {
                         // ошибки купюроприемника
                         goto NoCheckStatistic;
@@ -370,7 +391,7 @@ NoCheckStatistic:
                             result = (FormResultData)FormManager.OpenForm<FormWaitClientVideo>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
                         }
 
-                        if (result.stage == WorkerStateStage.BillError)
+                        if (result.stage == WorkerStateStage.ErrorBill)
                         {
                             // ошибки купюроприемника
                             goto NoCheckStatistic;
@@ -862,8 +883,11 @@ NoCheckStatistic:
             {
                 result.drivers.modem.SendSMS("Нет связи с принтером.", result.log);
 
-                // нет связи с принтером
-                result.stage = WorkerStateStage.ErrorPrinter;
+                if (Globals.ClientConfiguration.Settings.NoPaperWork == 0)
+                {
+                    // нет связи с принтером
+                    result.stage = WorkerStateStage.ErrorPrinter;
+                }
 
                 Program.Log.Write(LogMessageType.Error, "CHECK_STAT: нет связи с принтером.");
             }

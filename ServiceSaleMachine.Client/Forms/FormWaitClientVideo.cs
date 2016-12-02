@@ -97,6 +97,7 @@ namespace ServiceSaleMachine.Client
                 if ((status & (PrinterStatus.PRINTER_STATUS_PAPER_OUT
                              | PrinterStatus.PRINTER_STATUS_PAPER_JAM
                              | PrinterStatus.PRINTER_STATUS_PAPER_PROBLEM
+                             | PrinterStatus.PRINTER_STATUS_DOOR_OPEN
                              | PrinterStatus.PRINTER_STATUS_ERROR)) > 0)
                 {
                     if (Globals.ClientConfiguration.Settings.NoPaperWork == 0)
@@ -104,8 +105,15 @@ namespace ServiceSaleMachine.Client
                         data.stage = WorkerStateStage.PaperEnd;
                         this.Close();
                     }
+                    else
+                    {
+                        if (data.PrinterError == false)
+                        {
+                            Program.Log.Write(LogMessageType.Error, "CHECK_STAT: кончилась бумага.");
+                        }
 
-                    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: кончилась бумага.");
+                        data.PrinterError = true;
+                    }
                 }
                 else if ((status & PrinterStatus.PRINTER_STATUS_OFFLINE) > 0)
                 {
@@ -114,8 +122,24 @@ namespace ServiceSaleMachine.Client
                         data.stage = WorkerStateStage.ErrorPrinter;
                         this.Close();
                     }
+                    else
+                    {
+                        if (data.PrinterError == false)
+                        {
+                            Program.Log.Write(LogMessageType.Error, "CHECK_STAT: нет связи с принтером.");
+                        }
 
-                    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: нет связи с принтером.");
+                        data.PrinterError = true;
+                    }
+                }
+                else
+                {
+                    if (data.PrinterError == true)
+                    {
+                        Program.Log.Write(LogMessageType.Error, "CHECK_STAT: ошибка принтера снялась.");
+                    }
+
+                    data.PrinterError = false;
                 }
             }
         }

@@ -64,6 +64,11 @@ namespace ServiceSaleMachine.Client
         /// </summary>
         public Log log;
 
+        /// <summary>
+        /// об ошибке принтера уже сообщили
+        /// </summary>
+        public bool PrinterError = false;
+
         public FormResultData(Log log)
         {
             retLogin = "";

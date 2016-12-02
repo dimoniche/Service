@@ -57,7 +57,7 @@ namespace ServiceSaleMachine.Client
         /// </summary>
         private void MainWorker()
         {
-            if (Globals.admin)
+            //if (Globals.admin)
             {
                 Program.Log.Write(LogMessageType.Information, "MAIN WORK: Входим в режим настройки приложения.");
 
@@ -865,11 +865,10 @@ NoCheckStatistic:
 
             if ((status & (PrinterStatus.PRINTER_STATUS_PAPER_OUT 
                          | PrinterStatus.PRINTER_STATUS_PAPER_JAM 
-                         | PrinterStatus.PRINTER_STATUS_PAPER_PROBLEM 
+                         | PrinterStatus.PRINTER_STATUS_PAPER_PROBLEM
+                         | PrinterStatus.PRINTER_STATUS_DOOR_OPEN
                          | PrinterStatus.PRINTER_STATUS_ERROR)) > 0)
             {
-                result.drivers.modem.SendSMS("Кончилась бумага", result.log);
-
                 // что то с бумагой
                 if (Globals.ClientConfiguration.Settings.NoPaperWork == 0)
                 {
@@ -877,19 +876,38 @@ NoCheckStatistic:
                     result.stage = WorkerStateStage.PaperEnd;
                 }
 
-                Program.Log.Write(LogMessageType.Error, "CHECK_STAT: кончилась бумага.");
+                if (result.PrinterError == false)
+                {
+                    result.drivers.modem.SendSMS("Кончилась бумага", result.log);
+                    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: кончилась бумага.");
+                }
+
+                result.PrinterError = true;
             }
             else if ((status & PrinterStatus.PRINTER_STATUS_OFFLINE) > 0)
             {
-                result.drivers.modem.SendSMS("Нет связи с принтером.", result.log);
-
                 if (Globals.ClientConfiguration.Settings.NoPaperWork == 0)
                 {
                     // нет связи с принтером
                     result.stage = WorkerStateStage.ErrorPrinter;
                 }
 
-                Program.Log.Write(LogMessageType.Error, "CHECK_STAT: нет связи с принтером.");
+                if (result.PrinterError == false)
+                {
+                    result.drivers.modem.SendSMS("Нет связи с принтером.", result.log);
+                    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: нет связи с принтером.");
+                }
+
+                result.PrinterError = true;
+            }
+            else
+            {
+                if (result.PrinterError == true)
+                {
+                    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: ошибка принтера снялась.");
+                }
+
+                result.PrinterError = false;
             }
 
             return result;

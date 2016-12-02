@@ -1888,6 +1888,10 @@ namespace ServiceSaleMachine.Client
             {
                 labelStatusPaper.Text = "Ошибка связи с принтером";
             }
+            else if ((status & PrinterStatus.PRINTER_STATUS_DOOR_OPEN) > 0)
+            {
+                labelStatusPaper.Text = "Открыли дверцу.";
+            }
             else if (status > 0)
             {
                 labelStatusPaper.Text = "Ошибка принтера: " + status.ToString();

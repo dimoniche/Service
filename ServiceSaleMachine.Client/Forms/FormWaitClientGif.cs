@@ -37,6 +37,9 @@ namespace ServiceSaleMachine.Client
                 gifImage = new GifImage(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ScreenSaver);
                 gifImage.ReverseAtEnd = false; //dont reverse at end
             }
+
+            timer1.Enabled = true;
+            timer2.Enabled = true;
         }
 
         private void reciveResponse(object sender, ServiceClientResponseEventArgs e)
@@ -93,6 +96,7 @@ namespace ServiceSaleMachine.Client
             Params.Result = data;
             data.drivers.ReceivedResponse -= reciveResponse;
             timer1.Enabled = false;
+            timer2.Enabled = false;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -116,6 +120,7 @@ namespace ServiceSaleMachine.Client
                 if ((status & (PrinterStatus.PRINTER_STATUS_PAPER_OUT
                              | PrinterStatus.PRINTER_STATUS_PAPER_JAM
                              | PrinterStatus.PRINTER_STATUS_PAPER_PROBLEM
+                             | PrinterStatus.PRINTER_STATUS_DOOR_OPEN
                              | PrinterStatus.PRINTER_STATUS_ERROR)) > 0)
                 {
                     if (Globals.ClientConfiguration.Settings.NoPaperWork == 0)
@@ -123,8 +128,15 @@ namespace ServiceSaleMachine.Client
                         data.stage = WorkerStateStage.PaperEnd;
                         this.Close();
                     }
+                    else
+                    {
+                        if (data.PrinterError == false)
+                        {
+                            Program.Log.Write(LogMessageType.Error, "CHECK_STAT: кончилась бумага.");
+                        }
 
-                    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: кончилась бумага.");
+                        data.PrinterError = true;
+                    }
                 }
                 else if ((status & PrinterStatus.PRINTER_STATUS_OFFLINE) > 0)
                 {
@@ -133,8 +145,24 @@ namespace ServiceSaleMachine.Client
                         data.stage = WorkerStateStage.ErrorPrinter;
                         this.Close();
                     }
+                    else
+                    {
+                        if (data.PrinterError == false)
+                        {
+                            Program.Log.Write(LogMessageType.Error, "CHECK_STAT: нет связи с принтером.");
+                        }
 
-                    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: нет связи с принтером.");
+                        data.PrinterError = true;
+                    }
+                }
+                else
+                {
+                    if (data.PrinterError == true)
+                    {
+                        Program.Log.Write(LogMessageType.Error, "CHECK_STAT: ошибка принтера снялась.");
+                    }
+
+                    data.PrinterError = false;
                 }
             }
         }

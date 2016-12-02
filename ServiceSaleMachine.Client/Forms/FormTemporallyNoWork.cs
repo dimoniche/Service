@@ -148,6 +148,8 @@ namespace ServiceSaleMachine.Client
                 if ((status & (PrinterStatus.PRINTER_STATUS_PAPER_OUT
                              | PrinterStatus.PRINTER_STATUS_PAPER_JAM
                              | PrinterStatus.PRINTER_STATUS_PAPER_PROBLEM
+                             | PrinterStatus.PRINTER_STATUS_DOOR_OPEN
+                             | PrinterStatus.PRINTER_STATUS_OFFLINE
                              | PrinterStatus.PRINTER_STATUS_ERROR)) == 0)
                 {
                     if (data.stage == WorkerStateStage.PaperEnd)
@@ -158,10 +160,7 @@ namespace ServiceSaleMachine.Client
 
                         Program.Log.Write(LogMessageType.Error, "CHECK_STAT: бумага появилась.");
                     }
-                }
-                else if ((status & PrinterStatus.PRINTER_STATUS_OFFLINE) == 0)
-                {
-                    if (data.stage == WorkerStateStage.ErrorPrinter)
+                    else if (data.stage == WorkerStateStage.ErrorPrinter)
                     {
                         data.stage = WorkerStateStage.ErrorEndControl;
                         this.Close();

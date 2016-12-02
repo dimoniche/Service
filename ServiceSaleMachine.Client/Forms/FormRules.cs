@@ -62,6 +62,13 @@ namespace ServiceSaleMachine.Client
                 case DeviceEvent.BillAcceptorError:
 
                     break;
+                case DeviceEvent.ConnectBillError:
+                    {
+                        // нет связи с купюроприемником
+                        data.stage = WorkerStateStage.ErrorBill;
+                        this.Close();
+                    }
+                    break;
             }
         }
 

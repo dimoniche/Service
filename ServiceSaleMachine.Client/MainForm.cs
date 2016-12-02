@@ -57,7 +57,7 @@ namespace ServiceSaleMachine.Client
         /// </summary>
         private void MainWorker()
         {
-            //if (Globals.admin)
+            if (Globals.admin)
             {
                 Program.Log.Write(LogMessageType.Information, "MAIN WORK: Входим в режим настройки приложения.");
 
@@ -128,23 +128,40 @@ namespace ServiceSaleMachine.Client
 NoCheckStatistic:
                     if (result.stage == WorkerStateStage.ErrorBill)
                     {
-                        result.drivers.modem.SendSMS("Bill acceptor неисправен.", result.log);
+                        if (result.BillError == false)
+                        {
+                            result.drivers.modem.SendSMS("Bill acceptor неисправен.", result.log);
+                            Program.Log.Write(LogMessageType.Error, "MAIN WORK: Bill acceptor неисправен.");
+                        }
 
                         if (Globals.ClientConfiguration.Settings.changeOn > 0)
                         {
                             // со сдачей - не будем показывать экран смерти - продолжим работать
                             result.stage = WorkerStateStage.None;
                         }
+
+                        result.BillError = true;
                     }
                     else if (result.stage == WorkerStateStage.BillFull)
                     {
-                        result.drivers.modem.SendSMS("Bill acceptor полон.", result.log);
+                        if (result.BillError == false)
+                        {
+                            result.drivers.modem.SendSMS("Bill acceptor полон.", result.log);
+                            Program.Log.Write(LogMessageType.Error, "MAIN WORK: Bill acceptor полон.");
+                        }
 
                         if (Globals.ClientConfiguration.Settings.changeOn > 0)
                         {
                             // со сдачей - не будем показывать экран смерти
                             result.stage = WorkerStateStage.None;
                         }
+
+                        result.BillError = true;
+                    }
+                    else
+                    {
+                        // это не ошибки приемника - с приемником все ок
+                        result.BillError = false;
                     }
 
                     if (result.stage != WorkerStateStage.None)
@@ -336,6 +353,11 @@ NoCheckStatistic:
                             Close();
                             return;
                         }
+                        else if (result.stage == WorkerStateStage.ErrorBill)
+                        {
+                            // ошибки купюроприемника
+                            goto NoCheckStatistic;
+                        }
                         else if (result.stage == WorkerStateStage.DropCassettteBill)
                         {
                             // выемка денег
@@ -482,6 +504,11 @@ NoCheckStatistic:
                         Close();
                         return;
                     }
+                    else if (result.stage == WorkerStateStage.ErrorBill)
+                    {
+                        // ошибки купюроприемника
+                        goto NoCheckStatistic;
+                    }
                     else if (result.stage == WorkerStateStage.DropCassettteBill)
                     {
                         Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выемка денег.");
@@ -509,6 +536,11 @@ NoCheckStatistic:
                             // выход
                             Close();
                             return;
+                        }
+                        else if (result.stage == WorkerStateStage.ErrorBill)
+                        {
+                            // ошибки купюроприемника
+                            goto NoCheckStatistic;
                         }
 
                         // вернемся в выбор услуги (уж не думал что goto буду использовать)
@@ -546,6 +578,11 @@ NoCheckStatistic:
                         {
                             // отказ - выход в выбор услуг
                             goto ChooseService;
+                        }
+                        else if (result.stage == WorkerStateStage.ErrorBill)
+                        {
+                            // ошибки купюроприемника
+                            goto NoCheckStatistic;
                         }
                         else if (result.stage == WorkerStateStage.DropCassettteBill)
                         {

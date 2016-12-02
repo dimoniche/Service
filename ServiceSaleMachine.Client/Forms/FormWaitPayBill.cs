@@ -146,8 +146,11 @@ namespace ServiceSaleMachine.Client
             else if (Globals.ClientConfiguration.Settings.offHardware == 0)
             {
                 // перейдем в режим ожидания купюр
-                data.drivers.CCNETDriver.WaitBillEscrow();
-                data.log.Write(LogMessageType.Information, "WAIT BILL: запускаем режим ожидания купюр.");
+                if (data.drivers.CCNETDriver.NoConnectBill == false)
+                {
+                    data.drivers.CCNETDriver.WaitBillEscrow();
+                    data.log.Write(LogMessageType.Information, "WAIT BILL: запускаем режим ожидания купюр.");
+                }
 
                 // при старте сканер разбудим, если не отключена возможность оплаты чеком
                 if (Globals.ClientConfiguration.Settings.offCheck != 1)
@@ -190,6 +193,13 @@ namespace ServiceSaleMachine.Client
                         data.stage = WorkerStateStage.DropCassettteBill;
                         data.log.Write(LogMessageType.Debug, "WAIT BILL: Вытащили купюроприемник.");
 
+                        this.Close();
+                    }
+                    break;
+                case DeviceEvent.ConnectBillError:
+                    {
+                        // нет связи с купюроприемником
+                        data.stage = WorkerStateStage.ErrorBill;
                         this.Close();
                     }
                     break;
@@ -695,8 +705,11 @@ namespace ServiceSaleMachine.Client
                 // вернем деньгу
                 moneyFixed = false;
 
-                data.drivers.CCNETDriver.ReturnBill();
-                data.drivers.CCNETDriver.StopWaitBill();
+                if (data.drivers.CCNETDriver.NoConnectBill == false)
+                {
+                    data.drivers.CCNETDriver.ReturnBill();
+                    data.drivers.CCNETDriver.StopWaitBill();
+                }
 
                 // при завершении сканер усыпим
                 data.drivers.scaner.Request(ZebexCommandEnum.sleep);

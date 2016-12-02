@@ -432,7 +432,6 @@ namespace ServiceSaleMachine.Drivers
 
             try
             {
-
                 // сначала загрузим массив принимаемых купюр
                 while (CCNETDriver.bill_recordIsEmpty())
                 {
@@ -440,6 +439,8 @@ namespace ServiceSaleMachine.Drivers
                     {
                         //result = false;
                     }
+
+                    BillAcceptorEvent.WaitOne(500);
                 }
 
                 CCNETDriver.Cmd(CCNETCommandEnum.Information, (byte)CCNETDriver.BillAdr);
@@ -456,8 +457,11 @@ namespace ServiceSaleMachine.Drivers
                 try
                 {
                     //this.log.Write(LogMessageType.Information, "BILL TASK: Шаг обработчика.");
-
-                    if (!CCNETDriver.send_bill_command)
+                    if(CCNETDriver.getNumberComPort().Contains("нет"))
+                    {
+                        // нет ком порта - у не работаем
+                    }
+                    else if (!CCNETDriver.send_bill_command)
                     {
                         //this.log.Write(LogMessageType.Information, "BILL TASK: Запуск комманды опроса.");
 
@@ -491,12 +495,13 @@ namespace ServiceSaleMachine.Drivers
                             }
 
                             connectOff = true;
+                            CCNETDriver.NoConnectBill = true;
                         }
                         else
                         {
                             if (connectOff == true || (errorBill == true && (CCNETDriver.PollResults.Z1 != 0x47 
-                                                                          || CCNETDriver.PollResults.Z1 != 0x44 
-                                                                          || CCNETDriver.PollResults.Z1 != 0x45)))
+                                                                          && CCNETDriver.PollResults.Z1 != 0x44 
+                                                                          && CCNETDriver.PollResults.Z1 != 0x45)))
                             {
                                 // была пропажа питания или отсутствие связи
                                 Message message = new Message();
@@ -510,6 +515,29 @@ namespace ServiceSaleMachine.Drivers
 
                                 connectOff = false;
                                 errorBill = false;
+
+                                CCNETDriver.NoConnectBill = false;
+
+                                try
+                                {
+                                    // перезагружаем
+                                    CCNETDriver.restartBill();
+
+                                    // сначала загрузим массив принимаемых купюр
+                                    while (CCNETDriver.bill_recordIsEmpty())
+                                    {
+                                        if (CCNETDriver.GetBillTable().Contains("СБОЙ"))
+                                        {
+                                            //result = false;
+                                        }
+                                    }
+
+                                    CCNETDriver.Cmd(CCNETCommandEnum.Information, (byte)CCNETDriver.BillAdr);
+                                }
+                                catch (Exception exp)
+                                {
+                                    this.log.Write(LogMessageType.Debug, "BILL TASK: Ошибка: " + exp.ToString());
+                                }
                             }
 
                             // со связью все ок

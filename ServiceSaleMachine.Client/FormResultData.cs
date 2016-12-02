@@ -69,6 +69,11 @@ namespace ServiceSaleMachine.Client
         /// </summary>
         public bool PrinterError = false;
 
+        /// <summary>
+        /// Ошибка приемника
+        /// </summary>
+        public bool BillError = false;
+
         public FormResultData(Log log)
         {
             retLogin = "";

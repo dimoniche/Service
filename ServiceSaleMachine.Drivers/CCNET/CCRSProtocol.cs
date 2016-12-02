@@ -242,6 +242,11 @@ namespace ServiceSaleMachine.Drivers
         /// </summary>
         public _BillRecord[] bill_record = new _BillRecord[24];
 
+        /// <summary>
+        /// Ошибка в купюроприемнике
+        /// </summary>
+        public bool NoConnectBill = false;
+
         public CCRSProtocol()
         {
             iCmdDelay = 50;
@@ -638,7 +643,7 @@ namespace ServiceSaleMachine.Drivers
                     str = "Pause";
                     break;
                 case 0x47:
-                    str = "Pause";
+                    str = "Failure";
                     break;
                 case 0x80:
                     str = "Escrow position " + PollResults.Z2.ToString();

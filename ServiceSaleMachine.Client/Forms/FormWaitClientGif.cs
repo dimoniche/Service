@@ -132,7 +132,7 @@ namespace ServiceSaleMachine.Client
                     {
                         if (data.PrinterError == false)
                         {
-                            Program.Log.Write(LogMessageType.Error, "CHECK_STAT: кончилась бумага.");
+                            Program.Log.Write(LogMessageType.Error, "WAIT_MENU: кончилась бумага.");
                         }
 
                         data.PrinterError = true;
@@ -149,7 +149,7 @@ namespace ServiceSaleMachine.Client
                     {
                         if (data.PrinterError == false)
                         {
-                            Program.Log.Write(LogMessageType.Error, "CHECK_STAT: нет связи с принтером.");
+                            Program.Log.Write(LogMessageType.Error, "WAIT_MENU: нет связи с принтером.");
                         }
 
                         data.PrinterError = true;
@@ -159,7 +159,7 @@ namespace ServiceSaleMachine.Client
                 {
                     if (data.PrinterError == true)
                     {
-                        Program.Log.Write(LogMessageType.Error, "CHECK_STAT: ошибка принтера снялась.");
+                        Program.Log.Write(LogMessageType.Error, "WAIT_MENU: ошибка принтера снялась.");
                     }
 
                     data.PrinterError = false;

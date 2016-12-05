@@ -158,14 +158,14 @@ namespace ServiceSaleMachine.Client
                         data.stage = WorkerStateStage.ErrorEndControl;
                         this.Close();
 
-                        Program.Log.Write(LogMessageType.Error, "CHECK_STAT: бумага появилась.");
+                        Program.Log.Write(LogMessageType.Error, "NO_WORK_MENU: бумага появилась.");
                     }
                     else if (data.stage == WorkerStateStage.ErrorPrinter)
                     {
                         data.stage = WorkerStateStage.ErrorEndControl;
                         this.Close();
 
-                        Program.Log.Write(LogMessageType.Error, "CHECK_STAT: ошибка принтера снялась.");
+                        Program.Log.Write(LogMessageType.Error, "NO_WORK_MENU: ошибка принтера снялась.");
                     }
                 }
             }
@@ -175,7 +175,7 @@ namespace ServiceSaleMachine.Client
         {
             if (data.stage == WorkerStateStage.ErrorEndControl)
             {
-                data.log.Write(LogMessageType.Error, "CHECK_STAT: управляющее устройство работает нормально");
+                data.log.Write(LogMessageType.Error, "NO_WORK_MENU: управляющее устройство работает нормально");
             }
 
             timer1.Enabled = false;

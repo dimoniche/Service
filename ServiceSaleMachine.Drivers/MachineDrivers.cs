@@ -690,7 +690,7 @@ namespace ServiceSaleMachine.Drivers
                 }
                 catch (Exception exp)
                 {
-                    log.Write(LogMessageType.Debug, "TASK BILL: " + exp.ToString());
+                    log.Write(LogMessageType.Error, "TASK BILL: " + exp.ToString());
                     CCNETDriver.send_bill_command = false;
                 }
                 finally

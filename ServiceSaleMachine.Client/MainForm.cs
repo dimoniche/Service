@@ -813,6 +813,15 @@ NoCheckStatistic:
                 {
                     // вернемся к исходной позиции - какая то ошибка
                     Program.Log.Write(LogMessageType.Error, "MAIN WORK: Ошибка.");
+                    Program.Log.Write(LogMessageType.Error, "MAIN WORK: " + exp.ToString());
+
+                    // все переинициализируем
+                    result = new FormResultData(Program.Log);
+
+                    // инициализируем задачи
+                    result.drivers.InitAllTask();
+                    // инициализируем устройства
+                    result.drivers.InitAllDevice();
                 }
             }
         }

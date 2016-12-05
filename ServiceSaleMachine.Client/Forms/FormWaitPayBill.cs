@@ -191,7 +191,7 @@ namespace ServiceSaleMachine.Client
                 case DeviceEvent.DropCassetteBillAcceptor:
                     {
                         data.stage = WorkerStateStage.DropCassettteBill;
-                        data.log.Write(LogMessageType.Debug, "WAIT BILL: Вытащили купюроприемник.");
+                        if (data.log != null) data.log.Write(LogMessageType.Debug, "WAIT BILL: Вытащили купюроприемник.");
 
                         this.Close();
                     }
@@ -200,6 +200,8 @@ namespace ServiceSaleMachine.Client
                     {
                         // нет связи с купюроприемником
                         data.stage = WorkerStateStage.ErrorBill;
+                        if (data.log != null) data.log.Write(LogMessageType.Error, "WAIT BILL: Нет связи с купюроприемником.");
+
                         this.Close();
                     }
                     break;

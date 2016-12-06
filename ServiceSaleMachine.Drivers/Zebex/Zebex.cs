@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.IO.Ports;
+using System.Text.RegularExpressions;
 using System.Threading;
 
 namespace ServiceSaleMachine.Drivers
@@ -12,6 +13,8 @@ namespace ServiceSaleMachine.Drivers
         // Это буфер для накопления ответа
         public MemoryStream InputStream = new MemoryStream();
         internal readonly ReaderWriterLockSlim Locker = new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion);
+
+        int currentByte = 0;
 
         public ZebexScaner()
         {
@@ -113,6 +116,14 @@ namespace ServiceSaleMachine.Drivers
                             port.Read(byteAnswer, 0, bytes);
                         }
                         catch { }
+
+                        //var str = System.Text.Encoding.Default.GetString(byteAnswer);
+                        //string result = Regex.Replace(str, "[^0-9]+", "");
+
+                        //if(result.Length < 12)
+                        //{
+                        //    // не все цифры получили, если сканер не будет работать - нужно организовать прием нескольких частей
+                        //}
 
                         using (var ticket = LockTicket.Create(Locker, LockTypeEnum.Write))
                         {

@@ -813,7 +813,7 @@ NoCheckStatistic:
                 {
                     // вернемся к исходной позиции - какая то ошибка
                     Program.Log.Write(LogMessageType.Error, "MAIN WORK: Ошибка.");
-                    Program.Log.Write(LogMessageType.Error, "MAIN WORK: " + exp.ToString());
+                    Program.Log.Write(LogMessageType.Error, "MAIN WORK: " + exp.GetDebugInformation());
 
                     // все переинициализируем
                     result = new FormResultData(Program.Log);

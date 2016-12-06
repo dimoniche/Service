@@ -1404,9 +1404,8 @@ namespace ServiceSaleMachine.Drivers
             // если занято - ждем - но не более 1сек
             while (send_bill_command == true)
             {
-                if (count++ == 1000) { break; }
+                if (count++ == 1000) { return "СБОЙ"; }
                 Thread.Sleep(1);
-                return "СБОЙ";
             }
 
             send_bill_command = true;
@@ -1450,9 +1449,8 @@ namespace ServiceSaleMachine.Drivers
             // если занято - ждем - но не более 1сек
             while (send_bill_command == true)
             {
-                if (count++ == 1000) { break; }
+                if (count++ == 1000) { return "СБОЙ"; }
                 Thread.Sleep(1);
-                return "СБОЙ";
             }
 
             send_bill_command = true;
@@ -1509,9 +1507,8 @@ namespace ServiceSaleMachine.Drivers
             // если занято - ждем - но не более 1сек
             while (send_bill_command == true)
             {
-                if (count++ == 1000) { break; }
+                if (count++ == 1000) { return "СБОЙ"; }
                 Thread.Sleep(1);
-                return "СБОЙ";
             }
 
             send_bill_command = true;
@@ -1566,9 +1563,8 @@ namespace ServiceSaleMachine.Drivers
             // если занято - ждем - но не более 1сек
             while (send_bill_command == true)
             {
-                if (count++ == 1000) { break; }
+                if (count++ == 1000) { return "СБОЙ"; }
                 Thread.Sleep(1);
-                return "СБОЙ";
             }
 
             send_bill_command = true;
@@ -1617,9 +1613,8 @@ namespace ServiceSaleMachine.Drivers
             // если занято - ждем - но не более 1сек
             while (send_bill_command == true)
             {
-                if (count++ == 1000) { break; }
+                if (count++ == 1000) { return "СБОЙ"; }
                 Thread.Sleep(1);
-                return "СБОЙ";
             }
 
             send_bill_command = true;
@@ -1657,9 +1652,8 @@ namespace ServiceSaleMachine.Drivers
             // если занято - ждем - но не более 1сек
             while (send_bill_command == true)
             {
-                if (count++ == 1000) { break; }
+                if (count++ == 1000) { return "СБОЙ"; }
                 Thread.Sleep(1);
-                return "СБОЙ";
             }
 
             send_bill_command = true;
@@ -1699,9 +1693,8 @@ namespace ServiceSaleMachine.Drivers
             // если занято - ждем - но не более 1сек
             while (send_bill_command == true)
             {
-                if (count++ == 1000) { break; }
+                if (count++ == 1000) { return "СБОЙ"; }
                 Thread.Sleep(1);
-                return "СБОЙ";
             }
 
             send_bill_command = true;
@@ -1741,9 +1734,8 @@ namespace ServiceSaleMachine.Drivers
             // если занято - ждем - но не более 1сек
             while (send_bill_command == true)
             {
-                if (count++ == 1000) { break; }
+                if (count++ == 1000) { return "СБОЙ"; }
                 Thread.Sleep(1);
-                return "СБОЙ";
             }
 
             send_bill_command = true;
@@ -1780,9 +1772,8 @@ namespace ServiceSaleMachine.Drivers
             // если занято - ждем - но не более 1сек
             while (send_bill_command == true)
             {
-                if (count++ == 1000) { break; }
+                if (count++ == 1000) { return new List<_Cassete>(); }
                 Thread.Sleep(1);
-                return new List<_Cassete>();
             }
 
             send_bill_command = true;
@@ -1820,9 +1811,8 @@ namespace ServiceSaleMachine.Drivers
             // если занято - ждем - но не более 1сек
             while (send_bill_command == true)
             {
-                if (count++ == 1000) { break; }
+                if (count++ == 1000) { return new List<_Cassete>(); }
                 Thread.Sleep(1);
-                return new List<_Cassete>();
             }
 
             send_bill_command = true;
@@ -1860,9 +1850,8 @@ namespace ServiceSaleMachine.Drivers
             // если занято - ждем - но не более 1сек
             while (send_bill_command == true)
             {
-                if (count++ == 1000) { break; }
+                if (count++ == 1000) { return new List<_Cassete>(); }
                 Thread.Sleep(1);
-                return new List<_Cassete>();
             }
 
             send_bill_command = true;

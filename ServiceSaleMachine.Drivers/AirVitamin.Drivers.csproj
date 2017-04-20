@@ -7,8 +7,8 @@
     <ProjectGuid>{D1F52424-7717-459D-A0CC-A69F1EDFE105}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Drivers</RootNamespace>
-    <AssemblyName>Drivers</AssemblyName>
+    <RootNamespace>AirVitamin.Drivers</RootNamespace>
+    <AssemblyName>AirVitamin.Drivers</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

@@ -57,7 +57,7 @@ namespace AirVitamin.Client
         /// </summary>
         private void MainWorker()
         {
-            //if (Globals.admin)
+            if (Globals.admin)
             {
                 Program.Log.Write(LogMessageType.Information, "MAIN WORK: Входим в режим настройки приложения.");
 
@@ -653,43 +653,6 @@ NoCheckStatistic:
                                 Close();
                                 return;
                             }
-                        }
-
-                        // теперь собственно окажем услугу - сначала спросим надо ли 
-                        result = (FormResultData)FormManager.OpenForm<FormProvideServiceStart>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-
-                        if (result.stage == WorkerStateStage.ExitProgram)
-                        {
-                            // выход
-                            Close();
-                            return;
-                        }
-                        else if (result.stage == WorkerStateStage.Fail)
-                        {
-                            // услуга не нужна
-                            continue;
-                        }
-                        else if (result.stage == WorkerStateStage.DropCassettteBill)
-                        {
-                            Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выемка денег.");
-
-                            // выемка денег
-                            result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-
-                            if (result.stage == WorkerStateStage.EndDropCassette)
-                            {
-                                continue;
-                            }
-                            else if (result.stage == WorkerStateStage.ExitProgram)
-                            {
-                                // выход
-                                Close();
-                                return;
-                            }
-                        }
-                        else if (result.stage == WorkerStateStage.TimeOut)
-                        {
-                            continue;
                         }
 
                         Program.Log.Write(LogMessageType.Information, "MAIN WORK: Начали оказывать услугу: " + serv.caption);

@@ -122,6 +122,9 @@ namespace AirVitamin
                 case PathEnum.Text:
                     return "Text";
 
+                case PathEnum.Config:
+                    return "Configuration";
+
                 default:
                     throw new InvalidOperationException();
             }

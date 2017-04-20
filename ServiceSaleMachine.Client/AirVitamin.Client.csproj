@@ -50,11 +50,11 @@
   <ItemGroup>
     <Compile Include="FormResultData.cs" />
     <Compile Include="Forms\Enum\ControlDeviceEnum.cs" />
-    <Compile Include="Forms\FormChooseService1.cs">
+    <Compile Include="Forms\FormChooseService.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormChooseService1.Designer.cs">
-      <DependentUpon>FormChooseService1.cs</DependentUpon>
+    <Compile Include="Forms\FormChooseService.Designer.cs">
+      <DependentUpon>FormChooseService.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormInsertBill.cs">
       <SubType>Form</SubType>
@@ -146,12 +146,6 @@
     <Compile Include="Forms\FormWaitStage.Designer.cs">
       <DependentUpon>FormWaitStage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormChooseService.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormChooseService.Designer.cs">
-      <DependentUpon>FormChooseService.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\FormWelcomeUser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -179,8 +173,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\FormChooseService1.resx">
-      <DependentUpon>FormChooseService1.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormChooseService.resx">
+      <DependentUpon>FormChooseService.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormInsertBill.resx">
       <DependentUpon>FormInsertBill.cs</DependentUpon>
@@ -226,9 +220,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormWaitStage.resx">
       <DependentUpon>FormWaitStage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormChooseService.resx">
-      <DependentUpon>FormChooseService.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormWelcomeUser.resx">
       <DependentUpon>FormWelcomeUser.cs</DependentUpon>

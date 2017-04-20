@@ -10,5 +10,6 @@
         Bin,
         Video,
         Text,
+        Config,
     }
 }

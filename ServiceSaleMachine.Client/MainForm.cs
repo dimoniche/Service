@@ -476,7 +476,7 @@ NoCheckStatistic:
                     ChooseService:
 
                     // выбор услуг
-                    result = (FormResultData)FormManager.OpenForm<FormChooseService1>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+                    result = (FormResultData)FormManager.OpenForm<FormChooseService>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
                     if (result.stage == WorkerStateStage.ExitProgram)
                     {

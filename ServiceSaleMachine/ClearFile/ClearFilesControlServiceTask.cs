@@ -68,7 +68,7 @@ namespace ServiceSaleMachine
 							// Этот файл старый, удаляем
 							if (FileHelper.TryDelete(filePath))
 							{
-                                log.Write(LogMessageType.Debug, "Удален старый файл: " + filePath);
+                                log.Write(LogMessageType.Information, "Удален старый файл: " + filePath);
 							}
 						}
 					}

@@ -222,7 +222,7 @@ namespace ServiceSaleMachine.Drivers
                 }
                 catch (Exception exp)
                 {
-                    log.Write(LogMessageType.Error, "BILL INIT ALL: " + exp.ToString());
+                    log.Write(LogMessageType.Error, "BILL INIT ALL: " + exp.GetDebugInformation());
                 }
             }
             else
@@ -447,7 +447,7 @@ namespace ServiceSaleMachine.Drivers
             }
             catch (Exception exp)
             {
-                this.log.Write(LogMessageType.Debug, "BILL TASK: Ошибка: " + exp.ToString());
+                this.log.Write(LogMessageType.Error, "BILL TASK: Ошибка: " + exp.GetDebugInformation());
             }
 
             this.log.Write(LogMessageType.Information, "BILL TASK: Задачу приемника проинициализировали.");
@@ -536,7 +536,7 @@ namespace ServiceSaleMachine.Drivers
                                 }
                                 catch (Exception exp)
                                 {
-                                    this.log.Write(LogMessageType.Debug, "BILL TASK: Ошибка: " + exp.ToString());
+                                    this.log.Write(LogMessageType.Debug, "BILL TASK: Ошибка: " + exp.GetDebugInformation());
                                 }
                             }
 
@@ -690,7 +690,7 @@ namespace ServiceSaleMachine.Drivers
                 }
                 catch (Exception exp)
                 {
-                    log.Write(LogMessageType.Error, "TASK BILL: " + exp.ToString());
+                    log.Write(LogMessageType.Error, "TASK BILL: " + exp.GetDebugInformation());
                     CCNETDriver.send_bill_command = false;
                 }
                 finally
@@ -773,7 +773,7 @@ namespace ServiceSaleMachine.Drivers
                 }
                 catch (Exception exp)
                 {
-                    log.Write(LogMessageType.Error, "SCANNER: " + exp.ToString());
+                    log.Write(LogMessageType.Error, "SCANNER: " + exp.GetDebugInformation());
                 }
                 finally
                 {

@@ -475,7 +475,7 @@ namespace ServiceSaleMachine.Client
                 catch (Exception exp)
                 {
                     data.log.Write(LogMessageType.Error, "WAIT BILL: ошибка управляющего устройства.");
-                    data.log.Write(LogMessageType.Error, "WAIT BILL: " + exp.ToString());
+                    data.log.Write(LogMessageType.Error, "WAIT BILL: " + exp.GetDebugInformation());
 
                     // если какая либо ошибка - вернем купюру
                     data.drivers.CCNETDriver.ReturnBill();
@@ -688,7 +688,7 @@ namespace ServiceSaleMachine.Client
                 catch (Exception exp)
                 {
                     data.log.Write(LogMessageType.Error, "WAIT CHECK: ошибка управляющего устройства.");
-                    data.log.Write(LogMessageType.Error, "WAIT CHECK: " + exp.ToString());
+                    data.log.Write(LogMessageType.Error, "WAIT CHECK: " + exp.GetDebugInformation());
 
                     // при ошибке сканер усыпим
                     data.drivers.scaner.Request(ZebexCommandEnum.sleep);

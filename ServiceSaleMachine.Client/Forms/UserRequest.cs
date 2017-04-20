@@ -3,7 +3,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace ServiceSaleMachine.Client
+namespace AirVitamin.Client
 {
     public partial class UserRequest : MyForm
     {

@@ -1,10 +1,10 @@
-﻿using ServiceSaleMachine.Drivers;
+﻿using AirVitamin.Drivers;
 using System;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace ServiceSaleMachine.Client
+namespace AirVitamin.Client
 {
     public partial class FormWaitClientVideo : MyForm
     {

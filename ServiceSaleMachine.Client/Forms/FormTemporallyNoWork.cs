@@ -1,10 +1,10 @@
 ﻿using System.Data;
 using System.Linq;
 using System.Windows.Forms;
-using ServiceSaleMachine.Drivers;
-using static ServiceSaleMachine.Drivers.MachineDrivers;
+using AirVitamin.Drivers;
+using static AirVitamin.Drivers.MachineDrivers;
 
-namespace ServiceSaleMachine.Client
+namespace AirVitamin.Client
 {
     public partial class FormTemporallyNoWork : MyForm
     {

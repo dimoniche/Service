@@ -1,4 +1,4 @@
-﻿namespace ServiceSaleMachine.Client
+﻿namespace AirVitamin.Client
 {
     partial class FormChooseChange
     {
@@ -36,10 +36,10 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.scalableLabel1 = new ServiceSaleMachine.ScalableLabel();
+            this.scalableLabel1 = new AirVitamin.ScalableLabel();
             this.pBxAccount = new System.Windows.Forms.PictureBox();
             this.pBxCheck = new System.Windows.Forms.PictureBox();
-            this.label1 = new ServiceSaleMachine.ScalableLabel();
+            this.label1 = new AirVitamin.ScalableLabel();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();

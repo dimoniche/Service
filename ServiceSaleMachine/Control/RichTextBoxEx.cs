@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace ServiceSaleMachine
+namespace AirVitamin
 {
     public partial class RichTextBoxEx : RichTextBox
     {

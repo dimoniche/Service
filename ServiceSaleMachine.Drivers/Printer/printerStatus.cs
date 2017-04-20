@@ -1,10 +1,10 @@
-﻿using ServiceSaleMachine;
+﻿using AirVitamin;
 using System;
 using System.IO.Ports;
 using System.Threading;
 using System.Management;
 
-namespace ServiceSaleMachine.Drivers
+namespace AirVitamin.Drivers
 {
     public class printerStatus
     {

@@ -1,7 +1,7 @@
-﻿using ServiceSaleMachine.Drivers;
+﻿using AirVitamin.Drivers;
 using System;
 
-namespace ServiceSaleMachine.Drivers
+namespace AirVitamin.Drivers
 {
     public class ServiceClientResponseEventArgs : EventArgs
     {

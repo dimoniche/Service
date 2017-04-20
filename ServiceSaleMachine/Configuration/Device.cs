@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml.Linq;
 
-namespace ServiceSaleMachine
+namespace AirVitamin
 {
     public class Device
     {

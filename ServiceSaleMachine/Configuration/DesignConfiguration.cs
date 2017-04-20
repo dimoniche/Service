@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 
-namespace ServiceSaleMachine
+namespace AirVitamin
 {
     public class DesignConfiguration
     {

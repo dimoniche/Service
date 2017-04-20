@@ -5,7 +5,7 @@ using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 
-namespace ServiceSaleMachine
+namespace AirVitamin
 {
     public class GifImage
     {

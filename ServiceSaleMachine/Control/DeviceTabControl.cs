@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace ServiceSaleMachine
+namespace AirVitamin
 {
     public partial class DeviceTabControl : UserControl
     {

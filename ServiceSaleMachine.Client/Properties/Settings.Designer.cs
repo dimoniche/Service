@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ServiceSaleMachine.Properties
+namespace AirVitamin.Properties
 {
 
 

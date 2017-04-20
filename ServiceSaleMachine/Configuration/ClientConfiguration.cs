@@ -5,7 +5,7 @@ using System.Linq;
 using System.Xml.Linq;
 using System.Diagnostics;
 
-namespace ServiceSaleMachine
+namespace AirVitamin
 {
 	public class ClientConfiguration
 	{

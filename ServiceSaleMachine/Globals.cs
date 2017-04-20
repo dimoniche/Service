@@ -4,7 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Reflection;
 
-namespace ServiceSaleMachine
+namespace AirVitamin
 {
     public static class Globals
     {

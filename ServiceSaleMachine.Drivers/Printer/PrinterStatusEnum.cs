@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ServiceSaleMachine.Drivers
+namespace AirVitamin.Drivers
 {
     [FlagsAttribute]
     public enum PrinterStatus

@@ -1,4 +1,4 @@
-﻿namespace ServiceSaleMachine.Client
+﻿namespace AirVitamin.Client
 {
     partial class FormWaitPayBill
     {
@@ -37,19 +37,19 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.LabelNameService1 = new ServiceSaleMachine.ScalableLabel();
+            this.LabelNameService1 = new AirVitamin.ScalableLabel();
             this.panel8 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.LabelNameService2 = new ServiceSaleMachine.ScalableLabel();
+            this.LabelNameService2 = new AirVitamin.ScalableLabel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.panel10 = new System.Windows.Forms.Panel();
-            this.AmountServiceText = new ServiceSaleMachine.ScalableLabel();
+            this.AmountServiceText = new AirVitamin.ScalableLabel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel11 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
-            this.TextPayBill = new ServiceSaleMachine.RichTextBoxEx();
+            this.TextPayBill = new AirVitamin.RichTextBoxEx();
             this.panel5 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.panel14 = new System.Windows.Forms.Panel();
@@ -60,7 +60,7 @@
             this.pBxReturnBack = new System.Windows.Forms.PictureBox();
             this.panel12 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
-            this.SecondMessageText = new ServiceSaleMachine.ScalableLabel();
+            this.SecondMessageText = new AirVitamin.ScalableLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.tableLayoutPanel1.SuspendLayout();

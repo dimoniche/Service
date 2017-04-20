@@ -1,4 +1,4 @@
-﻿namespace ServiceSaleMachine.Client
+﻿namespace AirVitamin.Client
 {
     partial class FormTemporallyNoWork
     {
@@ -35,8 +35,8 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.MessageText = new ServiceSaleMachine.RichTextBoxEx();
-            this.error = new ServiceSaleMachine.ScalableLabel();
+            this.MessageText = new AirVitamin.RichTextBoxEx();
+            this.error = new AirVitamin.ScalableLabel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureError = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);

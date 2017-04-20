@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ServiceSaleMachine
+namespace AirVitamin
 {
 	public class DefaultValueObject<T>
 	{

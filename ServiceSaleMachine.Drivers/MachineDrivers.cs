@@ -6,13 +6,7 @@ namespace AirVitamin.Drivers
 {
     public class MachineDrivers
     {
-        private SaleThread WorkerScanerDriver { get; set; }
         private SaleThread WorkerBillPollDriver { get; set; }
-
-        /// <summary>
-        /// событие необходимости обработки данных сканера
-        /// </summary>
-        public static AutoResetEvent ScanerEvent = new AutoResetEvent(false);
 
         /// <summary>
         /// событие необходимости обработки данных купюроприемника
@@ -289,27 +283,6 @@ namespace AirVitamin.Drivers
 
                 }
                 CCNETDriver.send_bill_command = false;
-            }
-        }
-
-        public bool ScanerIsWork()
-        {
-            return WorkerScanerDriver.IsWork;
-        }
-
-        public void startScanerPoll()
-        {
-            if (!WorkerScanerDriver.IsWork)
-            {
-                WorkerScanerDriver.Run();
-            }
-        }
-
-        public void stopScanerPoll()
-        {
-            if (WorkerScanerDriver.IsWork)
-            {
-                WorkerScanerDriver.Abort();
             }
         }
 

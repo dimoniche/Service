@@ -57,7 +57,7 @@ namespace AirVitamin.Client
         /// </summary>
         private void MainWorker()
         {
-            if (Globals.admin)
+            //if (Globals.admin)
             {
                 Program.Log.Write(LogMessageType.Information, "MAIN WORK: Входим в режим настройки приложения.");
 
@@ -532,16 +532,8 @@ NoCheckStatistic:
                         continue;
                     }
 
-                    //if (Globals.ClientConfiguration.Settings.offCheck != 1)
-                    //{
-                    //    // выбор формы оплаты - если есть оплата чеком
-                    //    result = (FormResultData)FormManager.OpenForm<FormChoosePay>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-                    //}
-                    //else
-                    {
-                        // платим только деньгами и чеками
-                        result.stage = WorkerStateStage.PayBillService;
-                    }
+                    // платим только деньгами
+                    result.stage = WorkerStateStage.PayBillService;
 
                     // загрузим выбранную услугу
                     Service serv = Globals.ClientConfiguration.ServiceByIndex(result.numberService);

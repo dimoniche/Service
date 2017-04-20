@@ -15,11 +15,7 @@ namespace AirVitamin.Client
 
         // количество денег на купюрах
         int amountMoney;
-        // количество денег на чеках
-        int amountCheck;
 
-        // положили на чек
-        int difftoCheck = 0;
         // положили на аккаунт
         int difftoAccount = 0;
 
@@ -37,7 +33,6 @@ namespace AirVitamin.Client
             Timeout = 0;
             amount = 0;
             amountMoney = 0;
-            amountCheck = 0;
 
             if (Globals.ClientConfiguration.Settings.offHardware == 0 && Globals.ClientConfiguration.Settings.offBill == 0)
             {
@@ -492,7 +487,6 @@ namespace AirVitamin.Client
                     int count = info.Amount;
 
                     amount += count;
-                    amountCheck += count;
 
                     // всегда со сдачей - сразу забираем деньгу c чека - никого не спрашиваем - гасим текущий чек - распечатаем новый
                     GlobalDb.GlobalBase.FixedCheck(info.Id);
@@ -666,8 +660,6 @@ namespace AirVitamin.Client
             data.log.Write(LogMessageType.Information, "==============================================================================");
             data.log.Write(LogMessageType.Information, "WAIT BILL: Приняли " + amount + " руб.");
             data.log.Write(LogMessageType.Information, "WAIT BILL: Купюрами " + amountMoney + " руб.");
-            data.log.Write(LogMessageType.Information, "WAIT BILL: Чеками " + amountCheck + " руб.");
-            data.log.Write(LogMessageType.Information, "WAIT BILL: Дали сдачу чеком на сумму " + difftoCheck + " руб.");
             data.log.Write(LogMessageType.Information, "WAIT BILL: Окажем услугу на сумму " + data.serv.price + " руб.");
             data.log.Write(LogMessageType.Information, "WAIT BILL: Оказываем услугу.");
             data.log.Write(LogMessageType.Information, "==============================================================================");

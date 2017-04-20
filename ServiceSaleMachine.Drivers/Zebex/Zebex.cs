@@ -118,9 +118,6 @@ namespace AirVitamin.Drivers
 
                             // Наполняем поток полученными данными
                             InputStream.Write(byteAnswer, 0, bytes);
-
-                            // Обрабатываем полученные данные
-                            MachineDrivers.ScanerEvent.Set();
                         }
                     }
                 }

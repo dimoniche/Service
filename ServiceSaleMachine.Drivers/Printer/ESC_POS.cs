@@ -141,18 +141,6 @@ namespace AirVitamin.Drivers
             prn.AbortPrint();
         }
 
-        public string getNamePrinter()
-        {
-            return Globals.ClientConfiguration.Settings.NamePrinter;
-        }
-
-        public void setNamePrinter(string str)
-        {
-            Globals.ClientConfiguration.Settings.NamePrinter = str;
-            Globals.ClientConfiguration.Save();
-        }
-
-
         /// <summary>
         /// Печать чека инкассации
         /// </summary>
@@ -180,14 +168,6 @@ namespace AirVitamin.Drivers
                 Print(eLeft, false, false);
                 Print(TransformCode("Сумма на аккаунтах"), true);
                 Print(" ".PadRight(42 - 24 - statistic.AccountMoneySumm.ToString("000000.00").Length, ' ') + statistic.AccountMoneySumm.ToString("000000.00") + TransformCode(" руб"), true);
-                Print(eLeft);
-            }
-
-            if (Globals.ClientConfiguration.Settings.changeOn > 0)  // со сдачей
-            {
-                Print(eLeft, false, false);
-                Print(TransformCode("Сумма на чеках    "), true);
-                Print(" ".PadRight(42 - 24 - statistic.BarCodeMoneySumm.ToString("000000.00").Length, ' ')  + statistic.BarCodeMoneySumm.ToString("000000.00") + TransformCode(" руб"), true);
                 Print(eLeft);
             }
 

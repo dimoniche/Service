@@ -9,11 +9,8 @@ namespace AirVitamin
 	public class ClientConfigurationProperties
 	{
         // настройки драйверов
-        public string comPortScanner;
         public string comPortBill;
         public string adressBill = "3";
-        public string comPortPrinter;
-        public string NamePrinter;
         public string comPortControl;
         public int comPortControlSpeed = 9600;
 
@@ -34,8 +31,6 @@ namespace AirVitamin
 
         // Отключение железа
         public int offHardware = 1;
-        // отключение оплату чеком
-        public int offCheck = 1;
         // отключение БД
         public int offDataBase = 1;
         // отключение купюроприемник
@@ -57,10 +52,6 @@ namespace AirVitamin
         // настройки сервисов
         public List<Service> services;
 
-        // поведение со сдачей
-        public int changeToAccount = 0;
-        public int changeToCheck = 0;
-
         // стиль оформления
         public int style = 0;
 
@@ -72,9 +63,6 @@ namespace AirVitamin
 
         // предельное время оказания услуги в минутах
         public int limitServiceTime = 100;
-
-        // работaем без бумаги в принтере
-        public int NoPaperWork = 1;
 
         internal ClientConfigurationProperties()
 		{

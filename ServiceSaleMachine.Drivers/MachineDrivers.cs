@@ -22,19 +22,9 @@ namespace AirVitamin.Drivers
         // Драйвера устройств
 
         /// <summary>
-        /// Драйвер сканера
-        /// </summary>
-        public ZebexScaner scaner;
-
-        /// <summary>
         /// Драйвер купюроприемника
         /// </summary>
         public CCRSProtocol CCNETDriver;
-
-        /// <summary>
-        /// Драйвер принтера
-        /// </summary>
-        public PrinterESC printer;
 
         /// <summary>
         /// Драйвер управляющего устройства
@@ -75,9 +65,7 @@ namespace AirVitamin.Drivers
             this.log.Write(LogMessageType.Information, "DRIVERS: Старт драйверов. Версия " + Globals.ProductVersion);
 
             // создаем все объекты драйверов
-            if (scaner == null) { scaner = new ZebexScaner(); }
             if (CCNETDriver == null) { CCNETDriver = new CCRSProtocol(); }
-            if (printer == null) { printer = new PrinterESC(); }
             if (control == null) { control = new ControlDevice(); }
             if (modem == null) { modem = new Modem(); }
         }
@@ -92,12 +80,6 @@ namespace AirVitamin.Drivers
             {
                 if (WorkerBillPollDriver != null) WorkerBillPollDriver.Abort();
                 if (CCNETDriver != null) CCNETDriver.closePort();
-
-                if (Globals.ClientConfiguration.Settings.offCheck != 1)
-                {
-                    if (WorkerBillPollDriver != null) WorkerScanerDriver.Abort();
-                    if (scaner != null) scaner.closePort();
-                }
 
                 if (Globals.ClientConfiguration.Settings.offControl != 1)
                 {
@@ -115,17 +97,6 @@ namespace AirVitamin.Drivers
 
         public void InitAllTask()
         {
-            if (Globals.ClientConfiguration.Settings.offCheck != 1)
-            {
-                // не платим чеком - не нужен сканер
-                if (WorkerScanerDriver == null)
-                {
-                    WorkerScanerDriver = new SaleThread { ThreadName = "WorkerScanerDriver" };
-                    WorkerScanerDriver.Work += WorkerScanerDriver_Work;
-                    WorkerScanerDriver.Complete += WorkerScanerDriver_Complete;
-                }
-            }
-
             if (Globals.ClientConfiguration.Settings.offBill != 1)
             {
                 if (WorkerBillPollDriver == null)
@@ -147,42 +118,11 @@ namespace AirVitamin.Drivers
                 return WorkerStateStage.NoCOMPort;
             }
 
-            if ((Globals.ClientConfiguration.Settings.offCheck != 1 && scaner.getNumberComPort().Contains("нет"))
-            || (Globals.ClientConfiguration.Settings.offBill != 1 && CCNETDriver.getNumberComPort().Contains("нет"))
-            || printer.getNamePrinter().Contains("нет"))
+            if (Globals.ClientConfiguration.Settings.offBill != 1 && CCNETDriver.getNumberComPort().Contains("нет"))
             {
                 // необходима настройка приложения
                 this.log.Write(LogMessageType.Error, "INIT: Необходима настройка приложения");
                 res = WorkerStateStage.NeedSettingProgram;
-            }
-
-            // настроим драйвер сканера
-            if (Globals.ClientConfiguration.Settings.offCheck != 1 && !scaner.getNumberComPort().Contains("нет"))
-            {
-                this.log.Write(LogMessageType.Information, "SCANNER: Настройка сканера.");
-
-                // не платим чеком - не нужен сканер
-                if (scaner.openPort(scaner.getNumberComPort()))
-                {
-                    // запустим задачу ожидания сообщений от сканера
-                    if (!WorkerScanerDriver.IsWork)
-                    {
-                        WorkerScanerDriver.Run();
-                    }
-
-                    // при старте сканер усыпим
-                    scaner.Request(ZebexCommandEnum.sleep);
-                }
-                else
-                {
-                    // неудача
-                    this.log.Write(LogMessageType.Error, "SCANNER: Сканер не верно настроен. Порт не доступен.");                    
-                    res = WorkerStateStage.NeedSettingProgram;
-                }
-            }
-            else
-            {
-                this.log.Write(LogMessageType.Information, "SCANNER: Сканер отключен.");
             }
 
             this.log.Write(LogMessageType.Information, "BILL: Настройка купюроприемникa.");
@@ -231,27 +171,6 @@ namespace AirVitamin.Drivers
             }
 
             this.log.Write(LogMessageType.Information, "PRINTER: Настройка принтера.");
-
-            if (!printer.getNamePrinter().Contains("нет"))
-            {
-                // настроим принтер
-                if (printer.OpenPrint(Globals.ClientConfiguration.Settings.NamePrinter))
-                {
-                    // настроим сенсор бумаги
-                }
-                else
-                {
-                    // неудача
-                    this.log.Write(LogMessageType.Error, "PRINTER: Принтер не верно настроен. Порт не доступен.");
-                    res = WorkerStateStage.NeedSettingProgram;
-                }
-
-                printer.ClosePrint();
-            }
-            else
-            {
-                this.log.Write(LogMessageType.Error, "PRINTER: Принтер не настроен.");
-            }
 
             // настроим управляющее устройство
             this.log.Write(LogMessageType.Information, "CONTROL: Настройка управлящего устройства.");
@@ -305,15 +224,6 @@ namespace AirVitamin.Drivers
 
         public void ManualInitDevice()
         {
-            if (Globals.ClientConfiguration.Settings.offCheck != 1)
-            {
-                // не платим чеком - не нужен сканер
-                scaner = new ZebexScaner();
-                WorkerScanerDriver = new SaleThread { ThreadName = "WorkerScanerDriver" };
-                WorkerScanerDriver.Work += WorkerScanerDriver_Work;
-                WorkerScanerDriver.Complete += WorkerScanerDriver_Complete;
-            }
-
             if (Globals.ClientConfiguration.Settings.offBill != 1)
             {
                 CCNETDriver = new CCRSProtocol();
@@ -321,8 +231,6 @@ namespace AirVitamin.Drivers
                 WorkerBillPollDriver.Work += WorkerBillPollDriver_Work;
                 WorkerBillPollDriver.Complete += WorkerBillPollDriver_Complete;
             }
-
-            printer = new PrinterESC();
 
             if (Globals.ClientConfiguration.Settings.offControl != 1)
             {
@@ -699,88 +607,6 @@ namespace AirVitamin.Drivers
                     {
                         // Нормальная работа
                         BillAcceptorEvent.WaitOne(timeout);
-
-                        // Принудительный запуск сборки мусора, если возможно освободить больше установленного минимума
-                        stepCount++;
-
-                        if (stepCount >= 50)
-                        {
-                            stepCount = 0;
-
-                            if (GC.GetTotalMemory(false) >= Globals.GcMinMemoryBlock)
-                            {
-                                GC.Collect();
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        public void SetComPortScaner(string port)
-        {
-            scaner.closePort();
-            scaner.openPort(port);
-        }
-
-        void ScannerProcessResponse()
-        {
-            byte[] responseDriver = new byte[scaner.InputStream.Length];
-            byte[] buffer = scaner.InputStream.GetBuffer();
-
-            Array.Copy(buffer, 0, responseDriver, 0, responseDriver.Length);
-
-            var str = System.Text.Encoding.Default.GetString(responseDriver);
-
-            Message message = new Message();
-
-            message.Event = DeviceEvent.Scaner;
-
-            log.Write(LogMessageType.Information, "SCANNER: Raw data " + str);
-
-            string result = Regex.Replace(str, "[^0-9]+", "");
-
-            message.Content = result;
-
-            log.Write(LogMessageType.Information, "SCANNER: Barcode data " + message.Content);
-
-            ReceivedResponse(this, new ServiceClientResponseEventArgs(message));
-        }
-
-        private void WorkerScanerDriver_Complete(object sender, ThreadCompleteEventArgs e)
-        {
-
-        }
-
-        /// <summary>
-        /// Обработчик событий от сканера
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void WorkerScanerDriver_Work(object sender, ThreadWorkEventArgs e)
-        {
-            int stepCount = 0;
-
-            // сначала ждем первого события
-            ScanerEvent.WaitOne();
-
-            while (!e.Cancel)
-            {
-                try
-                {
-                    // обработка строк от сканера
-                    ScannerProcessResponse();
-                }
-                catch (Exception exp)
-                {
-                    log.Write(LogMessageType.Error, "SCANNER: " + exp.GetDebugInformation());
-                }
-                finally
-                {
-                    if (!e.Cancel)
-                    {
-                        // Нормальная работа
-                        ScanerEvent.WaitOne();
 
                         // Принудительный запуск сборки мусора, если возможно освободить больше установленного минимума
                         stepCount++;

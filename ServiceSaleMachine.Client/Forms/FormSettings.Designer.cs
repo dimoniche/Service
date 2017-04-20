@@ -31,18 +31,6 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.DeviceSettings = new System.Windows.Forms.TabPage();
             this.tabControl2 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.labSummCheck = new System.Windows.Forms.Label();
-            this.label34 = new System.Windows.Forms.Label();
-            this.butSendCode = new System.Windows.Forms.Button();
-            this.cBxCommand = new System.Windows.Forms.ComboBox();
-            this.buttonStopScanerPoll = new System.Windows.Forms.Button();
-            this.buttonStartScanerPoll = new System.Windows.Forms.Button();
-            this.LabelCode = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.butWriteComPortScaner = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cBxComPortScaner = new System.Windows.Forms.ComboBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.label10 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -68,23 +56,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.cBxComPortBill = new System.Windows.Forms.ComboBox();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.tBxsumm = new System.Windows.Forms.TextBox();
-            this.label33 = new System.Windows.Forms.Label();
-            this.buttoninsertcheck = new System.Windows.Forms.Button();
-            this.labelStatusPaper = new System.Windows.Forms.Label();
-            this.label32 = new System.Windows.Forms.Label();
-            this.cBxPrinterPort = new System.Windows.Forms.ComboBox();
-            this.cBxNoPaperWork = new System.Windows.Forms.CheckBox();
-            this.butWriteComPortPrinter = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            this.butStatus = new System.Windows.Forms.Button();
-            this.Incasbutton = new System.Windows.Forms.Button();
-            this.butPrintCheck = new System.Windows.Forms.Button();
-            this.butWriteBarCode = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.cbxComPortPrinter = new System.Windows.Forms.ComboBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.label27 = new System.Windows.Forms.Label();
             this.LightOff2 = new System.Windows.Forms.Button();
@@ -181,7 +152,6 @@
             this.cBxBillOff = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.cbxOffDataBase = new System.Windows.Forms.CheckBox();
-            this.cbxCheckOff = new System.Windows.Forms.CheckBox();
             this.cBxoffModem = new System.Windows.Forms.CheckBox();
             this.cbxOffHardware = new System.Windows.Forms.CheckBox();
             this.tabPage9 = new System.Windows.Forms.TabPage();
@@ -189,9 +159,7 @@
             this.textMaxCountBanknote = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.checkchangeOn = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.checkBox5000 = new System.Windows.Forms.CheckBox();
             this.checkBox1000 = new System.Windows.Forms.CheckBox();
@@ -237,9 +205,7 @@
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
-            this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            this.tabPage4.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.tabViewDataBase.SuspendLayout();
             this.tabDataBaseSetting.SuspendLayout();
@@ -303,9 +269,7 @@
             // 
             // tabControl2
             // 
-            this.tabControl2.Controls.Add(this.tabPage1);
             this.tabControl2.Controls.Add(this.tabPage3);
-            this.tabControl2.Controls.Add(this.tabPage4);
             this.tabControl2.Controls.Add(this.tabPage5);
             this.tabControl2.Controls.Add(this.tabViewDataBase);
             this.tabControl2.Controls.Add(this.tabPage10);
@@ -315,134 +279,6 @@
             this.tabControl2.SelectedIndex = 0;
             this.tabControl2.Size = new System.Drawing.Size(827, 602);
             this.tabControl2.TabIndex = 0;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.labSummCheck);
-            this.tabPage1.Controls.Add(this.label34);
-            this.tabPage1.Controls.Add(this.butSendCode);
-            this.tabPage1.Controls.Add(this.cBxCommand);
-            this.tabPage1.Controls.Add(this.buttonStopScanerPoll);
-            this.tabPage1.Controls.Add(this.buttonStartScanerPoll);
-            this.tabPage1.Controls.Add(this.LabelCode);
-            this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.butWriteComPortScaner);
-            this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.cBxComPortScaner);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(819, 576);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Сканер";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // labSummCheck
-            // 
-            this.labSummCheck.AutoSize = true;
-            this.labSummCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labSummCheck.Location = new System.Drawing.Point(135, 102);
-            this.labSummCheck.Name = "labSummCheck";
-            this.labSummCheck.Size = new System.Drawing.Size(24, 25);
-            this.labSummCheck.TabIndex = 14;
-            this.labSummCheck.Text = "0";
-            // 
-            // label34
-            // 
-            this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(17, 114);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(82, 13);
-            this.label34.TabIndex = 13;
-            this.label34.Text = "Сумма на чеке";
-            // 
-            // butSendCode
-            // 
-            this.butSendCode.Location = new System.Drawing.Point(157, 146);
-            this.butSendCode.Name = "butSendCode";
-            this.butSendCode.Size = new System.Drawing.Size(75, 23);
-            this.butSendCode.TabIndex = 12;
-            this.butSendCode.Text = "Послать";
-            this.butSendCode.UseVisualStyleBackColor = true;
-            this.butSendCode.Click += new System.EventHandler(this.butSendCode_Click);
-            // 
-            // cBxCommand
-            // 
-            this.cBxCommand.FormattingEnabled = true;
-            this.cBxCommand.Location = new System.Drawing.Point(20, 146);
-            this.cBxCommand.Name = "cBxCommand";
-            this.cBxCommand.Size = new System.Drawing.Size(121, 21);
-            this.cBxCommand.TabIndex = 11;
-            this.cBxCommand.SelectedIndexChanged += new System.EventHandler(this.cBxCommand_SelectedIndexChanged);
-            // 
-            // buttonStopScanerPoll
-            // 
-            this.buttonStopScanerPoll.Location = new System.Drawing.Point(340, 50);
-            this.buttonStopScanerPoll.Name = "buttonStopScanerPoll";
-            this.buttonStopScanerPoll.Size = new System.Drawing.Size(75, 23);
-            this.buttonStopScanerPoll.TabIndex = 10;
-            this.buttonStopScanerPoll.Text = "Стоп";
-            this.buttonStopScanerPoll.UseVisualStyleBackColor = true;
-            this.buttonStopScanerPoll.Visible = false;
-            this.buttonStopScanerPoll.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // buttonStartScanerPoll
-            // 
-            this.buttonStartScanerPoll.Location = new System.Drawing.Point(259, 50);
-            this.buttonStartScanerPoll.Name = "buttonStartScanerPoll";
-            this.buttonStartScanerPoll.Size = new System.Drawing.Size(75, 23);
-            this.buttonStartScanerPoll.TabIndex = 9;
-            this.buttonStartScanerPoll.Text = "Пуск опроса";
-            this.buttonStartScanerPoll.UseVisualStyleBackColor = true;
-            this.buttonStartScanerPoll.Visible = false;
-            this.buttonStartScanerPoll.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // LabelCode
-            // 
-            this.LabelCode.AutoSize = true;
-            this.LabelCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.LabelCode.Location = new System.Drawing.Point(77, 52);
-            this.LabelCode.Name = "LabelCode";
-            this.LabelCode.Size = new System.Drawing.Size(120, 25);
-            this.LabelCode.TabIndex = 7;
-            this.LabelCode.Text = "123456789";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(17, 61);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(26, 13);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Код";
-            // 
-            // butWriteComPortScaner
-            // 
-            this.butWriteComPortScaner.Location = new System.Drawing.Point(259, 21);
-            this.butWriteComPortScaner.Name = "butWriteComPortScaner";
-            this.butWriteComPortScaner.Size = new System.Drawing.Size(75, 23);
-            this.butWriteComPortScaner.TabIndex = 6;
-            this.butWriteComPortScaner.Text = "Записать";
-            this.butWriteComPortScaner.UseVisualStyleBackColor = true;
-            this.butWriteComPortScaner.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 24);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(32, 13);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Порт";
-            // 
-            // cBxComPortScaner
-            // 
-            this.cBxComPortScaner.FormattingEnabled = true;
-            this.cBxComPortScaner.Location = new System.Drawing.Point(76, 21);
-            this.cBxComPortScaner.Name = "cBxComPortScaner";
-            this.cBxComPortScaner.Size = new System.Drawing.Size(121, 21);
-            this.cBxComPortScaner.TabIndex = 4;
-            this.cBxComPortScaner.SelectedIndexChanged += new System.EventHandler(this.cBxComPortScaner_SelectedIndexChanged);
             // 
             // tabPage3
             // 
@@ -716,191 +552,6 @@
             this.cBxComPortBill.Size = new System.Drawing.Size(121, 21);
             this.cBxComPortBill.TabIndex = 33;
             this.cBxComPortBill.SelectedIndexChanged += new System.EventHandler(this.cBxComPortBill_SelectedIndexChanged);
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Controls.Add(this.tBxsumm);
-            this.tabPage4.Controls.Add(this.label33);
-            this.tabPage4.Controls.Add(this.buttoninsertcheck);
-            this.tabPage4.Controls.Add(this.labelStatusPaper);
-            this.tabPage4.Controls.Add(this.label32);
-            this.tabPage4.Controls.Add(this.cBxPrinterPort);
-            this.tabPage4.Controls.Add(this.cBxNoPaperWork);
-            this.tabPage4.Controls.Add(this.butWriteComPortPrinter);
-            this.tabPage4.Controls.Add(this.button9);
-            this.tabPage4.Controls.Add(this.butStatus);
-            this.tabPage4.Controls.Add(this.Incasbutton);
-            this.tabPage4.Controls.Add(this.butPrintCheck);
-            this.tabPage4.Controls.Add(this.butWriteBarCode);
-            this.tabPage4.Controls.Add(this.textBox2);
-            this.tabPage4.Controls.Add(this.label3);
-            this.tabPage4.Controls.Add(this.cbxComPortPrinter);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(819, 576);
-            this.tabPage4.TabIndex = 2;
-            this.tabPage4.Text = "Принтер";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // tBxsumm
-            // 
-            this.tBxsumm.Location = new System.Drawing.Point(457, 219);
-            this.tBxsumm.Name = "tBxsumm";
-            this.tBxsumm.Size = new System.Drawing.Size(121, 20);
-            this.tBxsumm.TabIndex = 49;
-            this.tBxsumm.Text = "250";
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(394, 224);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(57, 13);
-            this.label33.TabIndex = 48;
-            this.label33.Text = "на сумму ";
-            // 
-            // buttoninsertcheck
-            // 
-            this.buttoninsertcheck.Location = new System.Drawing.Point(250, 219);
-            this.buttoninsertcheck.Name = "buttoninsertcheck";
-            this.buttoninsertcheck.Size = new System.Drawing.Size(138, 23);
-            this.buttoninsertcheck.TabIndex = 47;
-            this.buttoninsertcheck.Text = "Внести чек в базу";
-            this.buttoninsertcheck.UseVisualStyleBackColor = true;
-            this.buttoninsertcheck.Click += new System.EventHandler(this.buttoninsertcheck_Click);
-            // 
-            // labelStatusPaper
-            // 
-            this.labelStatusPaper.AutoSize = true;
-            this.labelStatusPaper.Location = new System.Drawing.Point(247, 203);
-            this.labelStatusPaper.Name = "labelStatusPaper";
-            this.labelStatusPaper.Size = new System.Drawing.Size(70, 13);
-            this.labelStatusPaper.TabIndex = 46;
-            this.labelStatusPaper.Text = "Бумага есть";
-            // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(27, 61);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(32, 13);
-            this.label32.TabIndex = 45;
-            this.label32.Text = "Порт";
-            this.label32.Visible = false;
-            // 
-            // cBxPrinterPort
-            // 
-            this.cBxPrinterPort.FormattingEnabled = true;
-            this.cBxPrinterPort.Location = new System.Drawing.Point(103, 58);
-            this.cBxPrinterPort.Name = "cBxPrinterPort";
-            this.cBxPrinterPort.Size = new System.Drawing.Size(121, 21);
-            this.cBxPrinterPort.TabIndex = 44;
-            this.cBxPrinterPort.Visible = false;
-            this.cBxPrinterPort.SelectedIndexChanged += new System.EventHandler(this.cBxPrinterPort_SelectedIndexChanged);
-            // 
-            // cBxNoPaperWork
-            // 
-            this.cBxNoPaperWork.AutoSize = true;
-            this.cBxNoPaperWork.Location = new System.Drawing.Point(250, 62);
-            this.cBxNoPaperWork.Name = "cBxNoPaperWork";
-            this.cBxNoPaperWork.Size = new System.Drawing.Size(254, 17);
-            this.cBxNoPaperWork.TabIndex = 43;
-            this.cBxNoPaperWork.Text = "Продолжать работать при окончании бумаги";
-            this.cBxNoPaperWork.UseVisualStyleBackColor = true;
-            this.cBxNoPaperWork.CheckedChanged += new System.EventHandler(this.cBxNoPaperWork_CheckedChanged);
-            // 
-            // butWriteComPortPrinter
-            // 
-            this.butWriteComPortPrinter.Location = new System.Drawing.Point(250, 31);
-            this.butWriteComPortPrinter.Name = "butWriteComPortPrinter";
-            this.butWriteComPortPrinter.Size = new System.Drawing.Size(138, 23);
-            this.butWriteComPortPrinter.TabIndex = 42;
-            this.butWriteComPortPrinter.Text = "Сохранить";
-            this.butWriteComPortPrinter.UseVisualStyleBackColor = true;
-            this.butWriteComPortPrinter.Click += new System.EventHandler(this.button1_Click_2);
-            // 
-            // button9
-            // 
-            this.button9.Location = new System.Drawing.Point(394, 148);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(138, 23);
-            this.button9.TabIndex = 40;
-            this.button9.Text = "Распечатать RAW";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Visible = false;
-            this.button9.Click += new System.EventHandler(this.button9_Click_2);
-            // 
-            // butStatus
-            // 
-            this.butStatus.Location = new System.Drawing.Point(250, 177);
-            this.butStatus.Name = "butStatus";
-            this.butStatus.Size = new System.Drawing.Size(138, 23);
-            this.butStatus.TabIndex = 40;
-            this.butStatus.Text = "Статус";
-            this.butStatus.UseVisualStyleBackColor = true;
-            this.butStatus.Click += new System.EventHandler(this.butStatus_Click);
-            // 
-            // Incasbutton
-            // 
-            this.Incasbutton.Location = new System.Drawing.Point(394, 177);
-            this.Incasbutton.Name = "Incasbutton";
-            this.Incasbutton.Size = new System.Drawing.Size(138, 23);
-            this.Incasbutton.TabIndex = 40;
-            this.Incasbutton.Text = "Распечатать инкасац. чек";
-            this.Incasbutton.UseVisualStyleBackColor = true;
-            this.Incasbutton.Visible = false;
-            this.Incasbutton.Click += new System.EventHandler(this.Incasbutton_Click);
-            // 
-            // butPrintCheck
-            // 
-            this.butPrintCheck.Location = new System.Drawing.Point(250, 148);
-            this.butPrintCheck.Name = "butPrintCheck";
-            this.butPrintCheck.Size = new System.Drawing.Size(138, 23);
-            this.butPrintCheck.TabIndex = 40;
-            this.butPrintCheck.Text = "Распечатать чек";
-            this.butPrintCheck.UseVisualStyleBackColor = true;
-            this.butPrintCheck.Click += new System.EventHandler(this.button17_Click);
-            // 
-            // butWriteBarCode
-            // 
-            this.butWriteBarCode.Location = new System.Drawing.Point(250, 119);
-            this.butWriteBarCode.Name = "butWriteBarCode";
-            this.butWriteBarCode.Size = new System.Drawing.Size(138, 23);
-            this.butWriteBarCode.TabIndex = 41;
-            this.butWriteBarCode.Text = "Распечатать баркод";
-            this.butWriteBarCode.UseVisualStyleBackColor = true;
-            this.butWriteBarCode.Visible = false;
-            this.butWriteBarCode.Click += new System.EventHandler(this.button16_Click);
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(103, 119);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(121, 20);
-            this.textBox2.TabIndex = 39;
-            this.textBox2.Text = "123456789012";
-            this.textBox2.Visible = false;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(27, 34);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(50, 13);
-            this.label3.TabIndex = 36;
-            this.label3.Text = "Принтер";
-            // 
-            // cbxComPortPrinter
-            // 
-            this.cbxComPortPrinter.FormattingEnabled = true;
-            this.cbxComPortPrinter.Items.AddRange(new object[] {
-            "Citizen PPU-700",
-            "Custom VKP80II"});
-            this.cbxComPortPrinter.Location = new System.Drawing.Point(103, 31);
-            this.cbxComPortPrinter.Name = "cbxComPortPrinter";
-            this.cbxComPortPrinter.Size = new System.Drawing.Size(121, 21);
-            this.cbxComPortPrinter.TabIndex = 1;
             // 
             // tabPage5
             // 
@@ -1865,7 +1516,6 @@
             this.groupBox4.Controls.Add(this.cBxBillOff);
             this.groupBox4.Controls.Add(this.checkBox1);
             this.groupBox4.Controls.Add(this.cbxOffDataBase);
-            this.groupBox4.Controls.Add(this.cbxCheckOff);
             this.groupBox4.Controls.Add(this.cBxoffModem);
             this.groupBox4.Controls.Add(this.cbxOffHardware);
             this.groupBox4.Location = new System.Drawing.Point(15, 6);
@@ -1878,7 +1528,7 @@
             // offControl
             // 
             this.offControl.AutoSize = true;
-            this.offControl.Location = new System.Drawing.Point(16, 87);
+            this.offControl.Location = new System.Drawing.Point(16, 61);
             this.offControl.Name = "offControl";
             this.offControl.Size = new System.Drawing.Size(214, 17);
             this.offControl.TabIndex = 14;
@@ -1889,7 +1539,7 @@
             // cBxBillOff
             // 
             this.cBxBillOff.AutoSize = true;
-            this.cBxBillOff.Location = new System.Drawing.Point(16, 65);
+            this.cBxBillOff.Location = new System.Drawing.Point(16, 39);
             this.cBxBillOff.Name = "cBxBillOff";
             this.cBxBillOff.Size = new System.Drawing.Size(171, 17);
             this.cBxBillOff.TabIndex = 15;
@@ -1918,21 +1568,10 @@
             this.cbxOffDataBase.UseVisualStyleBackColor = true;
             this.cbxOffDataBase.CheckedChanged += new System.EventHandler(this.cbxOffDataBase_CheckedChanged);
             // 
-            // cbxCheckOff
-            // 
-            this.cbxCheckOff.AutoSize = true;
-            this.cbxCheckOff.Location = new System.Drawing.Point(16, 42);
-            this.cbxCheckOff.Name = "cbxCheckOff";
-            this.cbxCheckOff.Size = new System.Drawing.Size(120, 17);
-            this.cbxCheckOff.TabIndex = 12;
-            this.cbxCheckOff.Text = "Отключить сканер";
-            this.cbxCheckOff.UseVisualStyleBackColor = true;
-            this.cbxCheckOff.CheckedChanged += new System.EventHandler(this.cbxCheckOff_CheckedChanged);
-            // 
             // cBxoffModem
             // 
             this.cBxoffModem.AutoSize = true;
-            this.cBxoffModem.Location = new System.Drawing.Point(16, 110);
+            this.cBxoffModem.Location = new System.Drawing.Point(16, 84);
             this.cBxoffModem.Name = "cBxoffModem";
             this.cBxoffModem.Size = new System.Drawing.Size(118, 17);
             this.cBxoffModem.TabIndex = 10;
@@ -1995,27 +1634,13 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.checkBox4);
             this.groupBox2.Controls.Add(this.checkchangeOn);
-            this.groupBox2.Controls.Add(this.checkBox3);
             this.groupBox2.Location = new System.Drawing.Point(155, 20);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(184, 161);
+            this.groupBox2.Size = new System.Drawing.Size(184, 49);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Режим работы";
-            // 
-            // checkBox4
-            // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Enabled = false;
-            this.checkBox4.Location = new System.Drawing.Point(15, 42);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(130, 17);
-            this.checkBox4.TabIndex = 1;
-            this.checkBox4.Text = "Выдача сдачи чеком";
-            this.checkBox4.UseVisualStyleBackColor = true;
-            this.checkBox4.CheckedChanged += new System.EventHandler(this.ChangeWrite_Click);
             // 
             // checkchangeOn
             // 
@@ -2027,17 +1652,6 @@
             this.checkchangeOn.Text = "Со сдачей";
             this.checkchangeOn.UseVisualStyleBackColor = true;
             this.checkchangeOn.CheckedChanged += new System.EventHandler(this.button9_Click);
-            // 
-            // checkBox3
-            // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(15, 65);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(153, 17);
-            this.checkBox3.TabIndex = 1;
-            this.checkBox3.Text = "Запись сдачи на аккаунт";
-            this.checkBox3.UseVisualStyleBackColor = true;
-            this.checkBox3.CheckedChanged += new System.EventHandler(this.ChangeWrite_Click);
             // 
             // groupBox1
             // 
@@ -2506,12 +2120,8 @@
             this.tabControl1.ResumeLayout(false);
             this.DeviceSettings.ResumeLayout(false);
             this.tabControl2.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
             this.tabViewDataBase.ResumeLayout(false);
@@ -2573,17 +2183,7 @@
         private System.Windows.Forms.TabPage DeviceSettings;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabControl tabControl2;
-        private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.ComboBox cbxComPortPrinter;
-        private System.Windows.Forms.Button butWriteComPortScaner;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cBxComPortScaner;
-        private System.Windows.Forms.Button buttonStopScanerPoll;
-        private System.Windows.Forms.Button buttonStartScanerPoll;
-        private System.Windows.Forms.Label LabelCode;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Label label16;
@@ -2597,15 +2197,10 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cBxComPortBill;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.Button buttonwriteControlPort;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox cBxControlPort;
-        private System.Windows.Forms.Button butPrintCheck;
-        private System.Windows.Forms.Button butWriteBarCode;
-        private System.Windows.Forms.Button butWriteComPortPrinter;
         private System.Windows.Forms.TabPage tabViewDataBase;
         private System.Windows.Forms.TabControl tabDataBaseSetting;
         private System.Windows.Forms.TabPage tabPage7;
@@ -2644,8 +2239,6 @@
         private System.Windows.Forms.Button Close1;
         private System.Windows.Forms.Button Open2;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.TabPage tabPage10;
         private System.Windows.Forms.Button butWriteModemComPort;
@@ -2660,7 +2253,6 @@
         private System.Windows.Forms.CheckBox cBxBillOff;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox cbxOffDataBase;
-        private System.Windows.Forms.CheckBox cbxCheckOff;
         private System.Windows.Forms.CheckBox cBxoffModem;
         private System.Windows.Forms.CheckBox cbxOffHardware;
         private System.Windows.Forms.GroupBox groupBox5;
@@ -2668,7 +2260,6 @@
         private System.Windows.Forms.TabPage tabDev1;
         private System.Windows.Forms.Button butDelServ;
         private System.Windows.Forms.Button butaddServ;
-        private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.ComboBox cBxControlSpeed;
         private System.Windows.Forms.ComboBox cBxSpeedModem;
@@ -2733,19 +2324,6 @@
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.TextBox edtBDname;
         private System.Windows.Forms.TextBox PreviouslyName;
-        private System.Windows.Forms.Button Incasbutton;
-        private System.Windows.Forms.CheckBox cBxNoPaperWork;
-        private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.ComboBox cBxPrinterPort;
-        private System.Windows.Forms.Button butStatus;
-        private System.Windows.Forms.Label labelStatusPaper;
-        private System.Windows.Forms.Button buttoninsertcheck;
-        private System.Windows.Forms.TextBox tBxsumm;
-        private System.Windows.Forms.Label label33;
-        private System.Windows.Forms.Button butSendCode;
-        private System.Windows.Forms.ComboBox cBxCommand;
-        private System.Windows.Forms.Label labSummCheck;
-        private System.Windows.Forms.Label label34;
         private System.Windows.Forms.TabPage tabCheckView;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button butCheck;

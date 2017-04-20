@@ -380,7 +380,6 @@ namespace AirVitamin
             statistic.ServiceMoneySumm = GlobalDb.GlobalBase.GetCountMoneyService(dt);  // сумма оказанных услуг
             statistic.AccountMoneySumm = GlobalDb.GlobalBase.GetSummFromAccount();
             statistic.CountBankNote = GlobalDb.GlobalBase.GetCountBankNote();
-            statistic.BarCodeMoneySumm = GlobalDb.GlobalBase.GetSummFromBarCode(); 
 
             return statistic;
         }
@@ -398,7 +397,6 @@ namespace AirVitamin
             statistic.ServiceMoneySumm = GlobalDb.GlobalBase.GetCountMoneyService(dt);  // сумма оказанных услуг
             statistic.AccountMoneySumm = GlobalDb.GlobalBase.GetSummFromAccount();
             statistic.CountBankNote = GlobalDb.GlobalBase.GetCountBankNote();
-            statistic.BarCodeMoneySumm = GlobalDb.GlobalBase.GetSummFromBarCode();
 
             return statistic;
         }

@@ -151,13 +151,6 @@ namespace AirVitamin.Client
                     data.drivers.CCNETDriver.WaitBillEscrow();
                     data.log.Write(LogMessageType.Information, "WAIT BILL: запускаем режим ожидания купюр.");
                 }
-
-                // при старте сканер разбудим, если не отключена возможность оплаты чеком
-                if (Globals.ClientConfiguration.Settings.offCheck != 1)
-                {
-                    data.drivers.scaner.Request(ZebexCommandEnum.wakeUp);
-                    data.log.Write(LogMessageType.Information, "WAIT CHECK: запускаем режим ожидания чеков.");
-                }
             }
         }
 
@@ -345,8 +338,6 @@ namespace AirVitamin.Client
                         return;
                     }
 
-                    ChooseChangeEnum ch = ChooseChangeEnum.None;
-
                     if (Globals.ClientConfiguration.Settings.changeOn > 0)
                     {
                         // посчитаем размер сдачи
@@ -360,57 +351,15 @@ namespace AirVitamin.Client
                         {
                             data.log.Write(LogMessageType.Information, "WAIT BILL: Сумма сдачи " + diff + " руб.");
 
-                            //if (data.retLogin != "" && Globals.ClientConfiguration.Settings.changeToAccount == 1 && Globals.ClientConfiguration.Settings.changeToCheck == 1)
-                            //{
-                            //    // тут надо решить как выдать сдачу - спросим пользователя
-                            //    ch = (ChooseChangeEnum)FormManager.OpenForm<FormChooseChange>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, diff.ToString());
-                            //}
-                            //else 
-                            if (data.retLogin != "" && Globals.ClientConfiguration.Settings.changeToAccount == 1)
-                            {
-                                ch = ChooseChangeEnum.ChangeToAccount;
-                            }
-                            else if (Globals.ClientConfiguration.Settings.changeToCheck == 1)
-                            {
-                                ch = ChooseChangeEnum.ChangeToCheck;
-                            }
+                            data.log.Write(LogMessageType.Information, "WAIT BILL: сдача на аккаунт. Сумма сдачи " + diff);
 
-                            if (ch == ChooseChangeEnum.ChangeToAccount)
-                            {
-                                data.log.Write(LogMessageType.Information, "WAIT BILL: сдача на аккаунт. Сумма сдачи " + diff);
+                            // запомним сколько внесли на аккаунт
+                            data.statistic.AccountMoneySumm += diff;
 
-                                // запомним сколько внесли на аккаунт
-                                data.statistic.AccountMoneySumm += diff;
+                            difftoAccount += diff;
 
-                                difftoAccount += diff;
-
-                                // внесем на счет
-                                GlobalDb.GlobalBase.AddToAmount(data.CurrentUserId, diff);
-                            }
-                            else
-                            {
-                                // выдаем чек
-                                data.log.Write(LogMessageType.Information, "WAIT BILL: сдача на чек. Сумма сдачи " + diff);
-
-                                // запомним сколько выдали на чеке
-                                data.statistic.BarCodeMoneySumm += diff;
-
-                                difftoCheck += diff;
-
-                                // запомним такой чек
-                                string check = CheckHelper.GetUniqueNumberCheck(12);
-
-                                // Здесь также наращивается номер чека
-                                GlobalDb.GlobalBase.AddToCheck(data.CurrentUserId, diff, check);
-
-                                data.drivers.printer.StartPrint(data.drivers.printer.getNamePrinter());
-
-                                // и напечатем его
-                                data.drivers.printer.PrintHeader(1);
-                                data.drivers.printer.PrintBarCode(check,diff);
-                                data.drivers.printer.PrintFooter();
-                                data.drivers.printer.EndPrint();
-                            }
+                            // внесем на счет
+                            GlobalDb.GlobalBase.AddToAmount(data.CurrentUserId, diff);
                         }
                     }
 
@@ -420,15 +369,7 @@ namespace AirVitamin.Client
                         if (diff > 0)
                         {
                             AmountServiceText.Text = "ПРИНЯТО: " + data.serv.price + " руб.";
-
-                            if (ch == ChooseChangeEnum.ChangeToAccount)
-                            {
-                                SecondMessageText.Text = "Сдача в размере " + diff + " руб. будет зачислена на Ваш аккаунт";
-                            }
-                            else
-                            {
-                                SecondMessageText.Text = "Остаток на чеке: " + diff + " руб.";
-                            }
+                            SecondMessageText.Text = "Сдача в размере " + diff + " руб. будет зачислена на Ваш аккаунт";
                         }
                         else
                         {
@@ -466,7 +407,6 @@ namespace AirVitamin.Client
                         if (Globals.ClientConfiguration.Settings.offHardware == 0)
                         {
                             data.drivers.CCNETDriver.ReturnBill();
-                            data.drivers.scaner.Request(ZebexCommandEnum.sleep);
 
                             data.log.Write(LogMessageType.Information, "WAIT BILL: Остановим работу оборудования для приема средств.");
                         }
@@ -559,7 +499,6 @@ namespace AirVitamin.Client
 
                     // сдача
                     int diff = 0;
-                    ChooseChangeEnum ch = ChooseChangeEnum.None;
 
                     if (Globals.ClientConfiguration.Settings.changeOn > 0)
                     {
@@ -573,63 +512,15 @@ namespace AirVitamin.Client
                         // сдача на чек
                         if (amount > data.serv.price)
                         {
-                            //if (data.retLogin != "" && Globals.ClientConfiguration.Settings.changeToAccount == 1 && Globals.ClientConfiguration.Settings.changeToCheck == 1)
-                            //{
-                            //    // тут надо решить как выдать сдачу - спросим пользователя
-                            //    ch = (ChooseChangeEnum)FormManager.OpenForm<FormChooseChange>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, diff.ToString());
-                            //}
-                            //else 
-                            if (data.retLogin != "" && Globals.ClientConfiguration.Settings.changeToAccount == 1)
-                            {
-                                ch = ChooseChangeEnum.ChangeToAccount;
-                            }
-                            else if (Globals.ClientConfiguration.Settings.changeToCheck == 1)
-                            {
-                                ch = ChooseChangeEnum.ChangeToCheck;
-                            }
+                            data.log.Write(LogMessageType.Information, "WAIT CHECK: сдача на аккаунт. Сумма сдачи " + diff);
 
-                            if (ch == ChooseChangeEnum.ChangeToAccount)
-                            {
-                                data.log.Write(LogMessageType.Information, "WAIT CHECK: сдача на аккаунт. Сумма сдачи " + diff);
+                            // запомним сколько внесли на аккаунт
+                            data.statistic.AccountMoneySumm += diff;
 
-                                // запомним сколько внесли на аккаунт
-                                data.statistic.AccountMoneySumm += diff;
+                            difftoAccount += diff;
 
-                                difftoAccount += diff;
-
-                                // внесем на счет
-                                GlobalDb.GlobalBase.AddToAmount(data.CurrentUserId, diff);
-                            }
-                            else
-                            {
-                                // выдаем чек
-                                data.log.Write(LogMessageType.Information, "WAIT CHECK: сдача на чек. Сумма сдачи " + diff);
-
-                                // запомним сколько выдали на чеке - печатаем новый чек - часть денег отоварили
-                                data.statistic.BarCodeMoneySumm -= data.serv.price;
-
-                                difftoCheck += diff;
-
-                                // запомним такой чек
-                                string check = CheckHelper.GetUniqueNumberCheck(12);
-
-                                // Здесь также наращивается номер чека
-                                GlobalDb.GlobalBase.AddToCheck(data.CurrentUserId, diff, check);
-
-                                data.drivers.printer.StartPrint(data.drivers.printer.getNamePrinter());
-
-                                int numberCheck = GlobalDb.GlobalBase.GetCurrentNumberDeliveryCheck();
-
-                                // и напечатем его
-                                data.drivers.printer.PrintHeader(1);
-                                data.drivers.printer.PrintBarCode(check, diff);
-                                data.drivers.printer.PrintFooter();
-                                data.drivers.printer.EndPrint();
-
-                                data.log.Write(LogMessageType.Information, "WAIT CHECK: Печатаем чек со сдачей под номером " + numberCheck + ". На сумму " + diff + " руб.");
-                                data.log.Write(LogMessageType.Information, "WAIT CHECK: BarCode " + check);
-                                data.log.Write(LogMessageType.Information, "WAIT CHECK: Выход на оказание услуги.");
-                            }
+                            // внесем на счет
+                            GlobalDb.GlobalBase.AddToAmount(data.CurrentUserId, diff);
                         }
                     }
 
@@ -639,15 +530,7 @@ namespace AirVitamin.Client
                         if (diff > 0)
                         {
                             AmountServiceText.Text = "ПРИНЯТО: " + data.serv.price + " руб.";
-
-                            if (ch == ChooseChangeEnum.ChangeToAccount)
-                            {
-                                SecondMessageText.Text = "Сдача в размере " + diff + " руб. будет зачислена на Ваш аккаунт";
-                            }
-                            else
-                            {
-                                SecondMessageText.Text = "Остаток на чеке: " + diff + " руб.";
-                            }
+                            SecondMessageText.Text = "Сдача в размере " + diff + " руб. будет зачислена на Ваш аккаунт";
                         }
                         else
                         {
@@ -679,8 +562,6 @@ namespace AirVitamin.Client
                         if (Globals.ClientConfiguration.Settings.offHardware == 0)
                         {
                             data.drivers.CCNETDriver.ReturnBill();
-                            data.drivers.scaner.Request(ZebexCommandEnum.sleep);
-
                             data.log.Write(LogMessageType.Information, "WAIT BILL: Остановим работу оборудования для приема средств.");
                         }
                     }
@@ -689,9 +570,6 @@ namespace AirVitamin.Client
                 {
                     data.log.Write(LogMessageType.Error, "WAIT CHECK: ошибка управляющего устройства.");
                     data.log.Write(LogMessageType.Error, "WAIT CHECK: " + exp.GetDebugInformation());
-
-                    // при ошибке сканер усыпим
-                    data.drivers.scaner.Request(ZebexCommandEnum.sleep);
                 }
             }
         }
@@ -712,9 +590,6 @@ namespace AirVitamin.Client
                     data.drivers.CCNETDriver.ReturnBill();
                     data.drivers.CCNETDriver.StopWaitBill();
                 }
-
-                // при завершении сканер усыпим
-                data.drivers.scaner.Request(ZebexCommandEnum.sleep);
             }
 
             Params.Result = data;
@@ -755,47 +630,12 @@ namespace AirVitamin.Client
 
             if (Globals.ClientConfiguration.Settings.offHardware != 1)
             {
-                if (amountMoney > 0)
-                {
-                    // Распечатать чек за услугу - если были потрачены деньги
-                    data.drivers.printer.StartPrint(data.drivers.printer.getNamePrinter());
-
-                    if (data.drivers.printer.prn.PrinterIsOpen)
-                    {
-                        data.drivers.printer.PrintHeader();
-                        data.drivers.printer.PrintBody(data.serv, amountMoney);
-                        data.drivers.printer.PrintFooter();
-                        data.drivers.printer.EndPrint();
-
-                        int numbercheck = GlobalDb.GlobalBase.GetCurrentNumberCheck();
-
-                        // увеличим номер фискального чека
-                        GlobalDb.GlobalBase.SetNumberCheck(numbercheck + 1);
-
-                        data.log.Write(LogMessageType.Information, "WAIT BILL: Печатаем фискальный чек с номером " + numbercheck + ". На сумму " + amountMoney + " руб.");
-                    }
-                }
-
                 int sum = GlobalDb.GlobalBase.GetUserMoney(data.CurrentUserId);
 
                 // если зарегистрированы - чек с остатком на аккаунте тоже даем, если есть остаток
                 if (data.retLogin != "" && sum > 0)
                 {
-                    // Распечатать чек c информацией по аккаунту - платили с аккаунта
-                    data.drivers.printer.StartPrint(data.drivers.printer.getNamePrinter());
 
-                    if (data.drivers.printer.prn.PrinterIsOpen)
-                    {
-                        data.drivers.printer.PrintHeader();
-                        data.drivers.printer.PrintAccountBody(data.serv, sum, data.retLogin);
-                        data.drivers.printer.PrintFooter();
-                        data.drivers.printer.EndPrint();
-
-                        int numbercheck = GlobalDb.GlobalBase.GetCurrentAccountNumberCheck();
-
-                        // увеличим номер отчетного
-                        GlobalDb.GlobalBase.SetNumberAccountCheck(numbercheck + 1);
-                    }
                 }
             }
 

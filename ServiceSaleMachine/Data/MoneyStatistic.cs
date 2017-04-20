@@ -13,11 +13,6 @@
         public int AccountMoneySumm = 0;
 
         /// <summary>
-        ///  сумма денег на штрихкод-чеках
-        /// </summary>
-        public int BarCodeMoneySumm = 0;
-
-        /// <summary>
         /// оказано услуг на сумму
         /// </summary>
         public int ServiceMoneySumm = 0;

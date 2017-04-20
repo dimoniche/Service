@@ -54,13 +54,13 @@ namespace AirVitamin.Client
                 label1.Text = "Вы внесли купюру " + Nominal + " руб.";
             }
 
-            if(data.retLogin != "" && Globals.ClientConfiguration.Settings.changeToAccount == 1)
+            if(data.retLogin != "")
             {
                 scalableLabel1.Text = "Сдача будет зачислена на Ваш аккаунт";
             }
             else
             {
-                scalableLabel1.Text = "Ваша сдача будет на чеке";
+                scalableLabel1.Text = "Нет регистрации в аккаунте";
             }
         }
 

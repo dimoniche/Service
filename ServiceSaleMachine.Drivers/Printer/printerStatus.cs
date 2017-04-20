@@ -9,18 +9,9 @@ namespace AirVitamin.Drivers
     public class printerStatus
     {
         SerialPort serialPort;
+        string number_port;
+
         Log log = null;
-
-        public string getNumberComPort()
-        {
-            return Globals.ClientConfiguration.Settings.comPortPrinter;
-        }
-
-        public void setNumberComPort(string str)
-        {
-            Globals.ClientConfiguration.Settings.comPortPrinter = str;
-            Globals.ClientConfiguration.Save();
-        }
 
         public bool openPort(string com_port, int speed = 19200)
         {
@@ -160,7 +151,7 @@ namespace AirVitamin.Drivers
         {
             this.log = Log;
 
-            openPort(getNumberComPort());
+            openPort(number_port);
 
             if (serialPort == null || serialPort.IsOpen == false) return PaperEnableEnum.PaperError;
 

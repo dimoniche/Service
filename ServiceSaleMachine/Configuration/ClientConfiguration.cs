@@ -48,11 +48,8 @@ namespace AirVitamin
 					if (xSettings != null)
 					{
 
-                        if ((xElement = xSettings.Element("comPortScanner")) != null) Settings.comPortScanner = xElement.Value;
                         if ((xElement = xSettings.Element("adressBill")) != null) Settings.adressBill = xElement.Value;
                         if ((xElement = xSettings.Element("comPortBill")) != null) Settings.comPortBill = xElement.Value;
-                        if ((xElement = xSettings.Element("comPortPrinter")) != null) Settings.comPortPrinter = xElement.Value;
-                        if ((xElement = xSettings.Element("NamePrinter")) != null) Settings.NamePrinter = xElement.Value;
                         if ((xElement = xSettings.Element("comPortControl")) != null) Settings.comPortControl = xElement.Value;
                         if ((xElement = xSettings.Element("comPortModem")) != null) Settings.comPortModem = xElement.Value;
                         if ((xElement = xSettings.Element("comPortControlSpeed")) != null) Settings.comPortControlSpeed = int.Parse(xElement.Value);
@@ -66,19 +63,13 @@ namespace AirVitamin
                         if ((xElement = xSettings.Element("TextEndService")) != null) Settings.TextEndService = xElement.Value;
 
                         if ((xElement = xSettings.Element("offHardware")) != null) Settings.offHardware = int.Parse(xElement.Value);
-                        if ((xElement = xSettings.Element("offCheck")) != null) Settings.offCheck = int.Parse(xElement.Value);
                         if ((xElement = xSettings.Element("offDataBase")) != null) Settings.offDataBase = int.Parse(xElement.Value);
                         if ((xElement = xSettings.Element("offBill")) != null) Settings.offBill = int.Parse(xElement.Value);
                         if ((xElement = xSettings.Element("offControl")) != null) Settings.offControl = int.Parse(xElement.Value);
                         if ((xElement = xSettings.Element("offModem")) != null) Settings.offModem = int.Parse(xElement.Value);
 
-                        if ((xElement = xSettings.Element("NoPaperWork")) != null) Settings.NoPaperWork = int.Parse(xElement.Value);
-
                         if ((xElement = xSettings.Element("changeOn")) != null) Settings.changeOn = int.Parse(xElement.Value);
                         if ((xElement = xSettings.Element("timeout")) != null) Settings.timeout = int.Parse(xElement.Value);
-
-                        if ((xElement = xSettings.Element("changeToAccount")) != null) Settings.changeToAccount = int.Parse(xElement.Value);
-                        if ((xElement = xSettings.Element("changeToCheck")) != null) Settings.changeToCheck = int.Parse(xElement.Value);
 
                         if ((xElement = xSettings.Element("MaxCountBankNote")) != null) Settings.MaxCountBankNote = int.Parse(xElement.Value);
                         if ((xElement = xSettings.Element("limitServiceTime")) != null) Settings.limitServiceTime = int.Parse(xElement.Value);
@@ -134,11 +125,8 @@ namespace AirVitamin
 				// Настройки
 				XElement xSettings = new XElement("Settings");
 
-				xSettings.Add(new XElement("comPortScanner", Settings.comPortScanner));
                 xSettings.Add(new XElement("comPortBill", Settings.comPortBill));
                 xSettings.Add(new XElement("adressBill", Settings.adressBill));
-                xSettings.Add(new XElement("comPortPrinter", Settings.comPortPrinter));
-                xSettings.Add(new XElement("NamePrinter", Settings.NamePrinter));
                 xSettings.Add(new XElement("comPortControl", Settings.comPortControl));
                 xSettings.Add(new XElement("comPortModem", Settings.comPortModem));
                 xSettings.Add(new XElement("comPortControlSpeed", Settings.comPortControlSpeed.ToString()));
@@ -152,19 +140,13 @@ namespace AirVitamin
                 xSettings.Add(new XElement("TextEndService", Settings.TextEndService));
 
                 xSettings.Add(new XElement("offHardware", Settings.offHardware.ToString()));
-                xSettings.Add(new XElement("offCheck", Settings.offCheck.ToString()));
                 xSettings.Add(new XElement("offDataBase", Settings.offDataBase.ToString()));
                 xSettings.Add(new XElement("offBill", Settings.offBill.ToString()));
                 xSettings.Add(new XElement("offControl", Settings.offControl.ToString()));
                 xSettings.Add(new XElement("offModem", Settings.offModem.ToString()));
 
-                xSettings.Add(new XElement("NoPaperWork", Settings.NoPaperWork.ToString()));
-
                 xSettings.Add(new XElement("changeOn", Settings.changeOn.ToString()));
                 xSettings.Add(new XElement("timeout", Settings.timeout.ToString()));
-
-                xSettings.Add(new XElement("changeToAccount", Settings.changeToAccount.ToString()));
-                xSettings.Add(new XElement("changeToCheck", Settings.changeToCheck.ToString()));
 
                 xSettings.Add(new XElement("MaxCountBankNote", Settings.MaxCountBankNote.ToString()));
                 xSettings.Add(new XElement("limitServiceTime", Settings.limitServiceTime.ToString()));

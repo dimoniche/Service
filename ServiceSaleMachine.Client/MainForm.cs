@@ -209,16 +209,6 @@ NoCheckStatistic:
                         Close();
                         return;
                     }
-                    else if (result.stage == WorkerStateStage.PaperEnd)
-                    {
-                        // ошибки принтера есть
-                        continue;
-                    }
-                    else if (result.stage == WorkerStateStage.ErrorPrinter)
-                    {
-                        // ошибки принтера есть
-                        continue;
-                    }
                     else if (result.stage == WorkerStateStage.ErrorBill)
                     {
                         // ошибки купюроприемника
@@ -423,16 +413,6 @@ NoCheckStatistic:
                             // купюроприемник полон
                             goto NoCheckStatistic;
                         }
-                        else if (result.stage == WorkerStateStage.PaperEnd)
-                        {
-                            // ошибки принтера есть
-                            continue;
-                        }
-                        else if (result.stage == WorkerStateStage.ErrorPrinter)
-                        {
-                            // ошибки принтера есть
-                            continue;
-                        }
                         else if (result.stage == WorkerStateStage.DropCassettteBill)
                         {
                             Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выемка денег.");
@@ -610,50 +590,6 @@ NoCheckStatistic:
                         }
                         else if (result.stage == WorkerStateStage.TimeOut)
                         {
-                            check = false;
-                            continue;
-                        }
-                    }
-                    else if (result.stage == WorkerStateStage.PayCheckService)
-                    {
-                        // ожидание считывания чека - сюда не попадаем - отказались от оплаты только чеками
-                        result = (FormResultData)FormManager.OpenForm<FormWaitPayCheck>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-
-                        if (result.stage == WorkerStateStage.Fail || result.stage == WorkerStateStage.EndDropCassette)
-                        {
-                            Program.Log.Write(LogMessageType.Information, "MAIN WORK: Отказались от оплаты.");
-
-                            // отказ - выход в начало
-                            continue;
-                        }
-                        else if (result.stage == WorkerStateStage.ExitProgram)
-                        {
-                            // выход
-                            Close();
-                            return;
-                        }
-                        else if (result.stage == WorkerStateStage.DropCassettteBill)
-                        {
-                            Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выемка денег.");
-
-                            // выемка денег
-                            result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-
-                            if (result.stage == WorkerStateStage.EndDropCassette)
-                            {
-                                continue;
-                            }
-                            else if (result.stage == WorkerStateStage.ExitProgram)
-                            {
-                                // выход
-                                Close();
-                                return;
-                            }
-                        }
-                        else if (result.stage == WorkerStateStage.TimeOut)
-                        {
-                            Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выход из оплаты по тайм ауту.");
-
                             check = false;
                             continue;
                         }
@@ -893,69 +829,6 @@ NoCheckStatistic:
                 }
             }
 
-            // проверяем наличие бумаги в принтере
-            //if(result.drivers.printer.status.CheckPaper(Program.Log) == PaperEnableEnum.PaperEnd)
-            //{
-            //    // бумага кончилась
-
-            //    if (Globals.ClientConfiguration.Settings.NoPaperWork == 0)
-            //    {
-            //        // с такой ошибкой не работаем
-            //        result.stage = WorkerStateStage.PaperEnd;
-            //    }
-
-            //    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: кончилась бумага.");
-            //}
-
-            PrinterStatus status = result.drivers.printer.GetStatus();
-
-            if ((status & (PrinterStatus.PRINTER_STATUS_PAPER_OUT 
-                         | PrinterStatus.PRINTER_STATUS_PAPER_JAM 
-                         | PrinterStatus.PRINTER_STATUS_PAPER_PROBLEM
-                         | PrinterStatus.PRINTER_STATUS_DOOR_OPEN
-                         | PrinterStatus.PRINTER_STATUS_ERROR)) > 0)
-            {
-                // что то с бумагой
-                if (Globals.ClientConfiguration.Settings.NoPaperWork == 0)
-                {
-                    // с такой ошибкой не работаем
-                    result.stage = WorkerStateStage.PaperEnd;
-                }
-
-                if (result.PrinterError == false)
-                {
-                    result.drivers.modem.SendSMS("Кончилась бумага", result.log);
-                    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: кончилась бумага.");
-                }
-
-                result.PrinterError = true;
-            }
-            else if ((status & PrinterStatus.PRINTER_STATUS_OFFLINE) > 0)
-            {
-                if (Globals.ClientConfiguration.Settings.NoPaperWork == 0)
-                {
-                    // нет связи с принтером
-                    result.stage = WorkerStateStage.ErrorPrinter;
-                }
-
-                if (result.PrinterError == false)
-                {
-                    result.drivers.modem.SendSMS("Нет связи с принтером.", result.log);
-                    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: нет связи с принтером.");
-                }
-
-                result.PrinterError = true;
-            }
-            else
-            {
-                if (result.PrinterError == true)
-                {
-                    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: ошибка принтера снялась.");
-                }
-
-                result.PrinterError = false;
-            }
-
             return result;
         }
 
@@ -970,8 +843,6 @@ NoCheckStatistic:
             Program.Log.Write(LogMessageType.Information, "Выход из приложения.");
 
             GlobalDb.GlobalBase.CloseForm();
-
-            result.drivers.printer.AbortPrint();
 
             try
             {

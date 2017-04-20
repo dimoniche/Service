@@ -1,7 +1,5 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.IO.Ports;
-using System.Text.RegularExpressions;
 using System.Threading;
 
 namespace AirVitamin.Drivers
@@ -40,17 +38,6 @@ namespace AirVitamin.Drivers
 
                 serialPort = null;
             }
-        }
-
-        public string getNumberComPort()
-        {
-            return Globals.ClientConfiguration.Settings.comPortScanner;
-        }
-
-        public void setNumberComPort(string str)
-        {
-            Globals.ClientConfiguration.Settings.comPortScanner = str;
-            Globals.ClientConfiguration.Save();
         }
 
         public bool openPort(string com_port)

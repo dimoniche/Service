@@ -50,11 +50,6 @@ namespace AirVitamin
         ChoosePay,                  //
 
         /// <summary>
-        /// Оплата чеком
-        /// </summary>
-        PayCheckService,            //
-
-        /// <summary>
         /// Оплата деньгами
         /// </summary>
         PayBillService,             //
@@ -173,16 +168,6 @@ namespace AirVitamin
         /// Купюроприемник обслужили
         /// </summary>
         EndBillFull,
-
-        /// <summary>
-        /// бумага закончилась
-        /// </summary>
-        PaperEnd,
-
-        /// <summary>
-        /// ошибка принтера
-        /// </summary>
-        ErrorPrinter,
 
         /// <summary>
         /// ошибка при регистрации нового пользователя

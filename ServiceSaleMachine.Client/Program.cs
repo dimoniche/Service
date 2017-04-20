@@ -75,11 +75,8 @@ namespace AirVitamin.Client
 
             if (!Globals.ClientConfiguration.Load())
             {
-                Globals.ClientConfiguration.Settings.comPortScanner = "NULL";
                 Globals.ClientConfiguration.Settings.comPortBill = "NULL";
                 Globals.ClientConfiguration.Settings.adressBill = "NULL";
-                Globals.ClientConfiguration.Settings.comPortPrinter = "NULL";
-                Globals.ClientConfiguration.Settings.NamePrinter = "NULL";
                 Globals.ClientConfiguration.Settings.comPortControl = "NULL";
 
                 // пока 3 сервиса

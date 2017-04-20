@@ -27,6 +27,9 @@ namespace AirVitamin
         public static CheckConfiguration CheckConfiguration { get; private set; }
         public static RegistrySettings RegistrySettings { get; private set; }
 
+        public static bool scanerOff { get; private set; }
+        public static bool printerOff { get; private set; }
+
         /// <summary>
         /// период опроса управляющего устройства
         /// </summary>
@@ -45,6 +48,9 @@ namespace AirVitamin
 #if DEBUG
             IsDebug = true;
 #endif
+            scanerOff = true;
+            printerOff = true;
+
             DatabaseVersion = new Version("1.0");
             ProductVersion = (Version)Assembly.GetExecutingAssembly().GetName().Version.Clone();
             CultureRu = new CultureInfo("ru-RU");

@@ -50,13 +50,6 @@
   <ItemGroup>
     <Compile Include="FormResultData.cs" />
     <Compile Include="Forms\Enum\ControlDeviceEnum.cs" />
-    <Compile Include="Forms\Enum\ChooseChangeEnum.cs" />
-    <Compile Include="Forms\FormChooseChange.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormChooseChange.Designer.cs">
-      <DependentUpon>FormChooseChange.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\FormChooseService1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,12 +79,6 @@
     </Compile>
     <Compile Include="Forms\FormMainMenu.Designer.cs">
       <DependentUpon>FormMainMenu.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FormChoosePay.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormChoosePay.Designer.cs">
-      <DependentUpon>FormChoosePay.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormMoneyRecess.cs">
       <SubType>Form</SubType>
@@ -153,12 +140,6 @@
     <Compile Include="Forms\FormWaitPayBill.Designer.cs">
       <DependentUpon>FormWaitPayBill.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormWaitPayCheck.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormWaitPayCheck.Designer.cs">
-      <DependentUpon>FormWaitPayCheck.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\FormWaitStage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -198,9 +179,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\FormChooseChange.resx">
-      <DependentUpon>FormChooseChange.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormChooseService1.resx">
       <DependentUpon>FormChooseService1.cs</DependentUpon>
     </EmbeddedResource>
@@ -215,9 +193,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormMainMenu.resx">
       <DependentUpon>FormMainMenu.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormChoosePay.resx">
-      <DependentUpon>FormChoosePay.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormMoneyRecess.resx">
       <DependentUpon>FormMoneyRecess.cs</DependentUpon>
@@ -248,9 +223,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormWaitPayBill.resx">
       <DependentUpon>FormWaitPayBill.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormWaitPayCheck.resx">
-      <DependentUpon>FormWaitPayCheck.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormWaitStage.resx">
       <DependentUpon>FormWaitStage.cs</DependentUpon>

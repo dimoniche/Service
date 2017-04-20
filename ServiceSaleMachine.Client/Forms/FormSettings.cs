@@ -95,7 +95,6 @@ namespace AirVitamin.Client
 
             // Set up the ToolTip text for the Button and Checkbox.
             toolTip1.SetToolTip(this.cbxOffHardware, "Отключение всего оборудования.");
-            toolTip1.SetToolTip(this.cbxCheckOff,    "Отключение оплаты чеком. Так же выключается сканер штрих кода.");
             toolTip1.SetToolTip(this.cbxOffDataBase, "Отключить базу данных. Не будут работать аккаунты.");
             toolTip1.SetToolTip(this.checkBox1,      "Отключение регистрации пользователей.");
             toolTip1.SetToolTip(this.cBxBillOff,     "Отключение купюроприемника. Приведет к невозможности работы с наличностью.");
@@ -106,13 +105,10 @@ namespace AirVitamin.Client
             toolTip1.SetToolTip(this.cBxoffModem,           "Отключение модема. Не будет возможности оповещений о нештатных ситауциях и восстановления паролей пользователей.");
             toolTip1.SetToolTip(this.groupBox1,             "Возможные номиналы купюр с которыми может работать устройство.");
             toolTip1.SetToolTip(this.checkchangeOn,         "Работа устройства с выдачей сдачи чеком или заносом ее на счет пользвателя, если он зарегистрирован.");
-            toolTip1.SetToolTip(this.checkBox3,             "Включение возможности переноса сдачи на счет пользователя.");
             toolTip1.SetToolTip(this.textMaxCountBanknote,  "Максимальное значение банкнот в купюроприемнике после которого работа устройства невозможна и выдается предупреждение об этом.");
             toolTip1.SetToolTip(this.labelCurrNumberCheck,  "Номера чеков содержащих стоимость услуг за наличные.");
             toolTip1.SetToolTip(this.labeldelivery,         "Номера чеков содержащих сдачу в виде штрих кода.");
             toolTip1.SetToolTip(this.labelAccount,          "Номера чеков содержащих отчет о остатках денег на аккаунте пользователя.");
-            toolTip1.SetToolTip(this.cBxComPortScaner,      "Порт, к оторому подключен сканер штрих кодов.");
-            toolTip1.SetToolTip(this.cBxCommand,            "Комманды управления сканером штрих кодов.");
             toolTip1.SetToolTip(this.cBxComPortBill,        "Порт к котрому подключен купюроприемник.");
             toolTip1.SetToolTip(this.button8,               "Получение серийного номера купюроприемника.");
             toolTip1.SetToolTip(this.richTextBox1,          "Лог действий купюроприемника.");
@@ -359,10 +355,6 @@ namespace AirVitamin.Client
         {
             string[] currentPort = SerialPortHelper.GetSerialPorts();
 
-            cBxComPortScaner.Items.Clear();
-            cBxComPortScaner.Items.Add("нет");
-            cBxComPortScaner.Items.AddRange(currentPort);
-
             cBxComPortBill.Items.Clear();
             cBxComPortBill.Items.Add("нет");
             cBxComPortBill.Items.AddRange(currentPort);
@@ -374,10 +366,6 @@ namespace AirVitamin.Client
             cBxModemComPort.Items.Clear();
             cBxModemComPort.Items.Add("нет");
             cBxModemComPort.Items.AddRange(currentPort);
-
-            cBxPrinterPort.Items.Clear();
-            cBxPrinterPort.Items.Add("нет");
-            cBxPrinterPort.Items.AddRange(currentPort);
 
             cBxSpeedModem.Items.Clear();
             cBxControlSpeed.Items.Clear();
@@ -411,18 +399,6 @@ namespace AirVitamin.Client
             butReadStatus.Enabled = state;
         }
 
-        /// <summary>
-        /// Установка контролов относящихся к сканеру
-        /// </summary>
-        /// <param name="state"></param>
-        void SetStateScaner(bool state)
-        {
-            buttonStartScanerPoll.Enabled = state;
-            buttonStopScanerPoll.Enabled = state;
-            cBxComPortScaner.Enabled = state;
-            butWriteComPortScaner.Enabled = state;
-        }
-
         void ReLoad()
         {
             init = true;
@@ -443,54 +419,10 @@ namespace AirVitamin.Client
                 {
                     changeStateHardWare(true);
 
-                    if (Globals.ClientConfiguration.Settings.offCheck != 1)
-                    {
-                        buttonStartScanerPoll.Enabled = !data.drivers.ScanerIsWork();
-                        buttonStopScanerPoll.Enabled = data.drivers.ScanerIsWork();
-                    }
-
                     if (Globals.ClientConfiguration.Settings.offBill != 1)
                     {
                         butStartPoll.Enabled = !data.drivers.BillPollIsWork();
                         butStopPoll.Enabled = data.drivers.BillPollIsWork();
-                    }
-
-                    if (Globals.ClientConfiguration.Settings.offCheck != 1)
-                    {
-                        // не платим чеком - не нужен сканер
-                        if (data.drivers.scaner.getNumberComPort().Contains("нет"))
-                        {
-                            cBxComPortScaner.SelectedIndex = 0;
-
-                            buttonStartScanerPoll.Enabled = false;
-                            buttonStopScanerPoll.Enabled = false;
-                        }
-                        else if (data.drivers.scaner.getNumberComPort().Contains("COM"))
-                        {
-                            string index = data.drivers.scaner.getNumberComPort().Remove(0, 3);
-                            int int_index = 0;
-                            int.TryParse(index, out int_index);
-
-                            int counter = 0;
-                            foreach (object item in cBxComPortScaner.Items)
-                            {
-                                if ((string)item == data.drivers.scaner.getNumberComPort())
-                                {
-                                    break;
-                                }
-                                counter++;
-                            }
-
-                            cBxComPortScaner.SelectedIndex = counter;
-
-                            data.drivers.scaner.openPort((string)cBxComPortScaner.Items[cBxComPortScaner.SelectedIndex]);
-                        }
-
-                        SetStateScaner(true);
-                    }
-                    else
-                    {
-                        SetStateScaner(false);
                     }
 
                     if (Globals.ClientConfiguration.Settings.offControl == 1 && data.drivers.control.getNumberComPort().Contains("нет"))
@@ -564,37 +496,6 @@ namespace AirVitamin.Client
                         data.drivers.CCNETDriver.BillAdr = int_index;
                     }
 
-                    cbxComPortPrinter.Items.Clear();
-                    cbxComPortPrinter.Items.AddRange(data.drivers.printer.findAllPrinter());
-
-                    if (data.drivers.printer.getNamePrinter().Contains("нет"))
-                    {
-                        cbxComPortPrinter.SelectedIndex = -1;
-                    }
-                    else
-                    {
-                        cbxComPortPrinter.SelectedIndex = data.drivers.printer.findPrinterIndex(data.drivers.printer.getNamePrinter());
-                    }
-
-                    if (data.drivers.printer.status.getNumberComPort().Contains("COM"))
-                    {
-                        string index = data.drivers.printer.status.getNumberComPort().Remove(0, 3);
-                        int int_index = 0;
-                        int.TryParse(index, out int_index);
-
-                        int counter = 0;
-                        foreach (object item in cBxPrinterPort.Items)
-                        {
-                            if ((string)item == data.drivers.printer.status.getNumberComPort())
-                            {
-                                break;
-                            }
-                            counter++;
-                        }
-
-                        cBxPrinterPort.SelectedIndex = counter;
-                    }
-
                     if (Globals.ClientConfiguration.Settings.offModem == 1 && data.drivers.modem.getNumberComPort().Contains("нет"))
                     {
                         cBxModemComPort.SelectedIndex = 0;
@@ -655,15 +556,6 @@ namespace AirVitamin.Client
                 cbxOffDataBase.Checked = false;
             }
 
-            if (Globals.ClientConfiguration.Settings.offCheck == 1)
-            {
-                cbxCheckOff.Checked = true;
-            }
-            else
-            {
-                cbxCheckOff.Checked = false;
-            }
-
             if (Globals.ClientConfiguration.Settings.offHardware == 1)
             {
                 cbxOffHardware.Checked = true;
@@ -673,7 +565,6 @@ namespace AirVitamin.Client
                 cbxOffHardware.Checked = false;
             }
 
-            cbxCheckOff.Enabled = !cbxOffHardware.Checked;
             cBxBillOff.Enabled = !cbxOffHardware.Checked;
             offControl.Enabled = !cbxOffHardware.Checked;
             cBxoffModem.Enabled = !cbxOffHardware.Checked;
@@ -706,12 +597,7 @@ namespace AirVitamin.Client
 
             checkchangeOn.Checked = Globals.ClientConfiguration.Settings.changeOn > 0 ? true : false;
 
-            checkBox3.Checked = Globals.ClientConfiguration.Settings.changeToAccount > 0 ? true : false;
-            checkBox4.Checked = Globals.ClientConfiguration.Settings.changeToCheck > 0 ? true : false;
-
             cBxoffModem.Checked = Globals.ClientConfiguration.Settings.offModem > 0 ? true : false;
-
-            cBxNoPaperWork.Checked = Globals.ClientConfiguration.Settings.NoPaperWork > 0 ? true : false;
 
             textBoxTimeOut.Text = Globals.ClientConfiguration.Settings.timeout.ToString();
 
@@ -745,15 +631,6 @@ namespace AirVitamin.Client
 
             NumberCheck = GlobalDb.GlobalBase.GetCurrentAccountNumberCheck();
             labelAccount.Text = "Текущий номер чека с балансом счета: " + NumberCheck;
-
-            cBxCommand.Items.Clear();
-            cBxCommand.Items.Add("Включить");
-            cBxCommand.Items.Add("Выключить");
-            cBxCommand.Items.Add("Подать питание");
-            cBxCommand.Items.Add("Уснуть");
-            cBxCommand.Items.Add("Проснуться");
-
-            checkBox3.Enabled = checkchangeOn.Checked;
 
             if(Globals.ClientConfiguration.Settings.style == 0)
             {
@@ -800,7 +677,6 @@ namespace AirVitamin.Client
 
             labelAllMoneySumm.Text = "Сумма денег в кассете " + data.statistic.AllMoneySumm.ToString() + " руб.";
             labelAccountMoneySumm.Text = "Cумма денег на аккаунтах " + data.statistic.AccountMoneySumm.ToString() + " руб.";
-            labelBarCodeMoneySumm.Text = "Cумма денег на штрихкод-чеках " + data.statistic.BarCodeMoneySumm.ToString() + " руб.";
             labelServiceMoneySumm.Text = "Oказано услуг на сумму " + data.statistic.ServiceMoneySumm.ToString() + " руб.";
             labelCountBankNote.Text = "Количество принятых банкнот " + data.statistic.CountBankNote.ToString() + " шт.";
 
@@ -823,20 +699,6 @@ namespace AirVitamin.Client
 
             switch (e.Message.Event)
             {
-                case DeviceEvent.Scaner:
-                    LabelCode.Text = (string)e.Message.Content;
-                    {
-                        CheckInfo info = GlobalDb.GlobalBase.GetCheckByStr((string)e.Message.Content);
-
-                        if (info == null)
-                        {
-                            // нет такого чека
-                            return;
-                        }
-
-                        labSummCheck.Text = info.Amount.ToString();
-                    }
-                    break;
                 case DeviceEvent.BillAcceptor:
                     richTextBox1.Text = (string)e.Message.Content + "\n" + richTextBox1.Text;
                     break;
@@ -874,44 +736,6 @@ namespace AirVitamin.Client
             Globals.DbConfiguration.UserID = edtDBUserName.Text;
             Globals.DbConfiguration.Password = edtDBPsw.Text;
             Globals.DbConfiguration.Save();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            if (Globals.ClientConfiguration.Settings.offCheck != 1)
-            {
-                // не платим чеком - не нужен сканер
-                if (!((string)cBxComPortScaner.Items[cBxComPortScaner.SelectedIndex]).Contains("нет"))
-                {
-                    data.drivers.scaner.openPort((string)cBxComPortScaner.Items[cBxComPortScaner.SelectedIndex]);
-                }
-                else
-                {
-                    data.drivers.scaner.closePort();
-                }
-
-                data.drivers.scaner.setNumberComPort((string)cBxComPortScaner.Items[cBxComPortScaner.SelectedIndex]);
-            }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
-
-            data.drivers.startScanerPoll();
-
-            buttonStartScanerPoll.Enabled = !data.drivers.ScanerIsWork();
-            buttonStopScanerPoll.Enabled = data.drivers.ScanerIsWork();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
-
-            data.drivers.stopScanerPoll();
-
-            buttonStartScanerPoll.Enabled = !data.drivers.ScanerIsWork();
-            buttonStopScanerPoll.Enabled = data.drivers.ScanerIsWork();
         }
 
         private void button30_Click(object sender, EventArgs e)
@@ -980,21 +804,6 @@ namespace AirVitamin.Client
             label16.Text = data.drivers.CCNETDriver.WaitBill();
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
-            if (cbxComPortPrinter.SelectedIndex == -1) return;
-
-            if (!((string)cbxComPortPrinter.Items[cbxComPortPrinter.SelectedIndex]).Contains("нет"))
-            {
-               data.drivers.printer.OpenPrint((string)cbxComPortPrinter.Items[cbxComPortPrinter.SelectedIndex]);
-            }
-
-            data.drivers.printer.ClosePrint();
-
-           data.drivers.printer.setNamePrinter((string)cbxComPortPrinter.Items[cbxComPortPrinter.SelectedIndex]);
-        }
-
         private void button4_Click(object sender, EventArgs e)
         {
             if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
@@ -1012,47 +821,6 @@ namespace AirVitamin.Client
 
             data.drivers.control.setNumberComPort((string)cBxControlPort.Items[cBxControlPort.SelectedIndex]);
             data.drivers.control.setComPortSpeed((int)cBxControlSpeed.Items[cBxControlSpeed.SelectedIndex]);
-        }
-
-        private void button16_Click(object sender, EventArgs e)
-        {
-            if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
-            if (cbxComPortPrinter.SelectedIndex == -1) return;
-
-            data.drivers.printer.StartPrint((string)cbxComPortPrinter.Items[cbxComPortPrinter.SelectedIndex]);
-
-            if (data.drivers.printer.prn.PrinterIsOpen)
-            {
-               data.drivers.printer.PrintHeader(1);
-
-               int summ = 0;
-               int.TryParse(tBxsumm.Text, out summ);
-
-               data.drivers.printer.PrintBarCode(textBox2.Text,summ);
-               data.drivers.printer.PrintFooter();
-               data.drivers.printer.EndPrint();
-            }
-        }
-
-        private void button17_Click(object sender, EventArgs e)
-        {
-            if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
-            if (cbxComPortPrinter.SelectedIndex == -1) return;
-
-            data.drivers.printer.StartPrint((string)cbxComPortPrinter.Items[cbxComPortPrinter.SelectedIndex]);
-
-            if (data.drivers.printer.prn.PrinterIsOpen)
-            {
-               data.drivers.printer.PrintHeader();
-               data.drivers.printer.PrintBody(Globals.ClientConfiguration.ServiceByIndex(0));
-               data.drivers.printer.PrintFooter();
-               data.drivers.printer.EndPrint();
-            }
-        }
-
-        private void button1_Click_2(object sender, EventArgs e)
-        {
-           data.drivers.printer.setNamePrinter((string)cbxComPortPrinter.Items[cbxComPortPrinter.SelectedIndex]);
         }
 
         private void btnShowDB_Click(object sender, EventArgs e)
@@ -1088,24 +856,15 @@ namespace AirVitamin.Client
 
         void changeStateHardWare(bool state)
         {
-            SetStateScaner(state);
-
             cBxComPortBill.Enabled = state;
             tBxAdress.Enabled = state;
             butWriteComPortBill.Enabled = state;
 
             cBxControlPort.Enabled = state;
 
-            cbxComPortPrinter.Enabled = state;
-            butWriteComPortPrinter.Enabled = state;
-            butWriteBarCode.Enabled = state;
-            butPrintCheck.Enabled = state;
-
             SetStateControl(state);
 
             butReadStatus.Enabled = state;
-
-            cbxCheckOff.Enabled = state;
         }
 
         private void cbxOffHardware_CheckStateChanged(object sender, EventArgs e)
@@ -1121,7 +880,6 @@ namespace AirVitamin.Client
                 changeStateHardWare(true);
             }
 
-            cbxCheckOff.Enabled = !cbxOffHardware.Checked;
             cBxBillOff.Enabled = !cbxOffHardware.Checked;
             offControl.Enabled = !cbxOffHardware.Checked;
             cBxoffModem.Enabled = !cbxOffHardware.Checked;
@@ -1140,34 +898,6 @@ namespace AirVitamin.Client
         {
             if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
             data.drivers.CCNETDriver.StopWaitBill();
-        }
-
-        private void cbxCheckOff_CheckedChanged(object sender, EventArgs e)
-        {
-            if (Globals.ClientConfiguration.Settings.offHardware != 1)
-            {
-                if (cbxCheckOff.Checked)
-                {
-                    Globals.ClientConfiguration.Settings.offCheck = 1;
-
-                    SetStateScaner(false);
-                }
-                else
-                {
-                    Globals.ClientConfiguration.Settings.offCheck = 0;
-
-                    SetStateScaner(true);
-                }
-
-                Globals.ClientConfiguration.Save();
-
-                if (!init)
-                {
-                    //WorkerWait.Run();
-                    data.drivers.InitAllDevice();
-                    ReLoad();
-                }
-            }
         }
 
         private void cbxOffDataBase_CheckedChanged(object sender, EventArgs e)
@@ -1289,16 +1019,6 @@ namespace AirVitamin.Client
             if (init) return;
 
             Globals.ClientConfiguration.Settings.changeOn = checkchangeOn.Checked ? 1 : 0;
-            Globals.ClientConfiguration.Settings.changeToCheck = checkchangeOn.Checked ? 1 : 0;
-
-            checkBox4.Checked = checkchangeOn.Checked;
-            checkBox3.Enabled = checkchangeOn.Checked;
-
-            if (checkchangeOn.Checked == false)
-            {
-                checkBox3.Checked = checkchangeOn.Checked;
-            }
-
             Globals.ClientConfiguration.Save();
         }
 
@@ -1315,16 +1035,6 @@ namespace AirVitamin.Client
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
 
-        }
-
-        private void ChangeWrite_Click(object sender, EventArgs e)
-        {
-            if (init) return;
-
-            Globals.ClientConfiguration.Settings.changeToAccount = checkBox3.Checked ? 1 : 0;
-            Globals.ClientConfiguration.Settings.changeToCheck = checkBox4.Checked ? 1 : 0;
-
-            Globals.ClientConfiguration.Save();
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
@@ -1344,31 +1054,6 @@ namespace AirVitamin.Client
                 SetStateControl(true);
             }
 
-            Globals.ClientConfiguration.Save();
-        }
-
-        private void cBxComPortScaner_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cBxComPortScaner.SelectedIndex == -1) return;
-
-            if (((string)cBxComPortScaner.Items[cBxComPortScaner.SelectedIndex]).Contains("нет"))
-            {
-                SetStateScaner(false);
-
-                data.drivers.scaner.closePort();
-            }
-            else
-            {
-                if (!data.drivers.scaner.openPort((string)cBxComPortScaner.Items[cBxComPortScaner.SelectedIndex]))
-                {
-                    cBxComPortScaner.SelectedIndex = 0;
-                    return;
-                }
-
-                SetStateScaner(true);
-            }
-
-            data.drivers.scaner.setNumberComPort((string)cBxComPortScaner.Items[cBxComPortScaner.SelectedIndex]);
             Globals.ClientConfiguration.Save();
         }
 
@@ -1478,23 +1163,6 @@ namespace AirVitamin.Client
             }
 
             Globals.ClientConfiguration.Save();
-        }
-
-        private void button9_Click_2(object sender, EventArgs e)
-        {
-            if (Globals.ClientConfiguration.Settings.offHardware == 1) return;
-            if (cbxComPortPrinter.SelectedIndex == -1) return;
-
-            data.drivers.printer.StartPrint((string)cbxComPortPrinter.Items[cbxComPortPrinter.SelectedIndex]);
-
-            if (data.drivers.printer.prn.PrinterIsOpen)
-            {
-                data.drivers.printer.PrintBitMapHeader();
-                data.drivers.printer.PrintBitMapBody(Globals.ClientConfiguration.ServiceByIndex(0));
-                data.drivers.printer.PrintBitMapFooter();
-
-                data.drivers.printer.EndPrint();
-            }
         }
 
         private void cBxSpeedModem_SelectedIndexChanged(object sender, EventArgs e)
@@ -1787,14 +1455,6 @@ namespace AirVitamin.Client
 
         private void button13_Click_1(object sender, EventArgs e)
         {
-            data.drivers.printer.StartPrint(data.drivers.printer.getNamePrinter());
-
-            // печатаем чек c инкассацией
-            if (data.drivers.printer.prn.PrinterIsOpen)
-            {
-                data.drivers.printer.PrintCheckСollection(data.statistic);
-            }
-
             // запишем инфу о последнем обслуживании и инкасации
             DateTime dt = GlobalDb.GlobalBase.GetLastEncashment();
 
@@ -1827,109 +1487,6 @@ namespace AirVitamin.Client
         {
             Globals.CheckConfiguration.Settings.PreviouslyService = PreviouslyName.Text;
             Globals.CheckConfiguration.Save();
-        }
-
-        private void Incasbutton_Click(object sender, EventArgs e)
-        {
-            data.drivers.printer.StartPrint(data.drivers.printer.getNamePrinter());
-
-            // печатаем чек c инкассацией
-            if (data.drivers.printer.prn.PrinterIsOpen)
-            {
-                data.drivers.printer.PrintCheckСollection(data.statistic);
-            }
-        }
-
-        private void cBxNoPaperWork_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cBxNoPaperWork.Checked)
-            {
-                Globals.ClientConfiguration.Settings.NoPaperWork = 1;
-            }
-            else
-            {
-                Globals.ClientConfiguration.Settings.NoPaperWork = 0;
-            }
-
-            Globals.ClientConfiguration.Save();
-        }
-
-        private void buttonPrinterPort_Click(object sender, EventArgs e)
-        {
-            data.drivers.printer.status.setNumberComPort((string)cBxPrinterPort.Items[cBxPrinterPort.SelectedIndex]);
-        }
-
-        private void cBxPrinterPort_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            data.drivers.printer.status.setNumberComPort((string)cBxPrinterPort.Items[cBxPrinterPort.SelectedIndex]);
-        }
-
-        private void butStatus_Click(object sender, EventArgs e)
-        {
-            PrinterStatus status = data.drivers.printer.GetStatus();
-
-            if ((status & PrinterStatus.PRINTER_STATUS_PAPER_JAM) > 0)
-            {
-                labelStatusPaper.Text = "Проблемы с бумагой";
-            }
-            else if ((status & PrinterStatus.PRINTER_STATUS_PAPER_OUT) > 0)
-            {
-                labelStatusPaper.Text = "Бумага кончилась";
-            }
-            else if ((status & PrinterStatus.PRINTER_STATUS_PAPER_PROBLEM) > 0)
-            {
-                labelStatusPaper.Text = "Проблемы с бумагой";
-            }
-            else if ((status & PrinterStatus.PRINTER_STATUS_ERROR) > 0)
-            {
-                labelStatusPaper.Text = "Ошибка принтера";
-            }
-            else if ((status & PrinterStatus.PRINTER_STATUS_OFFLINE) > 0)
-            {
-                labelStatusPaper.Text = "Ошибка связи с принтером";
-            }
-            else if ((status & PrinterStatus.PRINTER_STATUS_DOOR_OPEN) > 0)
-            {
-                labelStatusPaper.Text = "Открыли дверцу.";
-            }
-            else if (status > 0)
-            {
-                labelStatusPaper.Text = "Ошибка принтера: " + status.ToString();
-            }
-            else
-            {
-                labelStatusPaper.Text = "Бумага есть";
-            }
-        }
-
-        private void buttoninsertcheck_Click(object sender, EventArgs e)
-        {
-            // запомним такой чек
-            string check = CheckHelper.GetUniqueNumberCheck(12);
-            textBox2.Text = check;
-
-            int summ = 0;
-
-            if (int.TryParse(tBxsumm.Text, out summ) == true)
-            {
-                GlobalDb.GlobalBase.AddToCheck(data.CurrentUserId, summ, check);
-
-                // распечатем чек
-                button16_Click(sender, e);
-            }
-            else
-            {
-            }
-        }
-
-        private void cBxCommand_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void butSendCode_Click(object sender, EventArgs e)
-        {
-            data.drivers.scaner.Request((ZebexCommandEnum)cBxCommand.SelectedIndex);
         }
 
         private void butCheck_Click(object sender, EventArgs e)
@@ -2002,8 +1559,6 @@ namespace AirVitamin.Client
             }
 
             // обновляем статистику
-            data.statistic.BarCodeMoneySumm = 0;
-
             MoneyStatistic();
         }
 
@@ -2018,7 +1573,6 @@ namespace AirVitamin.Client
 
             labelAllMoneySumm.Text = "Сумма денег в кассете " + data.statistic.AllMoneySumm.ToString() + " руб.";
             labelAccountMoneySumm.Text = "Cумма денег на аккаунтах " + data.statistic.AccountMoneySumm.ToString() + " руб.";
-            labelBarCodeMoneySumm.Text = "Cумма денег на штрихкод-чеках " + data.statistic.BarCodeMoneySumm.ToString() + " руб.";
             labelServiceMoneySumm.Text = "Oказано услуг на сумму " + data.statistic.ServiceMoneySumm.ToString() + " руб.";
             labelCountBankNote.Text = "Количество принятых банкнот " + data.statistic.CountBankNote.ToString() + " шт.";
         }

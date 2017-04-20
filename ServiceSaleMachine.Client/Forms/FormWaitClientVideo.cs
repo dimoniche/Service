@@ -90,58 +90,6 @@ namespace AirVitamin.Client
                     this.Close();
                 }
             }
-
-            {
-                PrinterStatus status = data.drivers.printer.GetStatus();
-
-                if ((status & (PrinterStatus.PRINTER_STATUS_PAPER_OUT
-                             | PrinterStatus.PRINTER_STATUS_PAPER_JAM
-                             | PrinterStatus.PRINTER_STATUS_PAPER_PROBLEM
-                             | PrinterStatus.PRINTER_STATUS_DOOR_OPEN
-                             | PrinterStatus.PRINTER_STATUS_ERROR)) > 0)
-                {
-                    if (Globals.ClientConfiguration.Settings.NoPaperWork == 0)
-                    {
-                        data.stage = WorkerStateStage.PaperEnd;
-                        this.Close();
-                    }
-                    else
-                    {
-                        if (data.PrinterError == false)
-                        {
-                            Program.Log.Write(LogMessageType.Error, "WAIT_MENU_VIDEO: кончилась бумага.");
-                        }
-
-                        data.PrinterError = true;
-                    }
-                }
-                else if ((status & PrinterStatus.PRINTER_STATUS_OFFLINE) > 0)
-                {
-                    if (Globals.ClientConfiguration.Settings.NoPaperWork == 0)
-                    {
-                        data.stage = WorkerStateStage.ErrorPrinter;
-                        this.Close();
-                    }
-                    else
-                    {
-                        if (data.PrinterError == false)
-                        {
-                            Program.Log.Write(LogMessageType.Error, "WAIT_MENU_VIDEO: нет связи с принтером.");
-                        }
-
-                        data.PrinterError = true;
-                    }
-                }
-                else
-                {
-                    if (data.PrinterError == true)
-                    {
-                        Program.Log.Write(LogMessageType.Error, "WAIT_MENU_VIDEO: ошибка принтера снялась.");
-                    }
-
-                    data.PrinterError = false;
-                }
-            }
         }
 
         private void FormWaitClientVideo_KeyDown(object sender, KeyEventArgs e)

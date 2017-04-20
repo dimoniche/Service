@@ -65,11 +65,6 @@ namespace AirVitamin.Client
         public Log log;
 
         /// <summary>
-        /// об ошибке принтера уже сообщили
-        /// </summary>
-        public bool PrinterError = false;
-
-        /// <summary>
         /// Ошибка приемника
         /// </summary>
         public bool BillError = false;

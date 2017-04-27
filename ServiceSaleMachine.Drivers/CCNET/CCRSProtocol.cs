@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 
-namespace ServiceSaleMachine.Drivers
+namespace AirVitamin.Drivers
 {
     public class CCRSProtocol
     {

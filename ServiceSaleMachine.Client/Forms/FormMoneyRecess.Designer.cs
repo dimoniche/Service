@@ -1,4 +1,4 @@
-﻿namespace ServiceSaleMachine.Client
+﻿namespace AirVitamin.Client
 {
     partial class FormMoneyRecess
     {
@@ -34,9 +34,9 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.moneySumm = new ServiceSaleMachine.ScalableLabel();
+            this.moneySumm = new AirVitamin.ScalableLabel();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.scalableLabel2 = new ServiceSaleMachine.ScalableLabel();
+            this.scalableLabel2 = new AirVitamin.ScalableLabel();
             this.panel5.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();

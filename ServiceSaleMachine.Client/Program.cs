@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace ServiceSaleMachine.Client
+namespace AirVitamin.Client
 {
     static class Program
     {

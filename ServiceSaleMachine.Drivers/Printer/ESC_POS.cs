@@ -5,7 +5,7 @@ using System.Drawing.Printing;
 using System.IO;
 using System.Text;
 
-namespace ServiceSaleMachine.Drivers
+namespace AirVitamin.Drivers
 {
     public class PrinterESC
     {

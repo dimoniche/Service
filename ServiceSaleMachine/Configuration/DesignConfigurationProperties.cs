@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.IO;
 
-namespace ServiceSaleMachine
+namespace AirVitamin
 {
 
     public class DesignConfigurationProperties

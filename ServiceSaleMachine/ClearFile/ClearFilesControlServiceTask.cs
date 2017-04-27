@@ -1,10 +1,10 @@
-﻿using ServiceSaleMachine;
+﻿using AirVitamin;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 
-namespace ServiceSaleMachine
+namespace AirVitamin
 {
 	/// <summary>
 	/// Выполняет чистку старых файлов

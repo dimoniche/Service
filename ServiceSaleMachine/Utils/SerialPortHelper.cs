@@ -3,7 +3,7 @@ using System.Globalization;
 using System.IO.Ports;
 using System.Linq;
 
-namespace ServiceSaleMachine
+namespace AirVitamin
 {
     public static class SerialPortHelper
     {

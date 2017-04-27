@@ -1,4 +1,4 @@
-﻿namespace ServiceSaleMachine.Client
+﻿namespace AirVitamin.Client
 {
     partial class FormProvideServiceStart
     {
@@ -36,19 +36,19 @@
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.LabelNameService1 = new ServiceSaleMachine.ScalableLabel();
+            this.LabelNameService1 = new AirVitamin.ScalableLabel();
             this.panel8 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.LabelNameService2 = new ServiceSaleMachine.ScalableLabel();
+            this.LabelNameService2 = new AirVitamin.ScalableLabel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.TextInstruction = new ServiceSaleMachine.RichTextBoxEx();
+            this.TextInstruction = new AirVitamin.RichTextBoxEx();
             this.panel4 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.pBxMinus = new System.Windows.Forms.PictureBox();
             this.pBxPlus = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.panel10 = new System.Windows.Forms.Panel();
-            this.intervalLabel = new ServiceSaleMachine.ScalableLabel();
+            this.intervalLabel = new AirVitamin.ScalableLabel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.panel9 = new System.Windows.Forms.Panel();

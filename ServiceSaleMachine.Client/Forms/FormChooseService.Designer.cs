@@ -1,4 +1,4 @@
-﻿namespace ServiceSaleMachine.Client
+﻿namespace AirVitamin.Client
 {
     partial class FormChooseService
     {
@@ -47,7 +47,7 @@
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.MainWorkerTask = new ServiceSaleMachine.SaleThread(this.components);
+            this.MainWorkerTask = new AirVitamin.SaleThread(this.components);
             this.TimeOutTimer = new System.Windows.Forms.Timer(this.components);
             this.panel2.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();

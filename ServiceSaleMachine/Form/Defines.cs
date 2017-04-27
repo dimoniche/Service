@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace ServiceSaleMachine
+namespace AirVitamin
 {
     public class CreateFormResult<T> where T : MyForm, new()
     {

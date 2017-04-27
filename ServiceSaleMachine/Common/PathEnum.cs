@@ -1,4 +1,4 @@
-﻿namespace ServiceSaleMachine
+﻿namespace AirVitamin
 {
     public enum PathEnum
     {
@@ -10,5 +10,6 @@
         Bin,
         Video,
         Text,
+        Config,
     }
 }

@@ -1,12 +1,12 @@
-﻿using ServiceSaleMachine.Drivers;
+﻿using AirVitamin.Drivers;
 using System;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using static ServiceSaleMachine.Drivers.MachineDrivers;
+using static AirVitamin.Drivers.MachineDrivers;
 
-namespace ServiceSaleMachine.Client
+namespace AirVitamin.Client
 {
     public partial class FormMainMenu : MyForm
     {

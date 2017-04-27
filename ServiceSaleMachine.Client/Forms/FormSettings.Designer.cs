@@ -1,4 +1,4 @@
-﻿namespace ServiceSaleMachine.Client
+﻿namespace AirVitamin.Client
 {
     partial class FormSettings
     {
@@ -2283,7 +2283,7 @@
             // 
             // checkPic
             // 
-            this.checkPic.Image = global::ServiceSaleMachine.Client.Properties.Resources.bitmap;
+            this.checkPic.Image = global::AirVitamin.Client.Properties.Resources.bitmap;
             this.checkPic.Location = new System.Drawing.Point(58, 37);
             this.checkPic.Name = "checkPic";
             this.checkPic.Size = new System.Drawing.Size(515, 502);

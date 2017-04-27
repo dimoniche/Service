@@ -9,7 +9,7 @@ using System.ServiceProcess;
 using System.Text;
 using System.Threading;
 
-namespace ServiceSaleMachine
+namespace AirVitamin
 {
     internal class Utils
     {

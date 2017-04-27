@@ -1,6 +1,6 @@
-﻿using ServiceSaleMachine.Drivers;
+﻿using AirVitamin.Drivers;
 
-namespace ServiceSaleMachine.Client
+namespace AirVitamin.Client
 {
     internal class FormResultData
     {

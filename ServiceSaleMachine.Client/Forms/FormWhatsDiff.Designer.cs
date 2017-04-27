@@ -1,4 +1,4 @@
-﻿namespace ServiceSaleMachine.Client
+﻿namespace AirVitamin.Client
 {
     partial class FormWhatsDiff
     {
@@ -36,8 +36,8 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.scalableLabel2 = new ServiceSaleMachine.ScalableLabel();
-            this.TextService1 = new ServiceSaleMachine.RichTextBoxEx();
+            this.scalableLabel2 = new AirVitamin.ScalableLabel();
+            this.TextService1 = new AirVitamin.RichTextBoxEx();
             this.panel8 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.pBxLabelService1 = new System.Windows.Forms.PictureBox();
@@ -45,8 +45,8 @@
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
-            this.TextService2 = new ServiceSaleMachine.RichTextBoxEx();
-            this.scalableLabel3 = new ServiceSaleMachine.ScalableLabel();
+            this.TextService2 = new AirVitamin.RichTextBoxEx();
+            this.scalableLabel3 = new AirVitamin.ScalableLabel();
             this.panel9 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
             this.pBxLabelService2 = new System.Windows.Forms.PictureBox();
@@ -55,7 +55,7 @@
             this.pBxBegin = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.scalableLabel1 = new ServiceSaleMachine.ScalableLabel();
+            this.scalableLabel1 = new AirVitamin.ScalableLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();

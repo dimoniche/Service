@@ -1,4 +1,4 @@
-﻿namespace ServiceSaleMachine.Client
+﻿namespace AirVitamin.Client
 {
     partial class UserRequest
     {
@@ -35,9 +35,9 @@
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.NumberBoard = new ServiceSaleMachine.Keyboard();
+            this.NumberBoard = new AirVitamin.Keyboard();
             this.panel17 = new System.Windows.Forms.Panel();
-            this.rTBxHelp = new ServiceSaleMachine.RichTextBoxEx();
+            this.rTBxHelp = new AirVitamin.RichTextBoxEx();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
@@ -49,15 +49,15 @@
             this.panel11 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.panel12 = new System.Windows.Forms.Panel();
-            this.scalableLabel1 = new ServiceSaleMachine.ScalableLabel();
+            this.scalableLabel1 = new AirVitamin.ScalableLabel();
             this.panel18 = new System.Windows.Forms.Panel();
             this.panel20 = new System.Windows.Forms.Panel();
-            this.tbxLogin = new ServiceSaleMachine.ScalableLabel();
+            this.tbxLogin = new AirVitamin.ScalableLabel();
             this.panel19 = new System.Windows.Forms.Panel();
             this.panel21 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.panel22 = new System.Windows.Forms.Panel();
-            this.scalableLabel2 = new ServiceSaleMachine.ScalableLabel();
+            this.scalableLabel2 = new AirVitamin.ScalableLabel();
             this.panel9 = new System.Windows.Forms.Panel();
             this.tablePassword = new System.Windows.Forms.TableLayoutPanel();
             this.panel10 = new System.Windows.Forms.Panel();
@@ -65,19 +65,19 @@
             this.panel23 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
             this.panel32 = new System.Windows.Forms.Panel();
-            this.scalableLabel3 = new ServiceSaleMachine.ScalableLabel();
+            this.scalableLabel3 = new AirVitamin.ScalableLabel();
             this.panel26 = new System.Windows.Forms.Panel();
             this.panel30 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel16 = new System.Windows.Forms.TableLayoutPanel();
             this.panel31 = new System.Windows.Forms.Panel();
-            this.tbxPassword = new ServiceSaleMachine.ScalableLabel();
-            this.scalableLabel4 = new ServiceSaleMachine.ScalableLabel();
+            this.tbxPassword = new AirVitamin.ScalableLabel();
+            this.scalableLabel4 = new AirVitamin.ScalableLabel();
             this.panel27 = new System.Windows.Forms.Panel();
             this.panel28 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel14 = new System.Windows.Forms.TableLayoutPanel();
             this.panel29 = new System.Windows.Forms.Panel();
-            this.scalableLabel6 = new ServiceSaleMachine.ScalableLabel();
-            this.scalableLabel5 = new ServiceSaleMachine.ScalableLabel();
+            this.scalableLabel6 = new AirVitamin.ScalableLabel();
+            this.scalableLabel5 = new AirVitamin.ScalableLabel();
             this.panel13 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
             this.panel15 = new System.Windows.Forms.Panel();
@@ -89,7 +89,7 @@
             this.panel24 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel15 = new System.Windows.Forms.TableLayoutPanel();
             this.panel25 = new System.Windows.Forms.Panel();
-            this.ErrorText = new ServiceSaleMachine.ScalableLabel();
+            this.ErrorText = new AirVitamin.ScalableLabel();
             this.chbNew = new System.Windows.Forms.CheckBox();
             this.rememberBox = new System.Windows.Forms.CheckBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -229,7 +229,7 @@
             this.NumberBoard.Name = "NumberBoard";
             this.NumberBoard.Size = new System.Drawing.Size(309, 253);
             this.NumberBoard.TabIndex = 10;
-            this.NumberBoard.KeyboardEvent += new ServiceSaleMachine.Keyboard.KeyboardEventHandler(this.NumberBoard_KeyboardEvent);
+            this.NumberBoard.KeyboardEvent += new AirVitamin.Keyboard.KeyboardEventHandler(this.NumberBoard_KeyboardEvent);
             this.NumberBoard.KeyDown += new System.Windows.Forms.KeyEventHandler(this.UserRequest_KeyDown);
             // 
             // panel17

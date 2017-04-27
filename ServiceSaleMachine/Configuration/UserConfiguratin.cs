@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ServiceSaleMachine
+namespace AirVitamin
 {
     /// <summary>
     /// Если будет личный кабинет то эта инфа пригодиться

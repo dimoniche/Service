@@ -1,4 +1,4 @@
-﻿namespace ServiceSaleMachine
+﻿namespace AirVitamin
 {
     partial class MyForm
     {

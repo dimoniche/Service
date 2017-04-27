@@ -1,4 +1,4 @@
-﻿namespace ServiceSaleMachine.Drivers
+﻿namespace AirVitamin.Drivers
 {
     public enum DeviceEvent
     {

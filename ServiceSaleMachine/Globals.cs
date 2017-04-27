@@ -4,7 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Reflection;
 
-namespace ServiceSaleMachine
+namespace AirVitamin
 {
     public static class Globals
     {
@@ -115,6 +115,9 @@ namespace ServiceSaleMachine
 
                 case PathEnum.Text:
                     return "Text";
+
+                case PathEnum.Config:
+                    return "Configuration";
 
                 default:
                     throw new InvalidOperationException();

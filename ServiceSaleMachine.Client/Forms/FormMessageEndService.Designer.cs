@@ -1,4 +1,4 @@
-﻿namespace ServiceSaleMachine.Client
+﻿namespace AirVitamin.Client
 {
     partial class FormMessageEndService
     {
@@ -40,7 +40,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.pBxFinish = new System.Windows.Forms.PictureBox();
-            this.TextEndService = new ServiceSaleMachine.RichTextBoxEx();
+            this.TextEndService = new AirVitamin.RichTextBoxEx();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();

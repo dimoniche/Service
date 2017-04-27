@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace ServiceSaleMachine
+namespace AirVitamin
 {
 	public class LockObject<T> where T : class
 	{

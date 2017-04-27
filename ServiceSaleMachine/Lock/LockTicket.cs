@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace ServiceSaleMachine
+namespace AirVitamin
 {
 	public sealed class LockTicket<T> : LockTicket where T : class
 	{

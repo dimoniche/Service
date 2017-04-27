@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace ServiceSaleMachine
+namespace AirVitamin
 {
     public class ScalableLabel : Control
     {

@@ -2,9 +2,9 @@
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
-using ServiceSaleMachine.Drivers;
+using AirVitamin.Drivers;
 
-namespace ServiceSaleMachine.Client
+namespace AirVitamin.Client
 {
     public partial class FormWaitClientGif : MyForm
     {

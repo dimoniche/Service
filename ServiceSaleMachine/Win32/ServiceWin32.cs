@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace ServiceSaleMachine
+namespace AirVitamin
 {
     public static class ServiceWin32
     {

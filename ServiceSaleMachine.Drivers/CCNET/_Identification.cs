@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ServiceSaleMachine.Drivers
+namespace AirVitamin.Drivers
 {
     public class _Identification
     {

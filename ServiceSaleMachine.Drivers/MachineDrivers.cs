@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 using System.Threading;
 
-namespace ServiceSaleMachine.Drivers
+namespace AirVitamin.Drivers
 {
     public class MachineDrivers
     {

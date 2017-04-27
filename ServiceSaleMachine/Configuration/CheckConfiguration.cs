@@ -2,7 +2,7 @@
 using System.IO;
 using System.Xml.Linq;
 
-namespace ServiceSaleMachine
+namespace AirVitamin
 {
     public class CheckConfiguration
     {
@@ -20,7 +20,7 @@ namespace ServiceSaleMachine
         {
             try
             {
-                string fileName = Globals.GetPath(PathEnum.Bin) + "\\" + FileName;
+                string fileName = Globals.GetPath(PathEnum.Config) + "\\" + FileName;
                 if (File.Exists(fileName))
                 {
                     XElement root = XElement.Load(fileName);
@@ -73,13 +73,13 @@ namespace ServiceSaleMachine
                     root.Add(xSettings);
                 }
 
-                if (!File.Exists(Globals.GetPath(PathEnum.Bin) + "\\" + FileName))
+                if (!File.Exists(Globals.GetPath(PathEnum.Config) + "\\" + FileName))
                 {
-                    Directory.CreateDirectory(Globals.GetPath(PathEnum.Bin));
-                    FileStream fs = File.Create(Globals.GetPath(PathEnum.Bin) + "\\" + FileName);
+                    Directory.CreateDirectory(Globals.GetPath(PathEnum.Config));
+                    FileStream fs = File.Create(Globals.GetPath(PathEnum.Config) + "\\" + FileName);
                     fs.Close();
                 }
-                root.Save(Globals.GetPath(PathEnum.Bin) + "\\" + FileName);
+                root.Save(Globals.GetPath(PathEnum.Config) + "\\" + FileName);
                 return true;
             }
             catch (Exception e)

@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Linq;
 
-namespace ServiceSaleMachine
+namespace AirVitamin
 {
 	public static class FileHelper
 	{

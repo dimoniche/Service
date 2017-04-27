@@ -4,7 +4,7 @@ using MySql.Data.MySqlClient;
 using System.Diagnostics;
 using System.Timers;
 
-namespace ServiceSaleMachine
+namespace AirVitamin
 {
     public class db
     {

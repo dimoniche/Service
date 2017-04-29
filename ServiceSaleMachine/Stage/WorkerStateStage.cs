@@ -50,11 +50,6 @@ namespace AirVitamin
         ChoosePay,                  //
 
         /// <summary>
-        /// Оплата чеком
-        /// </summary>
-        PayCheckService,            //
-
-        /// <summary>
         /// Оплата деньгами
         /// </summary>
         PayBillService,             //

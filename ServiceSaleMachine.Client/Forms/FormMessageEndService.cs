@@ -30,7 +30,8 @@ namespace AirVitamin.Client
                 }
             }
 
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxFinish, Globals.DesignConfiguration.Settings.ButtonRetToMain);
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxLogo, "Logo_O2.png");
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxFinishText, "Spasibo_txt.png");
 
             FTimeWork = data.serv.timeLightUrn;
 
@@ -83,7 +84,6 @@ namespace AirVitamin.Client
 
             if (!fileLoaded)
             {
-                TextEndService.LoadFile(Globals.GetPath(PathEnum.Text) + "\\EndService.rtf");
                 fileLoaded = true;
                 timer1.Interval = 1000;
             }

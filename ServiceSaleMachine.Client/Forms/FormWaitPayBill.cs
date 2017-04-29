@@ -360,12 +360,6 @@ namespace AirVitamin.Client
                         {
                             data.log.Write(LogMessageType.Information, "WAIT BILL: Сумма сдачи " + diff + " руб.");
 
-                            //if (data.retLogin != "" && Globals.ClientConfiguration.Settings.changeToAccount == 1 && Globals.ClientConfiguration.Settings.changeToCheck == 1)
-                            //{
-                            //    // тут надо решить как выдать сдачу - спросим пользователя
-                            //    ch = (ChooseChangeEnum)FormManager.OpenForm<FormChooseChange>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, diff.ToString());
-                            //}
-                            //else 
                             if (data.retLogin != "" && Globals.ClientConfiguration.Settings.changeToAccount == 1)
                             {
                                 ch = ChooseChangeEnum.ChangeToAccount;
@@ -573,12 +567,6 @@ namespace AirVitamin.Client
                         // сдача на чек
                         if (amount > data.serv.price)
                         {
-                            //if (data.retLogin != "" && Globals.ClientConfiguration.Settings.changeToAccount == 1 && Globals.ClientConfiguration.Settings.changeToCheck == 1)
-                            //{
-                            //    // тут надо решить как выдать сдачу - спросим пользователя
-                            //    ch = (ChooseChangeEnum)FormManager.OpenForm<FormChooseChange>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, diff.ToString());
-                            //}
-                            //else 
                             if (data.retLogin != "" && Globals.ClientConfiguration.Settings.changeToAccount == 1)
                             {
                                 ch = ChooseChangeEnum.ChangeToAccount;

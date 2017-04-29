@@ -29,11 +29,13 @@ namespace AirVitamin.Client
                 }
             }
 
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxStopService, Globals.DesignConfiguration.Settings.ButtonRetToMain);
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxLogo, "Logo_O2.png");
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxProvideServiceText, "Dishy_txt.png");
+
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxAnimation, "Dishy_txt.png");
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxReturnMainMenu, Globals.DesignConfiguration.Settings.ButtonRetToMain);
 
             timerService.Enabled = true;
-
-            ServiceText.Text = "Идет оказание услуги. Осталось еще " + (Interval / 60).ToString() + " минуты и " + (Interval % 60).ToString() + " секунд";
 
             // оказываем услугу пока так (перепутали устройства - поменял местами)
             if(data.numberCurrentDevice == (int)ControlDeviceEnum.dev3)
@@ -101,8 +103,6 @@ namespace AirVitamin.Client
                 data.stage = WorkerStateStage.EndService;
                 Close();
             }
-
-            ServiceText.Text = "Идет оказание услуги. Осталось еще " + (Interval / 60).ToString() + " минуты и " + (Interval % 60).ToString() + " секунд";
         }
 
         private void pBxStopService_Click(object sender, EventArgs e)

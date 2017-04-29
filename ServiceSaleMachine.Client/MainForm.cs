@@ -403,7 +403,6 @@ NoCheckStatistic:
                     else if (result.stage == WorkerStateStage.TimeOut)
                     {
                         // по тайм ауту вышли в рекламу
-                        //result = (FormResultData)FormManager.OpenForm<FormWaitStage>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
                         if (Globals.ClientConfiguration.Settings.ScreenServerType == 0 || Globals.ClientConfiguration.Settings.ScreenServerType == 1)
                         {
                             result = (FormResultData)FormManager.OpenForm<FormWaitClientGif>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
@@ -614,50 +613,6 @@ NoCheckStatistic:
                             continue;
                         }
                     }
-                    else if (result.stage == WorkerStateStage.PayCheckService)
-                    {
-                        // ожидание считывания чека - сюда не попадаем - отказались от оплаты только чеками
-                        result = (FormResultData)FormManager.OpenForm<FormWaitPayCheck>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-
-                        if (result.stage == WorkerStateStage.Fail || result.stage == WorkerStateStage.EndDropCassette)
-                        {
-                            Program.Log.Write(LogMessageType.Information, "MAIN WORK: Отказались от оплаты.");
-
-                            // отказ - выход в начало
-                            continue;
-                        }
-                        else if (result.stage == WorkerStateStage.ExitProgram)
-                        {
-                            // выход
-                            Close();
-                            return;
-                        }
-                        else if (result.stage == WorkerStateStage.DropCassettteBill)
-                        {
-                            Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выемка денег.");
-
-                            // выемка денег
-                            result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-
-                            if (result.stage == WorkerStateStage.EndDropCassette)
-                            {
-                                continue;
-                            }
-                            else if (result.stage == WorkerStateStage.ExitProgram)
-                            {
-                                // выход
-                                Close();
-                                return;
-                            }
-                        }
-                        else if (result.stage == WorkerStateStage.TimeOut)
-                        {
-                            Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выход из оплаты по тайм ауту.");
-
-                            check = false;
-                            continue;
-                        }
-                    }
                     else if (result.stage == WorkerStateStage.Fail)
                     {
                         // в начало
@@ -727,43 +682,6 @@ NoCheckStatistic:
                             }
                         }
 
-                        // теперь собственно окажем услугу - сначала спросим надо ли 
-                        result = (FormResultData)FormManager.OpenForm<FormProvideServiceStart>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-
-                        if (result.stage == WorkerStateStage.ExitProgram)
-                        {
-                            // выход
-                            Close();
-                            return;
-                        }
-                        else if (result.stage == WorkerStateStage.Fail)
-                        {
-                            // услуга не нужна
-                            continue;
-                        }
-                        else if (result.stage == WorkerStateStage.DropCassettteBill)
-                        {
-                            Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выемка денег.");
-
-                            // выемка денег
-                            result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-
-                            if (result.stage == WorkerStateStage.EndDropCassette)
-                            {
-                                continue;
-                            }
-                            else if (result.stage == WorkerStateStage.ExitProgram)
-                            {
-                                // выход
-                                Close();
-                                return;
-                            }
-                        }
-                        else if (result.stage == WorkerStateStage.TimeOut)
-                        {
-                            continue;
-                        }
-
                         Program.Log.Write(LogMessageType.Information, "MAIN WORK: Начали оказывать услугу: " + serv.caption);
 
                         // Будем оказывать услугу
@@ -772,7 +690,6 @@ NoCheckStatistic:
                         if (result.stage == WorkerStateStage.Fail)
                         {
                             // отказались от услуги
-                            
                         }
 
                         // Услугу оказали - выбросим расходники

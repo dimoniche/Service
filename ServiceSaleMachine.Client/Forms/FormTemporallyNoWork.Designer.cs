@@ -48,6 +48,7 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.Gainsboro;
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -106,7 +107,7 @@
             // 
             // MessageText
             // 
-            this.MessageText.BackColor = System.Drawing.SystemColors.Control;
+            this.MessageText.BackColor = System.Drawing.Color.Gainsboro;
             this.MessageText.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.MessageText.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MessageText.Location = new System.Drawing.Point(3, 3);
@@ -163,6 +164,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(800, 600);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel4);

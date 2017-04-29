@@ -331,7 +331,7 @@
             // 
             // TextPayBill
             // 
-            this.TextPayBill.BackColor = System.Drawing.SystemColors.Control;
+            this.TextPayBill.BackColor = System.Drawing.Color.Gainsboro;
             this.TextPayBill.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.TextPayBill.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TextPayBill.Location = new System.Drawing.Point(65, 3);
@@ -474,6 +474,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(800, 600);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

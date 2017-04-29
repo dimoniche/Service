@@ -80,7 +80,7 @@
             // 
             // InstructionText
             // 
-            this.InstructionText.BackColor = System.Drawing.SystemColors.Control;
+            this.InstructionText.BackColor = System.Drawing.Color.Gainsboro;
             this.InstructionText.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.InstructionText.Dock = System.Windows.Forms.DockStyle.Fill;
             this.InstructionText.Location = new System.Drawing.Point(0, 0);
@@ -164,6 +164,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(800, 600);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

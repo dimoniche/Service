@@ -191,7 +191,7 @@
             // 
             // TextService1
             // 
-            this.TextService1.BackColor = System.Drawing.SystemColors.Control;
+            this.TextService1.BackColor = System.Drawing.Color.Gainsboro;
             this.TextService1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.TextService1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TextService1.Location = new System.Drawing.Point(3, 30);
@@ -287,7 +287,7 @@
             // 
             // TextService2
             // 
-            this.TextService2.BackColor = System.Drawing.SystemColors.Control;
+            this.TextService2.BackColor = System.Drawing.Color.Gainsboro;
             this.TextService2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.TextService2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TextService2.Location = new System.Drawing.Point(3, 30);
@@ -424,6 +424,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(800, 600);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -17,15 +18,26 @@ namespace AirVitamin.Client
 
         int countRetry = 0;
 
+        Image image;
+
         public UserRequest()
         {
             InitializeComponent();
+
+            pictureTelephon.Load(Globals.GetPath(PathEnum.Image) + "\\Phone_txt.png");
+            picturePassword.Load(Globals.GetPath(PathEnum.Image) + "\\Password_txt.png");
 
             pBxRegister.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonRegister);
             pBxRemember.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonRemember);
 
             LoadFullKeyBoard();
-            tbx = tbxLogin;
+            tbx = textBox1;
+
+            image = Image.FromFile(Globals.GetPath(PathEnum.Image) + "\\Phone_b.png");
+            tableLayoutPhoneEdit.BackgroundImage = image;
+
+            image = Image.FromFile(Globals.GetPath(PathEnum.Image) + "\\Password_b.png");
+            tableLayoutPasswordEdit.BackgroundImage = image;
 
             timer1.Enabled = true;
             timer1.Interval = 50;
@@ -112,7 +124,7 @@ namespace AirVitamin.Client
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            data.retLogin = tbxLogin.Text;
+            data.retLogin = textBox1.Text;
             data.retPassword = tbxPassword.Text;
             Close();
         }
@@ -147,10 +159,10 @@ namespace AirVitamin.Client
 
             if (e.Message.Y == 0)
             {
-                if (User.Length < 10 && tbx == tbxLogin
+                if (User.Length < 12 && tbx == textBox1
                  || Password.Length < 4 && tbx == tbxPassword)
                 {
-                    if (tbx == tbxLogin)
+                    if (tbx == textBox1)
                     {
                         tbx.Text += row0[e.Message.X];
                         User += row0[e.Message.X];
@@ -164,10 +176,10 @@ namespace AirVitamin.Client
             }
             else if (e.Message.Y == 1)
             {
-                if (User.Length < 10 && tbx == tbxLogin
+                if (User.Length < 12 && tbx == textBox1
                  || Password.Length < 4 && tbx == tbxPassword)
                 {
-                    if (tbx == tbxLogin)
+                    if (tbx == textBox1)
                     {
                         tbx.Text += row1[e.Message.X];
                         User += row1[e.Message.X];
@@ -181,10 +193,10 @@ namespace AirVitamin.Client
             }
             else if (e.Message.Y == 2)
             {
-                if (User.Length < 10 && tbx == tbxLogin
+                if (User.Length < 12 && tbx == textBox1
                  || Password.Length < 4 && tbx == tbxPassword)
                 {
-                    if (tbx == tbxLogin)
+                    if (tbx == textBox1)
                     {
                         tbx.Text += row2[e.Message.X];
                         User += row2[e.Message.X];
@@ -201,11 +213,11 @@ namespace AirVitamin.Client
                 if (e.Message.X == 0)
                 {
                     // стереть символ последний
-                    if (tbx.Text.Length > 0)
+                    if (tbx.Text.Length > 2)
                     {
-                        if (tbx == tbxLogin)
+                        if (tbx == textBox1)
                         {
-                            tbxLogin.Text = tbxLogin.Text.Remove(tbxLogin.Text.Length - 1);
+                            textBox1.Text = textBox1.Text.Remove(textBox1.Text.Length - 1);
                             User = User.Remove(User.Length - 1);
                         }
                         else
@@ -223,10 +235,10 @@ namespace AirVitamin.Client
                 }
                 else if (e.Message.X == 1)
                 {
-                    if (User.Length < 10 && tbx == tbxLogin
+                    if (User.Length < 12 && tbx == textBox1
                      || Password.Length < 4 && tbx == tbxPassword)
                     {
-                        if (tbx == tbxLogin)
+                        if (tbx == textBox1)
                         {
                             tbx.Text += row3[e.Message.X];
                             User += row3[e.Message.X];
@@ -240,7 +252,7 @@ namespace AirVitamin.Client
                 }
                 else if (e.Message.X == 2)
                 {
-                    if (tbx == tbxLogin)
+                    if (tbx == textBox1)
                     {
                         if (User.Length < 10)
                         {
@@ -277,11 +289,13 @@ namespace AirVitamin.Client
                         return;
                     }
 
-                    if (tbx == tbxLogin)
+                    if (tbx == textBox1)
                     {
                         tbx = tbxPassword;
-                        tbxLogin.BackColor = System.Drawing.Color.Gray;
-                        tbxPassword.BackColor = System.Drawing.Color.Lime;
+
+                        image = Image.FromFile(Globals.GetPath(PathEnum.Image) + "\\Password_b_" + Password.Length + ".png");
+                        tableLayoutPasswordEdit.BackgroundImage = image;
+
                         return;
                     }
 
@@ -365,12 +379,12 @@ namespace AirVitamin.Client
                             }
                             else
                             {
-                                tbxLogin.Text = "";
+                                textBox1.Text = "";
                                 tbxPassword.Text = "";
                                 ErrorText.Text = "Вы ввели неправильный номер или пароль. Попробуйте еще раз.";
 
-                                tbx = tbxLogin;
-                                tbxLogin.BackColor = System.Drawing.Color.Lime;
+                                tbx = textBox1;
+                                textBox1.BackColor = System.Drawing.Color.Lime;
                                 tbxPassword.BackColor = System.Drawing.Color.Gray;
 
                                 data.log.Write(LogMessageType.Information, "Ввели неправильный пароль");
@@ -395,6 +409,12 @@ namespace AirVitamin.Client
                         }
                     }
                 }
+            }
+
+            if (tbx == tbxPassword)
+            {
+                image = Image.FromFile(Globals.GetPath(PathEnum.Image) + "\\Password_b_" + Password.Length + ".png");
+                tableLayoutPasswordEdit.BackgroundImage = image;
             }
         }
 
@@ -441,12 +461,9 @@ namespace AirVitamin.Client
             pBxRemember.Visible = false;
 
             ErrorText.Text = "";
-            tbxLogin.Text = "";
+            textBox1.Text = "";
             tbxPassword.Text = "";
-            tbx = tbxLogin;
-
-            tbxPassword.BackColor = System.Drawing.Color.Gray;
-            tbxLogin.BackColor = System.Drawing.Color.Lime;
+            tbx = textBox1;
         }
 
         private void pBxRemember_Click(object sender, EventArgs e)
@@ -456,14 +473,12 @@ namespace AirVitamin.Client
             pBxRemember.Visible = false;
             tbxPassword.Visible = false;
 
-            tablePassword.Visible = false;
+            //tablePassword.Visible = false;
 
             ErrorText.Text = "";
-            tbxLogin.Text = "";
+            textBox1.Text = "";
             tbxPassword.Text = "";
-            tbx = tbxLogin;
-
-            tbxLogin.BackColor = System.Drawing.Color.Lime;
+            tbx = textBox1;
         }
 
         private void timer1_Tick(object sender, EventArgs e)

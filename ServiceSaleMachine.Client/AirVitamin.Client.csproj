@@ -310,7 +310,6 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="Resources\bitmap.bmp" />
   </ItemGroup>

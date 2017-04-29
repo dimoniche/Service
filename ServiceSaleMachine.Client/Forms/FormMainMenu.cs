@@ -1,7 +1,6 @@
 ﻿using AirVitamin.Drivers;
 using System;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using static AirVitamin.Drivers.MachineDrivers;
@@ -15,9 +14,6 @@ namespace AirVitamin.Client
         public FormMainMenu()
         {
             InitializeComponent();
-
-            Image image = Image.FromFile(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.PanelBackGround);
-            this.BackgroundImage = image;
 
             Globals.DesignConfiguration.Settings.LoadPictureBox(pictureLogo, "Logo_O2.png");
 

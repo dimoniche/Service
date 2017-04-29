@@ -4,7 +4,6 @@ using System.Linq;
 using System.Windows.Forms;
 using AirVitamin.Drivers;
 using static AirVitamin.Drivers.MachineDrivers;
-using System.Drawing;
 
 namespace AirVitamin.Client
 {
@@ -17,9 +16,6 @@ namespace AirVitamin.Client
         public FormChooseService()
         {
             InitializeComponent();
-
-            Image image = Image.FromFile(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.PanelBackGround);
-            this.BackgroundImage = image;
 
             Globals.DesignConfiguration.Settings.LoadPictureBox(pictureLogo, "Logo_O2.png");
             Globals.DesignConfiguration.Settings.LoadPictureBox(pictureTitle, "Smes_txt.png");

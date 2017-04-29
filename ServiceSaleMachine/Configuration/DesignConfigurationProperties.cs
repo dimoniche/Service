@@ -12,7 +12,6 @@ namespace AirVitamin
         // настройки отображения - изображения
         const string defpicture = "default.png";
 
-        public string PanelBackGround = defpicture;
         public string ButtonStartServices = defpicture;
         public string ButtonHelp = defpicture;
         public string ButtonPhilosof = defpicture;

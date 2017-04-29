@@ -36,8 +36,6 @@ namespace AirVitamin
 
                     if (xSettings != null)
                     {
-                        if ((xElement = xSettings.Element("PanelBackGround")) != null) Settings.PanelBackGround = xElement.Value;
-
                         if ((xElement = xSettings.Element("ButtonStartServices")) != null) Settings.ButtonStartServices = xElement.Value;
                         if ((xElement = xSettings.Element("ButtonHelp")) != null) Settings.ButtonHelp = xElement.Value;
                         if ((xElement = xSettings.Element("ButtonPhilosof")) != null) Settings.ButtonPhilosof = xElement.Value;

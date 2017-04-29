@@ -40,19 +40,19 @@ namespace AirVitamin.Client
         {
             string[,] str = new string[NumberBoard.CountRow, NumberBoard.CountCol];
 
-            str[0, 0] = Globals.GetPath(PathEnum.Image) + "\\1.png";
-            str[0, 1] = Globals.GetPath(PathEnum.Image) + "\\2.png";
-            str[0, 2] = Globals.GetPath(PathEnum.Image) + "\\3.png";
-            str[1, 0] = Globals.GetPath(PathEnum.Image) + "\\4.png";
-            str[1, 1] = Globals.GetPath(PathEnum.Image) + "\\5.png";
-            str[1, 2] = Globals.GetPath(PathEnum.Image) + "\\6.png";
-            str[2, 0] = Globals.GetPath(PathEnum.Image) + "\\7.png";
-            str[2, 1] = Globals.GetPath(PathEnum.Image) + "\\8.png";
-            str[2, 2] = Globals.GetPath(PathEnum.Image) + "\\9.png";
+            str[0, 0] = Globals.GetPath(PathEnum.Image) + "\\1_b.png";
+            str[0, 1] = Globals.GetPath(PathEnum.Image) + "\\2_b.png";
+            str[0, 2] = Globals.GetPath(PathEnum.Image) + "\\3_b.png";
+            str[1, 0] = Globals.GetPath(PathEnum.Image) + "\\4_b.png";
+            str[1, 1] = Globals.GetPath(PathEnum.Image) + "\\5_b.png";
+            str[1, 2] = Globals.GetPath(PathEnum.Image) + "\\6_b.png";
+            str[2, 0] = Globals.GetPath(PathEnum.Image) + "\\7_b.png";
+            str[2, 1] = Globals.GetPath(PathEnum.Image) + "\\8_b.png";
+            str[2, 2] = Globals.GetPath(PathEnum.Image) + "\\9_b.png";
            
-            str[3, 0] = Globals.GetPath(PathEnum.Image) + "\\fail.png";
-            str[3, 1] = Globals.GetPath(PathEnum.Image) + "\\0.png";
-            str[3, 2] = Globals.GetPath(PathEnum.Image) + "\\Yes.jpg";
+            str[3, 0] = Globals.GetPath(PathEnum.Image) + "\\Del_b.png";
+            str[3, 1] = Globals.GetPath(PathEnum.Image) + "\\0_b.png";
+            str[3, 2] = Globals.GetPath(PathEnum.Image) + "\\Ok_b.png";
 
             NumberBoard.LoadPicture(str);
         }

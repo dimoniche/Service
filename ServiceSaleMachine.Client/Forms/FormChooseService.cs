@@ -1,7 +1,10 @@
 ﻿using System;
-using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using AirVitamin.Drivers;
+using static AirVitamin.Drivers.MachineDrivers;
+using System.Drawing;
 
 namespace AirVitamin.Client
 {
@@ -9,27 +12,31 @@ namespace AirVitamin.Client
     {
         FormResultData data;
 
-        int FCurrentPage;
-        int FServCount;
-        int FPageCount;
-        string EmptyServ;
+        int Timeout = 0;
 
-        // запуск приложения
         public FormChooseService()
         {
             InitializeComponent();
 
-            ServCount = Globals.ClientConfiguration.ServCount;
+            Image image = Image.FromFile(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.PanelBackGround);
+            this.BackgroundImage = image;
 
-            EmptyServ = Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonServiceEmpty;
-            pbxUser.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonUser);
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pbxRetToMain, Globals.DesignConfiguration.Settings.ButtonRetToMain);
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pictureLogo, "Logo_O2.png");
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pictureTitle, "Smes_txt.png");
 
+            if (Globals.ClientConfiguration.Settings.style == 1)
+            {
+                Globals.DesignConfiguration.Settings.LoadPictureBox(pBxService1, Globals.DesignConfiguration.Settings.ButtonService1);
+                Globals.DesignConfiguration.Settings.LoadPictureBox(pBxService2, Globals.DesignConfiguration.Settings.ButtonService2);
+            }
+            else
+            {
+                Globals.DesignConfiguration.Settings.LoadPictureBox(pBxService1, Globals.DesignConfiguration.Settings.ButtonService1_style1);
+                Globals.DesignConfiguration.Settings.LoadPictureBox(pBxService2, Globals.DesignConfiguration.Settings.ButtonService2_style1);
+            }
 
-            CurrentPage = 0;
-            pbxNext.BackColor = Color.Transparent;
-
-            this.WindowState = FormWindowState.Maximized;
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxreturntoMain, Globals.DesignConfiguration.Settings.ButtonRetToMain);
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxWhatsDiff, Globals.DesignConfiguration.Settings.ButtonWhatsDiff);
 
             TimeOutTimer.Enabled = true;
             Timeout = 0;
@@ -44,175 +51,48 @@ namespace AirVitamin.Client
                     data = (FormResultData)obj;
                 }
             }
+
+            data.drivers.ReceivedResponse += reciveResponse;
         }
 
-        public int ServCount
+        private void reciveResponse(object sender, ServiceClientResponseEventArgs e)
         {
-            get { return FServCount; }
-            set
+            if (InvokeRequired)
             {
-                FServCount = value;
-                FPageCount = (value - 1) / 4 + 1;
+                BeginInvoke(new ServiceClientResponseEventHandler(reciveResponse), sender, e);
+                return;
+            }
+
+            if (data.log != null)
+            {
+                data.log.Write(LogMessageType.Debug, "CHOOSE SERVICE: Событие: " + e.Message.Content + ".");
+            }
+
+            switch (e.Message.Event)
+            {
+                case DeviceEvent.DropCassetteBillAcceptor:
+                    {
+                        data.stage = WorkerStateStage.DropCassettteBill;
+                        this.Close();
+                    }
+                    break;
+                case DeviceEvent.DropCassetteFullBillAcceptor:
+
+                    break;
+                case DeviceEvent.BillAcceptorError:
+
+                    break;
+                case DeviceEvent.ConnectBillError:
+                    {
+                        // нет связи с купюроприемником
+                        data.stage = WorkerStateStage.ErrorBill;
+                        this.Close();
+                    }
+                    break;
             }
         }
 
-        public int CurrentPage
-        {
-            get { return FCurrentPage; }
-            set
-            {
-                if (value >= FPageCount)
-                    FCurrentPage = FPageCount - 1;
-                else
-                    FCurrentPage = value;
-
-                pbxPrev.Visible = FCurrentPage != 0;
-                pbxNext.Visible = FCurrentPage < FPageCount - 1;
-
-                pictureBox1.Enabled = ((FPageCount == FCurrentPage + 1) && ((FServCount - 1) % 4 >= 0)) || (FCurrentPage < FPageCount);
-                pictureBox2.Enabled = ((FPageCount == FCurrentPage + 1) && ((FServCount - 1) % 4 >= 1)) || (FCurrentPage < FPageCount - 1);
-                pictureBox3.Enabled = ((FPageCount == FCurrentPage + 1) && ((FServCount - 1) % 4 >= 2)) || (FCurrentPage < FPageCount - 1);
-                pictureBox4.Enabled = ((FPageCount == FCurrentPage + 1) && (((FServCount - 1) % 4 == 3) && (FServCount != 0))) ||
-                    (FCurrentPage < FPageCount - 1);
-
-                string fs = Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.ServiceByIndex(FCurrentPage * 4).filename;
-                if (pictureBox1.Enabled)
-                    pictureBox1.Load(fs);
-                else
-                    pictureBox1.Load(EmptyServ);
-
-                if (pictureBox2.Enabled)
-                    pictureBox2.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.ServiceByIndex(FCurrentPage * 4 + 1).filename);
-                else
-                    pictureBox2.Load(EmptyServ);
-
-                if (pictureBox3.Enabled)
-                    pictureBox3.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.ServiceByIndex(FCurrentPage * 4 + 2).filename);
-                else
-                    pictureBox3.Load(EmptyServ);
-
-                if (pictureBox4.Enabled)
-                    pictureBox4.Load(Globals.GetPath(PathEnum.Image) + "\\" + Globals.ClientConfiguration.ServiceByIndex(FCurrentPage * 4 + 3).filename);
-                else
-                    pictureBox4.Load(EmptyServ);
-
-            }
-        }
-
-        private void pbxNext_Click(object sender, EventArgs e)
-        {
-            // сбросим таймаут
-            Timeout = 0;
-        
-            if (FCurrentPage + 1 < FPageCount)
-                CurrentPage += 1;
-        }
-
-        private void pbxPrev_Click(object sender, EventArgs e)
-        {
-            // сбросим таймаут
-            Timeout = 0;
-
-            if (FCurrentPage + 1 > 0)
-                CurrentPage -= 1;
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            data.numberService = CurrentPage * 4;
-            data.stage = WorkerStateStage.ChoosePay;
-            this.Close();
-        }
-
-        private void pictureBox5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel4_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel5_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void pictureBox4_Click(object sender, EventArgs e)
-        {
-            data.numberService = CurrentPage * 4 + 3;
-            data.stage = WorkerStateStage.ChoosePay;
-            this.Close();
-        }
-
-        private void pictureBox3_Click(object sender, EventArgs e)
-        {
-            data.numberService = CurrentPage * 4 + 2;
-            data.stage = WorkerStateStage.ChoosePay;
-            this.Close();
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-            data.numberService = CurrentPage * 4 + 1;
-            data.stage = WorkerStateStage.ChoosePay;
-            this.Close();
-        }
-
-        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            TimeOutTimer.Enabled = false;
-            Params.Result = data;
-        }
-
-        private void FormChooseService_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Alt & e.KeyCode == Keys.F4)
-            {
-                data.stage = WorkerStateStage.ExitProgram;
-            }
-        }
-
-        private void pictureBox5_Click_1(object sender, EventArgs e)
-        {
-            data.stage = WorkerStateStage.UserRequestService;
-            this.Close();
-        }
-
-        int Timeout = 0;
-
-        private void TimeOutTimer_Tick(object sender, EventArgs e)
+        private void TimeOutTimer_Tick(object sender, System.EventArgs e)
         {
             Timeout++;
 
@@ -229,10 +109,53 @@ namespace AirVitamin.Client
             }
         }
 
-        private void pbxRetToMain_Click(object sender, EventArgs e)
+        private void FormChooseService1_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
+        {
+            TimeOutTimer.Enabled = false;
+            data.drivers.ReceivedResponse -= reciveResponse;
+            Params.Result = data;
+        }
+
+        private void FormChooseService1_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+            if (e.Alt & e.KeyCode == Keys.F4)
+            {
+                data.stage = WorkerStateStage.ExitProgram;
+            }
+        }
+
+        private void pBxService1_Click(object sender, System.EventArgs e)
+        {
+            data.numberService = 0;
+            data.stage = WorkerStateStage.ChoosePay;
+            this.Close();
+        }
+
+        private void pBxService2_Click(object sender, System.EventArgs e)
+        {
+            data.numberService = 1;
+            data.stage = WorkerStateStage.ChoosePay;
+            this.Close();
+        }
+
+        private void pBxreturntoMain_Click(object sender, System.EventArgs e)
         {
             data.stage = WorkerStateStage.TimeOut;
             this.Close();
+        }
+
+        private void pBxWhatsDiff_Click(object sender, System.EventArgs e)
+        {
+            data.stage = WorkerStateStage.WhatsDiff;
+            this.Close();
+        }
+
+        private void scalableLabel1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Alt & e.KeyCode == Keys.F4)
+            {
+                data.stage = WorkerStateStage.ExitProgram;
+            }
         }
     }
 }

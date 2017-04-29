@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using AirVitamin.Drivers;
 using static AirVitamin.Drivers.MachineDrivers;
+using System.Drawing;
 
 namespace AirVitamin.Client
 {
@@ -32,8 +33,13 @@ namespace AirVitamin.Client
                 }
             }
 
+            Image image = Image.FromFile(Globals.GetPath(PathEnum.Image) + "\\Instraction.png");
+            tableLayoutInstruction.BackgroundImage = image;
+
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxLogo, "Logo_O2.png");
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxInstructionTitle, "Instraction_txt.png");
+
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxMainMenu, Globals.DesignConfiguration.Settings.ButtonRetToMain);
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxStartService, Globals.DesignConfiguration.Settings.ButtonStartServices);
 
             InstructionText.LoadFile(Globals.HelpFileName);
 

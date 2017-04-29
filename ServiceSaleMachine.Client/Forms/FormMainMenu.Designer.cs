@@ -224,9 +224,9 @@
             // tableLayoutPanel6
             // 
             this.tableLayoutPanel6.ColumnCount = 3;
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.5F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.5F));
             this.tableLayoutPanel6.Controls.Add(this.panel13, 1, 0);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 0);
@@ -240,9 +240,9 @@
             // 
             this.panel13.Controls.Add(this.pictureLogo);
             this.panel13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel13.Location = new System.Drawing.Point(106, 3);
+            this.panel13.Location = new System.Drawing.Point(99, 3);
             this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(45, 41);
+            this.panel13.Size = new System.Drawing.Size(58, 41);
             this.panel13.TabIndex = 0;
             // 
             // pictureLogo
@@ -250,7 +250,7 @@
             this.pictureLogo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureLogo.Location = new System.Drawing.Point(0, 0);
             this.pictureLogo.Name = "pictureLogo";
-            this.pictureLogo.Size = new System.Drawing.Size(45, 41);
+            this.pictureLogo.Size = new System.Drawing.Size(58, 41);
             this.pictureLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureLogo.TabIndex = 0;
             this.pictureLogo.TabStop = false;

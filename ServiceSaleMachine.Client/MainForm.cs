@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using AirVitamin.Drivers;
 using static AirVitamin.Drivers.MachineDrivers;
+using System.Drawing;
 
 namespace AirVitamin.Client
 {
@@ -57,7 +58,7 @@ namespace AirVitamin.Client
         /// </summary>
         private void MainWorker()
         {
-            if (Globals.admin)
+            //if (Globals.admin)
             {
                 Program.Log.Write(LogMessageType.Information, "MAIN WORK: Входим в режим настройки приложения.");
 
@@ -70,6 +71,8 @@ namespace AirVitamin.Client
                 Close();
                 return;
             }
+
+            ShowVideo();
 
             initDevice:
 
@@ -414,10 +417,10 @@ NoCheckStatistic:
                         {
                             result = (FormResultData)FormManager.OpenForm<FormWaitClientGif>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
                         }
-                        else
-                        {
-                            result = (FormResultData)FormManager.OpenForm<FormWaitClientVideo>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-                        }
+                        //else
+                        //{
+                        //    result = (FormResultData)FormManager.OpenForm<FormWaitClientVideo>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+                        //}
 
                         if (result.stage == WorkerStateStage.ErrorBill)
                         {
@@ -888,6 +891,51 @@ NoCheckStatistic:
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Запуск видео на втором экране
+        /// </summary>
+        void ShowVideo()
+        {
+            // Разворачивание 2-й формы на втором мониторе
+            Screen[] sc;
+            sc = Screen.AllScreens;
+
+            // только один экран
+            if (sc.Length == 1) return;
+
+            Point p = new Point();
+
+            foreach (Screen screen in sc)
+            {
+                if(screen.Bounds.Location.X == 0 && screen.Bounds.Location.Y == 0)
+                {
+                    // главный экран
+                }
+                else
+                {
+                    // второй экран
+                    p = new Point(screen.Bounds.Location.X, screen.Bounds.Location.Y);
+                    break;
+                }
+            }
+
+            if (p.X == 0 && p.Y == 0)
+            {
+                // на главном экране ничего не рисуем
+                return;
+            }
+
+            FormWaitClientVideo fr2 = new FormWaitClientVideo(p,result);
+
+            fr2.FormBorderStyle = FormBorderStyle.None;
+            fr2.StartPosition = FormStartPosition.Manual;
+
+            fr2.Location = sc[0].Bounds.Location;
+            fr2.WindowState = FormWindowState.Maximized;
+
+            fr2.Show();
         }
 
         private void MainForm_Shown(object sender, EventArgs e)

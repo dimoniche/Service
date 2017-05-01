@@ -86,6 +86,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.cbxComPortPrinter = new System.Windows.Forms.ComboBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.label35 = new System.Windows.Forms.Label();
+            this.button18 = new System.Windows.Forms.Button();
+            this.button19 = new System.Windows.Forms.Button();
             this.label27 = new System.Windows.Forms.Label();
             this.LightOff2 = new System.Windows.Forms.Button();
             this.LightOn2 = new System.Windows.Forms.Button();
@@ -234,9 +237,6 @@
             this.labelTimeLastRefresh = new System.Windows.Forms.Label();
             this.labelWorkFromLastRefresh = new System.Windows.Forms.Label();
             this.buttonResetTimeRefresh = new System.Windows.Forms.Button();
-            this.label35 = new System.Windows.Forms.Label();
-            this.button18 = new System.Windows.Forms.Button();
-            this.button19 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -936,6 +936,35 @@
             this.tabPage5.TabIndex = 3;
             this.tabPage5.Text = "Управляющее устройство";
             this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(298, 198);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(85, 13);
+            this.label35.TabIndex = 26;
+            this.label35.Text = "Открыть шланг";
+            // 
+            // button18
+            // 
+            this.button18.Location = new System.Drawing.Point(159, 193);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(105, 23);
+            this.button18.TabIndex = 24;
+            this.button18.Text = "Выкл.шланг";
+            this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.button18_Click);
+            // 
+            // button19
+            // 
+            this.button19.Location = new System.Drawing.Point(25, 193);
+            this.button19.Name = "button19";
+            this.button19.Size = new System.Drawing.Size(105, 23);
+            this.button19.TabIndex = 25;
+            this.button19.Text = "Вкл.шланг";
+            this.button19.UseVisualStyleBackColor = true;
+            this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
             // label27
             // 
@@ -1671,6 +1700,7 @@
             this.groupBox7.TabIndex = 17;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Заставка";
+            this.groupBox7.Visible = false;
             // 
             // ButGIF
             // 
@@ -1717,6 +1747,7 @@
             this.groupBox3.TabIndex = 16;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Оформление";
+            this.groupBox3.Visible = false;
             // 
             // Style2
             // 
@@ -2498,35 +2529,6 @@
             this.buttonResetTimeRefresh.Text = "Обновить время обслуживания";
             this.buttonResetTimeRefresh.UseVisualStyleBackColor = true;
             this.buttonResetTimeRefresh.Click += new System.EventHandler(this.buttonResetTimeRefresh_Click);
-            // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(298, 198);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(85, 13);
-            this.label35.TabIndex = 26;
-            this.label35.Text = "Открыть шланг";
-            // 
-            // button18
-            // 
-            this.button18.Location = new System.Drawing.Point(159, 193);
-            this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(105, 23);
-            this.button18.TabIndex = 24;
-            this.button18.Text = "Выкл.шланг";
-            this.button18.UseVisualStyleBackColor = true;
-            this.button18.Click += new System.EventHandler(this.button18_Click);
-            // 
-            // button19
-            // 
-            this.button19.Location = new System.Drawing.Point(25, 193);
-            this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(105, 23);
-            this.button19.TabIndex = 25;
-            this.button19.Text = "Вкл.шланг";
-            this.button19.UseVisualStyleBackColor = true;
-            this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
             // FormSettings
             // 

@@ -8,7 +8,6 @@ namespace AirVitamin
 
     public class DesignConfigurationProperties
     {
-
         // настройки отображения - изображения
         const string defpicture = "default.png";
 
@@ -19,15 +18,11 @@ namespace AirVitamin
         public string ButtonService = defpicture;
         public string ButtonService1 = defpicture;
         public string ButtonService2 = defpicture;
-        public string ButtonService1_style1 = defpicture;
-        public string ButtonService2_style1 = defpicture;
         public string ButtonRetToMain = defpicture;
         public string ButtonWhatsDiff = defpicture;
         public string LogoService1 = defpicture;
         public string LogoService2 = defpicture;
-        public string LogoService_style1 = defpicture;
         public string ButtonGetOxigen = defpicture;
-        public string ButtonGetOxigen_style1 = defpicture;
         public string ScreenSaver = defpicture;
         public string ScreenSaverVideo = defpicture;
 

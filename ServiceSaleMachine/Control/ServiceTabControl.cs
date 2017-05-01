@@ -5,22 +5,20 @@ namespace AirVitamin
     public partial class ServiceTabControl : UserControl
     {
         public TabControl DeviceTab { get { return DevicetabControl; } set { DevicetabControl = value; } }
-        public TextBox TextBoxRecognize { get { return textBoxRecognize; } set { textBoxRecognize = value; } }
-        public TextBox TextBoxLightUrn { get { return LightUrn; } set { LightUrn = value; } }
+        public TextBox TextBoxPause { get { return textBoxPause; } set { textBoxPause = value; } }
 
         public TextBox TextBoxCaptionService { get { return textBoxCaptionService; } set { textBoxCaptionService = value; } }
         public TextBox TextBoxPriceService { get { return textBoxPriceService; } set { textBoxPriceService = value; } }
-        public TextBox TextBoxMaxTimeService { get { return textBoxMaxTimeService; } set { textBoxMaxTimeService = value; } }
+        public TextBox TextBoxTimeService { get { return textBoxTimeService; } set { textBoxTimeService = value; } }
 
         public delegate void ServiceClientResponseEventHandler(object sender);
 
         public event ServiceClientResponseEventHandler DeleteDevice;
         public event ServiceClientResponseEventHandler AddDevice;
-        public event ServiceClientResponseEventHandler RecognizeLeave;
-        public event ServiceClientResponseEventHandler LightUrnLeave;
+        public event ServiceClientResponseEventHandler PauseLeave;
         public event ServiceClientResponseEventHandler CaptionServiceLeave;
         public event ServiceClientResponseEventHandler PriceServiceLeave;
-        public event ServiceClientResponseEventHandler MaxTimeServiceLeave;
+        public event ServiceClientResponseEventHandler TimeServiceLeave;
 
         public ServiceTabControl()
         {
@@ -39,12 +37,7 @@ namespace AirVitamin
 
         private void textBoxRecognize_Leave(object sender, System.EventArgs e)
         {
-            RecognizeLeave(sender);
-        }
-
-        private void LightUrn_Leave(object sender, System.EventArgs e)
-        {
-            LightUrnLeave(sender);
+            PauseLeave(sender);
         }
 
         private void textBoxCaptionService_Leave(object sender, System.EventArgs e)
@@ -59,7 +52,7 @@ namespace AirVitamin
 
         private void textBoxMaxTimeService_Leave(object sender, System.EventArgs e)
         {
-            MaxTimeServiceLeave(sender);
+            TimeServiceLeave(sender);
         }
     }
 }

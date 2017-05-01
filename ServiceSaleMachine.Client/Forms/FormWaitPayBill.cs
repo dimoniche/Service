@@ -60,15 +60,8 @@ namespace AirVitamin.Client
 
             data.log.Write(LogMessageType.Information, "========================НАЧАЛО ОБСЛУЖИВАНИЯ==========================");
 
-            if (Globals.ClientConfiguration.Settings.style == 1)
-            {
-                gifImage = new GifImage(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonGetOxigen);
-                gifImage.ReverseAtEnd = false; //dont reverse at end
-            }
-            else
-            {
-                Globals.DesignConfiguration.Settings.LoadPictureBox(pBxGiveOxigen, Globals.DesignConfiguration.Settings.ButtonGetOxigen_style1);
-            }
+            gifImage = new GifImage(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonGetOxigen);
+            gifImage.ReverseAtEnd = false; //dont reverse at end
 
             //Globals.DesignConfiguration.Settings.LoadPictureBox(pBxGiveOxigen, Globals.DesignConfiguration.Settings.ButtonGetOxigen);
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxReturnBack, Globals.DesignConfiguration.Settings.ButtonRetToMain);
@@ -895,10 +888,7 @@ namespace AirVitamin.Client
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (Globals.ClientConfiguration.Settings.style == 1)
-            {
-                pBxGiveOxigen.Image = gifImage.GetNextFrame();
-            }
+            pBxGiveOxigen.Image = gifImage.GetNextFrame();
             //timer1.Enabled = false;
         }
     }

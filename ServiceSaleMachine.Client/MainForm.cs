@@ -631,7 +631,7 @@ NoCheckStatistic:
                         result.numberCurrentDevice = (int)ControlDeviceEnum.MixAfter;
                     }
 
-                    result.timeRecognize = serv.timeRecognize;
+                    result.timeRecognize = serv.timePause;
                     result.ServName = serv.caption;
 
                     Program.Log.Write(LogMessageType.Information, "MAIN WORK: Начали оказывать услугу: " + serv.caption + " Забор аксессуаров.");

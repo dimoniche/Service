@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 
 namespace AirVitamin
@@ -10,28 +8,24 @@ namespace AirVitamin
     {
         public int id;
         public string caption { get; set; }
-        public string filename { get; set; }
         public int price;
 
         public List<Device> devs;
 
         // время оказания услуги
         public int timework = 10;
-        // время ознакомления с услугой и забор аксессуаров (сек)
-        public int timeRecognize = 20;
-        // время подсветки урны для выброса акссесуаров (сек)
-        public int timeLightUrn = 20;
+        // пауза между процедурами
+        public int timePause = 20;
 
         public Service()
         {
 
         }
 
-        public Service(int id, string caption, string filename)
+        public Service(int id, string caption)
         {
             this.id = id;
             this.caption = caption;
-            this.filename = filename;
         }
 
         public XElement ToXml()
@@ -42,10 +36,8 @@ namespace AirVitamin
             xOut.Add(new XElement("id", id.ToString()));
             xOut.Add(new XElement("price", price.ToString()));
             xOut.Add(new XElement("caption", caption));
-            xOut.Add(new XElement("filename", filename));
             xOut.Add(new XElement("timework", timework));
-            xOut.Add(new XElement("timeRecognize", timeRecognize));
-            xOut.Add(new XElement("timeLightUrn", timeLightUrn));
+            xOut.Add(new XElement("timePause", timePause));
 
             if (devs.Count > 0)
             {
@@ -71,11 +63,9 @@ namespace AirVitamin
 
             if ((xElement = xObject.Element("id")) != null) result.id = int.Parse(xElement.Value);
             if ((xElement = xObject.Element("caption")) != null) result.caption = xElement.Value;
-            if ((xElement = xObject.Element("filename")) != null) result.filename = xElement.Value;
             if ((xElement = xObject.Element("price")) != null) result.price = int.Parse(xElement.Value);
             if ((xElement = xObject.Element("timework")) != null) result.timework = int.Parse(xElement.Value);
-            if ((xElement = xObject.Element("timeRecognize")) != null) result.timeRecognize = int.Parse(xElement.Value);
-            if ((xElement = xObject.Element("timeLightUrn")) != null) result.timeLightUrn = int.Parse(xElement.Value);
+            if ((xElement = xObject.Element("timePause")) != null) result.timePause = int.Parse(xElement.Value);
 
             // настройки сервисов
             if ((xElement = xObject.Element("Devices")) != null)
@@ -95,37 +85,6 @@ namespace AirVitamin
             }
 
             return result;
-        }
-
-        public Device GetActualDevice()
-        {
-            Device dev = null;
-            DateTime dt;
-            int count = 0;
-
-            for (int i = 1; i < devs.Count + 1; i++)
-            {
-                dt = GlobalDb.GlobalBase.GetLastRefreshTime(id, i);
-                if (dt != null)
-                {
-                    count = GlobalDb.GlobalBase.GetWorkTime(id, i, dt);
-
-                    if(count < devs[i-1].limitTime)
-                    {
-                        return devs[i - 1];
-                    }
-                }
-                else
-                {
-                    count = GlobalDb.GlobalBase.GetWorkTime(id, i, new DateTime(2000,1,1));
-                    if(count != 0)
-                    {
-                        return devs[i - 1];
-                    }
-                }
-            }
-
-            return dev;
         }
     }
 }

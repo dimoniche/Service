@@ -31,25 +31,22 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBoxTimeService = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.textBoxPriceService = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.textBoxCaptionService = new System.Windows.Forms.TextBox();
             this.labCaptionService = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.LightUrn = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.butDelDev = new System.Windows.Forms.Button();
             this.butaddDev = new System.Windows.Forms.Button();
-            this.textBoxRecognize = new System.Windows.Forms.TextBox();
+            this.textBoxPause = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.DevicetabControl = new System.Windows.Forms.TabControl();
             this.tabPageDevice = new System.Windows.Forms.TabPage();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBoxMaxTimeService = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -84,20 +81,17 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.textBoxMaxTimeService);
+            this.panel2.Controls.Add(this.textBoxTimeService);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.textBoxPriceService);
             this.panel2.Controls.Add(this.label7);
             this.panel2.Controls.Add(this.textBoxCaptionService);
             this.panel2.Controls.Add(this.labCaptionService);
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.LightUrn);
-            this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.butDelDev);
             this.panel2.Controls.Add(this.butaddDev);
-            this.panel2.Controls.Add(this.textBoxRecognize);
+            this.panel2.Controls.Add(this.textBoxPause);
             this.panel2.Controls.Add(this.label20);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
@@ -105,10 +99,37 @@
             this.panel2.Size = new System.Drawing.Size(508, 289);
             this.panel2.TabIndex = 0;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(361, 48);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(25, 13);
+            this.label4.TabIndex = 21;
+            this.label4.Text = "сек";
+            // 
+            // textBoxTimeService
+            // 
+            this.textBoxTimeService.Location = new System.Drawing.Point(255, 41);
+            this.textBoxTimeService.Name = "textBoxTimeService";
+            this.textBoxTimeService.Size = new System.Drawing.Size(100, 20);
+            this.textBoxTimeService.TabIndex = 20;
+            this.textBoxTimeService.Text = "0";
+            this.textBoxTimeService.Leave += new System.EventHandler(this.textBoxMaxTimeService_Leave);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 48);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(116, 13);
+            this.label5.TabIndex = 19;
+            this.label5.Text = "Длительность услуги";
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(361, 104);
+            this.label6.Location = new System.Drawing.Point(361, 95);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(24, 13);
             this.label6.TabIndex = 18;
@@ -116,7 +137,7 @@
             // 
             // textBoxPriceService
             // 
-            this.textBoxPriceService.Location = new System.Drawing.Point(255, 97);
+            this.textBoxPriceService.Location = new System.Drawing.Point(255, 88);
             this.textBoxPriceService.Name = "textBoxPriceService";
             this.textBoxPriceService.Size = new System.Drawing.Size(100, 20);
             this.textBoxPriceService.TabIndex = 17;
@@ -126,7 +147,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 104);
+            this.label7.Location = new System.Drawing.Point(3, 95);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(98, 13);
             this.label7.TabIndex = 16;
@@ -134,7 +155,7 @@
             // 
             // textBoxCaptionService
             // 
-            this.textBoxCaptionService.Location = new System.Drawing.Point(255, 73);
+            this.textBoxCaptionService.Location = new System.Drawing.Point(255, 64);
             this.textBoxCaptionService.Name = "textBoxCaptionService";
             this.textBoxCaptionService.Size = new System.Drawing.Size(133, 20);
             this.textBoxCaptionService.TabIndex = 14;
@@ -144,43 +165,16 @@
             // labCaptionService
             // 
             this.labCaptionService.AutoSize = true;
-            this.labCaptionService.Location = new System.Drawing.Point(3, 80);
+            this.labCaptionService.Location = new System.Drawing.Point(3, 71);
             this.labCaptionService.Name = "labCaptionService";
             this.labCaptionService.Size = new System.Drawing.Size(93, 13);
             this.labCaptionService.TabIndex = 13;
             this.labCaptionService.Text = "Название услуги";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(361, 34);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(25, 13);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "сек";
-            // 
-            // LightUrn
-            // 
-            this.LightUrn.Location = new System.Drawing.Point(255, 27);
-            this.LightUrn.Name = "LightUrn";
-            this.LightUrn.Size = new System.Drawing.Size(100, 20);
-            this.LightUrn.TabIndex = 11;
-            this.LightUrn.Text = "0";
-            this.LightUrn.Leave += new System.EventHandler(this.LightUrn_Leave);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 34);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(164, 13);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "Длительность подсветки урны";
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(361, 11);
+            this.label1.Location = new System.Drawing.Point(361, 23);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(25, 13);
             this.label1.TabIndex = 9;
@@ -206,23 +200,23 @@
             this.butaddDev.UseVisualStyleBackColor = true;
             this.butaddDev.Click += new System.EventHandler(this.butaddDev_Click);
             // 
-            // textBoxRecognize
+            // textBoxPause
             // 
-            this.textBoxRecognize.Location = new System.Drawing.Point(255, 4);
-            this.textBoxRecognize.Name = "textBoxRecognize";
-            this.textBoxRecognize.Size = new System.Drawing.Size(100, 20);
-            this.textBoxRecognize.TabIndex = 7;
-            this.textBoxRecognize.Text = "0";
-            this.textBoxRecognize.Leave += new System.EventHandler(this.textBoxRecognize_Leave);
+            this.textBoxPause.Location = new System.Drawing.Point(255, 16);
+            this.textBoxPause.Name = "textBoxPause";
+            this.textBoxPause.Size = new System.Drawing.Size(100, 20);
+            this.textBoxPause.TabIndex = 7;
+            this.textBoxPause.Text = "0";
+            this.textBoxPause.Leave += new System.EventHandler(this.textBoxRecognize_Leave);
             // 
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(3, 11);
+            this.label20.Location = new System.Drawing.Point(3, 23);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(204, 13);
+            this.label20.Size = new System.Drawing.Size(220, 13);
             this.label20.TabIndex = 6;
-            this.label20.Text = "Длительность подсветки расходников";
+            this.label20.Text = "Длительность паузы между процедурами";
             // 
             // panel3
             // 
@@ -253,33 +247,6 @@
             this.tabPageDevice.Text = "Устройство 1";
             this.tabPageDevice.UseVisualStyleBackColor = true;
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(361, 57);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(27, 13);
-            this.label4.TabIndex = 21;
-            this.label4.Text = "мин";
-            // 
-            // textBoxMaxTimeService
-            // 
-            this.textBoxMaxTimeService.Location = new System.Drawing.Point(255, 50);
-            this.textBoxMaxTimeService.Name = "textBoxMaxTimeService";
-            this.textBoxMaxTimeService.Size = new System.Drawing.Size(100, 20);
-            this.textBoxMaxTimeService.TabIndex = 20;
-            this.textBoxMaxTimeService.Text = "0";
-            this.textBoxMaxTimeService.Leave += new System.EventHandler(this.textBoxMaxTimeService_Leave);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 57);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(193, 13);
-            this.label5.TabIndex = 19;
-            this.label5.Text = "Максимальная длительность услуги";
-            // 
             // ServiceTabControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -302,7 +269,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TextBox textBoxRecognize;
+        private System.Windows.Forms.TextBox textBoxPause;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TabControl DevicetabControl;
@@ -310,16 +277,13 @@
         private System.Windows.Forms.Button butaddDev;
         private System.Windows.Forms.Button butDelDev;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox LightUrn;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBoxPriceService;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox textBoxCaptionService;
         private System.Windows.Forms.Label labCaptionService;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBoxMaxTimeService;
+        private System.Windows.Forms.TextBox textBoxTimeService;
         private System.Windows.Forms.Label label5;
     }
 }

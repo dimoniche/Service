@@ -44,6 +44,8 @@ namespace AirVitamin
         public int offControl = 1;
         // отключение модема
         public int offModem = 1;
+        // отключение принтера
+        public int offPrinter = 1;
 
         // массив обрабатываемых номиналов купюр
         public int[] nominals = new int[24];
@@ -51,7 +53,7 @@ namespace AirVitamin
         // режим работы купюроприемника
         public int changeOn = 0;
 
-        // таймаут перехода в реклами или начальный экран
+        // таймаут перехода в рекламу или начальный экран
         public int timeout = 0;
 
         // настройки сервисов
@@ -60,9 +62,6 @@ namespace AirVitamin
         // поведение со сдачей
         public int changeToAccount = 0;
         public int changeToCheck = 0;
-
-        // стиль оформления
-        public int style = 0;
 
         // стиль оформления
         public int ScreenServerType = 0;

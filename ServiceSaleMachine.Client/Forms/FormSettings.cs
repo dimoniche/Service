@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 using static AirVitamin.Drivers.MachineDrivers;
+using static System.Windows.Forms.TabControl;
 
 namespace AirVitamin.Client
 {
@@ -13,6 +14,8 @@ namespace AirVitamin.Client
         FormResultData data;
 
         bool init = false;
+
+        TabPageCollection tabTemp;
 
         public override void LoadData()
         {
@@ -35,17 +38,15 @@ namespace AirVitamin.Client
                 stc.AddDevice += AddDevice;
                 stc.DeleteDevice += DeleteDevice;
 
-                stc.RecognizeLeave += RecognizeLeave;
-                stc.LightUrnLeave += LightUrnLeave;
+                stc.PauseLeave += PauseLeave;
                 stc.CaptionServiceLeave += CaptionServiceLeave;
                 stc.PriceServiceLeave += PriceServiceLeave;
-                stc.MaxTimeServiceLeave += MaxTimeServiceLeave;
+                stc.TimeServiceLeave += TimeServiceLeave;
 
-                stc.TextBoxRecognize.Text = serv.timeRecognize.ToString();
+                stc.TextBoxPause.Text = serv.timePause.ToString();
                 stc.TextBoxPriceService.Text = serv.price.ToString();
                 stc.TextBoxCaptionService.Text = serv.caption;
-                stc.TextBoxLightUrn.Text = serv.timeLightUrn.ToString();
-                stc.TextBoxMaxTimeService.Text = serv.timework.ToString();
+                stc.TextBoxTimeService.Text = serv.timework.ToString();
 
                 tabSettingService.TabPages[tabSettingService.TabPages.Count - 1].Controls.Add(stc);
 
@@ -59,13 +60,9 @@ namespace AirVitamin.Client
 
                         DeviceTabControl devTab = new DeviceTabControl();
                         devTab.Dock = DockStyle.Fill;
-                        devTab.LimitTimeLeave += LimitTimeLeave;
-                        devTab.TimeWorkLeave += TimeWorkLeave;
                         devTab.IdDeviceLeave += IdDeviceLeave;
                         devTab.NameDeviceLeave += NameDeviceLeave;
 
-                        devTab.LimitTime.Text = dev.limitTime.ToString();
-                        devTab.TimeWork.Text = dev.timework.ToString();
                         devTab.TextBoxIdDevice.Text = dev.id.ToString();
                         devTab.TextBoxNameDevice.Text = dev.caption;
 
@@ -137,12 +134,12 @@ namespace AirVitamin.Client
             toolTip1.SetToolTip(this.cbxOffHardware, "Отключение всего оборудования.");
         }
 
-        private void MaxTimeServiceLeave(object sender)
+        private void TimeServiceLeave(object sender)
         {
             Service stc = Globals.ClientConfiguration.Settings.services[tabSettingService.SelectedIndex];
             ServiceTabControl currServiceTab = ((ServiceTabControl)tabSettingService.TabPages[tabSettingService.SelectedIndex].Controls[0]);
 
-            int.TryParse(currServiceTab.TextBoxMaxTimeService.Text, out stc.timework);
+            int.TryParse(currServiceTab.TextBoxTimeService.Text, out stc.timework);
 
             Globals.ClientConfiguration.Save();
         }
@@ -215,44 +212,12 @@ namespace AirVitamin.Client
             tabSettingService.TabPages[tabSettingService.SelectedIndex].Text = stc.caption;
         }
 
-        private void LightUrnLeave(object sender)
+        private void PauseLeave(object sender)
         {
             Service stc = Globals.ClientConfiguration.Settings.services[tabSettingService.SelectedIndex];
             ServiceTabControl currServiceTab = ((ServiceTabControl)tabSettingService.TabPages[tabSettingService.SelectedIndex].Controls[0]);
 
-            int.TryParse(currServiceTab.TextBoxLightUrn.Text, out stc.timeLightUrn);
-
-            Globals.ClientConfiguration.Save();
-        }
-
-        private void TimeWorkLeave(object sender)
-        {
-            Service stc = Globals.ClientConfiguration.Settings.services[tabSettingService.SelectedIndex];
-            ServiceTabControl currServiceTab = ((ServiceTabControl)tabSettingService.TabPages[tabSettingService.SelectedIndex].Controls[0]);
-            DeviceTabControl currDeviceTab = (DeviceTabControl)currServiceTab.DeviceTab.TabPages[currServiceTab.DeviceTab.SelectedIndex].Controls[0];
-
-            int.TryParse(currDeviceTab.TimeWork.Text, out stc.devs[currServiceTab.DeviceTab.SelectedIndex].timework);
-
-            Globals.ClientConfiguration.Save();
-        }
-
-        private void LimitTimeLeave(object sender)
-        {
-            Service stc = Globals.ClientConfiguration.Settings.services[tabSettingService.SelectedIndex];
-            ServiceTabControl currServiceTab = ((ServiceTabControl)tabSettingService.TabPages[tabSettingService.SelectedIndex].Controls[0]);
-            DeviceTabControl currDeviceTab = (DeviceTabControl)currServiceTab.DeviceTab.TabPages[currServiceTab.DeviceTab.SelectedIndex].Controls[0];
-
-            int.TryParse(currDeviceTab.LimitTime.Text, out stc.devs[currServiceTab.DeviceTab.SelectedIndex].limitTime);
-
-            Globals.ClientConfiguration.Save();
-        }
-
-        private void RecognizeLeave(object sender)
-        {
-            Service stc = Globals.ClientConfiguration.Settings.services[tabSettingService.SelectedIndex];
-            ServiceTabControl currServiceTab = ((ServiceTabControl)tabSettingService.TabPages[tabSettingService.SelectedIndex].Controls[0]);
-
-            int.TryParse(currServiceTab.TextBoxRecognize.Text, out stc.timeRecognize);
+            int.TryParse(currServiceTab.TextBoxPause.Text, out stc.timePause);
 
             Globals.ClientConfiguration.Save();
         }
@@ -292,13 +257,9 @@ namespace AirVitamin.Client
 
             currDeviceTab.Dock = DockStyle.Fill;
 
-            currDeviceTab.LimitTimeLeave += LimitTimeLeave;
-            currDeviceTab.TimeWorkLeave += TimeWorkLeave;
             currDeviceTab.IdDeviceLeave += IdDeviceLeave;
             currDeviceTab.NameDeviceLeave += NameDeviceLeave;
 
-            currDeviceTab.LimitTime.Text = dev.limitTime.ToString();
-            currDeviceTab.TimeWork.Text = dev.timework.ToString();
             currDeviceTab.TextBoxIdDevice.Text = dev.id.ToString();
             currDeviceTab.TextBoxNameDevice.Text = dev.caption;
 
@@ -320,20 +281,13 @@ namespace AirVitamin.Client
             currServiceTab.AddDevice += AddDevice;
             currServiceTab.DeleteDevice += DeleteDevice;
 
-            currServiceTab.RecognizeLeave += RecognizeLeave;
-            currServiceTab.LightUrnLeave += LightUrnLeave;
+            currServiceTab.PauseLeave += PauseLeave;
             currServiceTab.CaptionServiceLeave += CaptionServiceLeave;
             currServiceTab.PriceServiceLeave += PriceServiceLeave;
 
-            currServiceTab.TextBoxRecognize.Text = stc.timeRecognize.ToString();
+            currServiceTab.TextBoxPause.Text = stc.timePause.ToString();
             currServiceTab.TextBoxPriceService.Text = stc.price.ToString();
             currServiceTab.TextBoxCaptionService.Text = stc.caption;
-            currServiceTab.TextBoxLightUrn.Text = stc.timeLightUrn.ToString();
-
-            currServiceTab.TextBoxRecognize.Text = stc.timeRecognize.ToString();
-            currServiceTab.TextBoxPriceService.Text = stc.price.ToString();
-            currServiceTab.TextBoxCaptionService.Text = stc.caption;
-            currServiceTab.TextBoxLightUrn.Text = stc.timeLightUrn.ToString();
 
             tabSettingService.TabPages.Add(stc.caption);
             tabSettingService.TabPages[tabSettingService.TabPages.Count - 1].Controls.Add(currServiceTab);
@@ -408,6 +362,8 @@ namespace AirVitamin.Client
             LightOn2.Enabled = state;
             LightOff1.Enabled = state;
             LightOff2.Enabled = state;
+            pipeOff.Enabled = state;
+            PipeOn.Enabled = state;
             butReadStatus.Enabled = state;
         }
 
@@ -696,6 +652,15 @@ namespace AirVitamin.Client
                 offControl.Checked = false;
             }
 
+            if (Globals.ClientConfiguration.Settings.offPrinter == 1)
+            {
+                checkOffPrinter.Checked = true;
+            }
+            else
+            {
+                checkOffPrinter.Checked = false;
+            }
+
             // номиналы купюр
             checkBox10.Checked = Globals.ClientConfiguration.Settings.nominals[2] > 0 ? true : false;
             checkBox50.Checked = Globals.ClientConfiguration.Settings.nominals[3] > 0 ? true : false;
@@ -755,17 +720,6 @@ namespace AirVitamin.Client
 
             checkBox3.Enabled = checkchangeOn.Checked;
 
-            if(Globals.ClientConfiguration.Settings.style == 0)
-            {
-                Style1.Checked = true;
-                Style2.Checked = false;
-            }
-            else if(Globals.ClientConfiguration.Settings.style == 1)
-            {
-                Style1.Checked = false;
-                Style2.Checked = true;
-            }
-
             if (Globals.ClientConfiguration.Settings.ScreenServerType == 0)
             {
                 ButPicture.Checked = true;
@@ -791,6 +745,28 @@ namespace AirVitamin.Client
 
             // вставим дату последней инкассации
             dateTimeStatistic.Value = GlobalDb.GlobalBase.GetLastEncashment();
+
+            if (Globals.ClientConfiguration.Settings.offCheck == 1)
+            {
+                foreach(TabPage tab in tabControl2.TabPages)
+                {
+                    if(tab.Text == "Сканер")
+                    {
+                        tabControl2.TabPages.Remove(tab);
+                    }
+                }
+            }
+
+            if (Globals.ClientConfiguration.Settings.offPrinter == 1)
+            {
+                foreach (TabPage tab in tabControl2.TabPages)
+                {
+                    if (tab.Text == "Принтер")
+                    {
+                        tabControl2.TabPages.Remove(tab);
+                    }
+                }
+            }
         }
 
         void MoneyStatistic()
@@ -2055,20 +2031,6 @@ namespace AirVitamin.Client
             MoneyStatistic();
         }
 
-        private void Style1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (Style1.Checked == true && Style2.Checked == false)
-            {
-                Globals.ClientConfiguration.Settings.style = 0;
-            }
-            else if (Style1.Checked == false && Style2.Checked == true)
-            {
-                Globals.ClientConfiguration.Settings.style = 1;
-            }
-
-            Globals.CheckConfiguration.Save();
-        }
-
         private void ButPicture_CheckedChanged(object sender, EventArgs e)
         {
             if (ButPicture.Checked == true && ButGIF.Checked == false && ButVideo.Checked == false)
@@ -2095,6 +2057,23 @@ namespace AirVitamin.Client
         private void button18_Click(object sender, EventArgs e)
         {
             data.drivers.control.SendCloseControl((int)ControlDeviceEnum.Pipe);
+        }
+
+        private void checkOffPrinter_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Globals.ClientConfiguration.Settings.offHardware != 1)
+            {
+                if (checkOffPrinter.Checked)
+                {
+                    Globals.ClientConfiguration.Settings.offPrinter = 1;
+                }
+                else
+                {
+                    Globals.ClientConfiguration.Settings.offPrinter = 0;
+                }
+
+                Globals.ClientConfiguration.Save();
+            }
         }
     }
 }

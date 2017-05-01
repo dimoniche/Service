@@ -10,7 +10,7 @@ namespace AirVitamin.Client
     public partial class FormProvideService : MyForm
     {
         FormResultData data;
-        int Interval = 60;
+        int Interval = 180;
 
         public FormProvideService()
         {
@@ -25,7 +25,7 @@ namespace AirVitamin.Client
                 {
                     data = (FormResultData)obj;
 
-                    Interval = data.timework * 60;
+                    Interval = data.timework;
                 }
             }
 

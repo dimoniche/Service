@@ -7,20 +7,12 @@ namespace AirVitamin
     {
         public int id;
 
-        // предельное время конкретного устройства (не используется)
-        public int limitTime = 100000;
-
         public string caption = "";
 
-        // время работы конкретного устройства (не используется)
-        public int timework = 10;
-
-        public Device(int id, string caption, int limitTime,int timework)
+        public Device(int id, string caption)
         {
             this.id = id;
             this.caption = caption;
-            this.limitTime = limitTime;
-            this.timework = timework;
         }
 
         public Device()
@@ -34,8 +26,6 @@ namespace AirVitamin
 
             xOut.Add(new XElement("id", id.ToString()));
             xOut.Add(new XElement("caption", caption));
-            xOut.Add(new XElement("limitTime", limitTime.ToString()));
-            xOut.Add(new XElement("timework", timework.ToString()));
 
             return xOut;
         }
@@ -50,8 +40,6 @@ namespace AirVitamin
 
             if ((xElement = xObject.Element("id")) != null) result.id = int.Parse(xElement.Value);
             if ((xElement = xObject.Element("caption")) != null) result.caption = xElement.Value;
-            if ((xElement = xObject.Element("limitTime")) != null) result.limitTime = int.Parse(xElement.Value);
-            if ((xElement = xObject.Element("timework")) != null) result.timework = int.Parse(xElement.Value);
 
             return result;
         }

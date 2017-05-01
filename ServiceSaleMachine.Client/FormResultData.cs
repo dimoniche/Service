@@ -78,7 +78,7 @@ namespace AirVitamin.Client
         {
             retLogin = "";
             retPassword = "";
-            timework = 3;
+            timework = 180;
             ServName = "";
 
             // Лог

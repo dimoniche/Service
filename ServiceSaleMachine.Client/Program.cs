@@ -82,12 +82,11 @@ namespace AirVitamin.Client
                 Globals.ClientConfiguration.Settings.NamePrinter = "NULL";
                 Globals.ClientConfiguration.Settings.comPortControl = "NULL";
 
-                // пока 3 сервиса
+                // пока 2 сервиса
                 Globals.ClientConfiguration.Settings.services = new List<Service>();
                 
-                Globals.ClientConfiguration.Settings.services.Add(new Service(1,"Сервис 1", fileName + "sol.png"));
-                Globals.ClientConfiguration.Settings.services.Add(new Service(2,"Сервис 2", fileName + "sol.png"));
-                Globals.ClientConfiguration.Settings.services.Add(new Service(3,"Сервис 3", fileName + "sol.png"));
+                Globals.ClientConfiguration.Settings.services.Add(new Service(1,"Сервис 1"));
+                Globals.ClientConfiguration.Settings.services.Add(new Service(2,"Сервис 2"));
 
                 Globals.ClientConfiguration.Save();
                 Globals.ClientConfiguration.Load();

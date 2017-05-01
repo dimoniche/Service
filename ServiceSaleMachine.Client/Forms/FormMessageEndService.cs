@@ -33,7 +33,7 @@ namespace AirVitamin.Client
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxLogo, "Logo_O2.png");
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxFinishText, "Spasibo_txt.png");
 
-            FTimeWork = data.serv.timeLightUrn;
+            FTimeWork = data.serv.timePause;
 
             timer1.Enabled = true;
 

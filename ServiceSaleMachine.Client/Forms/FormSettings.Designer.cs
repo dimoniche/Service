@@ -87,8 +87,8 @@
             this.cbxComPortPrinter = new System.Windows.Forms.ComboBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.label35 = new System.Windows.Forms.Label();
-            this.button18 = new System.Windows.Forms.Button();
-            this.button19 = new System.Windows.Forms.Button();
+            this.pipeOff = new System.Windows.Forms.Button();
+            this.PipeOn = new System.Windows.Forms.Button();
             this.label27 = new System.Windows.Forms.Label();
             this.LightOff2 = new System.Windows.Forms.Button();
             this.LightOn2 = new System.Windows.Forms.Button();
@@ -164,9 +164,6 @@
             this.ButGIF = new System.Windows.Forms.RadioButton();
             this.ButVideo = new System.Windows.Forms.RadioButton();
             this.ButPicture = new System.Windows.Forms.RadioButton();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.Style2 = new System.Windows.Forms.RadioButton();
-            this.Style1 = new System.Windows.Forms.RadioButton();
             this.groupBoxTimeLimit = new System.Windows.Forms.GroupBox();
             this.label15 = new System.Windows.Forms.Label();
             this.textBoxMaxTimeService = new System.Windows.Forms.TextBox();
@@ -237,6 +234,7 @@
             this.labelTimeLastRefresh = new System.Windows.Forms.Label();
             this.labelWorkFromLastRefresh = new System.Windows.Forms.Label();
             this.buttonResetTimeRefresh = new System.Windows.Forms.Button();
+            this.checkOffPrinter = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -264,7 +262,6 @@
             this.tabControl3.SuspendLayout();
             this.tabPage6.SuspendLayout();
             this.groupBox7.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.groupBoxTimeLimit.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.tabSettingService.SuspendLayout();
@@ -908,8 +905,8 @@
             // tabPage5
             // 
             this.tabPage5.Controls.Add(this.label35);
-            this.tabPage5.Controls.Add(this.button18);
-            this.tabPage5.Controls.Add(this.button19);
+            this.tabPage5.Controls.Add(this.pipeOff);
+            this.tabPage5.Controls.Add(this.PipeOn);
             this.tabPage5.Controls.Add(this.label27);
             this.tabPage5.Controls.Add(this.LightOff2);
             this.tabPage5.Controls.Add(this.LightOn2);
@@ -946,25 +943,25 @@
             this.label35.TabIndex = 26;
             this.label35.Text = "Открыть шланг";
             // 
-            // button18
+            // pipeOff
             // 
-            this.button18.Location = new System.Drawing.Point(159, 193);
-            this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(105, 23);
-            this.button18.TabIndex = 24;
-            this.button18.Text = "Выкл.шланг";
-            this.button18.UseVisualStyleBackColor = true;
-            this.button18.Click += new System.EventHandler(this.button18_Click);
+            this.pipeOff.Location = new System.Drawing.Point(159, 193);
+            this.pipeOff.Name = "pipeOff";
+            this.pipeOff.Size = new System.Drawing.Size(105, 23);
+            this.pipeOff.TabIndex = 24;
+            this.pipeOff.Text = "Выкл.шланг";
+            this.pipeOff.UseVisualStyleBackColor = true;
+            this.pipeOff.Click += new System.EventHandler(this.button18_Click);
             // 
-            // button19
+            // PipeOn
             // 
-            this.button19.Location = new System.Drawing.Point(25, 193);
-            this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(105, 23);
-            this.button19.TabIndex = 25;
-            this.button19.Text = "Вкл.шланг";
-            this.button19.UseVisualStyleBackColor = true;
-            this.button19.Click += new System.EventHandler(this.button19_Click);
+            this.PipeOn.Location = new System.Drawing.Point(25, 193);
+            this.PipeOn.Name = "PipeOn";
+            this.PipeOn.Size = new System.Drawing.Size(105, 23);
+            this.PipeOn.TabIndex = 25;
+            this.PipeOn.Text = "Вкл.шланг";
+            this.PipeOn.UseVisualStyleBackColor = true;
+            this.PipeOn.Click += new System.EventHandler(this.button19_Click);
             // 
             // label27
             // 
@@ -1677,7 +1674,6 @@
             // tabPage6
             // 
             this.tabPage6.Controls.Add(this.groupBox7);
-            this.tabPage6.Controls.Add(this.groupBox3);
             this.tabPage6.Controls.Add(this.groupBoxTimeLimit);
             this.tabPage6.Controls.Add(this.groupBox5);
             this.tabPage6.Controls.Add(this.groupBox4);
@@ -1694,13 +1690,12 @@
             this.groupBox7.Controls.Add(this.ButGIF);
             this.groupBox7.Controls.Add(this.ButVideo);
             this.groupBox7.Controls.Add(this.ButPicture);
-            this.groupBox7.Location = new System.Drawing.Point(15, 455);
+            this.groupBox7.Location = new System.Drawing.Point(15, 371);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(163, 100);
             this.groupBox7.TabIndex = 17;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Заставка";
-            this.groupBox7.Visible = false;
             // 
             // ButGIF
             // 
@@ -1722,6 +1717,7 @@
             this.ButVideo.TabIndex = 2;
             this.ButVideo.Text = "Видео";
             this.ButVideo.UseVisualStyleBackColor = true;
+            this.ButVideo.Visible = false;
             this.ButVideo.CheckedChanged += new System.EventHandler(this.ButPicture_CheckedChanged);
             // 
             // ButPicture
@@ -1736,42 +1732,6 @@
             this.ButPicture.Text = "Статичная картинка";
             this.ButPicture.UseVisualStyleBackColor = true;
             this.ButPicture.CheckedChanged += new System.EventHandler(this.ButPicture_CheckedChanged);
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.Style2);
-            this.groupBox3.Controls.Add(this.Style1);
-            this.groupBox3.Location = new System.Drawing.Point(15, 371);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(292, 78);
-            this.groupBox3.TabIndex = 16;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Оформление";
-            this.groupBox3.Visible = false;
-            // 
-            // Style2
-            // 
-            this.Style2.AutoSize = true;
-            this.Style2.Location = new System.Drawing.Point(16, 46);
-            this.Style2.Name = "Style2";
-            this.Style2.Size = new System.Drawing.Size(76, 17);
-            this.Style2.TabIndex = 0;
-            this.Style2.TabStop = true;
-            this.Style2.Text = "Вариант 2";
-            this.Style2.UseVisualStyleBackColor = true;
-            this.Style2.CheckedChanged += new System.EventHandler(this.Style1_CheckedChanged);
-            // 
-            // Style1
-            // 
-            this.Style1.AutoSize = true;
-            this.Style1.Location = new System.Drawing.Point(16, 23);
-            this.Style1.Name = "Style1";
-            this.Style1.Size = new System.Drawing.Size(76, 17);
-            this.Style1.TabIndex = 0;
-            this.Style1.TabStop = true;
-            this.Style1.Text = "Вариант 1";
-            this.Style1.UseVisualStyleBackColor = true;
-            this.Style1.CheckedChanged += new System.EventHandler(this.Style1_CheckedChanged);
             // 
             // groupBoxTimeLimit
             // 
@@ -1898,6 +1858,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.checkOffPrinter);
             this.groupBox4.Controls.Add(this.offControl);
             this.groupBox4.Controls.Add(this.cBxBillOff);
             this.groupBox4.Controls.Add(this.checkBox1);
@@ -2185,7 +2146,7 @@
             // labelAccount
             // 
             this.labelAccount.AutoSize = true;
-            this.labelAccount.Location = new System.Drawing.Point(583, 163);
+            this.labelAccount.Location = new System.Drawing.Point(12, 158);
             this.labelAccount.Name = "labelAccount";
             this.labelAccount.Size = new System.Drawing.Size(230, 13);
             this.labelAccount.TabIndex = 9;
@@ -2193,7 +2154,7 @@
             // 
             // button16
             // 
-            this.button16.Location = new System.Drawing.Point(586, 179);
+            this.button16.Location = new System.Drawing.Point(15, 174);
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(227, 23);
             this.button16.TabIndex = 8;
@@ -2203,7 +2164,7 @@
             // 
             // button14
             // 
-            this.button14.Location = new System.Drawing.Point(586, 229);
+            this.button14.Location = new System.Drawing.Point(15, 224);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(227, 23);
             this.button14.TabIndex = 7;
@@ -2214,7 +2175,7 @@
             // labeldelivery
             // 
             this.labeldelivery.AutoSize = true;
-            this.labeldelivery.Location = new System.Drawing.Point(583, 99);
+            this.labeldelivery.Location = new System.Drawing.Point(12, 94);
             this.labeldelivery.Name = "labeldelivery";
             this.labeldelivery.Size = new System.Drawing.Size(190, 13);
             this.labeldelivery.TabIndex = 6;
@@ -2222,7 +2183,7 @@
             // 
             // buttonDelivery
             // 
-            this.buttonDelivery.Location = new System.Drawing.Point(586, 115);
+            this.buttonDelivery.Location = new System.Drawing.Point(15, 110);
             this.buttonDelivery.Name = "buttonDelivery";
             this.buttonDelivery.Size = new System.Drawing.Size(227, 23);
             this.buttonDelivery.TabIndex = 5;
@@ -2233,16 +2194,17 @@
             // PreviouslyName
             // 
             this.PreviouslyName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.PreviouslyName.Location = new System.Drawing.Point(76, 205);
+            this.PreviouslyName.Location = new System.Drawing.Point(301, 198);
             this.PreviouslyName.Name = "PreviouslyName";
             this.PreviouslyName.Size = new System.Drawing.Size(247, 26);
             this.PreviouslyName.TabIndex = 4;
+            this.PreviouslyName.Visible = false;
             this.PreviouslyName.Leave += new System.EventHandler(this.PreviouslyName_Leave);
             // 
             // labelCurrNumberCheck
             // 
             this.labelCurrNumberCheck.AutoSize = true;
-            this.labelCurrNumberCheck.Location = new System.Drawing.Point(583, 37);
+            this.labelCurrNumberCheck.Location = new System.Drawing.Point(12, 32);
             this.labelCurrNumberCheck.Name = "labelCurrNumberCheck";
             this.labelCurrNumberCheck.Size = new System.Drawing.Size(207, 13);
             this.labelCurrNumberCheck.TabIndex = 3;
@@ -2250,7 +2212,7 @@
             // 
             // resetCheckNumeration
             // 
-            this.resetCheckNumeration.Location = new System.Drawing.Point(586, 55);
+            this.resetCheckNumeration.Location = new System.Drawing.Point(15, 50);
             this.resetCheckNumeration.Name = "resetCheckNumeration";
             this.resetCheckNumeration.Size = new System.Drawing.Size(227, 23);
             this.resetCheckNumeration.TabIndex = 2;
@@ -2261,72 +2223,79 @@
             // advert4
             // 
             this.advert4.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.advert4.Location = new System.Drawing.Point(74, 498);
+            this.advert4.Location = new System.Drawing.Point(301, 506);
             this.advert4.Name = "advert4";
             this.advert4.Size = new System.Drawing.Size(482, 17);
             this.advert4.TabIndex = 1;
             this.advert4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.advert4.Visible = false;
             this.advert4.Leave += new System.EventHandler(this.advert4_Leave);
             // 
             // advert3
             // 
             this.advert3.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.advert3.Location = new System.Drawing.Point(74, 478);
+            this.advert3.Location = new System.Drawing.Point(301, 483);
             this.advert3.Name = "advert3";
             this.advert3.Size = new System.Drawing.Size(482, 17);
             this.advert3.TabIndex = 1;
             this.advert3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.advert3.Visible = false;
             this.advert3.Leave += new System.EventHandler(this.advert3_Leave);
             // 
             // advert2
             // 
             this.advert2.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.advert2.Location = new System.Drawing.Point(74, 460);
+            this.advert2.Location = new System.Drawing.Point(301, 460);
             this.advert2.Name = "advert2";
             this.advert2.Size = new System.Drawing.Size(482, 17);
             this.advert2.TabIndex = 1;
             this.advert2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.advert2.Visible = false;
             this.advert2.Leave += new System.EventHandler(this.advert2_Leave);
             // 
             // advert1
             // 
             this.advert1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.advert1.Location = new System.Drawing.Point(74, 442);
+            this.advert1.Location = new System.Drawing.Point(301, 437);
             this.advert1.Name = "advert1";
             this.advert1.Size = new System.Drawing.Size(482, 17);
             this.advert1.TabIndex = 1;
             this.advert1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.advert1.Visible = false;
             this.advert1.Leave += new System.EventHandler(this.advert1_Leave);
             // 
             // secondfirmsname
             // 
             this.secondfirmsname.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.secondfirmsname.Location = new System.Drawing.Point(76, 92);
+            this.secondfirmsname.Location = new System.Drawing.Point(301, 92);
             this.secondfirmsname.Name = "secondfirmsname";
             this.secondfirmsname.Size = new System.Drawing.Size(482, 26);
             this.secondfirmsname.TabIndex = 1;
             this.secondfirmsname.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.secondfirmsname.Visible = false;
             this.secondfirmsname.Leave += new System.EventHandler(this.secondfirmsname_Leave);
             // 
             // firmsname
             // 
             this.firmsname.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.firmsname.Location = new System.Drawing.Point(76, 60);
+            this.firmsname.Location = new System.Drawing.Point(301, 60);
             this.firmsname.Name = "firmsname";
             this.firmsname.Size = new System.Drawing.Size(482, 26);
             this.firmsname.TabIndex = 1;
             this.firmsname.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.firmsname.Visible = false;
             this.firmsname.Leave += new System.EventHandler(this.firmsname_Leave);
             // 
             // checkPic
             // 
             this.checkPic.Image = global::AirVitamin.Client.Properties.Resources.bitmap;
-            this.checkPic.Location = new System.Drawing.Point(58, 37);
+            this.checkPic.Location = new System.Drawing.Point(286, 32);
             this.checkPic.Name = "checkPic";
             this.checkPic.Size = new System.Drawing.Size(515, 502);
             this.checkPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.checkPic.TabIndex = 0;
             this.checkPic.TabStop = false;
+            this.checkPic.Visible = false;
             // 
             // tabPageChecking
             // 
@@ -2458,6 +2427,7 @@
             this.labelBarCodeMoneySumm.Size = new System.Drawing.Size(170, 13);
             this.labelBarCodeMoneySumm.TabIndex = 2;
             this.labelBarCodeMoneySumm.Text = "Cумма денег на штрихкод-чеках";
+            this.labelBarCodeMoneySumm.Visible = false;
             // 
             // labelAccountMoneySumm
             // 
@@ -2530,6 +2500,17 @@
             this.buttonResetTimeRefresh.UseVisualStyleBackColor = true;
             this.buttonResetTimeRefresh.Click += new System.EventHandler(this.buttonResetTimeRefresh_Click);
             // 
+            // checkOffPrinter
+            // 
+            this.checkOffPrinter.AutoSize = true;
+            this.checkOffPrinter.Location = new System.Drawing.Point(16, 133);
+            this.checkOffPrinter.Name = "checkOffPrinter";
+            this.checkOffPrinter.Size = new System.Drawing.Size(125, 17);
+            this.checkOffPrinter.TabIndex = 17;
+            this.checkOffPrinter.Text = "Отключить принтер";
+            this.checkOffPrinter.UseVisualStyleBackColor = true;
+            this.checkOffPrinter.CheckedChanged += new System.EventHandler(this.checkOffPrinter_CheckedChanged);
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2576,8 +2557,6 @@
             this.tabPage6.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.groupBoxTimeLimit.ResumeLayout(false);
             this.groupBoxTimeLimit.PerformLayout();
             this.groupBox5.ResumeLayout(false);
@@ -2805,15 +2784,13 @@
         private System.Windows.Forms.Label labelAccount;
         private System.Windows.Forms.Button button16;
         private System.Windows.Forms.Button button17;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.RadioButton Style2;
-        private System.Windows.Forms.RadioButton Style1;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.RadioButton ButVideo;
         private System.Windows.Forms.RadioButton ButPicture;
         private System.Windows.Forms.RadioButton ButGIF;
         private System.Windows.Forms.Label label35;
-        private System.Windows.Forms.Button button18;
-        private System.Windows.Forms.Button button19;
+        private System.Windows.Forms.Button pipeOff;
+        private System.Windows.Forms.Button PipeOn;
+        private System.Windows.Forms.CheckBox checkOffPrinter;
     }
 }

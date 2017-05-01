@@ -216,6 +216,65 @@ namespace AirVitamin.Drivers
             return res;
         }
 
+        /// <summary>
+        /// Пролучение статуса реле
+        /// </summary>
+        /// <returns></returns>
+        public byte[] GetStatusRelay(Log log = null)
+        {
+            if (Globals.ClientConfiguration.Settings.offControl == 1) return null;
+
+            byte[] res = new byte[4];
+            byte[] buf = new byte[2];
+            byte[] BufIn = new byte[10];
+
+            buf[0] = (byte)0x1F;
+            buf[1] = (byte)0xE0;
+
+            int Count = 0;
+
+            do
+            {
+                this.Send(buf, 2);
+
+                // нужна задержка - устройство видимо не успевает
+                Thread.Sleep(50);
+
+                if (log != null)
+                {
+                    log.Write(LogMessageType.Debug, "CONTROL: Transmit: " + buf[0].ToString("X") + " " + buf[1].ToString("X"));
+                }
+
+                int val = 0;
+                if (this.Recieve(BufIn, 5, out val) == false)
+                {
+                    return null;
+                }
+
+                if (log != null)
+                {
+                    log.Write(LogMessageType.Debug, "CONTROL: Data: " + BufIn[0].ToString("X") + " " + BufIn[1].ToString("X") + " " + BufIn[2].ToString("X") + " " + BufIn[3].ToString("X") + " " + BufIn[4].ToString("X") + " ");
+                }
+
+                Count++;
+
+                // проверим КС и количество попыток
+                if ((BufIn[4] == ((0xFF - BufIn[0] - BufIn[1] - BufIn[2] - BufIn[3]) & 0xff)) || (Count > 3)) break;
+
+                // нужна задержка - устройство видимо не успевает
+                Thread.Sleep(50);
+
+            } while (true);
+
+            // состояние 
+            res[0] = BufIn[0];
+            res[1] = BufIn[1];
+            res[2] = BufIn[2];
+            res[3] = BufIn[3];
+
+            return res;
+        }
+
         private void SerialPortPinChanged(object sender, SerialPinChangedEventArgs e)
         {
             

@@ -41,8 +41,10 @@ namespace AirVitamin.Client
 
             timer1.Enabled = true;
 
-            // включаем подсветку расходников
-            data.drivers.control.SendOpenControl((int)ControlDeviceEnum.light1);
+            // После оплаты открываем все окна (Шланг, Мундштук, Мусор)
+            data.drivers.control.SendOpenControl((int)ControlDeviceEnum.Holder);
+            data.drivers.control.SendOpenControl((int)ControlDeviceEnum.Pipe);
+            data.drivers.control.SendOpenControl((int)ControlDeviceEnum.Garbage);
 
             data.drivers.ReceivedResponse += reciveResponse;
         }
@@ -96,8 +98,9 @@ namespace AirVitamin.Client
 
         private void FormProgress1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            // Отключаем подстветку расходников
-            data.drivers.control.SendCloseControl((int)ControlDeviceEnum.light1);
+            // закрываем окно Мундштук 
+            data.drivers.control.SendCloseControl((int)ControlDeviceEnum.Pipe);
+
             timer1.Enabled = false;
 
             Params.Result = data;

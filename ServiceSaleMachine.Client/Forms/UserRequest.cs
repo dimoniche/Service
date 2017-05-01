@@ -159,7 +159,7 @@ namespace AirVitamin.Client
 
             if (e.Message.Y == 0)
             {
-                if (User.Length < 12 && tbx == textBox1
+                if (User.Length < 10 && tbx == textBox1
                  || Password.Length < 4 && tbx == tbxPassword)
                 {
                     if (tbx == textBox1)
@@ -176,7 +176,7 @@ namespace AirVitamin.Client
             }
             else if (e.Message.Y == 1)
             {
-                if (User.Length < 12 && tbx == textBox1
+                if (User.Length < 10 && tbx == textBox1
                  || Password.Length < 4 && tbx == tbxPassword)
                 {
                     if (tbx == textBox1)
@@ -193,7 +193,7 @@ namespace AirVitamin.Client
             }
             else if (e.Message.Y == 2)
             {
-                if (User.Length < 12 && tbx == textBox1
+                if (User.Length < 10 && tbx == textBox1
                  || Password.Length < 4 && tbx == tbxPassword)
                 {
                     if (tbx == textBox1)
@@ -213,29 +213,38 @@ namespace AirVitamin.Client
                 if (e.Message.X == 0)
                 {
                     // стереть символ последний
-                    if (tbx.Text.Length > 2)
+                    if (tbx == textBox1)
                     {
-                        if (tbx == textBox1)
+                        if (tbx.Text.Length > 2)
                         {
                             textBox1.Text = textBox1.Text.Remove(textBox1.Text.Length - 1);
                             User = User.Remove(User.Length - 1);
                         }
                         else
                         {
-                            tbxPassword.Text = tbxPassword.Text.Remove(tbxPassword.Text.Length - 1);
-                            Password = Password.Remove(Password.Length - 1);
+                            // выйти в главное меню
+                            data.stage = WorkerStateStage.MainScreen;
+                            Close();
                         }
                     }
                     else
                     {
-                        // выйти в главное меню
-                        data.stage = WorkerStateStage.MainScreen;
-                        Close();
+                        if (tbx.Text.Length > 0)
+                        {
+                            tbxPassword.Text = tbxPassword.Text.Remove(tbxPassword.Text.Length - 1);
+                            Password = Password.Remove(Password.Length - 1);
+                        }
+                        else
+                        {
+                            // выйти в главное меню
+                            data.stage = WorkerStateStage.MainScreen;
+                            Close();
+                        }
                     }
                 }
                 else if (e.Message.X == 1)
                 {
-                    if (User.Length < 12 && tbx == textBox1
+                    if (User.Length < 10 && tbx == textBox1
                      || Password.Length < 4 && tbx == tbxPassword)
                     {
                         if (tbx == textBox1)

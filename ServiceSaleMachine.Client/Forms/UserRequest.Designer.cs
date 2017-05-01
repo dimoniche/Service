@@ -34,6 +34,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+            this.tbxPassword = new AirVitamin.ScalableLabel();
             this.rememberBox = new System.Windows.Forms.CheckBox();
             this.chbNew = new System.Windows.Forms.CheckBox();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -48,7 +49,13 @@
             this.panel7 = new System.Windows.Forms.Panel();
             this.tableLayoutPhone = new System.Windows.Forms.TableLayoutPanel();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel18 = new System.Windows.Forms.Panel();
+            this.pictureTelephon = new System.Windows.Forms.PictureBox();
             this.panel11 = new System.Windows.Forms.Panel();
+            this.tableLayoutPhoneEdit = new System.Windows.Forms.TableLayoutPanel();
+            this.panel20 = new System.Windows.Forms.Panel();
+            this.textBox1 = new AirVitamin.ScalableLabel();
             this.panel9 = new System.Windows.Forms.Panel();
             this.panel13 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel15 = new System.Windows.Forms.TableLayoutPanel();
@@ -57,28 +64,21 @@
             this.panel24 = new System.Windows.Forms.Panel();
             this.tableLayoutPassword = new System.Windows.Forms.TableLayoutPanel();
             this.panel10 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel19 = new System.Windows.Forms.Panel();
+            this.picturePassword = new System.Windows.Forms.PictureBox();
             this.panel12 = new System.Windows.Forms.Panel();
+            this.tableLayoutPasswordEdit = new System.Windows.Forms.TableLayoutPanel();
             this.panel16 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
             this.panel33 = new System.Windows.Forms.Panel();
+            this.pBxRemember = new System.Windows.Forms.PictureBox();
             this.panel14 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
             this.panel15 = new System.Windows.Forms.Panel();
+            this.pBxRegister = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.TimeOutTimer = new System.Windows.Forms.Timer(this.components);
-            this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel18 = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel19 = new System.Windows.Forms.Panel();
-            this.tableLayoutPhoneEdit = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPasswordEdit = new System.Windows.Forms.TableLayoutPanel();
-            this.panel20 = new System.Windows.Forms.Panel();
-            this.textBox1 = new AirVitamin.ScalableLabel();
-            this.pictureTelephon = new System.Windows.Forms.PictureBox();
-            this.picturePassword = new System.Windows.Forms.PictureBox();
-            this.pBxRemember = new System.Windows.Forms.PictureBox();
-            this.pBxRegister = new System.Windows.Forms.PictureBox();
-            this.tbxPassword = new AirVitamin.ScalableLabel();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -94,29 +94,29 @@
             this.panel7.SuspendLayout();
             this.tableLayoutPhone.SuspendLayout();
             this.panel8.SuspendLayout();
+            this.tableLayoutPanel8.SuspendLayout();
+            this.panel18.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureTelephon)).BeginInit();
             this.panel11.SuspendLayout();
+            this.tableLayoutPhoneEdit.SuspendLayout();
+            this.panel20.SuspendLayout();
             this.panel13.SuspendLayout();
             this.tableLayoutPanel15.SuspendLayout();
             this.panel25.SuspendLayout();
             this.panel24.SuspendLayout();
             this.tableLayoutPassword.SuspendLayout();
             this.panel10.SuspendLayout();
+            this.tableLayoutPanel9.SuspendLayout();
+            this.panel19.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picturePassword)).BeginInit();
             this.panel12.SuspendLayout();
             this.panel16.SuspendLayout();
             this.tableLayoutPanel11.SuspendLayout();
             this.panel33.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pBxRemember)).BeginInit();
             this.panel14.SuspendLayout();
             this.tableLayoutPanel10.SuspendLayout();
             this.panel15.SuspendLayout();
-            this.tableLayoutPanel8.SuspendLayout();
-            this.panel18.SuspendLayout();
-            this.tableLayoutPanel9.SuspendLayout();
-            this.panel19.SuspendLayout();
-            this.tableLayoutPhoneEdit.SuspendLayout();
-            this.panel20.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureTelephon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picturePassword)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pBxRemember)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBxRegister)).BeginInit();
             this.SuspendLayout();
             // 
@@ -187,6 +187,16 @@
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel7.Size = new System.Drawing.Size(788, 300);
             this.tableLayoutPanel7.TabIndex = 0;
+            // 
+            // tbxPassword
+            // 
+            this.tbxPassword.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbxPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbxPassword.Location = new System.Drawing.Point(3, 273);
+            this.tbxPassword.Name = "tbxPassword";
+            this.tbxPassword.Size = new System.Drawing.Size(191, 24);
+            this.tbxPassword.TabIndex = 19;
+            this.tbxPassword.Visible = false;
             // 
             // rememberBox
             // 
@@ -357,6 +367,40 @@
             this.panel8.Size = new System.Drawing.Size(70, 25);
             this.panel8.TabIndex = 0;
             // 
+            // tableLayoutPanel8
+            // 
+            this.tableLayoutPanel8.ColumnCount = 1;
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel8.Controls.Add(this.panel18, 0, 1);
+            this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel8.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel8.Name = "tableLayoutPanel8";
+            this.tableLayoutPanel8.RowCount = 3;
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(70, 25);
+            this.tableLayoutPanel8.TabIndex = 0;
+            // 
+            // panel18
+            // 
+            this.panel18.Controls.Add(this.pictureTelephon);
+            this.panel18.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel18.Location = new System.Drawing.Point(3, 8);
+            this.panel18.Name = "panel18";
+            this.panel18.Size = new System.Drawing.Size(64, 9);
+            this.panel18.TabIndex = 0;
+            // 
+            // pictureTelephon
+            // 
+            this.pictureTelephon.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureTelephon.Location = new System.Drawing.Point(0, 0);
+            this.pictureTelephon.Name = "pictureTelephon";
+            this.pictureTelephon.Size = new System.Drawing.Size(64, 9);
+            this.pictureTelephon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureTelephon.TabIndex = 1;
+            this.pictureTelephon.TabStop = false;
+            // 
             // panel11
             // 
             this.panel11.Controls.Add(this.tableLayoutPhoneEdit);
@@ -365,6 +409,45 @@
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(384, 25);
             this.panel11.TabIndex = 1;
+            // 
+            // tableLayoutPhoneEdit
+            // 
+            this.tableLayoutPhoneEdit.BackColor = System.Drawing.Color.Transparent;
+            this.tableLayoutPhoneEdit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tableLayoutPhoneEdit.ColumnCount = 3;
+            this.tableLayoutPhoneEdit.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPhoneEdit.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPhoneEdit.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPhoneEdit.Controls.Add(this.panel20, 1, 0);
+            this.tableLayoutPhoneEdit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPhoneEdit.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPhoneEdit.Name = "tableLayoutPhoneEdit";
+            this.tableLayoutPhoneEdit.RowCount = 1;
+            this.tableLayoutPhoneEdit.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPhoneEdit.Size = new System.Drawing.Size(384, 25);
+            this.tableLayoutPhoneEdit.TabIndex = 0;
+            // 
+            // panel20
+            // 
+            this.panel20.BackColor = System.Drawing.Color.Transparent;
+            this.panel20.Controls.Add(this.textBox1);
+            this.panel20.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel20.Location = new System.Drawing.Point(99, 3);
+            this.panel20.Name = "panel20";
+            this.panel20.Size = new System.Drawing.Size(186, 19);
+            this.panel20.TabIndex = 0;
+            // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.Color.White;
+            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBox1.Location = new System.Drawing.Point(0, 0);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(186, 19);
+            this.textBox1.TabIndex = 4;
+            this.textBox1.Text = "+7";
+            this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.UserRequest_KeyDown);
             // 
             // panel9
             // 
@@ -451,6 +534,41 @@
             this.panel10.Size = new System.Drawing.Size(70, 25);
             this.panel10.TabIndex = 0;
             // 
+            // tableLayoutPanel9
+            // 
+            this.tableLayoutPanel9.ColumnCount = 1;
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel9.Controls.Add(this.panel19, 0, 1);
+            this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel9.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel9.Name = "tableLayoutPanel9";
+            this.tableLayoutPanel9.RowCount = 3;
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(70, 25);
+            this.tableLayoutPanel9.TabIndex = 0;
+            // 
+            // panel19
+            // 
+            this.panel19.Controls.Add(this.picturePassword);
+            this.panel19.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel19.Location = new System.Drawing.Point(3, 8);
+            this.panel19.Name = "panel19";
+            this.panel19.Size = new System.Drawing.Size(64, 9);
+            this.panel19.TabIndex = 0;
+            // 
+            // picturePassword
+            // 
+            this.picturePassword.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picturePassword.Location = new System.Drawing.Point(0, 0);
+            this.picturePassword.Name = "picturePassword";
+            this.picturePassword.Size = new System.Drawing.Size(64, 9);
+            this.picturePassword.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picturePassword.TabIndex = 1;
+            this.picturePassword.TabStop = false;
+            // 
             // panel12
             // 
             this.panel12.Controls.Add(this.tableLayoutPasswordEdit);
@@ -459,6 +577,23 @@
             this.panel12.Name = "panel12";
             this.panel12.Size = new System.Drawing.Size(384, 25);
             this.panel12.TabIndex = 1;
+            // 
+            // tableLayoutPasswordEdit
+            // 
+            this.tableLayoutPasswordEdit.BackColor = System.Drawing.Color.Transparent;
+            this.tableLayoutPasswordEdit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tableLayoutPasswordEdit.ColumnCount = 3;
+            this.tableLayoutPasswordEdit.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPasswordEdit.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPasswordEdit.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPasswordEdit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPasswordEdit.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPasswordEdit.Name = "tableLayoutPasswordEdit";
+            this.tableLayoutPasswordEdit.RowCount = 1;
+            this.tableLayoutPasswordEdit.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPasswordEdit.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPasswordEdit.Size = new System.Drawing.Size(384, 25);
+            this.tableLayoutPasswordEdit.TabIndex = 0;
             // 
             // panel16
             // 
@@ -492,6 +627,17 @@
             this.panel33.Name = "panel33";
             this.panel33.Size = new System.Drawing.Size(384, 41);
             this.panel33.TabIndex = 0;
+            // 
+            // pBxRemember
+            // 
+            this.pBxRemember.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pBxRemember.Location = new System.Drawing.Point(0, 0);
+            this.pBxRemember.Name = "pBxRemember";
+            this.pBxRemember.Size = new System.Drawing.Size(384, 41);
+            this.pBxRemember.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pBxRemember.TabIndex = 0;
+            this.pBxRemember.TabStop = false;
+            this.pBxRemember.Click += new System.EventHandler(this.pBxRemember_Click);
             // 
             // panel14
             // 
@@ -527,152 +673,6 @@
             this.panel15.TabIndex = 0;
             this.panel15.Click += new System.EventHandler(this.pBxRegister_Click);
             // 
-            // timer1
-            // 
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // TimeOutTimer
-            // 
-            this.TimeOutTimer.Enabled = true;
-            this.TimeOutTimer.Interval = 1000;
-            this.TimeOutTimer.Tick += new System.EventHandler(this.TimeOutTimer_Tick);
-            // 
-            // tableLayoutPanel8
-            // 
-            this.tableLayoutPanel8.ColumnCount = 1;
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel8.Controls.Add(this.panel18, 0, 1);
-            this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel8.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel8.Name = "tableLayoutPanel8";
-            this.tableLayoutPanel8.RowCount = 3;
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(70, 25);
-            this.tableLayoutPanel8.TabIndex = 0;
-            // 
-            // panel18
-            // 
-            this.panel18.Controls.Add(this.pictureTelephon);
-            this.panel18.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel18.Location = new System.Drawing.Point(3, 8);
-            this.panel18.Name = "panel18";
-            this.panel18.Size = new System.Drawing.Size(64, 9);
-            this.panel18.TabIndex = 0;
-            // 
-            // tableLayoutPanel9
-            // 
-            this.tableLayoutPanel9.ColumnCount = 1;
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel9.Controls.Add(this.panel19, 0, 1);
-            this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel9.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel9.Name = "tableLayoutPanel9";
-            this.tableLayoutPanel9.RowCount = 3;
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(70, 25);
-            this.tableLayoutPanel9.TabIndex = 0;
-            // 
-            // panel19
-            // 
-            this.panel19.Controls.Add(this.picturePassword);
-            this.panel19.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel19.Location = new System.Drawing.Point(3, 8);
-            this.panel19.Name = "panel19";
-            this.panel19.Size = new System.Drawing.Size(64, 9);
-            this.panel19.TabIndex = 0;
-            // 
-            // tableLayoutPhoneEdit
-            // 
-            this.tableLayoutPhoneEdit.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPhoneEdit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.tableLayoutPhoneEdit.ColumnCount = 3;
-            this.tableLayoutPhoneEdit.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPhoneEdit.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPhoneEdit.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPhoneEdit.Controls.Add(this.panel20, 1, 0);
-            this.tableLayoutPhoneEdit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPhoneEdit.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPhoneEdit.Name = "tableLayoutPhoneEdit";
-            this.tableLayoutPhoneEdit.RowCount = 1;
-            this.tableLayoutPhoneEdit.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPhoneEdit.Size = new System.Drawing.Size(384, 25);
-            this.tableLayoutPhoneEdit.TabIndex = 0;
-            // 
-            // tableLayoutPasswordEdit
-            // 
-            this.tableLayoutPasswordEdit.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPasswordEdit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.tableLayoutPasswordEdit.ColumnCount = 3;
-            this.tableLayoutPasswordEdit.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPasswordEdit.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPasswordEdit.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPasswordEdit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPasswordEdit.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPasswordEdit.Name = "tableLayoutPasswordEdit";
-            this.tableLayoutPasswordEdit.RowCount = 1;
-            this.tableLayoutPasswordEdit.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPasswordEdit.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tableLayoutPasswordEdit.Size = new System.Drawing.Size(384, 25);
-            this.tableLayoutPasswordEdit.TabIndex = 0;
-            // 
-            // panel20
-            // 
-            this.panel20.BackColor = System.Drawing.Color.Transparent;
-            this.panel20.Controls.Add(this.textBox1);
-            this.panel20.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel20.Location = new System.Drawing.Point(99, 3);
-            this.panel20.Name = "panel20";
-            this.panel20.Size = new System.Drawing.Size(186, 19);
-            this.panel20.TabIndex = 0;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox1.Location = new System.Drawing.Point(0, 0);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(186, 19);
-            this.textBox1.TabIndex = 4;
-            this.textBox1.Text = "+7";
-            this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.UserRequest_KeyDown);
-            // 
-            // pictureTelephon
-            // 
-            this.pictureTelephon.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureTelephon.Location = new System.Drawing.Point(0, 0);
-            this.pictureTelephon.Name = "pictureTelephon";
-            this.pictureTelephon.Size = new System.Drawing.Size(64, 9);
-            this.pictureTelephon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureTelephon.TabIndex = 1;
-            this.pictureTelephon.TabStop = false;
-            // 
-            // picturePassword
-            // 
-            this.picturePassword.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picturePassword.Location = new System.Drawing.Point(0, 0);
-            this.picturePassword.Name = "picturePassword";
-            this.picturePassword.Size = new System.Drawing.Size(64, 9);
-            this.picturePassword.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picturePassword.TabIndex = 1;
-            this.picturePassword.TabStop = false;
-            // 
-            // pBxRemember
-            // 
-            this.pBxRemember.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pBxRemember.Location = new System.Drawing.Point(0, 0);
-            this.pBxRemember.Name = "pBxRemember";
-            this.pBxRemember.Size = new System.Drawing.Size(384, 41);
-            this.pBxRemember.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pBxRemember.TabIndex = 0;
-            this.pBxRemember.TabStop = false;
-            this.pBxRemember.Click += new System.EventHandler(this.pBxRemember_Click);
-            // 
             // pBxRegister
             // 
             this.pBxRegister.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -684,15 +684,16 @@
             this.pBxRegister.TabStop = false;
             this.pBxRegister.Click += new System.EventHandler(this.pBxRegister_Click);
             // 
-            // tbxPassword
+            // timer1
             // 
-            this.tbxPassword.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbxPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbxPassword.Location = new System.Drawing.Point(3, 273);
-            this.tbxPassword.Name = "tbxPassword";
-            this.tbxPassword.Size = new System.Drawing.Size(191, 24);
-            this.tbxPassword.TabIndex = 19;
-            this.tbxPassword.Visible = false;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // TimeOutTimer
+            // 
+            this.TimeOutTimer.Enabled = true;
+            this.TimeOutTimer.Interval = 1000;
+            this.TimeOutTimer.Tick += new System.EventHandler(this.TimeOutTimer_Tick);
             // 
             // UserRequest
             // 
@@ -725,29 +726,29 @@
             this.panel7.ResumeLayout(false);
             this.tableLayoutPhone.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
+            this.tableLayoutPanel8.ResumeLayout(false);
+            this.panel18.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureTelephon)).EndInit();
             this.panel11.ResumeLayout(false);
+            this.tableLayoutPhoneEdit.ResumeLayout(false);
+            this.panel20.ResumeLayout(false);
             this.panel13.ResumeLayout(false);
             this.tableLayoutPanel15.ResumeLayout(false);
             this.panel25.ResumeLayout(false);
             this.panel24.ResumeLayout(false);
             this.tableLayoutPassword.ResumeLayout(false);
             this.panel10.ResumeLayout(false);
+            this.tableLayoutPanel9.ResumeLayout(false);
+            this.panel19.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picturePassword)).EndInit();
             this.panel12.ResumeLayout(false);
             this.panel16.ResumeLayout(false);
             this.tableLayoutPanel11.ResumeLayout(false);
             this.panel33.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pBxRemember)).EndInit();
             this.panel14.ResumeLayout(false);
             this.tableLayoutPanel10.ResumeLayout(false);
             this.panel15.ResumeLayout(false);
-            this.tableLayoutPanel8.ResumeLayout(false);
-            this.panel18.ResumeLayout(false);
-            this.tableLayoutPanel9.ResumeLayout(false);
-            this.panel19.ResumeLayout(false);
-            this.tableLayoutPhoneEdit.ResumeLayout(false);
-            this.panel20.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureTelephon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picturePassword)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pBxRemember)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBxRegister)).EndInit();
             this.ResumeLayout(false);
 

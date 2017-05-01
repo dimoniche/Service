@@ -1397,22 +1397,22 @@ namespace AirVitamin.Client
 
         private void Open1_Click(object sender, EventArgs e)
         {
-            data.drivers.control.SendOpenControl((int)ControlDeviceEnum.dev3);
+            data.drivers.control.SendOpenControl((int)ControlDeviceEnum.MixBefore);
         }
 
         private void Open2_Click(object sender, EventArgs e)
         {
-            data.drivers.control.SendOpenControl((int)ControlDeviceEnum.dev4);
+            data.drivers.control.SendOpenControl((int)ControlDeviceEnum.MixAfter);
         }
 
         private void Close1_Click(object sender, EventArgs e)
         {
-            data.drivers.control.SendCloseControl((int)ControlDeviceEnum.dev3);
+            data.drivers.control.SendCloseControl((int)ControlDeviceEnum.MixBefore);
         }
 
         private void Close2_Click(object sender, EventArgs e)
         {
-            data.drivers.control.SendCloseControl((int)ControlDeviceEnum.dev4);
+            data.drivers.control.SendCloseControl((int)ControlDeviceEnum.MixAfter);
         }
 
         bool login = false;
@@ -1746,22 +1746,22 @@ namespace AirVitamin.Client
 
         private void LightOn1_Click(object sender, EventArgs e)
         {
-            data.drivers.control.SendOpenControl((int)ControlDeviceEnum.light1);
+            data.drivers.control.SendOpenControl((int)ControlDeviceEnum.Garbage);
         }
 
         private void LightOff1_Click(object sender, EventArgs e)
         {
-            data.drivers.control.SendCloseControl((int)ControlDeviceEnum.light1);
+            data.drivers.control.SendCloseControl((int)ControlDeviceEnum.Garbage);
         }
 
         private void LightOn2_Click(object sender, EventArgs e)
         {
-            data.drivers.control.SendOpenControl((int)ControlDeviceEnum.light2);
+            data.drivers.control.SendOpenControl((int)ControlDeviceEnum.Holder);
         }
 
         private void LightOff2_Click(object sender, EventArgs e)
         {
-            data.drivers.control.SendCloseControl((int)ControlDeviceEnum.light2);
+            data.drivers.control.SendCloseControl((int)ControlDeviceEnum.Holder);
         }
 
         private void textBoxMaxTimeService_Leave(object sender, EventArgs e)
@@ -2085,6 +2085,16 @@ namespace AirVitamin.Client
             }
 
             Globals.CheckConfiguration.Save();
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            data.drivers.control.SendOpenControl((int)ControlDeviceEnum.Pipe);
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            data.drivers.control.SendCloseControl((int)ControlDeviceEnum.Pipe);
         }
     }
 }

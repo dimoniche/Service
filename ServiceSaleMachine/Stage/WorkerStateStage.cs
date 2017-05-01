@@ -205,5 +205,25 @@ namespace AirVitamin
         /// Ошибка приемника снялась
         /// </summary>
         BillErrorEnd,
+
+        /// <summary>
+        /// Упало давление газа1
+        /// </summary>
+        Gas1_low,
+
+        /// <summary>
+        /// Упало давление газа2
+        /// </summary>
+        Gas2_low,
+
+        /// <summary>
+        /// Упало давление газа3
+        /// </summary>
+        Gas3_low,
+
+        /// <summary>
+        /// Упало давление газа4
+        /// </summary>
+        Gas4_low,
     }
 }

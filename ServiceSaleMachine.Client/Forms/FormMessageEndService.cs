@@ -37,9 +37,6 @@ namespace AirVitamin.Client
 
             timer1.Enabled = true;
 
-            // включаем подсветку урны
-            data.drivers.control.SendOpenControl((int)ControlDeviceEnum.light2);
-
             data.drivers.ReceivedResponse += reciveResponse;
         }
 
@@ -70,8 +67,9 @@ namespace AirVitamin.Client
 
         private void FormMessageEndService1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            // отключаем подсветку урны
-            data.drivers.control.SendCloseControl((int)ControlDeviceEnum.light2);
+            // закрываем окна Шланг и Мусор
+            data.drivers.control.SendOpenControl((int)ControlDeviceEnum.Holder);
+            data.drivers.control.SendOpenControl((int)ControlDeviceEnum.Garbage);
 
             Params.Result = data;
 

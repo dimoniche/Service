@@ -200,7 +200,9 @@ NoCheckStatistic:
                     }
 
                     WaitClient:
+                    // -----------------------------------------------------
                     // ожидание клиента
+                    // -----------------------------------------------------
                     result = (FormResultData)FormManager.OpenForm<FormMainMenu>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
                     if (result.stage == WorkerStateStage.ExitProgram)
@@ -219,6 +221,11 @@ NoCheckStatistic:
                         // ошибки принтера есть
                         continue;
                     }
+                    //else if (result.stage == WorkerStateStage.Gas1_low || result.stage == WorkerStateStage.Gas2_low || result.stage == WorkerStateStage.Gas3_low || result.stage == WorkerStateStage.Gas4_low)
+                    //{
+                    //    // Давление газа упало - пойдем в анализ состояния - пошлем смс
+                    //    continue;
+                    //}
                     else if (result.stage == WorkerStateStage.ErrorBill)
                     {
                         // ошибки купюроприемника
@@ -494,7 +501,9 @@ NoCheckStatistic:
 
                     ChooseService:
 
+                    // -----------------------------------------------------
                     // выбор услуг
+                    // -----------------------------------------------------
                     result = (FormResultData)FormManager.OpenForm<FormChooseService>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
                     if (result.stage == WorkerStateStage.ExitProgram)
@@ -551,55 +560,37 @@ NoCheckStatistic:
                         continue;
                     }
 
-                    //if (Globals.ClientConfiguration.Settings.offCheck != 1)
-                    //{
-                    //    // выбор формы оплаты - если есть оплата чеком
-                    //    result = (FormResultData)FormManager.OpenForm<FormChoosePay>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-                    //}
-                    //else
-                    {
-                        // платим только деньгами и чеками
-                        result.stage = WorkerStateStage.PayBillService;
-                    }
-
                     // загрузим выбранную услугу
                     Service serv = Globals.ClientConfiguration.ServiceByIndex(result.numberService);
                     result.serv = serv;
 
                     Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выбрали услугу: " + serv.caption);
 
-                    if (result.stage == WorkerStateStage.PayBillService)
+                    // -----------------------------------------------------
+                    // ожидание внесение денег
+                    // -----------------------------------------------------
+                    result = (FormResultData)FormManager.OpenForm<FormWaitPayBill>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                    if (result.stage == WorkerStateStage.Fail || result.stage == WorkerStateStage.EndDropCassette)
                     {
-                        // ожидание внесение денег
-                        result = (FormResultData)FormManager.OpenForm<FormWaitPayBill>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+                        // отказ - выход в выбор услуг
+                        goto ChooseService;
+                    }
+                    else if (result.stage == WorkerStateStage.ErrorBill)
+                    {
+                        // ошибки купюроприемника
+                        goto NoCheckStatistic;
+                    }
+                    else if (result.stage == WorkerStateStage.DropCassettteBill)
+                    {
+                        Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выемка денег.");
 
-                        if (result.stage == WorkerStateStage.Fail || result.stage == WorkerStateStage.EndDropCassette)
-                        {
-                            // отказ - выход в выбор услуг
-                            goto ChooseService;
-                        }
-                        else if (result.stage == WorkerStateStage.ErrorBill)
-                        {
-                            // ошибки купюроприемника
-                            goto NoCheckStatistic;
-                        }
-                        else if (result.stage == WorkerStateStage.DropCassettteBill)
-                        {
-                            Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выемка денег.");
+                        // выемка денег
+                        result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
-                            // выемка денег
-                            result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-
-                            if (result.stage == WorkerStateStage.EndDropCassette)
-                            {
-                                continue;
-                            }
-                            else if (result.stage == WorkerStateStage.ExitProgram)
-                            {
-                                // выход
-                                Close();
-                                return;
-                            }
+                        if (result.stage == WorkerStateStage.EndDropCassette)
+                        {
+                            continue;
                         }
                         else if (result.stage == WorkerStateStage.ExitProgram)
                         {
@@ -607,16 +598,6 @@ NoCheckStatistic:
                             Close();
                             return;
                         }
-                        else if (result.stage == WorkerStateStage.TimeOut)
-                        {
-                            check = false;
-                            continue;
-                        }
-                    }
-                    else if (result.stage == WorkerStateStage.Fail)
-                    {
-                        // в начало
-                        continue;
                     }
                     else if (result.stage == WorkerStateStage.ExitProgram)
                     {
@@ -630,101 +611,96 @@ NoCheckStatistic:
                         continue;
                     }
 
+                    // -----------------------------------------------------
                     // оказание услуги
-                    //Device dev = serv.GetActualDevice();  // устройств пока всего 2 - поэтому решаем в лоб
+                    // -----------------------------------------------------
+                    result.timework = serv.timework;
 
-                    //if (dev != null)
+                    // пока так
+                    if(result.numberService == 0)
                     {
-                        result.timework = serv.timework;
+                        // первая услуга - До
+                        result.numberCurrentDevice = (int)ControlDeviceEnum.MixBefore;
+                    }
+                    else
+                    {
+                        // вторая услуга - После
+                        result.numberCurrentDevice = (int)ControlDeviceEnum.MixAfter;
+                    }
 
-                        // пока так
-                        if(result.numberService == 0)
+                    result.timeRecognize = serv.timeRecognize;
+                    result.ServName = serv.caption;
+
+                    Program.Log.Write(LogMessageType.Information, "MAIN WORK: Начали оказывать услугу: " + serv.caption + " Забор аксессуаров.");
+
+                    // сначала включим подсветку и разрешим забрать аксессуары
+                    result = (FormResultData)FormManager.OpenForm<FormProgress>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                    if (result.stage == WorkerStateStage.ExitProgram)
+                    {
+                        // выход
+                        Close();
+                        return;
+                    }
+                    else if (result.stage == WorkerStateStage.DropCassettteBill)
+                    {
+                        Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выемка денег.");
+
+                        // выемка денег
+                        result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                        if (result.stage == WorkerStateStage.EndDropCassette)
                         {
-                            // первая услуга - устройство 3
-                            result.numberCurrentDevice = (int)ControlDeviceEnum.dev3;
+                            continue;
                         }
-                        else
-                        {
-                            // вторая услуга - устройство 4
-                            result.numberCurrentDevice = (int)ControlDeviceEnum.dev4;
-                        }
-
-                        result.timeRecognize = serv.timeRecognize;
-                        result.ServName = serv.caption;
-
-                        Program.Log.Write(LogMessageType.Information, "MAIN WORK: Начали оказывать услугу: " + serv.caption + " Забор аксессуаров.");
-
-                        // сначала включим подсветку и разрешим забрать аксессуары
-                        result = (FormResultData)FormManager.OpenForm<FormProgress>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-
-                        if (result.stage == WorkerStateStage.ExitProgram)
+                        else if(result.stage == WorkerStateStage.ExitProgram)
                         {
                             // выход
                             Close();
                             return;
                         }
-                        else if (result.stage == WorkerStateStage.DropCassettteBill)
-                        {
-                            Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выемка денег.");
-
-                            // выемка денег
-                            result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-
-                            if (result.stage == WorkerStateStage.EndDropCassette)
-                            {
-                                continue;
-                            }
-                            else if(result.stage == WorkerStateStage.ExitProgram)
-                            {
-                                // выход
-                                Close();
-                                return;
-                            }
-                        }
-
-                        Program.Log.Write(LogMessageType.Information, "MAIN WORK: Начали оказывать услугу: " + serv.caption);
-
-                        // Будем оказывать услугу
-                        result = (FormResultData)FormManager.OpenForm<FormProvideService>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-
-                        if (result.stage == WorkerStateStage.Fail)
-                        {
-                            // отказались от услуги
-                        }
-
-                        // Услугу оказали - выбросим расходники
-                        result = (FormResultData)FormManager.OpenForm<FormMessageEndService>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-
-                        if (result.stage == WorkerStateStage.DropCassettteBill)
-                        {
-                            Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выемка денег.");
-
-                            // выемка денег
-                            result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-
-                            if (result.stage == WorkerStateStage.EndDropCassette)
-                            {
-                                continue;
-                            }
-                            else if (result.stage == WorkerStateStage.ExitProgram)
-                            {
-                                // выход
-                                Close();
-                                return;
-                            }
-                        }
-
-                        Program.Log.Write(LogMessageType.Information, "MAIN WORK: Закончили оказывать услугу: " + serv.caption);
-                        Program.Log.Write(LogMessageType.Information, "MAIN WORK: Проработали: " + result.timework);
-                        Program.Log.Write(LogMessageType.Information, "========================КОНЕЦ ОБСЛУЖИВАНИЯ===========================");
-
-                        // пишем в базу строку с временем работы
-                        GlobalDb.GlobalBase.WriteWorkTime(serv.id, result.numberCurrentDevice, result.timework);
                     }
-                    //else
-                    //{
-                    //    MessageBox.Show("Услуга " + serv.caption + " не может быть предоставлена");
-                    //}
+
+                    Program.Log.Write(LogMessageType.Information, "MAIN WORK: Начали оказывать услугу: " + serv.caption);
+
+                    // Будем оказывать услугу
+                    result = (FormResultData)FormManager.OpenForm<FormProvideService>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                    if (result.stage == WorkerStateStage.Fail)
+                    {
+                        // отказались от услуги
+                    }
+
+                    // -----------------------------------------------------
+                    // Услугу оказали - выбросим расходники
+                    // -----------------------------------------------------
+                    result = (FormResultData)FormManager.OpenForm<FormMessageEndService>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                    if (result.stage == WorkerStateStage.DropCassettteBill)
+                    {
+                        Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выемка денег.");
+
+                        // выемка денег
+                        result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                        if (result.stage == WorkerStateStage.EndDropCassette)
+                        {
+                            continue;
+                        }
+                        else if (result.stage == WorkerStateStage.ExitProgram)
+                        {
+                            // выход
+                            Close();
+                            return;
+                        }
+                    }
+
+                    Program.Log.Write(LogMessageType.Information, "MAIN WORK: Закончили оказывать услугу: " + serv.caption);
+                    Program.Log.Write(LogMessageType.Information, "MAIN WORK: Проработали: " + result.timework);
+                    Program.Log.Write(LogMessageType.Information, "========================КОНЕЦ ОБСЛУЖИВАНИЯ===========================");
+
+                    // пишем в базу строку с временем работы
+                    GlobalDb.GlobalBase.WriteWorkTime(serv.id, result.numberCurrentDevice, result.timework);
                 }
                 catch (Exception exp)
                 {
@@ -807,6 +783,44 @@ NoCheckStatistic:
                     result.stage = WorkerStateStage.ErrorControl;
 
                     Program.Log.Write(LogMessageType.Error, "CHECK_STAT: ошибка управляющего устройства.");
+                }
+            }
+
+            res = result.drivers.control.GetStatusRelay(Program.Log);
+
+            if (res != null)
+            {
+                if (res[0] == 1)
+                {
+                    result.drivers.modem.SendSMS("Низкое давление Газа 1.1", result.log);
+
+                    result.stage = WorkerStateStage.Gas1_low;
+
+                    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД1 - HIGH.");
+                }
+                if (res[1] == 1)
+                {
+                    result.drivers.modem.SendSMS("Низкое давление Газа 2", result.log);
+
+                    result.stage = WorkerStateStage.Gas2_low;
+
+                    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД2 - HIGH.");
+                }
+                if (res[2] == 1)
+                {
+                    result.drivers.modem.SendSMS("Низкое давление Газа 3", result.log);
+
+                    result.stage = WorkerStateStage.Gas3_low;
+
+                    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД3 - HIGH.");
+                }
+                if (res[3] == 1)
+                {
+                    result.drivers.modem.SendSMS("Низкое давление Газа 4", result.log);
+
+                    result.stage = WorkerStateStage.Gas4_low;
+
+                    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД4 - HIGH.");
                 }
             }
 

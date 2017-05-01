@@ -37,17 +37,7 @@ namespace AirVitamin.Client
 
             timerService.Enabled = true;
 
-            // оказываем услугу пока так (перепутали устройства - поменял местами)
-            if(data.numberCurrentDevice == (int)ControlDeviceEnum.dev3)
-            {
-                data.drivers.control.SendOpenControl((int)ControlDeviceEnum.dev3);
-                data.drivers.control.SendOpenControl((int)ControlDeviceEnum.dev4);
-            }
-            else
-            {
-                data.drivers.control.SendOpenControl((int)ControlDeviceEnum.dev3);
-            }
-
+            data.drivers.control.SendOpenControl(data.numberCurrentDevice);
             data.drivers.ReceivedResponse += reciveResponse;
         }
 
@@ -78,16 +68,8 @@ namespace AirVitamin.Client
 
         private void FormProvideService1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            // заканчиваем оказывать услугу (перепутали устройства - поменял местами)
-            if (data.numberCurrentDevice == (int)ControlDeviceEnum.dev3)
-            {
-                data.drivers.control.SendCloseControl((int)ControlDeviceEnum.dev3);
-                data.drivers.control.SendCloseControl((int)ControlDeviceEnum.dev4);
-            }
-            else
-            {
-                data.drivers.control.SendCloseControl((int)ControlDeviceEnum.dev3);
-            }
+            // заканчиваем оказывать услугу
+            data.drivers.control.SendCloseControl(data.numberCurrentDevice);
 
             Params.Result = data;
             timerService.Enabled = false;

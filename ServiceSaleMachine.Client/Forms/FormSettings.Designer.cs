@@ -234,6 +234,9 @@
             this.labelTimeLastRefresh = new System.Windows.Forms.Label();
             this.labelWorkFromLastRefresh = new System.Windows.Forms.Label();
             this.buttonResetTimeRefresh = new System.Windows.Forms.Button();
+            this.label35 = new System.Windows.Forms.Label();
+            this.button18 = new System.Windows.Forms.Button();
+            this.button19 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -904,6 +907,9 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.label35);
+            this.tabPage5.Controls.Add(this.button18);
+            this.tabPage5.Controls.Add(this.button19);
             this.tabPage5.Controls.Add(this.label27);
             this.tabPage5.Controls.Add(this.LightOff2);
             this.tabPage5.Controls.Add(this.LightOn2);
@@ -936,9 +942,9 @@
             this.label27.AutoSize = true;
             this.label27.Location = new System.Drawing.Point(298, 169);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(90, 13);
+            this.label27.Size = new System.Drawing.Size(103, 13);
             this.label27.TabIndex = 23;
-            this.label27.Text = "Подсветка урны";
+            this.label27.Text = "Открыть мундштук";
             // 
             // LightOff2
             // 
@@ -946,7 +952,7 @@
             this.LightOff2.Name = "LightOff2";
             this.LightOff2.Size = new System.Drawing.Size(105, 23);
             this.LightOff2.TabIndex = 21;
-            this.LightOff2.Text = "Выкл.подсветку";
+            this.LightOff2.Text = "Выкл.мундштук";
             this.LightOff2.UseVisualStyleBackColor = true;
             this.LightOff2.Click += new System.EventHandler(this.LightOff2_Click);
             // 
@@ -956,7 +962,7 @@
             this.LightOn2.Name = "LightOn2";
             this.LightOn2.Size = new System.Drawing.Size(105, 23);
             this.LightOn2.TabIndex = 22;
-            this.LightOn2.Text = "Вкл.подсветку";
+            this.LightOn2.Text = "Вкл.мундштук";
             this.LightOn2.UseVisualStyleBackColor = true;
             this.LightOn2.Click += new System.EventHandler(this.LightOn2_Click);
             // 
@@ -965,9 +971,9 @@
             this.label26.AutoSize = true;
             this.label26.Location = new System.Drawing.Point(298, 140);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(130, 13);
+            this.label26.Size = new System.Drawing.Size(85, 13);
             this.label26.TabIndex = 20;
-            this.label26.Text = "Подсветка аксессуаров";
+            this.label26.Text = "Открыть мусор";
             // 
             // LightOff1
             // 
@@ -975,7 +981,7 @@
             this.LightOff1.Name = "LightOff1";
             this.LightOff1.Size = new System.Drawing.Size(105, 23);
             this.LightOff1.TabIndex = 18;
-            this.LightOff1.Text = "Выкл.подсветку";
+            this.LightOff1.Text = "Выкл.мусор";
             this.LightOff1.UseVisualStyleBackColor = true;
             this.LightOff1.Click += new System.EventHandler(this.LightOff1_Click);
             // 
@@ -985,7 +991,7 @@
             this.LightOn1.Name = "LightOn1";
             this.LightOn1.Size = new System.Drawing.Size(105, 23);
             this.LightOn1.TabIndex = 19;
-            this.LightOn1.Text = "Вкл.подсветку";
+            this.LightOn1.Text = "Вкл.мусор";
             this.LightOn1.UseVisualStyleBackColor = true;
             this.LightOn1.Click += new System.EventHandler(this.LightOn1_Click);
             // 
@@ -1001,7 +1007,7 @@
             // StatusControl
             // 
             this.StatusControl.AutoSize = true;
-            this.StatusControl.Location = new System.Drawing.Point(156, 231);
+            this.StatusControl.Location = new System.Drawing.Point(156, 260);
             this.StatusControl.Name = "StatusControl";
             this.StatusControl.Size = new System.Drawing.Size(37, 13);
             this.StatusControl.TabIndex = 14;
@@ -1047,7 +1053,7 @@
             // 
             // butReadStatus
             // 
-            this.butReadStatus.Location = new System.Drawing.Point(25, 226);
+            this.butReadStatus.Location = new System.Drawing.Point(25, 255);
             this.butReadStatus.Name = "butReadStatus";
             this.butReadStatus.Size = new System.Drawing.Size(105, 23);
             this.butReadStatus.TabIndex = 10;
@@ -2493,6 +2499,35 @@
             this.buttonResetTimeRefresh.UseVisualStyleBackColor = true;
             this.buttonResetTimeRefresh.Click += new System.EventHandler(this.buttonResetTimeRefresh_Click);
             // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(298, 198);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(85, 13);
+            this.label35.TabIndex = 26;
+            this.label35.Text = "Открыть шланг";
+            // 
+            // button18
+            // 
+            this.button18.Location = new System.Drawing.Point(159, 193);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(105, 23);
+            this.button18.TabIndex = 24;
+            this.button18.Text = "Выкл.шланг";
+            this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.button18_Click);
+            // 
+            // button19
+            // 
+            this.button19.Location = new System.Drawing.Point(25, 193);
+            this.button19.Name = "button19";
+            this.button19.Size = new System.Drawing.Size(105, 23);
+            this.button19.TabIndex = 25;
+            this.button19.Text = "Вкл.шланг";
+            this.button19.UseVisualStyleBackColor = true;
+            this.button19.Click += new System.EventHandler(this.button19_Click);
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2775,5 +2810,8 @@
         private System.Windows.Forms.RadioButton ButVideo;
         private System.Windows.Forms.RadioButton ButPicture;
         private System.Windows.Forms.RadioButton ButGIF;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.Button button18;
+        private System.Windows.Forms.Button button19;
     }
 }

@@ -82,6 +82,38 @@ namespace AirVitamin.Client
                 }
             }
 
+            res = data.drivers.control.GetStatusRelay(data.log);
+
+            if (res != null)
+            {
+                if (res[0] == 1)
+                {
+                    data.stage = WorkerStateStage.Gas1_low;
+
+                    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД1 - HIGH.");
+                }
+                if (res[1] == 1)
+                {
+                    data.stage = WorkerStateStage.Gas2_low;
+
+                    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД2 - HIGH.");
+                }
+                if (res[2] == 1)
+                {
+                    data.drivers.modem.SendSMS("Низкое давление Газа 3", data.log);
+
+                    data.stage = WorkerStateStage.Gas3_low;
+
+                    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД3 - HIGH.");
+                }
+                if (res[3] == 1)
+                {
+                    data.stage = WorkerStateStage.Gas4_low;
+
+                    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД4 - HIGH.");
+                }
+            }
+
             {
                 PrinterStatus status = data.drivers.printer.GetStatus();
 

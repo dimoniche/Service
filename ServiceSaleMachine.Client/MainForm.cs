@@ -58,7 +58,7 @@ namespace AirVitamin.Client
         /// </summary>
         private void MainWorker()
         {
-            //if (Globals.admin)
+            if (Globals.admin)
             {
                 Program.Log.Write(LogMessageType.Information, "MAIN WORK: Входим в режим настройки приложения.");
 
@@ -841,52 +841,59 @@ NoCheckStatistic:
             //    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: кончилась бумага.");
             //}
 
-            PrinterStatus status = result.drivers.printer.GetStatus();
-
-            if ((status & (PrinterStatus.PRINTER_STATUS_PAPER_OUT 
-                         | PrinterStatus.PRINTER_STATUS_PAPER_JAM 
-                         | PrinterStatus.PRINTER_STATUS_PAPER_PROBLEM
-                         | PrinterStatus.PRINTER_STATUS_DOOR_OPEN
-                         | PrinterStatus.PRINTER_STATUS_ERROR)) > 0)
+            if (Globals.ClientConfiguration.Settings.offPrinter == 0)
             {
-                // что то с бумагой
-                if (Globals.ClientConfiguration.Settings.NoPaperWork == 0)
-                {
-                    // с такой ошибкой не работаем
-                    result.stage = WorkerStateStage.PaperEnd;
-                }
+                PrinterStatus status = result.drivers.printer.GetStatus();
 
-                if (result.PrinterError == false)
+                if ((status & (PrinterStatus.PRINTER_STATUS_PAPER_OUT
+                             | PrinterStatus.PRINTER_STATUS_PAPER_JAM
+                             | PrinterStatus.PRINTER_STATUS_PAPER_PROBLEM
+                             | PrinterStatus.PRINTER_STATUS_DOOR_OPEN
+                             | PrinterStatus.PRINTER_STATUS_ERROR)) > 0)
                 {
-                    result.drivers.modem.SendSMS("Кончилась бумага", result.log);
-                    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: кончилась бумага.");
-                }
+                    // что то с бумагой
+                    if (Globals.ClientConfiguration.Settings.NoPaperWork == 0)
+                    {
+                        // с такой ошибкой не работаем
+                        result.stage = WorkerStateStage.PaperEnd;
+                    }
 
-                result.PrinterError = true;
-            }
-            else if ((status & PrinterStatus.PRINTER_STATUS_OFFLINE) > 0)
-            {
-                if (Globals.ClientConfiguration.Settings.NoPaperWork == 0)
+                    if (result.PrinterError == false)
+                    {
+                        result.drivers.modem.SendSMS("Кончилась бумага", result.log);
+                        Program.Log.Write(LogMessageType.Error, "CHECK_STAT: кончилась бумага.");
+                    }
+
+                    result.PrinterError = true;
+                }
+                else if ((status & PrinterStatus.PRINTER_STATUS_OFFLINE) > 0)
                 {
-                    // нет связи с принтером
-                    result.stage = WorkerStateStage.ErrorPrinter;
-                }
+                    if (Globals.ClientConfiguration.Settings.NoPaperWork == 0)
+                    {
+                        // нет связи с принтером
+                        result.stage = WorkerStateStage.ErrorPrinter;
+                    }
 
-                if (result.PrinterError == false)
+                    if (result.PrinterError == false)
+                    {
+                        result.drivers.modem.SendSMS("Нет связи с принтером.", result.log);
+                        Program.Log.Write(LogMessageType.Error, "CHECK_STAT: нет связи с принтером.");
+                    }
+
+                    result.PrinterError = true;
+                }
+                else
                 {
-                    result.drivers.modem.SendSMS("Нет связи с принтером.", result.log);
-                    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: нет связи с принтером.");
-                }
+                    if (result.PrinterError == true)
+                    {
+                        Program.Log.Write(LogMessageType.Error, "CHECK_STAT: ошибка принтера снялась.");
+                    }
 
-                result.PrinterError = true;
+                    result.PrinterError = false;
+                }
             }
             else
             {
-                if (result.PrinterError == true)
-                {
-                    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: ошибка принтера снялась.");
-                }
-
                 result.PrinterError = false;
             }
 

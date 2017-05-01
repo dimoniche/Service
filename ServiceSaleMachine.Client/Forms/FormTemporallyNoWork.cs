@@ -141,31 +141,34 @@ namespace AirVitamin.Client
                 }
             }
 
-            if (data.stage == WorkerStateStage.PaperEnd || data.stage == WorkerStateStage.ErrorPrinter)
+            if (Globals.ClientConfiguration.Settings.offPrinter == 0)
             {
-                PrinterStatus status = data.drivers.printer.GetStatus();
-
-                if ((status & (PrinterStatus.PRINTER_STATUS_PAPER_OUT
-                             | PrinterStatus.PRINTER_STATUS_PAPER_JAM
-                             | PrinterStatus.PRINTER_STATUS_PAPER_PROBLEM
-                             | PrinterStatus.PRINTER_STATUS_DOOR_OPEN
-                             | PrinterStatus.PRINTER_STATUS_OFFLINE
-                             | PrinterStatus.PRINTER_STATUS_ERROR)) == 0)
+                if (data.stage == WorkerStateStage.PaperEnd || data.stage == WorkerStateStage.ErrorPrinter)
                 {
-                    if (data.stage == WorkerStateStage.PaperEnd)
-                    {
-                        // с бумагой стало OK
-                        data.stage = WorkerStateStage.ErrorEndControl;
-                        this.Close();
+                    PrinterStatus status = data.drivers.printer.GetStatus();
 
-                        Program.Log.Write(LogMessageType.Error, "NO_WORK_MENU: бумага появилась.");
-                    }
-                    else if (data.stage == WorkerStateStage.ErrorPrinter)
+                    if ((status & (PrinterStatus.PRINTER_STATUS_PAPER_OUT
+                                 | PrinterStatus.PRINTER_STATUS_PAPER_JAM
+                                 | PrinterStatus.PRINTER_STATUS_PAPER_PROBLEM
+                                 | PrinterStatus.PRINTER_STATUS_DOOR_OPEN
+                                 | PrinterStatus.PRINTER_STATUS_OFFLINE
+                                 | PrinterStatus.PRINTER_STATUS_ERROR)) == 0)
                     {
-                        data.stage = WorkerStateStage.ErrorEndControl;
-                        this.Close();
+                        if (data.stage == WorkerStateStage.PaperEnd)
+                        {
+                            // с бумагой стало OK
+                            data.stage = WorkerStateStage.ErrorEndControl;
+                            this.Close();
 
-                        Program.Log.Write(LogMessageType.Error, "NO_WORK_MENU: ошибка принтера снялась.");
+                            Program.Log.Write(LogMessageType.Error, "NO_WORK_MENU: бумага появилась.");
+                        }
+                        else if (data.stage == WorkerStateStage.ErrorPrinter)
+                        {
+                            data.stage = WorkerStateStage.ErrorEndControl;
+                            this.Close();
+
+                            Program.Log.Write(LogMessageType.Error, "NO_WORK_MENU: ошибка принтера снялась.");
+                        }
                     }
                 }
             }

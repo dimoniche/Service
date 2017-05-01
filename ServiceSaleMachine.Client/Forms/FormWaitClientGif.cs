@@ -114,6 +114,7 @@ namespace AirVitamin.Client
                 }
             }
 
+            if (Globals.ClientConfiguration.Settings.offPrinter == 0)
             {
                 PrinterStatus status = data.drivers.printer.GetStatus();
 
@@ -164,6 +165,10 @@ namespace AirVitamin.Client
 
                     data.PrinterError = false;
                 }
+            }
+            else
+            {
+                data.PrinterError = false;
             }
         }
 

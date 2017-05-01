@@ -28,18 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormWaitClientVideo));
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.VideoPlayer = new AxWMPLib.AxWindowsMediaPlayer();
             ((System.ComponentModel.ISupportInitialize)(this.VideoPlayer)).BeginInit();
             this.SuspendLayout();
-            // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 500;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // VideoPlayer
             // 
@@ -72,8 +64,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Timer timer1;
         private AxWMPLib.AxWindowsMediaPlayer VideoPlayer;
     }
 }

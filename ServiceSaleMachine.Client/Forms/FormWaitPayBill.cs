@@ -76,17 +76,17 @@ namespace AirVitamin.Client
                 Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTitle, "");
             }
 
-            AmountServiceText.Font = new Font(CustomFont.GetCustomFont(Properties.Resources.CeraRoundPro_Bold).Families[0], 72);
+            AmountServiceText.Font = new Font(data.FontCollection.Families[CustomFont.CeraRoundPro_Bold], 72);
             AmountServiceText.Text = "Внесено: 0 руб.";
             AmountServiceText.ForeColor = Color.FromArgb(0,158,227);
 
-            SecondMessageText.Font = new Font(CustomFont.GetCustomFont(Properties.Resources.CeraRoundPro_Medium).Families[0], 72);
+            SecondMessageText.Font = new Font(data.FontCollection.Families[CustomFont.CeraRoundPro_Medium], 72);
             SecondMessageText.ForeColor = Color.Gray;
             SecondMessageText.Text = "";
 
-            TextPayBill.ForeColor = Color.Gray;
-            TextPayBill.Font = new Font(CustomFont.GetCustomFont(Properties.Resources.CeraRoundPro_Thin).Families[0],14);
             TextPayBill.LoadFile(Globals.GetPath(PathEnum.Text) + "\\WaitPayBill.rtf");
+            TextPayBill.ForeColor = Color.Gray;
+            //TextPayBill.Font = new Font(data.FontCollection.Families[1],14);
 
             // сразу проверим - если авторизовались и достаточно денег на счете - сразу списываем деньги со счета
             if (data.retLogin != "")
@@ -104,7 +104,7 @@ namespace AirVitamin.Client
 
                     AmountServiceText.Text = "Внесено: " + data.serv.price + " руб.";
                     AmountServiceText.ForeColor = Color.Green;
-                    SecondMessageText.Text = "                Остаток на счете: " + (sum - data.serv.price) + " руб.";
+                    SecondMessageText.Text = "                          Остаток на счете: " + (sum - data.serv.price) + " руб.";
 
                     data.log.Write(LogMessageType.Information, "ACCOUNT: Внесли достаточную для оказания услуги сумму со счета.");
 
@@ -274,7 +274,7 @@ namespace AirVitamin.Client
                     int diff = 0;
                     bool res = true;    // купюру забираем всегда - предлагаем вернуть - только если перебор
 
-                    if (Globals.ClientConfiguration.Settings.changeOn == 0)
+                    if (Globals.ClientConfiguration.Settings.changeOn == 0 || data.retLogin == "")
                     {
                         // без сдачи
                         if (amount > data.serv.price)

@@ -49,6 +49,12 @@ namespace AirVitamin.Client
             ClearFilesTask = new ClearFilesControlServiceTask(Program.Log);
 
             result = new FormResultData(Program.Log);
+
+            result.FontCollection = new System.Drawing.Text.PrivateFontCollection();
+
+            CustomFont.AddFont(result.FontCollection, Properties.Resources.CeraRoundPro_Bold);
+            CustomFont.AddFont(result.FontCollection, Properties.Resources.CeraRoundPro_Medium);
+
             // инициализируем задачи
             result.drivers.InitAllTask();
         }

@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -42,8 +43,13 @@ namespace AirVitamin.Client
                 }
             }
 
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pictureLogo, "Logo_O2.png");
+
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTakeAwayMoney, Globals.DesignConfiguration.Settings.ButtonTakeAwayMoney);
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxreturnMoney, Globals.DesignConfiguration.Settings.ButtonreturnMoney);
+
+            label1.Font = new Font(data.FontCollection.Families[CustomFont.CeraRoundPro_Bold], 72);
+            label1.ForeColor = Color.FromArgb(0, 158, 227);
 
             if (check)
             {
@@ -51,10 +57,13 @@ namespace AirVitamin.Client
             }
             else
             {
-                label1.Text = "Вы внесли купюру " + Nominal + " руб.";
+                label1.Text = "Внесено: " + Nominal + " руб.";
             }
 
-            if(data.retLogin != "" && Globals.ClientConfiguration.Settings.changeToAccount == 1)
+            scalableLabel1.Font = new Font(data.FontCollection.Families[CustomFont.CeraRoundPro_Medium], 72);
+            scalableLabel1.ForeColor = Color.Gray;
+
+            if (data.retLogin != "" && Globals.ClientConfiguration.Settings.changeToAccount == 1)
             {
                 scalableLabel1.Text = "Сдача будет зачислена на Ваш аккаунт";
             }

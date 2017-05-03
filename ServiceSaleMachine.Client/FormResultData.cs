@@ -1,4 +1,5 @@
 ﻿using AirVitamin.Drivers;
+using System.Drawing.Text;
 
 namespace AirVitamin.Client
 {
@@ -73,6 +74,11 @@ namespace AirVitamin.Client
         /// Ошибка приемника
         /// </summary>
         public bool BillError = false;
+
+        /// <summary>
+        /// Загруженные шрифты
+        /// </summary>
+        public PrivateFontCollection FontCollection;
 
         public FormResultData(Log log)
         {

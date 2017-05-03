@@ -177,6 +177,7 @@
             this.tabSettingService = new System.Windows.Forms.TabControl();
             this.tabDev1 = new System.Windows.Forms.TabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.checkOffPrinter = new System.Windows.Forms.CheckBox();
             this.offControl = new System.Windows.Forms.CheckBox();
             this.cBxBillOff = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -234,7 +235,6 @@
             this.labelTimeLastRefresh = new System.Windows.Forms.Label();
             this.labelWorkFromLastRefresh = new System.Windows.Forms.Label();
             this.buttonResetTimeRefresh = new System.Windows.Forms.Button();
-            this.checkOffPrinter = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -1873,6 +1873,17 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Отключение оборудования";
             // 
+            // checkOffPrinter
+            // 
+            this.checkOffPrinter.AutoSize = true;
+            this.checkOffPrinter.Location = new System.Drawing.Point(16, 133);
+            this.checkOffPrinter.Name = "checkOffPrinter";
+            this.checkOffPrinter.Size = new System.Drawing.Size(125, 17);
+            this.checkOffPrinter.TabIndex = 17;
+            this.checkOffPrinter.Text = "Отключить принтер";
+            this.checkOffPrinter.UseVisualStyleBackColor = true;
+            this.checkOffPrinter.CheckedChanged += new System.EventHandler(this.checkOffPrinter_CheckedChanged);
+            // 
             // offControl
             // 
             this.offControl.AutoSize = true;
@@ -2499,17 +2510,6 @@
             this.buttonResetTimeRefresh.Text = "Обновить время обслуживания";
             this.buttonResetTimeRefresh.UseVisualStyleBackColor = true;
             this.buttonResetTimeRefresh.Click += new System.EventHandler(this.buttonResetTimeRefresh_Click);
-            // 
-            // checkOffPrinter
-            // 
-            this.checkOffPrinter.AutoSize = true;
-            this.checkOffPrinter.Location = new System.Drawing.Point(16, 133);
-            this.checkOffPrinter.Name = "checkOffPrinter";
-            this.checkOffPrinter.Size = new System.Drawing.Size(125, 17);
-            this.checkOffPrinter.TabIndex = 17;
-            this.checkOffPrinter.Text = "Отключить принтер";
-            this.checkOffPrinter.UseVisualStyleBackColor = true;
-            this.checkOffPrinter.CheckedChanged += new System.EventHandler(this.checkOffPrinter_CheckedChanged);
             // 
             // FormSettings
             // 

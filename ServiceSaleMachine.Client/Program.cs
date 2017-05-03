@@ -39,6 +39,8 @@ namespace AirVitamin.Client
 
             }
 
+            Application.SetCompatibleTextRenderingDefault(true);
+
             // Создадим журнал клиента
             Log = new Log { MinMessageType = LogMessageTypeEnum.Warning, AllowWriteToConsole = false };
 

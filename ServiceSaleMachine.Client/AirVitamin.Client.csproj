@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Fonts\CustomFont.cs" />
     <Compile Include="FormResultData.cs" />
     <Compile Include="Forms\Enum\ControlDeviceEnum.cs" />
     <Compile Include="Forms\Enum\ChooseChangeEnum.cs" />

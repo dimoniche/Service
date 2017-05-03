@@ -3,6 +3,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 using AirVitamin.Drivers;
+using System.Drawing;
 
 namespace AirVitamin.Client
 {
@@ -46,8 +47,6 @@ namespace AirVitamin.Client
             }
         }
 
-        private GifImage gifImage = null;
-
         public override void LoadData()
         {
             foreach (object obj in Params.Objects.Where(obj => obj != null))
@@ -60,18 +59,33 @@ namespace AirVitamin.Client
 
             data.log.Write(LogMessageType.Information, "========================НАЧАЛО ОБСЛУЖИВАНИЯ==========================");
 
-            gifImage = new GifImage(Globals.GetPath(PathEnum.Image) + "\\" + Globals.DesignConfiguration.Settings.ButtonGetOxigen);
-            gifImage.ReverseAtEnd = false; //dont reverse at end
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxGiveOxigen, Globals.DesignConfiguration.Settings.ButtonGetOxigen);
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxMainMenu, "Menu_big.png");
 
-            //Globals.DesignConfiguration.Settings.LoadPictureBox(pBxGiveOxigen, Globals.DesignConfiguration.Settings.ButtonGetOxigen);
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxReturnBack, Globals.DesignConfiguration.Settings.ButtonRetToMain);
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pictureLogo, "Logo_O2.png");
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTitle1, "Smes_txt.png");
 
+            if (data.numberService == 0)
+            {
+                // до тренировки
+                Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTitle, "Do_tren_ver.png");
+            }
+            else
+            {
+                // после тренировки
+                Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTitle, "");
+            }
+
+            AmountServiceText.Font = new Font(CustomFont.GetCustomFont(Properties.Resources.CeraRoundPro_Bold).Families[0], 72);
             AmountServiceText.Text = "Внесено: 0 руб.";
-            AmountServiceText.ForeColor = System.Drawing.Color.Red;
+            AmountServiceText.ForeColor = Color.FromArgb(0,158,227);
+
+            SecondMessageText.Font = new Font(CustomFont.GetCustomFont(Properties.Resources.CeraRoundPro_Medium).Families[0], 72);
+            SecondMessageText.ForeColor = Color.Gray;
             SecondMessageText.Text = "";
 
-            LabelNameService2.Text = Globals.ClientConfiguration.Settings.services[data.numberService].caption;
-
+            TextPayBill.ForeColor = Color.Gray;
+            TextPayBill.Font = new Font(CustomFont.GetCustomFont(Properties.Resources.CeraRoundPro_Thin).Families[0],14);
             TextPayBill.LoadFile(Globals.GetPath(PathEnum.Text) + "\\WaitPayBill.rtf");
 
             // сразу проверим - если авторизовались и достаточно денег на счете - сразу списываем деньги со счета
@@ -89,8 +103,8 @@ namespace AirVitamin.Client
                     amount += data.serv.price;
 
                     AmountServiceText.Text = "Внесено: " + data.serv.price + " руб.";
-                    AmountServiceText.ForeColor = System.Drawing.Color.Green;
-                    SecondMessageText.Text = "Остаток на счете: " + (sum - data.serv.price) + " руб.";
+                    AmountServiceText.ForeColor = Color.Green;
+                    SecondMessageText.Text = "                Остаток на счете: " + (sum - data.serv.price) + " руб.";
 
                     data.log.Write(LogMessageType.Information, "ACCOUNT: Внесли достаточную для оказания услуги сумму со счета.");
 
@@ -103,7 +117,7 @@ namespace AirVitamin.Client
                     // обновим счет
                     GlobalDb.GlobalBase.AddToAmount(data.CurrentUserId, 0 - data.serv.price);
 
-                    pBxReturnBack.Enabled = false;
+                    pBxMainMenu.Enabled = false;
 
                     return;
                 }
@@ -115,12 +129,12 @@ namespace AirVitamin.Client
                     amount += sum;
 
                     AmountServiceText.Text = "Внесено: " + sum + " руб.";
-                    SecondMessageText.Text = "Недостаточно денег для оказания услуги";
+                    SecondMessageText.Text = "                Недостаточно денег для оказания услуги";
 
                     // обновим счет
                     GlobalDb.GlobalBase.AddToAmount(data.CurrentUserId, 0 - sum);
 
-                    pBxReturnBack.Enabled = false;
+                    pBxMainMenu.Enabled = false;
                 }
             }
             //
@@ -208,7 +222,7 @@ namespace AirVitamin.Client
         {
             if (StopHardware) return;
 
-            pBxReturnBack.Enabled = false;
+            pBxMainMenu.Enabled = false;
             SecondMessageText.Text = "";
 
             lock (Params)
@@ -241,7 +255,7 @@ namespace AirVitamin.Client
 
                         data.log.Write(LogMessageType.Information, "WAIT BILL: Купюру c номером номинала равным " + numberNominal + " не принимаем");
 
-                        SecondMessageText.Text = "Внесите купюру другого номинала.";
+                        SecondMessageText.Text = "                Внесите купюру другого номинала.";
                         return;
                     }
 
@@ -278,11 +292,11 @@ namespace AirVitamin.Client
 
                             if (amount == 0)
                             {
-                                pBxReturnBack.Enabled = true;
+                                pBxMainMenu.Enabled = true;
                             }
 
                             // сообщим о том что купюра великовата
-                            SecondMessageText.Text = "Внесите купюру меньшего номинала.";
+                            SecondMessageText.Text = "                Внесите купюру меньшего номинала.";
 
                             data.log.Write(LogMessageType.Information, "WAIT BILL: Внесите купюру меньшего номинала. Нет сдачи.");
 
@@ -332,7 +346,7 @@ namespace AirVitamin.Client
 
                         if (amount == 0)
                         {
-                            pBxReturnBack.Enabled = true;
+                            pBxMainMenu.Enabled = true;
                         }
 
                         return;
@@ -426,7 +440,7 @@ namespace AirVitamin.Client
                     else
                     {
                         AmountServiceText.Text = "Внесено: " + amount + " руб.";
-                        SecondMessageText.Text = "Недостаточно денег для оказания услуги";
+                        SecondMessageText.Text = "                Недостаточно денег для оказания услуги";
                     }
 
                     data.log.Write(LogMessageType.Information, "WAIT BILL: Внесено " + amount + " руб.");
@@ -476,7 +490,7 @@ namespace AirVitamin.Client
         {
             if (StopHardware) return;
 
-            pBxReturnBack.Enabled = false;   // блокировать возврат не будем - можем ведь чеком сдачу давать
+            pBxMainMenu.Enabled = false;   // блокировать возврат не будем - можем ведь чеком сдачу давать
             SecondMessageText.Text = "";
 
             lock (Params)
@@ -509,11 +523,11 @@ namespace AirVitamin.Client
                     if (info == null)
                     {
                         // нет такого чека
-                        SecondMessageText.Text = "   Чек не существует.         ";
+                        SecondMessageText.Text = "              Чек не существует.         ";
 
                         if (amount == 0)
                         {
-                            pBxReturnBack.Enabled = true;
+                            pBxMainMenu.Enabled = true;
                         }
 
                         data.log.Write(LogMessageType.Information, "WAIT CHECK: Чек не существует.");
@@ -528,7 +542,7 @@ namespace AirVitamin.Client
 
                         if (amount == 0)
                         {
-                            pBxReturnBack.Enabled = true;
+                            pBxMainMenu.Enabled = true;
                         }
 
                         data.log.Write(LogMessageType.Information, "WAIT CHECK: Чек уже был использован ранее.");
@@ -639,7 +653,7 @@ namespace AirVitamin.Client
                     else
                     {
                         AmountServiceText.Text = "Внесено: " + amount + " руб.";
-                        SecondMessageText.Text = "Недостаточно денег для оказания услуги";
+                        SecondMessageText.Text = "               Недостаточно денег для оказания услуги";
                     }
 
                     data.log.Write(LogMessageType.Information, "WAIT CHECK: Внесено " + amount + " руб.");
@@ -888,7 +902,7 @@ namespace AirVitamin.Client
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            pBxGiveOxigen.Image = gifImage.GetNextFrame();
+            //pBxGiveOxigen.Image = gifImage.GetNextFrame();
             //timer1.Enabled = false;
         }
     }

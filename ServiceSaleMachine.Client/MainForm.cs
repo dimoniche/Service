@@ -72,7 +72,7 @@ namespace AirVitamin.Client
                 return;
             }
 
-            ShowVideo();
+            //ShowVideo();
 
             initDevice:
 

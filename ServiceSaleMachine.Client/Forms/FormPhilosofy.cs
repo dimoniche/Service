@@ -8,20 +8,19 @@ using System.Drawing;
 
 namespace AirVitamin.Client
 {
-    public partial class FormWhatsDiff : MyForm
+    public partial class FormPhilosofy : MyForm
     {
         FormResultData data;
 
-        public FormWhatsDiff()
+        public FormPhilosofy()
         {
             InitializeComponent();
 
             Globals.DesignConfiguration.Settings.LoadPictureBox(pictureLogo, "Logo_O2.png");
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTitle, "Smes_txt.png");
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTitle, "philosofy.png");
 
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxBegin, Globals.DesignConfiguration.Settings.ButtonStartServices);
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxBeforeTrain, Globals.DesignConfiguration.Settings.LogoService1);
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxAfterTrain, Globals.DesignConfiguration.Settings.LogoService2);
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxMainMenu, "Menu_big.png");
         }
 
         public override void LoadData()
@@ -77,14 +76,13 @@ namespace AirVitamin.Client
 
         private void pBxBegin_Click(object sender, EventArgs e)
         {
-            data.stage = WorkerStateStage.ChoosePay;
+            data.stage = WorkerStateStage.ChooseService;
             Close();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            TextService1.LoadFile(Globals.GetPath(PathEnum.Text) + "\\service1.rtf");
-            TextService2.LoadFile(Globals.GetPath(PathEnum.Text) + "\\service2.rtf");
+            TextService1.LoadFile(Globals.GetPath(PathEnum.Text) + "\\Philosof.rtf");
 
             timer1.Enabled = false;
         }
@@ -95,6 +93,12 @@ namespace AirVitamin.Client
             {
                 data.stage = WorkerStateStage.ExitProgram;
             }
+        }
+
+        private void pBxMainMenu_Click(object sender, EventArgs e)
+        {
+            data.stage = WorkerStateStage.MainScreen;
+            Close();
         }
     }
 }

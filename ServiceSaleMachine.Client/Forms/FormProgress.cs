@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using AirVitamin.Drivers;
 using static AirVitamin.Drivers.MachineDrivers;
+using System.Drawing;
 
 namespace AirVitamin.Client
 {
@@ -32,9 +33,20 @@ namespace AirVitamin.Client
                 }
             }
 
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pictureLogo, "Logo_O2.png");
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTitle1, "Smes_txt.png");
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxStart, Globals.DesignConfiguration.Settings.ButtonStartServices);
 
-            LabelNameService2.Text = Globals.ClientConfiguration.Settings.services[data.numberService].caption.ToLower();
+            if (data.numberService == 0)
+            {
+                // до тренировки
+                Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTitle, "Do_tren_ver.png");
+            }
+            else
+            {
+                // после тренировки
+                Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTitle, "");
+            }
 
             FTimeWork = data.timeRecognize;
             CurrentWork = 0;
@@ -79,6 +91,7 @@ namespace AirVitamin.Client
             if (!fileLoaded)
             {
                 TextInstruction.LoadFile(Globals.GetPath(PathEnum.Text) + "\\service_step1.rtf");
+
                 fileLoaded = true;
                 timer1.Interval = 1000;
                 return;

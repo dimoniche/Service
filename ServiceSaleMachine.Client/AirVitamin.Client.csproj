@@ -136,6 +136,12 @@
     <Compile Include="Forms\FormWaitPayBill.Designer.cs">
       <DependentUpon>FormWaitPayBill.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormPhilosofy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormPhilosofy.Designer.cs">
+      <DependentUpon>FormPhilosofy.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormWhatsDiff.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -198,6 +204,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormWaitPayBill.resx">
       <DependentUpon>FormWaitPayBill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormPhilosofy.resx">
+      <DependentUpon>FormPhilosofy.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormWhatsDiff.resx">
       <DependentUpon>FormWhatsDiff.cs</DependentUpon>

@@ -352,7 +352,53 @@ NoCheckStatistic:
                     {
                         // уходим на выбор услуг
                     }
-                    else if (result.stage == WorkerStateStage.Rules || result.stage == WorkerStateStage.Philosof)
+                    else if (result.stage == WorkerStateStage.Philosof)
+                    {
+                        // ознакомление с правилами
+                        result = (FormResultData)FormManager.OpenForm<FormPhilosofy>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                        if (result.stage == WorkerStateStage.MainScreen)
+                        {
+                            // ознакомились - возвращаемся обратно
+                            check = false;
+                            continue;
+                        }
+                        else if (result.stage == WorkerStateStage.ExitProgram)
+                        {
+                            // выход
+                            Close();
+                            return;
+                        }
+                        else if (result.stage == WorkerStateStage.ErrorBill)
+                        {
+                            // ошибки купюроприемника
+                            goto NoCheckStatistic;
+                        }
+                        else if (result.stage == WorkerStateStage.DropCassettteBill)
+                        {
+                            // выемка денег
+                            Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выемка денег.");
+
+                            result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                            if (result.stage == WorkerStateStage.EndDropCassette)
+                            {
+                                continue;
+                            }
+                            else if (result.stage == WorkerStateStage.ExitProgram)
+                            {
+                                // выход
+                                Close();
+                                return;
+                            }
+                        }
+                        else if (result.stage == WorkerStateStage.ChooseService)
+                        {
+                            // уходим на выбор услуг
+                            check = false;
+                        }
+                    }
+                    else if (result.stage == WorkerStateStage.Rules)
                     {
                         // ознакомление с правилами
                         result = (FormResultData)FormManager.OpenForm<FormRules>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);

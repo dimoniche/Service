@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using AirVitamin.Drivers;
 using static AirVitamin.Drivers.MachineDrivers;
+using System.Drawing;
 
 namespace AirVitamin.Client
 {
@@ -15,9 +16,12 @@ namespace AirVitamin.Client
         {
             InitializeComponent();
 
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pictureLogo, "Logo_O2.png");
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTitle, "Smes_txt.png");
+
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxBegin, Globals.DesignConfiguration.Settings.ButtonStartServices);
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxLabelService1, Globals.DesignConfiguration.Settings.LogoService1);
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxLabelService2, Globals.DesignConfiguration.Settings.LogoService2);
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxBeforeTrain, Globals.DesignConfiguration.Settings.LogoService1);
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxAfterTrain, Globals.DesignConfiguration.Settings.LogoService2);
         }
 
         public override void LoadData()
@@ -81,6 +85,9 @@ namespace AirVitamin.Client
         {
             TextService1.LoadFile(Globals.GetPath(PathEnum.Text) + "\\service1.rtf");
             TextService2.LoadFile(Globals.GetPath(PathEnum.Text) + "\\service2.rtf");
+
+            TextService1.ForeColor = System.Drawing.Color.Gray;
+            TextService2.ForeColor = System.Drawing.Color.Gray;
 
             timer1.Enabled = false;
         }

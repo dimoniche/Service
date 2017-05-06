@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using AirVitamin.Drivers;
 using static AirVitamin.Drivers.MachineDrivers;
 using System;
+using System.Drawing;
 
 namespace AirVitamin.Client
 {
@@ -31,8 +32,17 @@ namespace AirVitamin.Client
             // обновим из базы статистические данные
             data.statistic = GlobalDb.GlobalBase.GetMoneyStatistic();
 
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pictureLogo, "Logo_O2.png");
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTitle, "Inkasacia.png");
+
+            Label1.Font = new Font(data.FontCollection.Families[CustomFont.CeraRoundPro_Medium], 72);
+            Label1.Text = "Сумма денег в кассете:";
+            Label1.ForeColor = Color.Gray;
+
             // 
-            moneySumm.Text = "Сумма денег в кассете: " + data.statistic.AllMoneySumm + " руб.";
+            moneySumm.Font = new Font(data.FontCollection.Families[CustomFont.CeraRoundPro_Bold], 72);
+            moneySumm.Text = data.statistic.AllMoneySumm + " руб.";
+            moneySumm.ForeColor = Color.FromArgb(0, 158, 227);
 
             data.drivers.printer.StartPrint(data.drivers.printer.getNamePrinter());
 

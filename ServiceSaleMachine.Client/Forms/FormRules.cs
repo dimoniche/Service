@@ -13,8 +13,6 @@ namespace AirVitamin.Client
         FormResultData data;
         private int Timeout;
 
-        bool fileLoaded = false;
-
         public FormRules()
         {
             InitializeComponent();
@@ -40,8 +38,6 @@ namespace AirVitamin.Client
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxInstructionTitle, "Instraction_txt.png");
 
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxMainMenu, Globals.DesignConfiguration.Settings.ButtonRetToMain);
-
-            InstructionText.LoadFile(Globals.HelpFileName);
 
             data.drivers.ReceivedResponse += reciveResponse;
         }
@@ -81,13 +77,6 @@ namespace AirVitamin.Client
         private void timer1_Tick(object sender, EventArgs e)
         {
             Timeout++;
-
-            if (!fileLoaded)
-            {
-                InstructionText.LoadFile(Globals.HelpFileName);
-                fileLoaded = true;
-                timer1.Interval = 1000;
-            }
 
             if (Globals.ClientConfiguration.Settings.timeout == 0)
             {

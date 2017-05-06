@@ -3,14 +3,13 @@ using System.Linq;
 using System.Windows.Forms;
 using AirVitamin.Drivers;
 using static AirVitamin.Drivers.MachineDrivers;
+using System.Drawing;
 
 namespace AirVitamin.Client
 {
     public partial class FormTemporallyNoWork : MyForm
     {
         FormResultData data;
-
-        private bool fileLoaded = false;
 
         public FormTemporallyNoWork()
         {
@@ -30,6 +29,19 @@ namespace AirVitamin.Client
             data.drivers.ReceivedResponse += reciveResponse;
 
             Globals.DesignConfiguration.Settings.LoadPictureBox(pictureError, Globals.DesignConfiguration.Settings.ButtonFail);
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pictureLogo, "Logo_O2.png");
+
+            Title.Font = new Font(data.FontCollection.Families[CustomFont.CeraRoundPro_Medium], 72);
+            Title1.Font = new Font(data.FontCollection.Families[CustomFont.CeraRoundPro_Medium], 72);
+
+            Title.ForeColor = Color.FromArgb(0, 158, 227);
+            Title1.ForeColor = Color.Gray;
+
+            Title.Text = "ИЗВИНИТЕ,";
+            Title1.Text = "АППАРАТ ВРЕМЕННО НЕ РАБОТАЕТ";
+
+            error.Font = new Font(data.FontCollection.Families[CustomFont.CeraRoundPro_Medium], 72);
+            error.ForeColor = Color.Gray;
 
             // список ошибок
             if (data.stage == WorkerStateStage.BillFull)
@@ -56,6 +68,8 @@ namespace AirVitamin.Client
             {
                 error.Text = "Ошибка E060";
             }
+
+            timer1.Interval = Globals.IntervalCheckControl;
         }
 
         private void reciveResponse(object sender, ServiceClientResponseEventArgs e)
@@ -118,13 +132,6 @@ namespace AirVitamin.Client
 
         private void timer1_Tick(object sender, System.EventArgs e)
         {
-            if (!fileLoaded)
-            {
-                MessageText.LoadFile(Globals.GetPath(PathEnum.Text) + "\\ErrorText.rtf");
-                fileLoaded = true;
-                timer1.Interval = Globals.IntervalCheckControl;
-            }
-
             if (data.stage == WorkerStateStage.ErrorControl)
             {
                 // читаем состояние устройства
@@ -201,21 +208,6 @@ namespace AirVitamin.Client
 
                     message.Event = DeviceEvent.DropCassetteBillAcceptor;
                     message.Content = "Drop bill";
-
-                    ServiceClientResponseEventArgs e1 = new ServiceClientResponseEventArgs(message);
-
-                    reciveResponse(null, e1);
-                }
-            }
-            else if (e.Alt & e.KeyCode == Keys.F6)
-            {
-                if (Globals.IsDebug)
-                {
-                    // пошлем событие вынимания приемника
-                    Drivers.Message message = new Drivers.Message();
-
-                    message.Event = DeviceEvent.ConnectBillErrorEnd;
-                    message.Content = "";
 
                     ServiceClientResponseEventArgs e1 = new ServiceClientResponseEventArgs(message);
 

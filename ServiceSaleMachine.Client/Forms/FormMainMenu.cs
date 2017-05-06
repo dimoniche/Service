@@ -260,6 +260,14 @@ namespace AirVitamin.Client
                     reciveResponse(null, e1);
                 }
             }
+            else if (e.Alt & e.KeyCode == Keys.F6)
+            {
+                if (Globals.IsDebug)
+                {
+                    data.stage = WorkerStateStage.ErrorControl;
+                    Close();
+                }
+            }
         }
 
         int Timeout = 0;

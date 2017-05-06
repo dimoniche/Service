@@ -40,7 +40,6 @@
             this.panel6 = new System.Windows.Forms.Panel();
             this.NumberBoard = new AirVitamin.Keyboard();
             this.panel17 = new System.Windows.Forms.Panel();
-            this.rTBxHelp = new AirVitamin.RichTextBoxEx();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
@@ -77,7 +76,6 @@
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
             this.panel15 = new System.Windows.Forms.Panel();
             this.pBxRegister = new System.Windows.Forms.PictureBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.TimeOutTimer = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -85,7 +83,6 @@
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
             this.panel6.SuspendLayout();
-            this.panel17.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
@@ -244,25 +241,11 @@
             // 
             // panel17
             // 
-            this.panel17.Controls.Add(this.rTBxHelp);
             this.panel17.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel17.Location = new System.Drawing.Point(3, 3);
             this.panel17.Name = "panel17";
             this.panel17.Size = new System.Drawing.Size(191, 264);
             this.panel17.TabIndex = 1;
-            // 
-            // rTBxHelp
-            // 
-            this.rTBxHelp.BackColor = System.Drawing.Color.Gainsboro;
-            this.rTBxHelp.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.rTBxHelp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rTBxHelp.Location = new System.Drawing.Point(0, 0);
-            this.rTBxHelp.Name = "rTBxHelp";
-            this.rTBxHelp.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.rTBxHelp.Size = new System.Drawing.Size(191, 264);
-            this.rTBxHelp.TabIndex = 0;
-            this.rTBxHelp.Text = "";
-            this.rTBxHelp.Visible = false;
             // 
             // panel2
             // 
@@ -469,9 +452,9 @@
             // tableLayoutPanel15
             // 
             this.tableLayoutPanel15.ColumnCount = 3;
-            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23F));
+            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54F));
+            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23F));
             this.tableLayoutPanel15.Controls.Add(this.panel25, 1, 0);
             this.tableLayoutPanel15.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel15.Location = new System.Drawing.Point(0, 0);
@@ -485,9 +468,9 @@
             // 
             this.panel25.Controls.Add(this.ErrorText);
             this.panel25.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel25.Location = new System.Drawing.Point(84, 3);
+            this.panel25.Location = new System.Drawing.Point(127, 3);
             this.panel25.Name = "panel25";
-            this.panel25.Size = new System.Drawing.Size(374, 4);
+            this.panel25.Size = new System.Drawing.Size(287, 4);
             this.panel25.TabIndex = 2;
             // 
             // ErrorText
@@ -496,7 +479,7 @@
             this.ErrorText.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ErrorText.Location = new System.Drawing.Point(0, 0);
             this.ErrorText.Name = "ErrorText";
-            this.ErrorText.Size = new System.Drawing.Size(374, 4);
+            this.ErrorText.Size = new System.Drawing.Size(287, 4);
             this.ErrorText.TabIndex = 0;
             // 
             // panel24
@@ -684,11 +667,6 @@
             this.pBxRegister.TabStop = false;
             this.pBxRegister.Click += new System.EventHandler(this.pBxRegister_Click);
             // 
-            // timer1
-            // 
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // TimeOutTimer
             // 
             this.TimeOutTimer.Enabled = true;
@@ -716,7 +694,6 @@
             this.tableLayoutPanel7.ResumeLayout(false);
             this.tableLayoutPanel7.PerformLayout();
             this.panel6.ResumeLayout(false);
-            this.panel17.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
@@ -773,7 +750,6 @@
         private System.Windows.Forms.Panel panel13;
         private System.Windows.Forms.Panel panel17;
         private RichTextBoxEx rTBxHelp;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Panel panel24;
         private System.Windows.Forms.Timer TimeOutTimer;
         private System.Windows.Forms.CheckBox rememberBox;

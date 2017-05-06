@@ -14,8 +14,6 @@ namespace AirVitamin.Client
         string User = "";
         string Password = "";
 
-        bool fileLoaded = false;
-
         int countRetry = 0;
 
         Image image;
@@ -38,14 +36,6 @@ namespace AirVitamin.Client
 
             image = Image.FromFile(Globals.GetPath(PathEnum.Image) + "\\Password_b.png");
             tableLayoutPasswordEdit.BackgroundImage = image;
-
-            timer1.Enabled = true;
-            timer1.Interval = 50;
-        }
-
-        public void LoadNumberKeyBoard()
-        {
-          
         }
 
         public void LoadFullKeyBoard()
@@ -69,7 +59,6 @@ namespace AirVitamin.Client
             NumberBoard.LoadPicture(str);
         }
 
-
         public override void LoadData()
         {
             foreach (object obj in Params.Objects.Where(obj => obj != null))
@@ -80,12 +69,13 @@ namespace AirVitamin.Client
                 }
             }
 
-            rTBxHelp.LoadFile(Globals.GetPath(PathEnum.Text) + "\\HelpAccount.rtf");
-
             if (Globals.ClientConfiguration.Settings.offModem == 1)
             {
                 tableLayoutPanel11.Visible = false;
             }
+
+            ErrorText.Font = new Font(data.FontCollection.Families[CustomFont.CeraRoundPro_Medium], 72);
+            ErrorText.ForeColor = Color.Gray;
         }
 
         private void UserRequest_FormClosed(object sender, FormClosedEventArgs e)
@@ -388,13 +378,11 @@ namespace AirVitamin.Client
                             }
                             else
                             {
-                                textBox1.Text = "";
+                                textBox1.Text = "+7";
                                 tbxPassword.Text = "";
                                 ErrorText.Text = "Вы ввели неправильный номер или пароль. Попробуйте еще раз.";
 
                                 tbx = textBox1;
-                                textBox1.BackColor = System.Drawing.Color.Lime;
-                                tbxPassword.BackColor = System.Drawing.Color.Gray;
 
                                 data.log.Write(LogMessageType.Information, "Ввели неправильный пароль");
                                 data.log.Write(LogMessageType.Information, User);
@@ -402,6 +390,9 @@ namespace AirVitamin.Client
 
                                 User = "";
                                 Password = "";
+
+                                image = Image.FromFile(Globals.GetPath(PathEnum.Image) + "\\Password_b.png");
+                                tableLayoutPasswordEdit.BackgroundImage = image;
                             }
                         }
                         else
@@ -470,9 +461,12 @@ namespace AirVitamin.Client
             pBxRemember.Visible = false;
 
             ErrorText.Text = "";
-            textBox1.Text = "";
+            textBox1.Text = "+7";
             tbxPassword.Text = "";
             tbx = textBox1;
+
+            image = Image.FromFile(Globals.GetPath(PathEnum.Image) + "\\Password_b.png");
+            tableLayoutPasswordEdit.BackgroundImage = image;
         }
 
         private void pBxRemember_Click(object sender, EventArgs e)
@@ -485,21 +479,12 @@ namespace AirVitamin.Client
             //tablePassword.Visible = false;
 
             ErrorText.Text = "";
-            textBox1.Text = "";
+            textBox1.Text = "+7";
             tbxPassword.Text = "";
             tbx = textBox1;
-        }
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            if (!fileLoaded)
-            {
-                rTBxHelp.LoadFile(Globals.GetPath(PathEnum.Text) + "\\HelpAccount.rtf");
-
-                fileLoaded = true;
-                timer1.Interval = 1000;
-                timer1.Enabled = false;
-            }
+            image = Image.FromFile(Globals.GetPath(PathEnum.Image) + "\\Password_b.png");
+            tableLayoutPasswordEdit.BackgroundImage = image;
         }
 
         int Timeout = 0;

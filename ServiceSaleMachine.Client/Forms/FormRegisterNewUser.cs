@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -20,12 +21,17 @@ namespace AirVitamin.Client
                 if (obj.GetType() == typeof(FormResultData))
                 {
                     data = (FormResultData)obj;
+
+                    NewUserinfo.ForeColor = Color.Gray;
+                    NewUserinfo.Font = new Font(data.FontCollection.Families[CustomFont.CeraRoundPro_Medium], 72);
                 }
                 else if (obj.GetType() == typeof(string))
                 {
                     NewUserinfo.Text = (string)obj;
                 }
             }
+
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pictureLogo, "Logo_O2.png");
         }
 
         private void FormRegisterNewUser_FormClosed(object sender, FormClosedEventArgs e)

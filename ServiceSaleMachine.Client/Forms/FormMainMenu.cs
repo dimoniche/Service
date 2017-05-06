@@ -11,6 +11,11 @@ namespace AirVitamin.Client
     {
         FormResultData data;
 
+        bool IsSendSMS1 = false;
+        bool IsSendSMS2 = false;
+        bool IsSendSMS3 = false;
+        bool IsSendSMS4 = false;
+
         public FormMainMenu()
         {
             InitializeComponent();
@@ -86,32 +91,50 @@ namespace AirVitamin.Client
 
             if (res != null)
             {
-                if (res[0] == 1)
+                // просто шлем смс - не выходим пока с ошибкой
+                if (res[0] == 1 && !IsSendSMS1)
                 {
+                    data.drivers.modem.SendSMS("Низкое давление Газа 1", data.log);
+
                     data.stage = WorkerStateStage.Gas1_low;
+                    IsSendSMS1 = true;
 
                     Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД1 - HIGH.");
                 }
-                if (res[1] == 1)
+                else IsSendSMS1 = false;
+
+                if (res[1] == 1 && !IsSendSMS2)
                 {
+                    data.drivers.modem.SendSMS("Низкое давление Газа 2", data.log);
+
                     data.stage = WorkerStateStage.Gas2_low;
+                    IsSendSMS2 = true;
 
                     Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД2 - HIGH.");
                 }
-                if (res[2] == 1)
+                else IsSendSMS2 = false;
+
+                if (res[2] == 1 && !IsSendSMS3)
                 {
                     data.drivers.modem.SendSMS("Низкое давление Газа 3", data.log);
 
                     data.stage = WorkerStateStage.Gas3_low;
+                    IsSendSMS3 = true;
 
                     Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД3 - HIGH.");
                 }
-                if (res[3] == 1)
+                else IsSendSMS3 = false;
+
+                if (res[3] == 1 && !IsSendSMS4)
                 {
+                    data.drivers.modem.SendSMS("Низкое давление Газа 4", data.log);
+
                     data.stage = WorkerStateStage.Gas4_low;
+                    IsSendSMS4 = true;
 
                     Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД4 - HIGH.");
                 }
+                else IsSendSMS4 = false;
             }
 
             if (Globals.ClientConfiguration.Settings.offPrinter == 0)

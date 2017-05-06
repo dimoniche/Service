@@ -167,6 +167,35 @@ NoCheckStatistic:
 
                         result.BillError = true;
                     }
+                    else if (result.stage == WorkerStateStage.Gas1_low 
+                            || result.stage == WorkerStateStage.Gas2_low 
+                            || result.stage == WorkerStateStage.Gas3_low 
+                            || result.stage == WorkerStateStage.Gas4_low)
+                    {
+                        // давление упало - но мы продолжаем работать - просто шлем СМС
+                        if (result.stage == WorkerStateStage.Gas1_low)
+                        {
+                            result.drivers.modem.SendSMS("Низкое давление Газа 1", result.log);
+                            Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД1 - HIGH.");
+                        }
+                        if (result.stage == WorkerStateStage.Gas2_low)
+                        {
+                            result.drivers.modem.SendSMS("Низкое давление Газа 2", result.log);
+                            Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД2 - HIGH.");
+                        }
+                        if (result.stage == WorkerStateStage.Gas3_low)
+                        {
+                            result.drivers.modem.SendSMS("Низкое давление Газа 3", result.log);
+                            Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД3 - HIGH.");
+                        }
+                        if (result.stage == WorkerStateStage.Gas4_low)
+                        {
+                            result.drivers.modem.SendSMS("Низкое давление Газа 4", result.log);
+                            Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД4 - HIGH.");
+                        }
+
+                        result.stage = WorkerStateStage.None;
+                    }
                     else
                     {
                         // это не ошибки приемника - с приемником все ок
@@ -847,35 +876,19 @@ NoCheckStatistic:
             {
                 if (res[0] == 1)
                 {
-                    result.drivers.modem.SendSMS("Низкое давление Газа 1.1", result.log);
-
                     result.stage = WorkerStateStage.Gas1_low;
-
-                    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД1 - HIGH.");
                 }
                 if (res[1] == 1)
                 {
-                    result.drivers.modem.SendSMS("Низкое давление Газа 2", result.log);
-
                     result.stage = WorkerStateStage.Gas2_low;
-
-                    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД2 - HIGH.");
                 }
                 if (res[2] == 1)
                 {
-                    result.drivers.modem.SendSMS("Низкое давление Газа 3", result.log);
-
                     result.stage = WorkerStateStage.Gas3_low;
-
-                    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД3 - HIGH.");
                 }
                 if (res[3] == 1)
                 {
-                    result.drivers.modem.SendSMS("Низкое давление Газа 4", result.log);
-
                     result.stage = WorkerStateStage.Gas4_low;
-
-                    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД4 - HIGH.");
                 }
             }
 

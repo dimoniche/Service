@@ -78,7 +78,7 @@ namespace AirVitamin.Client
                 return;
             }
 
-            //ShowVideo();
+            ShowVideo();
 
             initDevice:
 
@@ -970,6 +970,8 @@ NoCheckStatistic:
         /// </summary>
         void ShowVideo()
         {
+            if (Globals.ClientConfiguration.Settings.offVideoSecondScreen == 1) return;
+
             // Разворачивание 2-й формы на втором мониторе
             Screen[] sc;
             sc = Screen.AllScreens;

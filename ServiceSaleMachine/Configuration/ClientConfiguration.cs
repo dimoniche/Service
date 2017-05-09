@@ -72,6 +72,7 @@ namespace AirVitamin
                         if ((xElement = xSettings.Element("offControl")) != null) Settings.offControl = int.Parse(xElement.Value);
                         if ((xElement = xSettings.Element("offModem")) != null) Settings.offModem = int.Parse(xElement.Value);
                         if ((xElement = xSettings.Element("offPrinter")) != null) Settings.offPrinter = int.Parse(xElement.Value);
+                        if ((xElement = xSettings.Element("offVideoSecondScreen")) != null) Settings.offVideoSecondScreen = int.Parse(xElement.Value);
 
                         if ((xElement = xSettings.Element("NoPaperWork")) != null) Settings.NoPaperWork = int.Parse(xElement.Value);
 
@@ -158,6 +159,7 @@ namespace AirVitamin
                 xSettings.Add(new XElement("offControl", Settings.offControl.ToString()));
                 xSettings.Add(new XElement("offModem", Settings.offModem.ToString()));
                 xSettings.Add(new XElement("offPrinter", Settings.offPrinter.ToString()));
+                xSettings.Add(new XElement("offVideoSecondScreen", Settings.offVideoSecondScreen.ToString()));
 
                 xSettings.Add(new XElement("NoPaperWork", Settings.NoPaperWork.ToString()));
 

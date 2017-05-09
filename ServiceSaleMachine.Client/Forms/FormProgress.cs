@@ -45,7 +45,7 @@ namespace AirVitamin.Client
             else
             {
                 // после тренировки
-                Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTitle, "");
+                Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTitle, "Posle_tren_ver.png");
             }
 
             FTimeWork = data.timeRecognize;

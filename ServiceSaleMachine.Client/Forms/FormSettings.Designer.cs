@@ -160,6 +160,7 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.cBxVideoSecondScreen = new System.Windows.Forms.CheckBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.ButGIF = new System.Windows.Forms.RadioButton();
             this.ButVideo = new System.Windows.Forms.RadioButton();
@@ -1673,6 +1674,7 @@
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.cBxVideoSecondScreen);
             this.tabPage6.Controls.Add(this.groupBox7);
             this.tabPage6.Controls.Add(this.groupBoxTimeLimit);
             this.tabPage6.Controls.Add(this.groupBox5);
@@ -1684,6 +1686,17 @@
             this.tabPage6.TabIndex = 0;
             this.tabPage6.Text = "Основные";
             this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // cBxVideoSecondScreen
+            // 
+            this.cBxVideoSecondScreen.AutoSize = true;
+            this.cBxVideoSecondScreen.Location = new System.Drawing.Point(15, 491);
+            this.cBxVideoSecondScreen.Name = "cBxVideoSecondScreen";
+            this.cBxVideoSecondScreen.Size = new System.Drawing.Size(208, 17);
+            this.cBxVideoSecondScreen.TabIndex = 18;
+            this.cBxVideoSecondScreen.Text = "Отключить видео на втором экране";
+            this.cBxVideoSecondScreen.UseVisualStyleBackColor = true;
+            this.cBxVideoSecondScreen.CheckedChanged += new System.EventHandler(this.cBxVideoSecondScreen_CheckedChanged);
             // 
             // groupBox7
             // 
@@ -2555,6 +2568,7 @@
             this.tabPage2.ResumeLayout(false);
             this.tabControl3.ResumeLayout(false);
             this.tabPage6.ResumeLayout(false);
+            this.tabPage6.PerformLayout();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             this.groupBoxTimeLimit.ResumeLayout(false);
@@ -2792,5 +2806,6 @@
         private System.Windows.Forms.Button pipeOff;
         private System.Windows.Forms.Button PipeOn;
         private System.Windows.Forms.CheckBox checkOffPrinter;
+        private System.Windows.Forms.CheckBox cBxVideoSecondScreen;
     }
 }

@@ -664,6 +664,15 @@ namespace AirVitamin.Client
                 checkOffPrinter.Checked = false;
             }
 
+            if (Globals.ClientConfiguration.Settings.offVideoSecondScreen == 1)
+            {
+                cBxVideoSecondScreen.Checked = true;
+            }
+            else
+            {
+                cBxVideoSecondScreen.Checked = false;
+            }
+
             // номиналы купюр
             checkBox10.Checked = Globals.ClientConfiguration.Settings.nominals[2] > 0 ? true : false;
             checkBox50.Checked = Globals.ClientConfiguration.Settings.nominals[3] > 0 ? true : false;
@@ -2076,6 +2085,18 @@ namespace AirVitamin.Client
                 }
 
                 Globals.ClientConfiguration.Save();
+            }
+        }
+
+        private void cBxVideoSecondScreen_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cBxVideoSecondScreen.Checked)
+            {
+                Globals.ClientConfiguration.Settings.offVideoSecondScreen = 1;
+            }
+            else
+            {
+                Globals.ClientConfiguration.Settings.offVideoSecondScreen = 0;
             }
         }
     }

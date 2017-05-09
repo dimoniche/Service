@@ -73,7 +73,7 @@ namespace AirVitamin.Client
             else
             {
                 // после тренировки
-                Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTitle, "");
+                Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTitle, "Posle_tren_ver.png");
             }
 
             AmountServiceText.Font = new Font(data.FontCollection.Families[CustomFont.CeraRoundPro_Bold], 72);

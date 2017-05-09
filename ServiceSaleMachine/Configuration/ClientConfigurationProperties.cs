@@ -75,6 +75,9 @@ namespace AirVitamin
         // работaем без бумаги в принтере
         public int NoPaperWork = 1;
 
+        // отключение видео на втором экране
+        public int offVideoSecondScreen = 1;
+
         internal ClientConfigurationProperties()
 		{
 			

@@ -465,6 +465,9 @@ namespace AirVitamin.Client
             tbxPassword.Text = "";
             tbx = textBox1;
 
+            User = "";
+            Password = "";
+
             image = Image.FromFile(Globals.GetPath(PathEnum.Image) + "\\Password_b.png");
             tableLayoutPasswordEdit.BackgroundImage = image;
         }
@@ -482,6 +485,9 @@ namespace AirVitamin.Client
             textBox1.Text = "+7";
             tbxPassword.Text = "";
             tbx = textBox1;
+
+            User = "";
+            Password = "";
 
             image = Image.FromFile(Globals.GetPath(PathEnum.Image) + "\\Password_b.png");
             tableLayoutPasswordEdit.BackgroundImage = image;

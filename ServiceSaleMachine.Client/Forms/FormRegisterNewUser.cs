@@ -21,13 +21,23 @@ namespace AirVitamin.Client
                 if (obj.GetType() == typeof(FormResultData))
                 {
                     data = (FormResultData)obj;
-
-                    NewUserinfo.ForeColor = Color.Gray;
-                    NewUserinfo.Font = new Font(data.FontCollection.Families[CustomFont.CeraRoundPro_Medium], 72);
                 }
                 else if (obj.GetType() == typeof(string))
                 {
-                    NewUserinfo.Text = (string)obj;
+                    string Text = (string)obj;
+
+                    if(Text.Contains("Зарегистрировали нового пользователя:"))
+                    {
+                        tableLayoutPanel3.ColumnStyles[0].Width = 26.25F;
+                        tableLayoutPanel3.ColumnStyles[1].Width = 47.5F;
+                        tableLayoutPanel3.ColumnStyles[2].Width = 26.25F;
+
+                        Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTitle, "Registration_ok.png");
+                    }
+                    else
+                    {
+                        Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTitle, "Password_mail.png");
+                    }
                 }
             }
 

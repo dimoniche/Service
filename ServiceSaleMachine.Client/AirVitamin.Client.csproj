@@ -30,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>AirVitamin.Client.Program</StartupObject>
@@ -236,6 +237,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Resources\CeraRoundPro_Black.otf" />
+    <None Include="Resources\CeraRoundPro_Bold.otf" />
+    <None Include="Resources\CeraRoundPro_Light.otf" />
+    <None Include="Resources\CeraRoundPro_Medium.otf" />
+    <None Include="Resources\CeraRoundPro_Regular.otf" />
+    <None Include="Resources\CeraRoundPro_Thin.otf" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ServiceSaleMachine.Drivers\AirVitamin.Drivers.csproj">

@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using AirVitamin.Drivers;
 using static AirVitamin.Drivers.MachineDrivers;
 using System.Drawing;
+using System.IO;
 
 namespace AirVitamin.Client
 {
@@ -17,6 +18,8 @@ namespace AirVitamin.Client
         /// Данные передаваемые между окнами
         /// </summary>
         FormResultData result;
+
+        FormWaitClientVideo fr2;
 
         // запуск приложения
         public MainForm()
@@ -52,8 +55,8 @@ namespace AirVitamin.Client
 
             result.FontCollection = new System.Drawing.Text.PrivateFontCollection();
 
-            CustomFont.AddFont(result.FontCollection, Properties.Resources.CeraRoundPro_Bold);
-            CustomFont.AddFont(result.FontCollection, Properties.Resources.CeraRoundPro_Medium);
+            result.FontCollection.AddFontFile(Globals.GetPath(PathEnum.Fonts) + "\\" + "CeraRoundPro_Bold.ttf");
+            result.FontCollection.AddFontFile(Globals.GetPath(PathEnum.Fonts) + "\\" + "CeraRoundPro_Medium.ttf");
 
             // инициализируем задачи
             result.drivers.InitAllTask();
@@ -1001,7 +1004,7 @@ NoCheckStatistic:
                 return;
             }
 
-            FormWaitClientVideo fr2 = new FormWaitClientVideo(p,result);
+            fr2 = new FormWaitClientVideo(p,result);
 
             fr2.FormBorderStyle = FormBorderStyle.None;
             fr2.StartPosition = FormStartPosition.Manual;
@@ -1025,6 +1028,8 @@ NoCheckStatistic:
             GlobalDb.GlobalBase.CloseForm();
 
             result.drivers.printer.AbortPrint();
+
+            if(fr2 != null) fr2.Close();
 
             try
             {

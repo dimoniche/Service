@@ -119,6 +119,9 @@ namespace AirVitamin
                 case PathEnum.Config:
                     return "Configuration";
 
+                case PathEnum.Fonts:
+                    return "Fonts";
+
                 default:
                     throw new InvalidOperationException();
             }

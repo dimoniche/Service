@@ -188,6 +188,7 @@
             this.butDelDev.TabIndex = 8;
             this.butDelDev.Text = "Удалить устройство";
             this.butDelDev.UseVisualStyleBackColor = true;
+            this.butDelDev.Visible = false;
             this.butDelDev.Click += new System.EventHandler(this.butDelDev_Click);
             // 
             // butaddDev
@@ -198,6 +199,7 @@
             this.butaddDev.TabIndex = 8;
             this.butaddDev.Text = "Добавить устройство";
             this.butaddDev.UseVisualStyleBackColor = true;
+            this.butaddDev.Visible = false;
             this.butaddDev.Click += new System.EventHandler(this.butaddDev_Click);
             // 
             // textBoxPause
@@ -236,6 +238,7 @@
             this.DevicetabControl.SelectedIndex = 0;
             this.DevicetabControl.Size = new System.Drawing.Size(508, 290);
             this.DevicetabControl.TabIndex = 0;
+            this.DevicetabControl.Visible = false;
             // 
             // tabPageDevice
             // 

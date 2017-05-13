@@ -74,7 +74,7 @@ namespace AirVitamin.Client
                 tableLayoutPanel11.Visible = false;
             }
 
-            ErrorText.Font = new Font(data.FontCollection.Families[CustomFont.CeraRoundPro_Medium], 72);
+            ErrorText.Font = new Font(data.FontCollection.Families[CustomFont.CeraRoundPro_Medium], 72, FontStyle.Regular);
             ErrorText.ForeColor = Color.Gray;
         }
 

@@ -35,12 +35,12 @@ namespace AirVitamin.Client
             Globals.DesignConfiguration.Settings.LoadPictureBox(pictureLogo, "Logo_O2.png");
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTitle, "Inkasacia.png");
 
-            Label1.Font = new Font(data.FontCollection.Families[CustomFont.CeraRoundPro_Medium], 72);
+            Label1.Font = new Font(data.FontCollection.Families[CustomFont.CeraRoundPro_Medium], 72, FontStyle.Regular);
             Label1.Text = "Сумма денег в кассете:";
             Label1.ForeColor = Color.Gray;
 
             // 
-            moneySumm.Font = new Font(data.FontCollection.Families[CustomFont.CeraRoundPro_Bold], 72);
+            moneySumm.Font = new Font(data.FontCollection.Families[CustomFont.CeraRoundPro_Bold], 72, FontStyle.Bold);
             moneySumm.Text = data.statistic.AllMoneySumm + " руб.";
             moneySumm.ForeColor = Color.FromArgb(0, 158, 227);
 

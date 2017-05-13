@@ -11,5 +11,6 @@
         Video,
         Text,
         Config,
+        Fonts,
     }
 }

@@ -39,16 +39,16 @@ namespace AirVitamin
             xOut.Add(new XElement("timework", timework));
             xOut.Add(new XElement("timePause", timePause));
 
-            if (devs.Count > 0)
-            {
-                XElement devices = new XElement("Devices");
-                foreach (Device dev in devs)
-                {
-                    XElement newservice = dev.ToXml();
-                    devices.Add(newservice);
-                }
-                xOut.Add(devices);
-            }
+            //if (devs.Count > 0)
+            //{
+            //    XElement devices = new XElement("Devices");
+            //    foreach (Device dev in devs)
+            //    {
+            //        XElement newservice = dev.ToXml();
+            //        devices.Add(newservice);
+            //    }
+            //    xOut.Add(devices);
+            //}
 
             return xOut;
         }
@@ -68,21 +68,21 @@ namespace AirVitamin
             if ((xElement = xObject.Element("timePause")) != null) result.timePause = int.Parse(xElement.Value);
 
             // настройки сервисов
-            if ((xElement = xObject.Element("Devices")) != null)
-            {
-                result.devs = new List<Device>();
-                int i = 1;
-                foreach (XElement xItem in xElement.Elements("Device"))
-                {
-                    Device tmp = Device.FromXml(xItem);
-                    if (tmp.id == 0)
-                    {
-                        tmp.id = i;
-                    }
-                    result.devs.Add(tmp);
-                    i++;
-                }
-            }
+            //if ((xElement = xObject.Element("Devices")) != null)
+            //{
+            //    result.devs = new List<Device>();
+            //    int i = 1;
+            //    foreach (XElement xItem in xElement.Elements("Device"))
+            //    {
+            //        Device tmp = Device.FromXml(xItem);
+            //        if (tmp.id == 0)
+            //        {
+            //            tmp.id = i;
+            //        }
+            //        result.devs.Add(tmp);
+            //        i++;
+            //    }
+            //}
 
             return result;
         }

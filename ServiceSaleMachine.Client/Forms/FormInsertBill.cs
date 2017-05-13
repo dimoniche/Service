@@ -48,7 +48,7 @@ namespace AirVitamin.Client
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTakeAwayMoney, Globals.DesignConfiguration.Settings.ButtonTakeAwayMoney);
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxreturnMoney, Globals.DesignConfiguration.Settings.ButtonreturnMoney);
 
-            label1.Font = new Font(data.FontCollection.Families[CustomFont.CeraRoundPro_Bold], 72);
+            label1.Font = new Font(data.FontCollection.Families[CustomFont.CeraRoundPro_Bold], 72, FontStyle.Bold);
             label1.ForeColor = Color.FromArgb(0, 158, 227);
 
             if (check)
@@ -60,7 +60,7 @@ namespace AirVitamin.Client
                 label1.Text = "Внесено: " + Nominal + " руб.";
             }
 
-            scalableLabel1.Font = new Font(data.FontCollection.Families[CustomFont.CeraRoundPro_Medium], 72);
+            scalableLabel1.Font = new Font(data.FontCollection.Families[CustomFont.CeraRoundPro_Medium], 72, FontStyle.Regular);
             scalableLabel1.ForeColor = Color.Gray;
 
             if (data.retLogin != "" && Globals.ClientConfiguration.Settings.changeToAccount == 1)

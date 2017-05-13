@@ -76,17 +76,16 @@ namespace AirVitamin.Client
                 Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTitle, "Posle_tren_ver.png");
             }
 
-            AmountServiceText.Font = new Font(data.FontCollection.Families[CustomFont.CeraRoundPro_Bold], 72);
+            AmountServiceText.Font = new Font(data.FontCollection.Families[CustomFont.CeraRoundPro_Bold], 72, FontStyle.Bold);
             AmountServiceText.Text = "Внесено: 0 руб.";
             AmountServiceText.ForeColor = Color.FromArgb(0,158,227);
 
-            SecondMessageText.Font = new Font(data.FontCollection.Families[CustomFont.CeraRoundPro_Medium], 72);
+            SecondMessageText.Font = new Font(data.FontCollection.Families[CustomFont.CeraRoundPro_Medium], 72, FontStyle.Regular);
             SecondMessageText.ForeColor = Color.Gray;
             SecondMessageText.Text = "";
 
             TextPayBill.LoadFile(Globals.GetPath(PathEnum.Text) + "\\WaitPayBill.rtf");
             TextPayBill.ForeColor = Color.Gray;
-            //TextPayBill.Font = new Font(data.FontCollection.Families[1],14);
 
             // сразу проверим - если авторизовались и достаточно денег на счете - сразу списываем деньги со счета
             if (data.retLogin != "")

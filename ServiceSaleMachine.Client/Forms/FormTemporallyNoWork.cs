@@ -31,8 +31,8 @@ namespace AirVitamin.Client
             Globals.DesignConfiguration.Settings.LoadPictureBox(pictureError, Globals.DesignConfiguration.Settings.ButtonFail);
             Globals.DesignConfiguration.Settings.LoadPictureBox(pictureLogo, "Logo_O2.png");
 
-            Title.Font = new Font(data.FontCollection.Families[CustomFont.CeraRoundPro_Medium], 72);
-            Title1.Font = new Font(data.FontCollection.Families[CustomFont.CeraRoundPro_Medium], 72);
+            Title.Font = new Font(data.FontCollection.Families[CustomFont.CeraRoundPro_Medium], 72, FontStyle.Regular);
+            Title1.Font = new Font(data.FontCollection.Families[CustomFont.CeraRoundPro_Medium], 72, FontStyle.Regular);
 
             Title.ForeColor = Color.FromArgb(0, 158, 227);
             Title1.ForeColor = Color.Gray;
@@ -40,7 +40,7 @@ namespace AirVitamin.Client
             Title.Text = "ИЗВИНИТЕ,";
             Title1.Text = "АППАРАТ ВРЕМЕННО НЕ РАБОТАЕТ";
 
-            error.Font = new Font(data.FontCollection.Families[CustomFont.CeraRoundPro_Medium], 72);
+            error.Font = new Font(data.FontCollection.Families[CustomFont.CeraRoundPro_Medium], 72, FontStyle.Regular);
             error.ForeColor = Color.Gray;
 
             // список ошибок

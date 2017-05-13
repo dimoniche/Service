@@ -121,22 +121,4 @@
   <data name="bitmap" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bitmap.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="CeraRoundPro_Black" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Fonts\CeraRoundProDEMO-Black.otf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="CeraRoundPro_Bold" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Fonts\CeraRoundProDEMO-Bold.otf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="CeraRoundPro_Light" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Fonts\CeraRoundProDEMO-Light.otf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="CeraRoundPro_Medium" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Fonts\CeraRoundProDEMO-Medium.otf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="CeraRoundPro_Regular" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Fonts\CeraRoundProDEMO-Regular.otf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="CeraRoundPro_Thin" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Fonts\CeraRoundProDEMO-Thin.otf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
 </root>

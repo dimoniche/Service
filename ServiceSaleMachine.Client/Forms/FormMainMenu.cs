@@ -11,10 +11,10 @@ namespace AirVitamin.Client
     {
         FormResultData data;
 
-        bool IsSendSMS1 = false;
-        bool IsSendSMS2 = false;
-        bool IsSendSMS3 = false;
-        bool IsSendSMS4 = false;
+        public bool IsSendSMS1 = false;
+        public bool IsSendSMS2 = false;
+        public bool IsSendSMS3 = false;
+        public bool IsSendSMS4 = false;
 
         public FormMainMenu()
         {
@@ -101,7 +101,7 @@ namespace AirVitamin.Client
 
                     Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД1 - HIGH.");
                 }
-                else IsSendSMS1 = false;
+                else if (res[0] == 0) IsSendSMS1 = false;
 
                 if (res[1] == 1 && !IsSendSMS2)
                 {
@@ -112,7 +112,7 @@ namespace AirVitamin.Client
 
                     Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД2 - HIGH.");
                 }
-                else IsSendSMS2 = false;
+                else if (res[1] == 0) IsSendSMS2 = false;
 
                 if (res[2] == 1 && !IsSendSMS3)
                 {
@@ -123,7 +123,7 @@ namespace AirVitamin.Client
 
                     Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД3 - HIGH.");
                 }
-                else IsSendSMS3 = false;
+                else if (res[2] == 0) IsSendSMS3 = false;
 
                 if (res[3] == 1 && !IsSendSMS4)
                 {
@@ -134,7 +134,7 @@ namespace AirVitamin.Client
 
                     Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД4 - HIGH.");
                 }
-                else IsSendSMS4 = false;
+                else if (res[3] == 0) IsSendSMS4 = false;
             }
 
             if (Globals.ClientConfiguration.Settings.offPrinter == 0)

@@ -122,6 +122,9 @@ namespace AirVitamin
                 case PathEnum.Fonts:
                     return "Fonts";
 
+                case PathEnum.Flash:
+                    return "Flash";
+
                 default:
                     throw new InvalidOperationException();
             }

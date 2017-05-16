@@ -55,11 +55,13 @@ namespace AirVitamin.Client
 
             result.FontCollection = new System.Drawing.Text.PrivateFontCollection();
 
-            result.FontCollection.AddFontFile(Globals.GetPath(PathEnum.Fonts) + "\\" + "CeraRoundPro_Bold.ttf");
-            result.FontCollection.AddFontFile(Globals.GetPath(PathEnum.Fonts) + "\\" + "CeraRoundPro_Medium.ttf");
+            //result.FontCollection.AddFontFile(Globals.GetPath(PathEnum.Fonts) + "\\" + "CeraRoundPro_Bold.ttf");
+            //result.FontCollection.AddFontFile(Globals.GetPath(PathEnum.Fonts) + "\\" + "CeraRoundPro_Medium.ttf");
 
             // инициализируем задачи
             result.drivers.InitAllTask();
+
+            result = (FormResultData)FormManager.OpenForm<FormProvideService>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
         }
 
         /// <summary>

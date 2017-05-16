@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using AirVitamin.Drivers;
 using static AirVitamin.Drivers.MachineDrivers;
+using System.Drawing;
 
 namespace AirVitamin.Client
 {
@@ -11,6 +12,9 @@ namespace AirVitamin.Client
     {
         FormResultData data;
         int Interval = 180;
+
+        double height;
+        double width;
 
         public FormProvideService()
         {
@@ -31,8 +35,6 @@ namespace AirVitamin.Client
 
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxLogo, "Logo_O2.png");
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxProvideServiceText, "Dishy_txt.png");
-
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxAnimation, "Dishy_txt.png");
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxReturnMainMenu, Globals.DesignConfiguration.Settings.ButtonRetToMain);
 
             timerService.Enabled = true;
@@ -99,6 +101,32 @@ namespace AirVitamin.Client
             {
                 data.stage = WorkerStateStage.ExitProgram;
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Pen pen = new Pen(Color.Green, 10);
+
+            Graphics g = Graphics.FromHwnd(Balloon.Handle);
+            g.DrawEllipse(pen, new Rectangle(15,15, (int)(width - 15),(int)(height - 15)));
+        }
+
+        private void FormProvideService_Shown(object sender, EventArgs e)
+        {
+            height = baloonLayout.Height;
+            width = baloonLayout.Width;
+
+            double scale = (height / width) * 100;
+
+            baloonLayout.ColumnStyles[0].Width = (float)(100.0 - scale) / 2;
+            baloonLayout.ColumnStyles[1].Width = (float)(scale);
+            baloonLayout.ColumnStyles[2].Width = (float)(100.0 - scale) / 2;
+
+            height = panel5.Height;
+            width = panel5.Width;
+
+            Balloon.Movie = Globals.GetPath(PathEnum.Flash) + "\\balloon.swf";
+            Balloon.Zoom(40);
         }
     }
 }

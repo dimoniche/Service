@@ -12,5 +12,6 @@
         Text,
         Config,
         Fonts,
+        Flash,
     }
 }

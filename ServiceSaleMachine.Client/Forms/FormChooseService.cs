@@ -128,7 +128,7 @@ namespace AirVitamin.Client
 
         private void pBxreturntoMain_Click(object sender, System.EventArgs e)
         {
-            data.stage = WorkerStateStage.TimeOut;
+            data.stage = WorkerStateStage.MainScreen;
             this.Close();
         }
 

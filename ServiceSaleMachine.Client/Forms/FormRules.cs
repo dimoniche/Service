@@ -13,12 +13,16 @@ namespace AirVitamin.Client
         FormResultData data;
         private int Timeout;
 
+        public bool IsSendSMS1 = false;
+        public bool IsSendSMS2 = false;
+        public bool IsSendSMS3 = false;
+        public bool IsSendSMS4 = false;
+
         public FormRules()
         {
             InitializeComponent();
 
             timer1.Enabled = true;
-            timer1.Interval = 50;
         }
 
         public override void LoadData()
@@ -50,6 +54,11 @@ namespace AirVitamin.Client
                 return;
             }
 
+            if (data.log != null)
+            {
+                data.log.Write(LogMessageType.Debug, "MAIN MENU: Событие: " + e.Message.Content + ".");
+            }
+
             switch (e.Message.Event)
             {
                 case DeviceEvent.DropCassetteBillAcceptor:
@@ -59,10 +68,19 @@ namespace AirVitamin.Client
                     }
                     break;
                 case DeviceEvent.DropCassetteFullBillAcceptor:
-
+                    {
+                        data.stage = WorkerStateStage.BillFull;
+                        this.Close();
+                    }
                     break;
                 case DeviceEvent.BillAcceptorError:
-
+                case DeviceEvent.DropCassetteJammed:
+                case DeviceEvent.BillCheated:
+                    {
+                        // ошибка купюроприемника
+                        data.stage = WorkerStateStage.ErrorBill;
+                        this.Close();
+                    }
                     break;
                 case DeviceEvent.ConnectBillError:
                     {
@@ -76,6 +94,69 @@ namespace AirVitamin.Client
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            // читаем состояние устройства
+            byte[] res;
+            res = data.drivers.control.GetStatusControl(data.log);
+
+            if (res != null)
+            {
+                if (res[0] == 0)
+                {
+                    data.stage = WorkerStateStage.ErrorControl;
+                    this.Close();
+                }
+            }
+
+            res = data.drivers.control.GetStatusRelay(data.log);
+
+            if (res != null)
+            {
+                // просто шлем смс - не выходим пока с ошибкой
+                if (res[0] == 1 && !IsSendSMS1)
+                {
+                    data.drivers.modem.SendSMS("Низкое давление Газа 1", data.log);
+
+                    data.stage = WorkerStateStage.Gas1_low;
+                    IsSendSMS1 = true;
+
+                    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД1 - HIGH.");
+                }
+                else if (res[0] == 0) IsSendSMS1 = false;
+
+                if (res[1] == 1 && !IsSendSMS2)
+                {
+                    data.drivers.modem.SendSMS("Низкое давление Газа 2", data.log);
+
+                    data.stage = WorkerStateStage.Gas2_low;
+                    IsSendSMS2 = true;
+
+                    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД2 - HIGH.");
+                }
+                else if (res[1] == 0) IsSendSMS2 = false;
+
+                if (res[2] == 1 && !IsSendSMS3)
+                {
+                    data.drivers.modem.SendSMS("Низкое давление Газа 3", data.log);
+
+                    data.stage = WorkerStateStage.Gas3_low;
+                    IsSendSMS3 = true;
+
+                    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД3 - HIGH.");
+                }
+                else if (res[2] == 0) IsSendSMS3 = false;
+
+                if (res[3] == 1 && !IsSendSMS4)
+                {
+                    data.drivers.modem.SendSMS("Низкое давление Газа 4", data.log);
+
+                    data.stage = WorkerStateStage.Gas4_low;
+                    IsSendSMS4 = true;
+
+                    Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД4 - HIGH.");
+                }
+                else if (res[3] == 0) IsSendSMS4 = false;
+            }
+
             Timeout++;
 
             if (Globals.ClientConfiguration.Settings.timeout == 0)
@@ -87,6 +168,11 @@ namespace AirVitamin.Client
             if (Timeout > Globals.ClientConfiguration.Settings.timeout * 60)
             {
                 data.stage = WorkerStateStage.TimeOut;
+
+                data.retLogin = "";
+                data.retPassword = "";
+                data.CurrentUserId = 0;
+
                 this.Close();
             }
         }
@@ -100,12 +186,6 @@ namespace AirVitamin.Client
         private void pBxMainMenu_Click(object sender, EventArgs e)
         {
             data.stage = WorkerStateStage.MainScreen;
-            this.Close();
-        }
-
-        private void pBxStartService_Click(object sender, EventArgs e)
-        {
-            data.stage = WorkerStateStage.ChooseService;
             this.Close();
         }
 

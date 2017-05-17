@@ -19,7 +19,7 @@ namespace AirVitamin.Client
         /// </summary>
         FormResultData result;
 
-        FormWaitClientVideo fr2;
+        FormWaitVideoSecondScreen fr2;
 
         // запуск приложения
         public MainForm()
@@ -60,6 +60,8 @@ namespace AirVitamin.Client
 
             // инициализируем задачи
             result.drivers.InitAllTask();
+
+            //result = (FormResultData)FormManager.OpenForm<FormProvideService>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
         }
 
         /// <summary>
@@ -244,6 +246,137 @@ NoCheckStatistic:
                     // -----------------------------------------------------
                     // ожидание клиента
                     // -----------------------------------------------------
+
+                    // ознакомление с правилами
+                    result = (FormResultData)FormManager.OpenForm<FormRules>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                    if (result.stage == WorkerStateStage.MainScreen)
+                    {
+                        // ознакомились - возвращаемся обратно - идем на выбор что делать
+                    }
+                    else if (result.stage == WorkerStateStage.ExitProgram)
+                    {
+                        // выход
+                        Close();
+                        return;
+                    }
+                    else if (result.stage == WorkerStateStage.ErrorBill)
+                    {
+                        // ошибки купюроприемника
+                        goto NoCheckStatistic;
+                    }
+                    else if (result.stage == WorkerStateStage.DropCassettteBill)
+                    {
+                        // выемка денег
+                        Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выемка денег.");
+
+                        result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                        if (result.stage == WorkerStateStage.EndDropCassette)
+                        {
+                            continue;
+                        }
+                        else if (result.stage == WorkerStateStage.ExitProgram)
+                        {
+                            // выход
+                            Close();
+                            return;
+                        }
+                    }
+                    else if (result.stage == WorkerStateStage.TimeOut)
+                    {
+                        // по тайм ауту вышли в рекламу
+                        if (Globals.ClientConfiguration.Settings.ScreenServerType == 0 || Globals.ClientConfiguration.Settings.ScreenServerType == 1)
+                        {
+                            result = (FormResultData)FormManager.OpenForm<FormWaitClientGif>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+                        }
+                        else
+                        {
+                            result = (FormResultData)FormManager.OpenForm<FormWaitClientVideo>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+                        }
+
+                        if (result.stage == WorkerStateStage.ErrorBill)
+                        {
+                            // ошибки купюроприемника
+                            goto NoCheckStatistic;
+                        }
+                        else if (result.stage == WorkerStateStage.BillFull)
+                        {
+                            // купюроприемник полон
+                            goto NoCheckStatistic;
+                        }
+                        else if (result.stage == WorkerStateStage.PaperEnd)
+                        {
+                            // ошибки принтера есть
+                            continue;
+                        }
+                        else if (result.stage == WorkerStateStage.ErrorPrinter)
+                        {
+                            // ошибки принтера есть
+                            continue;
+                        }
+                        else if (result.stage == WorkerStateStage.DropCassettteBill)
+                        {
+                            Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выемка денег.");
+
+                            // выемка денег
+                            result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                            if (result.stage == WorkerStateStage.EndDropCassette)
+                            {
+                                continue;
+                            }
+                            else if (result.stage == WorkerStateStage.ExitProgram)
+                            {
+                                // выход
+                                Close();
+                                return;
+                            }
+                        }
+                        else if (result.stage == WorkerStateStage.ErrorControl)
+                        {
+                            Program.Log.Write(LogMessageType.Information, "MAIN WORK: Аппарат временно не работает.");
+
+                            // аппарат временно не работает
+                            result = (FormResultData)FormManager.OpenForm<FormTemporallyNoWork>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                            if (result.stage == WorkerStateStage.ExitProgram)
+                            {
+                                // выход
+                                Close();
+                                return;
+                            }
+                            else if (result.stage == WorkerStateStage.DropCassettteBill)
+                            {
+                                Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выемка денег.");
+
+                                // выемка денег
+                                result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                                if (result.stage == WorkerStateStage.ExitProgram)
+                                {
+                                    // выход
+                                    Close();
+                                    return;
+                                }
+                            }
+                            else if (result.stage == WorkerStateStage.BillErrorEnd)
+                            {
+
+                            }
+
+                            continue;
+                        }
+                        else
+                        {
+                            // вышли из рекламы
+                            check = false;
+                            continue;
+                        }
+                    }
+
+                    MainForm:
+                    // выбор что делать
                     result = (FormResultData)FormManager.OpenForm<FormMainMenu>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
                     if (result.stage == WorkerStateStage.ExitProgram)
@@ -339,7 +472,7 @@ NoCheckStatistic:
                         else if (result.stage == WorkerStateStage.MainScreen)
                         {
                             // сброс авторизации
-                            continue;
+                            goto MainForm;
                         }
                         else if (result.stage == WorkerStateStage.TimeOut)
                         {
@@ -392,8 +525,7 @@ NoCheckStatistic:
                         if (result.stage == WorkerStateStage.MainScreen)
                         {
                             // ознакомились - возвращаемся обратно
-                            check = false;
-                            continue;
+                            goto MainForm;
                         }
                         else if (result.stage == WorkerStateStage.ExitProgram)
                         {
@@ -438,8 +570,7 @@ NoCheckStatistic:
                         if (result.stage == WorkerStateStage.MainScreen)
                         {
                             // ознакомились - возвращаемся обратно
-                            check = false;
-                            continue;
+                            goto MainForm;
                         }
                         else if (result.stage == WorkerStateStage.ExitProgram)
                         {
@@ -496,94 +627,8 @@ NoCheckStatistic:
                     }
                     else if (result.stage == WorkerStateStage.TimeOut)
                     {
-                        // по тайм ауту вышли в рекламу
-                        if (Globals.ClientConfiguration.Settings.ScreenServerType == 0 || Globals.ClientConfiguration.Settings.ScreenServerType == 1)
-                        {
-                            result = (FormResultData)FormManager.OpenForm<FormWaitClientGif>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-                        }
-                        //else
-                        //{
-                        //    result = (FormResultData)FormManager.OpenForm<FormWaitClientVideo>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-                        //}
-
-                        if (result.stage == WorkerStateStage.ErrorBill)
-                        {
-                            // ошибки купюроприемника
-                            goto NoCheckStatistic;
-                        }
-                        else if (result.stage == WorkerStateStage.BillFull)
-                        {
-                            // купюроприемник полон
-                            goto NoCheckStatistic;
-                        }
-                        else if (result.stage == WorkerStateStage.PaperEnd)
-                        {
-                            // ошибки принтера есть
-                            continue;
-                        }
-                        else if (result.stage == WorkerStateStage.ErrorPrinter)
-                        {
-                            // ошибки принтера есть
-                            continue;
-                        }
-                        else if (result.stage == WorkerStateStage.DropCassettteBill)
-                        {
-                            Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выемка денег.");
-
-                            // выемка денег
-                            result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-
-                            if (result.stage == WorkerStateStage.EndDropCassette)
-                            {
-                                continue;
-                            }
-                            else if (result.stage == WorkerStateStage.ExitProgram)
-                            {
-                                // выход
-                                Close();
-                                return;
-                            }
-                        }
-                        else if (result.stage == WorkerStateStage.ErrorControl)
-                        {
-                            Program.Log.Write(LogMessageType.Information, "MAIN WORK: Аппарат временно не работает.");
-
-                            // аппарат временно не работает
-                            result = (FormResultData)FormManager.OpenForm<FormTemporallyNoWork>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-
-                            if (result.stage == WorkerStateStage.ExitProgram)
-                            {
-                                // выход
-                                Close();
-                                return;
-                            }
-                            else if (result.stage == WorkerStateStage.DropCassettteBill)
-                            {
-                                Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выемка денег.");
-
-                                // выемка денег
-                                result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
-
-                                if (result.stage == WorkerStateStage.ExitProgram)
-                                {
-                                    // выход
-                                    Close();
-                                    return;
-                                }
-                            }
-                            else if (result.stage == WorkerStateStage.BillErrorEnd)
-                            {
-
-                            }
-
-                            continue;
-                        }
-                        else
-                        {
-                            // вышли из рекламы
-                            check = false;
-                            continue;
-                        }
+                        // перейдем на инструкцию
+                        continue;
                     }
 
                     ChooseService:
@@ -598,6 +643,10 @@ NoCheckStatistic:
                         // выход
                         Close();
                         return;
+                    }
+                    else if (result.stage == WorkerStateStage.MainScreen)
+                    {
+                        goto MainForm;
                     }
                     else if (result.stage == WorkerStateStage.ErrorBill)
                     {
@@ -1004,7 +1053,7 @@ NoCheckStatistic:
                 return;
             }
 
-            fr2 = new FormWaitClientVideo(p,result);
+            fr2 = new FormWaitVideoSecondScreen(p,result);
 
             fr2.FormBorderStyle = FormBorderStyle.None;
             fr2.StartPosition = FormStartPosition.Manual;

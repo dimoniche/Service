@@ -58,6 +58,8 @@ namespace AirVitamin.Drivers
 
         public bool OpenPrint(string name)
         {
+            if (Globals.ClientConfiguration.Settings.offPrinter == 1) return false;
+
             if(PrinterOpen == false)
             {
                 di.pDocName = ".NET RAW Document";

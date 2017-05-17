@@ -125,6 +125,12 @@
     <Compile Include="Forms\FormWaitClientGif.Designer.cs">
       <DependentUpon>FormWaitClientGif.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormWaitVideoSecondScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormWaitVideoSecondScreen.Designer.cs">
+      <DependentUpon>FormWaitVideoSecondScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormWaitClientVideo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -199,6 +205,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormWaitClientGif.resx">
       <DependentUpon>FormWaitClientGif.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormWaitVideoSecondScreen.resx">
+      <DependentUpon>FormWaitVideoSecondScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormWaitClientVideo.resx">
       <DependentUpon>FormWaitClientVideo.cs</DependentUpon>

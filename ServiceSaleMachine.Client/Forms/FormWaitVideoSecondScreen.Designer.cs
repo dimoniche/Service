@@ -1,6 +1,6 @@
 ﻿namespace AirVitamin.Client
 {
-    partial class FormWaitClientVideo
+    partial class FormWaitVideoSecondScreen
     {
         /// <summary>
         /// Required designer variable.
@@ -28,10 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormWaitClientVideo));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormWaitVideoSecondScreen));
             this.VideoPlayer = new AxWMPLib.AxWindowsMediaPlayer();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.VideoPlayer)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,20 +45,14 @@
             this.VideoPlayer.PlayStateChange += new AxWMPLib._WMPOCXEvents_PlayStateChangeEventHandler(this.VideoPlayer_PlayStateChange);
             this.VideoPlayer.ClickEvent += new AxWMPLib._WMPOCXEvents_ClickEventHandler(this.VideoPlayer_ClickEvent);
             // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // FormWaitClientVideo
+            // FormWaitVideoSecondScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 600);
             this.Controls.Add(this.VideoPlayer);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "FormWaitClientVideo";
+            this.Name = "FormWaitVideoSecondScreen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormWaitClientVideo";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -73,6 +65,5 @@
 
         #endregion
         private AxWMPLib.AxWindowsMediaPlayer VideoPlayer;
-        private System.Windows.Forms.Timer timer1;
     }
 }

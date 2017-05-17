@@ -1730,7 +1730,6 @@
             this.ButVideo.TabIndex = 2;
             this.ButVideo.Text = "Видео";
             this.ButVideo.UseVisualStyleBackColor = true;
-            this.ButVideo.Visible = false;
             this.ButVideo.CheckedChanged += new System.EventHandler(this.ButPicture_CheckedChanged);
             // 
             // ButPicture

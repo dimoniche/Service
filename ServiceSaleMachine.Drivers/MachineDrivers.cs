@@ -149,7 +149,7 @@ namespace AirVitamin.Drivers
 
             if ((Globals.ClientConfiguration.Settings.offCheck != 1 && scaner.getNumberComPort().Contains("нет"))
             || (Globals.ClientConfiguration.Settings.offBill != 1 && CCNETDriver.getNumberComPort().Contains("нет"))
-            || printer.getNamePrinter().Contains("нет"))
+            || (Globals.ClientConfiguration.Settings.offPrinter != 1 && printer.getNamePrinter().Contains("нет")))
             {
                 // необходима настройка приложения
                 this.log.Write(LogMessageType.Error, "INIT: Необходима настройка приложения");
@@ -230,27 +230,34 @@ namespace AirVitamin.Drivers
                 this.log.Write(LogMessageType.Error, "BILL: Купюроприемник не настроен.");
             }
 
-            this.log.Write(LogMessageType.Information, "PRINTER: Настройка принтера.");
-
-            if (!printer.getNamePrinter().Contains("нет"))
+            if (Globals.ClientConfiguration.Settings.offPrinter != 1)
             {
-                // настроим принтер
-                if (printer.OpenPrint(Globals.ClientConfiguration.Settings.NamePrinter))
+                this.log.Write(LogMessageType.Information, "PRINTER: Настройка принтера.");
+
+                if (!printer.getNamePrinter().Contains("нет"))
                 {
-                    // настроим сенсор бумаги
+                    // настроим принтер
+                    if (printer.OpenPrint(Globals.ClientConfiguration.Settings.NamePrinter))
+                    {
+                        // настроим сенсор бумаги
+                    }
+                    else
+                    {
+                        // неудача
+                        this.log.Write(LogMessageType.Error, "PRINTER: Принтер не верно настроен. Порт не доступен.");
+                        res = WorkerStateStage.NeedSettingProgram;
+                    }
+
+                    printer.ClosePrint();
                 }
                 else
                 {
-                    // неудача
-                    this.log.Write(LogMessageType.Error, "PRINTER: Принтер не верно настроен. Порт не доступен.");
-                    res = WorkerStateStage.NeedSettingProgram;
+                    this.log.Write(LogMessageType.Error, "PRINTER: Принтер не настроен.");
                 }
-
-                printer.ClosePrint();
             }
             else
             {
-                this.log.Write(LogMessageType.Error, "PRINTER: Принтер не настроен.");
+                this.log.Write(LogMessageType.Error, "PRINTER: Принтер выключен.");
             }
 
             // настроим управляющее устройство

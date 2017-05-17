@@ -41,6 +41,10 @@ namespace AirVitamin.Client
 
             data.drivers.control.SendOpenControl(data.numberCurrentDevice);
             data.drivers.ReceivedResponse += reciveResponse;
+
+            progressBar.Maximum = Interval;
+            progressBar.Value = Interval;
+            progressBar.ForeColor = Color.FromArgb(0, 158, 227);
         }
 
         private void reciveResponse(object sender, ServiceClientResponseEventArgs e)
@@ -81,6 +85,8 @@ namespace AirVitamin.Client
 
         private void timerService_Tick(object sender, EventArgs e)
         {
+            progressBar.Value--;
+
             if (Interval-- == 0)
             {
                 // услугу оказали полностью
@@ -107,8 +113,8 @@ namespace AirVitamin.Client
         {
             Pen pen = new Pen(Color.Green, 10);
 
-            Graphics g = Graphics.FromHwnd(Balloon.Handle);
-            g.DrawEllipse(pen, new Rectangle(15,15, (int)(width - 15),(int)(height - 15)));
+            //Graphics g = Graphics.FromHwnd(tableLayoutPanel3.Handle);
+            //g.DrawEllipse(pen, new Rectangle(15,15, (int)(width - 15),(int)(height - 15)));
         }
 
         private void FormProvideService_Shown(object sender, EventArgs e)

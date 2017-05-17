@@ -94,7 +94,7 @@ namespace AirVitamin.Client
                 Globals.ClientConfiguration.Load();
             }
 
-            Application.EnableVisualStyles();
+            //Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
         }

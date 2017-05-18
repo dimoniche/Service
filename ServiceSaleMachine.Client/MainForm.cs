@@ -283,8 +283,41 @@ NoCheckStatistic:
                             return;
                         }
                     }
+                    else if (result.stage == WorkerStateStage.ErrorControl)
+                    {
+                        #region Ошибка управляющего устройства
+                        Program.Log.Write(LogMessageType.Information, "MAIN WORK: Аппарат не работает.");
+
+                        // аппарат временно не работает
+                        result = (FormResultData)FormManager.OpenForm<FormTemporallyNoWork>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                        if (result.stage == WorkerStateStage.DropCassettteBill)
+                        {
+                            Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выемка денег.");
+
+                            // выемка денег
+                            result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                            if (result.stage == WorkerStateStage.ExitProgram)
+                            {
+                                // выход
+                                Close();
+                                return;
+                            }
+                        }
+                        else if (result.stage == WorkerStateStage.ExitProgram)
+                        {
+                            // выход
+                            Close();
+                            return;
+                        }
+
+                        continue;
+                        #endregion
+                    }
                     else if (result.stage == WorkerStateStage.TimeOut)
                     {
+                        #region отображение видео ожидания
                         // по тайм ауту вышли в рекламу
                         if (Globals.ClientConfiguration.Settings.ScreenServerType == 0 || Globals.ClientConfiguration.Settings.ScreenServerType == 1)
                         {
@@ -335,6 +368,7 @@ NoCheckStatistic:
                         }
                         else if (result.stage == WorkerStateStage.ErrorControl)
                         {
+                            #region Ошибка управляющего устройства
                             Program.Log.Write(LogMessageType.Information, "MAIN WORK: Аппарат временно не работает.");
 
                             // аппарат временно не работает
@@ -366,6 +400,7 @@ NoCheckStatistic:
                             }
 
                             continue;
+                            #endregion
                         }
                         else
                         {
@@ -373,6 +408,17 @@ NoCheckStatistic:
                             check = false;
                             continue;
                         }
+                        #endregion
+                    }
+                    else if (result.stage == WorkerStateStage.ErrorBill)
+                    {
+                        // ошибки купюроприемника
+                        goto NoCheckStatistic;
+                    }
+                    else if (result.stage == WorkerStateStage.BillFull)
+                    {
+                        // купюроприемник полон
+                        goto NoCheckStatistic;
                     }
 
                     MainForm:
@@ -412,7 +458,8 @@ NoCheckStatistic:
                     }
                     else if (result.stage == WorkerStateStage.InterUser)
                     {
-                        // авторизация пользователя
+                        #region  авторизация пользователя
+
                         result = (FormResultData)FormManager.OpenForm<UserRequest>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
                         // проверим результат
@@ -448,8 +495,6 @@ NoCheckStatistic:
                                 Close();
                                 return;
                             }
-
-                            continue;
                         }
                         else if (result.stage == WorkerStateStage.NotFindPhone)
                         {
@@ -477,14 +522,18 @@ NoCheckStatistic:
                         else if (result.stage == WorkerStateStage.TimeOut)
                         {
                             // тайм аут
+
                             continue;
                         }
 
                         // нормально зарегистрировались
-                        goto WaitClient;
+                        goto MainForm;
+
+                        #endregion
                     }
                     else if (result.stage == WorkerStateStage.ErrorControl)
                     {
+                        #region Ошибка управляющего устройства
                         Program.Log.Write(LogMessageType.Information, "MAIN WORK: Аппарат не работает.");
 
                         // аппарат временно не работает
@@ -512,6 +561,7 @@ NoCheckStatistic:
                         }
 
                         continue;
+                        #endregion
                     }
                     else if (result.stage == WorkerStateStage.ChooseService)
                     {
@@ -519,7 +569,7 @@ NoCheckStatistic:
                     }
                     else if (result.stage == WorkerStateStage.Philosof)
                     {
-                        // ознакомление с правилами
+                        #region ознакомление с философией
                         result = (FormResultData)FormManager.OpenForm<FormPhilosofy>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
                         if (result.stage == WorkerStateStage.MainScreen)
@@ -561,10 +611,11 @@ NoCheckStatistic:
                             // уходим на выбор услуг
                             check = false;
                         }
+                        #endregion
                     }
                     else if (result.stage == WorkerStateStage.Rules)
                     {
-                        // ознакомление с правилами
+                        #region ознакомление с правилами
                         result = (FormResultData)FormManager.OpenForm<FormRules>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
                         if (result.stage == WorkerStateStage.MainScreen)
@@ -606,6 +657,7 @@ NoCheckStatistic:
                             // уходим на выбор услуг
                             check = false;
                         }
+                        #endregion
                     }
                     else if (result.stage == WorkerStateStage.DropCassettteBill)
                     {

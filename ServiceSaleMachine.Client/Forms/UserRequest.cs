@@ -105,6 +105,9 @@ namespace AirVitamin.Client
 
                         data.retLogin = "";
                         data.retPassword = "";
+
+                        Globals.UserConfiguration.UserLogin = "";
+                        Globals.UserConfiguration.UserPassword = "";
                     }
                 }
 

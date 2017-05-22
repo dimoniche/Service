@@ -47,15 +47,14 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.baloonLayout = new System.Windows.Forms.TableLayoutPanel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel12 = new System.Windows.Forms.Panel();
             this.Balloon = new AxShockwaveFlashObjects.AxShockwaveFlash();
             this.panel6 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.pBxReturnMainMenu = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
-            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -72,13 +71,13 @@
             this.panel4.SuspendLayout();
             this.baloonLayout.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.panel12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Balloon)).BeginInit();
             this.panel6.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
             this.panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBxReturnMainMenu)).BeginInit();
-            this.panel11.SuspendLayout();
-            this.tableLayoutPanel8.SuspendLayout();
             this.SuspendLayout();
             // 
             // timerService
@@ -119,7 +118,6 @@
             this.tableLayoutPanel2.Controls.Add(this.panel4, 0, 5);
             this.tableLayoutPanel2.Controls.Add(this.panel6, 0, 7);
             this.tableLayoutPanel2.Controls.Add(this.button1, 0, 8);
-            this.tableLayoutPanel2.Controls.Add(this.panel11, 0, 4);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -274,12 +272,38 @@
             // 
             // panel5
             // 
-            this.panel5.Controls.Add(this.Balloon);
+            this.panel5.Controls.Add(this.tableLayoutPanel3);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(206, 3);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(215, 215);
             this.panel5.TabIndex = 0;
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 3;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel3.Controls.Add(this.panel12, 1, 1);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 3;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(215, 215);
+            this.tableLayoutPanel3.TabIndex = 0;
+            // 
+            // panel12
+            // 
+            this.panel12.Controls.Add(this.Balloon);
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel12.Location = new System.Drawing.Point(46, 46);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(123, 123);
+            this.panel12.TabIndex = 0;
             // 
             // Balloon
             // 
@@ -288,8 +312,8 @@
             this.Balloon.Location = new System.Drawing.Point(0, 0);
             this.Balloon.Name = "Balloon";
             this.Balloon.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("Balloon.OcxState")));
-            this.Balloon.Size = new System.Drawing.Size(215, 215);
-            this.Balloon.TabIndex = 0;
+            this.Balloon.Size = new System.Drawing.Size(123, 123);
+            this.Balloon.TabIndex = 1;
             // 
             // panel6
             // 
@@ -342,45 +366,9 @@
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 4;
             this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = false;
+            this.button1.UseVisualStyleBackColor = true;
             this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // panel11
-            // 
-            this.panel11.Controls.Add(this.tableLayoutPanel8);
-            this.panel11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel11.Location = new System.Drawing.Point(3, 155);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(628, 39);
-            this.panel11.TabIndex = 5;
-            // 
-            // tableLayoutPanel8
-            // 
-            this.tableLayoutPanel8.ColumnCount = 3;
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel8.Controls.Add(this.progressBar, 1, 1);
-            this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel8.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel8.Name = "tableLayoutPanel8";
-            this.tableLayoutPanel8.RowCount = 3;
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 0F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(628, 39);
-            this.tableLayoutPanel8.TabIndex = 0;
-            // 
-            // progressBar
-            // 
-            this.progressBar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.progressBar.ForeColor = System.Drawing.Color.Aqua;
-            this.progressBar.Location = new System.Drawing.Point(128, 18);
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(370, 17);
-            this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.progressBar.TabIndex = 0;
             // 
             // FormProvideService
             // 
@@ -412,13 +400,13 @@
             this.panel4.ResumeLayout(false);
             this.baloonLayout.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.panel12.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Balloon)).EndInit();
             this.panel6.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pBxReturnMainMenu)).EndInit();
-            this.panel11.ResumeLayout(false);
-            this.tableLayoutPanel8.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -446,10 +434,9 @@
         private System.Windows.Forms.PictureBox pBxLogo;
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.PictureBox pBxProvideServiceText;
-        private AxShockwaveFlashObjects.AxShockwaveFlash Balloon;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Panel panel11;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
-        private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.Panel panel12;
+        private AxShockwaveFlashObjects.AxShockwaveFlash Balloon;
     }
 }

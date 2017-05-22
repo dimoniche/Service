@@ -173,6 +173,9 @@ namespace AirVitamin.Client
                 data.retPassword = "";
                 data.CurrentUserId = 0;
 
+                Globals.UserConfiguration.UserLogin = "";
+                Globals.UserConfiguration.UserPassword = "";
+
                 this.Close();
             }
         }

@@ -16,6 +16,14 @@ namespace AirVitamin.Client
         double height;
         double width;
 
+        Pen pen;
+        Graphics g;
+
+        float startAngle = -90.0F;
+        float sweepAngle = 360.0F;
+
+        float step = 0;
+
         public FormProvideService()
         {
             InitializeComponent();
@@ -37,14 +45,10 @@ namespace AirVitamin.Client
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxProvideServiceText, "Dishy_txt.png");
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxReturnMainMenu, Globals.DesignConfiguration.Settings.ButtonRetToMain);
 
-            timerService.Enabled = true;
-
             data.drivers.control.SendOpenControl(data.numberCurrentDevice);
             data.drivers.ReceivedResponse += reciveResponse;
 
-            progressBar.Maximum = Interval;
-            progressBar.Value = Interval;
-            progressBar.ForeColor = Color.FromArgb(0, 158, 227);
+            step = 360f / Interval;
         }
 
         private void reciveResponse(object sender, ServiceClientResponseEventArgs e)
@@ -85,13 +89,24 @@ namespace AirVitamin.Client
 
         private void timerService_Tick(object sender, EventArgs e)
         {
-            progressBar.Value--;
-
             if (Interval-- == 0)
             {
                 // услугу оказали полностью
                 data.stage = WorkerStateStage.EndService;
                 Close();
+            }
+            else
+            {
+                g = Graphics.FromHwnd(tableLayoutPanel3.Handle);
+
+                pen = new Pen(Color.Gainsboro, 20);
+                g.DrawArc(pen, new Rectangle(15, 15, (int)(width - 30), (int)(height - 30)), startAngle, sweepAngle);
+
+                startAngle += step;
+                sweepAngle -= step;
+
+                pen = new Pen(Color.FromArgb(0, 158, 227), 20);
+                g.DrawArc(pen, new Rectangle(15, 15, (int)(width - 30), (int)(height - 30)), startAngle, sweepAngle);
             }
         }
 
@@ -111,10 +126,10 @@ namespace AirVitamin.Client
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Pen pen = new Pen(Color.Green, 10);
+            pen = new Pen(Color.FromArgb(0, 158, 227), 20);
+            g = Graphics.FromHwnd(tableLayoutPanel3.Handle);
 
-            //Graphics g = Graphics.FromHwnd(tableLayoutPanel3.Handle);
-            //g.DrawEllipse(pen, new Rectangle(15,15, (int)(width - 15),(int)(height - 15)));
+            g.DrawArc(pen, new Rectangle(15,15, (int)(width - 30),(int)(height - 30)),45,90);
         }
 
         private void FormProvideService_Shown(object sender, EventArgs e)
@@ -131,8 +146,14 @@ namespace AirVitamin.Client
             height = panel5.Height;
             width = panel5.Width;
 
+            g = Graphics.FromHwnd(tableLayoutPanel3.Handle);
+            pen = new Pen(Color.FromArgb(0, 158, 227), 20);
+            g.DrawArc(pen, new Rectangle(15, 15, (int)(width - 30), (int)(height - 30)), startAngle, sweepAngle);
+
             Balloon.Movie = Globals.GetPath(PathEnum.Flash) + "\\balloon.swf";
             Balloon.Zoom(40);
+
+            timerService.Enabled = true;
         }
     }
 }

@@ -131,6 +131,9 @@ namespace AirVitamin.Client
                     result.retLogin = "";
                     result.retPassword = "";
 
+                    Globals.UserConfiguration.UserLogin = "";
+                    Globals.UserConfiguration.UserPassword = "";
+
                     // Проверка статистических данных - может пора заканчивать работать
                     if (check)
                     {

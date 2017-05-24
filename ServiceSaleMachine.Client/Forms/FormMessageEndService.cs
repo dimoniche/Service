@@ -82,6 +82,15 @@ namespace AirVitamin.Client
 
             if (!fileLoaded)
             {
+                if (data.numberService == 0)
+                {
+                    TextThanks.LoadFile(Globals.GetPath(PathEnum.Text) + "\\text_thanks1.rtf");
+                }
+                else
+                {
+                    TextThanks.LoadFile(Globals.GetPath(PathEnum.Text) + "\\text_thanks2.rtf");
+                }
+
                 fileLoaded = true;
                 timer1.Interval = 1000;
             }

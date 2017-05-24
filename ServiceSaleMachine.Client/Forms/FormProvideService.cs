@@ -41,6 +41,9 @@ namespace AirVitamin.Client
                 }
             }
 
+            // у флеша немного другой цвет фона
+            BackColor = Color.FromArgb(212, 208, 199);
+
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxLogo, "Logo_O2.png");
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxProvideServiceText, "Dishy_txt.png");
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxReturnMainMenu, Globals.DesignConfiguration.Settings.ButtonRetToMain);

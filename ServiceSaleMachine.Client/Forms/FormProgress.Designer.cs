@@ -32,10 +32,10 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel5 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.pBxStart = new System.Windows.Forms.PictureBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.panel9 = new System.Windows.Forms.Panel();
@@ -43,37 +43,37 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.panel10 = new System.Windows.Forms.Panel();
+            this.pBxTitle = new System.Windows.Forms.PictureBox();
             this.panel11 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.panel12 = new System.Windows.Forms.Panel();
+            this.pBxTitle1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.panel14 = new System.Windows.Forms.Panel();
-            this.pBxStart = new System.Windows.Forms.PictureBox();
-            this.pBxTitle = new System.Windows.Forms.PictureBox();
-            this.pBxTitle1 = new System.Windows.Forms.PictureBox();
             this.pictureLogo = new System.Windows.Forms.PictureBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel5.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
             this.panel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pBxStart)).BeginInit();
             this.panel4.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.panel9.SuspendLayout();
             this.panel3.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
             this.panel10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pBxTitle)).BeginInit();
             this.panel11.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
             this.panel12.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pBxTitle1)).BeginInit();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.panel14.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pBxStart)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pBxTitle)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pBxTitle1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureLogo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -128,11 +128,6 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(794, 594);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
-            // timer1
-            // 
-            this.timer1.Interval = 50;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // panel5
             // 
             this.panel5.Controls.Add(this.tableLayoutPanel7);
@@ -165,6 +160,17 @@
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(338, 52);
             this.panel6.TabIndex = 0;
+            // 
+            // pBxStart
+            // 
+            this.pBxStart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pBxStart.Location = new System.Drawing.Point(0, 0);
+            this.pBxStart.Name = "pBxStart";
+            this.pBxStart.Size = new System.Drawing.Size(338, 52);
+            this.pBxStart.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pBxStart.TabIndex = 1;
+            this.pBxStart.TabStop = false;
+            this.pBxStart.Click += new System.EventHandler(this.pBxStart_Click);
             // 
             // panel4
             // 
@@ -245,6 +251,16 @@
             this.panel10.Size = new System.Drawing.Size(141, 33);
             this.panel10.TabIndex = 0;
             // 
+            // pBxTitle
+            // 
+            this.pBxTitle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pBxTitle.Location = new System.Drawing.Point(0, 0);
+            this.pBxTitle.Name = "pBxTitle";
+            this.pBxTitle.Size = new System.Drawing.Size(141, 33);
+            this.pBxTitle.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pBxTitle.TabIndex = 0;
+            this.pBxTitle.TabStop = false;
+            // 
             // panel11
             // 
             this.panel11.Controls.Add(this.tableLayoutPanel9);
@@ -277,6 +293,16 @@
             this.panel12.Name = "panel12";
             this.panel12.Size = new System.Drawing.Size(338, 16);
             this.panel12.TabIndex = 0;
+            // 
+            // pBxTitle1
+            // 
+            this.pBxTitle1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pBxTitle1.Location = new System.Drawing.Point(0, 0);
+            this.pBxTitle1.Name = "pBxTitle1";
+            this.pBxTitle1.Size = new System.Drawing.Size(338, 16);
+            this.pBxTitle1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pBxTitle1.TabIndex = 0;
+            this.pBxTitle1.TabStop = false;
             // 
             // panel2
             // 
@@ -311,37 +337,6 @@
             this.panel14.Size = new System.Drawing.Size(43, 41);
             this.panel14.TabIndex = 0;
             // 
-            // pBxStart
-            // 
-            this.pBxStart.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pBxStart.Location = new System.Drawing.Point(0, 0);
-            this.pBxStart.Name = "pBxStart";
-            this.pBxStart.Size = new System.Drawing.Size(338, 52);
-            this.pBxStart.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pBxStart.TabIndex = 1;
-            this.pBxStart.TabStop = false;
-            this.pBxStart.Click += new System.EventHandler(this.pBxStart_Click);
-            // 
-            // pBxTitle
-            // 
-            this.pBxTitle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pBxTitle.Location = new System.Drawing.Point(0, 0);
-            this.pBxTitle.Name = "pBxTitle";
-            this.pBxTitle.Size = new System.Drawing.Size(141, 33);
-            this.pBxTitle.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pBxTitle.TabIndex = 0;
-            this.pBxTitle.TabStop = false;
-            // 
-            // pBxTitle1
-            // 
-            this.pBxTitle1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pBxTitle1.Location = new System.Drawing.Point(0, 0);
-            this.pBxTitle1.Name = "pBxTitle1";
-            this.pBxTitle1.Size = new System.Drawing.Size(338, 16);
-            this.pBxTitle1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pBxTitle1.TabIndex = 0;
-            this.pBxTitle1.TabStop = false;
-            // 
             // pictureLogo
             // 
             this.pictureLogo.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -351,6 +346,11 @@
             this.pictureLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureLogo.TabIndex = 1;
             this.pictureLogo.TabStop = false;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 50;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // FormProgress
             // 
@@ -371,21 +371,21 @@
             this.panel5.ResumeLayout(false);
             this.tableLayoutPanel7.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pBxStart)).EndInit();
             this.panel4.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.tableLayoutPanel8.ResumeLayout(false);
             this.panel10.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pBxTitle)).EndInit();
             this.panel11.ResumeLayout(false);
             this.tableLayoutPanel9.ResumeLayout(false);
             this.panel12.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pBxTitle1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.panel14.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pBxStart)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pBxTitle)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pBxTitle1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureLogo)).EndInit();
             this.ResumeLayout(false);
 

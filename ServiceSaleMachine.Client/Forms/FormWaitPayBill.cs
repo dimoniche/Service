@@ -60,7 +60,7 @@ namespace AirVitamin.Client
             data.log.Write(LogMessageType.Information, "========================НАЧАЛО ОБСЛУЖИВАНИЯ==========================");
 
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxGiveOxigen, Globals.DesignConfiguration.Settings.ButtonGetOxigen);
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxMainMenu, "Menu_big.png");
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxMainMenu, "Vybrat_smes.png");
 
             Globals.DesignConfiguration.Settings.LoadPictureBox(pictureLogo, "Logo_O2.png");
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTitle1, "Smes_txt.png");

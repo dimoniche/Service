@@ -47,6 +47,9 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.DevicetabControl = new System.Windows.Forms.TabControl();
             this.tabPageDevice = new System.Windows.Forms.TabPage();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBoxBefore = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -80,6 +83,9 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Controls.Add(this.textBoxBefore);
+            this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.textBoxTimeService);
             this.panel2.Controls.Add(this.label5);
@@ -102,7 +108,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(361, 48);
+            this.label4.Location = new System.Drawing.Point(361, 83);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(25, 13);
             this.label4.TabIndex = 21;
@@ -110,7 +116,7 @@
             // 
             // textBoxTimeService
             // 
-            this.textBoxTimeService.Location = new System.Drawing.Point(255, 41);
+            this.textBoxTimeService.Location = new System.Drawing.Point(255, 76);
             this.textBoxTimeService.Name = "textBoxTimeService";
             this.textBoxTimeService.Size = new System.Drawing.Size(100, 20);
             this.textBoxTimeService.TabIndex = 20;
@@ -120,7 +126,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 48);
+            this.label5.Location = new System.Drawing.Point(3, 83);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(116, 13);
             this.label5.TabIndex = 19;
@@ -129,7 +135,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(361, 95);
+            this.label6.Location = new System.Drawing.Point(361, 130);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(24, 13);
             this.label6.TabIndex = 18;
@@ -137,7 +143,7 @@
             // 
             // textBoxPriceService
             // 
-            this.textBoxPriceService.Location = new System.Drawing.Point(255, 88);
+            this.textBoxPriceService.Location = new System.Drawing.Point(255, 123);
             this.textBoxPriceService.Name = "textBoxPriceService";
             this.textBoxPriceService.Size = new System.Drawing.Size(100, 20);
             this.textBoxPriceService.TabIndex = 17;
@@ -147,7 +153,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 95);
+            this.label7.Location = new System.Drawing.Point(3, 130);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(98, 13);
             this.label7.TabIndex = 16;
@@ -155,7 +161,7 @@
             // 
             // textBoxCaptionService
             // 
-            this.textBoxCaptionService.Location = new System.Drawing.Point(255, 64);
+            this.textBoxCaptionService.Location = new System.Drawing.Point(255, 99);
             this.textBoxCaptionService.Name = "textBoxCaptionService";
             this.textBoxCaptionService.Size = new System.Drawing.Size(133, 20);
             this.textBoxCaptionService.TabIndex = 14;
@@ -165,7 +171,7 @@
             // labCaptionService
             // 
             this.labCaptionService.AutoSize = true;
-            this.labCaptionService.Location = new System.Drawing.Point(3, 71);
+            this.labCaptionService.Location = new System.Drawing.Point(3, 106);
             this.labCaptionService.Name = "labCaptionService";
             this.labCaptionService.Size = new System.Drawing.Size(93, 13);
             this.labCaptionService.TabIndex = 13;
@@ -174,7 +180,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(361, 23);
+            this.label1.Location = new System.Drawing.Point(361, 58);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(25, 13);
             this.label1.TabIndex = 9;
@@ -182,7 +188,7 @@
             // 
             // butDelDev
             // 
-            this.butDelDev.Location = new System.Drawing.Point(166, 124);
+            this.butDelDev.Location = new System.Drawing.Point(166, 159);
             this.butDelDev.Name = "butDelDev";
             this.butDelDev.Size = new System.Drawing.Size(154, 23);
             this.butDelDev.TabIndex = 8;
@@ -193,7 +199,7 @@
             // 
             // butaddDev
             // 
-            this.butaddDev.Location = new System.Drawing.Point(6, 124);
+            this.butaddDev.Location = new System.Drawing.Point(6, 159);
             this.butaddDev.Name = "butaddDev";
             this.butaddDev.Size = new System.Drawing.Size(154, 23);
             this.butaddDev.TabIndex = 8;
@@ -204,7 +210,7 @@
             // 
             // textBoxPause
             // 
-            this.textBoxPause.Location = new System.Drawing.Point(255, 16);
+            this.textBoxPause.Location = new System.Drawing.Point(255, 51);
             this.textBoxPause.Name = "textBoxPause";
             this.textBoxPause.Size = new System.Drawing.Size(100, 20);
             this.textBoxPause.TabIndex = 7;
@@ -214,11 +220,11 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(3, 23);
+            this.label20.Location = new System.Drawing.Point(3, 58);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(220, 13);
+            this.label20.Size = new System.Drawing.Size(175, 13);
             this.label20.TabIndex = 6;
-            this.label20.Text = "Длительность паузы между процедурами";
+            this.label20.Text = "Пауза перед началом процедуры";
             // 
             // panel3
             // 
@@ -249,6 +255,33 @@
             this.tabPageDevice.TabIndex = 0;
             this.tabPageDevice.Text = "Устройство 1";
             this.tabPageDevice.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(361, 33);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(25, 13);
+            this.label2.TabIndex = 24;
+            this.label2.Text = "сек";
+            // 
+            // textBoxBefore
+            // 
+            this.textBoxBefore.Location = new System.Drawing.Point(255, 26);
+            this.textBoxBefore.Name = "textBoxBefore";
+            this.textBoxBefore.Size = new System.Drawing.Size(100, 20);
+            this.textBoxBefore.TabIndex = 23;
+            this.textBoxBefore.Text = "0";
+            this.textBoxBefore.Leave += new System.EventHandler(this.textBoxBefore_Leave);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 33);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(175, 13);
+            this.label3.TabIndex = 22;
+            this.label3.Text = "Пауза перед началом процедуры";
             // 
             // ServiceTabControl
             // 
@@ -288,5 +321,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBoxTimeService;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBoxBefore;
+        private System.Windows.Forms.Label label3;
     }
 }

@@ -236,6 +236,8 @@
             this.labelTimeLastRefresh = new System.Windows.Forms.Label();
             this.labelWorkFromLastRefresh = new System.Windows.Forms.Label();
             this.buttonResetTimeRefresh = new System.Windows.Forms.Button();
+            this.label36 = new System.Windows.Forms.Label();
+            this.textCollectSMS = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -1515,7 +1517,7 @@
             // resSMS
             // 
             this.resSMS.AutoSize = true;
-            this.resSMS.Location = new System.Drawing.Point(190, 257);
+            this.resSMS.Location = new System.Drawing.Point(190, 273);
             this.resSMS.Name = "resSMS";
             this.resSMS.Size = new System.Drawing.Size(138, 13);
             this.resSMS.TabIndex = 16;
@@ -1538,6 +1540,8 @@
             // 
             // groupBxSettingModem
             // 
+            this.groupBxSettingModem.Controls.Add(this.label36);
+            this.groupBxSettingModem.Controls.Add(this.textCollectSMS);
             this.groupBxSettingModem.Controls.Add(this.label24);
             this.groupBxSettingModem.Controls.Add(this.label22);
             this.groupBxSettingModem.Controls.Add(this.textNeedCollect);
@@ -1546,7 +1550,7 @@
             this.groupBxSettingModem.Controls.Add(this.textNumberPhone);
             this.groupBxSettingModem.Location = new System.Drawing.Point(18, 55);
             this.groupBxSettingModem.Name = "groupBxSettingModem";
-            this.groupBxSettingModem.Size = new System.Drawing.Size(341, 178);
+            this.groupBxSettingModem.Size = new System.Drawing.Size(341, 193);
             this.groupBxSettingModem.TabIndex = 14;
             this.groupBxSettingModem.TabStop = false;
             this.groupBxSettingModem.Text = "Настройки модема";
@@ -1556,9 +1560,9 @@
             this.label24.AutoSize = true;
             this.label24.Location = new System.Drawing.Point(18, 99);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(213, 13);
+            this.label24.Size = new System.Drawing.Size(216, 13);
             this.label24.TabIndex = 2;
-            this.label24.Text = "Текст СМС онеобходимости инкассации";
+            this.label24.Text = "Текст СМС о необходимости инкассации";
             // 
             // label22
             // 
@@ -1604,7 +1608,7 @@
             // 
             // butsendsms
             // 
-            this.butsendsms.Location = new System.Drawing.Point(18, 251);
+            this.butsendsms.Location = new System.Drawing.Point(18, 267);
             this.butsendsms.Name = "butsendsms";
             this.butsendsms.Size = new System.Drawing.Size(150, 24);
             this.butsendsms.TabIndex = 13;
@@ -1765,9 +1769,9 @@
             this.label15.AutoSize = true;
             this.label15.Location = new System.Drawing.Point(242, 88);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(27, 13);
+            this.label15.Size = new System.Drawing.Size(25, 13);
             this.label15.TabIndex = 21;
-            this.label15.Text = "мин";
+            this.label15.Text = "сек";
             // 
             // textBoxMaxTimeService
             // 
@@ -2366,7 +2370,7 @@
             // 
             // button17
             // 
-            this.button17.Location = new System.Drawing.Point(35, 217);
+            this.button17.Location = new System.Drawing.Point(36, 147);
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(201, 23);
             this.button17.TabIndex = 13;
@@ -2376,7 +2380,7 @@
             // 
             // buttonResetAllAmount
             // 
-            this.buttonResetAllAmount.Location = new System.Drawing.Point(439, 217);
+            this.buttonResetAllAmount.Location = new System.Drawing.Point(450, 147);
             this.buttonResetAllAmount.Name = "buttonResetAllAmount";
             this.buttonResetAllAmount.Size = new System.Drawing.Size(201, 23);
             this.buttonResetAllAmount.TabIndex = 12;
@@ -2398,9 +2402,9 @@
             this.labelAllAmountMoney.AutoSize = true;
             this.labelAllAmountMoney.Location = new System.Drawing.Point(447, 95);
             this.labelAllAmountMoney.Name = "labelAllAmountMoney";
-            this.labelAllAmountMoney.Size = new System.Drawing.Size(124, 13);
+            this.labelAllAmountMoney.Size = new System.Drawing.Size(161, 13);
             this.labelAllAmountMoney.TabIndex = 10;
-            this.labelAllAmountMoney.Text = "Сумма принятых денег";
+            this.labelAllAmountMoney.Text = "Сумма, внесенная наличными";
             // 
             // dateTimeStatistic
             // 
@@ -2413,7 +2417,7 @@
             // 
             // button15
             // 
-            this.button15.Location = new System.Drawing.Point(35, 246);
+            this.button15.Location = new System.Drawing.Point(34, 387);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(201, 23);
             this.button15.TabIndex = 8;
@@ -2425,7 +2429,7 @@
             // labelCountBankNote
             // 
             this.labelCountBankNote.AutoSize = true;
-            this.labelCountBankNote.Location = new System.Drawing.Point(32, 163);
+            this.labelCountBankNote.Location = new System.Drawing.Point(31, 333);
             this.labelCountBankNote.Name = "labelCountBankNote";
             this.labelCountBankNote.Size = new System.Drawing.Size(161, 13);
             this.labelCountBankNote.TabIndex = 2;
@@ -2435,7 +2439,7 @@
             // labelServiceMoneySumm
             // 
             this.labelServiceMoneySumm.AutoSize = true;
-            this.labelServiceMoneySumm.Location = new System.Drawing.Point(32, 140);
+            this.labelServiceMoneySumm.Location = new System.Drawing.Point(31, 310);
             this.labelServiceMoneySumm.Name = "labelServiceMoneySumm";
             this.labelServiceMoneySumm.Size = new System.Drawing.Size(131, 13);
             this.labelServiceMoneySumm.TabIndex = 2;
@@ -2445,7 +2449,7 @@
             // labelBarCodeMoneySumm
             // 
             this.labelBarCodeMoneySumm.AutoSize = true;
-            this.labelBarCodeMoneySumm.Location = new System.Drawing.Point(32, 118);
+            this.labelBarCodeMoneySumm.Location = new System.Drawing.Point(31, 288);
             this.labelBarCodeMoneySumm.Name = "labelBarCodeMoneySumm";
             this.labelBarCodeMoneySumm.Size = new System.Drawing.Size(170, 13);
             this.labelBarCodeMoneySumm.TabIndex = 2;
@@ -2455,7 +2459,7 @@
             // labelAccountMoneySumm
             // 
             this.labelAccountMoneySumm.AutoSize = true;
-            this.labelAccountMoneySumm.Location = new System.Drawing.Point(32, 95);
+            this.labelAccountMoneySumm.Location = new System.Drawing.Point(32, 73);
             this.labelAccountMoneySumm.Name = "labelAccountMoneySumm";
             this.labelAccountMoneySumm.Size = new System.Drawing.Size(142, 13);
             this.labelAccountMoneySumm.TabIndex = 2;
@@ -2464,7 +2468,7 @@
             // labelAllMoneySumm
             // 
             this.labelAllMoneySumm.AutoSize = true;
-            this.labelAllMoneySumm.Location = new System.Drawing.Point(32, 73);
+            this.labelAllMoneySumm.Location = new System.Drawing.Point(447, 73);
             this.labelAllMoneySumm.Name = "labelAllMoneySumm";
             this.labelAllMoneySumm.Size = new System.Drawing.Size(126, 13);
             this.labelAllMoneySumm.TabIndex = 2;
@@ -2473,7 +2477,7 @@
             // buttonEncashment
             // 
             this.buttonEncashment.Enabled = false;
-            this.buttonEncashment.Location = new System.Drawing.Point(36, 188);
+            this.buttonEncashment.Location = new System.Drawing.Point(35, 358);
             this.buttonEncashment.Name = "buttonEncashment";
             this.buttonEncashment.Size = new System.Drawing.Size(201, 23);
             this.buttonEncashment.TabIndex = 1;
@@ -2509,9 +2513,9 @@
             this.labelWorkFromLastRefresh.AutoSize = true;
             this.labelWorkFromLastRefresh.Location = new System.Drawing.Point(23, 52);
             this.labelWorkFromLastRefresh.Name = "labelWorkFromLastRefresh";
-            this.labelWorkFromLastRefresh.Size = new System.Drawing.Size(340, 13);
+            this.labelWorkFromLastRefresh.Size = new System.Drawing.Size(338, 13);
             this.labelWorkFromLastRefresh.TabIndex = 1;
-            this.labelWorkFromLastRefresh.Text = "Всего проработали со времени последнего обслуживания: 0 мин";
+            this.labelWorkFromLastRefresh.Text = "Всего проработали со времени последнего обслуживания: 0 сек";
             // 
             // buttonResetTimeRefresh
             // 
@@ -2522,6 +2526,23 @@
             this.buttonResetTimeRefresh.Text = "Обновить время обслуживания";
             this.buttonResetTimeRefresh.UseVisualStyleBackColor = true;
             this.buttonResetTimeRefresh.Click += new System.EventHandler(this.buttonResetTimeRefresh_Click);
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(18, 140);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(135, 13);
+            this.label36.TabIndex = 4;
+            this.label36.Text = "Текст СМС о инкассации";
+            // 
+            // textCollectSMS
+            // 
+            this.textCollectSMS.Location = new System.Drawing.Point(133, 156);
+            this.textCollectSMS.Name = "textCollectSMS";
+            this.textCollectSMS.Size = new System.Drawing.Size(181, 20);
+            this.textCollectSMS.TabIndex = 3;
+            this.textCollectSMS.Leave += new System.EventHandler(this.textCollectSMS_Leave);
             // 
             // FormSettings
             // 
@@ -2806,5 +2827,7 @@
         private System.Windows.Forms.Button PipeOn;
         private System.Windows.Forms.CheckBox checkOffPrinter;
         private System.Windows.Forms.CheckBox cBxVideoSecondScreen;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.TextBox textCollectSMS;
     }
 }

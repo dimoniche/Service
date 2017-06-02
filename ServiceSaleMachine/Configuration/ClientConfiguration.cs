@@ -61,6 +61,7 @@ namespace AirVitamin
                         if ((xElement = xSettings.Element("numberTelephoneSMS")) != null) Settings.numberTelephoneSMS = xElement.Value;
                         if ((xElement = xSettings.Element("SMSMessageTimeEnd")) != null) Settings.SMSMessageTimeEnd = xElement.Value;
                         if ((xElement = xSettings.Element("SMSMessageNeedCollect")) != null) Settings.SMSMessageNeedCollect = xElement.Value;
+                        if ((xElement = xSettings.Element("SMSMessageCollect")) != null) Settings.SMSMessageCollect = xElement.Value;
 
                         if ((xElement = xSettings.Element("TextStartService")) != null) Settings.TextStartService = xElement.Value;
                         if ((xElement = xSettings.Element("TextEndService")) != null) Settings.TextEndService = xElement.Value;
@@ -148,6 +149,7 @@ namespace AirVitamin
                 xSettings.Add(new XElement("numberTelephoneSMS", Settings.numberTelephoneSMS));
                 xSettings.Add(new XElement("SMSMessageTimeEnd", Settings.SMSMessageTimeEnd));
                 xSettings.Add(new XElement("SMSMessageNeedCollect", Settings.SMSMessageNeedCollect));
+                xSettings.Add(new XElement("SMSMessageCollect", Settings.SMSMessageCollect));
 
                 xSettings.Add(new XElement("TextStartService", Settings.TextStartService));
                 xSettings.Add(new XElement("TextEndService", Settings.TextEndService));

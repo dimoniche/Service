@@ -6,6 +6,7 @@ namespace AirVitamin
     {
         public TabControl DeviceTab { get { return DevicetabControl; } set { DevicetabControl = value; } }
         public TextBox TextBoxPause { get { return textBoxPause; } set { textBoxPause = value; } }
+        public TextBox TextBoxBefore { get { return textBoxBefore; } set { textBoxBefore = value; } }
 
         public TextBox TextBoxCaptionService { get { return textBoxCaptionService; } set { textBoxCaptionService = value; } }
         public TextBox TextBoxPriceService { get { return textBoxPriceService; } set { textBoxPriceService = value; } }
@@ -16,6 +17,7 @@ namespace AirVitamin
         public event ServiceClientResponseEventHandler DeleteDevice;
         public event ServiceClientResponseEventHandler AddDevice;
         public event ServiceClientResponseEventHandler PauseLeave;
+        public event ServiceClientResponseEventHandler BeforeLeave;
         public event ServiceClientResponseEventHandler CaptionServiceLeave;
         public event ServiceClientResponseEventHandler PriceServiceLeave;
         public event ServiceClientResponseEventHandler TimeServiceLeave;
@@ -53,6 +55,11 @@ namespace AirVitamin
         private void textBoxMaxTimeService_Leave(object sender, System.EventArgs e)
         {
             TimeServiceLeave(sender);
+        }
+
+        private void textBoxBefore_Leave(object sender, System.EventArgs e)
+        {
+            BeforeLeave(sender);
         }
     }
 }

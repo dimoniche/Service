@@ -28,7 +28,7 @@ namespace AirVitamin.Client
         /// <summary>
         /// максимальное время оказания услуги
         /// </summary>
-        public int timework = 3;
+        public int timework = 180;
 
         /// <summary>
         /// время ознакомления с услугой и забор аксессуаров

@@ -12,6 +12,9 @@ namespace AirVitamin
 
         public List<Device> devs;
 
+
+        // задержка перед оказанием услуги
+        public int timeBefore = 10;
         // время оказания услуги
         public int timework = 10;
         // пауза между процедурами
@@ -36,6 +39,7 @@ namespace AirVitamin
             xOut.Add(new XElement("id", id.ToString()));
             xOut.Add(new XElement("price", price.ToString()));
             xOut.Add(new XElement("caption", caption));
+            xOut.Add(new XElement("timeBefore", timeBefore));
             xOut.Add(new XElement("timework", timework));
             xOut.Add(new XElement("timePause", timePause));
 
@@ -64,6 +68,7 @@ namespace AirVitamin
             if ((xElement = xObject.Element("id")) != null) result.id = int.Parse(xElement.Value);
             if ((xElement = xObject.Element("caption")) != null) result.caption = xElement.Value;
             if ((xElement = xObject.Element("price")) != null) result.price = int.Parse(xElement.Value);
+            if ((xElement = xObject.Element("timeBefore")) != null) result.timeBefore = int.Parse(xElement.Value);
             if ((xElement = xObject.Element("timework")) != null) result.timework = int.Parse(xElement.Value);
             if ((xElement = xObject.Element("timePause")) != null) result.timePause = int.Parse(xElement.Value);
 

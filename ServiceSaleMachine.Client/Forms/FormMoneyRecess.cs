@@ -59,6 +59,9 @@ namespace AirVitamin.Client
             data.log.Write(LogMessageType.Information, "INCASS: Количество банкнот: " + data.statistic.CountBankNote + " руб.");
             data.log.Write(LogMessageType.Information, "INCASS: Оказано услуг: " + data.statistic.ServiceMoneySumm + " руб.");
             data.log.Write(LogMessageType.Information, "==============================================================================");
+
+            // пошлем смс
+            data.drivers.modem.SendSMS(Globals.ClientConfiguration.Settings.SMSMessageCollect + data.statistic.AllMoneySumm + " руб.", data.log);
         }
 
         private void reciveResponse(object sender, ServiceClientResponseEventArgs e)

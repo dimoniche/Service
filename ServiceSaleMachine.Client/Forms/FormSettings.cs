@@ -42,11 +42,13 @@ namespace AirVitamin.Client
                 stc.DeleteDevice += DeleteDevice;
 
                 stc.PauseLeave += PauseLeave;
+                stc.BeforeLeave += BeforeLeave;
                 stc.CaptionServiceLeave += CaptionServiceLeave;
                 stc.PriceServiceLeave += PriceServiceLeave;
                 stc.TimeServiceLeave += TimeServiceLeave;
 
                 stc.TextBoxPause.Text = serv.timePause.ToString();
+                stc.TextBoxBefore.Text = serv.timeBefore.ToString();
                 stc.TextBoxPriceService.Text = serv.price.ToString();
                 stc.TextBoxCaptionService.Text = serv.caption;
                 stc.TextBoxTimeService.Text = serv.timework.ToString();
@@ -78,6 +80,16 @@ namespace AirVitamin.Client
             LoadToolTips();
 
             ReLoad();
+        }
+
+        private void BeforeLeave(object sender)
+        {
+            Service stc = Globals.ClientConfiguration.Settings.services[tabSettingService.SelectedIndex];
+            ServiceTabControl currServiceTab = ((ServiceTabControl)tabSettingService.TabPages[tabSettingService.SelectedIndex].Controls[0]);
+
+            int.TryParse(currServiceTab.TextBoxBefore.Text, out stc.timeBefore);
+
+            Globals.ClientConfiguration.Save();
         }
 
         private void LoadToolTips()
@@ -289,6 +301,7 @@ namespace AirVitamin.Client
             currServiceTab.PriceServiceLeave += PriceServiceLeave;
 
             currServiceTab.TextBoxPause.Text = stc.timePause.ToString();
+            currServiceTab.TextBoxBefore.Text = stc.timeBefore.ToString();
             currServiceTab.TextBoxPriceService.Text = stc.price.ToString();
             currServiceTab.TextBoxCaptionService.Text = stc.caption;
 
@@ -695,6 +708,7 @@ namespace AirVitamin.Client
             textNumberPhone.Text = Globals.ClientConfiguration.Settings.numberTelephoneSMS;
             textSMSTimeEnd.Text = Globals.ClientConfiguration.Settings.SMSMessageTimeEnd;
             textNeedCollect.Text = Globals.ClientConfiguration.Settings.SMSMessageNeedCollect;
+            textCollectSMS.Text = Globals.ClientConfiguration.Settings.SMSMessageCollect;
 
             firmsname.Text = Globals.CheckConfiguration.Settings.firmsname;
             secondfirmsname.Text = Globals.CheckConfiguration.Settings.secondfirmsname;
@@ -710,7 +724,7 @@ namespace AirVitamin.Client
             DateTime dt = GlobalDb.GlobalBase.GetLastRefreshTime();
 
             labelTimeLastRefresh.Text = "Время последнего обслуживания: " + dt.ToString();
-            labelWorkFromLastRefresh.Text = "Всего проработали со времени последнего обслуживания: " + GlobalDb.GlobalBase.GetWorkTime(dt).ToString() + " мин";
+            labelWorkFromLastRefresh.Text = "Всего проработали со времени последнего обслуживания: " + (GlobalDb.GlobalBase.GetWorkTime(dt) / 60).ToString() + " мин " + (GlobalDb.GlobalBase.GetWorkTime(dt) % 60).ToString() + " сек";
 
             MoneyStatistic();
 
@@ -792,7 +806,7 @@ namespace AirVitamin.Client
             labelServiceMoneySumm.Text = "Oказано услуг на сумму " + data.statistic.ServiceMoneySumm.ToString() + " руб.";
             labelCountBankNote.Text = "Количество принятых банкнот " + data.statistic.CountBankNote.ToString() + " шт.";
 
-            labelAllAmountMoney.Text = "Сумма денег в кассете " + GlobalDb.GlobalBase.GetAmountMoney().ToString() + " руб.";
+            labelAllAmountMoney.Text = "Сумма, внесенная наличными " + GlobalDb.GlobalBase.GetAmountMoney().ToString() + " руб.";
             labelAllAmountService.Text = "Oказано услуг на сумму " + GlobalDb.GlobalBase.GetAmountService().ToString() + " руб.";
         }
 
@@ -1770,7 +1784,7 @@ namespace AirVitamin.Client
             DateTime dt = GlobalDb.GlobalBase.GetLastRefreshTime();
 
             labelTimeLastRefresh.Text = "Время последнего обслуживания: " + dt.ToString();
-            labelWorkFromLastRefresh.Text = "Всего проработали со времени последнего обслуживания: " + GlobalDb.GlobalBase.GetWorkTime(dt).ToString();
+            labelWorkFromLastRefresh.Text = "Всего проработали со времени последнего обслуживания: " + (GlobalDb.GlobalBase.GetWorkTime(dt)/60).ToString() + " мин " + (GlobalDb.GlobalBase.GetWorkTime(dt) % 60).ToString() + " сек";
         }
 
         private void button13_Click_1(object sender, EventArgs e)
@@ -2098,6 +2112,12 @@ namespace AirVitamin.Client
             {
                 Globals.ClientConfiguration.Settings.offVideoSecondScreen = 0;
             }
+        }
+
+        private void textCollectSMS_Leave(object sender, EventArgs e)
+        {
+            Globals.ClientConfiguration.Settings.SMSMessageCollect = textCollectSMS.Text;
+            Globals.ClientConfiguration.Save();
         }
     }
 }

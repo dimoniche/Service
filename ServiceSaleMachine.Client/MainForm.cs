@@ -272,7 +272,6 @@ NoCheckStatistic:
                         continue;
                     }
 
-                    WaitClient:
                     // -----------------------------------------------------
                     // ожидание клиента
                     // -----------------------------------------------------
@@ -1008,19 +1007,19 @@ NoCheckStatistic:
 
             if (res != null)
             {
-                if (res[0] == 1)
+                if (res[0] >= 1)
                 {
                     result.stage = WorkerStateStage.Gas1_low;
                 }
-                if (res[1] == 1)
+                if (res[1] >= 1)
                 {
                     result.stage = WorkerStateStage.Gas2_low;
                 }
-                if (res[2] == 1)
+                if (res[2] >= 1)
                 {
                     result.stage = WorkerStateStage.Gas3_low;
                 }
-                if (res[3] == 1)
+                if (res[3] >= 1)
                 {
                     result.stage = WorkerStateStage.Gas4_low;
                 }

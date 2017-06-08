@@ -69,7 +69,7 @@ namespace AirVitamin.Client
         /// </summary>
         private void MainWorker()
         {
-            //if (Globals.admin)
+            if (Globals.admin)
             {
                 Program.Log.Write(LogMessageType.Information, "MAIN WORK: Входим в режим настройки приложения.");
 

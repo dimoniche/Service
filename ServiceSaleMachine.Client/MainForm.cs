@@ -184,28 +184,48 @@ NoCheckStatistic:
                         // давление упало - но мы продолжаем работать - просто шлем СМС
                         if (result.stage == WorkerStateStage.Gas1_low)
                         {
-                            //result.drivers.modem.SendSMS("Низкое давление Газа 1", result.log);
+                            if (!result.IsSendSMS1)
+                            {
+                                result.drivers.modem.SendSMS("Упало давление кислорода", result.log);
+                                result.IsSendSMS1 = true;
+                            }
+
                             Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД1 - HIGH.");
 
                             if (Globals.ClientConfiguration.Settings.offReserve != 1) result.stage = WorkerStateStage.None;
                         }
                         if (result.stage == WorkerStateStage.Gas2_low)
                         {
-                            //result.drivers.modem.SendSMS("Низкое давление Газа 2", result.log);
+                            if (!result.IsSendSMS2)
+                            {
+                                result.drivers.modem.SendSMS("Низкое давление Газа 2", result.log);
+                                result.IsSendSMS2 = true;
+                            }
+
                             Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД2 - HIGH.");
 
                             result.stage = WorkerStateStage.None;
                         }
                         if (result.stage == WorkerStateStage.Gas3_low)
                         {
-                            //result.drivers.modem.SendSMS("Низкое давление Газа 3", result.log);
+                            if (!result.IsSendSMS3)
+                            {
+                                result.drivers.modem.SendSMS("Низкое давление Газа 3", result.log);
+                                result.IsSendSMS3= true;
+                            }
+
                             Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД3 - HIGH.");
 
                             result.stage = WorkerStateStage.None;
                         }
                         if (result.stage == WorkerStateStage.Gas4_low)
                         {
-                            //result.drivers.modem.SendSMS("Низкое давление Газа 4", result.log);
+                            if (!result.IsSendSMS4)
+                            {
+                                result.drivers.modem.SendSMS("Низкое давление Газа 4", result.log);
+                                result.IsSendSMS4 = true;
+                            }
+
                             Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД4 - HIGH.");
                         }
                     }
@@ -213,6 +233,8 @@ NoCheckStatistic:
                     {
                         // это не ошибки приемника - с приемником все ок
                         result.BillError = false;
+                        // с газом тоже полный порядок
+                        result.IsSendSMS1 = result.IsSendSMS2 = result.IsSendSMS3 = result.IsSendSMS4 = false;
                     }
 
                     if (result.stage != WorkerStateStage.None)

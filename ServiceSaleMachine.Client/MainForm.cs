@@ -69,7 +69,7 @@ namespace AirVitamin.Client
         /// </summary>
         private void MainWorker()
         {
-            if (Globals.admin)
+            //if (Globals.admin)
             {
                 Program.Log.Write(LogMessageType.Information, "MAIN WORK: Входим в режим настройки приложения.");
 
@@ -130,6 +130,7 @@ namespace AirVitamin.Client
                     result.stage = WorkerStateStage.None;
                     result.retLogin = "";
                     result.retPassword = "";
+                    result.realtimework = 0;
 
                     Globals.UserConfiguration.UserLogin = "";
                     Globals.UserConfiguration.UserPassword = "";
@@ -185,24 +186,28 @@ NoCheckStatistic:
                         {
                             //result.drivers.modem.SendSMS("Низкое давление Газа 1", result.log);
                             Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД1 - HIGH.");
+
+                            if (Globals.ClientConfiguration.Settings.offReserve != 1) result.stage = WorkerStateStage.None;
                         }
                         if (result.stage == WorkerStateStage.Gas2_low)
                         {
                             //result.drivers.modem.SendSMS("Низкое давление Газа 2", result.log);
                             Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД2 - HIGH.");
+
+                            result.stage = WorkerStateStage.None;
                         }
                         if (result.stage == WorkerStateStage.Gas3_low)
                         {
                             //result.drivers.modem.SendSMS("Низкое давление Газа 3", result.log);
                             Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД3 - HIGH.");
+
+                            result.stage = WorkerStateStage.None;
                         }
                         if (result.stage == WorkerStateStage.Gas4_low)
                         {
                             //result.drivers.modem.SendSMS("Низкое давление Газа 4", result.log);
                             Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД4 - HIGH.");
                         }
-
-                        result.stage = WorkerStateStage.None;
                     }
                     else
                     {
@@ -887,11 +892,11 @@ NoCheckStatistic:
                     }
 
                     Program.Log.Write(LogMessageType.Information, "MAIN WORK: Закончили оказывать услугу: " + serv.caption);
-                    Program.Log.Write(LogMessageType.Information, "MAIN WORK: Проработали: " + result.timework);
+                    Program.Log.Write(LogMessageType.Information, "MAIN WORK: Проработали: " + result.realtimework);
                     Program.Log.Write(LogMessageType.Information, "========================КОНЕЦ ОБСЛУЖИВАНИЯ===========================");
 
                     // пишем в базу строку с временем работы
-                    GlobalDb.GlobalBase.WriteWorkTime(serv.id, result.numberCurrentDevice, result.timework);
+                    GlobalDb.GlobalBase.WriteWorkTime(serv.id, result.numberCurrentDevice, result.realtimework);
                 }
                 catch (Exception exp)
                 {
@@ -956,7 +961,7 @@ NoCheckStatistic:
                 result.drivers.modem.SendSMS(Globals.ClientConfiguration.Settings.SMSMessageTimeEnd, result.log);
 
                 // аппарат не работает
-                result.stage = WorkerStateStage.ResursEnd;
+                if (Globals.ClientConfiguration.Settings.BlockDevice == 1) result.stage = WorkerStateStage.ResursEnd;
 
                 Program.Log.Write(LogMessageType.Error, "CHECK_STAT: выработали ресурс. Было установлено:" + Globals.ClientConfiguration.Settings.limitServiceTime + " проработали " + count);
             }

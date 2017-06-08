@@ -56,7 +56,7 @@ namespace AirVitamin.Client
             {
                 error.Text = "Ошибка E040";
             }
-            else if (data.stage == WorkerStateStage.ErrorControl)
+            else if (data.stage == WorkerStateStage.ErrorControl || data.stage == WorkerStateStage.Gas1_low)
             {
                 error.Text = "Ошибка E010";
             }
@@ -67,6 +67,10 @@ namespace AirVitamin.Client
             else if (data.stage == WorkerStateStage.ErrorPrinter)
             {
                 error.Text = "Ошибка E060";
+            }
+            else if (data.stage == WorkerStateStage.Gas4_low)
+            {
+                error.Text = "Ошибка E070";
             }
 
             timer1.Interval = Globals.IntervalCheckControl;
@@ -143,6 +147,42 @@ namespace AirVitamin.Client
                     if (res[0] > 0)
                     {
                         data.stage = WorkerStateStage.ErrorEndControl;
+                        this.Close();
+                    }
+                }
+            }
+
+            if (data.stage == WorkerStateStage.Gas1_low)
+            {
+                // читаем состояние устройства
+                byte[] res;
+                res = data.drivers.control.GetStatusRelay(data.log);
+
+                if (res != null)
+                {
+                    if (res[0] == 0)
+                    {
+                        data.stage = WorkerStateStage.ErrorEndControl;
+
+                        data.IsSendSMS1 = false;
+                        this.Close();
+                    }
+                }
+            }
+
+            if (data.stage == WorkerStateStage.Gas4_low)
+            {
+                // читаем состояние устройства
+                byte[] res;
+                res = data.drivers.control.GetStatusRelay(data.log);
+
+                if (res != null)
+                {
+                    if (res[3] == 0)
+                    {
+                        data.stage = WorkerStateStage.ErrorEndControl;
+
+                        data.IsSendSMS4 = false;
                         this.Close();
                     }
                 }

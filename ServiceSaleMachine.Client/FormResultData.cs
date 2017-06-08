@@ -31,6 +31,11 @@ namespace AirVitamin.Client
         public int timework = 180;
 
         /// <summary>
+        /// Реальное время оказания услуги
+        /// </summary>
+        public int realtimework = 0;
+
+        /// <summary>
         /// время ознакомления с услугой и забор аксессуаров
         /// </summary>
         public int timeRecognize = 60;
@@ -49,11 +54,6 @@ namespace AirVitamin.Client
         /// Драйвера устройств
         /// </summary>
         public MachineDrivers drivers;
-
-        /// <summary>
-        /// Тип инструкции 
-        /// </summary>
-        public InstructionEnum Instruction;
 
         /// <summary>
         /// статистика по деньгам
@@ -79,6 +79,11 @@ namespace AirVitamin.Client
         /// Загруженные шрифты
         /// </summary>
         public PrivateFontCollection FontCollection;
+
+        public bool IsSendSMS1 = false;
+        public bool IsSendSMS2 = false;
+        public bool IsSendSMS3 = false;
+        public bool IsSendSMS4 = false;
 
         public FormResultData(Log log)
         {

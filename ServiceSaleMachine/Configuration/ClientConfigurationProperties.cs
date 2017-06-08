@@ -80,6 +80,12 @@ namespace AirVitamin
         // отключение видео на втором экране
         public int offVideoSecondScreen = 1;
 
+        // отключение резервирования
+        public int offReserve = 1;
+
+        // блокировка аппарата
+        public int BlockDevice = 1;
+
         internal ClientConfigurationProperties()
 		{
 			

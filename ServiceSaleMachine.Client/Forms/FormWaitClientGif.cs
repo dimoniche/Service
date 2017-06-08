@@ -11,11 +11,6 @@ namespace AirVitamin.Client
         FormResultData data;
         private GifImage gifImage = null;
 
-        public bool IsSendSMS1 = false;
-        public bool IsSendSMS2 = false;
-        public bool IsSendSMS3 = false;
-        public bool IsSendSMS4 = false;
-
         public FormWaitClientGif()
         {
             InitializeComponent();
@@ -124,49 +119,53 @@ namespace AirVitamin.Client
             if (res != null)
             {
                 // просто шлем смс - не выходим пока с ошибкой
-                if (res[0] == 1 && !IsSendSMS1)
+                if (res[0] >= 1 && !data.IsSendSMS1)
                 {
-                    data.drivers.modem.SendSMS("Низкое давление Газа 1", data.log);
+                    data.drivers.modem.SendSMS("Упало давление кислорода", data.log);
 
                     data.stage = WorkerStateStage.Gas1_low;
-                    IsSendSMS1 = true;
+                    data.IsSendSMS1 = true;
 
                     Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД1 - HIGH.");
-                }
-                else if (res[0] == 0) IsSendSMS1 = false;
 
-                if (res[1] == 1 && !IsSendSMS2)
+                    if (Globals.ClientConfiguration.Settings.offReserve == 1) this.Close();
+                }
+                else if (res[0] == 0) data.IsSendSMS1 = false;
+
+                if (res[1] >= 1 && !data.IsSendSMS2)
                 {
                     data.drivers.modem.SendSMS("Низкое давление Газа 2", data.log);
 
                     data.stage = WorkerStateStage.Gas2_low;
-                    IsSendSMS2 = true;
+                    data.IsSendSMS2 = true;
 
                     Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД2 - HIGH.");
                 }
-                else if (res[1] == 0) IsSendSMS2 = false;
+                else if (res[1] == 0) data.IsSendSMS2 = false;
 
-                if (res[2] == 1 && !IsSendSMS3)
+                if (res[2] >= 1 && !data.IsSendSMS3)
                 {
                     data.drivers.modem.SendSMS("Низкое давление Газа 3", data.log);
 
                     data.stage = WorkerStateStage.Gas3_low;
-                    IsSendSMS3 = true;
+                    data.IsSendSMS3 = true;
 
                     Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД3 - HIGH.");
                 }
-                else if (res[2] == 0) IsSendSMS3 = false;
+                else if (res[2] == 0) data.IsSendSMS3 = false;
 
-                if (res[3] == 1 && !IsSendSMS4)
+                if (res[3] >= 1 && !data.IsSendSMS4)
                 {
                     data.drivers.modem.SendSMS("Низкое давление Газа 4", data.log);
 
                     data.stage = WorkerStateStage.Gas4_low;
-                    IsSendSMS4 = true;
+                    data.IsSendSMS4 = true;
 
                     Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД4 - HIGH.");
+
+                    this.Close();
                 }
-                else if (res[3] == 0) IsSendSMS4 = false;
+                else if (res[3] == 0) data.IsSendSMS4 = false;
             }
 
             if (Globals.ClientConfiguration.Settings.offPrinter == 0)

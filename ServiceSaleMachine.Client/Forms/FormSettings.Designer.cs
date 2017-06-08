@@ -146,6 +146,8 @@
             this.resSMS = new System.Windows.Forms.Label();
             this.cBxSpeedModem = new System.Windows.Forms.ComboBox();
             this.groupBxSettingModem = new System.Windows.Forms.GroupBox();
+            this.label36 = new System.Windows.Forms.Label();
+            this.textCollectSMS = new System.Windows.Forms.TextBox();
             this.label24 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.textNeedCollect = new System.Windows.Forms.TextBox();
@@ -236,8 +238,8 @@
             this.labelTimeLastRefresh = new System.Windows.Forms.Label();
             this.labelWorkFromLastRefresh = new System.Windows.Forms.Label();
             this.buttonResetTimeRefresh = new System.Windows.Forms.Button();
-            this.label36 = new System.Windows.Forms.Label();
-            this.textCollectSMS = new System.Windows.Forms.TextBox();
+            this.cBxOffReserve = new System.Windows.Forms.CheckBox();
+            this.cBxBlockDevice = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -1555,6 +1557,23 @@
             this.groupBxSettingModem.TabStop = false;
             this.groupBxSettingModem.Text = "Настройки модема";
             // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(18, 140);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(135, 13);
+            this.label36.TabIndex = 4;
+            this.label36.Text = "Текст СМС о инкассации";
+            // 
+            // textCollectSMS
+            // 
+            this.textCollectSMS.Location = new System.Drawing.Point(133, 156);
+            this.textCollectSMS.Name = "textCollectSMS";
+            this.textCollectSMS.Size = new System.Drawing.Size(181, 20);
+            this.textCollectSMS.TabIndex = 3;
+            this.textCollectSMS.Leave += new System.EventHandler(this.textCollectSMS_Leave);
+            // 
             // label24
             // 
             this.label24.AutoSize = true;
@@ -1678,6 +1697,7 @@
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.cBxOffReserve);
             this.tabPage6.Controls.Add(this.cBxVideoSecondScreen);
             this.tabPage6.Controls.Add(this.groupBox7);
             this.tabPage6.Controls.Add(this.groupBoxTimeLimit);
@@ -1707,7 +1727,7 @@
             this.groupBox7.Controls.Add(this.ButGIF);
             this.groupBox7.Controls.Add(this.ButVideo);
             this.groupBox7.Controls.Add(this.ButPicture);
-            this.groupBox7.Location = new System.Drawing.Point(15, 371);
+            this.groupBox7.Location = new System.Drawing.Point(15, 383);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(163, 100);
             this.groupBox7.TabIndex = 17;
@@ -1751,6 +1771,7 @@
             // 
             // groupBoxTimeLimit
             // 
+            this.groupBoxTimeLimit.Controls.Add(this.cBxBlockDevice);
             this.groupBoxTimeLimit.Controls.Add(this.label15);
             this.groupBoxTimeLimit.Controls.Add(this.textBoxMaxTimeService);
             this.groupBoxTimeLimit.Controls.Add(this.label17);
@@ -1759,7 +1780,7 @@
             this.groupBoxTimeLimit.Controls.Add(this.label11);
             this.groupBoxTimeLimit.Location = new System.Drawing.Point(15, 241);
             this.groupBoxTimeLimit.Name = "groupBoxTimeLimit";
-            this.groupBoxTimeLimit.Size = new System.Drawing.Size(292, 124);
+            this.groupBoxTimeLimit.Size = new System.Drawing.Size(292, 136);
             this.groupBoxTimeLimit.TabIndex = 15;
             this.groupBoxTimeLimit.TabStop = false;
             this.groupBoxTimeLimit.Text = "Времена";
@@ -2527,22 +2548,27 @@
             this.buttonResetTimeRefresh.UseVisualStyleBackColor = true;
             this.buttonResetTimeRefresh.Click += new System.EventHandler(this.buttonResetTimeRefresh_Click);
             // 
-            // label36
+            // cBxOffReserve
             // 
-            this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(18, 140);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(135, 13);
-            this.label36.TabIndex = 4;
-            this.label36.Text = "Текст СМС о инкассации";
+            this.cBxOffReserve.AutoSize = true;
+            this.cBxOffReserve.Location = new System.Drawing.Point(15, 514);
+            this.cBxOffReserve.Name = "cBxOffReserve";
+            this.cBxOffReserve.Size = new System.Drawing.Size(168, 17);
+            this.cBxOffReserve.TabIndex = 19;
+            this.cBxOffReserve.Text = "Отключить резервирование";
+            this.cBxOffReserve.UseVisualStyleBackColor = true;
+            this.cBxOffReserve.CheckedChanged += new System.EventHandler(this.cBxOffReserve_CheckedChanged);
             // 
-            // textCollectSMS
+            // cBxBlockDevice
             // 
-            this.textCollectSMS.Location = new System.Drawing.Point(133, 156);
-            this.textCollectSMS.Name = "textCollectSMS";
-            this.textCollectSMS.Size = new System.Drawing.Size(181, 20);
-            this.textCollectSMS.TabIndex = 3;
-            this.textCollectSMS.Leave += new System.EventHandler(this.textCollectSMS_Leave);
+            this.cBxBlockDevice.AutoSize = true;
+            this.cBxBlockDevice.Location = new System.Drawing.Point(19, 107);
+            this.cBxBlockDevice.Name = "cBxBlockDevice";
+            this.cBxBlockDevice.Size = new System.Drawing.Size(136, 17);
+            this.cBxBlockDevice.TabIndex = 22;
+            this.cBxBlockDevice.Text = "Блокировать аппарат";
+            this.cBxBlockDevice.UseVisualStyleBackColor = true;
+            this.cBxBlockDevice.CheckedChanged += new System.EventHandler(this.cBxBlockDevice_CheckedChanged);
             // 
             // FormSettings
             // 
@@ -2829,5 +2855,7 @@
         private System.Windows.Forms.CheckBox cBxVideoSecondScreen;
         private System.Windows.Forms.Label label36;
         private System.Windows.Forms.TextBox textCollectSMS;
+        private System.Windows.Forms.CheckBox cBxOffReserve;
+        private System.Windows.Forms.CheckBox cBxBlockDevice;
     }
 }

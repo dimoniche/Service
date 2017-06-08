@@ -686,6 +686,24 @@ namespace AirVitamin.Client
                 cBxVideoSecondScreen.Checked = false;
             }
 
+            if (Globals.ClientConfiguration.Settings.offReserve == 1)
+            {
+                cBxOffReserve.Checked = true;
+            }
+            else
+            {
+                cBxOffReserve.Checked = false;
+            }
+
+            if (Globals.ClientConfiguration.Settings.BlockDevice == 1)
+            {
+                cBxBlockDevice.Checked = true;
+            }
+            else
+            {
+                cBxBlockDevice.Checked = false;
+            }
+
             // номиналы купюр
             checkBox10.Checked = Globals.ClientConfiguration.Settings.nominals[2] > 0 ? true : false;
             checkBox50.Checked = Globals.ClientConfiguration.Settings.nominals[3] > 0 ? true : false;
@@ -1707,15 +1725,18 @@ namespace AirVitamin.Client
 
             if (res != null)
             {
-                StatusControl.Text = "Устройство: ";
+                StatusControl.Text = "Cтатус: ";
 
-                if (res[0] > 0)
+                for (int i = 0; i < 4; i++)
                 {
-                    StatusControl.Text += "включено";
-                }
-                else
-                {
-                    StatusControl.Text += "отключено";
+                    if (res[i] > 0)
+                    {
+                        StatusControl.Text += "01 ";
+                    }
+                    else
+                    {
+                        StatusControl.Text += "00 ";
+                    }
                 }
             }
         }
@@ -2118,6 +2139,30 @@ namespace AirVitamin.Client
         {
             Globals.ClientConfiguration.Settings.SMSMessageCollect = textCollectSMS.Text;
             Globals.ClientConfiguration.Save();
+        }
+
+        private void cBxOffReserve_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cBxOffReserve.Checked)
+            {
+                Globals.ClientConfiguration.Settings.offReserve = 1;
+            }
+            else
+            {
+                Globals.ClientConfiguration.Settings.offReserve = 0;
+            }
+        }
+
+        private void cBxBlockDevice_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cBxBlockDevice.Checked)
+            {
+                Globals.ClientConfiguration.Settings.BlockDevice = 1;
+            }
+            else
+            {
+                Globals.ClientConfiguration.Settings.BlockDevice = 0;
+            }
         }
     }
 }

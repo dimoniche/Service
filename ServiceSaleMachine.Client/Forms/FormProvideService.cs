@@ -24,6 +24,8 @@ namespace AirVitamin.Client
 
         float step = 0;
 
+        int timework = 0;
+
         public FormProvideService()
         {
             InitializeComponent();
@@ -83,6 +85,7 @@ namespace AirVitamin.Client
         {
             // заканчиваем оказывать услугу
             data.drivers.control.SendCloseControl(data.numberCurrentDevice);
+            data.realtimework = timework;
 
             Params.Result = data;
             timerService.Enabled = false;
@@ -92,6 +95,9 @@ namespace AirVitamin.Client
 
         private void timerService_Tick(object sender, EventArgs e)
         {
+            // наращиваем время работы
+            timework++;
+
             if (Interval-- == 0)
             {
                 // услугу оказали полностью

@@ -1721,7 +1721,7 @@ namespace AirVitamin.Client
         {
             byte[] res;
 
-            res = data.drivers.control.GetStatusControl(data.log);
+            res = data.drivers.control.GetStatusRelay(data.log);
 
             if (res != null)
             {

@@ -117,6 +117,13 @@ namespace AirVitamin.Client
                 pen = new Pen(Color.FromArgb(0, 158, 227), 20);
                 g.DrawArc(pen, new Rectangle(15, 15, (int)(width - 30), (int)(height - 30)), startAngle, sweepAngle);
             }
+
+            ReasonEnum reason = CheckError.GetStatus(data);
+
+            if (reason == ReasonEnum.FormClose)
+            {
+                this.Close();
+            }
         }
 
         private void pBxStopService_Click(object sender, EventArgs e)

@@ -146,9 +146,14 @@ namespace AirVitamin.Drivers
         /// Команда закрыть
         /// </summary>
         /// <returns></returns>
-        public void SendCloseControl(int controlNumber)
+        public void SendCloseControl(int controlNumber, Log log = null)
         {
             if (Globals.ClientConfiguration.Settings.offControl == 1) return;
+
+            if (log != null)
+            {
+                log.Write(LogMessageType.Debug, "CONTROL: Start Close " + controlNumber);
+            }
 
             byte[] buf = new byte[2];
 
@@ -158,6 +163,11 @@ namespace AirVitamin.Drivers
 
             // нужна задержка - устройство видимо не успевает
             Thread.Sleep(50);
+
+            if (log != null)
+            {
+                log.Write(LogMessageType.Debug, "CONTROL: Transmit: " + buf[0].ToString("X") + " " + buf[1].ToString("X"));
+            }
         }
 
         /// <summary>
@@ -271,6 +281,11 @@ namespace AirVitamin.Drivers
             res[1] = BufIn[1];
             res[2] = BufIn[2];
             res[3] = BufIn[3];
+
+            /*res[0] = 0;
+            res[1] = 0;
+            res[2] = 0;
+            res[3] = 0;*/
 
             return res;
         }

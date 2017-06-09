@@ -136,7 +136,7 @@ namespace AirVitamin.Client
 
         private void timer1_Tick(object sender, System.EventArgs e)
         {
-            if (data.stage == WorkerStateStage.ErrorControl)
+            /*if (data.stage == WorkerStateStage.ErrorControl)
             {
                 // читаем состояние устройства
                 byte[] res;
@@ -150,7 +150,7 @@ namespace AirVitamin.Client
                         this.Close();
                     }
                 }
-            }
+            }*/
 
             if (data.stage == WorkerStateStage.Gas1_low)
             {
@@ -175,6 +175,11 @@ namespace AirVitamin.Client
                 // читаем состояние устройства
                 byte[] res;
                 res = data.drivers.control.GetStatusRelay(data.log);
+
+                if (Globals.IsDebug == true && res == null)
+                {
+                    res = new byte[4] { 0, 0, 0, 0 };
+                }
 
                 if (res != null)
                 {

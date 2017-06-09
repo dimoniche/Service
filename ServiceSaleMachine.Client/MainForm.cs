@@ -367,6 +367,11 @@ NoCheckStatistic:
                             // купюроприемник полон
                             goto NoCheckStatistic;
                         }
+                        else if (result.stage == WorkerStateStage.Gas1_low || result.stage == WorkerStateStage.Gas4_low)
+                        {
+                            // Давление газа упало - в окно ошибки
+                            goto NoCheckStatistic;
+                        }
                         else if (result.stage == WorkerStateStage.PaperEnd)
                         {
                             // ошибки принтера есть
@@ -449,6 +454,11 @@ NoCheckStatistic:
                         // купюроприемник полон
                         goto NoCheckStatistic;
                     }
+                    else if (result.stage == WorkerStateStage.Gas1_low || result.stage == WorkerStateStage.Gas4_low)
+                    {
+                        // Давление газа упало - в окно ошибки
+                        goto NoCheckStatistic;
+                    }
 
                     MainForm:
                     // выбор что делать
@@ -470,11 +480,11 @@ NoCheckStatistic:
                         // ошибки принтера есть
                         continue;
                     }
-                    //else if (result.stage == WorkerStateStage.Gas1_low || result.stage == WorkerStateStage.Gas2_low || result.stage == WorkerStateStage.Gas3_low || result.stage == WorkerStateStage.Gas4_low)
-                    //{
-                    //    // Давление газа упало - пойдем в анализ состояния - пошлем смс
-                    //    continue;
-                    //}
+                    else if (result.stage == WorkerStateStage.Gas1_low || result.stage == WorkerStateStage.Gas4_low)
+                    {
+                        // Давление газа упало - в окно ошибки
+                        goto NoCheckStatistic;
+                    }
                     else if (result.stage == WorkerStateStage.ErrorBill)
                     {
                         // ошибки купюроприемника
@@ -887,6 +897,10 @@ NoCheckStatistic:
                     {
                         // отказались от услуги
                     }
+                    else if (result.stage == WorkerStateStage.Gas1_low || result.stage == WorkerStateStage.Gas2_low)
+                    {
+                        goto NoCheckStatistic;
+                    }
 
                     // -----------------------------------------------------
                     // Услугу оказали - выбросим расходники
@@ -989,7 +1003,7 @@ NoCheckStatistic:
 
             // читаем состояние устройства
             byte[] res;
-            res = result.drivers.control.GetStatusControl(Program.Log);
+            /*res = result.drivers.control.GetStatusControl(Program.Log);
 
             if (res != null)
             {
@@ -1001,7 +1015,7 @@ NoCheckStatistic:
 
                     Program.Log.Write(LogMessageType.Error, "CHECK_STAT: ошибка управляющего устройства.");
                 }
-            }
+            }*/
 
             res = result.drivers.control.GetStatusRelay(Program.Log);
 

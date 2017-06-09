@@ -49,6 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CheckError\CheckError.cs" />
+    <Compile Include="CheckError\ReasonEnum.cs" />
     <Compile Include="Fonts\CustomFont.cs" />
     <Compile Include="FormResultData.cs" />
     <Compile Include="Forms\Enum\ControlDeviceEnum.cs" />

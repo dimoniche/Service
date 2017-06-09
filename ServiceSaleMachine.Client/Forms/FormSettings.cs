@@ -18,8 +18,6 @@ namespace AirVitamin.Client
 
         bool init = false;
 
-        TabPageCollection tabTemp;
-
         public override void LoadData()
         {
             foreach (object obj in Params.Objects.Where(obj => obj != null))
@@ -1774,7 +1772,7 @@ namespace AirVitamin.Client
 
         private void LightOff1_Click(object sender, EventArgs e)
         {
-            data.drivers.control.SendCloseControl((int)ControlDeviceEnum.Garbage);
+            data.drivers.control.SendCloseControl((int)ControlDeviceEnum.Garbage,data.log);
         }
 
         private void LightOn2_Click(object sender, EventArgs e)
@@ -1784,7 +1782,7 @@ namespace AirVitamin.Client
 
         private void LightOff2_Click(object sender, EventArgs e)
         {
-            data.drivers.control.SendCloseControl((int)ControlDeviceEnum.Holder);
+            data.drivers.control.SendCloseControl((int)ControlDeviceEnum.Holder, data.log);
         }
 
         private void textBoxMaxTimeService_Leave(object sender, EventArgs e)

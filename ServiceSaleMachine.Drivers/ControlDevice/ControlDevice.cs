@@ -140,6 +140,12 @@ namespace AirVitamin.Drivers
 
             // нужна задержка - устройство видимо не успевает
             Thread.Sleep(50);
+
+            // должен прийти ответ
+            int val = 0;
+            if (this.Recieve(buf, 2, out val) == false)
+            {
+            }
         }
 
         /// <summary>
@@ -163,6 +169,12 @@ namespace AirVitamin.Drivers
 
             // нужна задержка - устройство видимо не успевает
             Thread.Sleep(50);
+
+            // должен прийти ответ
+            int val = 0;
+            if (this.Recieve(buf, 2, out val) == false)
+            {
+            }
 
             if (log != null)
             {
@@ -196,7 +208,7 @@ namespace AirVitamin.Drivers
 
                 if (log != null)
                 {
-                    log.Write(LogMessageType.Debug, "CONTROL: Transmit: " + buf[0].ToString("X") + " " + buf[1].ToString("X"));
+                    log.Write(LogMessageType.Information, "CONTROL: Transmit: " + buf[0].ToString("X") + " " + buf[1].ToString("X"));
                 }
 
                 int val = 0;
@@ -207,7 +219,7 @@ namespace AirVitamin.Drivers
 
                 if (log != null)
                 {
-                    log.Write(LogMessageType.Debug, "CONTROL: Data: " + BufIn[0].ToString("X") + " " + BufIn[1].ToString("X") + " " + BufIn[2].ToString("X") + " ");
+                    log.Write(LogMessageType.Information, "CONTROL: Data: " + BufIn[0].ToString("X") + " " + BufIn[1].ToString("X") + " " + BufIn[2].ToString("X") + " ");
                 }
 
                 Count++;
@@ -216,7 +228,7 @@ namespace AirVitamin.Drivers
                 if ((BufIn[2] == ((0xFF - BufIn[0] - BufIn[1]) & 0xff)) || (Count > 3)) break;
 
                 // нужна задержка - устройство видимо не успевает
-                Thread.Sleep(50);
+                Thread.Sleep(10);
 
             } while (true);
 
@@ -268,11 +280,11 @@ namespace AirVitamin.Drivers
 
                 Count++;
 
-                // проверим КС и количество попыток
-                if ((BufIn[4] == ((0xFF - BufIn[0] - BufIn[1] - BufIn[2] - BufIn[3]) & 0xff)) || (Count > 3)) break;
+                // проверим КС (в двух вариантах) и количество попыток
+                if ((BufIn[4] == ((0xFF - BufIn[0] - BufIn[1] - BufIn[2] - BufIn[3]) & 0xff)) || (BufIn[4] == ((BufIn[0] + BufIn[1] + BufIn[2] + BufIn[3]) & 0xff)) || (Count > 3)) break;
 
                 // нужна задержка - устройство видимо не успевает
-                Thread.Sleep(50);
+                Thread.Sleep(10);
 
             } while (true);
 
@@ -281,6 +293,15 @@ namespace AirVitamin.Drivers
             res[1] = BufIn[1];
             res[2] = BufIn[2];
             res[3] = BufIn[3];
+
+            if (Count > 3)
+            {
+                // нет связи с управляющим устройством - уходим в ошибку
+                res[0] = 1;
+                res[1] = 1;
+                res[2] = 1;
+                res[3] = 1;
+            }
 
             /*res[0] = 0;
             res[1] = 0;

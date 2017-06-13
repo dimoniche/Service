@@ -112,7 +112,7 @@ namespace AirVitamin.Client
         private void FormProgress1_FormClosed(object sender, FormClosedEventArgs e)
         {
             // закрываем окно Мундштук 
-            data.drivers.control.SendCloseControl((int)ControlDeviceEnum.Pipe);
+            data.drivers.control.SendCloseControl((int)ControlDeviceEnum.Holder);
 
             timer1.Enabled = false;
 

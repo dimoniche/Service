@@ -68,7 +68,7 @@ namespace AirVitamin.Client
         private void FormMessageEndService1_FormClosed(object sender, FormClosedEventArgs e)
         {
             // закрываем окна Шланг и Мусор
-            data.drivers.control.SendCloseControl((int)ControlDeviceEnum.Holder);
+            data.drivers.control.SendCloseControl((int)ControlDeviceEnum.Pipe);
             data.drivers.control.SendCloseControl((int)ControlDeviceEnum.Garbage);
 
             Params.Result = data;

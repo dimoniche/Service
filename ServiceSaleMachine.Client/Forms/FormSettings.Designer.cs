@@ -162,12 +162,14 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.cBxOffReserve = new System.Windows.Forms.CheckBox();
             this.cBxVideoSecondScreen = new System.Windows.Forms.CheckBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.ButGIF = new System.Windows.Forms.RadioButton();
             this.ButVideo = new System.Windows.Forms.RadioButton();
             this.ButPicture = new System.Windows.Forms.RadioButton();
             this.groupBoxTimeLimit = new System.Windows.Forms.GroupBox();
+            this.cBxBlockDevice = new System.Windows.Forms.CheckBox();
             this.label15 = new System.Windows.Forms.Label();
             this.textBoxMaxTimeService = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
@@ -238,8 +240,6 @@
             this.labelTimeLastRefresh = new System.Windows.Forms.Label();
             this.labelWorkFromLastRefresh = new System.Windows.Forms.Label();
             this.buttonResetTimeRefresh = new System.Windows.Forms.Button();
-            this.cBxOffReserve = new System.Windows.Forms.CheckBox();
-            this.cBxBlockDevice = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -1711,6 +1711,17 @@
             this.tabPage6.Text = "Основные";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
+            // cBxOffReserve
+            // 
+            this.cBxOffReserve.AutoSize = true;
+            this.cBxOffReserve.Location = new System.Drawing.Point(15, 514);
+            this.cBxOffReserve.Name = "cBxOffReserve";
+            this.cBxOffReserve.Size = new System.Drawing.Size(168, 17);
+            this.cBxOffReserve.TabIndex = 19;
+            this.cBxOffReserve.Text = "Отключить резервирование";
+            this.cBxOffReserve.UseVisualStyleBackColor = true;
+            this.cBxOffReserve.CheckedChanged += new System.EventHandler(this.cBxOffReserve_CheckedChanged);
+            // 
             // cBxVideoSecondScreen
             // 
             this.cBxVideoSecondScreen.AutoSize = true;
@@ -1784,6 +1795,17 @@
             this.groupBoxTimeLimit.TabIndex = 15;
             this.groupBoxTimeLimit.TabStop = false;
             this.groupBoxTimeLimit.Text = "Времена";
+            // 
+            // cBxBlockDevice
+            // 
+            this.cBxBlockDevice.AutoSize = true;
+            this.cBxBlockDevice.Location = new System.Drawing.Point(19, 107);
+            this.cBxBlockDevice.Name = "cBxBlockDevice";
+            this.cBxBlockDevice.Size = new System.Drawing.Size(136, 17);
+            this.cBxBlockDevice.TabIndex = 22;
+            this.cBxBlockDevice.Text = "Блокировать аппарат";
+            this.cBxBlockDevice.UseVisualStyleBackColor = true;
+            this.cBxBlockDevice.CheckedChanged += new System.EventHandler(this.cBxBlockDevice_CheckedChanged);
             // 
             // label15
             // 
@@ -2547,28 +2569,6 @@
             this.buttonResetTimeRefresh.Text = "Обновить время обслуживания";
             this.buttonResetTimeRefresh.UseVisualStyleBackColor = true;
             this.buttonResetTimeRefresh.Click += new System.EventHandler(this.buttonResetTimeRefresh_Click);
-            // 
-            // cBxOffReserve
-            // 
-            this.cBxOffReserve.AutoSize = true;
-            this.cBxOffReserve.Location = new System.Drawing.Point(15, 514);
-            this.cBxOffReserve.Name = "cBxOffReserve";
-            this.cBxOffReserve.Size = new System.Drawing.Size(168, 17);
-            this.cBxOffReserve.TabIndex = 19;
-            this.cBxOffReserve.Text = "Отключить резервирование";
-            this.cBxOffReserve.UseVisualStyleBackColor = true;
-            this.cBxOffReserve.CheckedChanged += new System.EventHandler(this.cBxOffReserve_CheckedChanged);
-            // 
-            // cBxBlockDevice
-            // 
-            this.cBxBlockDevice.AutoSize = true;
-            this.cBxBlockDevice.Location = new System.Drawing.Point(19, 107);
-            this.cBxBlockDevice.Name = "cBxBlockDevice";
-            this.cBxBlockDevice.Size = new System.Drawing.Size(136, 17);
-            this.cBxBlockDevice.TabIndex = 22;
-            this.cBxBlockDevice.Text = "Блокировать аппарат";
-            this.cBxBlockDevice.UseVisualStyleBackColor = true;
-            this.cBxBlockDevice.CheckedChanged += new System.EventHandler(this.cBxBlockDevice_CheckedChanged);
             // 
             // FormSettings
             // 

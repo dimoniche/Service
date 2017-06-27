@@ -31,6 +31,9 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBoxBefore = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxTimeService = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -47,9 +50,6 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.DevicetabControl = new System.Windows.Forms.TabControl();
             this.tabPageDevice = new System.Windows.Forms.TabPage();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBoxBefore = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -104,6 +104,33 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(508, 289);
             this.panel2.TabIndex = 0;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(361, 33);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(25, 13);
+            this.label2.TabIndex = 24;
+            this.label2.Text = "сек";
+            // 
+            // textBoxBefore
+            // 
+            this.textBoxBefore.Location = new System.Drawing.Point(255, 26);
+            this.textBoxBefore.Name = "textBoxBefore";
+            this.textBoxBefore.Size = new System.Drawing.Size(100, 20);
+            this.textBoxBefore.TabIndex = 23;
+            this.textBoxBefore.Text = "0";
+            this.textBoxBefore.Leave += new System.EventHandler(this.textBoxBefore_Leave);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 33);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(175, 13);
+            this.label3.TabIndex = 22;
+            this.label3.Text = "Пауза перед началом процедуры";
             // 
             // label4
             // 
@@ -222,9 +249,9 @@
             this.label20.AutoSize = true;
             this.label20.Location = new System.Drawing.Point(3, 58);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(175, 13);
+            this.label20.Size = new System.Drawing.Size(129, 13);
             this.label20.TabIndex = 6;
-            this.label20.Text = "Пауза перед началом процедуры";
+            this.label20.Text = "Пауза после процедуры";
             // 
             // panel3
             // 
@@ -255,33 +282,6 @@
             this.tabPageDevice.TabIndex = 0;
             this.tabPageDevice.Text = "Устройство 1";
             this.tabPageDevice.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(361, 33);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(25, 13);
-            this.label2.TabIndex = 24;
-            this.label2.Text = "сек";
-            // 
-            // textBoxBefore
-            // 
-            this.textBoxBefore.Location = new System.Drawing.Point(255, 26);
-            this.textBoxBefore.Name = "textBoxBefore";
-            this.textBoxBefore.Size = new System.Drawing.Size(100, 20);
-            this.textBoxBefore.TabIndex = 23;
-            this.textBoxBefore.Text = "0";
-            this.textBoxBefore.Leave += new System.EventHandler(this.textBoxBefore_Leave);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 33);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(175, 13);
-            this.label3.TabIndex = 22;
-            this.label3.Text = "Пауза перед началом процедуры";
             // 
             // ServiceTabControl
             // 

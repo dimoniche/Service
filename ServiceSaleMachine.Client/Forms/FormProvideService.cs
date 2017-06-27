@@ -43,6 +43,9 @@ namespace AirVitamin.Client
                 }
             }
 
+            // сменим видео при оказании услуги
+            data.fr2.SetPlayNewVideo(CurrentVideoEnum.Video2);
+
             // у флеша немного другой цвет фона
             BackColor = Color.FromArgb(212, 208, 199);
 
@@ -91,6 +94,9 @@ namespace AirVitamin.Client
             timerService.Enabled = false;
 
             data.drivers.ReceivedResponse -= reciveResponse;
+
+            // сменим обратно на ожидание
+            data.fr2.SetPlayNewVideo(CurrentVideoEnum.Video1);
         }
 
         private void timerService_Tick(object sender, EventArgs e)
@@ -116,13 +122,6 @@ namespace AirVitamin.Client
 
                 pen = new Pen(Color.FromArgb(0, 158, 227), 20);
                 g.DrawArc(pen, new Rectangle(15, 15, (int)(width - 30), (int)(height - 30)), startAngle, sweepAngle);
-            }
-
-            ReasonEnum reason = CheckError.GetStatus(data);
-
-            if (reason == ReasonEnum.FormClose)
-            {
-                this.Close();
             }
         }
 

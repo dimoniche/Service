@@ -85,6 +85,8 @@ namespace AirVitamin.Client
         public bool IsSendSMS3 = false;
         public bool IsSendSMS4 = false;
 
+        public FormWaitVideoSecondScreen fr2;
+
         public FormResultData(Log log)
         {
             retLogin = "";

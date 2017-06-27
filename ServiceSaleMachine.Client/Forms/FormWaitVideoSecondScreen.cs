@@ -8,8 +8,15 @@ namespace AirVitamin.Client
     {
         FormResultData data;
 
+        public CurrentVideoEnum Video = CurrentVideoEnum.Video1;
+
+        string[] ScreenVideo = new string[2];
+
         public FormWaitVideoSecondScreen()
         {
+            ScreenVideo[0] = Globals.GetPath(PathEnum.Video) + "\\" + Globals.DesignConfiguration.Settings.ScreenSaverVideo;
+            ScreenVideo[1] = Globals.GetPath(PathEnum.Video) + "\\" + Globals.DesignConfiguration.Settings.ScreenSaverVideo2;
+
             init();
         }
 
@@ -30,6 +37,20 @@ namespace AirVitamin.Client
             VideoPlayer.settings.setMode("loop", true);
 
             VideoPlayer.URL = Globals.GetPath(PathEnum.Video) + "\\" + Globals.DesignConfiguration.Settings.ScreenSaverVideo;
+            VideoPlayer.Ctlcontrols.play();
+        }
+
+        /// <summary>
+        /// Новое видео
+        /// </summary>
+        public void SetPlayNewVideo(CurrentVideoEnum video)
+        {
+            if (Globals.ClientConfiguration.Settings.offVideoSecondScreen == 1) return;
+
+            // остановим текущее видео
+            this.VideoPlayer.Ctlcontrols.stop();
+
+            VideoPlayer.URL = ScreenVideo[(int)video];
             VideoPlayer.Ctlcontrols.play();
         }
 

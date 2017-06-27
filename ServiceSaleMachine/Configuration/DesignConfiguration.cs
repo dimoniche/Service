@@ -76,6 +76,7 @@ namespace AirVitamin
 
                         if ((xElement = xSettings.Element("ScreenSaver")) != null) Settings.ScreenSaver = xElement.Value;
                         if ((xElement = xSettings.Element("ScreenSaverVideo")) != null) Settings.ScreenSaverVideo = xElement.Value;
+                        if ((xElement = xSettings.Element("ScreenSaverVideo2")) != null) Settings.ScreenSaverVideo2 = xElement.Value;
                     }
 
                     return true;
@@ -97,21 +98,6 @@ namespace AirVitamin
 
                 // Настройки
                 XElement xSettings = new XElement("Settings");
-
-/*                xSettings.Add(new XElement("RetToMain", Settings.ButtonRetToMain));
-                xSettings.Add(new XElement("ButtonFail", Settings.ButtonFail));
-                xSettings.Add(new XElement("ButtonYes", Settings.ButtonYes));
-                xSettings.Add(new XElement("ButtonUser", Settings.ButtonUser));
-                xSettings.Add(new XElement("ButtonCheck", Settings.ButtonCheck));
-                xSettings.Add(new XElement("ButtonMoney", Settings.ButtonMoney));
-                xSettings.Add(new XElement("ButtonService", Settings.ButtonService));
-                xSettings.Add(new XElement("ButtonServiceEmpty", Settings.ButtonServiceEmpty));
-                xSettings.Add(new XElement("ButtonBack", Settings.ButtonBack));
-                xSettings.Add(new XElement("ButtonForward", Settings.ButtonForward));
-                xSettings.Add(new XElement("ButtonNoForward", Settings.ButtonNoForward));
-                xSettings.Add(new XElement("ButtonEnterUserName", Settings.ButtonEnterUserName));
-                xSettings.Add(new XElement("ButtonEnterUserPasw", Settings.ButtonEnterUserPasw));
-                */
 
                 if (xSettings.HasElements)
                 {

@@ -19,8 +19,6 @@ namespace AirVitamin.Client
         /// </summary>
         FormResultData result;
 
-        FormWaitVideoSecondScreen fr2;
-
         // запуск приложения
         public MainForm()
         {
@@ -1148,15 +1146,15 @@ NoCheckStatistic:
                 return;
             }
 
-            fr2 = new FormWaitVideoSecondScreen(p,result);
+            result.fr2 = new FormWaitVideoSecondScreen(p,result);
 
-            fr2.FormBorderStyle = FormBorderStyle.None;
-            fr2.StartPosition = FormStartPosition.Manual;
+            result.fr2.FormBorderStyle = FormBorderStyle.None;
+            result.fr2.StartPosition = FormStartPosition.Manual;
 
-            fr2.Location = sc[0].Bounds.Location;
-            fr2.WindowState = FormWindowState.Maximized;
+            result.fr2.Location = sc[0].Bounds.Location;
+            result.fr2.WindowState = FormWindowState.Maximized;
 
-            fr2.Show();
+            result.fr2.Show();
         }
 
         private void MainForm_Shown(object sender, EventArgs e)
@@ -1173,7 +1171,7 @@ NoCheckStatistic:
 
             result.drivers.printer.AbortPrint();
 
-            if(fr2 != null) fr2.Close();
+            if(result.fr2 != null) result.fr2.Close();
 
             try
             {

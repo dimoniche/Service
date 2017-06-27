@@ -40,7 +40,7 @@
             this.VideoPlayer.Location = new System.Drawing.Point(0, 0);
             this.VideoPlayer.Name = "VideoPlayer";
             this.VideoPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("VideoPlayer.OcxState")));
-            this.VideoPlayer.Size = new System.Drawing.Size(800, 600);
+            this.VideoPlayer.Size = new System.Drawing.Size(1280, 1024);
             this.VideoPlayer.TabIndex = 0;
             this.VideoPlayer.PlayStateChange += new AxWMPLib._WMPOCXEvents_PlayStateChangeEventHandler(this.VideoPlayer_PlayStateChange);
             this.VideoPlayer.ClickEvent += new AxWMPLib._WMPOCXEvents_ClickEventHandler(this.VideoPlayer_ClickEvent);
@@ -49,7 +49,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 600);
+            this.ClientSize = new System.Drawing.Size(1280, 1024);
             this.Controls.Add(this.VideoPlayer);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormWaitVideoSecondScreen";

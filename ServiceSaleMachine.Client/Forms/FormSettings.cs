@@ -702,6 +702,15 @@ namespace AirVitamin.Client
                 cBxBlockDevice.Checked = false;
             }
 
+            if (Globals.ClientConfiguration.Settings.offAdvert == 1)
+            {
+                cBxoffAdvert.Checked = true;
+            }
+            else
+            {
+                cBxoffAdvert.Checked = false;
+            }
+
             // номиналы купюр
             checkBox10.Checked = Globals.ClientConfiguration.Settings.nominals[2] > 0 ? true : false;
             checkBox50.Checked = Globals.ClientConfiguration.Settings.nominals[3] > 0 ? true : false;
@@ -2160,6 +2169,18 @@ namespace AirVitamin.Client
             else
             {
                 Globals.ClientConfiguration.Settings.BlockDevice = 0;
+            }
+        }
+
+        private void cBxoffAdvert_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cBxoffAdvert.Checked)
+            {
+                Globals.ClientConfiguration.Settings.offAdvert = 1;
+            }
+            else
+            {
+                Globals.ClientConfiguration.Settings.offAdvert = 0;
             }
         }
     }

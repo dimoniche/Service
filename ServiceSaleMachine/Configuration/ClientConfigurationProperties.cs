@@ -86,6 +86,9 @@ namespace AirVitamin
         // блокировка аппарата
         public int BlockDevice = 1;
 
+        // выключить рекламную заставку
+        public int offAdvert = 1;
+
         internal ClientConfigurationProperties()
 		{
 			

@@ -106,16 +106,19 @@ namespace AirVitamin.Client
 
             if (Timeout > Globals.ClientConfiguration.Settings.timeout * 60)
             {
-                data.stage = WorkerStateStage.TimeOut;
+                if (Globals.ClientConfiguration.Settings.offAdvert == 0)
+                {
+                    data.stage = WorkerStateStage.TimeOut;
 
-                data.retLogin = "";
-                data.retPassword = "";
-                data.CurrentUserId = 0;
+                    data.retLogin = "";
+                    data.retPassword = "";
+                    data.CurrentUserId = 0;
 
-                Globals.UserConfiguration.UserLogin = "";
-                Globals.UserConfiguration.UserPassword = "";
+                    Globals.UserConfiguration.UserLogin = "";
+                    Globals.UserConfiguration.UserPassword = "";
 
-                this.Close();
+                    this.Close();
+                }
             }
         }
 

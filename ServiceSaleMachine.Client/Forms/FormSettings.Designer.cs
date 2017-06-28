@@ -240,6 +240,7 @@
             this.labelTimeLastRefresh = new System.Windows.Forms.Label();
             this.labelWorkFromLastRefresh = new System.Windows.Forms.Label();
             this.buttonResetTimeRefresh = new System.Windows.Forms.Button();
+            this.cBxoffAdvert = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -1714,7 +1715,7 @@
             // cBxOffReserve
             // 
             this.cBxOffReserve.AutoSize = true;
-            this.cBxOffReserve.Location = new System.Drawing.Point(15, 514);
+            this.cBxOffReserve.Location = new System.Drawing.Point(15, 548);
             this.cBxOffReserve.Name = "cBxOffReserve";
             this.cBxOffReserve.Size = new System.Drawing.Size(168, 17);
             this.cBxOffReserve.TabIndex = 19;
@@ -1725,7 +1726,7 @@
             // cBxVideoSecondScreen
             // 
             this.cBxVideoSecondScreen.AutoSize = true;
-            this.cBxVideoSecondScreen.Location = new System.Drawing.Point(15, 491);
+            this.cBxVideoSecondScreen.Location = new System.Drawing.Point(15, 525);
             this.cBxVideoSecondScreen.Name = "cBxVideoSecondScreen";
             this.cBxVideoSecondScreen.Size = new System.Drawing.Size(208, 17);
             this.cBxVideoSecondScreen.TabIndex = 18;
@@ -1738,7 +1739,7 @@
             this.groupBox7.Controls.Add(this.ButGIF);
             this.groupBox7.Controls.Add(this.ButVideo);
             this.groupBox7.Controls.Add(this.ButPicture);
-            this.groupBox7.Location = new System.Drawing.Point(15, 383);
+            this.groupBox7.Location = new System.Drawing.Point(15, 417);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(163, 100);
             this.groupBox7.TabIndex = 17;
@@ -1782,6 +1783,7 @@
             // 
             // groupBoxTimeLimit
             // 
+            this.groupBoxTimeLimit.Controls.Add(this.cBxoffAdvert);
             this.groupBoxTimeLimit.Controls.Add(this.cBxBlockDevice);
             this.groupBoxTimeLimit.Controls.Add(this.label15);
             this.groupBoxTimeLimit.Controls.Add(this.textBoxMaxTimeService);
@@ -1791,7 +1793,7 @@
             this.groupBoxTimeLimit.Controls.Add(this.label11);
             this.groupBoxTimeLimit.Location = new System.Drawing.Point(15, 241);
             this.groupBoxTimeLimit.Name = "groupBoxTimeLimit";
-            this.groupBoxTimeLimit.Size = new System.Drawing.Size(292, 136);
+            this.groupBoxTimeLimit.Size = new System.Drawing.Size(292, 170);
             this.groupBoxTimeLimit.TabIndex = 15;
             this.groupBoxTimeLimit.TabStop = false;
             this.groupBoxTimeLimit.Text = "Времена";
@@ -1799,7 +1801,7 @@
             // cBxBlockDevice
             // 
             this.cBxBlockDevice.AutoSize = true;
-            this.cBxBlockDevice.Location = new System.Drawing.Point(19, 107);
+            this.cBxBlockDevice.Location = new System.Drawing.Point(19, 142);
             this.cBxBlockDevice.Name = "cBxBlockDevice";
             this.cBxBlockDevice.Size = new System.Drawing.Size(136, 17);
             this.cBxBlockDevice.TabIndex = 22;
@@ -1810,7 +1812,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(242, 88);
+            this.label15.Location = new System.Drawing.Point(242, 123);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(25, 13);
             this.label15.TabIndex = 21;
@@ -1818,7 +1820,7 @@
             // 
             // textBoxMaxTimeService
             // 
-            this.textBoxMaxTimeService.Location = new System.Drawing.Point(127, 81);
+            this.textBoxMaxTimeService.Location = new System.Drawing.Point(127, 116);
             this.textBoxMaxTimeService.Name = "textBoxMaxTimeService";
             this.textBoxMaxTimeService.Size = new System.Drawing.Size(100, 20);
             this.textBoxMaxTimeService.TabIndex = 20;
@@ -1829,7 +1831,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(13, 65);
+            this.label17.Location = new System.Drawing.Point(13, 100);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(121, 13);
             this.label17.TabIndex = 19;
@@ -2570,6 +2572,17 @@
             this.buttonResetTimeRefresh.UseVisualStyleBackColor = true;
             this.buttonResetTimeRefresh.Click += new System.EventHandler(this.buttonResetTimeRefresh_Click);
             // 
+            // cBxoffAdvert
+            // 
+            this.cBxoffAdvert.AutoSize = true;
+            this.cBxoffAdvert.Location = new System.Drawing.Point(19, 68);
+            this.cBxoffAdvert.Name = "cBxoffAdvert";
+            this.cBxoffAdvert.Size = new System.Drawing.Size(192, 17);
+            this.cBxoffAdvert.TabIndex = 23;
+            this.cBxoffAdvert.Text = "Выключить рекламную заставку";
+            this.cBxoffAdvert.UseVisualStyleBackColor = true;
+            this.cBxoffAdvert.CheckedChanged += new System.EventHandler(this.cBxoffAdvert_CheckedChanged);
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2857,5 +2870,6 @@
         private System.Windows.Forms.TextBox textCollectSMS;
         private System.Windows.Forms.CheckBox cBxOffReserve;
         private System.Windows.Forms.CheckBox cBxBlockDevice;
+        private System.Windows.Forms.CheckBox cBxoffAdvert;
     }
 }

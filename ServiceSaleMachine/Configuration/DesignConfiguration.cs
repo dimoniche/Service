@@ -76,6 +76,7 @@ namespace AirVitamin
 
                         if ((xElement = xSettings.Element("ScreenSaver")) != null) Settings.ScreenSaver = xElement.Value;
                         if ((xElement = xSettings.Element("ScreenSaverVideo")) != null) Settings.ScreenSaverVideo = xElement.Value;
+                        if ((xElement = xSettings.Element("ScreenSaverVideo1")) != null) Settings.ScreenSaverVideo1 = xElement.Value;
                         if ((xElement = xSettings.Element("ScreenSaverVideo2")) != null) Settings.ScreenSaverVideo2 = xElement.Value;
                     }
 

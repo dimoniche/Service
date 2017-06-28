@@ -25,6 +25,7 @@ namespace AirVitamin
         public string ButtonGetOxigen = defpicture;
         public string ScreenSaver = defpicture;
         public string ScreenSaverVideo = defpicture;
+        public string ScreenSaverVideo1 = defpicture;
         public string ScreenSaverVideo2 = defpicture;
 
         public string ButtonTakeAwayMoney = defpicture;

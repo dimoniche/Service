@@ -76,6 +76,7 @@ namespace AirVitamin
                         if ((xElement = xSettings.Element("offVideoSecondScreen")) != null) Settings.offVideoSecondScreen = int.Parse(xElement.Value);
                         if ((xElement = xSettings.Element("offReserve")) != null) Settings.offReserve = int.Parse(xElement.Value);
                         if ((xElement = xSettings.Element("BlockDevice")) != null) Settings.BlockDevice = int.Parse(xElement.Value);
+                        if ((xElement = xSettings.Element("offAdvert")) != null) Settings.offAdvert = int.Parse(xElement.Value);
 
                         if ((xElement = xSettings.Element("NoPaperWork")) != null) Settings.NoPaperWork = int.Parse(xElement.Value);
 
@@ -166,6 +167,7 @@ namespace AirVitamin
                 xSettings.Add(new XElement("offVideoSecondScreen", Settings.offVideoSecondScreen.ToString()));
                 xSettings.Add(new XElement("offReserve", Settings.offReserve.ToString()));
                 xSettings.Add(new XElement("BlockDevice", Settings.BlockDevice.ToString()));
+                xSettings.Add(new XElement("offAdvert", Settings.offAdvert.ToString()));
 
                 xSettings.Add(new XElement("NoPaperWork", Settings.NoPaperWork.ToString()));
 

@@ -737,8 +737,11 @@ namespace AirVitamin.Client
 
             if (Timeout > Globals.ClientConfiguration.Settings.timeout * 60)
             {
-                data.stage = WorkerStateStage.TimeOut;
-                this.Close();
+                if (Globals.ClientConfiguration.Settings.offAdvert == 0)
+                {
+                    data.stage = WorkerStateStage.TimeOut;
+                    this.Close();
+                }
             }
         }
 

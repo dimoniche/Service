@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormWaitVideoSecondScreen));
-            this.VideoPlayer = new AxWMPLib.AxWindowsMediaPlayer();
+            this.VideoPlayer = new AxAXVLC.AxVLCPlugin2();
             ((System.ComponentModel.ISupportInitialize)(this.VideoPlayer)).BeginInit();
             this.SuspendLayout();
             // 
@@ -42,8 +42,6 @@
             this.VideoPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("VideoPlayer.OcxState")));
             this.VideoPlayer.Size = new System.Drawing.Size(1280, 1024);
             this.VideoPlayer.TabIndex = 0;
-            this.VideoPlayer.PlayStateChange += new AxWMPLib._WMPOCXEvents_PlayStateChangeEventHandler(this.VideoPlayer_PlayStateChange);
-            this.VideoPlayer.ClickEvent += new AxWMPLib._WMPOCXEvents_ClickEventHandler(this.VideoPlayer_ClickEvent);
             // 
             // FormWaitVideoSecondScreen
             // 
@@ -64,6 +62,7 @@
         }
 
         #endregion
-        private AxWMPLib.AxWindowsMediaPlayer VideoPlayer;
+
+        private AxAXVLC.AxVLCPlugin2 VideoPlayer;
     }
 }

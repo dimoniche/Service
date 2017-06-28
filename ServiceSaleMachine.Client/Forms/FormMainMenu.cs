@@ -188,18 +188,15 @@ namespace AirVitamin.Client
 
             if (Timeout > Globals.ClientConfiguration.Settings.timeout * 60)
             {
-                if (Globals.ClientConfiguration.Settings.offAdvert == 0)
-                {
-                    data.stage = WorkerStateStage.TimeOut;
+                data.stage = WorkerStateStage.TimeOut;
 
-                    numberTelefon.Text = "";
+                numberTelefon.Text = "";
 
-                    data.retLogin = "";
-                    data.retPassword = "";
-                    data.CurrentUserId = 0;
+                data.retLogin = "";
+                data.retPassword = "";
+                data.CurrentUserId = 0;
 
-                    this.Close();
-                }
+                this.Close();
             }
         }
 

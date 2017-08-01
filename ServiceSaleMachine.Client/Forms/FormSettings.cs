@@ -735,6 +735,11 @@ namespace AirVitamin.Client
             textNeedCollect.Text = Globals.ClientConfiguration.Settings.SMSMessageNeedCollect;
             textCollectSMS.Text = Globals.ClientConfiguration.Settings.SMSMessageCollect;
 
+            tbxSMS1Span.Text = Globals.ClientConfiguration.Settings.spanSendSMS1.ToString();
+            tbxSMS2Span.Text = Globals.ClientConfiguration.Settings.spanSendSMS2.ToString();
+            tbxSMS3Span.Text = Globals.ClientConfiguration.Settings.spanSendSMS3.ToString();
+            tbxSMS4Span.Text = Globals.ClientConfiguration.Settings.spanSendSMS4.ToString();
+
             firmsname.Text = Globals.CheckConfiguration.Settings.firmsname;
             secondfirmsname.Text = Globals.CheckConfiguration.Settings.secondfirmsname;
             PreviouslyName.Text = Globals.CheckConfiguration.Settings.PreviouslyService;
@@ -893,6 +898,11 @@ namespace AirVitamin.Client
             firmsname_Leave(sender, e);
             textNeedCollect_Leave(sender, e);
             textBoxMaxTimeService_Leave(sender, e);
+
+            tbxSMS1Span_Leave(sender, e);
+            tbxSMS2Span_Leave(sender, e);
+            tbxSMS3Span_Leave(sender, e);
+            tbxSMS4Span_Leave(sender, e);
 
             Globals.ClientConfiguration.Save();
 
@@ -2182,6 +2192,46 @@ namespace AirVitamin.Client
             {
                 Globals.ClientConfiguration.Settings.offAdvert = 0;
             }
+        }
+
+        private void tbxSMS1Span_Leave(object sender, EventArgs e)
+        {
+            int time = 24;
+
+            int.TryParse(tbxSMS1Span.Text, out time);
+
+            Globals.ClientConfiguration.Settings.spanSendSMS1 = time;
+            Globals.ClientConfiguration.Save();
+        }
+
+        private void tbxSMS2Span_Leave(object sender, EventArgs e)
+        {
+            int time = 24;
+
+            int.TryParse(tbxSMS2Span.Text, out time);
+
+            Globals.ClientConfiguration.Settings.spanSendSMS2 = time;
+            Globals.ClientConfiguration.Save();
+        }
+
+        private void tbxSMS3Span_Leave(object sender, EventArgs e)
+        {
+            int time = 24;
+
+            int.TryParse(tbxSMS3Span.Text, out time);
+
+            Globals.ClientConfiguration.Settings.spanSendSMS3 = time;
+            Globals.ClientConfiguration.Save();
+        }
+
+        private void tbxSMS4Span_Leave(object sender, EventArgs e)
+        {
+            int time = 24;
+
+            int.TryParse(tbxSMS4Span.Text, out time);
+
+            Globals.ClientConfiguration.Settings.spanSendSMS4 = time;
+            Globals.ClientConfiguration.Save();
         }
     }
 }

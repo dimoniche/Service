@@ -162,10 +162,14 @@ namespace AirVitamin.Client
                 {
                     if (res[0] == 0)
                     {
-                        data.stage = WorkerStateStage.ErrorEndControl;
-
                         data.IsSendSMS1 = false;
-                        this.Close();
+
+                        if (data.IsSendSMS1 == false)
+                        {
+                            // в состоянии гистерезиса от отправки СМС - остаемся в меню не работы
+                            data.stage = WorkerStateStage.ErrorEndControl;
+                            this.Close();
+                        }
                     }
                 }
             }
@@ -185,10 +189,14 @@ namespace AirVitamin.Client
                 {
                     if (res[3] == 0)
                     {
-                        data.stage = WorkerStateStage.ErrorEndControl;
-
                         data.IsSendSMS4 = false;
-                        this.Close();
+
+                        if(data.IsSendSMS4 == false)
+                        {
+                            // в состоянии гистерезиса от отправки СМС - остаемся в меню не работы
+                            data.stage = WorkerStateStage.ErrorEndControl;
+                            this.Close();
+                        }
                     }
                 }
             }

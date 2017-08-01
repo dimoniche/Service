@@ -169,6 +169,7 @@
             this.ButVideo = new System.Windows.Forms.RadioButton();
             this.ButPicture = new System.Windows.Forms.RadioButton();
             this.groupBoxTimeLimit = new System.Windows.Forms.GroupBox();
+            this.cBxoffAdvert = new System.Windows.Forms.CheckBox();
             this.cBxBlockDevice = new System.Windows.Forms.CheckBox();
             this.label15 = new System.Windows.Forms.Label();
             this.textBoxMaxTimeService = new System.Windows.Forms.TextBox();
@@ -240,7 +241,15 @@
             this.labelTimeLastRefresh = new System.Windows.Forms.Label();
             this.labelWorkFromLastRefresh = new System.Windows.Forms.Label();
             this.buttonResetTimeRefresh = new System.Windows.Forms.Button();
-            this.cBxoffAdvert = new System.Windows.Forms.CheckBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label37 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
+            this.tbxSMS1Span = new System.Windows.Forms.TextBox();
+            this.tbxSMS2Span = new System.Windows.Forms.TextBox();
+            this.tbxSMS3Span = new System.Windows.Forms.TextBox();
+            this.tbxSMS4Span = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -282,6 +291,7 @@
             this.tabControl4.SuspendLayout();
             this.tabPageReacess.SuspendLayout();
             this.tabPage14.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -1501,6 +1511,7 @@
             // 
             // tabPage10
             // 
+            this.tabPage10.Controls.Add(this.groupBox3);
             this.tabPage10.Controls.Add(this.resSMS);
             this.tabPage10.Controls.Add(this.cBxSpeedModem);
             this.tabPage10.Controls.Add(this.groupBxSettingModem);
@@ -1797,6 +1808,17 @@
             this.groupBoxTimeLimit.TabIndex = 15;
             this.groupBoxTimeLimit.TabStop = false;
             this.groupBoxTimeLimit.Text = "Времена";
+            // 
+            // cBxoffAdvert
+            // 
+            this.cBxoffAdvert.AutoSize = true;
+            this.cBxoffAdvert.Location = new System.Drawing.Point(19, 68);
+            this.cBxoffAdvert.Name = "cBxoffAdvert";
+            this.cBxoffAdvert.Size = new System.Drawing.Size(192, 17);
+            this.cBxoffAdvert.TabIndex = 23;
+            this.cBxoffAdvert.Text = "Выключить рекламную заставку";
+            this.cBxoffAdvert.UseVisualStyleBackColor = true;
+            this.cBxoffAdvert.CheckedChanged += new System.EventHandler(this.cBxoffAdvert_CheckedChanged);
             // 
             // cBxBlockDevice
             // 
@@ -2572,16 +2594,90 @@
             this.buttonResetTimeRefresh.UseVisualStyleBackColor = true;
             this.buttonResetTimeRefresh.Click += new System.EventHandler(this.buttonResetTimeRefresh_Click);
             // 
-            // cBxoffAdvert
+            // groupBox3
             // 
-            this.cBxoffAdvert.AutoSize = true;
-            this.cBxoffAdvert.Location = new System.Drawing.Point(19, 68);
-            this.cBxoffAdvert.Name = "cBxoffAdvert";
-            this.cBxoffAdvert.Size = new System.Drawing.Size(192, 17);
-            this.cBxoffAdvert.TabIndex = 23;
-            this.cBxoffAdvert.Text = "Выключить рекламную заставку";
-            this.cBxoffAdvert.UseVisualStyleBackColor = true;
-            this.cBxoffAdvert.CheckedChanged += new System.EventHandler(this.cBxoffAdvert_CheckedChanged);
+            this.groupBox3.Controls.Add(this.tbxSMS4Span);
+            this.groupBox3.Controls.Add(this.tbxSMS3Span);
+            this.groupBox3.Controls.Add(this.tbxSMS2Span);
+            this.groupBox3.Controls.Add(this.tbxSMS1Span);
+            this.groupBox3.Controls.Add(this.label40);
+            this.groupBox3.Controls.Add(this.label39);
+            this.groupBox3.Controls.Add(this.label38);
+            this.groupBox3.Controls.Add(this.label37);
+            this.groupBox3.Location = new System.Drawing.Point(365, 55);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(418, 193);
+            this.groupBox3.TabIndex = 17;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Периоды отправки СМС";
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(19, 28);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(160, 13);
+            this.label37.TabIndex = 2;
+            this.label37.Text = "Период отправки СМС РД0 (ч)";
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(19, 54);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(160, 13);
+            this.label38.TabIndex = 2;
+            this.label38.Text = "Период отправки СМС РД1 (ч)";
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(19, 79);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(160, 13);
+            this.label39.TabIndex = 2;
+            this.label39.Text = "Период отправки СМС РД2 (ч)";
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(19, 105);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(160, 13);
+            this.label40.TabIndex = 2;
+            this.label40.Text = "Период отправки СМС РД4 (ч)";
+            // 
+            // tbxSMS1Span
+            // 
+            this.tbxSMS1Span.Location = new System.Drawing.Point(183, 25);
+            this.tbxSMS1Span.Name = "tbxSMS1Span";
+            this.tbxSMS1Span.Size = new System.Drawing.Size(181, 20);
+            this.tbxSMS1Span.TabIndex = 3;
+            this.tbxSMS1Span.Leave += new System.EventHandler(this.tbxSMS1Span_Leave);
+            // 
+            // tbxSMS2Span
+            // 
+            this.tbxSMS2Span.Location = new System.Drawing.Point(183, 51);
+            this.tbxSMS2Span.Name = "tbxSMS2Span";
+            this.tbxSMS2Span.Size = new System.Drawing.Size(181, 20);
+            this.tbxSMS2Span.TabIndex = 3;
+            this.tbxSMS2Span.Leave += new System.EventHandler(this.tbxSMS2Span_Leave);
+            // 
+            // tbxSMS3Span
+            // 
+            this.tbxSMS3Span.Location = new System.Drawing.Point(183, 76);
+            this.tbxSMS3Span.Name = "tbxSMS3Span";
+            this.tbxSMS3Span.Size = new System.Drawing.Size(181, 20);
+            this.tbxSMS3Span.TabIndex = 3;
+            this.tbxSMS3Span.Leave += new System.EventHandler(this.tbxSMS3Span_Leave);
+            // 
+            // tbxSMS4Span
+            // 
+            this.tbxSMS4Span.Location = new System.Drawing.Point(183, 102);
+            this.tbxSMS4Span.Name = "tbxSMS4Span";
+            this.tbxSMS4Span.Size = new System.Drawing.Size(181, 20);
+            this.tbxSMS4Span.TabIndex = 3;
+            this.tbxSMS4Span.Leave += new System.EventHandler(this.tbxSMS4Span_Leave);
             // 
             // FormSettings
             // 
@@ -2652,6 +2748,8 @@
             this.tabPageReacess.PerformLayout();
             this.tabPage14.ResumeLayout(false);
             this.tabPage14.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2871,5 +2969,14 @@
         private System.Windows.Forms.CheckBox cBxOffReserve;
         private System.Windows.Forms.CheckBox cBxBlockDevice;
         private System.Windows.Forms.CheckBox cBxoffAdvert;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.TextBox tbxSMS4Span;
+        private System.Windows.Forms.TextBox tbxSMS3Span;
+        private System.Windows.Forms.TextBox tbxSMS2Span;
+        private System.Windows.Forms.TextBox tbxSMS1Span;
     }
 }

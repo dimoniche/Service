@@ -1,4 +1,5 @@
 ﻿using AirVitamin.Drivers;
+using System;
 using System.Drawing.Text;
 
 namespace AirVitamin.Client
@@ -80,10 +81,131 @@ namespace AirVitamin.Client
         /// </summary>
         public PrivateFontCollection FontCollection;
 
-        public bool IsSendSMS1 = false;
-        public bool IsSendSMS2 = false;
-        public bool IsSendSMS3 = false;
-        public bool IsSendSMS4 = false;
+        private bool isSendSMS1 = false;
+        private bool isSendSMS2 = false;
+        private bool isSendSMS3 = false;
+        private bool isSendSMS4 = false;
+
+        public bool IsSendSMS1
+        {
+            get
+            {
+                if (Globals.ClientConfiguration.Settings.spanSendSMS1 == 0)
+                {
+                    // если 0 - отключим отправку смс вообще
+                    lastTimeSendSMS1 = DateTime.Now;
+                    return true;
+                }
+
+                return isSendSMS1;
+            }
+            set
+            {
+                if (DateTime.Now - lastTimeSendSMS1 > new TimeSpan(Globals.ClientConfiguration.Settings.spanSendSMS1, 0, 0))
+                {
+                    // меняем значение только если прошло время заданного гистрезиса
+                    isSendSMS1 = value;
+
+                    if (isSendSMS1 == true)
+                    {
+                        // обновляем время отсылки СМС если только что его отослали
+                        lastTimeSendSMS1 = DateTime.Now;
+                    }
+                }
+            }
+        }
+
+        public bool IsSendSMS2
+        {
+            get
+            {
+                if (Globals.ClientConfiguration.Settings.spanSendSMS2 == 0)
+                {
+                    // если 0 - отключим отправку смс вообще
+                    lastTimeSendSMS1 = DateTime.Now;
+                    return true;
+                }
+
+                return isSendSMS2;
+            }
+            set
+            {
+                if (DateTime.Now - lastTimeSendSMS2 > new TimeSpan(Globals.ClientConfiguration.Settings.spanSendSMS2, 0, 0))
+                {
+                    // меняем значение только если прошло время заданного гистрезиса
+                    isSendSMS1 = value;
+
+                    if (isSendSMS2 == true)
+                    {
+                        // обновляем время отсылки СМС если только что его отослали
+                        lastTimeSendSMS2 = DateTime.Now;
+                    }
+                }
+            }
+        }
+
+        public bool IsSendSMS3
+        {
+            get
+            {
+                if (Globals.ClientConfiguration.Settings.spanSendSMS3 == 0)
+                {
+                    // если 0 - отключим отправку смс вообще
+                    lastTimeSendSMS1 = DateTime.Now;
+                    return true;
+                }
+
+                return isSendSMS3;
+            }
+            set
+            {
+                if (DateTime.Now - lastTimeSendSMS3 > new TimeSpan(Globals.ClientConfiguration.Settings.spanSendSMS3, 0, 0))
+                {
+                    // меняем значение только если прошло время заданного гистрезиса
+                    isSendSMS3 = value;
+
+                    if (isSendSMS3 == true)
+                    {
+                        // обновляем время отсылки СМС если только что его отослали
+                        lastTimeSendSMS3 = DateTime.Now;
+                    }
+                }
+            }
+        }
+
+        public bool IsSendSMS4
+        {
+            get
+            {
+                if (Globals.ClientConfiguration.Settings.spanSendSMS4 == 0)
+                {
+                    // если 0 - отключим отправку смс вообще
+                    lastTimeSendSMS1 = DateTime.Now;
+                    return true;
+                }
+
+                return isSendSMS4;
+            }
+            set
+            {
+                if (DateTime.Now - lastTimeSendSMS4 > new TimeSpan(Globals.ClientConfiguration.Settings.spanSendSMS4, 0, 0))
+                {
+                    // меняем значение только если прошло время заданного гистрезиса
+                    isSendSMS4 = value;
+
+                    if (isSendSMS4 == true)
+                    {
+                        // обновляем время отсылки СМС если только что его отослали
+                        lastTimeSendSMS4 = DateTime.Now;
+                    }
+                }
+            }
+        }
+
+        DateTime lastTimeSendSMS1 = new DateTime(0);
+        DateTime lastTimeSendSMS2 = new DateTime(0);
+        DateTime lastTimeSendSMS3 = new DateTime(0);
+        DateTime lastTimeSendSMS4 = new DateTime(0);
 
         public FormWaitVideoSecondScreen fr2;
 

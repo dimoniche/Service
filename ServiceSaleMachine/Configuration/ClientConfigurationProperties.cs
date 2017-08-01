@@ -89,6 +89,11 @@ namespace AirVitamin
         // выключить рекламную заставку
         public int offAdvert = 1;
 
+        public int spanSendSMS1 = 24;
+        public int spanSendSMS2 = 24;
+        public int spanSendSMS3 = 24;
+        public int spanSendSMS4 = 24;
+
         internal ClientConfigurationProperties()
 		{
 			

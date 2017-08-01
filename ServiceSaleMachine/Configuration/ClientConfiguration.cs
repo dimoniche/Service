@@ -91,6 +91,11 @@ namespace AirVitamin
 
                         if ((xElement = xSettings.Element("ScreenServerType")) != null) Settings.ScreenServerType = int.Parse(xElement.Value);
 
+                        if ((xElement = xSettings.Element("spanSendSMS1")) != null) Settings.spanSendSMS1 = int.Parse(xElement.Value);
+                        if ((xElement = xSettings.Element("spanSendSMS2")) != null) Settings.spanSendSMS2 = int.Parse(xElement.Value);
+                        if ((xElement = xSettings.Element("spanSendSMS3")) != null) Settings.spanSendSMS3 = int.Parse(xElement.Value);
+                        if ((xElement = xSettings.Element("spanSendSMS4")) != null) Settings.spanSendSMS4 = int.Parse(xElement.Value);
+
                         if ((xElement = xSettings.Element("nominals")) != null)
                         {
                             Settings.nominals = new int[24];
@@ -181,6 +186,11 @@ namespace AirVitamin
                 xSettings.Add(new XElement("limitServiceTime", Settings.limitServiceTime.ToString()));
             
                 xSettings.Add(new XElement("ScreenServerType", Settings.ScreenServerType.ToString()));
+
+                xSettings.Add(new XElement("spanSendSMS1", Settings.spanSendSMS1.ToString()));
+                xSettings.Add(new XElement("spanSendSMS2", Settings.spanSendSMS2.ToString()));
+                xSettings.Add(new XElement("spanSendSMS3", Settings.spanSendSMS3.ToString()));
+                xSettings.Add(new XElement("spanSendSMS4", Settings.spanSendSMS4.ToString()));
 
                 XElement element = new XElement("nominals");
                 foreach (int nominal in Settings.nominals)

@@ -29,12 +29,17 @@ namespace AirVitamin.Client
             if (res != null)
             {
                 // просто шлем смс - не выходим пока с ошибкой
-                if (res[0] >= 1 && !data.IsSendSMS1)
+                if (res[0] >= 1 && !data.IsInterError1)
                 {
-                    data.drivers.modem.SendSMS("Упало давление кислорода", data.log);
+                    if (!data.IsSendSMS1)
+                    {
+                        Program.Log.Write(LogMessageType.Error, "Шлем СМС: РД1 - HIGH.");
+                        data.drivers.modem.SendSMS("Упало давление кислорода", data.log);
+                        data.IsSendSMS1 = true;
+                    }
 
+                    data.IsInterError1 = true;
                     data.stage = WorkerStateStage.Gas1_low;
-                    data.IsSendSMS1 = true;
 
                     Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД1 - HIGH.");
 
@@ -43,42 +48,73 @@ namespace AirVitamin.Client
                         return ReasonEnum.FormClose;
                     }
                 }
-                else if (res[0] == 0) data.IsSendSMS1 = false;
-
-                if (res[1] >= 1 && !data.IsSendSMS2)
+                else if (res[0] == 0)
                 {
-                    data.drivers.modem.SendSMS("Низкое давление Газа 2", data.log);
+                    data.IsSendSMS1 = false;
+                    data.IsInterError1 = false;
+                }
 
+                if (res[1] >= 1 && !data.IsInterError2)
+                {
+                    if (!data.IsSendSMS2)
+                    {
+                        Program.Log.Write(LogMessageType.Error, "Шлем СМС: РД2 - HIGH.");
+                        data.drivers.modem.SendSMS("Низкое давление Газа 2", data.log);
+                        data.IsSendSMS2 = true;
+                    }
+
+                    data.IsInterError2 = true;
                     data.stage = WorkerStateStage.Gas2_low;
-                    data.IsSendSMS2 = true;
 
                     Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД2 - HIGH.");
                 }
-                else if (res[1] == 0) data.IsSendSMS2 = false;
-
-                if (res[2] >= 1 && !data.IsSendSMS3)
+                else if (res[1] == 0)
                 {
-                    data.drivers.modem.SendSMS("Низкое давление Газа 3", data.log);
+                    data.IsSendSMS2 = false;
+                    data.IsInterError2 = false;
+                }
 
+                if (res[2] >= 1 && !data.IsInterError3)
+                {
+                    if (!data.IsSendSMS3)
+                    {
+                        Program.Log.Write(LogMessageType.Error, "Шлем СМС: РД3 - HIGH.");
+                        data.drivers.modem.SendSMS("Низкое давление Газа 3", data.log);
+                        data.IsSendSMS3 = true;
+                    }
+
+                    data.IsInterError3 = true;
                     data.stage = WorkerStateStage.Gas3_low;
-                    data.IsSendSMS3 = true;
 
                     Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД3 - HIGH.");
                 }
-                else if (res[2] == 0) data.IsSendSMS3 = false;
-
-                if (res[3] >= 1 && !data.IsSendSMS4)
+                else if (res[2] == 0)
                 {
-                    data.drivers.modem.SendSMS("Низкое давление Газа 4", data.log);
+                    data.IsSendSMS3 = false;
+                    data.IsInterError3 = false;
+                }
 
+                if (res[3] >= 1 && !data.IsInterError4)
+                {
+                    if (!data.IsSendSMS4)
+                    {
+                        Program.Log.Write(LogMessageType.Error, "Шлем СМС: РД4 - HIGH.");
+                        data.drivers.modem.SendSMS("Низкое давление Газа 4", data.log);
+                        data.IsSendSMS4 = true;
+                    }
+
+                    data.IsInterError4 = true;
                     data.stage = WorkerStateStage.Gas4_low;
-                    data.IsSendSMS4 = true;
 
                     Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД4 - HIGH.");
 
                     return ReasonEnum.FormClose;
                 }
-                else if (res[3] == 0) data.IsSendSMS4 = false;
+                else if (res[3] == 0)
+                {
+                    data.IsSendSMS4 = false;
+                    data.IsInterError4 = false;
+                }
             }
 
             if (Globals.ClientConfiguration.Settings.offPrinter == 0)

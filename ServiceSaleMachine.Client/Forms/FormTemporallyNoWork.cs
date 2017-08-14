@@ -158,18 +158,18 @@ namespace AirVitamin.Client
                 byte[] res;
                 res = data.drivers.control.GetStatusRelay(data.log);
 
+                if (Globals.IsDebug == true && res == null)
+                {
+                    res = new byte[4] { 0, 0, 0, 0 };
+                }
+
                 if (res != null)
                 {
+                    // здесь еще можно сделать гистерезис от быстрого выхода из ошибки
                     if (res[0] == 0)
                     {
-                        data.IsSendSMS1 = false;
-
-                        if (data.IsSendSMS1 == false)
-                        {
-                            // в состоянии гистерезиса от отправки СМС - остаемся в меню не работы
-                            data.stage = WorkerStateStage.ErrorEndControl;
-                            this.Close();
-                        }
+                        data.stage = WorkerStateStage.ErrorEndControl;
+                        this.Close();
                     }
                 }
             }
@@ -189,14 +189,8 @@ namespace AirVitamin.Client
                 {
                     if (res[3] == 0)
                     {
-                        data.IsSendSMS4 = false;
-
-                        if(data.IsSendSMS4 == false)
-                        {
-                            // в состоянии гистерезиса от отправки СМС - остаемся в меню не работы
-                            data.stage = WorkerStateStage.ErrorEndControl;
-                            this.Close();
-                        }
+                        data.stage = WorkerStateStage.ErrorEndControl;
+                        this.Close();
                     }
                 }
             }

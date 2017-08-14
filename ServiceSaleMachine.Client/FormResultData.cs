@@ -86,6 +86,11 @@ namespace AirVitamin.Client
         private bool isSendSMS3 = false;
         private bool isSendSMS4 = false;
 
+        public bool IsInterError1 = false;
+        public bool IsInterError2 = false;
+        public bool IsInterError3 = false;
+        public bool IsInterError4 = false;
+
         public bool IsSendSMS1
         {
             get
@@ -122,7 +127,7 @@ namespace AirVitamin.Client
                 if (Globals.ClientConfiguration.Settings.spanSendSMS2 == 0)
                 {
                     // если 0 - отключим отправку смс вообще
-                    lastTimeSendSMS1 = DateTime.Now;
+                    lastTimeSendSMS2 = DateTime.Now;
                     return true;
                 }
 
@@ -133,7 +138,7 @@ namespace AirVitamin.Client
                 if (DateTime.Now - lastTimeSendSMS2 > new TimeSpan(Globals.ClientConfiguration.Settings.spanSendSMS2, 0, 0))
                 {
                     // меняем значение только если прошло время заданного гистрезиса
-                    isSendSMS1 = value;
+                    isSendSMS2 = value;
 
                     if (isSendSMS2 == true)
                     {
@@ -151,7 +156,7 @@ namespace AirVitamin.Client
                 if (Globals.ClientConfiguration.Settings.spanSendSMS3 == 0)
                 {
                     // если 0 - отключим отправку смс вообще
-                    lastTimeSendSMS1 = DateTime.Now;
+                    lastTimeSendSMS3 = DateTime.Now;
                     return true;
                 }
 
@@ -180,7 +185,7 @@ namespace AirVitamin.Client
                 if (Globals.ClientConfiguration.Settings.spanSendSMS4 == 0)
                 {
                     // если 0 - отключим отправку смс вообще
-                    lastTimeSendSMS1 = DateTime.Now;
+                    lastTimeSendSMS4 = DateTime.Now;
                     return true;
                 }
 

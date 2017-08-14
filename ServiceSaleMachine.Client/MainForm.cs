@@ -115,6 +115,7 @@ namespace AirVitamin.Client
             }
 
             bool check = true;
+            bool firstload = true;
 
             while (true)
             {
@@ -134,12 +135,13 @@ namespace AirVitamin.Client
                     Globals.UserConfiguration.UserPassword = "";
 
                     // Проверка статистических данных - может пора заканчивать работать
-                    if (check)
+                    if (check && !firstload)
                     {
                         result = CheckStatistic(result);
                     }
 
                     check = true;
+                    firstload = false;
 
 NoCheckStatistic:
                     if (result.stage == WorkerStateStage.ErrorBill)
@@ -184,6 +186,7 @@ NoCheckStatistic:
                         {
                             if (!result.IsSendSMS1)
                             {
+                                Program.Log.Write(LogMessageType.Error, "Шлем СМС: РД1 - HIGH.");
                                 result.drivers.modem.SendSMS("Упало давление кислорода", result.log);
                                 result.IsSendSMS1 = true;
                             }
@@ -196,6 +199,7 @@ NoCheckStatistic:
                         {
                             if (!result.IsSendSMS2)
                             {
+                                Program.Log.Write(LogMessageType.Error, "Шлем СМС: РД2 - HIGH.");
                                 result.drivers.modem.SendSMS("Низкое давление Газа 2", result.log);
                                 result.IsSendSMS2 = true;
                             }
@@ -208,8 +212,9 @@ NoCheckStatistic:
                         {
                             if (!result.IsSendSMS3)
                             {
+                                Program.Log.Write(LogMessageType.Error, "Шлем СМС: РД3 - HIGH.");
                                 result.drivers.modem.SendSMS("Низкое давление Газа 3", result.log);
-                                result.IsSendSMS3= true;
+                                result.IsSendSMS3 = true;
                             }
 
                             Program.Log.Write(LogMessageType.Error, "CHECK_STAT: РД3 - HIGH.");
@@ -220,6 +225,7 @@ NoCheckStatistic:
                         {
                             if (!result.IsSendSMS4)
                             {
+                                Program.Log.Write(LogMessageType.Error, "Шлем СМС: РД4 - HIGH.");
                                 result.drivers.modem.SendSMS("Низкое давление Газа 4", result.log);
                                 result.IsSendSMS4 = true;
                             }
@@ -233,6 +239,7 @@ NoCheckStatistic:
                         result.BillError = false;
                         // с газом тоже полный порядок
                         result.IsSendSMS1 = result.IsSendSMS2 = result.IsSendSMS3 = result.IsSendSMS4 = false;
+                        result.IsInterError1 = result.IsInterError2 = result.IsInterError3 = result.IsInterError4 = false;
                     }
 
                     if (result.stage != WorkerStateStage.None)

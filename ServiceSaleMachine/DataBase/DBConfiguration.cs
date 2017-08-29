@@ -20,6 +20,11 @@ namespace AirVitamin
         public string UserID = "";
         public string Password = "";
 
+        // настройки резервирования
+        public string folderBuckUp = "";
+        public int AutomaticBuckUp = 1;
+        public int PeriodBuckUp = 6;
+
         public bool Load()
         {
             try
@@ -37,11 +42,14 @@ namespace AirVitamin
 
                     if (xSettings != null)
                     {
-
                         if ((xElement = xSettings.Element("Server")) != null) Server = xElement.Value;
                         if ((xElement = xSettings.Element("Database")) != null) Database = xElement.Value;
                         if ((xElement = xSettings.Element("UserID")) != null) UserID = xElement.Value;
                         if ((xElement = xSettings.Element("Password")) != null) Password = xElement.Value;
+                        if ((xElement = xSettings.Element("folderBuckUp")) != null) folderBuckUp = xElement.Value;
+
+                        if ((xElement = xSettings.Element("AutomaticBuckUp")) != null) AutomaticBuckUp = int.Parse(xElement.Value);
+                        if ((xElement = xSettings.Element("PeriodBuckUp")) != null) PeriodBuckUp = int.Parse(xElement.Value);
                     }
 
                     return true;
@@ -66,6 +74,10 @@ namespace AirVitamin
                 xSettings.Add(new XElement("Database", Database));
                 xSettings.Add(new XElement("UserID", UserID));
                 xSettings.Add(new XElement("Password", Password));
+
+                xSettings.Add(new XElement("folderBuckUp", folderBuckUp));
+                xSettings.Add(new XElement("AutomaticBuckUp", AutomaticBuckUp));
+                xSettings.Add(new XElement("PeriodBuckUp", PeriodBuckUp));
 
                 if (xSettings.HasElements)
                 {

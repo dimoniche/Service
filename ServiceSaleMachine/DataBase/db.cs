@@ -57,6 +57,48 @@ namespace AirVitamin
             }
         }
 
+        public void Backup(string file)
+        {
+            lock (connection)
+            {
+                using (MySqlConnection conn = new MySqlConnection(mysqlCSB.ConnectionString))
+                {
+                    using (MySqlCommand cmd = new MySqlCommand())
+                    {
+                        using (MySqlBackup mb = new MySqlBackup(cmd))
+                        {
+                            file += "\\" + DateTime.Now.ToString("ddMMyy_hhmmss") + ".bak";
+
+                            cmd.Connection = conn;
+                            conn.Open();
+                            mb.ExportToFile(file);
+                            conn.Close();
+                        }
+                    }
+                }
+            }
+        }
+
+        public void Restore(string file)
+        {
+            lock (connection)
+            {
+                using (MySqlConnection conn = new MySqlConnection(mysqlCSB.ConnectionString))
+                {
+                    using (MySqlCommand cmd = new MySqlCommand())
+                    {
+                        using (MySqlBackup mb = new MySqlBackup(cmd))
+                        {
+                            cmd.Connection = conn;
+                            conn.Open();
+                            mb.ImportFromFile(file);
+                            conn.Close();
+                        }
+                    }
+                }
+            }
+        }
+
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             lock(connection)

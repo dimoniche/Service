@@ -823,6 +823,21 @@ namespace AirVitamin.Client
                     }
                 }
             }
+
+            FolderBuckup.Text = Globals.DbConfiguration.folderBuckUp;
+
+            if(Globals.DbConfiguration.AutomaticBuckUp == 0)
+            {
+                checkBox2.Checked = false;
+            }
+            else
+            {
+                checkBox2.Checked = true;
+            }
+
+            numericPeriodBuckUp.Enabled = checkBox2.Checked;
+
+            numericPeriodBuckUp.Value = Globals.DbConfiguration.PeriodBuckUp;
         }
 
         void MoneyStatistic()
@@ -2232,6 +2247,63 @@ namespace AirVitamin.Client
 
             Globals.ClientConfiguration.Settings.spanSendSMS4 = time;
             Globals.ClientConfiguration.Save();
+        }
+
+        // Архивирование базы
+
+        private void buttonFolderBuckUp_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog dialog = new FolderBrowserDialog();
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                string folder = dialog.SelectedPath;
+
+                Globals.DbConfiguration.folderBuckUp = folder;
+                Globals.DbConfiguration.Save();
+
+                FolderBuckup.Text = folder;
+            }
+        }
+
+        private void checkBox2_CheckedChanged_1(object sender, EventArgs e)
+        {
+            if(checkBox2.Checked)
+            {
+                Globals.DbConfiguration.AutomaticBuckUp = 1;
+            }
+            else
+            {
+                Globals.DbConfiguration.AutomaticBuckUp = 0;
+            }
+
+            Globals.DbConfiguration.Save();
+
+            numericPeriodBuckUp.Enabled = checkBox2.Checked;
+        }
+
+        private void numericPeriodBuckUp_ValueChanged(object sender, EventArgs e)
+        {
+            Globals.DbConfiguration.PeriodBuckUp = (int)numericPeriodBuckUp.Value;
+
+            Globals.DbConfiguration.Save();
+        }
+
+        private void butBuckUp_Click(object sender, EventArgs e)
+        {
+            GlobalDb.GlobalBase.Backup(Globals.DbConfiguration.folderBuckUp);
+        }
+
+        private void butRestore_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog file = new OpenFileDialog();
+            file.Filter = "BuckUp files (*.bak)|*.bak";
+            file.RestoreDirectory = true;
+
+            if (file.ShowDialog() == DialogResult.OK)
+            {
+                GlobalDb.GlobalBase.Restore(file.FileName);
+            }
         }
     }
 }

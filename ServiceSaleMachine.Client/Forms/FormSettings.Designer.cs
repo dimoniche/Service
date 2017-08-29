@@ -111,6 +111,17 @@
             this.tabViewDataBase = new System.Windows.Forms.TabPage();
             this.tabDataBaseSetting = new System.Windows.Forms.TabControl();
             this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.gBbuckup = new System.Windows.Forms.GroupBox();
+            this.label45 = new System.Windows.Forms.Label();
+            this.label44 = new System.Windows.Forms.Label();
+            this.numericPeriodBuckUp = new System.Windows.Forms.NumericUpDown();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.label43 = new System.Windows.Forms.Label();
+            this.label42 = new System.Windows.Forms.Label();
+            this.FolderBuckup = new System.Windows.Forms.Label();
+            this.butRestore = new System.Windows.Forms.Button();
+            this.butBuckUp = new System.Windows.Forms.Button();
+            this.buttonFolderBuckUp = new System.Windows.Forms.Button();
             this.label31 = new System.Windows.Forms.Label();
             this.edtDBServer = new System.Windows.Forms.TextBox();
             this.label30 = new System.Windows.Forms.Label();
@@ -143,6 +154,15 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.button13 = new System.Windows.Forms.Button();
             this.tabPage10 = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.tbxSMS4Span = new System.Windows.Forms.TextBox();
+            this.tbxSMS3Span = new System.Windows.Forms.TextBox();
+            this.tbxSMS2Span = new System.Windows.Forms.TextBox();
+            this.tbxSMS1Span = new System.Windows.Forms.TextBox();
+            this.label40 = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
             this.resSMS = new System.Windows.Forms.Label();
             this.cBxSpeedModem = new System.Windows.Forms.ComboBox();
             this.groupBxSettingModem = new System.Windows.Forms.GroupBox();
@@ -241,15 +261,6 @@
             this.labelTimeLastRefresh = new System.Windows.Forms.Label();
             this.labelWorkFromLastRefresh = new System.Windows.Forms.Label();
             this.buttonResetTimeRefresh = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label37 = new System.Windows.Forms.Label();
-            this.label38 = new System.Windows.Forms.Label();
-            this.label39 = new System.Windows.Forms.Label();
-            this.label40 = new System.Windows.Forms.Label();
-            this.tbxSMS1Span = new System.Windows.Forms.TextBox();
-            this.tbxSMS2Span = new System.Windows.Forms.TextBox();
-            this.tbxSMS3Span = new System.Windows.Forms.TextBox();
-            this.tbxSMS4Span = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -260,6 +271,8 @@
             this.tabViewDataBase.SuspendLayout();
             this.tabDataBaseSetting.SuspendLayout();
             this.tabPage7.SuspendLayout();
+            this.gBbuckup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericPeriodBuckUp)).BeginInit();
             this.tabViewUser.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -272,6 +285,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.LogView)).BeginInit();
             this.panel4.SuspendLayout();
             this.tabPage10.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.groupBxSettingModem.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabControl3.SuspendLayout();
@@ -291,7 +305,6 @@
             this.tabControl4.SuspendLayout();
             this.tabPageReacess.SuspendLayout();
             this.tabPage14.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -1191,6 +1204,7 @@
             // 
             // tabPage7
             // 
+            this.tabPage7.Controls.Add(this.gBbuckup);
             this.tabPage7.Controls.Add(this.label31);
             this.tabPage7.Controls.Add(this.edtDBServer);
             this.tabPage7.Controls.Add(this.label30);
@@ -1206,6 +1220,129 @@
             this.tabPage7.TabIndex = 0;
             this.tabPage7.Text = "Настройка доступа";
             this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // gBbuckup
+            // 
+            this.gBbuckup.Controls.Add(this.label45);
+            this.gBbuckup.Controls.Add(this.label44);
+            this.gBbuckup.Controls.Add(this.numericPeriodBuckUp);
+            this.gBbuckup.Controls.Add(this.checkBox2);
+            this.gBbuckup.Controls.Add(this.label43);
+            this.gBbuckup.Controls.Add(this.label42);
+            this.gBbuckup.Controls.Add(this.FolderBuckup);
+            this.gBbuckup.Controls.Add(this.butRestore);
+            this.gBbuckup.Controls.Add(this.butBuckUp);
+            this.gBbuckup.Controls.Add(this.buttonFolderBuckUp);
+            this.gBbuckup.Location = new System.Drawing.Point(32, 164);
+            this.gBbuckup.Name = "gBbuckup";
+            this.gBbuckup.Size = new System.Drawing.Size(365, 238);
+            this.gBbuckup.TabIndex = 10;
+            this.gBbuckup.TabStop = false;
+            this.gBbuckup.Text = "Архивирование базы";
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(14, 114);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(67, 13);
+            this.label45.TabIndex = 5;
+            this.label45.Text = "C периодом";
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(147, 114);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(36, 13);
+            this.label44.TabIndex = 5;
+            this.label44.Text = "часов";
+            // 
+            // numericPeriodBuckUp
+            // 
+            this.numericPeriodBuckUp.Location = new System.Drawing.Point(86, 112);
+            this.numericPeriodBuckUp.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericPeriodBuckUp.Name = "numericPeriodBuckUp";
+            this.numericPeriodBuckUp.Size = new System.Drawing.Size(40, 20);
+            this.numericPeriodBuckUp.TabIndex = 4;
+            this.numericPeriodBuckUp.Value = new decimal(new int[] {
+            6,
+            0,
+            0,
+            0});
+            this.numericPeriodBuckUp.ValueChanged += new System.EventHandler(this.numericPeriodBuckUp_ValueChanged);
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(17, 70);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(203, 17);
+            this.checkBox2.TabIndex = 3;
+            this.checkBox2.Text = "Архивировать базу автоматически";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged_1);
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(137, 194);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(59, 13);
+            this.label43.TabIndex = 2;
+            this.label43.Text = "Результат";
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(137, 154);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(59, 13);
+            this.label42.TabIndex = 2;
+            this.label42.Text = "Результат";
+            // 
+            // FolderBuckup
+            // 
+            this.FolderBuckup.AutoSize = true;
+            this.FolderBuckup.Location = new System.Drawing.Point(137, 36);
+            this.FolderBuckup.Name = "FolderBuckup";
+            this.FolderBuckup.Size = new System.Drawing.Size(22, 13);
+            this.FolderBuckup.TabIndex = 2;
+            this.FolderBuckup.Text = "C:\\";
+            // 
+            // butRestore
+            // 
+            this.butRestore.Location = new System.Drawing.Point(17, 189);
+            this.butRestore.Name = "butRestore";
+            this.butRestore.Size = new System.Drawing.Size(109, 23);
+            this.butRestore.TabIndex = 1;
+            this.butRestore.Text = "Восстановить";
+            this.butRestore.UseVisualStyleBackColor = true;
+            this.butRestore.Click += new System.EventHandler(this.butRestore_Click);
+            // 
+            // butBuckUp
+            // 
+            this.butBuckUp.Location = new System.Drawing.Point(17, 149);
+            this.butBuckUp.Name = "butBuckUp";
+            this.butBuckUp.Size = new System.Drawing.Size(109, 23);
+            this.butBuckUp.TabIndex = 1;
+            this.butBuckUp.Text = "Архивировать";
+            this.butBuckUp.UseVisualStyleBackColor = true;
+            this.butBuckUp.Click += new System.EventHandler(this.butBuckUp_Click);
+            // 
+            // buttonFolderBuckUp
+            // 
+            this.buttonFolderBuckUp.Location = new System.Drawing.Point(17, 31);
+            this.buttonFolderBuckUp.Name = "buttonFolderBuckUp";
+            this.buttonFolderBuckUp.Size = new System.Drawing.Size(109, 23);
+            this.buttonFolderBuckUp.TabIndex = 0;
+            this.buttonFolderBuckUp.Text = "Папка с архивом";
+            this.buttonFolderBuckUp.UseVisualStyleBackColor = true;
+            this.buttonFolderBuckUp.Click += new System.EventHandler(this.buttonFolderBuckUp_Click);
             // 
             // label31
             // 
@@ -1527,6 +1664,91 @@
             this.tabPage10.TabIndex = 5;
             this.tabPage10.Text = "Модем";
             this.tabPage10.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.tbxSMS4Span);
+            this.groupBox3.Controls.Add(this.tbxSMS3Span);
+            this.groupBox3.Controls.Add(this.tbxSMS2Span);
+            this.groupBox3.Controls.Add(this.tbxSMS1Span);
+            this.groupBox3.Controls.Add(this.label40);
+            this.groupBox3.Controls.Add(this.label39);
+            this.groupBox3.Controls.Add(this.label38);
+            this.groupBox3.Controls.Add(this.label37);
+            this.groupBox3.Location = new System.Drawing.Point(365, 55);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(418, 193);
+            this.groupBox3.TabIndex = 17;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Периоды отправки СМС";
+            // 
+            // tbxSMS4Span
+            // 
+            this.tbxSMS4Span.Location = new System.Drawing.Point(183, 102);
+            this.tbxSMS4Span.Name = "tbxSMS4Span";
+            this.tbxSMS4Span.Size = new System.Drawing.Size(181, 20);
+            this.tbxSMS4Span.TabIndex = 3;
+            this.tbxSMS4Span.Leave += new System.EventHandler(this.tbxSMS4Span_Leave);
+            // 
+            // tbxSMS3Span
+            // 
+            this.tbxSMS3Span.Location = new System.Drawing.Point(183, 76);
+            this.tbxSMS3Span.Name = "tbxSMS3Span";
+            this.tbxSMS3Span.Size = new System.Drawing.Size(181, 20);
+            this.tbxSMS3Span.TabIndex = 3;
+            this.tbxSMS3Span.Leave += new System.EventHandler(this.tbxSMS3Span_Leave);
+            // 
+            // tbxSMS2Span
+            // 
+            this.tbxSMS2Span.Location = new System.Drawing.Point(183, 51);
+            this.tbxSMS2Span.Name = "tbxSMS2Span";
+            this.tbxSMS2Span.Size = new System.Drawing.Size(181, 20);
+            this.tbxSMS2Span.TabIndex = 3;
+            this.tbxSMS2Span.Leave += new System.EventHandler(this.tbxSMS2Span_Leave);
+            // 
+            // tbxSMS1Span
+            // 
+            this.tbxSMS1Span.Location = new System.Drawing.Point(183, 25);
+            this.tbxSMS1Span.Name = "tbxSMS1Span";
+            this.tbxSMS1Span.Size = new System.Drawing.Size(181, 20);
+            this.tbxSMS1Span.TabIndex = 3;
+            this.tbxSMS1Span.Leave += new System.EventHandler(this.tbxSMS1Span_Leave);
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(19, 105);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(160, 13);
+            this.label40.TabIndex = 2;
+            this.label40.Text = "Период отправки СМС РД4 (ч)";
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(19, 79);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(160, 13);
+            this.label39.TabIndex = 2;
+            this.label39.Text = "Период отправки СМС РД2 (ч)";
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(19, 54);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(160, 13);
+            this.label38.TabIndex = 2;
+            this.label38.Text = "Период отправки СМС РД1 (ч)";
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(19, 28);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(160, 13);
+            this.label37.TabIndex = 2;
+            this.label37.Text = "Период отправки СМС РД0 (ч)";
             // 
             // resSMS
             // 
@@ -2594,91 +2816,6 @@
             this.buttonResetTimeRefresh.UseVisualStyleBackColor = true;
             this.buttonResetTimeRefresh.Click += new System.EventHandler(this.buttonResetTimeRefresh_Click);
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.tbxSMS4Span);
-            this.groupBox3.Controls.Add(this.tbxSMS3Span);
-            this.groupBox3.Controls.Add(this.tbxSMS2Span);
-            this.groupBox3.Controls.Add(this.tbxSMS1Span);
-            this.groupBox3.Controls.Add(this.label40);
-            this.groupBox3.Controls.Add(this.label39);
-            this.groupBox3.Controls.Add(this.label38);
-            this.groupBox3.Controls.Add(this.label37);
-            this.groupBox3.Location = new System.Drawing.Point(365, 55);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(418, 193);
-            this.groupBox3.TabIndex = 17;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Периоды отправки СМС";
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(19, 28);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(160, 13);
-            this.label37.TabIndex = 2;
-            this.label37.Text = "Период отправки СМС РД0 (ч)";
-            // 
-            // label38
-            // 
-            this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(19, 54);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(160, 13);
-            this.label38.TabIndex = 2;
-            this.label38.Text = "Период отправки СМС РД1 (ч)";
-            // 
-            // label39
-            // 
-            this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(19, 79);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(160, 13);
-            this.label39.TabIndex = 2;
-            this.label39.Text = "Период отправки СМС РД2 (ч)";
-            // 
-            // label40
-            // 
-            this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(19, 105);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(160, 13);
-            this.label40.TabIndex = 2;
-            this.label40.Text = "Период отправки СМС РД4 (ч)";
-            // 
-            // tbxSMS1Span
-            // 
-            this.tbxSMS1Span.Location = new System.Drawing.Point(183, 25);
-            this.tbxSMS1Span.Name = "tbxSMS1Span";
-            this.tbxSMS1Span.Size = new System.Drawing.Size(181, 20);
-            this.tbxSMS1Span.TabIndex = 3;
-            this.tbxSMS1Span.Leave += new System.EventHandler(this.tbxSMS1Span_Leave);
-            // 
-            // tbxSMS2Span
-            // 
-            this.tbxSMS2Span.Location = new System.Drawing.Point(183, 51);
-            this.tbxSMS2Span.Name = "tbxSMS2Span";
-            this.tbxSMS2Span.Size = new System.Drawing.Size(181, 20);
-            this.tbxSMS2Span.TabIndex = 3;
-            this.tbxSMS2Span.Leave += new System.EventHandler(this.tbxSMS2Span_Leave);
-            // 
-            // tbxSMS3Span
-            // 
-            this.tbxSMS3Span.Location = new System.Drawing.Point(183, 76);
-            this.tbxSMS3Span.Name = "tbxSMS3Span";
-            this.tbxSMS3Span.Size = new System.Drawing.Size(181, 20);
-            this.tbxSMS3Span.TabIndex = 3;
-            this.tbxSMS3Span.Leave += new System.EventHandler(this.tbxSMS3Span_Leave);
-            // 
-            // tbxSMS4Span
-            // 
-            this.tbxSMS4Span.Location = new System.Drawing.Point(183, 102);
-            this.tbxSMS4Span.Name = "tbxSMS4Span";
-            this.tbxSMS4Span.Size = new System.Drawing.Size(181, 20);
-            this.tbxSMS4Span.TabIndex = 3;
-            this.tbxSMS4Span.Leave += new System.EventHandler(this.tbxSMS4Span_Leave);
-            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2704,6 +2841,9 @@
             this.tabDataBaseSetting.ResumeLayout(false);
             this.tabPage7.ResumeLayout(false);
             this.tabPage7.PerformLayout();
+            this.gBbuckup.ResumeLayout(false);
+            this.gBbuckup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericPeriodBuckUp)).EndInit();
             this.tabViewUser.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -2718,6 +2858,8 @@
             this.panel4.ResumeLayout(false);
             this.tabPage10.ResumeLayout(false);
             this.tabPage10.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.groupBxSettingModem.ResumeLayout(false);
             this.groupBxSettingModem.PerformLayout();
             this.tabPage2.ResumeLayout(false);
@@ -2748,8 +2890,6 @@
             this.tabPageReacess.PerformLayout();
             this.tabPage14.ResumeLayout(false);
             this.tabPage14.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2978,5 +3118,16 @@
         private System.Windows.Forms.TextBox tbxSMS3Span;
         private System.Windows.Forms.TextBox tbxSMS2Span;
         private System.Windows.Forms.TextBox tbxSMS1Span;
+        private System.Windows.Forms.GroupBox gBbuckup;
+        private System.Windows.Forms.NumericUpDown numericPeriodBuckUp;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.Label FolderBuckup;
+        private System.Windows.Forms.Button butRestore;
+        private System.Windows.Forms.Button butBuckUp;
+        private System.Windows.Forms.Button buttonFolderBuckUp;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.Label label44;
     }
 }

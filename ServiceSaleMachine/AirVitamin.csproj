@@ -141,6 +141,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\PathEnum.cs" />
     <Compile Include="Configuration\RegistrySettings.cs" />
+    <Compile Include="Services\CostConfiguration.cs" />
+    <Compile Include="Services\CostTable.cs" />
+    <Compile Include="Services\Enum\NumberServiceEnum.cs" />
+    <Compile Include="Services\ServiceCost.cs" />
     <Compile Include="Stage\WorkerStateStage.cs" />
     <Compile Include="Thread\Thread.cs">
       <SubType>Component</SubType>
@@ -177,6 +181,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

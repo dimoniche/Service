@@ -114,14 +114,14 @@ namespace AirVitamin.Client
 
         private void pBxService1_Click(object sender, System.EventArgs e)
         {
-            data.numberService = 0;
+            data.numberService = NumberServiceEnum.Before;
             data.stage = WorkerStateStage.ChoosePay;
             this.Close();
         }
 
         private void pBxService2_Click(object sender, System.EventArgs e)
         {
-            data.numberService = 1;
+            data.numberService = NumberServiceEnum.After;
             data.stage = WorkerStateStage.ChoosePay;
             this.Close();
         }

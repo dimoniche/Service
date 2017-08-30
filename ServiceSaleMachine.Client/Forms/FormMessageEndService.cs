@@ -82,7 +82,7 @@ namespace AirVitamin.Client
 
             if (!fileLoaded)
             {
-                if (data.numberService == 0)
+                if (data.numberService == NumberServiceEnum.Before)
                 {
                     TextThanks.LoadFile(Globals.GetPath(PathEnum.Text) + "\\text_thanks1.rtf");
                 }

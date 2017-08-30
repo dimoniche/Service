@@ -801,7 +801,7 @@ NoCheckStatistic:
                     }
 
                     // загрузим выбранную услугу
-                    Service serv = Globals.ClientConfiguration.ServiceByIndex(result.numberService);
+                    Service serv = Globals.ClientConfiguration.ServiceByIndex((int)result.numberService);
                     result.serv = serv;
 
                     Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выбрали услугу: " + serv.caption);
@@ -857,7 +857,7 @@ NoCheckStatistic:
                     result.timework = serv.timework;
 
                     // пока так
-                    if(result.numberService == 0)
+                    if(result.numberService == NumberServiceEnum.Before)
                     {
                         // первая услуга - До
                         result.numberCurrentDevice = (int)ControlDeviceEnum.MixBefore;

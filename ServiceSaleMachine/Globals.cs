@@ -26,6 +26,7 @@ namespace AirVitamin
         public static DBConfiguration DbConfiguration { get; private set; }
         public static CheckConfiguration CheckConfiguration { get; private set; }
         public static RegistrySettings RegistrySettings { get; private set; }
+        public static CostConfiguration CostConfiguration { get; private set; }
 
         /// <summary>
         /// период опроса управляющего устройства
@@ -54,6 +55,7 @@ namespace AirVitamin
             CheckConfiguration = new CheckConfiguration();
             UserConfiguration = new UserConfiguration();
             DbConfiguration = new DBConfiguration();
+            CostConfiguration = new CostConfiguration();
 
             IntervalCheckControl = 1000;
         }

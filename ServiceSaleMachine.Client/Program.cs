@@ -94,6 +94,26 @@ namespace AirVitamin.Client
                 Globals.ClientConfiguration.Load();
             }
 
+            if (!Globals.CostConfiguration.Load())
+            {
+                Globals.CostConfiguration.CostSetting.Tables = new List<ServiceCost>();
+
+                ServiceCost cost = new ServiceCost();
+
+                cost.numberService = 0;
+                cost.rangeStart = 15;
+                cost.rangeStop = 180;
+                cost.step = 5;
+
+                cost.priceCash.Add(10);
+                cost.priceAccount.Add(10);
+
+                Globals.CostConfiguration.CostSetting.Tables.Add(cost);
+
+                Globals.CostConfiguration.Save();
+                Globals.CostConfiguration.Load();
+            }
+
             //Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());

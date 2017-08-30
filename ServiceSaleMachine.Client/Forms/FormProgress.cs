@@ -37,7 +37,7 @@ namespace AirVitamin.Client
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTitle1, "Smes_txt.png");
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxStart, Globals.DesignConfiguration.Settings.ButtonStartServices);
 
-            if (data.numberService == 0)
+            if (data.numberService == NumberServiceEnum.Before)
             {
                 // до тренировки
                 Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTitle, "Do_tren_ver.png");

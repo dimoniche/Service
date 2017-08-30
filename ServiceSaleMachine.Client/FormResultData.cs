@@ -11,7 +11,7 @@ namespace AirVitamin.Client
         /// <summary>
         /// Номер текущей выбранной услуги
         /// </summary>
-        public int numberService;
+        public NumberServiceEnum numberService;
 
         /// <summary>
         /// данные по текущей выбранной услуге

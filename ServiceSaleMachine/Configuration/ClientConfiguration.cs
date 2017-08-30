@@ -27,7 +27,12 @@ namespace AirVitamin
 
         public Service ServiceByIndex(int aIndex)
         {
-            return Settings.services[aIndex];
+            if (aIndex < Settings.services.Count)
+            {
+                return Settings.services[aIndex];
+            }
+
+            return Settings.services[0];
         }
 
         public bool Load()

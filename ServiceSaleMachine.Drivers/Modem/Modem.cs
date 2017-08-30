@@ -302,7 +302,7 @@ namespace AirVitamin.Drivers
             byte[] buf;
             byte[] BufIn = new byte[200];
 
-            sms = Translit(sms);
+            sms = Translit(Globals.ClientConfiguration.Settings.numberDevice + ": " + sms);
 
             buf = System.Text.Encoding.ASCII.GetBytes("AT+CMGF=1\x0d\x0a");
 

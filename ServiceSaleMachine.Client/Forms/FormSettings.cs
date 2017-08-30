@@ -43,11 +43,13 @@ namespace AirVitamin.Client
                 stc.BeforeLeave += BeforeLeave;
                 stc.CaptionServiceLeave += CaptionServiceLeave;
                 stc.PriceServiceLeave += PriceServiceLeave;
+                stc.PriceServiceLeave1 += PriceServiceLeave1;
                 stc.TimeServiceLeave += TimeServiceLeave;
 
                 stc.TextBoxPause.Text = serv.timePause.ToString();
                 stc.TextBoxBefore.Text = serv.timeBefore.ToString();
-                stc.TextBoxPriceService.Text = serv.price.ToString();
+                stc.TextBoxPriceService.Text = serv.priceCash.ToString();
+                stc.TextBoxPriceService1.Text = serv.priceAccount.ToString();
                 stc.TextBoxCaptionService.Text = serv.caption;
                 stc.TextBoxTimeService.Text = serv.timework.ToString();
 
@@ -208,7 +210,17 @@ namespace AirVitamin.Client
             Service stc = Globals.ClientConfiguration.Settings.services[tabSettingService.SelectedIndex];
             ServiceTabControl currServiceTab = ((ServiceTabControl)tabSettingService.TabPages[tabSettingService.SelectedIndex].Controls[0]);
 
-            int.TryParse(currServiceTab.TextBoxPriceService.Text, out stc.price);
+            int.TryParse(currServiceTab.TextBoxPriceService.Text, out stc.priceCash);
+
+            Globals.ClientConfiguration.Save();
+        }
+
+        private void PriceServiceLeave1(object sender)
+        {
+            Service stc = Globals.ClientConfiguration.Settings.services[tabSettingService.SelectedIndex];
+            ServiceTabControl currServiceTab = ((ServiceTabControl)tabSettingService.TabPages[tabSettingService.SelectedIndex].Controls[0]);
+
+            int.TryParse(currServiceTab.TextBoxPriceService1.Text, out stc.priceAccount);
 
             Globals.ClientConfiguration.Save();
         }
@@ -300,7 +312,8 @@ namespace AirVitamin.Client
 
             currServiceTab.TextBoxPause.Text = stc.timePause.ToString();
             currServiceTab.TextBoxBefore.Text = stc.timeBefore.ToString();
-            currServiceTab.TextBoxPriceService.Text = stc.price.ToString();
+            currServiceTab.TextBoxPriceService.Text = stc.priceCash.ToString();
+            currServiceTab.TextBoxPriceService1.Text = stc.priceAccount.ToString();
             currServiceTab.TextBoxCaptionService.Text = stc.caption;
 
             tabSettingService.TabPages.Add(stc.caption);
@@ -824,6 +837,7 @@ namespace AirVitamin.Client
                 }
             }
 
+            // резервирование
             FolderBuckup.Text = Globals.DbConfiguration.folderBuckUp;
 
             if(Globals.DbConfiguration.AutomaticBuckUp == 0)
@@ -836,8 +850,10 @@ namespace AirVitamin.Client
             }
 
             numericPeriodBuckUp.Enabled = checkBox2.Checked;
-
             numericPeriodBuckUp.Value = Globals.DbConfiguration.PeriodBuckUp;
+
+            // серийный номер
+            tBxSerialNumber.Text = Globals.ClientConfiguration.Settings.numberDevice;
         }
 
         void MoneyStatistic()
@@ -2304,6 +2320,12 @@ namespace AirVitamin.Client
             {
                 GlobalDb.GlobalBase.Restore(file.FileName);
             }
+        }
+
+        private void tBxSerialNumber_Leave(object sender, EventArgs e)
+        {
+            Globals.ClientConfiguration.Settings.numberDevice = tBxSerialNumber.Text;
+            Globals.ClientConfiguration.Save();
         }
     }
 }

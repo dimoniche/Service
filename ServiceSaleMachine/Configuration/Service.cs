@@ -8,7 +8,14 @@ namespace AirVitamin
     {
         public int id;
         public string caption { get; set; }
+
+        /// <summary>
+        /// Здесь цена в зависимости от куда берем деньги
+        /// </summary>
         public int price;
+
+        public int priceAccount;
+        public int priceCash;
 
         public List<Device> devs;
 
@@ -37,7 +44,9 @@ namespace AirVitamin
             xOut = new XElement("Service");
 
             xOut.Add(new XElement("id", id.ToString()));
-            xOut.Add(new XElement("price", price.ToString()));
+            //xOut.Add(new XElement("price", price.ToString()));
+            xOut.Add(new XElement("priceAccount", priceAccount.ToString()));
+            xOut.Add(new XElement("priceCash", priceCash.ToString()));
             xOut.Add(new XElement("caption", caption));
             xOut.Add(new XElement("timeBefore", timeBefore));
             xOut.Add(new XElement("timework", timework));
@@ -67,7 +76,9 @@ namespace AirVitamin
 
             if ((xElement = xObject.Element("id")) != null) result.id = int.Parse(xElement.Value);
             if ((xElement = xObject.Element("caption")) != null) result.caption = xElement.Value;
-            if ((xElement = xObject.Element("price")) != null) result.price = int.Parse(xElement.Value);
+            //if ((xElement = xObject.Element("price")) != null) result.price = int.Parse(xElement.Value);
+            if ((xElement = xObject.Element("priceCash")) != null) result.priceCash = int.Parse(xElement.Value);
+            if ((xElement = xObject.Element("priceAccount")) != null) result.priceAccount = int.Parse(xElement.Value);
             if ((xElement = xObject.Element("timeBefore")) != null) result.timeBefore = int.Parse(xElement.Value);
             if ((xElement = xObject.Element("timework")) != null) result.timework = int.Parse(xElement.Value);
             if ((xElement = xObject.Element("timePause")) != null) result.timePause = int.Parse(xElement.Value);

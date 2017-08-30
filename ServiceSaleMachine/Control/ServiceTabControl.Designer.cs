@@ -31,6 +31,9 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.textBoxPriceService1 = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxBefore = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -83,6 +86,9 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.label8);
+            this.panel2.Controls.Add(this.textBoxPriceService1);
+            this.panel2.Controls.Add(this.label9);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.textBoxBefore);
             this.panel2.Controls.Add(this.label3);
@@ -104,6 +110,33 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(508, 289);
             this.panel2.TabIndex = 0;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(361, 155);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(24, 13);
+            this.label8.TabIndex = 27;
+            this.label8.Text = "руб";
+            // 
+            // textBoxPriceService1
+            // 
+            this.textBoxPriceService1.Location = new System.Drawing.Point(255, 148);
+            this.textBoxPriceService1.Name = "textBoxPriceService1";
+            this.textBoxPriceService1.Size = new System.Drawing.Size(100, 20);
+            this.textBoxPriceService1.TabIndex = 26;
+            this.textBoxPriceService1.Text = "100";
+            this.textBoxPriceService1.Leave += new System.EventHandler(this.textBoxPriceService1_Leave);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(3, 155);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(147, 13);
+            this.label9.TabIndex = 25;
+            this.label9.Text = "Стоимость услуги (аккаунт)";
             // 
             // label2
             // 
@@ -182,9 +215,9 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(3, 130);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(98, 13);
+            this.label7.Size = new System.Drawing.Size(156, 13);
             this.label7.TabIndex = 16;
-            this.label7.Text = "Стоимость услуги";
+            this.label7.Text = "Стоимость услуги (наличные)";
             // 
             // textBoxCaptionService
             // 
@@ -215,7 +248,7 @@
             // 
             // butDelDev
             // 
-            this.butDelDev.Location = new System.Drawing.Point(166, 159);
+            this.butDelDev.Location = new System.Drawing.Point(166, 208);
             this.butDelDev.Name = "butDelDev";
             this.butDelDev.Size = new System.Drawing.Size(154, 23);
             this.butDelDev.TabIndex = 8;
@@ -226,7 +259,7 @@
             // 
             // butaddDev
             // 
-            this.butaddDev.Location = new System.Drawing.Point(6, 159);
+            this.butaddDev.Location = new System.Drawing.Point(6, 208);
             this.butaddDev.Name = "butaddDev";
             this.butaddDev.Size = new System.Drawing.Size(154, 23);
             this.butaddDev.TabIndex = 8;
@@ -324,5 +357,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBoxBefore;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox textBoxPriceService1;
+        private System.Windows.Forms.Label label9;
     }
 }

@@ -15,6 +15,11 @@ namespace AirVitamin.Client
         ClearFilesControlServiceTask ClearFilesTask { get; set; }
 
         /// <summary>
+        /// Задача резервирования базы
+        /// </summary>
+        BuckUpControlServiceTask BuckUpTask { get; set; }
+
+        /// <summary>
         /// Данные передаваемые между окнами
         /// </summary>
         FormResultData result;
@@ -48,6 +53,9 @@ namespace AirVitamin.Client
 
             // запустим задачу очистки от логов директории
             ClearFilesTask = new ClearFilesControlServiceTask(Program.Log);
+
+            // запустим задачу резервирования базы
+            BuckUpTask = new BuckUpControlServiceTask(Program.Log);
 
             result = new FormResultData(Program.Log);
 

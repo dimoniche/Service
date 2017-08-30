@@ -125,6 +125,9 @@ namespace AirVitamin
                 case PathEnum.Flash:
                     return "Flash";
 
+                case PathEnum.BuckUp:
+                    return "BuckUp";
+
                 default:
                     throw new InvalidOperationException();
             }

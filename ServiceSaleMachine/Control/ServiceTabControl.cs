@@ -10,6 +10,7 @@ namespace AirVitamin
 
         public TextBox TextBoxCaptionService { get { return textBoxCaptionService; } set { textBoxCaptionService = value; } }
         public TextBox TextBoxPriceService { get { return textBoxPriceService; } set { textBoxPriceService = value; } }
+        public TextBox TextBoxPriceService1 { get { return textBoxPriceService1; } set { textBoxPriceService1 = value; } }
         public TextBox TextBoxTimeService { get { return textBoxTimeService; } set { textBoxTimeService = value; } }
 
         public delegate void ServiceClientResponseEventHandler(object sender);
@@ -20,6 +21,7 @@ namespace AirVitamin
         public event ServiceClientResponseEventHandler BeforeLeave;
         public event ServiceClientResponseEventHandler CaptionServiceLeave;
         public event ServiceClientResponseEventHandler PriceServiceLeave;
+        public event ServiceClientResponseEventHandler PriceServiceLeave1;
         public event ServiceClientResponseEventHandler TimeServiceLeave;
 
         public ServiceTabControl()
@@ -60,6 +62,11 @@ namespace AirVitamin
         private void textBoxBefore_Leave(object sender, System.EventArgs e)
         {
             BeforeLeave(sender);
+        }
+
+        private void textBoxPriceService1_Leave(object sender, System.EventArgs e)
+        {
+            PriceServiceLeave1(sender);
         }
     }
 }

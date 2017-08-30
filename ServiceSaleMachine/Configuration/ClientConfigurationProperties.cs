@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using System.IO;
+﻿using System.Collections.Generic;
 
 namespace AirVitamin
 {
 
-	public class ClientConfigurationProperties
+    public class ClientConfigurationProperties
 	{
         // настройки драйверов
         public string comPortScanner;
@@ -93,6 +90,9 @@ namespace AirVitamin
         public int spanSendSMS2 = 24;
         public int spanSendSMS3 = 24;
         public int spanSendSMS4 = 24;
+
+        // номер аппарата
+        public string numberDevice = "0";
 
         internal ClientConfigurationProperties()
 		{

@@ -13,5 +13,6 @@
         Config,
         Fonts,
         Flash,
+        BuckUp
     }
 }

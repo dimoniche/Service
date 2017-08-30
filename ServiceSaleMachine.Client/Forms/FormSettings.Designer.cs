@@ -261,6 +261,10 @@
             this.labelTimeLastRefresh = new System.Windows.Forms.Label();
             this.labelWorkFromLastRefresh = new System.Windows.Forms.Label();
             this.buttonResetTimeRefresh = new System.Windows.Forms.Button();
+            this.DeviceSetting = new System.Windows.Forms.TabPage();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.label41 = new System.Windows.Forms.Label();
+            this.tBxSerialNumber = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.DeviceSettings.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -305,6 +309,8 @@
             this.tabControl4.SuspendLayout();
             this.tabPageReacess.SuspendLayout();
             this.tabPage14.SuspendLayout();
+            this.DeviceSetting.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -338,6 +344,7 @@
             this.tabControl2.Controls.Add(this.tabPage5);
             this.tabControl2.Controls.Add(this.tabViewDataBase);
             this.tabControl2.Controls.Add(this.tabPage10);
+            this.tabControl2.Controls.Add(this.DeviceSetting);
             this.tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl2.Location = new System.Drawing.Point(3, 3);
             this.tabControl2.Name = "tabControl2";
@@ -2816,6 +2823,46 @@
             this.buttonResetTimeRefresh.UseVisualStyleBackColor = true;
             this.buttonResetTimeRefresh.Click += new System.EventHandler(this.buttonResetTimeRefresh_Click);
             // 
+            // DeviceSetting
+            // 
+            this.DeviceSetting.Controls.Add(this.panel6);
+            this.DeviceSetting.Location = new System.Drawing.Point(4, 22);
+            this.DeviceSetting.Name = "DeviceSetting";
+            this.DeviceSetting.Padding = new System.Windows.Forms.Padding(3);
+            this.DeviceSetting.Size = new System.Drawing.Size(819, 576);
+            this.DeviceSetting.TabIndex = 6;
+            this.DeviceSetting.Text = "Аппарат";
+            this.DeviceSetting.UseVisualStyleBackColor = true;
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.tBxSerialNumber);
+            this.panel6.Controls.Add(this.label41);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel6.Location = new System.Drawing.Point(3, 3);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(813, 570);
+            this.panel6.TabIndex = 0;
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(18, 34);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(93, 13);
+            this.label41.TabIndex = 0;
+            this.label41.Text = "Серийный номер";
+            // 
+            // tBxSerialNumber
+            // 
+            this.tBxSerialNumber.Location = new System.Drawing.Point(117, 31);
+            this.tBxSerialNumber.Name = "tBxSerialNumber";
+            this.tBxSerialNumber.Size = new System.Drawing.Size(163, 20);
+            this.tBxSerialNumber.TabIndex = 1;
+            this.tBxSerialNumber.Text = "1";
+            this.tBxSerialNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tBxSerialNumber.Leave += new System.EventHandler(this.tBxSerialNumber_Leave);
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2890,6 +2937,9 @@
             this.tabPageReacess.PerformLayout();
             this.tabPage14.ResumeLayout(false);
             this.tabPage14.PerformLayout();
+            this.DeviceSetting.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -3129,5 +3179,9 @@
         private System.Windows.Forms.Button buttonFolderBuckUp;
         private System.Windows.Forms.Label label45;
         private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.TabPage DeviceSetting;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.TextBox tBxSerialNumber;
+        private System.Windows.Forms.Label label41;
     }
 }

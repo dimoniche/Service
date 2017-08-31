@@ -31,8 +31,6 @@ namespace AirVitamin
                     XElement root = XElement.Load(fileName);
                     if (root.Name != RootName) return false;
 
-                    XElement xElement;
-
                     // Настройки драйверов
                     XElement xSettings = root.Element("CostSetting");
 

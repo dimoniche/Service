@@ -105,9 +105,16 @@ namespace AirVitamin.Client
                 cost.rangeStop = 180;
                 cost.step = 5;
 
-                cost.priceCash.Add(10);
-                cost.priceAccount.Add(10);
+                Price price = new Price();
+                price.amount = 1;
+                price.price = 10;
 
+                cost.priceCash.Add(price);
+                cost.priceCash.Add(price);
+                cost.priceAccount.Add(price);
+                cost.priceAccount.Add(price);
+
+                Globals.CostConfiguration.CostSetting.Tables.Add(cost);
                 Globals.CostConfiguration.CostSetting.Tables.Add(cost);
 
                 Globals.CostConfiguration.Save();

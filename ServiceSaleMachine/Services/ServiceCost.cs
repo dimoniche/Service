@@ -26,17 +26,17 @@ namespace AirVitamin
         /// <summary>
         /// Массив цен за наличные
         /// </summary>
-        public List<int> priceCash;
+        public List<Price> priceCash;
 
         /// <summary>
         /// Массив цен с платой с аккаунта
         /// </summary>
-        public List<int> priceAccount;
+        public List<Price> priceAccount;
 
         public ServiceCost()
         {
-            priceCash = new List<int>();
-            priceAccount = new List<int>();
+            priceCash = new List<Price>();
+            priceAccount = new List<Price>();
         }
 
         public XElement ToXml()
@@ -49,23 +49,26 @@ namespace AirVitamin
             xOut.Add(new XElement("rangeStop", rangeStop));
             xOut.Add(new XElement("step", step));
 
-            XElement xpriceCash = new XElement("priceCash");
+            XElement Element = null;
+            Element = new XElement("priceCash");
 
-            foreach (int price in priceCash)
+            foreach (Price price in priceCash)
             {
-                xpriceCash.Add(new XElement("price", price));
+                XElement xprice = price.ToXml();
+                Element.Add(xprice);
             }
 
-            xOut.Add(xpriceCash);
+            xOut.Add(Element);
 
-            XElement xpriceAccount = new XElement("priceAccount");
+            Element = new XElement("priceAccount");
 
-            foreach (int price in priceCash)
+            foreach (Price price in priceCash)
             {
-                xpriceAccount.Add(new XElement("price", price));
+                XElement xprice = price.ToXml();
+                Element.Add(xprice);
             }
 
-            xOut.Add(xpriceAccount);
+            xOut.Add(Element);
 
             return xOut;
         }
@@ -84,21 +87,21 @@ namespace AirVitamin
 
             if ((xElement = xObject.Element("priceCash")) != null)
             {
-                cost.priceCash = new List<int>();
+                cost.priceCash = new List<Price>();
 
-                foreach (XElement xItem in xElement.Elements("price"))
+                foreach (XElement xItem in xElement.Elements("priceItem"))
                 {
-                    cost.priceCash.Add(int.Parse(xItem.Value));
+                    cost.priceCash.Add(Price.FromXml(xItem));
                 }
             }
 
             if ((xElement = xObject.Element("priceAccount")) != null)
             {
-                cost.priceAccount = new List<int>();
+                cost.priceAccount = new List<Price>();
 
-                foreach (XElement xItem in xElement.Elements("price"))
+                foreach (XElement xItem in xElement.Elements("priceItem"))
                 {
-                    cost.priceAccount.Add(int.Parse(xItem.Value));
+                    cost.priceAccount.Add(Price.FromXml(xItem));
                 }
             }
 

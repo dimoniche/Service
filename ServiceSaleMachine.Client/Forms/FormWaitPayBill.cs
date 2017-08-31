@@ -30,6 +30,11 @@ namespace AirVitamin.Client
         // остановка оборудования - больше денег не надо
         bool StopHardware = false;
 
+        /// <summary>
+        /// Цена услуги - она переменная - устанавливаем в зависимости от длительности процедуры
+        /// </summary>
+        int price;
+
         public FormWaitPayBill()
         {
             InitializeComponent();
@@ -91,19 +96,20 @@ namespace AirVitamin.Client
             if (data.retLogin != "")
             {
                 int sum = GlobalDb.GlobalBase.GetUserMoney(data.CurrentUserId);
+                price = data.serv.cost.getPriceAccountByAmount(data.serv.timework);
 
                 data.log.Write(LogMessageType.Information, "ACCOUNT: На счету у пользователя " + data.retLogin + " " + sum + " руб.");
 
-                if (sum >= data.serv.price)
+                if (sum >= price)
                 {
                     // денег на счете достаточно
                     data.log.Write(LogMessageType.Information, "ACCOUNT: Оказываем услугу с денег со счета...");
 
-                    amount += data.serv.price;
+                    amount += price;
 
-                    AmountServiceText.Text = "Внесено: " + data.serv.price + " руб.";
+                    AmountServiceText.Text = "Внесено: " + price + " руб.";
                     AmountServiceText.ForeColor = Color.Green;
-                    SecondMessageText.Text = "                          Остаток на счете: " + (sum - data.serv.price) + " руб.";
+                    SecondMessageText.Text = "                          Остаток на счете: " + (sum - price) + " руб.";
 
                     data.log.Write(LogMessageType.Information, "ACCOUNT: Внесли достаточную для оказания услуги сумму со счета.");
 
@@ -114,7 +120,7 @@ namespace AirVitamin.Client
                     StopHardware = true;
 
                     // обновим счет
-                    GlobalDb.GlobalBase.AddToAmount(data.CurrentUserId, 0 - data.serv.price);
+                    GlobalDb.GlobalBase.AddToAmount(data.CurrentUserId, 0 - price);
 
                     pBxMainMenu.Enabled = false;
 
@@ -136,15 +142,20 @@ namespace AirVitamin.Client
                     pBxMainMenu.Enabled = false;
                 }
             }
+            else
+            {
+                // это ввод денег наличными
+                price = data.serv.cost.getPriceCashByAmount(data.serv.timework);
+            }
             //
 
             // заменим обработчик событий
             data.drivers.ReceivedResponse += reciveResponse;
 
-            if (data.serv.price == 0)
+            if (price == 0)
             {
                 // может быть цена нулевая - и это демо режим - можно сразу без денег работать
-                AmountServiceText.ForeColor = System.Drawing.Color.Green;
+                AmountServiceText.ForeColor = Color.Green;
                 pBxGiveOxigen.Enabled = true;
 
                 data.log.Write(LogMessageType.Information, "WAIT BILL: работаем в демо режиме.");
@@ -276,7 +287,7 @@ namespace AirVitamin.Client
                     if (Globals.ClientConfiguration.Settings.changeOn == 0 || data.retLogin == "")
                     {
                         // без сдачи
-                        if (amount > data.serv.price)
+                        if (amount > price)
                         {
                             // купюра великовата - вернем ее
                             amount -= count;
@@ -305,7 +316,7 @@ namespace AirVitamin.Client
                     else
                     {
                         // со сдачей
-                        if (amount > data.serv.price)
+                        if (amount > price)
                         {
                             // купюра великовата - спросим может вернуть ее
                             res = (bool)FormManager.OpenForm<FormInsertBill>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, data, ((BillNominal)e.Message.Content).Denomination);
@@ -356,13 +367,13 @@ namespace AirVitamin.Client
                     if (Globals.ClientConfiguration.Settings.changeOn > 0)
                     {
                         // посчитаем размер сдачи
-                        diff = amount - data.serv.price;
+                        diff = amount - price;
 
                         // денег не достаточно - сдачи нет
                         if (diff < 0) diff = 0;
 
                         // сдача на чек
-                        if (amount > data.serv.price)
+                        if (amount > price)
                         {
                             data.log.Write(LogMessageType.Information, "WAIT BILL: Сумма сдачи " + diff + " руб.");
 
@@ -415,11 +426,11 @@ namespace AirVitamin.Client
                     }
 
                     // напишем на экране
-                    if (amount >= data.serv.price)
+                    if (amount >= price)
                     {
                         if (diff > 0)
                         {
-                            AmountServiceText.Text = "ПРИНЯТО: " + data.serv.price + " руб.";
+                            AmountServiceText.Text = "ПРИНЯТО: " + price + " руб.";
 
                             if (ch == ChooseChangeEnum.ChangeToAccount)
                             {
@@ -452,7 +463,7 @@ namespace AirVitamin.Client
                     // заносим банкноту
                     GlobalDb.GlobalBase.InsertBankNote();
 
-                    if (amount >= data.serv.price)
+                    if (amount >= price)
                     {
                         // внесли достаточную для услуги сумму
                         data.log.Write(LogMessageType.Information, "WAIT BILL: Внесли достаточную для оказания услуги сумму.");
@@ -565,13 +576,13 @@ namespace AirVitamin.Client
                     {
 
                         // посчитаем размер сдачи
-                        diff = amount - data.serv.price;
+                        diff = amount - price;
 
                         // денег не достаточно - сдачи нет
                         if (diff < 0) diff = 0;
 
                         // сдача на чек
-                        if (amount > data.serv.price)
+                        if (amount > price)
                         {
                             if (data.retLogin != "" && Globals.ClientConfiguration.Settings.changeToAccount == 1)
                             {
@@ -600,7 +611,7 @@ namespace AirVitamin.Client
                                 data.log.Write(LogMessageType.Information, "WAIT CHECK: сдача на чек. Сумма сдачи " + diff);
 
                                 // запомним сколько выдали на чеке - печатаем новый чек - часть денег отоварили
-                                data.statistic.BarCodeMoneySumm -= data.serv.price;
+                                data.statistic.BarCodeMoneySumm -= price;
 
                                 difftoCheck += diff;
 
@@ -628,11 +639,11 @@ namespace AirVitamin.Client
                     }
 
                     // напишем на экране
-                    if (amount >= data.serv.price)
+                    if (amount >= price)
                     {
                         if (diff > 0)
                         {
-                            AmountServiceText.Text = "ПРИНЯТО: " + data.serv.price + " руб.";
+                            AmountServiceText.Text = "ПРИНЯТО: " + price + " руб.";
 
                             if (ch == ChooseChangeEnum.ChangeToAccount)
                             {
@@ -660,7 +671,7 @@ namespace AirVitamin.Client
                     // деньги внесли - нет пути назад
                     TimeOutTimer.Enabled = false;
 
-                    if (amount >= data.serv.price)
+                    if (amount >= price)
                     {
                         // внесли достаточную для услуги сумму
                         data.log.Write(LogMessageType.Information, "WAIT CHECK: Внесли достаточную для оказания услуги сумму.");
@@ -713,7 +724,7 @@ namespace AirVitamin.Client
 
             Params.Result = data;
 
-            if (amount >= data.serv.price)
+            if (amount >= price)
             {
                 data.log.Write(LogMessageType.Information, "WAIT BILL: Выход на оказание услуги.");
             }
@@ -796,7 +807,7 @@ namespace AirVitamin.Client
             // запомним принятую купюру
             data.statistic.AllMoneySumm += (amountMoney);
             // запомним на сколько оказали услуг
-            data.statistic.ServiceMoneySumm += data.serv.price;
+            data.statistic.ServiceMoneySumm += price;
 
             // Запомним в базе принятую купюру
             GlobalDb.GlobalBase.SetMoneyStatistic(data.statistic);
@@ -812,17 +823,17 @@ namespace AirVitamin.Client
             GlobalDb.GlobalBase.SetAmountMoney(count + amountMoney);
 
             count = GlobalDb.GlobalBase.GetAmountService();
-            GlobalDb.GlobalBase.SetAmountService(count + data.serv.price);
+            GlobalDb.GlobalBase.SetAmountService(count + price);
 
             // запоминаем оказанную услугу этому пользователю
-            GlobalDb.GlobalBase.InsertService(data.CurrentUserId, (data.serv.price));
+            GlobalDb.GlobalBase.InsertService(data.CurrentUserId, (price));
 
             data.log.Write(LogMessageType.Information, "==============================================================================");
             data.log.Write(LogMessageType.Information, "WAIT BILL: Приняли " + amount + " руб.");
             data.log.Write(LogMessageType.Information, "WAIT BILL: Купюрами " + amountMoney + " руб.");
             data.log.Write(LogMessageType.Information, "WAIT BILL: Чеками " + amountCheck + " руб.");
             data.log.Write(LogMessageType.Information, "WAIT BILL: Дали сдачу чеком на сумму " + difftoCheck + " руб.");
-            data.log.Write(LogMessageType.Information, "WAIT BILL: Окажем услугу на сумму " + data.serv.price + " руб.");
+            data.log.Write(LogMessageType.Information, "WAIT BILL: Окажем услугу на сумму " + price + " руб.");
             data.log.Write(LogMessageType.Information, "WAIT BILL: Оказываем услугу.");
             data.log.Write(LogMessageType.Information, "==============================================================================");
 

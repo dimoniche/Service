@@ -17,8 +17,12 @@ namespace AirVitamin
         public int priceAccount;
         public int priceCash;
 
-        public List<Device> devs;
+        /// <summary>
+        /// Набор цен услуг
+        /// </summary>
+        public ServiceCost cost;
 
+        public List<Device> devs;
 
         // задержка перед оказанием услуги
         public int timeBefore = 10;

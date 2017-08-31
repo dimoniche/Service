@@ -75,7 +75,7 @@ namespace AirVitamin.Client
         /// </summary>
         private void MainWorker()
         {
-            //if (Globals.admin)
+            if (Globals.admin)
             {
                 Program.Log.Write(LogMessageType.Information, "MAIN WORK: Входим в режим настройки приложения.");
 
@@ -802,6 +802,8 @@ NoCheckStatistic:
 
                     // загрузим выбранную услугу
                     Service serv = Globals.ClientConfiguration.ServiceByIndex((int)result.numberService);
+                    serv.cost = Globals.CostConfiguration.CostSetting.Tables[(int)result.numberService];
+
                     result.serv = serv;
 
                     Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выбрали услугу: " + serv.caption);

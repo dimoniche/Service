@@ -39,6 +39,46 @@ namespace AirVitamin
             priceAccount = new List<Price>();
         }
 
+        /// <summary>
+        /// Вернуть цену услуги наличными
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <returns></returns>
+        public int getPriceCashByAmount(int amount)
+        {
+            int price = 0;
+            foreach (Price Price in priceCash)
+            {
+                if (Price.amount == amount)
+                {
+                    price = Price.price;
+                    break;
+                }
+            }
+
+            return price;
+        }
+
+        /// <summary>
+        /// Вернуть цену услуги с аккаунта
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <returns></returns>
+        public int getPriceAccountByAmount( int amount)
+        {
+            int price = 0;
+            foreach (Price Price in priceAccount)
+            {
+                if (Price.amount == amount)
+                {
+                    price = Price.price;
+                    break;
+                }
+            }
+
+            return price;
+        }
+
         public XElement ToXml()
         {
             XElement xOut = null;

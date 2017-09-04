@@ -75,6 +75,12 @@
     <Compile Include="Forms\CurrentVideoEnum.cs" />
     <Compile Include="Forms\Enum\ControlDeviceEnum.cs" />
     <Compile Include="Forms\Enum\ChooseChangeEnum.cs" />
+    <Compile Include="Forms\FormChoosePrice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormChoosePrice.Designer.cs">
+      <DependentUpon>FormChoosePrice.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormChooseService.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -193,6 +199,9 @@
     <Compile Include="Enum\NumberServiceEnum.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\FormChoosePrice.resx">
+      <DependentUpon>FormChoosePrice.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormChooseService.resx">
       <DependentUpon>FormChooseService.cs</DependentUpon>
     </EmbeddedResource>

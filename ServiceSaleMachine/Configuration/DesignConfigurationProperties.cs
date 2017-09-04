@@ -23,6 +23,7 @@ namespace AirVitamin
         public string ButtonWhatsDiff = defpicture;
         public string LogoService1 = defpicture;
         public string LogoService2 = defpicture;
+        public string LogoService3 = defpicture;
         public string ButtonGetOxigen = defpicture;
         public string ScreenSaver = defpicture;
         public string ScreenSaverVideo = defpicture;
@@ -49,6 +50,10 @@ namespace AirVitamin
         public string ButtonEnterUserPasw = defpicture;
         public string ButtonRegister = defpicture;
         public string ButtonRemember = defpicture;
+
+        public string ButtonMinus = defpicture;
+        public string ButtonPlus = defpicture;
+        public string ButtonOplata = defpicture;
 
         internal DesignConfigurationProperties()
         {

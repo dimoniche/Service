@@ -22,6 +22,7 @@ namespace AirVitamin.Client
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxBegin, Globals.DesignConfiguration.Settings.ButtonStartServices);
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxBeforeTrain, Globals.DesignConfiguration.Settings.LogoService1);
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxAfterTrain, Globals.DesignConfiguration.Settings.LogoService2);
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxContinueTrain, Globals.DesignConfiguration.Settings.LogoService3);
         }
 
         public override void LoadData()
@@ -85,6 +86,7 @@ namespace AirVitamin.Client
         {
             TextService1.LoadFile(Globals.GetPath(PathEnum.Text) + "\\service1.rtf");
             TextService2.LoadFile(Globals.GetPath(PathEnum.Text) + "\\service2.rtf");
+            TextService3.LoadFile(Globals.GetPath(PathEnum.Text) + "\\service3.rtf");
 
             timer1.Enabled = false;
         }

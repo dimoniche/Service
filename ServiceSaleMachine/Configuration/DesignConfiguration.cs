@@ -50,6 +50,7 @@ namespace AirVitamin
                         if ((xElement = xSettings.Element("ButtonWhatsDiff")) != null) Settings.ButtonWhatsDiff = xElement.Value;
                         if ((xElement = xSettings.Element("LogoService1")) != null) Settings.LogoService1 = xElement.Value;
                         if ((xElement = xSettings.Element("LogoService2")) != null) Settings.LogoService2 = xElement.Value;
+                        if ((xElement = xSettings.Element("LogoService3")) != null) Settings.LogoService3 = xElement.Value;
 
                         if ((xElement = xSettings.Element("ButtonGetOxigen")) != null) Settings.ButtonGetOxigen = xElement.Value;
                         if ((xElement = xSettings.Element("ButtonTakeAwayMoney")) != null) Settings.ButtonTakeAwayMoney = xElement.Value;
@@ -79,6 +80,10 @@ namespace AirVitamin
                         if ((xElement = xSettings.Element("ScreenSaverVideo")) != null) Settings.ScreenSaverVideo = xElement.Value;
                         if ((xElement = xSettings.Element("ScreenSaverVideo1")) != null) Settings.ScreenSaverVideo1 = xElement.Value;
                         if ((xElement = xSettings.Element("ScreenSaverVideo2")) != null) Settings.ScreenSaverVideo2 = xElement.Value;
+
+                        if ((xElement = xSettings.Element("ButtonMinus")) != null) Settings.ButtonMinus = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonPlus")) != null) Settings.ButtonPlus = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonOplata")) != null) Settings.ButtonOplata = xElement.Value;
                     }
 
                     return true;

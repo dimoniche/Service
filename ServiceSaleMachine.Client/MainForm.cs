@@ -67,7 +67,11 @@ namespace AirVitamin.Client
             // инициализируем задачи
             result.drivers.InitAllTask();
 
-            //result = (FormResultData)FormManager.OpenForm<FormProvideService>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+            Service serv = Globals.ClientConfiguration.ServiceByIndex((int)2);
+            serv.cost = Globals.CostConfiguration.CostSetting.Tables[(int)2];
+            result.serv = serv;
+
+            result = (FormResultData)FormManager.OpenForm<FormChoosePrice>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
         }
 
         /// <summary>

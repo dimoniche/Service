@@ -22,6 +22,7 @@ namespace AirVitamin.Client
 
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxService1, Globals.DesignConfiguration.Settings.ButtonService1);
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxService2, Globals.DesignConfiguration.Settings.ButtonService2);
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxService3, Globals.DesignConfiguration.Settings.ButtonService3);
 
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxreturntoMain, Globals.DesignConfiguration.Settings.ButtonRetToMain);
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxWhatsDiff, Globals.DesignConfiguration.Settings.ButtonWhatsDiff);
@@ -144,6 +145,13 @@ namespace AirVitamin.Client
             {
                 data.stage = WorkerStateStage.ExitProgram;
             }
+        }
+
+        private void pBxService3_Click(object sender, EventArgs e)
+        {
+            data.numberService = NumberServiceEnum.Continue;
+            data.stage = WorkerStateStage.ChoosePay;
+            this.Close();
         }
     }
 }

@@ -37,7 +37,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.pBxService1 = new System.Windows.Forms.PictureBox();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.pBxService2 = new System.Windows.Forms.PictureBox();
+            this.pBxService3 = new System.Windows.Forms.PictureBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.panel7 = new System.Windows.Forms.Panel();
@@ -46,6 +46,8 @@
             this.pictureLogo = new System.Windows.Forms.PictureBox();
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
+            this.pBxService2 = new System.Windows.Forms.PictureBox();
+            this.panel10 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.pBxreturntoMain = new System.Windows.Forms.PictureBox();
             this.pBxWhatsDiff = new System.Windows.Forms.PictureBox();
@@ -58,7 +60,7 @@
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBxService1)).BeginInit();
             this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pBxService2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pBxService3)).BeginInit();
             this.panel5.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -66,6 +68,8 @@
             this.panel8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureLogo)).BeginInit();
             this.panel9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pBxService2)).BeginInit();
+            this.panel10.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBxreturntoMain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBxWhatsDiff)).BeginInit();
@@ -105,21 +109,24 @@
             this.tableLayoutPanel2.Controls.Add(this.panel5, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.panel6, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.panel9, 0, 9);
+            this.tableLayoutPanel2.Controls.Add(this.panel10, 0, 11);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 11;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 3.701851F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.884442F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.403702F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.442221F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.884442F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.37519F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.922962F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.37519F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.884442F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.37519F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.75038F));
+            this.tableLayoutPanel2.RowCount = 13;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 3.701866F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.884479F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.403731F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.442239F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.884479F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.37523F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.922986F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.37523F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.884479F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.37523F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.380002F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.38004F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 2.990001F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(344, 594);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
@@ -164,23 +171,23 @@
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.pBxService2);
+            this.panel4.Controls.Add(this.pBxService3);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(3, 293);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(338, 55);
             this.panel4.TabIndex = 3;
             // 
-            // pBxService2
+            // pBxService3
             // 
-            this.pBxService2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pBxService2.Location = new System.Drawing.Point(0, 0);
-            this.pBxService2.Name = "pBxService2";
-            this.pBxService2.Size = new System.Drawing.Size(338, 55);
-            this.pBxService2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pBxService2.TabIndex = 1;
-            this.pBxService2.TabStop = false;
-            this.pBxService2.Click += new System.EventHandler(this.pBxService2_Click);
+            this.pBxService3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pBxService3.Location = new System.Drawing.Point(0, 0);
+            this.pBxService3.Name = "pBxService3";
+            this.pBxService3.Size = new System.Drawing.Size(338, 55);
+            this.pBxService3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pBxService3.TabIndex = 0;
+            this.pBxService3.TabStop = false;
+            this.pBxService3.Click += new System.EventHandler(this.pBxService3_Click);
             // 
             // panel5
             // 
@@ -260,12 +267,32 @@
             // 
             // panel9
             // 
-            this.panel9.Controls.Add(this.tableLayoutPanel3);
+            this.panel9.Controls.Add(this.pBxService2);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel9.Location = new System.Drawing.Point(3, 406);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(338, 55);
             this.panel9.TabIndex = 6;
+            // 
+            // pBxService2
+            // 
+            this.pBxService2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pBxService2.Location = new System.Drawing.Point(0, 0);
+            this.pBxService2.Name = "pBxService2";
+            this.pBxService2.Size = new System.Drawing.Size(338, 55);
+            this.pBxService2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pBxService2.TabIndex = 2;
+            this.pBxService2.TabStop = false;
+            this.pBxService2.Click += new System.EventHandler(this.pBxService2_Click);
+            // 
+            // panel10
+            // 
+            this.panel10.Controls.Add(this.tableLayoutPanel3);
+            this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel10.Location = new System.Drawing.Point(3, 510);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(338, 55);
+            this.panel10.TabIndex = 7;
             // 
             // tableLayoutPanel3
             // 
@@ -281,7 +308,7 @@
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(338, 55);
-            this.tableLayoutPanel3.TabIndex = 1;
+            this.tableLayoutPanel3.TabIndex = 2;
             // 
             // pBxreturntoMain
             // 
@@ -332,7 +359,7 @@
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pBxService1)).EndInit();
             this.panel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pBxService2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pBxService3)).EndInit();
             this.panel5.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
@@ -340,6 +367,8 @@
             this.panel8.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureLogo)).EndInit();
             this.panel9.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pBxService2)).EndInit();
+            this.panel10.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pBxreturntoMain)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBxWhatsDiff)).EndInit();
@@ -360,15 +389,17 @@
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.PictureBox pictureTitle;
         private System.Windows.Forms.PictureBox pBxService1;
-        private System.Windows.Forms.PictureBox pBxService2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.PictureBox pictureLogo;
         private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.PictureBox pBxreturntoMain;
         private System.Windows.Forms.PictureBox pBxWhatsDiff;
+        private System.Windows.Forms.PictureBox pBxService3;
+        private System.Windows.Forms.PictureBox pBxService2;
     }
 }

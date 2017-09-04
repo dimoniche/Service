@@ -44,6 +44,7 @@ namespace AirVitamin
                         if ((xElement = xSettings.Element("ButtonService")) != null) Settings.ButtonService = xElement.Value;
                         if ((xElement = xSettings.Element("ButtonService1")) != null) Settings.ButtonService1 = xElement.Value;
                         if ((xElement = xSettings.Element("ButtonService2")) != null) Settings.ButtonService2 = xElement.Value;
+                        if ((xElement = xSettings.Element("ButtonService3")) != null) Settings.ButtonService3 = xElement.Value;
 
                         if ((xElement = xSettings.Element("ButtonRetToMain")) != null) Settings.ButtonRetToMain = xElement.Value;
                         if ((xElement = xSettings.Element("ButtonWhatsDiff")) != null) Settings.ButtonWhatsDiff = xElement.Value;

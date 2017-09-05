@@ -75,10 +75,15 @@ namespace AirVitamin.Client
                 // до тренировки
                 Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTitle, "Do_tren_ver.png");
             }
-            else
+            else if (data.numberService == NumberServiceEnum.After)
             {
                 // после тренировки
                 Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTitle, "Posle_tren_ver.png");
+            }
+            else
+            {
+                // после тренировки
+                Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTitle, "Vo_vremya_tren_ver.png");
             }
 
             AmountServiceText.Font = new Font(data.FontCollection.Families[CustomFont.CeraRoundPro_Bold], 72, FontStyle.Bold);
@@ -96,7 +101,7 @@ namespace AirVitamin.Client
             if (data.retLogin != "")
             {
                 int sum = GlobalDb.GlobalBase.GetUserMoney(data.CurrentUserId);
-                price = data.serv.cost.getPriceAccountByAmount(data.serv.timework);
+                price = data.serv.cost.getPriceAccountByAmount(data.timework);
 
                 data.log.Write(LogMessageType.Information, "ACCOUNT: На счету у пользователя " + data.retLogin + " " + sum + " руб.");
 
@@ -145,7 +150,7 @@ namespace AirVitamin.Client
             else
             {
                 // это ввод денег наличными
-                price = data.serv.cost.getPriceCashByAmount(data.serv.timework);
+                price = data.serv.cost.getPriceCashByAmount(data.timework);
             }
             //
 

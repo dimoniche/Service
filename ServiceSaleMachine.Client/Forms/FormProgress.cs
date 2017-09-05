@@ -39,13 +39,15 @@ namespace AirVitamin.Client
 
             if (data.numberService == NumberServiceEnum.Before)
             {
-                // до тренировки
                 Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTitle, "Do_tren_ver.png");
+            }
+            else if (data.numberService == NumberServiceEnum.After)
+            {
+                Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTitle, "Posle_tren_ver.png");
             }
             else
             {
-                // после тренировки
-                Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTitle, "Posle_tren_ver.png");
+                Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTitle, "Vo_vremya_tren_ver.png");
             }
 
             FTimeWork = data.timeRecognize;

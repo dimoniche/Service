@@ -21,19 +21,6 @@ namespace AirVitamin.Client
         {
             InitializeComponent();
 
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxMinus, Globals.DesignConfiguration.Settings.ButtonMinus);
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxPlus, Globals.DesignConfiguration.Settings.ButtonPlus);
-
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxOplata, Globals.DesignConfiguration.Settings.ButtonOplata);
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxMainMenu, "Menu_big.png");
-
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxClock, "Clock.png");
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxMoney, "Money_blue.png");
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxRubles, "Rub.png");
-
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTitle, "Vo_vremya.png");
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pictureLogo, "Logo_O2.png");
-
             TimeOutTimer.Enabled = true;
             Timeout = 0;
         }
@@ -46,6 +33,31 @@ namespace AirVitamin.Client
                 {
                     data = (FormResultData)obj;
                 }
+            }
+
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxMinus, Globals.DesignConfiguration.Settings.ButtonMinus);
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxPlus, Globals.DesignConfiguration.Settings.ButtonPlus);
+
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxOplata, Globals.DesignConfiguration.Settings.ButtonOplata);
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxMainMenu, "Menu_big.png");
+
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxClock, "Clock.png");
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxMoney, "Money_blue.png");
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxRubles, "Rub.png");
+
+            Globals.DesignConfiguration.Settings.LoadPictureBox(pictureLogo, "Logo_O2.png");
+
+            if (data.numberService == NumberServiceEnum.Before)
+            {
+                Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTitle, "Do_tren_ver.png");
+            }
+            else if (data.numberService == NumberServiceEnum.After)
+            {
+                Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTitle, "Posle_tren_ver.png");
+            }
+            else
+            {
+                Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTitle, "Vo_vremya_tren_ver.png");
             }
 
             time = data.serv.cost.rangeStart;
@@ -126,13 +138,6 @@ namespace AirVitamin.Client
             }
         }
 
-        private void FormChooseService1_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
-        {
-            TimeOutTimer.Enabled = false;
-            data.drivers.ReceivedResponse -= reciveResponse;
-            Params.Result = data;
-        }
-
         private void FormChooseService1_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
         {
             if (e.Alt & e.KeyCode == Keys.F4)
@@ -165,6 +170,29 @@ namespace AirVitamin.Client
 
             CountTime.Text = span.ToString(@"mm\:ss");
             Price.Text = price.ToString();
+        }
+
+        private void pBxOplata_Click(object sender, EventArgs e)
+        {
+            data.stage = WorkerStateStage.ChoosePay;
+            this.Close();
+        }
+
+        private void pBxMainMenu_Click(object sender, EventArgs e)
+        {
+            data.stage = WorkerStateStage.MainScreen;
+            this.Close();
+        }
+
+        private void FormChoosePrice_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            TimeOutTimer.Enabled = false;
+            data.drivers.ReceivedResponse -= reciveResponse;
+
+            // запомним выбранное время услуги
+            data.timework = time;
+
+            Params.Result = data;
         }
     }
 }

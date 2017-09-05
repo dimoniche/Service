@@ -67,11 +67,11 @@ namespace AirVitamin.Client
             // инициализируем задачи
             result.drivers.InitAllTask();
 
-            Service serv = Globals.ClientConfiguration.ServiceByIndex((int)2);
-            serv.cost = Globals.CostConfiguration.CostSetting.Tables[(int)2];
-            result.serv = serv;
+            //Service serv = Globals.ClientConfiguration.ServiceByIndex((int)2);
+            //serv.cost = Globals.CostConfiguration.CostSetting.Tables[(int)2];
+            //result.serv = serv;
 
-            result = (FormResultData)FormManager.OpenForm<FormChoosePrice>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+            //result = (FormResultData)FormManager.OpenForm<FormChoosePrice>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
         }
 
         /// <summary>
@@ -813,6 +813,56 @@ NoCheckStatistic:
                     Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выбрали услугу: " + serv.caption);
 
                     // -----------------------------------------------------
+                    // Выбор продолжительности услуги
+                    // -----------------------------------------------------
+
+                    result = (FormResultData)FormManager.OpenForm<FormChoosePrice>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                    if (result.stage == WorkerStateStage.Fail || result.stage == WorkerStateStage.EndDropCassette)
+                    {
+                        // отказ - выход в выбор услуг
+                        goto ChooseService;
+                    }
+                    else if (result.stage == WorkerStateStage.ErrorBill)
+                    {
+                        // ошибки купюроприемника
+                        goto NoCheckStatistic;
+                    }
+                    else if (result.stage == WorkerStateStage.DropCassettteBill)
+                    {
+                        Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выемка денег.");
+
+                        // выемка денег
+                        result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+
+                        if (result.stage == WorkerStateStage.EndDropCassette)
+                        {
+                            continue;
+                        }
+                        else if (result.stage == WorkerStateStage.ExitProgram)
+                        {
+                            // выход
+                            Close();
+                            return;
+                        }
+                    }
+                    else if (result.stage == WorkerStateStage.MainScreen)
+                    {
+                        goto MainForm;
+                    }
+                    else if (result.stage == WorkerStateStage.ExitProgram)
+                    {
+                        // выход
+                        Close();
+                        return;
+                    }
+                    else if (result.stage == WorkerStateStage.TimeOut)
+                    {
+                        check = false;
+                        continue;
+                    }
+
+                    // -----------------------------------------------------
                     // ожидание внесение денег
                     // -----------------------------------------------------
                     result = (FormResultData)FormManager.OpenForm<FormWaitPayBill>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
@@ -860,7 +910,6 @@ NoCheckStatistic:
                     // -----------------------------------------------------
                     // оказание услуги
                     // -----------------------------------------------------
-                    result.timework = serv.timework;
 
                     // пока так
                     if(result.numberService == NumberServiceEnum.Before)

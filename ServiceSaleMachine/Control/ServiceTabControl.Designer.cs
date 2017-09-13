@@ -119,6 +119,7 @@
             this.label8.Size = new System.Drawing.Size(24, 13);
             this.label8.TabIndex = 27;
             this.label8.Text = "руб";
+            this.label8.Visible = false;
             // 
             // textBoxPriceService1
             // 
@@ -127,6 +128,7 @@
             this.textBoxPriceService1.Size = new System.Drawing.Size(100, 20);
             this.textBoxPriceService1.TabIndex = 26;
             this.textBoxPriceService1.Text = "100";
+            this.textBoxPriceService1.Visible = false;
             this.textBoxPriceService1.Leave += new System.EventHandler(this.textBoxPriceService1_Leave);
             // 
             // label9
@@ -137,6 +139,7 @@
             this.label9.Size = new System.Drawing.Size(147, 13);
             this.label9.TabIndex = 25;
             this.label9.Text = "Стоимость услуги (аккаунт)";
+            this.label9.Visible = false;
             // 
             // label2
             // 
@@ -173,6 +176,7 @@
             this.label4.Size = new System.Drawing.Size(25, 13);
             this.label4.TabIndex = 21;
             this.label4.Text = "сек";
+            this.label4.Visible = false;
             // 
             // textBoxTimeService
             // 
@@ -181,6 +185,7 @@
             this.textBoxTimeService.Size = new System.Drawing.Size(100, 20);
             this.textBoxTimeService.TabIndex = 20;
             this.textBoxTimeService.Text = "0";
+            this.textBoxTimeService.Visible = false;
             this.textBoxTimeService.Leave += new System.EventHandler(this.textBoxMaxTimeService_Leave);
             // 
             // label5
@@ -191,6 +196,7 @@
             this.label5.Size = new System.Drawing.Size(116, 13);
             this.label5.TabIndex = 19;
             this.label5.Text = "Длительность услуги";
+            this.label5.Visible = false;
             // 
             // label6
             // 
@@ -200,6 +206,7 @@
             this.label6.Size = new System.Drawing.Size(24, 13);
             this.label6.TabIndex = 18;
             this.label6.Text = "руб";
+            this.label6.Visible = false;
             // 
             // textBoxPriceService
             // 
@@ -208,6 +215,7 @@
             this.textBoxPriceService.Size = new System.Drawing.Size(100, 20);
             this.textBoxPriceService.TabIndex = 17;
             this.textBoxPriceService.Text = "100";
+            this.textBoxPriceService.Visible = false;
             this.textBoxPriceService.Leave += new System.EventHandler(this.textBoxPriceService_Leave);
             // 
             // label7
@@ -218,6 +226,7 @@
             this.label7.Size = new System.Drawing.Size(156, 13);
             this.label7.TabIndex = 16;
             this.label7.Text = "Стоимость услуги (наличные)";
+            this.label7.Visible = false;
             // 
             // textBoxCaptionService
             // 
@@ -226,6 +235,7 @@
             this.textBoxCaptionService.Size = new System.Drawing.Size(133, 20);
             this.textBoxCaptionService.TabIndex = 14;
             this.textBoxCaptionService.Text = "До тренировки";
+            this.textBoxCaptionService.Visible = false;
             this.textBoxCaptionService.Leave += new System.EventHandler(this.textBoxCaptionService_Leave);
             // 
             // labCaptionService
@@ -236,6 +246,7 @@
             this.labCaptionService.Size = new System.Drawing.Size(93, 13);
             this.labCaptionService.TabIndex = 13;
             this.labCaptionService.Text = "Название услуги";
+            this.labCaptionService.Visible = false;
             // 
             // label1
             // 

@@ -42,6 +42,9 @@
             this.panel25 = new System.Windows.Forms.Panel();
             this.LabelSmes = new AirVitamin.ScalableLabel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel16 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel30 = new System.Windows.Forms.Panel();
+            this.pBxTitle = new System.Windows.Forms.PictureBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
             this.panel26 = new System.Windows.Forms.Panel();
@@ -87,9 +90,6 @@
             this.panel13 = new System.Windows.Forms.Panel();
             this.pBxMainMenu = new System.Windows.Forms.PictureBox();
             this.TimeOutTimer = new System.Windows.Forms.Timer(this.components);
-            this.tableLayoutPanel16 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel30 = new System.Windows.Forms.Panel();
-            this.pBxTitle = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -102,6 +102,9 @@
             this.tableLayoutPanel11.SuspendLayout();
             this.panel25.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.tableLayoutPanel16.SuspendLayout();
+            this.panel30.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pBxTitle)).BeginInit();
             this.panel5.SuspendLayout();
             this.tableLayoutPanel12.SuspendLayout();
             this.panel26.SuspendLayout();
@@ -142,9 +145,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pBxOplata)).BeginInit();
             this.panel13.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBxMainMenu)).BeginInit();
-            this.tableLayoutPanel16.SuspendLayout();
-            this.panel30.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pBxTitle)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -306,6 +306,7 @@
             this.LabelSmes.Size = new System.Drawing.Size(199, 18);
             this.LabelSmes.TabIndex = 1;
             this.LabelSmes.Text = "ДЫХАТЕЛЬНАЯ СМЕСЬ";
+            this.LabelSmes.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormChooseService1_KeyDown);
             // 
             // panel4
             // 
@@ -315,6 +316,40 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(342, 39);
             this.panel4.TabIndex = 2;
+            // 
+            // tableLayoutPanel16
+            // 
+            this.tableLayoutPanel16.ColumnCount = 3;
+            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel16.Controls.Add(this.panel30, 1, 0);
+            this.tableLayoutPanel16.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel16.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel16.Name = "tableLayoutPanel16";
+            this.tableLayoutPanel16.RowCount = 1;
+            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel16.Size = new System.Drawing.Size(342, 39);
+            this.tableLayoutPanel16.TabIndex = 0;
+            // 
+            // panel30
+            // 
+            this.panel30.Controls.Add(this.pBxTitle);
+            this.panel30.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel30.Location = new System.Drawing.Point(88, 3);
+            this.panel30.Name = "panel30";
+            this.panel30.Size = new System.Drawing.Size(165, 33);
+            this.panel30.TabIndex = 0;
+            // 
+            // pBxTitle
+            // 
+            this.pBxTitle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pBxTitle.Location = new System.Drawing.Point(0, 0);
+            this.pBxTitle.Name = "pBxTitle";
+            this.pBxTitle.Size = new System.Drawing.Size(165, 33);
+            this.pBxTitle.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pBxTitle.TabIndex = 2;
+            this.pBxTitle.TabStop = false;
             // 
             // panel5
             // 
@@ -358,6 +393,7 @@
             this.LabelCounter.Size = new System.Drawing.Size(267, 42);
             this.LabelCounter.TabIndex = 1;
             this.LabelCounter.Text = "Длительность";
+            this.LabelCounter.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormChooseService1_KeyDown);
             // 
             // panel6
             // 
@@ -473,6 +509,7 @@
             this.CountTime.Size = new System.Drawing.Size(93, 39);
             this.CountTime.TabIndex = 2;
             this.CountTime.Text = "0.00";
+            this.CountTime.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormChooseService1_KeyDown);
             // 
             // panel17
             // 
@@ -721,6 +758,7 @@
             this.Price.Size = new System.Drawing.Size(76, 39);
             this.Price.TabIndex = 1;
             this.Price.Text = "100";
+            this.Price.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormChooseService1_KeyDown);
             // 
             // panel21
             // 
@@ -810,40 +848,7 @@
             // TimeOutTimer
             // 
             this.TimeOutTimer.Interval = 1000;
-            // 
-            // tableLayoutPanel16
-            // 
-            this.tableLayoutPanel16.ColumnCount = 3;
-            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel16.Controls.Add(this.panel30, 1, 0);
-            this.tableLayoutPanel16.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel16.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel16.Name = "tableLayoutPanel16";
-            this.tableLayoutPanel16.RowCount = 1;
-            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel16.Size = new System.Drawing.Size(342, 39);
-            this.tableLayoutPanel16.TabIndex = 0;
-            // 
-            // panel30
-            // 
-            this.panel30.Controls.Add(this.pBxTitle);
-            this.panel30.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel30.Location = new System.Drawing.Point(88, 3);
-            this.panel30.Name = "panel30";
-            this.panel30.Size = new System.Drawing.Size(165, 33);
-            this.panel30.TabIndex = 0;
-            // 
-            // pBxTitle
-            // 
-            this.pBxTitle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pBxTitle.Location = new System.Drawing.Point(0, 0);
-            this.pBxTitle.Name = "pBxTitle";
-            this.pBxTitle.Size = new System.Drawing.Size(165, 33);
-            this.pBxTitle.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pBxTitle.TabIndex = 2;
-            this.pBxTitle.TabStop = false;
+            this.TimeOutTimer.Tick += new System.EventHandler(this.TimeOutTimer_Tick);
             // 
             // FormChoosePrice
             // 
@@ -870,6 +875,9 @@
             this.tableLayoutPanel11.ResumeLayout(false);
             this.panel25.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
+            this.tableLayoutPanel16.ResumeLayout(false);
+            this.panel30.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pBxTitle)).EndInit();
             this.panel5.ResumeLayout(false);
             this.tableLayoutPanel12.ResumeLayout(false);
             this.panel26.ResumeLayout(false);
@@ -910,9 +918,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pBxOplata)).EndInit();
             this.panel13.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pBxMainMenu)).EndInit();
-            this.tableLayoutPanel16.ResumeLayout(false);
-            this.panel30.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pBxTitle)).EndInit();
             this.ResumeLayout(false);
 
         }

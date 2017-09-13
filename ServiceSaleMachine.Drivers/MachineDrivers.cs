@@ -187,7 +187,9 @@ namespace AirVitamin.Drivers
 
             this.log.Write(LogMessageType.Information, "BILL: Настройка купюроприемникa.");
 
-            if (Globals.ClientConfiguration.Settings.offBill != 1 && !CCNETDriver.getNumberComPort().Contains("нет"))
+            if (Globals.ClientConfiguration.Settings.offBill != 1 
+                && !CCNETDriver.getNumberComPort().Contains("нет") 
+                && !string.IsNullOrEmpty(CCNETDriver.getNumberComPort()))
             {
                 try
                 {
@@ -263,7 +265,9 @@ namespace AirVitamin.Drivers
             // настроим управляющее устройство
             this.log.Write(LogMessageType.Information, "CONTROL: Настройка управлящего устройства.");
 
-            if (Globals.ClientConfiguration.Settings.offControl != 1 && !control.getNumberComPort().Contains("нет"))
+            if (Globals.ClientConfiguration.Settings.offControl != 1 
+                && !control.getNumberComPort().Contains("нет")
+                && !string.IsNullOrEmpty(control.getNumberComPort()))
             {
                 if (control.openPort(control.getNumberComPort()))
                 {
@@ -285,7 +289,9 @@ namespace AirVitamin.Drivers
             // настроим драйвер модема
             this.log.Write(LogMessageType.Information, "MODEM: Настройка модема.");
 
-            if (Globals.ClientConfiguration.Settings.offModem != 1 && !modem.getNumberComPort().Contains("нет"))
+            if (Globals.ClientConfiguration.Settings.offModem != 1 
+                && !modem.getNumberComPort().Contains("нет")
+                && !string.IsNullOrEmpty(modem.getNumberComPort()))
             {
                 this.log.Write(LogMessageType.Information, "MODEM: Настройка модема.");
 

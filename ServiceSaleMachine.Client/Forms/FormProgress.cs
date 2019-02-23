@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using AirVitamin.Drivers;
 using static AirVitamin.Drivers.MachineDrivers;
 using System.Drawing;
+using System.IO;
 
 namespace AirVitamin.Client
 {
@@ -50,7 +51,20 @@ namespace AirVitamin.Client
                 Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTitle, "Vo_vremya_tren_ver.png");
             }
 
-            FTimeWork = data.timeRecognize;
+			if (!File.Exists(Globals.GetPath(PathEnum.Text) + "\\service_step1.rtf"))
+			{
+				Globals.DesignConfiguration.Settings.LoadPictureBox(pBInstruction, "Instraction.png");
+
+				fileLoaded = true;
+				timer1.Interval = 1000;
+			}
+			else
+			{
+				TextInstruction.Visible = true;
+				TextInstruction.Dock = DockStyle.Fill;
+			}
+
+			FTimeWork = data.timeRecognize;
             CurrentWork = 0;
 
             timer1.Enabled = true;

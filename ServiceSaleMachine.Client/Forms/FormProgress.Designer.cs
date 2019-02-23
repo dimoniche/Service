@@ -39,7 +39,6 @@
 			this.panel4 = new System.Windows.Forms.Panel();
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
 			this.panel9 = new System.Windows.Forms.Panel();
-			this.TextInstruction = new AirVitamin.RichTextBoxEx();
 			this.panel3 = new System.Windows.Forms.Panel();
 			this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
 			this.panel10 = new System.Windows.Forms.Panel();
@@ -53,6 +52,8 @@
 			this.panel14 = new System.Windows.Forms.Panel();
 			this.pictureLogo = new System.Windows.Forms.PictureBox();
 			this.timer1 = new System.Windows.Forms.Timer(this.components);
+			this.pBInstruction = new System.Windows.Forms.PictureBox();
+			this.TextInstruction = new AirVitamin.RichTextBoxEx();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.tableLayoutPanel2.SuspendLayout();
@@ -75,6 +76,7 @@
 			this.tableLayoutPanel4.SuspendLayout();
 			this.panel14.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureLogo)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pBInstruction)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// tableLayoutPanel1
@@ -199,24 +201,12 @@
 			// panel9
 			// 
 			this.panel9.Controls.Add(this.TextInstruction);
+			this.panel9.Controls.Add(this.pBInstruction);
 			this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel9.Location = new System.Drawing.Point(50, 3);
 			this.panel9.Name = "panel9";
 			this.panel9.Size = new System.Drawing.Size(687, 262);
 			this.panel9.TabIndex = 0;
-			// 
-			// TextInstruction
-			// 
-			this.TextInstruction.BackColor = System.Drawing.Color.Gainsboro;
-			this.TextInstruction.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.TextInstruction.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.TextInstruction.Location = new System.Drawing.Point(0, 0);
-			this.TextInstruction.Name = "TextInstruction";
-			this.TextInstruction.ReadOnly = true;
-			this.TextInstruction.Size = new System.Drawing.Size(687, 262);
-			this.TextInstruction.TabIndex = 1;
-			this.TextInstruction.Text = "";
-			this.TextInstruction.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LabelNameService1_KeyDown);
 			// 
 			// panel3
 			// 
@@ -352,6 +342,28 @@
 			this.timer1.Interval = 50;
 			this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
 			// 
+			// pBInstruction
+			// 
+			this.pBInstruction.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.pBInstruction.Location = new System.Drawing.Point(0, 0);
+			this.pBInstruction.Name = "pBInstruction";
+			this.pBInstruction.Size = new System.Drawing.Size(687, 262);
+			this.pBInstruction.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+			this.pBInstruction.TabIndex = 0;
+			this.pBInstruction.TabStop = false;
+			// 
+			// TextInstruction
+			// 
+			this.TextInstruction.BackColor = System.Drawing.Color.Gainsboro;
+			this.TextInstruction.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.TextInstruction.Location = new System.Drawing.Point(3, 3);
+			this.TextInstruction.Name = "TextInstruction";
+			this.TextInstruction.Size = new System.Drawing.Size(100, 96);
+			this.TextInstruction.TabIndex = 1;
+			this.TextInstruction.Text = "";
+			this.TextInstruction.Visible = false;
+			this.TextInstruction.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LabelNameService1_KeyDown);
+			// 
 			// FormProgress
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -387,6 +399,7 @@
 			this.tableLayoutPanel4.ResumeLayout(false);
 			this.panel14.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.pictureLogo)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pBInstruction)).EndInit();
 			this.ResumeLayout(false);
 
         }
@@ -404,7 +417,6 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Panel panel9;
-        private RichTextBoxEx TextInstruction;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
         private System.Windows.Forms.Panel panel10;
@@ -417,5 +429,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.Panel panel14;
         private System.Windows.Forms.PictureBox pictureLogo;
-    }
+		private System.Windows.Forms.PictureBox pBInstruction;
+		private RichTextBoxEx TextInstruction;
+	}
 }

@@ -222,7 +222,7 @@
 			// tableLayoutInstruction
 			// 
 			this.tableLayoutInstruction.BackColor = System.Drawing.Color.Transparent;
-			this.tableLayoutInstruction.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.tableLayoutInstruction.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
 			this.tableLayoutInstruction.ColumnCount = 1;
 			this.tableLayoutInstruction.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tableLayoutInstruction.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));

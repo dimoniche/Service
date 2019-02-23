@@ -53,6 +53,7 @@ namespace AirVitamin.Client
 
 			if (!File.Exists(Globals.GetPath(PathEnum.Text) + "\\service_step1.rtf"))
 			{
+			    // если нет текстового файла с инструкцией - отобразим графический файл
 				Globals.DesignConfiguration.Settings.LoadPictureBox(pBInstruction, "Instraction.png");
 
 				fileLoaded = true;

@@ -207,7 +207,7 @@
 			this.pBxFinishText.Location = new System.Drawing.Point(210, 3);
 			this.pBxFinishText.Name = "pBxFinishText";
 			this.pBxFinishText.Size = new System.Drawing.Size(207, 133);
-			this.pBxFinishText.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pBxFinishText.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pBxFinishText.TabIndex = 0;
 			this.pBxFinishText.TabStop = false;
 			this.pBxFinishText.Click += new System.EventHandler(this.pBxFinish_Click);

@@ -164,7 +164,7 @@
 			this.pBxService1.Location = new System.Drawing.Point(0, 0);
 			this.pBxService1.Name = "pBxService1";
 			this.pBxService1.Size = new System.Drawing.Size(338, 55);
-			this.pBxService1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pBxService1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pBxService1.TabIndex = 1;
 			this.pBxService1.TabStop = false;
 			this.pBxService1.Click += new System.EventHandler(this.pBxService1_Click);
@@ -184,7 +184,7 @@
 			this.pBxService3.Location = new System.Drawing.Point(0, 0);
 			this.pBxService3.Name = "pBxService3";
 			this.pBxService3.Size = new System.Drawing.Size(338, 55);
-			this.pBxService3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pBxService3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pBxService3.TabIndex = 0;
 			this.pBxService3.TabStop = false;
 			this.pBxService3.Click += new System.EventHandler(this.pBxService3_Click);
@@ -280,7 +280,7 @@
 			this.pBxService2.Location = new System.Drawing.Point(0, 0);
 			this.pBxService2.Name = "pBxService2";
 			this.pBxService2.Size = new System.Drawing.Size(338, 55);
-			this.pBxService2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pBxService2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pBxService2.TabIndex = 2;
 			this.pBxService2.TabStop = false;
 			this.pBxService2.Click += new System.EventHandler(this.pBxService2_Click);
@@ -316,7 +316,7 @@
 			this.pBxreturntoMain.Location = new System.Drawing.Point(3, 3);
 			this.pBxreturntoMain.Name = "pBxreturntoMain";
 			this.pBxreturntoMain.Size = new System.Drawing.Size(154, 49);
-			this.pBxreturntoMain.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pBxreturntoMain.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pBxreturntoMain.TabIndex = 0;
 			this.pBxreturntoMain.TabStop = false;
 			this.pBxreturntoMain.Click += new System.EventHandler(this.pBxreturntoMain_Click);
@@ -327,7 +327,7 @@
 			this.pBxWhatsDiff.Location = new System.Drawing.Point(179, 3);
 			this.pBxWhatsDiff.Name = "pBxWhatsDiff";
 			this.pBxWhatsDiff.Size = new System.Drawing.Size(156, 49);
-			this.pBxWhatsDiff.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pBxWhatsDiff.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pBxWhatsDiff.TabIndex = 1;
 			this.pBxWhatsDiff.TabStop = false;
 			this.pBxWhatsDiff.Click += new System.EventHandler(this.pBxWhatsDiff_Click);

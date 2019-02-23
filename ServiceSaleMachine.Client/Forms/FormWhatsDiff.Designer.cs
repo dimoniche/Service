@@ -252,7 +252,7 @@
 			this.pBxAfterTrain.Location = new System.Drawing.Point(0, 0);
 			this.pBxAfterTrain.Name = "pBxAfterTrain";
 			this.pBxAfterTrain.Size = new System.Drawing.Size(240, 20);
-			this.pBxAfterTrain.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pBxAfterTrain.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pBxAfterTrain.TabIndex = 0;
 			this.pBxAfterTrain.TabStop = false;
 			// 
@@ -389,7 +389,7 @@
 			this.pBxContinueTrain.Location = new System.Drawing.Point(0, 0);
 			this.pBxContinueTrain.Name = "pBxContinueTrain";
 			this.pBxContinueTrain.Size = new System.Drawing.Size(303, 20);
-			this.pBxContinueTrain.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pBxContinueTrain.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pBxContinueTrain.TabIndex = 0;
 			this.pBxContinueTrain.TabStop = false;
 			// 
@@ -432,7 +432,7 @@
 			this.pBxBeforeTrain.Location = new System.Drawing.Point(0, 0);
 			this.pBxBeforeTrain.Name = "pBxBeforeTrain";
 			this.pBxBeforeTrain.Size = new System.Drawing.Size(240, 9);
-			this.pBxBeforeTrain.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pBxBeforeTrain.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pBxBeforeTrain.TabIndex = 0;
 			this.pBxBeforeTrain.TabStop = false;
 			// 
@@ -475,7 +475,7 @@
 			this.pBxTitle.Location = new System.Drawing.Point(0, 0);
 			this.pBxTitle.Name = "pBxTitle";
 			this.pBxTitle.Size = new System.Drawing.Size(338, 20);
-			this.pBxTitle.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pBxTitle.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pBxTitle.TabIndex = 0;
 			this.pBxTitle.TabStop = false;
 			// 
@@ -561,7 +561,7 @@
 			this.pBxBegin.Location = new System.Drawing.Point(0, 0);
 			this.pBxBegin.Name = "pBxBegin";
 			this.pBxBegin.Size = new System.Drawing.Size(338, 45);
-			this.pBxBegin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pBxBegin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pBxBegin.TabIndex = 1;
 			this.pBxBegin.TabStop = false;
 			this.pBxBegin.Click += new System.EventHandler(this.pBxBegin_Click);

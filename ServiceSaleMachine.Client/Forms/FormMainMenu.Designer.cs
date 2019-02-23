@@ -309,7 +309,7 @@
 			this.pBxBegin.Location = new System.Drawing.Point(3, 37);
 			this.pBxBegin.Name = "pBxBegin";
 			this.pBxBegin.Size = new System.Drawing.Size(335, 54);
-			this.pBxBegin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pBxBegin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pBxBegin.TabIndex = 0;
 			this.pBxBegin.TabStop = false;
 			this.pBxBegin.Click += new System.EventHandler(this.pbxStart_Click);
@@ -320,7 +320,7 @@
 			this.pBxPhilosof.Location = new System.Drawing.Point(3, 131);
 			this.pBxPhilosof.Name = "pBxPhilosof";
 			this.pBxPhilosof.Size = new System.Drawing.Size(335, 54);
-			this.pBxPhilosof.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pBxPhilosof.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pBxPhilosof.TabIndex = 1;
 			this.pBxPhilosof.TabStop = false;
 			this.pBxPhilosof.Click += new System.EventHandler(this.pBxPhilosof_Click);
@@ -331,7 +331,7 @@
 			this.pBxInstruction.Location = new System.Drawing.Point(3, 225);
 			this.pBxInstruction.Name = "pBxInstruction";
 			this.pBxInstruction.Size = new System.Drawing.Size(335, 54);
-			this.pBxInstruction.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pBxInstruction.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pBxInstruction.TabIndex = 2;
 			this.pBxInstruction.TabStop = false;
 			this.pBxInstruction.Click += new System.EventHandler(this.pbxHelp_Click);
@@ -351,7 +351,7 @@
 			this.pictureBoxInter.Location = new System.Drawing.Point(0, 0);
 			this.pictureBoxInter.Name = "pictureBoxInter";
 			this.pictureBoxInter.Size = new System.Drawing.Size(335, 54);
-			this.pictureBoxInter.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pictureBoxInter.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pictureBoxInter.TabIndex = 0;
 			this.pictureBoxInter.TabStop = false;
 			this.pictureBoxInter.Click += new System.EventHandler(this.pictureBoxInter_Click);

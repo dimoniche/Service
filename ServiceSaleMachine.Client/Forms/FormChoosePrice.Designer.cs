@@ -347,7 +347,7 @@
 			this.pBxTitle.Location = new System.Drawing.Point(0, 0);
 			this.pBxTitle.Name = "pBxTitle";
 			this.pBxTitle.Size = new System.Drawing.Size(165, 33);
-			this.pBxTitle.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pBxTitle.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pBxTitle.TabIndex = 2;
 			this.pBxTitle.TabStop = false;
 			// 
@@ -552,7 +552,7 @@
 			this.pBxClock.Location = new System.Drawing.Point(0, 0);
 			this.pBxClock.Name = "pBxClock";
 			this.pBxClock.Size = new System.Drawing.Size(41, 25);
-			this.pBxClock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pBxClock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pBxClock.TabIndex = 4;
 			this.pBxClock.TabStop = false;
 			// 
@@ -595,7 +595,7 @@
 			this.pBxPlus.Location = new System.Drawing.Point(0, 0);
 			this.pBxPlus.Name = "pBxPlus";
 			this.pBxPlus.Size = new System.Drawing.Size(143, 45);
-			this.pBxPlus.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pBxPlus.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pBxPlus.TabIndex = 0;
 			this.pBxPlus.TabStop = false;
 			this.pBxPlus.Click += new System.EventHandler(this.pBxPlus_Click);
@@ -639,7 +639,7 @@
 			this.pBxMinus.Location = new System.Drawing.Point(0, 0);
 			this.pBxMinus.Name = "pBxMinus";
 			this.pBxMinus.Size = new System.Drawing.Size(141, 45);
-			this.pBxMinus.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pBxMinus.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pBxMinus.TabIndex = 1;
 			this.pBxMinus.TabStop = false;
 			this.pBxMinus.Click += new System.EventHandler(this.pBxMinus_Click);
@@ -670,6 +670,7 @@
 			this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 51F));
 			this.tableLayoutPanel7.Size = new System.Drawing.Size(342, 51);
 			this.tableLayoutPanel7.TabIndex = 1;
+			this.tableLayoutPanel7.Visible = false;
 			// 
 			// panel19
 			// 
@@ -712,7 +713,7 @@
 			this.pBxRubles.Location = new System.Drawing.Point(0, 0);
 			this.pBxRubles.Name = "pBxRubles";
 			this.pBxRubles.Size = new System.Drawing.Size(26, 21);
-			this.pBxRubles.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pBxRubles.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pBxRubles.TabIndex = 2;
 			this.pBxRubles.TabStop = false;
 			// 
@@ -801,7 +802,7 @@
 			this.pBxMoney.Location = new System.Drawing.Point(0, 0);
 			this.pBxMoney.Name = "pBxMoney";
 			this.pBxMoney.Size = new System.Drawing.Size(49, 25);
-			this.pBxMoney.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pBxMoney.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pBxMoney.TabIndex = 4;
 			this.pBxMoney.TabStop = false;
 			// 
@@ -820,7 +821,7 @@
 			this.pBxOplata.Location = new System.Drawing.Point(0, 0);
 			this.pBxOplata.Name = "pBxOplata";
 			this.pBxOplata.Size = new System.Drawing.Size(342, 51);
-			this.pBxOplata.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pBxOplata.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pBxOplata.TabIndex = 0;
 			this.pBxOplata.TabStop = false;
 			this.pBxOplata.Click += new System.EventHandler(this.pBxOplata_Click);
@@ -840,7 +841,7 @@
 			this.pBxMainMenu.Location = new System.Drawing.Point(0, 0);
 			this.pBxMainMenu.Name = "pBxMainMenu";
 			this.pBxMainMenu.Size = new System.Drawing.Size(342, 51);
-			this.pBxMainMenu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pBxMainMenu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pBxMainMenu.TabIndex = 0;
 			this.pBxMainMenu.TabStop = false;
 			this.pBxMainMenu.Click += new System.EventHandler(this.pBxMainMenu_Click);

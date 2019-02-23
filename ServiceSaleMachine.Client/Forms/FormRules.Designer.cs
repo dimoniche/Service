@@ -206,7 +206,7 @@
 			this.pBxInstructionTitle.Location = new System.Drawing.Point(0, 0);
 			this.pBxInstructionTitle.Name = "pBxInstructionTitle";
 			this.pBxInstructionTitle.Size = new System.Drawing.Size(172, 16);
-			this.pBxInstructionTitle.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pBxInstructionTitle.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pBxInstructionTitle.TabIndex = 0;
 			this.pBxInstructionTitle.TabStop = false;
 			// 
@@ -275,7 +275,7 @@
 			this.pBxMainMenu.Location = new System.Drawing.Point(0, 0);
 			this.pBxMainMenu.Name = "pBxMainMenu";
 			this.pBxMainMenu.Size = new System.Drawing.Size(148, 50);
-			this.pBxMainMenu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pBxMainMenu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pBxMainMenu.TabIndex = 0;
 			this.pBxMainMenu.TabStop = false;
 			this.pBxMainMenu.Click += new System.EventHandler(this.pBxMainMenu_Click);

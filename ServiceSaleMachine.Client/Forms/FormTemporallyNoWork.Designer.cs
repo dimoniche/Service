@@ -308,7 +308,7 @@
 			this.pictureError.Location = new System.Drawing.Point(0, 0);
 			this.pictureError.Name = "pictureError";
 			this.pictureError.Size = new System.Drawing.Size(208, 181);
-			this.pictureError.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pictureError.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pictureError.TabIndex = 0;
 			this.pictureError.TabStop = false;
 			// 

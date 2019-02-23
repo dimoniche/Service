@@ -20,7 +20,15 @@ namespace AirVitamin.Client
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxBegin, Globals.DesignConfiguration.Settings.ButtonStartServices);
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxPhilosof, Globals.DesignConfiguration.Settings.ButtonPhilosof);
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxInstruction, Globals.DesignConfiguration.Settings.ButtonHelp);
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pictureBoxInter, Globals.DesignConfiguration.Settings.ButtonInter);
+
+			if (Globals.DesignConfiguration.Settings.ButtonInter != "default.png")
+			{
+				Globals.DesignConfiguration.Settings.LoadPictureBox(pictureBoxInter, Globals.DesignConfiguration.Settings.ButtonInter);
+			}
+			else
+			{
+				pictureBoxInter.Visible = false;
+			}
 
             TimeOutTimer.Enabled = true;
             Timeout = 0;

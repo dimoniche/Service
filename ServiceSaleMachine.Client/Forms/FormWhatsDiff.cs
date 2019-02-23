@@ -20,9 +20,36 @@ namespace AirVitamin.Client
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxTitle, "Smes_txt.png");
 
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxBegin, Globals.DesignConfiguration.Settings.ButtonStartServices);
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxBeforeTrain, Globals.DesignConfiguration.Settings.LogoService1);
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxAfterTrain, Globals.DesignConfiguration.Settings.LogoService2);
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxContinueTrain, Globals.DesignConfiguration.Settings.LogoService3);
+
+			if (Globals.DesignConfiguration.Settings.LogoService1 != "default.png")
+			{
+				Globals.DesignConfiguration.Settings.LoadPictureBox(pBxBeforeTrain, Globals.DesignConfiguration.Settings.LogoService1);
+			}
+			else
+			{
+				pBxBeforeTrain.Visible = false;
+				TextService1.Visible = false;
+			}
+
+			if (Globals.DesignConfiguration.Settings.LogoService2 != "default.png")
+			{
+				Globals.DesignConfiguration.Settings.LoadPictureBox(pBxContinueTrain, Globals.DesignConfiguration.Settings.LogoService2);
+			}
+			else
+			{
+				pBxContinueTrain.Visible = false;
+				TextService3.Visible = false;
+			}
+
+			if (Globals.DesignConfiguration.Settings.LogoService3 != "default.png")
+			{
+				Globals.DesignConfiguration.Settings.LoadPictureBox(pBxAfterTrain, Globals.DesignConfiguration.Settings.LogoService3);
+			}
+			else
+			{
+				pBxAfterTrain.Visible = false;
+				TextService2.Visible = false;
+			}
         }
 
         public override void LoadData()

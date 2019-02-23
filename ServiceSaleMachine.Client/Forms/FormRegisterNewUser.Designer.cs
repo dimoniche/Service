@@ -190,7 +190,7 @@
 			this.pBxTitle.Location = new System.Drawing.Point(0, 0);
 			this.pBxTitle.Name = "pBxTitle";
 			this.pBxTitle.Size = new System.Drawing.Size(269, 93);
-			this.pBxTitle.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pBxTitle.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pBxTitle.TabIndex = 0;
 			this.pBxTitle.TabStop = false;
 			// 

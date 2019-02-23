@@ -813,84 +813,86 @@ NoCheckStatistic:
 
                     Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выбрали услугу: " + serv.caption);
 
-                    if(result.numberService == NumberServiceEnum.Continue && result.retLogin == "")
-                    {
-                        // во время тренировки попадаем во вход личного кабинета, если не зарегистрировались
-                        #region  авторизация пользователя
+					#region Пока лишнее
+					//if(result.numberService == NumberServiceEnum.Continue && result.retLogin == "")
+					//{
+					//    // во время тренировки попадаем во вход личного кабинета, если не зарегистрировались
+					//    #region  авторизация пользователя
 
-                        result = (FormResultData)FormManager.OpenForm<UserRequest>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+					//    result = (FormResultData)FormManager.OpenForm<UserRequest>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
-                        // проверим результат
-                        if ((result.stage == WorkerStateStage.AuthorizeUser || result.stage == WorkerStateStage.RegisterNewUser) && result.retLogin != "")
-                        {
-                            // авторизовались или внесли нового пользователя
-                            UserInfo ui = GlobalDb.GlobalBase.GetUserByName(result.retLogin, result.retPassword);
+					//    // проверим результат
+					//    if ((result.stage == WorkerStateStage.AuthorizeUser || result.stage == WorkerStateStage.RegisterNewUser) && result.retLogin != "")
+					//    {
+					//        // авторизовались или внесли нового пользователя
+					//        UserInfo ui = GlobalDb.GlobalBase.GetUserByName(result.retLogin, result.retPassword);
 
-                            if (ui != null && result.stage == WorkerStateStage.RegisterNewUser)
-                            {
-                                // Новый пользователь - сообщим об этом
-                                result = (FormResultData)FormManager.OpenForm<FormRegisterNewUser>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result, "Зарегистрировали нового пользователя: +7" + result.retLogin);
+					//        if (ui != null && result.stage == WorkerStateStage.RegisterNewUser)
+					//        {
+					//            // Новый пользователь - сообщим об этом
+					//            result = (FormResultData)FormManager.OpenForm<FormRegisterNewUser>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result, "Зарегистрировали нового пользователя: +7" + result.retLogin);
 
-                                if (result.stage == WorkerStateStage.ExitProgram)
-                                {
-                                    // выход
-                                    Close();
-                                    return;
-                                }
-                            }
-                            else if (ui != null)
-                            {
-                                // здесь покажем какого пользователя авторизовали
-                            }
-                        }
-                        else if (result.stage == WorkerStateStage.FindPhone)
-                        {
-                            result = (FormResultData)FormManager.OpenForm<FormRegisterNewUser>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result, "На Ваш телефон " + result.retLogin + " отправлен пароль");
+					//            if (result.stage == WorkerStateStage.ExitProgram)
+					//            {
+					//                // выход
+					//                Close();
+					//                return;
+					//            }
+					//        }
+					//        else if (ui != null)
+					//        {
+					//            // здесь покажем какого пользователя авторизовали
+					//        }
+					//    }
+					//    else if (result.stage == WorkerStateStage.FindPhone)
+					//    {
+					//        result = (FormResultData)FormManager.OpenForm<FormRegisterNewUser>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result, "На Ваш телефон " + result.retLogin + " отправлен пароль");
 
-                            if (result.stage == WorkerStateStage.ExitProgram)
-                            {
-                                // выход
-                                Close();
-                                return;
-                            }
-                        }
-                        else if (result.stage == WorkerStateStage.NotFindPhone)
-                        {
-                            continue;
-                        }
-                        else if (result.stage == WorkerStateStage.ErrorRegisterNewUser)
-                        {
-                            continue;
-                        }
-                        else if (result.stage == WorkerStateStage.NotAuthorizeUser)
-                        {
-                            continue;
-                        }
-                        else if (result.stage == WorkerStateStage.ExitProgram)
-                        {
-                            // выход
-                            Close();
-                            return;
-                        }
-                        else if (result.stage == WorkerStateStage.MainScreen)
-                        {
-                            // сброс авторизации
-                            goto MainForm;
-                        }
-                        else if (result.stage == WorkerStateStage.TimeOut)
-                        {
-                            // тайм аут
-                            continue;
-                        }
+					//        if (result.stage == WorkerStateStage.ExitProgram)
+					//        {
+					//            // выход
+					//            Close();
+					//            return;
+					//        }
+					//    }
+					//    else if (result.stage == WorkerStateStage.NotFindPhone)
+					//    {
+					//        continue;
+					//    }
+					//    else if (result.stage == WorkerStateStage.ErrorRegisterNewUser)
+					//    {
+					//        continue;
+					//    }
+					//    else if (result.stage == WorkerStateStage.NotAuthorizeUser)
+					//    {
+					//        continue;
+					//    }
+					//    else if (result.stage == WorkerStateStage.ExitProgram)
+					//    {
+					//        // выход
+					//        Close();
+					//        return;
+					//    }
+					//    else if (result.stage == WorkerStateStage.MainScreen)
+					//    {
+					//        // сброс авторизации
+					//        goto MainForm;
+					//    }
+					//    else if (result.stage == WorkerStateStage.TimeOut)
+					//    {
+					//        // тайм аут
+					//        continue;
+					//    }
 
-                        #endregion
-                    }
+					//    #endregion
+					//}
+					#endregion
 
-                    // -----------------------------------------------------
-                    // Выбор продолжительности услуги
-                    // -----------------------------------------------------
+					// -----------------------------------------------------
+					// Выбор продолжительности услуги
+					// -----------------------------------------------------
 
-                    result = (FormResultData)FormManager.OpenForm<FormChoosePrice>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+					result = (FormResultData)FormManager.OpenForm<FormChoosePrice>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
                     if (result.stage == WorkerStateStage.Fail || result.stage == WorkerStateStage.EndDropCassette)
                     {

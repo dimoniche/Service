@@ -20,9 +20,32 @@ namespace AirVitamin.Client
             Globals.DesignConfiguration.Settings.LoadPictureBox(pictureLogo, "Logo_O2.png");
             Globals.DesignConfiguration.Settings.LoadPictureBox(pictureTitle, "Smes_txt.png");
 
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxService1, Globals.DesignConfiguration.Settings.ButtonService1);
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxService2, Globals.DesignConfiguration.Settings.ButtonService2);
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxService3, Globals.DesignConfiguration.Settings.ButtonService3);
+			if (Globals.DesignConfiguration.Settings.ButtonService1 != "default.png")
+			{
+				Globals.DesignConfiguration.Settings.LoadPictureBox(pBxService1, Globals.DesignConfiguration.Settings.ButtonService1);
+			}
+			else
+			{
+				pBxService1.Visible = false;
+			}
+
+			if (Globals.DesignConfiguration.Settings.ButtonService2 != "default.png")
+			{
+				Globals.DesignConfiguration.Settings.LoadPictureBox(pBxService3, Globals.DesignConfiguration.Settings.ButtonService2);
+			}
+			else
+			{
+				pBxService3.Visible = false;
+			}
+
+			if (Globals.DesignConfiguration.Settings.ButtonService3 != "default.png")
+			{
+				Globals.DesignConfiguration.Settings.LoadPictureBox(pBxService2, Globals.DesignConfiguration.Settings.ButtonService3);
+			}
+			else
+			{
+				pBxService2.Visible = false;
+			}
 
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxreturntoMain, Globals.DesignConfiguration.Settings.ButtonRetToMain);
             Globals.DesignConfiguration.Settings.LoadPictureBox(pBxWhatsDiff, Globals.DesignConfiguration.Settings.ButtonWhatsDiff);

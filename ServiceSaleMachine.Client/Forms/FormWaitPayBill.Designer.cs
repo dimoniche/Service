@@ -261,7 +261,7 @@
 			this.pBxTitle1.Location = new System.Drawing.Point(0, 0);
 			this.pBxTitle1.Name = "pBxTitle1";
 			this.pBxTitle1.Size = new System.Drawing.Size(338, 17);
-			this.pBxTitle1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pBxTitle1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pBxTitle1.TabIndex = 0;
 			this.pBxTitle1.TabStop = false;
 			// 
@@ -313,7 +313,7 @@
 			this.pBxTitle.Location = new System.Drawing.Point(0, 0);
 			this.pBxTitle.Name = "pBxTitle";
 			this.pBxTitle.Size = new System.Drawing.Size(141, 34);
-			this.pBxTitle.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pBxTitle.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pBxTitle.TabIndex = 0;
 			this.pBxTitle.TabStop = false;
 			// 
@@ -443,7 +443,7 @@
 			this.pBxMainMenu.Location = new System.Drawing.Point(0, 0);
 			this.pBxMainMenu.Name = "pBxMainMenu";
 			this.pBxMainMenu.Size = new System.Drawing.Size(338, 46);
-			this.pBxMainMenu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pBxMainMenu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pBxMainMenu.TabIndex = 0;
 			this.pBxMainMenu.TabStop = false;
 			this.pBxMainMenu.Click += new System.EventHandler(this.pBxReturnBack_Click);
@@ -487,7 +487,7 @@
 			this.pBxGiveOxigen.Location = new System.Drawing.Point(0, 0);
 			this.pBxGiveOxigen.Name = "pBxGiveOxigen";
 			this.pBxGiveOxigen.Size = new System.Drawing.Size(338, 46);
-			this.pBxGiveOxigen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pBxGiveOxigen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pBxGiveOxigen.TabIndex = 0;
 			this.pBxGiveOxigen.TabStop = false;
 			this.pBxGiveOxigen.Click += new System.EventHandler(this.pBxGiveOxigen_Click);

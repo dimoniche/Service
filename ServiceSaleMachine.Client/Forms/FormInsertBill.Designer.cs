@@ -282,7 +282,7 @@
 			this.pBxreturnMoney.Location = new System.Drawing.Point(224, 3);
 			this.pBxreturnMoney.Name = "pBxreturnMoney";
 			this.pBxreturnMoney.Size = new System.Drawing.Size(338, 54);
-			this.pBxreturnMoney.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pBxreturnMoney.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pBxreturnMoney.TabIndex = 0;
 			this.pBxreturnMoney.TabStop = false;
 			this.pBxreturnMoney.Click += new System.EventHandler(this.pictureBox2_Click);
@@ -317,7 +317,7 @@
 			this.pBxTakeAwayMoney.Location = new System.Drawing.Point(224, 3);
 			this.pBxTakeAwayMoney.Name = "pBxTakeAwayMoney";
 			this.pBxTakeAwayMoney.Size = new System.Drawing.Size(338, 54);
-			this.pBxTakeAwayMoney.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pBxTakeAwayMoney.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pBxTakeAwayMoney.TabIndex = 0;
 			this.pBxTakeAwayMoney.TabStop = false;
 			this.pBxTakeAwayMoney.Click += new System.EventHandler(this.pictureBox1_Click);

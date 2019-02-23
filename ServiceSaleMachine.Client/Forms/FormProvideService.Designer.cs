@@ -242,7 +242,7 @@
 			this.pBxProvideServiceText.Location = new System.Drawing.Point(0, 0);
 			this.pBxProvideServiceText.Name = "pBxProvideServiceText";
 			this.pBxProvideServiceText.Size = new System.Drawing.Size(157, 16);
-			this.pBxProvideServiceText.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pBxProvideServiceText.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pBxProvideServiceText.TabIndex = 0;
 			this.pBxProvideServiceText.TabStop = false;
 			// 
@@ -354,7 +354,7 @@
 			this.pBxReturnMainMenu.Location = new System.Drawing.Point(0, 0);
 			this.pBxReturnMainMenu.Name = "pBxReturnMainMenu";
 			this.pBxReturnMainMenu.Size = new System.Drawing.Size(144, 42);
-			this.pBxReturnMainMenu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pBxReturnMainMenu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pBxReturnMainMenu.TabIndex = 0;
 			this.pBxReturnMainMenu.TabStop = false;
 			this.pBxReturnMainMenu.Click += new System.EventHandler(this.pBxStopService_Click);

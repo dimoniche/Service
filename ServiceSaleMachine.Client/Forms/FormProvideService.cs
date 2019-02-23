@@ -43,8 +43,12 @@ namespace AirVitamin.Client
                 }
             }
 
-            // сменим видео при оказании услуги
-            data.fr2.SetPlayNewVideo(CurrentVideoEnum.Video2);
+			// только один экран
+			if (Screen.AllScreens.Length > 1)
+			{
+				// сменим видео при оказании услуги
+				data.fr2.SetPlayNewVideo(CurrentVideoEnum.Video2);
+			}
 
             // у флеша немного другой цвет фона
             BackColor = Color.FromArgb(212, 208, 199);
@@ -95,8 +99,11 @@ namespace AirVitamin.Client
 
             data.drivers.ReceivedResponse -= reciveResponse;
 
-            // сменим обратно на ожидание
-            data.fr2.SetPlayNewVideo(CurrentVideoEnum.Video1);
+			// сменим обратно на ожидание
+			if (Screen.AllScreens.Length > 1)
+			{
+				data.fr2.SetPlayNewVideo(CurrentVideoEnum.Video1);
+			}
         }
 
         private void timerService_Tick(object sender, EventArgs e)

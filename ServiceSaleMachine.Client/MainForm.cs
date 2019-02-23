@@ -938,50 +938,53 @@ NoCheckStatistic:
                         continue;
                     }
 
-                    // -----------------------------------------------------
-                    // ожидание внесение денег
-                    // -----------------------------------------------------
-                    result = (FormResultData)FormManager.OpenForm<FormWaitPayBill>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+					// -----------------------------------------------------
+					// ожидание внесение денег
+					// -----------------------------------------------------
+					if (Globals.ClientConfiguration.Settings.offBill == 0)
+					{
+						result = (FormResultData)FormManager.OpenForm<FormWaitPayBill>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
-                    if (result.stage == WorkerStateStage.Fail || result.stage == WorkerStateStage.EndDropCassette)
-                    {
-                        // отказ - выход в выбор услуг
-                        goto ChooseService;
-                    }
-                    else if (result.stage == WorkerStateStage.ErrorBill)
-                    {
-                        // ошибки купюроприемника
-                        goto NoCheckStatistic;
-                    }
-                    else if (result.stage == WorkerStateStage.DropCassettteBill)
-                    {
-                        Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выемка денег.");
+						if (result.stage == WorkerStateStage.Fail || result.stage == WorkerStateStage.EndDropCassette)
+						{
+							// отказ - выход в выбор услуг
+							goto ChooseService;
+						}
+						else if (result.stage == WorkerStateStage.ErrorBill)
+						{
+							// ошибки купюроприемника
+							goto NoCheckStatistic;
+						}
+						else if (result.stage == WorkerStateStage.DropCassettteBill)
+						{
+							Program.Log.Write(LogMessageType.Information, "MAIN WORK: Выемка денег.");
 
-                        // выемка денег
-                        result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
+							// выемка денег
+							result = (FormResultData)FormManager.OpenForm<FormMoneyRecess>(this, FormShowTypeEnum.Dialog, FormReasonTypeEnum.Modify, result);
 
-                        if (result.stage == WorkerStateStage.EndDropCassette)
-                        {
-                            continue;
-                        }
-                        else if (result.stage == WorkerStateStage.ExitProgram)
-                        {
-                            // выход
-                            Close();
-                            return;
-                        }
-                    }
-                    else if (result.stage == WorkerStateStage.ExitProgram)
-                    {
-                        // выход
-                        Close();
-                        return;
-                    }
-                    else if (result.stage == WorkerStateStage.TimeOut)
-                    {
-                        check = false;
-                        continue;
-                    }
+							if (result.stage == WorkerStateStage.EndDropCassette)
+							{
+								continue;
+							}
+							else if (result.stage == WorkerStateStage.ExitProgram)
+							{
+								// выход
+								Close();
+								return;
+							}
+						}
+						else if (result.stage == WorkerStateStage.ExitProgram)
+						{
+							// выход
+							Close();
+							return;
+						}
+						else if (result.stage == WorkerStateStage.TimeOut)
+						{
+							check = false;
+							continue;
+						}
+					}
 
                     // -----------------------------------------------------
                     // оказание услуги

@@ -17,17 +17,27 @@ namespace AirVitamin.Client
 
             Globals.DesignConfiguration.Settings.LoadPictureBox(pictureLogo, "Logo_O2.png");
 
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxBegin, Globals.DesignConfiguration.Settings.ButtonStartServices);
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxPhilosof, Globals.DesignConfiguration.Settings.ButtonPhilosof);
-            Globals.DesignConfiguration.Settings.LoadPictureBox(pBxInstruction, Globals.DesignConfiguration.Settings.ButtonHelp);
-
 			if (Globals.DesignConfiguration.Settings.ButtonInter != "default.png")
 			{
+				Globals.DesignConfiguration.Settings.LoadPictureBox(pBxBegin, Globals.DesignConfiguration.Settings.ButtonStartServices);
+				Globals.DesignConfiguration.Settings.LoadPictureBox(pBxPhilosof, Globals.DesignConfiguration.Settings.ButtonPhilosof);
+				Globals.DesignConfiguration.Settings.LoadPictureBox(pBxInstruction, Globals.DesignConfiguration.Settings.ButtonHelp);
 				Globals.DesignConfiguration.Settings.LoadPictureBox(pictureBoxInter, Globals.DesignConfiguration.Settings.ButtonInter);
 			}
 			else
 			{
-				pictureBoxInter.Visible = false;
+				// прераспределим кнопки, если отключили личные кабинеты
+				Globals.DesignConfiguration.Settings.LoadPictureBox(pBxPhilosof, Globals.DesignConfiguration.Settings.ButtonStartServices);
+				Globals.DesignConfiguration.Settings.LoadPictureBox(pBxInstruction, Globals.DesignConfiguration.Settings.ButtonPhilosof);
+				Globals.DesignConfiguration.Settings.LoadPictureBox(pictureBoxInter, Globals.DesignConfiguration.Settings.ButtonHelp);
+
+				// верхнюю кнопку закроем
+				pBxBegin.Visible = false;
+
+				// сменим реакцию на нажатия
+				pBxPhilosof.Click += pbxStart_Click;
+				pBxInstruction.Click += pBxPhilosof_Click;
+				pictureBoxInter.Click += pbxHelp_Click;
 			}
 
             TimeOutTimer.Enabled = true;

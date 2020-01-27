@@ -61,7 +61,16 @@ namespace AirVitamin.Client
             }
 
             time = data.serv.cost.rangeStart;
-            price = data.serv.cost.getPriceAccountByAmount(time);
+
+            if (data.retLogin == string.Empty)
+            {
+                price = data.serv.cost.getPriceCashByAmount(time);
+            }
+            else
+            {
+                price = data.serv.cost.getPriceAccountByAmount(time);
+            }
+
             TimeSpan span = new TimeSpan(0, time / 60, time % 60);
 
             LabelCounter.Font = new Font(data.FontCollection.Families[CustomFont.CeraRoundPro_Bold], 72, FontStyle.Bold);
@@ -151,7 +160,15 @@ namespace AirVitamin.Client
             if (time <= data.serv.cost.rangeStart) return;
 
             time -= data.serv.cost.step;
-            price = data.serv.cost.getPriceAccountByAmount(time);
+
+            if (data.retLogin == string.Empty)
+            {
+                price = data.serv.cost.getPriceCashByAmount(time);
+            }
+            else
+            {
+                price = data.serv.cost.getPriceAccountByAmount(time);
+            }
 
             TimeSpan span = new TimeSpan(0, time / 60, time % 60);
 
@@ -164,7 +181,15 @@ namespace AirVitamin.Client
             if (time >= data.serv.cost.rangeStop) return;
 
             time += data.serv.cost.step;
-            price = data.serv.cost.getPriceAccountByAmount(time);
+
+            if (data.retLogin == string.Empty)
+            {
+                price = data.serv.cost.getPriceCashByAmount(time);
+            }
+            else
+            {
+                price = data.serv.cost.getPriceAccountByAmount(time);
+            }
 
             TimeSpan span = new TimeSpan(0, time / 60, time % 60);
 

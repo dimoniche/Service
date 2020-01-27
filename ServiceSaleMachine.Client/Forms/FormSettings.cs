@@ -1483,6 +1483,8 @@ namespace AirVitamin.Client
             data.drivers.control.SendCloseControl((int)ControlDeviceEnum.MixAfter);
         }
 
+        bool login = false;
+
         private void button4_Click_1(object sender, EventArgs e)
         {
             dataGridView1.DataSource = GlobalDb.GlobalBase.GetUsers();
@@ -1495,6 +1497,8 @@ namespace AirVitamin.Client
                 dataGridView1.Columns[3].HeaderText = "Тип";
                 dataGridView1.Columns[4].HeaderText = "Дата регистрации";
             }
+
+            login = true;
 
             button12.Enabled = true;
             button10.Enabled = true;
@@ -1509,14 +1513,7 @@ namespace AirVitamin.Client
 
             if (!((string)cBxModemComPort.Items[cBxModemComPort.SelectedIndex]).Contains("нет"))
             {
-                try
-                {
-                    data.drivers.modem.openPort((string)cBxModemComPort.Items[cBxModemComPort.SelectedIndex], (int)cBxSpeedModem.Items[cBxSpeedModem.SelectedIndex]);
-                }
-                catch
-                {
-
-                }
+                data.drivers.modem.openPort((string)cBxModemComPort.Items[cBxModemComPort.SelectedIndex], (int)cBxSpeedModem.Items[cBxSpeedModem.SelectedIndex]);
             }
             else
             {
@@ -1570,7 +1567,7 @@ namespace AirVitamin.Client
 
         private void cBxSpeedModem_SelectedIndexChanged(object sender, EventArgs e)
         {
-            data.drivers.modem.setComPortSpeed((int)cBxSpeedModem.Items[cBxSpeedModem.SelectedIndex]);
+
         }
 
         private void cBxModemComPort_SelectedIndexChanged(object sender, EventArgs e)
@@ -1587,15 +1584,7 @@ namespace AirVitamin.Client
             }
             else
             {
-                try
-                {
-                    if (!data.drivers.modem.openPort((string)cBxModemComPort.Items[cBxModemComPort.SelectedIndex], (int)cBxSpeedModem.Items[cBxSpeedModem.SelectedIndex]))
-                    {
-                        cBxModemComPort.SelectedIndex = 0;
-                        return;
-                    }
-                }
-                catch
+                if (!data.drivers.modem.openPort((string)cBxModemComPort.Items[cBxModemComPort.SelectedIndex], (int)cBxSpeedModem.Items[cBxSpeedModem.SelectedIndex]))
                 {
                     cBxModemComPort.SelectedIndex = 0;
                     return;

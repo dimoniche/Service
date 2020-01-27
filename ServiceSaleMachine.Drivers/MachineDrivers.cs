@@ -238,26 +238,19 @@ namespace AirVitamin.Drivers
 
                 if (!printer.getNamePrinter().Contains("нет"))
                 {
-                    try
+                    // настроим принтер
+                    if (printer.OpenPrint(Globals.ClientConfiguration.Settings.NamePrinter))
                     {
-                        // настроим принтер
-                        if (printer.OpenPrint(Globals.ClientConfiguration.Settings.NamePrinter))
-                        {
-                            // настроим сенсор бумаги
-                        }
-                        else
-                        {
-                            // неудача
-                            this.log.Write(LogMessageType.Error, "PRINTER: Принтер не верно настроен. Порт не доступен.");
-                            res = WorkerStateStage.NeedSettingProgram;
-                        }
+                        // настроим сенсор бумаги
+                    }
+                    else
+                    {
+                        // неудача
+                        this.log.Write(LogMessageType.Error, "PRINTER: Принтер не верно настроен. Порт не доступен.");
+                        res = WorkerStateStage.NeedSettingProgram;
+                    }
 
-                        printer.ClosePrint();
-                    }
-                    catch (Exception e)
-                    {
-                        this.log.Write(LogMessageType.Error, "PRINTER: Ком порт не открыть.", e);
-                    }
+                    printer.ClosePrint();
                 }
                 else
                 {
@@ -276,26 +269,16 @@ namespace AirVitamin.Drivers
                 && !control.getNumberComPort().Contains("нет")
                 && !string.IsNullOrEmpty(control.getNumberComPort()))
             {
-                try
+                if (control.openPort(control.getNumberComPort()))
                 {
-                    if (control.openPort(control.getNumberComPort()))
-                    {
 
 
-                    }
-                    else
-                    {
-                        // неудача
-                        this.log.Write(LogMessageType.Error, "CONTROL: Управляющее устройство не верно настроено. Порт не доступен.");
-                        res = WorkerStateStage.NeedSettingProgram;
-                    }
                 }
-                catch (Exception e)
+                else
                 {
-                    Globals.ClientConfiguration.Settings.offControl = 1;
-                    Globals.ClientConfiguration.Save();
-
-                    this.log.Write(LogMessageType.Error, "CONTROL: Ком порт не открыть.", e);
+                    // неудача
+                    this.log.Write(LogMessageType.Error, "CONTROL: Управляющее устройство не верно настроено. Порт не доступен.");
+                    res = WorkerStateStage.NeedSettingProgram;
                 }
             }
             else
@@ -312,25 +295,15 @@ namespace AirVitamin.Drivers
             {
                 this.log.Write(LogMessageType.Information, "MODEM: Настройка модема.");
 
-                try
+                if (modem.openPort(modem.getNumberComPort(), modem.getComPortSpeed()))
                 {
-                    if (modem.openPort(modem.getNumberComPort(), modem.getComPortSpeed()))
-                    {
 
-                    }
-                    else
-                    {
-                        // неудача
-                        this.log.Write(LogMessageType.Error, "MODEM: Модем не верно настроен. Порт не доступен.");
-                        res = WorkerStateStage.NeedSettingProgram;
-                    }
                 }
-                catch(Exception e)
+                else
                 {
-                    Globals.ClientConfiguration.Settings.offModem = 1;
-                    Globals.ClientConfiguration.Save();
-
-                    this.log.Write(LogMessageType.Error, "MODEM: Ком порт не открыть. Модем отключаем.", e);
+                    // неудача
+                    this.log.Write(LogMessageType.Error, "MODEM: Модем не верно настроен. Порт не доступен.");
+                    res = WorkerStateStage.NeedSettingProgram;
                 }
             }
             else

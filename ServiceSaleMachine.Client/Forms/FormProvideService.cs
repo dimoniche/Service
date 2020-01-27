@@ -47,7 +47,7 @@ namespace AirVitamin.Client
 			if (Screen.AllScreens.Length > 1)
 			{
 				// сменим видео при оказании услуги
-				data.fr2.SetPlayNewVideo(CurrentVideoEnum.Video2);
+				data.fr2?.SetPlayNewVideo(CurrentVideoEnum.Video2);
 			}
 
             // у флеша немного другой цвет фона
@@ -102,7 +102,7 @@ namespace AirVitamin.Client
 			// сменим обратно на ожидание
 			if (Screen.AllScreens.Length > 1)
 			{
-				data.fr2.SetPlayNewVideo(CurrentVideoEnum.Video1);
+				data.fr2?.SetPlayNewVideo(CurrentVideoEnum.Video1);
 			}
         }
 
